@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 17 – Appendix D: Glossary & Translation Guide | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 17 – Appendix D: Glossary & Translation Guide">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-17-appendix-d-glossary-and-translation-guide">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part VI Appendices</div>
+<h1 id="chapter-17-appendix-d-glossary-translation-guide">Chapter 17 –
+Appendix D: Glossary &amp; Translation Guide</h1>
+<p>Developing and operating reliable autonomous systems demands a
+precise, shared vocabulary. This appendix defines the canonical terms
+used throughout this book and provides a small translation layer to
+familiar industry language.</p>
+<h2 id="software-development-as-code-sdac">Software Development as Code
+(SDaC)</h2>
+<p><strong>Software Development as Code (SDaC)</strong> is the
+discipline of turning stochastic generation into a reliable engineering
+process: deterministic context selection, hard gates, and verifiable
+loops that produce diffs you can review.</p>
+<p>This glossary is tiered the same way the book is: start with Tier 1
+and you’ll have enough vocabulary to build a working loop.</p>
+<h2 id="tier-1-substrate-use-everywhere">Tier 1 (Substrate: use
+everywhere)</h2>
+<p><strong>Map</strong>: Structured, version-controlled intent (docs,
+contracts, inventories, derived views).</p>
+<p><strong>Terrain</strong>: Reality-as-code (source, configs, schemas,
+runtime behavior).</p>
+<p><strong>Ledger</strong>: Append-only evidence (diffs, validator
+output, decision traces, run metadata).</p>
+<p><strong>Physics</strong>: Deterministic constraints that shape a
+stochastic process (schemas, linters, tests, architectural rules,
+budgets, stopping conditions).</p>
+<p><strong>Mechanism</strong>: A specific, runnable detail (a validator,
+a parser, a build target, a CI gate) — not a metaphor.</p>
+<p><strong>Deterministic Sandwich</strong>: The unit pattern for safe
+autonomy: <code>Prep → Model → Validation</code>.</p>
+<p><strong>Validator</strong>: One deterministic gate (lint, types,
+schema, contract, policy).</p>
+<p><strong>Immune System</strong>: The suite of Validators that defines
+“good enough” for a surface.</p>
+<p><strong>Immune System case</strong>: One concrete PASS/FAIL case
+inside the Immune System suite.</p>
+<p><strong>Effector</strong>: A bounded transformation that proposes a
+patch/diff to the Terrain (or a Map surface) under constraints.</p>
+<p><strong>Sensor</strong>: A read-only measurement of the Terrain that
+emits structured signals (diffs, counts, failing invariants,
+hotspots).</p>
+<p><strong>Agent</strong>: A model running inside a constrained
+environment with explicit Tools, Physics, and a Ledger. It does not
+“want” anything; it executes a loop.</p>
+<p><strong>Engine</strong>: The full system: substrate + Sensors +
+Effectors + Immune System + Judge + Ledger. The model is a component,
+not the system.</p>
+<p><strong>Mission Object</strong>: Typed intent and state. A persistent
+artifact (YAML/JSON) that acts as an executable pull request: it defines
+goal, scope, budgets, and gates, and it records lifecycle status (for
+example <code>status</code> and <code>completed_at</code>).</p>
+<p><strong>Judge</strong>: Consumes validator signals + evidence and
+decides the next move.</p>
+<p><strong>Adaptation State Machine (ASM)</strong>: The allowed moves
+after Judgement: <strong>Revert</strong>, <strong>Iterate</strong>,
+<strong>Update Environment</strong> (and optionally escalate to a
+Human).</p>
+<h2 id="tier-2-loop-once-the-loop-runs">Tier 2 (Loop: once the loop
+runs)</h2>
+<p><strong>The Three-Tier Frame (Substrate → Loop →
+Governance)</strong>: A completeness frame: Substrate
+(Map/Terrain/Ledger + Physics + Context Graph), Loop (Sandwich +
+feedback), Governance (blast-radius limits + protected graders).</p>
+<p><strong>Stochastic Drift</strong>: Variance in output and behavior
+under the same Mission Object and context slice.</p>
+<p><strong>Ouroboros Protocol</strong>: The iterative loop:
+<code>Write → Judge → Refine</code> until convergence or a circuit
+breaker. Refine is the constrained mutation step in response to a
+specific failure signal, producing a smaller, cleaner diff.</p>
+<p><strong>Circuit Breakers</strong>: Hard stop conditions that keep
+loops finite (max iterations, max wall-clock, max diff size, min
+progress).</p>
+<p><strong>Structured Error Objects</strong>: Machine-readable failures
+(file, line, error code, failing validator, suggested fix) instead of
+vague prose.</p>
+<p><strong>Feedback Injection</strong>: Feed the exact failing signal
+back into the next iteration (stderr, linter lines, failing test
+output).</p>
+<p><strong>Salvage Protocol</strong>: A loss-aversion mechanism.
+Failed/reverted candidates are moved into a Quarantine directory (diffs
++ logs + artifacts) rather than deleted (for example
+<code>.sdac/workflow-quarantine/</code>) so useful fragments are
+recoverable.</p>
+<p><strong>Context Architecture</strong>: Engineering how context is
+selected, structured, and bounded so the model can act
+deterministically.</p>
+<p><strong>Directives</strong>: Human-authored behavioral laws for the
+Agent (for example <code>agent_directives.md</code>). Unlike Physics
+(enforced by code), Directives are enforced by the agent instruction
+layer and review policy. They define “who you are” and “how you
+act.”</p>
+<p><strong>Context Graph</strong>: A queryable topology of the codebase.
+Nodes (apps, packages, modules) carry identity (language, framework,
+build tooling). Edges encode dependencies and contracts. The graph is
+what lets Drivers select the correct mechanism without guessing.</p>
+<p><strong>Driver Pattern</strong>: Decouple intent from mechanism
+(Mission says “run tests,” driver selects <code>pytest</code> vs
+<code>vitest</code> vs <code>mvn test</code>).</p>
+<p><strong>Map-Updater</strong>: Sense → Normalize → Compare → Propose
+patches to keep Map surfaces synchronized with the Terrain.</p>
+<p><strong>CI Gate (Map–Terrain Sync)</strong>: Divergence between Map
+and Terrain becomes a build failure.</p>
+<p><strong>Mission Gate</strong>: Run a Mission’s acceptance criteria
+(Physics) without running the model.</p>
+<h3 id="meta-patterns">Meta-Patterns</h3>
+<p><strong>Meta-Pattern: Don’t Chat, Compile</strong>: Use chat for
+ideation, but ship work through versioned Missions and deterministic
+runners (diffs + logs).</p>
+<p><strong>Meta-Pattern: Physics is Law</strong>: If a change fails
+Physics, it does not exist. No warnings. No loopholes.</p>
+<h2 id="tier-3-governance-maintenance-and-safety">Tier 3 (Governance:
+maintenance and safety)</h2>
+<p><strong>Immutable Infrastructure</strong>: Protected paths and
+pipelines that grade and govern the system (validators, CI, policy).</p>
+<p><strong>Scope Guard</strong>: Blast-radius control via explicit path
+allowlists (the Mission scope).</p>
+<p><strong>Ratchet</strong>: Monotonic quality metrics:
+<code>metric_new ≥ metric_old</code> for chosen guardrail metrics.</p>
+<p><strong>Neuroplasticity</strong>: Safe self-modification capability:
+the system can accept refactorings and other changes without collapsing
+into regressions (because it is bounded by Immutable Infrastructure,
+budgets, and hard gates).</p>
+<p><strong>Dream Manifest</strong>: Measurable maintenance targets: an
+entropy backlog expressed as concrete work selectors.</p>
+<p><strong>Dream Daemon</strong>: Scheduled background maintenance (most
+teams start with the human-approved 90% solution).</p>
+<p><strong>Automated Refactoring Under Guards</strong>: Measure → Mutate
+→ Measure → Commit/Revert under strict validators, budgets, and
+protected graders.</p>
+<p><strong>Hofstadter Bridge</strong>: The boundary where documentation
+becomes executable constraints: the Map is no longer advisory; it is
+enforced.</p>
+<p><strong>Mirror</strong>: The optional limit case: a system can treat
+its own docs/spec as an input to its maintenance and governance
+loops.</p>
+<h3 id="meta-patterns-1">Meta-Patterns</h3>
+<p><strong>Meta-Pattern: Recursion</strong>: The same toolchain used by
+humans is used by maintenance loops (Dream Daemon emits Missions; the
+loop validates changes under Immutable Infrastructure boundaries).</p>
+<h2 id="translation-guide-one-time-bridge-then-use-canon">Translation
+guide (one-time bridge, then use canon)</h2>
+<ul>
+<li><strong>Immune System</strong> → tests + validator gates</li>
+<li><strong>Effector</strong> → transformation pipeline / mutation
+operator</li>
+<li><strong>Map/Terrain</strong> → specification/implementation</li>
+<li><strong>Mission Object</strong> → executable change request</li>
+<li><strong>Neuroplasticity</strong> → safe self-modification
+capability</li>
+</ul>
+<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h2>
+<p>Pick one system you operate today and map the Tier 1 terms onto it:
+what is the Map, what is the Terrain, what is your Ledger, and what is
+your Immune System? Once you can point to those artifacts, you can start
+building reliable loops.</p>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="chapter-16-appendix-c-pattern-library">← Chapter 16 – Appendix C: Pattern Library</a>
+    
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

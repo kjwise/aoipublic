@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 14 – Appendix A: Setup and Implementation Checklist | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 14 – Appendix A: Setup and Implementation Checklist">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-14-appendix-a-setup-and-implementation-checklist">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part VI Appendices</div>
+<h1
+id="chapter-14-appendix-a-setup-and-implementation-checklist">Chapter 14
+– Appendix A: Setup and Implementation Checklist</h1>
+<p>This appendix does two things:</p>
+<ol type="1">
+<li>It defines the minimal setup you need to run the examples and build
+your own SDaC loop.</li>
+<li>It provides an implementation checklist (a dependency graph plus
+milestones).</li>
+</ol>
+<h2 id="minimal-toolchain">Minimal toolchain</h2>
+<p>You can implement Software Development as Code (SDaC) in any stack.
+The patterns in this book assume you have a small deterministic
+substrate that can do three things reliably: version, run, and
+verify.</p>
+<p>Minimum requirements:</p>
+<ul>
+<li>Version control (Git).</li>
+<li>A deterministic runner (Make, a task runner, or a CI job).</li>
+<li>A scripting/runtime layer for glue code (Python is used in many
+examples, but the point is “small and deterministic,” not “Python
+specifically”).</li>
+<li>A diff surface (unified diffs in Git are the simplest).</li>
+<li>A validator suite (linters, schema checks, and tests) that can
+return machine-readable failures.</li>
+</ul>
+<p>Optional (useful for docs or manuscripts):</p>
+<ul>
+<li>A Markdown renderer to produce PDFs.</li>
+</ul>
+<h2 id="quick-sanity-check-for-any-repo">Quick sanity check (for any
+repo)</h2>
+<p>Before you build autonomy, verify you can deterministically reproduce
+reality:</p>
+<ol type="1">
+<li>Run <code>git status</code>; it should be clean.</li>
+<li>Run a validator suite locally (lint/tests) and get a deterministic
+pass/fail.</li>
+<li>Generate a diff and revert it cleanly.</li>
+</ol>
+<p>If you cannot do those three things, your SDaC loop will be
+“creative,” not reliable.</p>
+<h2 id="implementation-checklist">Implementation checklist</h2>
+<p>The goal is not to implement every chapter. The goal is to ship a
+small loop that is correct, auditable, and easy to extend.</p>
+<h3 id="the-dependency-graph">The dependency graph</h3>
+<pre class="mermaid"><code>graph TD
+  MVF[Ch 1: Minimum Viable Factory] --&gt; Sandwich[Ch 2: Deterministic Sandwich]
+  Sandwich --&gt; Validators[Ch 3: Define Good (Validators)]
+  Validators --&gt; Drift[Ch 4: Drift Measurement]
+  Validators --&gt; Ouroboros[Ch 5: Ouroboros Protocol]
+  Ouroboros --&gt; Slice[Ch 6: Context Slicing]
+  Slice --&gt; Missions[Ch 7: Mission Objects]
+  Missions --&gt; MapUpdaters[Ch 8: Map-Updaters + CI Gate]
+  MapUpdaters --&gt; Dream[Ch 9: Scheduled Maintenance / Dream Daemon]
+  Validators --&gt; Guardrails[Ch 10: Immutable Infrastructure]
+  Guardrails --&gt; Refactor[Ch 11: Automated Refactoring Under Guards]
+  Guardrails --&gt; Policy[Ch 12: Governance at Machine Speed]
+  Policy --&gt; Reflect[Ch 13: Hofstadter Bridge (Optional)]</code></pre>
+<h3 id="weekend-sprint-part-i-build-the-first-loop">Weekend sprint (Part
+I): Build the first loop</h3>
+<h4 id="milestone-1-a-loop-you-can-run-locally-chapter-1">Milestone 1: A
+loop you can run locally (Chapter 1)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>One Effector that updates an artifact (docs, config, or code) from a
+Map input.</li>
+<li>One Validator that deterministically gates the result.</li>
+<li>One command that runs <code>effector -&gt; validator</code>
+end-to-end and fails fast on violations.</li>
+</ul>
+<p>Minimal scope recommendations:</p>
+<ul>
+<li>Prefer doc sync or config generation before code generation.</li>
+<li>Keep the “Map” small and explicit (one YAML/JSON file).</li>
+</ul>
+<h4 id="milestone-2-wrap-the-stochastic-call-chapter-2">Milestone 2:
+Wrap the stochastic call (Chapter 2)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>Prep layer produces a structured request from typed inputs (a
+template + a mapping function).</li>
+<li>Validation layer parses the output strictly and emits a
+machine-readable error on failure.</li>
+<li>The Effector refuses to write when validation fails.</li>
+</ul>
+<p>Minimum set of error fields to collect (even if you only print
+them):</p>
+<ul>
+<li><code>file_path</code></li>
+<li><code>line_number</code> (or “unknown” if your validator cannot
+localize yet)</li>
+<li><code>error_code</code> (schema keyword, linter code, or tool
+name)</li>
+<li><code>message</code></li>
+</ul>
+<h4 id="milestone-3-make-good-executable-chapter-3">Milestone 3: Make
+“good” executable (Chapter 3)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>At least one hard validator that catches a real failure mode your
+team has seen.</li>
+<li>Your validator output is stable and readable (same format every
+run).</li>
+<li>You can demonstrate causality: break the rule, observe deterministic
+failure.</li>
+</ul>
+<h3 id="weeks-12-part-ii-understand-why-it-works">Weeks 1–2 (Part II):
+Understand why it works</h3>
+<h4 id="milestone-4-measure-drift-chapter-4">Milestone 4: Measure drift
+(Chapter 4)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>Run the same Mission Object 10 times.</li>
+<li>Track at least one drift metric:
+<ul>
+<li>Unique diffs (how many distinct outputs)</li>
+<li>Failure rate (what percent violates validators)</li>
+<li>Time-to-convergence (iterations until PASS)</li>
+</ul></li>
+</ul>
+<h4 id="milestone-5-build-a-loop-that-converges-chapter-5">Milestone 5:
+Build a loop that converges (Chapter 5)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>A <code>Write -&gt; Judge -&gt; Refine</code> loop that
+terminates.</li>
+<li>The Judge returns structured diagnostics, not vague prose.</li>
+<li>You have circuit breakers (max iterations + wall-clock budget).</li>
+</ul>
+<h4 id="milestone-6-slice-the-graph-do-not-dump-it-chapter-6">Milestone
+6: Slice the graph, do not dump it (Chapter 6)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>A repeatable way to build a context packet for a single task.</li>
+<li>The slice is small enough to fit comfortably in one model call.</li>
+<li>You can show one failure from a raw dump and one success from a
+slice.</li>
+</ul>
+<h3 id="weeks-24-part-iii-scale-the-loop-into-a-system">Weeks 2–4 (Part
+III): Scale the loop into a system</h3>
+<h4 id="milestone-7-intent-as-a-typed-object-chapter-7">Milestone 7:
+Intent as a typed object (Chapter 7)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>Mission Objects are stored as data (JSON/YAML) rather than embedded
+strings.</li>
+<li>Mission Objects include constraints and a success condition.</li>
+<li>Failures route through a state machine: <code>Revert</code>,
+<code>Iterate</code>, or <code>Update Environment</code>.</li>
+</ul>
+<h4 id="milestone-8-keep-the-map-fresh-chapter-8">Milestone 8: Keep the
+Map fresh (Chapter 8)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>A Map-Updater that extracts a deterministic skeleton from the
+Terrain.</li>
+<li>A compare step that detects drift.</li>
+<li>A propose step that emits a unified diff (and nothing else).</li>
+<li>A CI gate that fails on drift and tells you how to repair it.</li>
+</ul>
+<h4 id="milestone-9-the-90-maintenance-system-chapter-9">Milestone 9:
+The 90% maintenance system (Chapter 9)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>Scheduled runs (nightly or weekly) that propose maintenance
+patches.</li>
+<li>Human approval before merge.</li>
+<li>A short “Dream Manifest” of what you measure and why (defects, flaky
+tests, complexity hotspots).</li>
+</ul>
+<h3 id="ongoing-part-iv-govern-safe-evolution">Ongoing (Part IV): Govern
+safe evolution</h3>
+<h4 id="milestone-10-protected-infrastructure-chapter-10">Milestone 10:
+Protected Infrastructure (Chapter 10)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>Your system cannot modify the code that grades it (tests,
+validators, CI rules) without a human.</li>
+<li>Protected paths and review rules are enforced by the platform
+(CODEOWNERS / branch protection).</li>
+<li>A break-glass procedure exists and is rehearsed.</li>
+</ul>
+<h4
+id="milestone-11-automated-refactoring-under-guards-chapter-11">Milestone
+11: Automated refactoring under guards (Chapter 11)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>A small, metric-driven refactor loop with commit/revert rules.</li>
+<li>The Ratchet is explicit: quality metrics do not regress without an
+intentional waiver.</li>
+</ul>
+<h4 id="milestone-12-governance-at-machine-speed-chapter-12">Milestone
+12: Governance at machine speed (Chapter 12)</h4>
+<p>Definition of done:</p>
+<ul>
+<li>Clear policy for what can auto-merge vs what requires review.</li>
+<li>Blast radius boundaries are explicit and enforced.</li>
+<li>Audit artifacts are retained (logs, diffs, run metadata).</li>
+</ul>
+<h3 id="optional-part-v-reflections">Optional (Part V): Reflections</h3>
+<p>Chapter 13 is a useful limit case. Treat it as a tool for thinking,
+not a build requirement.</p>
+<h3 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h3>
+<ol type="1">
+<li><p>Pick one artifact and one validator, and get a local end-to-end
+loop working.</p></li>
+<li><p>Add structured error output to your Judge, even if it is only
+<code>file_path + message</code> at first.</p></li>
+<li><p>Put one protected path in place (tests/validators/CI) and require
+human review for it.</p></li>
+</ol>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="chapter-14-appendix-a-implementation-checklist">← Chapter 14 – Appendix A: Implementation Checklist</a>
+    <a class="next-link" href="chapter-15-appendix-b-failure-mode-gallery">Chapter 15 – Appendix B: Failure Mode Gallery →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

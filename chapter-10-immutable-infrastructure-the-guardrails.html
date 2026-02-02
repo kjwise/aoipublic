@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part IV Govern It Safe Evolution</div>
+<h1 id="chapter-10-immutable-infrastructure-the-guardrails">Chapter 10 –
+Immutable Infrastructure (The Guardrails)</h1>
+<p>We built a loop that lets your system write its own code. We
+demonstrated how it can propose changes, measure their impact, and even
+refine them. This autonomy promises efficiency, but it also introduces a
+fundamental dilemma: if the system can rewrite its own code, what
+prevents it from rewriting the very rules and graders that govern its
+behavior? What happens when a self-modifying system decides to grant
+itself more power, or worse, remove the checks designed to keep it
+safe?</p>
+<p>This is where <em>immutable infrastructure</em> becomes
+non-negotiable. In the context of Software Development as Code (SDaC),
+immutable infrastructure refers to the protected paths and pipelines
+that are designed to grade and govern the system. These are the
+guardrails, hard-coded into your engineering process, that ensure even
+the most autonomous agent cannot merge changes without human approval,
+especially when those changes affect the guardrails themselves. It’s
+about building a robust system that can propose and even test changes,
+but cannot unilaterally escalate its own privileges or diminish the
+quality and safety standards that protect you.</p>
+<p>The goal isn’t to impede the agent; it’s to guarantee its proposals
+are rigorously vetted against non-negotiable, human-defined policy
+before they become reality.</p>
+<h2 id="the-meta-patterns-applied-to-governance">The Meta-Patterns
+Applied to Governance</h2>
+<p>Immutable Infrastructure is where the Meta-Patterns become
+enforcement.</p>
+<h3 id="dont-chat-compile">1) Don’t Chat, Compile</h3>
+<p>Governance cannot live as advice in a wiki. It must live as versioned
+artifacts: <code>CODEOWNERS</code>, branch protection rules, CI
+workflows, policy schemas, and the scripts that enforce them.</p>
+<p>A rule is enforceable only when it lives in a file and is wired into
+a gate. Otherwise it’s a vibe.</p>
+<h3 id="physics-is-law">2) Physics is Law</h3>
+<p>If a change fails required checks, it does not exist. Governance is
+the work of closing bypass paths:</p>
+<ul>
+<li><p>Include administrators in branch protection.</p></li>
+<li><p>Protect the <code>CODEOWNERS</code> file itself.</p></li>
+<li><p>Treat policy validation and security checks as
+<code>PASS/FAIL</code>, not warnings.</p></li>
+</ul>
+<h3 id="recursion">3) Recursion</h3>
+<p>The same gates apply to everyone: humans, agents, and maintenance
+loops.</p>
+<p>There is no privileged mode for the Dream Daemon. It emits Missions
+and runs the same Validators, under the same Immutable Infrastructure
+boundaries.</p>
+<h2 id="the-core-problem-guardrails-that-can-grade-themselves">The Core
+Problem: Guardrails that Can Grade Themselves</h2>
+<p>Imagine an autonomous agent proposing a change to your CI pipeline.
+Perhaps it’s optimizing the Immune System suite, or adding a new linter.
+Now imagine it <em>also</em> proposes disabling a critical security
+scan, or modifying the <code>CODEOWNERS</code> file so it no longer
+requires human review for its own changes. If the system is allowed to
+approve such a combined change, you’ve just created a vulnerability that
+could spiral into an unmanageable production incident.</p>
+<p>Our SDaC agents operate on the principle of <em>proposing</em>
+changes, not merging them directly into protected branches. The
+mechanism by which those proposals are reviewed and approved must be
+explicitly outside the agent’s direct control. This setup ensures that
+while the system can generate powerful modifications, the ultimate
+authority for <em>governance</em> remains with human engineers. The
+guardrails themselves must be immutable to the autonomous system; they
+can only be changed by explicit human action following rigorous
+procedures.</p>
+<h2 id="protected-paths-your-engineering-constitution">Protected Paths:
+Your Engineering Constitution</h2>
+<p>To establish immutable infrastructure, you define specific paths
+within your repository that represent the “constitution” of your
+engineering practices. Changes to these paths are subject to the highest
+scrutiny.</p>
+<h3
+id="directory-topology-as-governance-a-self-referential-example">Directory
+topology as governance (a self-referential example)</h3>
+<p>In this repository, we make the governance boundary legible in the
+filesystem. The “engine” that runs loops is separated from the
+“products” it produces.</p>
+<pre class="text"><code>core/   # workflow runtime, step implementations (validators, judges)
+tools/  # controllers and entrypoints (dream, writers, map-updaters)
+mk/     # make orchestration
+dist/   # products (each project has its own book/ and meta/)</code></pre>
+<p>That separation is not cosmetic. It’s a practical definition of
+immutable infrastructure: changes to <code>core/</code> and
+<code>tools/</code> change the machine that grades work, so they deserve
+stricter review than changes to a manuscript file under
+<code>dist/</code>.</p>
+<h3 id="codeowners-defining-human-responsibility">CODEOWNERS: Defining
+Human Responsibility</h3>
+<p>The <code>CODEOWNERS</code> file, a common feature in Git-based
+platforms like GitHub, GitLab, and Bitbucket, is your first line of
+defense. It specifies which teams or individuals are responsible for
+reviewing code in particular directories or file types. For SDaC, this
+is crucial for protecting the agent’s definition, its policies, and the
+validation pipelines.</p>
+<p><strong>Example:</strong></p>
+<pre><code>
+# CODEOWNERS
+
+# This file ensures that critical parts of the SDaC system
+
+# require specific team approvals.
+
+# All agent definitions and core logic
+/agents/ @sdac-core-team
+
+# All validation logic (linters, security checks, tests)
+/validators/ @platform-engineering @security-team
+
+# All policy definitions (e.g., how the agent is allowed to behave)
+/policies/ @sdac-core-team @legal-compliance
+
+# CI/CD pipeline definitions
+/.github/workflows/ @platform-engineering
+
+# This CODEOWNERS file itself!
+/CODEOWNERS @platform-engineering @lead-architects</code></pre>
+<p>With this configuration, any pull request (PR) that touches files in
+<code>/agents/</code>, <code>/validators/</code>,
+<code>/policies/</code>, or the CI workflow definitions will
+automatically require approval from the specified teams. Crucially,
+changes to the <code>CODEOWNERS</code> file itself are also protected,
+preventing an agent (or even a malicious human actor) from easily
+bypassing these rules.</p>
+<h3
+id="branch-protection-rules-enforcing-the-rules-of-engagement">Branch
+Protection Rules: Enforcing the Rules of Engagement</h3>
+<p><code>CODEOWNERS</code> is powerful, but it relies on humans to
+respect its guidance. Branch protection rules (available in virtually
+all modern Git platforms) enforce these requirements at a repository
+level. They prevent direct pushes to critical branches (like
+<code>main</code> or <code>production</code>), require passing status
+checks (CI/CD pipelines), and mandate a certain number of approving
+reviews, often integrating directly with <code>CODEOWNERS</code>.</p>
+<p><strong>Key Branch Protection Rules for SDaC:</strong></p>
+<ul>
+<li><p><strong>Require pull request reviews before merging:</strong>
+Mandate that all changes to the protected branch come through a
+PR.</p></li>
+<li><p><strong>Require approvals from <code>CODEOWNERS</code>:</strong>
+Ensure that the specific teams defined in <code>CODEOWNERS</code>
+provide their sign-off.</p></li>
+<li><p><strong>Require status checks to pass before merging:</strong>
+This is where your validators and CI gates live. No merge without green
+CI.</p></li>
+<li><p><strong>Include administrators:</strong> Ensure even repository
+admins are subject to these rules, preventing an “operator privilege”
+loophole.</p></li>
+<li><p><strong>Restrict who can push to matching branches:</strong>
+Limit direct pushes to a very small set of emergency roles, if
+any.</p></li>
+</ul>
+<p>These rules create a hard barrier. An SDaC agent can open a PR with
+its proposed changes, and it can even run tests and linting. But the
+merge button remains inaccessible until all human approvals and
+automated checks are satisfied.</p>
+<h3 id="scope-guard-blast-radius-as-a-permission-system">Scope Guard:
+Blast Radius as a Permission System</h3>
+<p>Immutable Infrastructure protects the graders. A <strong>Scope
+Guard</strong> protects the rest of the repository from scope leak by
+enforcing a write allowlist.</p>
+<p>Enforce it twice:</p>
+<ul>
+<li><p><strong>Runtime</strong>: the agent runner denies writes outside
+the Mission scope.</p></li>
+<li><p><strong>CI</strong>: a gate verifies the diff touches only
+allowed paths.</p></li>
+</ul>
+<p><strong>Example (Mission scope):</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">write_allowlist</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;src/**&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;tests/**&quot;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">denylist</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;.github/**&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;policies/**&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;validators/**&quot;</span></span></code></pre></div>
+<p>This is how you keep autonomy focused: the Mission defines the blast
+radius, and the system enforces it mechanically.</p>
+<h3 id="mission-gate-validation-without-the-agent">Mission Gate:
+Validation Without the Agent</h3>
+<p>To keep Physics impartial, decouple validation from generation. A
+<strong>Mission Gate</strong> runs a Mission’s acceptance criteria
+without running the model.</p>
+<p>In practice:</p>
+<ul>
+<li><p>The PR declares the Mission Object it is meant to
+satisfy.</p></li>
+<li><p>CI runs the Mission Gate: scope checks + validators + policy
+checks.</p></li>
+<li><p>If any gate fails, the change is rejected regardless of who
+authored it (human or agent).</p></li>
+</ul>
+<p>This turns “good” into executable law.</p>
+<h3 id="ci-path-filters-targeted-vetting">CI Path Filters: Targeted
+Vetting</h3>
+<p>While branch protection ensures all changes pass <em>some</em> CI,
+path filters in your CI/CD pipelines allow you to trigger
+<em>specific</em>, more intensive checks for critical paths. If an agent
+proposes a change to a policy file, you might want to run a more
+extensive formal verification or compliance check that wouldn’t be
+necessary for a simple application code change.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/policy-validator.yml</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Validate SDaC Policies</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> main</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;policies/**&#39;</span><span class="co"> # Only run this workflow if files in the policies directory change</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;validators/policy-schema.json&#39;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">validate-policies</span><span class="kw">:</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install dependencies</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm install -g @stoplight/spectral-cli</span><span class="co"> # Or any policy validation tool</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run policy schema validation</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> spectral lint policies/my-agent-rules.yaml --ruleset validators/policy-schema.json</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run compliance audit checks</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python scripts/audit_policy_compliance.py --policy-file policies/my-agent-rules.yaml</span></span></code></pre></div>
+<p>This workflow ensures that any change affecting your SDaC policies or
+their validation schema triggers dedicated, rigorous checks. It’s a
+pragmatic way to scale governance without slowing down every single pull
+request.</p>
+<h2 id="human-as-supreme-court-break-glass-kill-switches">Human as
+Supreme Court; Break-Glass; Kill Switches</h2>
+<p>Even with robust automated guardrails, there are times when human
+intervention is absolutely essential. These are the “Supreme Court”
+moments, the break-glass procedures, and the kill switches.</p>
+<h3 id="human-as-supreme-court">Human as Supreme Court</h3>
+<p>The human role in SDaC is to serve as the ultimate arbiter of intent
+and safety. When an autonomous system proposes a change and the
+automated checks are green, a human still provides the final approval.
+This is especially true for changes to the SDaC system itself. The
+<code>CODEOWNERS</code> and branch protection rules funnel these
+high-impact changes to the engineers with the most context and
+authority. This ensures that the system always remains a tool serving
+human objectives, not an uncontrolled entity.</p>
+<h3 id="break-glass-procedures">Break-Glass Procedures</h3>
+<p>Despite all planning, emergencies happen. A critical bug in a policy,
+an agent generating bad code, or a security vulnerability might require
+an immediate, unreviewed fix that bypasses standard procedures. A
+<em>break-glass procedure</em> is a documented, auditable process for
+bypassing your standard controls in an emergency.</p>
+<p>A good break-glass procedure is:</p>
+<ol type="1">
+<li><p><strong>Rare:</strong> It should be a last resort, not a
+shortcut.</p></li>
+<li><p><strong>Documented:</strong> Steps are clear, including who can
+invoke it and under what circumstances.</p></li>
+<li><p><strong>Auditable:</strong> Every invocation leaves an undeniable
+trace (logs, incident tickets, alerts).</p></li>
+<li><p><strong>Post-mortem enforced:</strong> Every use requires a
+post-mortem to understand <em>why</em> it was needed and how to prevent
+future occurrences.</p></li>
+</ol>
+<p><strong>Example:</strong></p>
+<pre><code>
+# Break-Glass Procedure: Emergency Merge to Main
+
+**Purpose:** To merge critical fixes or security patches to &#39;main&#39; branch that cannot wait for standard PR review cycle.
+
+**Invocation:**
+
+1.  **Identify Criticality:** Must be a Severity-1 or Severity-2 incident (P0/P1 outage, critical security vulnerability).
+
+2.  **Authorization:** Requires explicit approval from at least two of [Lead Architect, Head of Engineering, CTO].
+
+3.  **Action:**
+    a.  A designated &quot;emergency responder&quot; (from authorized list) creates a feature branch with the fix.
+    b.  Responder **forces push** to `main` branch (bypassing PR and branch protection).
+    c.  Immediately after push, create an incident ticket (`INC-XXXX`).
+    d.  Link the incident ticket to the force push commit message.
+
+4.  **Audit &amp; Follow-up:**
+    a.  Automated alert triggered on force-push to `main` (Slack, PagerDuty).
+    b.  Automated audit log entry created, linking commit, user, and timestamp.
+    c.  Within 24 hours, a post-mortem meeting must be scheduled to analyze the root cause and implement preventative measures to avoid future break-glass situations.</code></pre>
+<p>This procedure makes it <em>possible</em> to act fast in a crisis,
+but ensures it’s not done lightly and always leaves an audit trail for
+accountability and learning.</p>
+<h3 id="kill-switches-that-work">Kill Switches That Work</h3>
+<p>Autonomous systems, by definition, run themselves. But you need a way
+to stop them if they go rogue, enter an infinite loop, or start
+generating undesirable changes. A kill switch is a mechanism to
+immediately pause or disable the agent’s ability to propose or merge
+changes.</p>
+<p><strong>Characteristics of an effective kill switch:</strong></p>
+<ul>
+<li><p><strong>Simple to activate:</strong> Should be a single,
+unambiguous action.</p></li>
+<li><p><strong>Immediate effect:</strong> Stops the agent’s active
+operations within seconds.</p></li>
+<li><p><strong>Auditable:</strong> Records who flipped the switch and
+when.</p></li>
+<li><p><strong>Configurable:</strong> Ideally, can be toggled without
+deploying new code.</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<ol type="1">
+<li><p><strong>Environment Variable:</strong> The simplest kill switch
+might be an environment variable (<code>SDAC_AGENT_ENABLED=false</code>)
+read by the agent’s runtime. If <code>false</code>, the agent merely
+logs its intent but takes no action.</p></li>
+<li><p><strong>Feature Flag Service:</strong> Integrate with a feature
+flag service (e.g., LaunchDarkly, Optimizely, or an internal
+equivalent). Toggling a flag like <code>auto_merge_enabled</code> can
+instantly control the agent’s ability to create or merge pull
+requests.</p></li>
+<li><p><strong>Git Branch State:</strong> A dedicated
+<code>disable-auto-merge</code> branch. A CI check on <em>every</em>
+agent-generated PR could check for the existence of this branch. If it
+exists, the CI job automatically fails, preventing the agent from
+merging.</p></li>
+</ol>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/agent-pr-gate.yml</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Agent Merge Blocker</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">opened</span><span class="kw">,</span><span class="at"> synchronize</span><span class="kw">,</span><span class="at"> reopened</span><span class="kw">]</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> main</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">check-kill-switch</span><span class="kw">:</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">ref</span><span class="kw">:</span><span class="at"> main</span><span class="co"> # Checkout main to check for the kill switch branch</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check for kill switch branch</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">id</span><span class="kw">:</span><span class="at"> check_branch</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>          if git branch --list disable-auto-merge | grep -q &quot;disable-auto-merge&quot;; then</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>            echo &quot;::error::Kill switch &#39;disable-auto-merge&#39; branch found. Autonomous merges are temporarily suspended.&quot;</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>            echo &quot;kill_switch_active=true&quot; &gt;&gt; $GITHUB_OUTPUT</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>          else</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>            echo &quot;kill_switch_active=false&quot; &gt;&gt; $GITHUB_OUTPUT</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>          fi</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch active</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">if</span><span class="kw">:</span><span class="at"> steps.check_branch.outputs.kill_switch_active == &#39;true&#39;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> exit 1</span></span></code></pre></div>
+<p>This CI workflow ensures that if a branch named
+<code>disable-auto-merge</code> exists in the repository, any
+agent-generated PR to <code>main</code> will automatically fail its
+checks, thus preventing merges. To re-enable, simply delete the
+<code>disable-auto-merge</code> branch. It’s a clear, auditable, and
+instantly effective way to pause the agent’s merging capability.</p>
+<p>Immutable infrastructure, protected paths, and emergency controls are
+the bedrock of safe SDaC. They establish the boundaries within which
+autonomous agents can operate, ensuring that innovation doesn’t come at
+the cost of control and safety. With these guardrails in place, we can
+move towards more sophisticated autonomous operations with
+confidence.</p>
+<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h2>
+<ol type="1">
+<li><p><strong>Define <code>CODEOWNERS</code> for SDaC
+components:</strong> Identify the critical directories (e.g.,
+<code>agents/</code>, <code>policies/</code>, <code>validators/</code>,
+CI/CD config files like <code>.github/workflows/</code>) in your
+repository. Create or update your <code>CODEOWNERS</code> file to
+mandate specific team reviews for changes to these paths, including the
+<code>CODEOWNERS</code> file itself.</p></li>
+<li><p><strong>Configure Branch Protection for
+<code>main</code>:</strong> Set up branch protection rules for your
+<code>main</code> branch to require:</p>
+<ul>
+<li><p>At least one approving review (or more, if your
+<code>CODEOWNERS</code> specify).</p></li>
+<li><p><code>CODEOWNERS</code> approval (if your platform supports
+it).</p></li>
+<li><p>All required status checks (CI/CD) to pass.</p></li>
+<li><p>Restrict direct pushes to <code>main</code>.</p></li>
+</ul></li>
+<li><p><strong>Implement a basic Kill Switch:</strong> Choose one of the
+kill switch mechanisms (environment variable, feature flag, or
+<code>disable-auto-merge</code> Git branch). Implement it in your
+agent’s logic or a CI gate. Test that flipping the switch successfully
+prevents your agent from merging PRs.</p></li>
+<li><p><strong>Draft a Break-Glass Procedure (initial version):</strong>
+Work with your team leads to draft a preliminary
+<code>BREAK_GLASS.md</code> document outlining who, why, and how to
+bypass standard controls in a critical emergency, emphasizing
+auditability and post-mortem requirements.</p></li>
+</ol>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="chapter-9-the-dream-daemon-background-maintenance">← Chapter 9 – The Dream Daemon (Background Maintenance)</a>
+    <a class="next-link" href="chapter-11-automated-refactoring-under-guards">Chapter 11 – Automated Refactoring Under Guards →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

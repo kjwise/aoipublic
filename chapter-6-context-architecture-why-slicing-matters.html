@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
+<h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
+Context Architecture (Why Slicing Matters)</h1>
+<p>You’ve built your first SDaC loop in Part I. You’ve seen it reliably
+generate, judge, and refine code. Now, in Part II, we drill into
+<em>why</em> it works, starting with the most critical ingredient:
+context.</p>
+<p>If you’ve spent any time working with large language models (LLMs),
+you’ve encountered the “context window” problem. It’s the maximum amount
+of text an LLM can process at once. Most engineers treat this like a
+bucket: dump everything relevant (and often irrelevant) into it and hope
+the model figures it out. This approach might work for quick demos, but
+it’s a recipe for non-determinism, Stochastic Drift, and unreliable
+systems in production. It’s why “better Mission Objects” alone stops
+scaling.</p>
+<p>Reliable GenAI systems don’t just <em>have</em> context; they
+<em>engineer</em> it.</p>
+<h2 id="from-context-windows-to-context-graphs">From Context Windows to
+Context Graphs</h2>
+<p>A raw context window is like giving a junior engineer access to your
+entire codebase, asking them to Refine a specific bug, and telling them,
+“It’s in there somewhere.” They’ll spend more time sifting through noise
+than Refining the problem, and their solution might introduce new issues
+because they misunderstood the boundaries of their task.</p>
+<p>This is where <strong>Context Architecture</strong> comes in. It’s
+the discipline of engineering how context is selected, structured, and
+bounded so an LLM (or any agent) can act deterministically. It moves
+beyond raw text dumps to a precise, verifiable understanding of what
+information is relevant and how it relates.</p>
+<p>The core artifact of Context Architecture is the <strong>Context
+Graph</strong>. Imagine a graph where nodes represent discrete units of
+information—files, functions, classes, symbols, documentation segments,
+API contracts, Immune System cases, or even specific lines of code.
+Edges represent typed relationships: “depends on,” “implements,” “is
+validated by,” “calls,” “references,” “is documented by.”</p>
+<p>In polyglot repositories, the graph also needs
+<strong>identity</strong>. A node isn’t just “a folder”; it’s “a Rust
+crate built with Cargo” or “a Python package built with pyproject.” That
+identity is how the Driver Pattern can select the right mechanism
+without guessing.</p>
+<p><strong>Example: node identity (computed
+deterministically)</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;id&quot;</span><span class="fu">:</span><span class="st">&quot;services/ledger&quot;</span><span class="fu">,</span><span class="dt">&quot;kind&quot;</span><span class="fu">:</span><span class="st">&quot;package&quot;</span><span class="fu">,</span><span class="dt">&quot;language&quot;</span><span class="fu">:</span><span class="st">&quot;rust&quot;</span><span class="fu">,</span><span class="dt">&quot;build&quot;</span><span class="fu">:</span><span class="st">&quot;cargo&quot;</span><span class="fu">,</span><span class="dt">&quot;test_cmd&quot;</span><span class="fu">:</span><span class="st">&quot;cargo test&quot;</span><span class="fu">}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;id&quot;</span><span class="fu">:</span><span class="st">&quot;services/api&quot;</span><span class="fu">,</span><span class="dt">&quot;kind&quot;</span><span class="fu">:</span><span class="st">&quot;package&quot;</span><span class="fu">,</span><span class="dt">&quot;language&quot;</span><span class="fu">:</span><span class="st">&quot;python&quot;</span><span class="fu">,</span><span class="dt">&quot;build&quot;</span><span class="fu">:</span><span class="st">&quot;pyproject&quot;</span><span class="fu">,</span><span class="dt">&quot;test_cmd&quot;</span><span class="fu">:</span><span class="st">&quot;pytest&quot;</span><span class="fu">}</span></span></code></pre></div>
+<p>Identity is not what the model infers from vibes. It’s what your
+deterministic extractors compute by reading manifests
+(<code>Cargo.toml</code>, <code>pyproject.toml</code>) and attaching the
+results to nodes.</p>
+<p>Instead of a monolithic blob, a Context Graph allows you to
+<em>slice</em> the exact subset of information pertinent to a single
+task. The slice is produced by deterministic rules. It should include
+three things: the information itself, why it matters to the task, and
+how it should be interpreted.</p>
+<h3
+id="deterministic-scope-routing-a-self-referential-example">Deterministic
+scope routing (a self-referential example)</h3>
+<p>In this repository, the engine can operate on both prose and code.
+That means slicing starts one step earlier than “pick files”: it starts
+by deciding which plane you are in.</p>
+<p>The router in <code>core/scope.py</code> does not ask a model to
+guess. It infers scope from the target path and returns a typed object
+(book scope vs. code scope). The heuristics are intentionally plain:</p>
+<ul>
+<li><code>*.md</code> targets are treated as book scope.</li>
+<li><code>*.py</code> targets are treated as code scope.</li>
+<li>directories that contain a <code>book/</code> subtree are treated as
+book scope.</li>
+</ul>
+<p>That is Context Architecture in practice: deterministic routing
+before any stochastic step runs.</p>
+<h2 id="building-the-context-graph-deterministic-extraction">Building
+the Context Graph (Deterministic Extraction)</h2>
+<p>You don’t need a perfect graph to start. You need a deterministic
+extractor that produces stable nodes and stable edges.</p>
+<p>If you want implementation guidance (storage options, incremental
+rebuilds, and query shapes), see the Context Graph implementation guide
+in Appendix C.</p>
+<p>At minimum, build it in two passes:</p>
+<ol type="1">
+<li><strong>Extract nodes</strong> (files, symbols, doc sections,
+schemas, Immune System cases).</li>
+<li><strong>Derive edges</strong> (imports, calls, “documented by”,
+“validated by”, “exercises”).</li>
+</ol>
+<p><strong>Pseudocode: <code>extract_nodes()</code></strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> extract_nodes(repo_root):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> path <span class="kw">in</span> iter_repo_files(repo_root):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_source_file(path):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> Node(kind<span class="op">=</span><span class="st">&quot;file&quot;</span>, <span class="bu">id</span><span class="op">=</span><span class="bu">str</span>(path))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> symbol <span class="kw">in</span> ast_symbols(path):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> Node(kind<span class="op">=</span><span class="st">&quot;symbol&quot;</span>, <span class="bu">id</span><span class="op">=</span><span class="ss">f&quot;</span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>symbol<span class="sc">.</span>qualified_name<span class="sc">}</span><span class="ss">&quot;</span>, <span class="bu">file</span><span class="op">=</span><span class="bu">str</span>(path))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_markdown(path):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> heading <span class="kw">in</span> markdown_headings(path):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> Node(kind<span class="op">=</span><span class="st">&quot;doc_section&quot;</span>, <span class="bu">id</span><span class="op">=</span><span class="ss">f&quot;</span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">#</span><span class="sc">{</span>heading<span class="sc">.</span>slug<span class="sc">}</span><span class="ss">&quot;</span>, <span class="bu">file</span><span class="op">=</span><span class="bu">str</span>(path))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> is_test_file(path):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> case <span class="kw">in</span> test_cases(path):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> Node(kind<span class="op">=</span><span class="st">&quot;immune_case&quot;</span>, <span class="bu">id</span><span class="op">=</span><span class="ss">f&quot;</span><span class="sc">{</span>path<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>case<span class="sc">.</span>name<span class="sc">}</span><span class="ss">&quot;</span>, <span class="bu">file</span><span class="op">=</span><span class="bu">str</span>(path))</span></code></pre></div>
+<p><strong>Pseudocode: <code>derive_edges()</code></strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> derive_edges(nodes):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> file_node <span class="kw">in</span> nodes_of_kind(nodes, <span class="st">&quot;file&quot;</span>):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> imported <span class="kw">in</span> imports(file_node.<span class="bu">id</span>):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> Edge(src<span class="op">=</span>file_node.<span class="bu">id</span>, dst<span class="op">=</span>imported, kind<span class="op">=</span><span class="st">&quot;imports&quot;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> case <span class="kw">in</span> nodes_of_kind(nodes, <span class="st">&quot;immune_case&quot;</span>):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> symbol <span class="kw">in</span> referenced_symbols(case.<span class="bu">file</span>):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> Edge(src<span class="op">=</span>case.<span class="bu">id</span>, dst<span class="op">=</span>symbol, kind<span class="op">=</span><span class="st">&quot;exercises&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> doc <span class="kw">in</span> nodes_of_kind(nodes, <span class="st">&quot;doc_section&quot;</span>):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> symbol <span class="kw">in</span> linked_symbols(doc.<span class="bu">id</span>):</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> Edge(src<span class="op">=</span>doc.<span class="bu">id</span>, dst<span class="op">=</span>symbol, kind<span class="op">=</span><span class="st">&quot;documents&quot;</span>)</span></code></pre></div>
+<p><strong>Example query (anchor → slice):</strong></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anchor</span><span class="kw">:</span><span class="at"> src/tax_service.py:calculate_income_tax</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span><span class="kw">:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> doc_section</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">match</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;docs/tax_rules.md&quot;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> immune_case</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">match</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;test_tax_service.py:test_calculate_income_tax_high_earner_scenario&quot;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">kind</span><span class="kw">:</span><span class="at"> symbol</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">relation</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;imports&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">prune</span><span class="kw">:</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_nodes</span><span class="kw">:</span><span class="at"> </span><span class="dv">12</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_tokens</span><span class="kw">:</span><span class="at"> </span><span class="dv">1500</span></span></code></pre></div>
+<p><strong>Example slice returned (ordered):</strong></p>
+<ul>
+<li><code>docs/tax_rules.md</code></li>
+<li><code>src/tax_service.py</code> (only the relevant function +
+constants)</li>
+<li><code>tests/test_tax_service.py</code> (only the failing case)</li>
+<li><code>src/tax_service.py</code> direct imports (only what the
+function touches)</li>
+</ul>
+<h2 id="how-to-slice-a-context-graph-for-deterministic-action">How to
+Slice a Context Graph for Deterministic Action</h2>
+<p>The goal of slicing is precision: the minimum necessary context to
+complete a task with high determinism and low risk of Stochastic Drift.
+Too little context leads to incomplete work; too much leads to “lost in
+the middle” phenomena and irrelevant generations.</p>
+<p>Here’s a systematic approach to slicing, building on concepts
+familiar to software engineers:</p>
+<ol type="1">
+<li><p><strong>Identify the Anchor Node:</strong> Every task has a focal
+point. This is your anchor node. If you’re Refining a bug, it might be
+the failing Immune System case, the function implicated in the stack
+trace, or the specific line of code. If you’re adding a feature, it’s
+the interface definition or the target file for implementation. This
+anchor defines the immediate scope of work.</p></li>
+<li><p><strong>Map First (Intent &amp; Constraints):</strong> Before
+diving into implementation details, an agent needs to understand the
+<em>intent</em> and <em>constraints</em>. This is your “Map” layer of
+context.</p>
+<ul>
+<li><p><strong>Project Structure:</strong> How is the repository
+organized? (e.g., <code>src/</code>, <code>tests/</code>,
+<code>docs/</code>, <code>meta/</code>)</p></li>
+<li><p><strong>Architectural Contracts:</strong> Which interfaces,
+schemas, or data models must be adhered to? (e.g.,
+<code>api/v1/schema.json</code>, <code>interfaces.ts</code>)</p></li>
+<li><p><strong>Documentation:</strong> Relevant high-level design
+documents, user stories, or requirements. (e.g.,
+<code>docs/feature_x.md</code>)</p></li>
+<li><p><strong>Configuration:</strong> Global settings, environment
+variables, or build configurations that impact the change. (e.g.,
+<code>package.json</code>, <code>tsconfig.json</code>) The Map provides
+the guardrails and ensures the agent understands the “why” and “what are
+the rules” before the “how.” In SDaC, this often translates to providing
+your <code>meta/</code> directory or key architectural
+<code>README</code>s as initial context.</p></li>
+</ul></li>
+<li><p><strong>Terrain Second (Implementation Details):</strong> Once
+the Map is understood, you pull in the actual code and immediate
+dependencies—the “Terrain.” This layer is always interpreted
+<em>through</em> the lens of the Map.</p>
+<ul>
+<li><p><strong>Code Dependencies:</strong> The functions, classes, or
+modules directly called by, or calling, your anchor node.</p></li>
+<li><p><strong>Immune System cases:</strong> Related unit, integration,
+or end-to-end cases, especially if the task is bug-Refining or adding a
+new feature.</p></li>
+<li><p><strong>Relevant Snippets:</strong> Specific blocks of code, not
+entire files, that are tightly coupled to the task.</p></li>
+</ul></li>
+<li><p><strong>Prune Aggressively:</strong> This is where the “less is
+more” principle becomes paramount. After identifying potential context,
+ruthlessly eliminate anything that isn’t <em>strictly necessary</em> for
+the current task.</p>
+<ul>
+<li><p><strong>Irrelevant Modules:</strong> If you’re working on a
+backend API, frontend UI code is usually noise.</p></li>
+<li><p><strong>Unused Functions:</strong> Functions in the same file
+that are unrelated to the current task.</p></li>
+<li><p><strong>Excessive History:</strong> While useful for humans,
+commit history or extensive diffs might not be necessary for an LLM to
+generate a specific Refinement if the current state and target change
+are well-defined. The most effective pruning often relies on
+deterministic tools: AST parsers for dependency graphs, static analysis
+tools, or even simple <code>grep</code> commands for symbol
+resolution.</p></li>
+</ul></li>
+</ol>
+<h3 id="branching-factor-rule-of-seven">Branching Factor (Rule of
+Seven)</h3>
+<p>Structure is a compression algorithm for attention. Keep your Map and
+Terrain queryable by maintaining a healthy branching factor (fan-out) at
+each layer.</p>
+<ul>
+<li><strong>Junk drawers (high fan-out):</strong> A directory with 50
+files, or a Mission Object with 30 flat constraints, dilutes signal.
+Important details get washed out.</li>
+<li><strong>Rabbit holes (low fan-out):</strong> Five layers of folders
+each containing one item wastes context on traversal and hides peer
+relationships.</li>
+<li><strong>Heuristic:</strong> aim for ~7 (±2) siblings per node
+(directories, headings, grouped constraints). If you’re at 20, you’re
+missing a sub-abstraction. If you’re at 1, flatten.</li>
+</ul>
+<p><strong>Mechanism: quick branching-factor checks</strong></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Directory fan-out: how many immediate children are in this layer?</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> services/api <span class="at">-maxdepth</span> 1 <span class="at">-mindepth</span> 1 <span class="at">-print</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Doc fan-out: how many sibling sections (headings) are at this layer?</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">rg</span> <span class="at">-n</span> <span class="st">&#39;^### &#39;</span> docs/feature_x.md <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p>If you want to enforce this as Physics, lint it:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>children <span class="op">=</span> count_children(<span class="st">&quot;services/api&quot;</span>)  <span class="co"># ignore .git, build artifacts, etc.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> children <span class="op">&gt;</span> <span class="dv">10</span>:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    warn(<span class="ss">f&quot;branching_factor_too_high path=services/api children=</span><span class="sc">{</span>children<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<p>This layered approach ensures that the LLM receives relevant context
+in a structure that guides deterministic behavior, reducing the surface
+area for stochastic generation.</p>
+<h2 id="failure-modes-the-wrong-slice">Failure Modes: The Wrong
+Slice</h2>
+<p>The easiest way to feel why slicing matters is to watch it fail.
+There are two common failure modes:</p>
+<ul>
+<li><strong>Slice too small:</strong> you omit a critical constraint or
+signal.</li>
+<li><strong>Slice too big:</strong> you drown the anchor in noise and
+invite scope leak.</li>
+</ul>
+<h3 id="slice-too-small-missing-the-contract">Slice too small: missing
+the contract</h3>
+<p>You want to Refine a bug in <code>calculate_income_tax()</code>. You
+do the “obvious” thing: give the model the whole file and ask it to make
+the failing Immune System case pass.</p>
+<p><strong>Wrong slice (too small):</strong></p>
+<ul>
+<li>Includes <code>tax_service.py</code></li>
+<li>Omits the failing Immune System case (so the model can’t see the
+exact assertion)</li>
+<li>Omits the tax rules source (so the model can’t see the
+contract)</li>
+</ul>
+<p>The model guesses. It changes constants and logic that look
+plausible, but it has no way to verify intent.</p>
+<pre class="text"><code>[immune] FAIL: test_calculate_income_tax_high_earner_scenario
+  expected: 30000
+  got:      35000
+[validator] FAIL: regression detected (previously passing scenario now fails)</code></pre>
+<p><strong>Fix:</strong> include the failing Immune System case and the
+Map node that defines correctness (tax rules / schema). Now the Judge
+can localize the failure and the loop has a real target.</p>
+<h3 id="slice-too-big-noise-and-scope-leak">Slice too big: noise and
+scope leak</h3>
+<p>The opposite failure is to “be safe” by throwing in everything:</p>
+<p><strong>Wrong slice (too big):</strong></p>
+<ul>
+<li><code>src/</code> (multiple modules, not just the tax function)</li>
+<li><code>tests/</code> (entire suite, not the failing case)</li>
+<li><code>docs/</code> (all tax docs, plus unrelated decisions)</li>
+<li>Whatever happens to be nearby in the repository</li>
+</ul>
+<p>Now the agent spends tokens on traversal and story-building. It may
+“fix” the bug by rewriting large sections, or by editing unrelated
+modules that happen to look adjacent.</p>
+<pre class="text"><code>[validator] FAIL: diff_budget exceeded (files_changed=12 &gt; 3)
+[validator] FAIL: out_of_scope_edit (touched src/payments/)</code></pre>
+<p><strong>Fix:</strong> set budgets (<code>max_nodes</code>,
+<code>max_tokens</code>, diff budget), anchor hard (start from the
+failing Immune System case), and prune deterministically (imports/calls
+only, one-hop dependencies, one failing case). If the slice is still too
+large, that’s a signal to split the Mission Object into smaller
+steps.</p>
+<p>Slicing is not about giving the model more. It’s about giving it the
+<em>right</em> evidence, in a bounded packet, so the loop can
+converge.</p>
+<h2
+id="skeleton-first-rule-sensors-extract-models-generate">Skeleton-First
+Rule: Sensors Extract, Models Generate</h2>
+<p>One of the core ideas for taming stochastic generation is to separate
+the “skeleton” from the “flesh.”</p>
+<p>The <strong>Skeleton-First Rule</strong> dictates that critical,
+structural elements of the system (the “skeleton”) must be
+deterministically <em>extracted</em> and <em>presented</em> to the LLM,
+not generated by it. The LLM’s role is then to fill in the “flesh”—the
+implementation details, the exact wording, the logic within established
+boundaries.</p>
+<p>Examples of “skeleton” elements include:</p>
+<ul>
+<li><p>Function signatures</p></li>
+<li><p>Class definitions and their members</p></li>
+<li><p>Interface contracts</p></li>
+<li><p>Data schemas (e.g., JSON Schema, Protobuf definitions)</p></li>
+<li><p>Immune System definitions (e.g., <code>describe</code> blocks,
+<code>it</code> descriptions)</p></li>
+<li><p>File paths and names</p></li>
+<li><p>Imports/exports</p></li>
+</ul>
+<p>These are elements that, if changed randomly by an LLM, would break
+the system’s architecture or external contracts. A
+<strong>Sensor</strong> (deterministic extractor: AST walker, schema
+parser, router introspector) extracts these elements from the existing
+codebase and provides them as immutable context. The LLM is then
+instructed (and often constrained by tools) to operate <em>within</em>
+these provided structures.</p>
+<p>For instance, if you’re asking an LLM to implement a new method for
+an existing interface, the interface definition itself is
+deterministically extracted by a Sensor and provided as context. The LLM
+can then <em>only</em> generate the body of the method, ensuring it
+adheres to the contract. This significantly reduces the model’s degrees
+of freedom, pushing it towards reliable and verifiable outputs.</p>
+<h2
+id="worked-example-debugging-a-tax-calculation-with-a-precise-slice">Worked
+Example: Debugging a Tax Calculation with a Precise Slice</h2>
+<p>Let’s apply these principles to a real-world scenario: debugging a
+tax calculation function in a Python service.</p>
+<p>Imagine a <code>tax_service.py</code> file with a
+<code>calculate_income_tax</code> function. A new Immune System
+<code>test_tax_service.py</code> is failing, specifically for a scenario
+involving specific income brackets.</p>
+<p><strong>The Problem:</strong> <code>test_tax_service.py</code></p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tax_service <span class="im">import</span> calculate_income_tax</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_calculate_income_tax_high_earner_scenario():</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Example for someone earning $150,000</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    income <span class="op">=</span> <span class="dv">150000</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    expected_tax <span class="op">=</span> <span class="dv">30000</span>  <span class="co"># 50k*0.1 + 50k*0.2 + 50k*0.3</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    actual_tax <span class="op">=</span> calculate_income_tax(income)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> actual_tax <span class="op">==</span> pytest.approx(expected_tax, <span class="fl">0.01</span>) <span class="co"># Fails here</span></span></code></pre></div>
+<p><strong><code>tax_service.py</code> (simplified snippet with a
+potential bug):</strong></p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tax_service.py</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>TAX_BRACKETS <span class="op">=</span> [</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">0</span>, <span class="dv">50000</span>, <span class="fl">0.10</span>),    <span class="co"># 10% for first $50k</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">50001</span>, <span class="dv">100000</span>, <span class="fl">0.20</span>),  <span class="co"># 20% for next $50k</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">100001</span>, <span class="bu">float</span>(<span class="st">&#39;inf&#39;</span>), <span class="fl">0.30</span>) <span class="co"># 30% for everything above $100k</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_income_tax(income: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    total_tax <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    remaining_income <span class="op">=</span> income</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lower, upper, rate <span class="kw">in</span> TAX_BRACKETS:</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> remaining_income <span class="op">&lt;=</span> <span class="dv">0</span>:</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Bug: This calculation for upper brackets might be off</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        taxable_in_bracket <span class="op">=</span> <span class="bu">min</span>(remaining_income, upper <span class="op">-</span> lower <span class="op">+</span> <span class="dv">1</span>) <span class="co"># Potential off-by-one or logic error</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> lower <span class="op">&lt;=</span> remaining_income: <span class="co"># This condition might also be problematic</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            taxable_in_bracket <span class="op">=</span> <span class="bu">min</span>(remaining_income, upper <span class="op">-</span> lower <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>            tax_amount <span class="op">=</span> taxable_in_bracket <span class="op">*</span> rate</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>            total_tax <span class="op">+=</span> tax_amount</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>            remaining_income <span class="op">-=</span> taxable_in_bracket</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total_tax</span></code></pre></div>
+<p>Here’s how we’d build a precise Context Graph slice for an agent to
+Refine this bug:</p>
+<ol type="1">
+<li><p><strong>Anchor Node:</strong> The failing Immune System case:
+<code>test_calculate_income_tax_high_earner_scenario</code> within
+<code>test_tax_service.py</code>. This immediately points to the
+<code>calculate_income_tax</code> function as the primary
+suspect.</p></li>
+<li><p><strong>Map First (Intent &amp; Constraints):</strong></p>
+<ul>
+<li><p><strong>Tax Rules Documentation:</strong> A simplified
+<code>tax_rules.md</code> explaining the progressive tax bracket system.
+(e.g., “Income between $0-$50k is 10%, $50,001-$100k is 20%, above $100k
+is 30%”). This defines the <em>correct behavior</em>.</p></li>
+<li><p><strong>Project Structure:</strong> Knowing
+<code>tax_service.py</code> is in <code>src/</code> and
+<code>test_tax_service.py</code> is in <code>tests/</code> helps the
+agent understand file relationships.</p></li>
+<li><p><strong>Type Hinting:</strong> The function signature
+<code>calculate_income_tax(income: float) -&gt; float</code> is a hard
+constraint. The agent <em>must not</em> change this.</p></li>
+</ul></li>
+<li><p><strong>Terrain Second (Implementation Details):</strong></p>
+<ul>
+<li><p><strong><code>tax_service.py</code> (sliced):</strong> Only the
+<code>TAX_BRACKETS</code> constant and the
+<code>calculate_income_tax</code> function body. No other functions in
+<code>tax_service.py</code> (if any) are included.</p></li>
+<li><p><strong><code>test_tax_service.py</code> (sliced):</strong> Only
+the <code>test_calculate_income_tax_high_earner_scenario</code>
+function, including its assertion. This provides the specific failing
+input and expected output.</p></li>
+</ul></li>
+<li><p><strong>Prune Aggressively:</strong></p>
+<ul>
+<li><p>Remove all other Immune System cases from
+<code>test_tax_service.py</code>.</p></li>
+<li><p>Remove all other functions/classes from
+<code>tax_service.py</code>.</p></li>
+<li><p>Exclude unrelated files like database models, API endpoints, or
+UI templates.</p></li>
+</ul></li>
+</ol>
+<p><strong>The Context Provided to the LLM:</strong></p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu"># file: tax_rules.md</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Progressive Income Tax System</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>Income tax is calculated based on progressive tax brackets.</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Income $0 - $50,000: 10%</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Income $50,001 - $100,000: 20% (applied to income within this bracket)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Income &gt; $100,000: 30% (applied to income above $100,000)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># file: src/tax_service.py</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="fu"># (Only the relevant constant and function from tax_service.py)</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>TAX_BRACKETS = [</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    (0, 50000, 0.10),</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    (50001, 100000, 0.20),</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    (100001, float(&#39;inf&#39;), 0.30)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>def calculate_income_tax(income: float) -&gt; float:</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    total_tax = 0.0</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    remaining_income = income</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="in">    for lower, upper, rate in TAX_BRACKETS:</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="in">        if remaining_income &lt;= 0:</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="in">            break</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="in">        # Bug is likely here.</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="in">        # Current logic:</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="in">        # taxable_in_bracket = min(remaining_income, upper - lower + 1)</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="in">        # if lower &lt;= remaining_income:</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="in">        #     taxable_in_bracket = min(remaining_income, upper - lower + 1)</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="in">        #     tax_amount = taxable_in_bracket * rate</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="in">        #     total_tax += tax_amount</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="in">        #     remaining_income -= taxable_in_bracket</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="in">    return total_tax</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="fu"># file: tests/test_tax_service.py</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a><span class="fu"># (Only the failing test from test_tax_service.py)</span></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>import pytest</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>from tax_service import calculate_income_tax</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>def test_calculate_income_tax_high_earner_scenario():</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>    income = 150000</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>    expected_tax = 30000  # 50k*0.1 + 50k*0.2 + 50k*0.3</span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>    actual_tax = calculate_income_tax(income)</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>    assert actual_tax == pytest.approx(expected_tax, 0.01) # This test is currently failing.</span></code></pre></div>
+<p>The agent’s task: “Refine the <code>calculate_income_tax</code>
+function to pass
+<code>test_calculate_income_tax_high_earner_scenario</code>, adhering to
+the tax rules and without changing the function signature.”</p>
+<p><strong>Skeleton-First Rule in Action:</strong> A deterministic
+extractor + Validator (for example an AST-based checker in a pre-commit
+hook) will verify that:</p>
+<ol type="1">
+<li><p>The <code>calculate_income_tax</code> function signature
+(<code>def calculate_income_tax(income: float) -&gt; float:</code>)
+remains unchanged.</p></li>
+<li><p>The <code>TAX_BRACKETS</code> constant is not arbitrarily altered
+(unless specifically requested).</p></li>
+<li><p>The agent <em>only</em> modifies the body of the function and
+<em>only</em> to Refine the tax calculation logic.</p></li>
+</ol>
+<p>This precise slicing provides the LLM with exactly what it needs: the
+goal (failing Immune System), the rules (tax docs), and the specific
+code to modify, all within strict deterministic boundaries. This leads
+to a higher probability of correct and verifiable output.</p>
+<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h2>
+<p>Start thinking about the context you provide to your own GenAI
+agents. Instead of giving them entire files or directories, identify a
+single task, an anchor node, and then manually construct a “slice” of
+context for it. Include:</p>
+<ol type="1">
+<li><p>The anchor node (e.g., a function, an Immune System).</p></li>
+<li><p>Any <code>meta/</code> or <code>docs/</code> files that define
+the intent or constraints.</p></li>
+<li><p>Only the directly relevant code dependencies.</p></li>
+<li><p>Then, ruthlessly prune anything that isn’t essential.</p></li>
+</ol>
+<p>Experiment with how a smaller, more focused context slice affects the
+output quality and determinism compared to a larger, less structured
+one. Pay attention to how many tokens you use, and how often the model
+strays from the core task.</p>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge">← Chapter 5 – The Ouroboros Protocol (Why Loops Converge)</a>
+    <a class="next-link" href="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as Code (Mission Objects) →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

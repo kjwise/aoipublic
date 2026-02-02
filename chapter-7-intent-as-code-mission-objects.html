@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 7 – Intent as Code (Mission Objects) | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 7 – Intent as Code (Mission Objects)">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-7-intent-as-code-mission-objects">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part III Scale It From Loop to System</div>
+<h1 id="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as
+Code (Mission Objects)</h1>
+<p>The dream of a fully autonomous engineering system often gets bogged
+down in the reality of instruction tweaking. We’ve all been there: a
+meticulously crafted instruction, revised endlessly, still produces
+inconsistent results, or worse, confidently wrong output. The core
+problem is that a raw instruction string is not a contract. It lacks
+explicit scope, verifiable gates, and a clear path for recovery when
+things go sideways.</p>
+<p>This chapter introduces the <strong>Mission Object</strong>: your
+typed, executable contract for what a GenAI system should achieve. It’s
+not just a longer instruction; it’s a structured declaration of intent
+that brings rigor and reliability to your AI-driven engineering
+tasks.</p>
+<p>Terminology note: a <em>mission</em> is the abstract objective
+(“update the docs”). A <strong>Mission Object</strong> is the versioned
+YAML/JSON artifact that encodes that objective plus scope, budgets,
+gates, and fallbacks.</p>
+<h2 id="from-ad-hoc-instructions-to-typed-mission-objects">From Ad-hoc
+Instructions to Typed Mission Objects</h2>
+<p>Imagine you want an AI to update a specific section of your
+<code>README.md</code> to reflect a new API endpoint. With a traditional
+approach, you might write: “Update the ‘API Endpoints’ section in
+<code>README.md</code> to include <code>/v2/users</code> and describe
+its pagination.”</p>
+<p>That instruction is ambiguous:</p>
+<ul>
+<li><p><strong>Scope</strong>: Does it only touch that section, or can
+it add new sections?</p></li>
+<li><p><strong>Constraints</strong>: What format should the description
+take? Are there keywords it must include?</p></li>
+<li><p><strong>Quality</strong>: How do we <em>know</em> it did a good
+job? Is it grammatical? Is the new endpoint actually present?</p></li>
+<li><p><strong>Recovery</strong>: What if it messes up the existing
+formatting? How do we fix it?</p></li>
+</ul>
+<p>A <strong>Mission Object</strong> transforms this opaque instruction
+into a clear, executable specification. It’s a structured data format
+(often YAML or JSON) that codifies the <em>goal</em>, <em>scope</em>,
+<em>constraints</em>, <em>quality gate</em>, <em>fallbacks</em>, and
+<em>telemetry</em> for a task.</p>
+<p>Here’s how a Mission Object might look for our README update
+task:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> update-readme-api-endpoint-v1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> Ensure README.md documents the /v2/users API endpoint</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">target_files</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> README.md</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">target_sections</span><span class="kw">:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;API Endpoints&quot;</span><span class="co"> # Restrict AI to modifying content within this heading</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">constraints</span><span class="kw">:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;README.md&quot;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">must_contain_strings</span><span class="kw">:</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;/v2/users&quot;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;pagination&quot;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">must_not_contain_strings</span><span class="kw">:</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;/v1/users&quot;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;README.md&quot;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">regex_match</span><span class="kw">:</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;- `/v2/users`: Supports pagination and user resource management.&quot;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Exact line for new endpoint description.&quot;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">validator_script</span><span class="kw">:</span><span class="at"> ./scripts/validate_readme.sh</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">expected_output_schema</span><span class="kw">:</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> object</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">properties</span><span class="kw">:</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">new_endpoint_present</span><span class="kw">:</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">type</span><span class="kw">:</span><span class="at"> boolean</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;True if /v2/users is documented.&quot;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">formatting_intact</span><span class="kw">:</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">type</span><span class="kw">:</span><span class="at"> boolean</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;True if existing formatting is preserved.&quot;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span><span class="co"> # Maximum retries if validation fails</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span><span class="co"> # If max_iterations reached, revert all changes.</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">telemetry</span><span class="kw">:</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tags</span><span class="kw">:</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> documentation</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> api-update</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">metrics</span><span class="kw">:</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> success_rate</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> iteration_count</span></span></code></pre></div>
+<p>At first glance, this is more verbose than a one-line instruction.
+But this verbosity is its strength. It makes the task
+<strong>deterministic</strong>, <strong>auditable</strong>, and
+<strong>recoverable</strong>.</p>
+<h2
+id="mission-objects-are-stateful-artifacts-executable-pr-state-of-record">Mission
+Objects are stateful artifacts (Executable PR + state of record)</h2>
+<p>A Mission Object is not only an input to a run. It is the state of
+record for the unit of work: the thing you can point at in review, rerun
+tomorrow, and audit later.</p>
+<p>In practice, treat the Mission Object as a persistent artifact that
+the runner updates (or writes a companion record for) as it moves
+through the loop:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">state</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">status</span><span class="kw">:</span><span class="at"> planned</span><span class="co"> # planned | running | completed | failed | reverted</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">started_at</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">completed_at</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">attempt_count</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">last_run_id</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span></code></pre></div>
+<p>The Mission stays human-readable, but it stops being prose. It
+becomes an executable pull request: goal + scope + budgets + gates, plus
+outcome and a pointer to evidence in the Ledger (diffs, validator
+output, traces).</p>
+<h2 id="the-meta-patterns-applied-to-missions">The Meta-Patterns Applied
+to Missions</h2>
+<p>Mission Objects are where the Meta-Patterns become concrete.</p>
+<h3 id="dont-chat-compile-mission-objects-are-build-inputs">1) Don’t
+Chat, Compile (Mission Objects are build inputs)</h3>
+<p>Chat is fine for ideation. For repeatable work, turn intent into an
+artifact you can version and rerun.</p>
+<ul>
+<li><p>Store the Mission Object as data
+(<code>missions/update_readme.mission.yaml</code>) and treat it like
+source code.</p></li>
+<li><p>Run a deterministic runner that produces a diff plus a Decision
+Trace (validator output, structured errors, and final
+<code>PASS/FAIL</code>).</p></li>
+</ul>
+<p>The point is provenance: you can rerun the same Mission Object
+tomorrow and debug the process, not just the outcome.</p>
+<h3 id="physics-is-law-the-mission-must-be-gateable">2) Physics is Law
+(the Mission must be gateable)</h3>
+<p>A Mission Object is only useful if the system can reject it
+deterministically. That means the Mission must define:</p>
+<ul>
+<li><p>A bounded scope.</p></li>
+<li><p>Executable gates (constraints, a <code>quality_gate</code>,
+and/or tests).</p></li>
+<li><p>A revert policy when the gate fails.</p></li>
+</ul>
+<p>If the gate fails, the correct result is <code>FAIL</code> and a
+revert.</p>
+<h3 id="recursion-missions-are-system-currency">3) Recursion (Missions
+are system currency)</h3>
+<p>Once Missions exist as artifacts, maintenance loops can emit them
+too.</p>
+<ul>
+<li><p>A Sensor emits a concrete entropy signal (drift, unused config,
+missing docs).</p></li>
+<li><p>The loop writes a Mission Object that scopes the repair and
+defines gates.</p></li>
+<li><p>The same runner executes it and records evidence in the
+Ledger.</p></li>
+</ul>
+<p>Now “maintenance” is a pipeline, not a calendar reminder.</p>
+<h2
+id="judge-output-as-structured-error-objects-signal-rich-failure">Judge
+Output as Structured Error Objects (Signal-Rich Failure)</h2>
+<p>Once an AI has attempted a task defined by a Mission Object, how do
+we evaluate its output? A simple “yes” or “no” isn’t enough. We need
+<strong>signal-rich failure</strong> that tells us <em>why</em>
+something went wrong, enabling intelligent iteration or informed human
+intervention. This is where the <code>quality_gate</code> field in our
+Mission Object comes into play.</p>
+<p>A <code>quality_gate</code> isn’t just a pass/fail check; it’s a
+mechanism for producing structured feedback. This feedback should be
+machine-readable, ideally conforming to a predefined schema.</p>
+<p>Consider our <code>README.md</code> update. The
+<code>quality_gate</code> references <code>validator_script</code> and
+<code>expected_output_schema</code>. After the AI proposes changes to
+<code>README.md</code>, our system executes
+<code>validator_script</code>. This script doesn’t just return an exit
+code; it produces a JSON object detailing the validation results.</p>
+<p>Here’s an example of what that validator script might output if it
+fails:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;validation_status&quot;</span><span class="fu">:</span> <span class="st">&quot;FAILED&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;reason&quot;</span><span class="fu">:</span> <span class="st">&quot;Missing required content or incorrect format.&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;details&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;check&quot;</span><span class="fu">:</span> <span class="st">&quot;Must contain &#39;/v2/users&#39;&quot;</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;PASSED&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;check&quot;</span><span class="fu">:</span> <span class="st">&quot;Must contain &#39;pagination&#39;&quot;</span><span class="fu">,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;PASSED&quot;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;check&quot;</span><span class="fu">:</span> <span class="st">&quot;Regex match for exact line &#39;/v2/users&#39;: Supports pagination...&quot;</span><span class="fu">,</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;FAILED&quot;</span><span class="fu">,</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;actual&quot;</span><span class="fu">:</span> <span class="st">&quot;- `/v2/users`: Manages user resources.&quot;</span><span class="fu">,</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;expected_pattern&quot;</span><span class="fu">:</span> <span class="st">&quot;- `/v2/users`: Supports pagination and user resource management.&quot;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;recommendations&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Ensure the description for `/v2/users` explicitly mentions &#39;pagination&#39;.&quot;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>That JSON output is not just a report. It is the next iteration’s
+input.</p>
+<p>When you feed the failing checks back into the next Refine step
+(<strong>Feedback Injection</strong>), the model can fix one constraint
+instead of re-interpreting the whole mission.</p>
+<p>If you revert after a failure, keep the candidate diff and the
+validator output in a quarantine directory (<strong>Salvage
+Protocol</strong>). You want the system safe by default, and you want
+humans to recover useful fragments without re-running the model.</p>
+<p><strong>A concrete Salvage Protocol example: loot the useful
+fragment</strong></p>
+<p>Imagine attempt 2 produced a good helper, but the overall patch
+failed a validator (wrong edit region, wrong formatting, missing
+required string). The runner should revert the working tree, but keep
+the evidence:</p>
+<pre class="text"><code>.sdac/workflow-quarantine/
+  update-readme-api-endpoint-v1/
+    attempt-2.diff
+    attempt-2.findings.json</code></pre>
+<p>On the next attempt, you can either:</p>
+<ul>
+<li>include the helper in the deterministic slice (so the model reuses
+it), or</li>
+<li>copy the helper into the final patch manually, without re-running
+the model.</li>
+</ul>
+<p>Salvage is not “keep broken code.” It’s “keep the best parts of a
+failed attempt with provenance.”</p>
+<p>This structured error object is critical. Instead of a vague
+“validation failed,” we get:</p>
+<ul>
+<li><p>A clear <code>validation_status</code>.</p></li>
+<li><p>A high-level <code>reason</code>.</p></li>
+<li><p>Granular <code>details</code> for each check, including
+<code>actual</code> vs. <code>expected_pattern</code> for specific
+failures.</p></li>
+<li><p>Actionable <code>recommendations</code>.</p></li>
+</ul>
+<p>This is the “deterministic context” that tames stochastic generation.
+When the AI fails, we get precise signals on <em>how</em> to guide its
+next attempt, rather than just knowing it failed.</p>
+<h2 id="the-adaptation-state-machine-asm">The Adaptation State Machine
+(ASM)</h2>
+<p>Receiving structured feedback is powerful, but what do we <em>do</em>
+with it? This brings us to the <strong>Adaptation State
+Machine</strong>: the allowed moves after the Judge step. The
+<code>fallbacks</code> section in a Mission Object sets boundaries for
+these moves.</p>
+<p>In a minimal implementation, the core moves are:</p>
+<pre class="mermaid"><code>stateDiagram-v2
+  [*] --&gt; Write
+  Write --&gt; Judge
+  Judge --&gt; Commit: PASS
+  Judge --&gt; Iterate: FAIL (signal-rich)
+  Judge --&gt; UpdateEnvironment: FAIL (missing constraints/tools)
+  Judge --&gt; Revert: FAIL (unsafe or thrashing)
+  Iterate --&gt; Write
+  UpdateEnvironment --&gt; Write
+  Commit --&gt; [*]
+  Revert --&gt; [*]</code></pre>
+<ol type="1">
+<li><p><strong>Iterate:</strong> try again with tighter constraints and
+the exact failing evidence. This is only worth doing when the Judge
+output is signal-rich (file, line, failing check, expected vs
+actual).</p></li>
+<li><p><strong>Update Environment:</strong> change the deterministic
+context or tools, not the output. Add a missing schema to the slice. Add
+a validator. Add a fixture. If the system is failing because it lacks
+the contract, no amount of mutation fixes it.</p></li>
+<li><p><strong>Revert:</strong> abort and leave the Terrain unchanged.
+This is a successful outcome when the loop is thrashing or the blast
+radius is too high.</p></li>
+</ol>
+<p>If the Judge returns <code>PASS</code>, you can commit or merge. If
+it returns <code>FAIL</code>, the ASM decides whether it’s worth
+spending more compute or whether you should stop and ask for a better
+Mission Object.</p>
+<h2 id="templates-by-change-type">Templates by Change Type</h2>
+<p>Not every engineering task is unique. Many fall into predictable
+patterns: synchronizing documentation, evolving schemas, or performing
+bounded refactors. Attempting to craft a unique Mission Object for each
+instance of these common tasks is inefficient and error-prone. This is
+where <strong>Mission Object Templates</strong> come in.</p>
+<p>Templates pre-package the common <code>goal</code>,
+<code>scope</code>, <code>constraints</code>, <code>quality_gate</code>,
+and <code>fallbacks</code> for specific categories of changes. They
+allow engineers to invoke complex, AI-driven workflows with minimal
+input, inheriting a robust set of guardrails and validation logic.</p>
+<p>Here are examples of how templates can simplify common SDaC
+workflows:</p>
+<h3 id="driver-pattern-decouple-intent-from-mechanism">Driver Pattern
+(decouple intent from mechanism)</h3>
+<p>Mission Objects and templates should express what to do, not which
+tool to use. “Run tests” is intent; <code>pytest</code> vs
+<code>vitest</code> vs <code>mvn test</code> is mechanism.</p>
+<p>One simple pattern is to name the intent and let a driver map it to
+the repository substrate:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effects</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">action</span><span class="kw">:</span><span class="at"> run_tests</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">target</span><span class="kw">:</span><span class="at"> default</span></span></code></pre></div>
+<p>Your driver selects the command based on the repo (language, package
+manager, existing CI), ideally using Context Graph identity for the
+target node. That keeps Mission Objects portable across stacks and keeps
+tool details out of intent.</p>
+<h4 id="driver-resolution-algorithm-identity-command-fail-fast">Driver
+resolution algorithm (identity → command, fail fast)</h4>
+<p>Keep driver resolution deterministic and explicit:</p>
+<ol type="1">
+<li>Read node identity from the Context Graph (language + build
+system).</li>
+<li>Look up a driver in a registry (built-in defaults plus repo
+overrides).</li>
+<li>If multiple drivers match, apply precedence (most specific match
+wins).</li>
+<li>If no driver matches, fail fast with an actionable error (“no test
+driver for rust+cargo”).</li>
+</ol>
+<p>The key is that the system chooses the mechanism from deterministic
+identity. The model never guesses which toolchain to run.</p>
+<h4 id="worked-polyglot-example-pytest-vs.-jest">Worked polyglot
+example: <code>pytest</code> vs. <code>jest</code></h4>
+<p>Assume a monorepo with two packages:</p>
+<ul>
+<li><code>services/api</code> is Python (tests run via
+<code>pytest</code>)</li>
+<li><code>services/web</code> is JavaScript (tests run via
+<code>jest</code>)</li>
+</ul>
+<p>The Mission Object expresses intent only:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effects</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">action</span><span class="kw">:</span><span class="at"> run_tests</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">target</span><span class="kw">:</span><span class="at"> services/api</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">action</span><span class="kw">:</span><span class="at"> run_tests</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">target</span><span class="kw">:</span><span class="at"> services/web</span></span></code></pre></div>
+<p>The driver uses deterministic identity (computed from
+<code>pyproject.toml</code> / <code>package.json</code>) to choose the
+mechanism:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drivers</span><span class="kw">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_tests</span><span class="kw">:</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">match</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="fu">language</span><span class="kw">:</span><span class="at"> python</span><span class="kw">}</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;pytest&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;-q&quot;</span><span class="kw">]</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">match</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="fu">language</span><span class="kw">:</span><span class="at"> javascript</span><span class="kw">}</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;npm&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;test&quot;</span><span class="kw">]</span><span class="co"> # runs jest via the package&#39;s scripts</span></span></code></pre></div>
+<p>If <code>services/web</code> has no <code>package.json</code>, the
+driver fails fast. If <code>services/api</code> has no test runner
+configured, the driver fails fast. The model never invents toolchains;
+the substrate tells you what exists.</p>
+<h3 id="documentation-synchronization">Documentation
+Synchronization</h3>
+<ul>
+<li><p><strong>Problem</strong>: <code>README.md</code> or API
+documentation often drifts out of sync with the actual code or OpenAPI
+specification.</p></li>
+<li><p><strong>Template</strong>: A <code>DocSyncMission</code> template
+might take <code>source_file</code> (e.g.,
+<code>api/openapi.json</code>) and <code>target_file</code> (e.g.,
+<code>docs/api.md</code>) as input. Its <code>constraints</code> would
+ensure specific sections of the target file reflect the source, and its
+<code>quality_gate</code> would validate format, content, and
+completeness.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">template_name</span><span class="kw">:</span><span class="at"> DocSyncMission</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">source_path</span><span class="kw">:</span><span class="at"> api/openapi.json</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">target_path</span><span class="kw">:</span><span class="at"> README.md</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">section_map</span><span class="kw">:</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">source_selector</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;$.paths[&#39;/v2/users&#39;]&quot;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">target_section</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;## API Endpoints: /v2/users&quot;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Inherits default constraints, quality_gate for doc sync</span></span></code></pre></div></li>
+</ul>
+<h3 id="schema-evolution">Schema Evolution</h3>
+<ul>
+<li><p><strong>Problem</strong>: Adding a field to a database schema
+requires corresponding updates in ORM models, API DTOs, and potentially
+UI forms.</p></li>
+<li><p><strong>Template</strong>: A <code>SchemaEvolutionMission</code>
+template could take <code>table_name</code> and
+<code>new_field_definition</code> as input. Its <code>scope</code> would
+be automatically expanded to include relevant files (<code>*.py</code>
+for SQLAlchemy models, <code>*.go</code> for Go structs,
+<code>*.ts</code> for TypeScript interfaces). Its
+<code>constraints</code> might enforce type consistency, and its
+<code>quality_gate</code> could run linters or even compile the updated
+code.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">template_name</span><span class="kw">:</span><span class="at"> SchemaEvolutionMission</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">table</span><span class="kw">:</span><span class="at"> users</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">add_field</span><span class="kw">:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> last_login_at</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">type</span><span class="kw">:</span><span class="at"> datetime</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nullable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Inherits default scope, constraints, quality_gate for schema updates</span></span></code></pre></div></li>
+</ul>
+<h3 id="bounded-refactor">Bounded Refactor</h3>
+<ul>
+<li><p><strong>Problem</strong>: Applying a consistent rename across a
+codebase or extracting a small helper function.</p></li>
+<li><p><strong>Template</strong>: A <code>BoundedRefactorMission</code>
+might take <code>original_identifier</code> and
+<code>new_identifier</code> for a rename, or
+<code>target_code_block</code> and <code>new_function_name</code> for an
+extraction. Its <code>scope</code> would be tightly limited, and its
+<code>quality_gate</code> would likely involve running unit tests and
+static analysis.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Example</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">template_name</span><span class="kw">:</span><span class="at"> BoundedRefactorMission</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">refactor_type</span><span class="kw">:</span><span class="at"> rename_variable</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">original_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;user_id_str&#39;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">new_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;user_uuid&#39;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">files_to_scan</span><span class="kw">:</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;src/auth/**/*.py&#39;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Inherits default constraints (e.g., no functional change, tests pass), quality_gate</span></span></code></pre></div></li>
+</ul>
+<p>By using templates, teams can establish robust, pre-vetted patterns
+for AI-driven changes. This promotes consistency, reduces the risk of
+novel instruction-injection failures, and allows engineers to focus on
+higher-level problems, trusting that the underlying SDaC system will
+execute routine tasks safely and reliably within well-defined
+boundaries.</p>
+<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h2>
+<ol type="1">
+<li><p><strong>Define a Simple Mission Object</strong>: Pick a
+straightforward, low-stakes task in your codebase (e.g., update a
+comment, add a line to a specific section of a non-critical file). Write
+a basic YAML file for this task, including <code>goal</code>,
+<code>scope</code> (targeting a single file), and simple
+<code>constraints</code> (e.g.,
+<code>must_contain_strings</code>).</p></li>
+<li><p><strong>Mock an AI Executor</strong>: Write a small script
+(Python, Bash, Node) that <em>reads</em> your Mission Object YAML. For
+now, have it simply print the <code>goal</code> and <code>scope</code>.
+Then, manually make the requested change in the target file.</p></li>
+<li><p><strong>Implement a Basic Quality Gate</strong>: Add a
+<code>quality_gate</code> to your Mission Object. Create a separate
+script (e.g., <code>validate_task.sh</code>) that takes the modified
+file as input and performs one or two simple checks (e.g.,
+<code>grep</code> for a specific string, check file size). Have this
+script output a simple JSON object indicating <code>status</code>
+(“PASSED” or “FAILED”) and a <code>reason</code>.</p></li>
+<li><p><strong>Wire up a “Judge”</strong>: Modify your executor script
+from step 2 to call your <code>quality_gate</code> script. Based on the
+JSON output, print “Mission PASSED” or “Mission FAILED” along with the
+reason. You now have the core components of an auditable SDaC
+loop.</p></li>
+</ol>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="chapter-6-context-architecture-why-slicing-matters">← Chapter 6 – Context Architecture (Why Slicing Matters)</a>
+    <a class="next-link" href="chapter-8-keep-the-map-fresh-map-updaters">Chapter 8 – Keep the Map Fresh (Map-Updaters) →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
+<h1 id="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 –
+The Ouroboros Protocol (Why Loops Converge)</h1>
+<p>In Part I, you built a working loop: take a goal, propose a change,
+validate it, and if it fails, feed the error signal into the next
+attempt. This iterative process is the engine of reliability for
+Software Development as Code.</p>
+<p>We call it the Ouroboros Protocol because each iteration consumes its
+own artifacts as input: the last diff and the deterministic failure
+signal. But this is not an endless cycle. It is recursion with an exit
+strategy: converge to a stable passing state, or abort via circuit
+breakers and leave the Terrain unchanged.</p>
+<p>Two properties make this loop more than “retry until it passes”:</p>
+<ol type="1">
+<li><p><strong>Self-reference is a feature.</strong> The loop treats its
+own artifacts as input: the last diff, the last Validator failures, the
+last scope decision, the last trace. It is not “try again.” It is “try
+again with the evidence of why you failed.”</p></li>
+<li><p><strong>Maintenance is drift repair.</strong> Over time, the
+Terrain changes and the Map lags behind (docs, inventories, indexes, and
+rules drift). Ouroboros is the unit process that turns drift into a
+bounded repair under Physics — whether the diff touches code (Terrain)
+or a Map surface.</p></li>
+</ol>
+<p>Ouroboros is finite per Mission Object. A single run should end in
+one of a few outcomes: <code>PASS</code> and commit, <code>FAIL</code>
+and revert, or defer/escalate with evidence. The system can run many
+Ouroboros loops over months. That is where continuous renewal lives —
+not in an infinite retry loop.</p>
+<p>The core insight here is that you don’t need a perfectly
+deterministic Large Language Model (LLM) to achieve reliable, auditable
+outputs. You need a deterministic <em>process</em> that can tame a
+stochastic engine. The Ouroboros Protocol provides that process.</p>
+<h2 id="the-core-loop-write-judge-refine">The Core Loop: Write → Judge →
+Refine</h2>
+<p>At its heart, the Ouroboros Protocol is a feedback control loop:</p>
+<ol type="1">
+<li><p><strong>Write</strong>: The LLM, given context and a Mission
+Object (which may include prior errors), generates a candidate output.
+This output is the LLM’s best attempt to fulfill the current task. Since
+LLMs are stochastic engines (Chapter 4), this step is inherently
+probabilistic. Even with identical inputs, the output might vary
+slightly between runs.</p></li>
+<li><p><strong>Judge</strong>: This is where determinism enters the
+system. A <code>Judge</code> function takes the LLM’s <code>Write</code>
+output and evaluates it against a set of predefined, unambiguous
+criteria. This <code>Judge</code> is a piece of code (a schema
+validator, a linter, or an Immune System case) that <em>always</em>
+produces the same result for the same input. It doesn’t guess; it
+calculates, validates, or compares. It answers the question: “Does this
+output meet the requirements?” The <code>Judge</code>’s output is a set
+of findings, errors, or a simple pass/fail.</p></li>
+<li><p><strong>Refine</strong>: If the <code>Judge</code> reports errors
+or non-compliance, the <code>Refine</code> step prepares the feedback
+for the next iteration. This usually involves formatting the
+<code>Judge</code>’s output (e.g., error messages, diffs against a
+target, failing Immune System cases) and feeding it into the next model
+request. The LLM then attempts to incorporate this specific,
+deterministic feedback to improve its next generation.</p></li>
+</ol>
+<p>This cycle repeats until the <code>Judge</code> reports success, or a
+circuit breaker is tripped.</p>
+<h2 id="convergence-vs.-thrashing">Convergence vs. Thrashing</h2>
+<p>Understanding how this loop behaves is crucial for building robust
+SDaC systems.</p>
+<h3 id="convergence-when-the-loop-settles">Convergence: When the Loop
+Settles</h3>
+<p>Convergence occurs when the <code>Write → Judge → Refine</code> loop
+successfully guides the LLM to an output that satisfies all
+<code>Judge</code> criteria. This looks like:</p>
+<ul>
+<li><p><strong>Decreasing Errors</strong>: The <code>Judge</code>
+reports fewer and fewer errors with each iteration.</p></li>
+<li><p><strong>Stable Output</strong>: The diffs between successive LLM
+outputs become smaller, eventually leading to a stable output that
+passes all Validators.</p></li>
+<li><p><strong>Successful Validation</strong>: The <code>Judge</code>
+returns a “pass” or “no issues found.”</p></li>
+</ul>
+<p><strong>Why it happens:</strong> The deterministic feedback from the
+<code>Judge</code> acts as a strong gravitational pull, guiding the LLM
+towards the desired state. Even though the LLM’s internal generation
+process is stochastic, its subsequent attempts are conditioned by
+precise, unambiguous error messages. It’s like navigating a maze: the
+LLM might try different paths, but the <code>Judge</code> reliably tells
+it “dead end here, try another direction.”</p>
+<p><strong>Evidence of Convergence:</strong> A key output of a
+converging loop is a trace that shows the progressive reduction of
+errors, leading to a final successful validation. This trace, often
+stored as part of your SDaC system’s audit log, is your evidence of
+reliability.</p>
+<h3 id="attractors-system-geometry-for-done">Attractors: System Geometry
+for “Done”</h3>
+<p>Convergence is not luck. It’s geometry.</p>
+<p>An <strong>Attractor</strong> is the region of “solution space” where
+your Immune System is satisfied: the candidate parses cleanly, stays in
+scope, respects budgets, and passes every Validator.</p>
+<p>You can picture it as a “valley” in the space of possible diffs: once
+a candidate lands inside it, the Validators stop pushing it back
+out.</p>
+<p>If you prefer a less poetic definition:</p>
+<pre class="text"><code>admissible(candidate) =
+  parse_ok
+  AND in_scope
+  AND budgets_ok
+  AND all_validators_pass</code></pre>
+<p>That boolean predicate defines the attractor. The loop “settles” when
+successive candidates land in the same admissible region and stop
+moving.</p>
+<p>This framing is useful because thrashing stops looking like “the
+model is being weird” and starts looking like a topological failure:</p>
+<ul>
+<li><p><strong>Attractor too flat (constraints too loose):</strong> many
+candidates are admissible, but there’s no canonical “shape.” The loop
+wanders: formatting churn, reordering, and needless variation. Fix it by
+tightening the attractor: smaller allowed edit region, stricter output
+schema, canonical formatting, and stronger Validators that reject
+variance you don’t want to review.</p></li>
+<li><p><strong>No attractor (constraints too tight or
+contradictory):</strong> there is no candidate that can satisfy all
+gates at once. The loop cycles until a circuit breaker fires. Fix it by
+making “Done” reachable: correct conflicting rules, include the missing
+contract in the slice (schema, interface, policy), or split the Mission
+Object into smaller steps.</p></li>
+</ul>
+<p>When you debug thrash, ask one question first: <strong>did I define
+an attractor that actually exists?</strong> (In other words: is
+<code>PASS</code> mathematically reachable inside the declared scope and
+budgets?)</p>
+<blockquote>
+<p><strong>Thrash debug checklist (Attractor):</strong></p>
+<ul>
+<li><strong>Reachability:</strong> can any candidate pass all gates
+inside the declared scope + budgets? (Look for contradictory rules,
+missing contracts in the slice, or an impossible acceptance test.)</li>
+<li><strong>Flatness:</strong> are too many candidates admissible?
+(Tighten the allowed edit region, output schema, canonical formatting,
+and validators that reject churn.)</li>
+<li><strong>Signal quality:</strong> does the Judge output point to
+specific files/lines/checks? (Vague errors produce wander; fix
+validators to emit structured failures.)</li>
+<li><strong>Circuit breakers:</strong> are iteration/time budgets and
+“minimum progress” checks enforced?</li>
+</ul>
+</blockquote>
+<h3 id="thrashing-when-the-loop-flails">Thrashing: When the Loop
+Flails</h3>
+<p>Thrashing occurs when the loop fails to converge, either getting
+stuck in a cycle of errors or producing wildly different (and still
+incorrect) outputs with each attempt. This looks like:</p>
+<ul>
+<li><p><strong>Persistent Errors</strong>: The <code>Judge</code>
+reports the same errors repeatedly across iterations, or replaces old
+errors with new, unrelated ones.</p></li>
+<li><p><strong>Unstable Output</strong>: Successive diffs are large,
+indicating significant changes in the LLM’s output without moving
+towards a correct solution.</p></li>
+<li><p><strong>Circuit Breakers Tripped</strong>: The loop hits its
+maximum iteration count or other predefined limits.</p></li>
+</ul>
+<p><strong>Why it happens:</strong></p>
+<ul>
+<li><p><strong>The attractor is malformed:</strong> the “definition of
+done” is too loose (the loop wanders) or not reachable (the loop cannot
+possibly pass).</p></li>
+<li><p><strong>Ambiguous or Insufficient Context</strong>: If the
+initial Mission Object or supplementary context is too vague, the LLM
+lacks the clear parameters needed to generate correctly.</p></li>
+<li><p><strong>Flawed Validation</strong>: A <code>Judge</code> that is
+incorrect, too strict, or provides unhelpful feedback can confuse the
+LLM, making convergence impossible.</p></li>
+<li><p><strong>Conflicting Requirements</strong>: If the task itself is
+contradictory, the LLM will struggle to find a solution that satisfies
+all criteria.</p></li>
+<li><p><strong>Misunderstood Feedback</strong>: The LLM might not
+correctly interpret the error messages provided by the
+<code>Judge</code>, leading to irrelevant changes.</p></li>
+</ul>
+<p><strong>Evidence of Thrashing:</strong> A trace showing repeated or
+shifting errors, large diffs across many iterations, and ultimately a
+“failed” status due to a tripped circuit breaker. This is equally
+valuable audit information, highlighting areas where your context, your
+Mission Object, or your validation rules need improvement.</p>
+<h2 id="circuit-breakers-guardrails-for-stochasticity">Circuit Breakers:
+Guardrails for Stochasticity</h2>
+<p>Because LLMs are stochastic and can, under certain conditions, thrash
+indefinitely, it’s critical to implement circuit breakers. These are
+deterministic rules that stop the Ouroboros loop before it runs out of
+control, saving compute resources and preventing endless, unproductive
+cycles.</p>
+<ol type="1">
+<li><p><strong>Maximum Iterations</strong>: The most common and simplest
+circuit breaker. The loop stops after a predefined number of
+<code>Write → Judge → Refine</code> cycles, regardless of convergence
+status. This prevents infinite loops and sets an upper bound on
+computation time.</p>
+<p><em>Example</em>: If a configuration should be generated within 5
+attempts, <code>max_iterations = 5</code>.</p></li>
+<li><p><strong>Diff Budget (Blast Radius)</strong>: This circuit breaker
+limits how large a proposed change is allowed to be. If the candidate
+diff exceeds your budget (files touched, lines changed, or
+protected-path violations), the loop terminates. This prevents “fix one
+thing, rewrite the world” behavior.</p>
+<p><em>Example</em>: <code>max_files_changed = 3</code>,
+<code>max_lines_changed = 200</code>. If the diff is larger, abort and
+shrink scope.</p></li>
+<li><p><strong>Cost Limit</strong>: This circuit breaker monitors the
+resources consumed by the loop, such as API calls to the LLM, compute
+time, or token usage. If the cost exceeds a set threshold, the loop
+terminates. This is crucial for managing operational expenses.</p>
+<p><em>Example</em>: If each LLM call costs $0.01 and a loop has a
+budget of $0.10, it will stop after 10 calls, even if
+<code>max_iterations</code> is higher.</p></li>
+<li><p><strong>Minimum Progress</strong>: A more sophisticated circuit
+breaker that monitors the <em>effectiveness</em> of the refinement. The
+loop terminates if the <code>Judge</code> does not report any
+improvement after a certain number of iterations. “Improvement” can be
+defined as:</p>
+<ul>
+<li><p>A reduction in the number of errors.</p></li>
+<li><p>A decrease in the size of the diff against a target
+output.</p></li>
+<li><p>No new errors introduced.</p></li>
+</ul></li>
+</ol>
+<p><em>Example</em>: If the error count remains at 3 for three
+consecutive iterations, the loop terminates, indicating the LLM is
+stuck. This prevents the system from burning cycles on a problem it
+cannot solve with the current context or Mission Object.</p>
+<ol start="5" type="1">
+<li><p><strong>Review Budget (Rate Limits for Humans)</strong>: If your
+loop emits pull requests, the review queue becomes a scarce resource.
+Without a cap, autonomy doesn’t just generate diffs; it generates
+backlog faster than humans can govern it.</p>
+<p>A realistic failure mode:</p>
+<ul>
+<li>A scheduled daemon runs across ten services and opens five PRs a
+night.</li>
+<li>Someone adds a second run for dependency updates.</li>
+<li>Two weeks later you have 60 open PRs, half of them stale or
+conflicting.</li>
+</ul>
+<p>Nothing is “unsafe” yet. But the queue has collapsed. Review quality
+drops, and governance becomes rubber-stamping.</p>
+<p>Mitigations that actually work:</p>
+<ul>
+<li>cap open agent PRs (per repo, per service, per agent)</li>
+<li>cap PRs per day</li>
+<li>enforce diff budgets (files/lines) and hard scope allowlists</li>
+<li>auto-escalate stale work (close/requeue and file a ticket with
+evidence)</li>
+</ul>
+<p><strong>Example: review budget (policy inputs)</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">review_budget</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_open_agent_prs</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_agent_prs_per_day</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">200</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">stale_after_hours</span><span class="kw">:</span><span class="at"> </span><span class="dv">48</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">escalation</span><span class="kw">:</span><span class="at"> file_ticket</span></span></code></pre></div></li>
+<li><p><strong>Rollback and Deployment Guardrails</strong>: Not every
+loop stops at merge. For changes that ship, add circuit breakers beyond
+the repo:</p>
+<ul>
+<li>validate in a sandbox environment that mirrors production</li>
+<li>canary deploy first and watch metrics</li>
+<li>ship behind feature flags so you can turn off without a revert</li>
+<li>trigger automated rollback when latency/error/usage regress</li>
+</ul>
+<p>If you can’t revert quickly, you aren’t doing automation. You’re
+doing roulette.</p></li>
+</ol>
+<h3 id="circuit-breaker-precedence-recommended-check-order">Circuit
+breaker precedence (recommended check order)</h3>
+<p>Circuit breakers work best when they fire deterministically and
+predictably. That means a consistent precedence order: cheap checks
+first, and “can’t even evaluate” failures before “try again”
+failures.</p>
+<p>A practical order:</p>
+<ol type="1">
+<li><strong>Parse/structure errors</strong> (you cannot even judge the
+candidate).</li>
+<li><strong>Scope and policy violations</strong> (protected paths, diff
+budgets, review budget).</li>
+<li><strong>Judgement/validation</strong> (collect signal-rich failures
+for refinement).</li>
+<li><strong>Stop conditions</strong> (max iterations, time limit, cost
+limit, no-progress).</li>
+</ol>
+<p>One way to wire it:</p>
+<pre class="text"><code>for attempt in 1..max_iterations:
+  candidate = write()
+  if parse_failed(candidate): abort(&quot;unreadable output&quot;)
+  if policy_violation(candidate): abort(&quot;scope/diff/review budget&quot;)
+
+  findings = judge(candidate)
+  if findings.pass: commit_and_exit()
+
+  if time_exceeded() or cost_exceeded(): abort(&quot;budget exceeded&quot;)
+  if no_progress_window_exceeded(findings): abort(&quot;thrashing&quot;)
+
+  refine(findings)
+abort(&quot;max iterations&quot;)</code></pre>
+<h2 id="one-realistic-trace-the-loop-settles">One Real(istic) Trace: The
+Loop Settles</h2>
+<p>Let’s illustrate convergence with a realistic trace. Imagine we’re
+asking our SDaC system to generate a <code>deployment.yaml</code> file
+for a Kubernetes application, which must strictly adhere to a predefined
+JSON schema.</p>
+<p><strong>Goal:</strong> Generate a Kubernetes
+<code>deployment.yaml</code> that passes a strict JSON schema
+validation.</p>
+<hr />
+<h3 id="iteration-1"><strong>Iteration 1</strong></h3>
+<p><strong>Write:</strong> The LLM generates the initial YAML.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app-container</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myrepo/my-app:latest</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span></code></pre></div>
+<p><strong>Judge:</strong> The schema validator runs.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0]&quot;</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Required property &#39;livenessProbe&#39; is missing.&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector&quot;</span><span class="fu">,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Property &#39;matchLabels&#39; is missing required property &#39;matchExpressions&#39;.&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
+<p><strong>Refine:</strong> The raw JSON errors are fed back into the
+next model request. “The following errors were found in your YAML
+output. Please correct them:” followed by the JSON above.</p>
+<hr />
+<h3 id="iteration-2"><strong>Iteration 2</strong></h3>
+<p><strong>Write:</strong> The LLM receives the errors and tries to
+correct them.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">    # Note: LLM misunderstood &#39;matchExpressions&#39; requirement, didn&#39;t add it</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app-container</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myrepo/my-app:latest</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">livenessProbe</span><span class="kw">:</span><span class="co"> # Fixed missing livenessProbe</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">httpGet</span><span class="kw">:</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /healthz</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">initialDelaySeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">periodSeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span></code></pre></div>
+<p><strong>Judge:</strong> The validator runs again.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector&quot;</span><span class="fu">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Property &#39;matchLabels&#39; is missing required property &#39;matchExpressions&#39;.&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0].livenessProbe.httpGet&quot;</span><span class="fu">,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Required property &#39;scheme&#39; is missing.&quot;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
+<p><em>Observation</em>: The <code>livenessProbe</code> was added, but
+the LLM introduced a new, minor error within it, and the
+<code>matchExpressions</code> error persists. Progress, but not full
+convergence.</p>
+<p><strong>Refine:</strong> New errors are fed back to the LLM.</p>
+<hr />
+<h3 id="iteration-3"><strong>Iteration 3</strong></h3>
+<p><strong>Write:</strong> The LLM attempts to Refine the remaining
+issues.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchExpressions</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span><span class="co"> # Added matchExpressions, but as an empty array</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app-container</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myrepo/my-app:latest</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">livenessProbe</span><span class="kw">:</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">httpGet</span><span class="kw">:</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /healthz</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">scheme</span><span class="kw">:</span><span class="at"> HTTP</span><span class="co"> # Fixed missing &#39;scheme&#39;</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">initialDelaySeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">periodSeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span></code></pre></div>
+<p><strong>Judge:</strong> The validator runs.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector.matchExpressions&quot;</span><span class="fu">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Array must have at least 1 element(s).&quot;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
+<p><em>Observation</em>: The <code>livenessProbe</code> is now fully
+compliant. Only one minor error remains regarding
+<code>matchExpressions</code>. Close to convergence.</p>
+<p><strong>Refine:</strong> The final error is fed back.</p>
+<hr />
+<h3 id="iteration-4"><strong>Iteration 4</strong></h3>
+<p><strong>Write:</strong> The LLM addresses the last error.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchExpressions</span><span class="kw">:</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">key</span><span class="kw">:</span><span class="at"> environment</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">operator</span><span class="kw">:</span><span class="at"> In</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">values</span><span class="kw">:</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> production</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app-container</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myrepo/my-app:latest</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">livenessProbe</span><span class="kw">:</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">httpGet</span><span class="kw">:</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /healthz</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">scheme</span><span class="kw">:</span><span class="at"> HTTP</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">initialDelaySeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">periodSeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span></code></pre></div>
+<p><strong>Judge:</strong> The validator runs.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[]</span></span></code></pre></div>
+<p><em>Observation</em>: The <code>Judge</code> returns an empty array,
+indicating no errors. The loop has converged successfully.</p>
+<hr />
+<p>This trace demonstrates how specific, deterministic feedback from the
+<code>Judge</code> can guide a stochastic LLM to a compliant, verifiable
+output, even if it takes a few iterations and a bit of trial-and-error.
+The key is that the <em>errors</em> are not subjective; they are
+concrete, machine-readable validation failures.</p>
+<h2 id="one-realistic-trace-the-loop-thrashes">One Real(istic) Trace:
+The Loop Thrashes</h2>
+<p>Convergence is the happy path. You also need to recognize the failure
+path: when the loop is not getting closer to <code>PASS</code>.</p>
+<p>Here’s what thrashing looks like in logs.</p>
+<p><strong>Goal:</strong> Generate a compliant
+<code>deployment.yaml</code> with a liveness probe and strict label
+selector rules.</p>
+<h3 id="iteration-1-1">Iteration 1</h3>
+<p><strong>Judge:</strong></p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;missing_field&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0].livenessProbe is required&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;schema_mismatch&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector.matchExpressions must be a list of objects&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;invalid_value&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;resources.limits.cpu must match pattern &#39;^</span><span class="ch">\\</span><span class="st">d+m$&#39;&quot;</span><span class="fu">}</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
+<h3 id="iteration-2-1">Iteration 2</h3>
+<p>The model adds a probe but breaks YAML structure. Now you can’t even
+parse the file.</p>
+<p><strong>Judge:</strong></p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;parse_error&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;YAML parse failed: mapping values are not allowed here (line 27)&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;missing_field&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0].livenessProbe is required&quot;</span><span class="fu">}</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
+<h3 id="iteration-3-1">Iteration 3</h3>
+<p>The file parses again, but the error set isn’t shrinking. It’s
+cycling.</p>
+<p><strong>Judge:</strong></p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;missing_field&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0].livenessProbe is required&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;schema_mismatch&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector.matchExpressions must be a list of objects&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;invalid_value&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;resources.limits.cpu must match pattern &#39;^</span><span class="ch">\\</span><span class="st">d+m$&#39;&quot;</span><span class="fu">}</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
+<p>At this point the system should stop.</p>
+<pre class="text"><code>[ouroboros] abort: min_progress violated (error_count unchanged across 2 iterations)
+[ouroboros] outcome: REVERT (no changes applied)</code></pre>
+<p>This is a successful outcome: you avoided spending more compute on
+guessing. The move is not “try harder.” The move is to improve the
+signal:</p>
+<ul>
+<li>Tighten the Mission Object (more constraints, smaller scope).</li>
+<li>Improve the context slice (include the schema, not just the
+file).</li>
+<li>Improve the Judge output (more localization, fewer vague
+messages).</li>
+</ul>
+<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h2>
+<ol type="1">
+<li><p><strong>Identify a simple, schema-driven generation task</strong>
+in your current work (e.g., generating a JSON configuration file, a SQL
+query based on a schema, or a simple code snippet that must pass a
+linter).</p></li>
+<li><p><strong>Define your <code>Judge</code> function</strong>: Write a
+simple tool or use an existing validator (like a JSON schema validator,
+a Kubernetes schema validator such as <code>kubeconform</code>, or a
+linter/type checker) that can deterministically validate the output of
+your chosen task. The <code>Judge</code> should return clear, structured
+errors.</p></li>
+<li><p><strong>Build a manual Ouroboros loop</strong>:</p>
+<ul>
+<li>Write a Mission Object for an LLM to generate the artifact.</li>
+<li>Run your <code>Judge</code> against the output.</li>
+<li>If it fails, paste the <code>Judge</code> output into the next
+request and ask for a fix that addresses only the recorded
+failures.</li>
+<li>Repeat until it converges or you hit a manual
+<code>max_iterations</code> limit.</li>
+</ul></li>
+<li><p><strong>Debug thrashing as a missing attractor:</strong> If you
+can’t converge, don’t “try harder.” Check reachability:</p>
+<ul>
+<li>Can a human produce a <code>PASS</code> artifact under the same
+scope and budgets?</li>
+<li>Do your Validators conflict (two rules that cannot both be
+true)?</li>
+<li>Are you missing the contract in your slice (schema/interface/policy)
+so the loop is guessing?</li>
+</ul></li>
+</ol>
+<p>This exercise will give you a visceral understanding of how the
+deterministic <code>Judge</code> drives the stochastic LLM.</p>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="chapter-4-the-stochastic-engine-why-you-need-physics">← Chapter 4 – The Stochastic Engine (Why You Need Physics)</a>
+    <a class="next-link" href="chapter-6-context-architecture-why-slicing-matters">Chapter 6 – Context Architecture (Why Slicing Matters) →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

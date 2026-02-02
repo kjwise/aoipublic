@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
+<h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
+– The Stochastic Engine (Why You Need Physics)</h1>
+<p>Here’s what happens when you take the Chapter 1 Map/Terrain sync loop
+and swap the deterministic Effector for a stochastic one.</p>
+<p><strong>Run 1:</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Public Interfaces</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`normalize_country(country)`</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_tax(amount, country, rate)`</span></span></code></pre></div>
+<p><strong>Run 2:</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Public Interfaces</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`normalize_country(country: str)`</span> — Normalize an input country string.</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_tax(amount: float, country: str, rate: float)`</span> — Compute tax for an amount.</span></code></pre></div>
+<p>Both are “reasonable.” If your only validators are “valid Markdown”
+and “the doc mentions the right function names,” both pass. But they’re
+different: different signature surfaces, extra prose, different
+formatting.</p>
+<p>This isn’t a bug in your loop. This is the nature of the engine.</p>
+<p>Large Language Models (LLMs) are <em>stochastic engines</em>:
+probability machines that produce plausible outputs, not guaranteed
+ones. If you want reliable automation, you have to add Physics around
+the generation.</p>
+<h2 id="llms-are-probability-engines">LLMs Are Probability Engines</h2>
+<p>At its heart, an LLM assigns probabilities to possible next tokens,
+then samples one. Even if the “best” token has a 90% chance, there’s
+still a 10% tail. That tail is where regressions come from.</p>
+<p>Three implications matter in SDaC:</p>
+<ul>
+<li><p><strong>No guarantee of identical output</strong>: The same
+Mission Object, given to the same model, with the same temperature, can
+produce slightly different results across runs.</p></li>
+<li><p><strong>Contextual sensitivity</strong>: Small changes in input
+or context can shift the distribution and change the output.</p></li>
+<li><p><strong>Non-local failure modes</strong>: A tiny variation can
+move a change from “passes” to “fails” without a clean, debuggable
+execution path.</p></li>
+</ul>
+<p>This is why SDaC treats generation as a component, not a plan: you
+measure variance, constrain it, and gate it.</p>
+<h2 id="the-drift-experiment-measure-structural-variance">The Drift
+Experiment: Measure Structural Variance</h2>
+<p>Run the same Mission Object 10 times. The goal is to make variance
+measurable.</p>
+<p><strong>Setup (hold everything constant):</strong></p>
+<ol type="1">
+<li><p>Same Mission Object: “Update <code>## Public Interfaces</code> in
+<code>product/docs/architecture.md</code> to match
+<code>product/src/</code>.”</p></li>
+<li><p>Same model, same temperature, same system instructions, same
+context slice.</p></li>
+<li><p>Store the output of each run.</p></li>
+</ol>
+<p>Hold everything deterministic except the stochastic call. Then
+measure drift where it matters: on the change surface.</p>
+<p><strong>Drift measurements</strong></p>
+<ul>
+<li><strong>Unique diffs:</strong> how many distinct patches you get for
+the same Mission Object under identical <code>Prep</code>.</li>
+<li><strong>Failure rate:</strong> how often you cannot reach
+<code>PASS</code> within your circuit breakers (max iters, time, or diff
+budget).</li>
+<li><strong>Time-to-convergence:</strong> seconds (or iterations) until
+the patch is admissible under your Validators.</li>
+</ul>
+<p><strong>One simple proxy: count unique diffs</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace `run_effector_once` with your one-shot, diff-emitting command.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The only rule: every run starts from the same baseline state.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">10</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> checkout <span class="at">--</span> product/docs/architecture.md</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">run_effector_once</span> <span class="op">&gt;</span> <span class="st">&quot;run_</span><span class="va">${i}</span><span class="st">.diff&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;FAIL run=</span><span class="va">${i}</span><span class="st">&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">shasum</span> <span class="st">&quot;run_</span><span class="va">${i}</span><span class="st">.diff&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39; &#39;</span> <span class="at">-f1</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<p><strong>Example summary (your numbers will vary):</strong></p>
+<pre class="text"><code>mission_id=doc_sync:public_interfaces runs=10
+unique_diffs=4
+failure_rate=20%  (2/10 exceeded circuit breakers)
+iterations_to_converge: p50=2 p90=6</code></pre>
+<p>This is <strong>Stochastic Drift</strong> with a ruler next to it:
+you can measure it, budget it, and reduce it by tightening context
+selection and hardening validators.</p>
+<h3 id="a-simple-drift-coefficient-plus-an-illustrative-run-log">A
+simple drift coefficient (plus an illustrative run log)</h3>
+<p>You don’t need a perfect statistical model to make drift operational.
+Start with a simple, auditable coefficient:</p>
+<p><code>drift_coefficient = unique_diffs / total_runs</code></p>
+<p>This is an operational proxy, not a statistical claim or a benchmark.
+Use it to compare the same workflow over time, set budgets, and detect
+regressions — not to compare different repositories or teams.</p>
+<p>Interpretation:</p>
+<ul>
+<li><code>0.1</code> means “one in ten runs differs” (stable enough for
+many workflows).</li>
+<li><code>1.0</code> means “every run is different” (you do not have a
+reusable automation surface yet).</li>
+</ul>
+<p>It also helps to classify variance. Some differences are harmless
+(whitespace, reordering). Some are structural (different interfaces,
+different edit regions, new files).</p>
+<p><strong>Illustrative run log (N=10; not a benchmark):</strong></p>
+<table>
+<thead>
+<tr>
+<th>run</th>
+<th>result</th>
+<th>diff class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>PASS</td>
+<td>A (canonical)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PASS</td>
+<td>A (canonical)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>PASS</td>
+<td>B (whitespace-only)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PASS</td>
+<td>B (whitespace-only)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>PASS</td>
+<td>C (reordered lines)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>FAIL</td>
+<td>— (exceeded circuit breakers)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>PASS</td>
+<td>A (canonical)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>FAIL</td>
+<td>— (exceeded circuit breakers)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>PASS</td>
+<td>D (structural variance)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>PASS</td>
+<td>A (canonical)</td>
+</tr>
+</tbody>
+</table>
+<p>From that log:</p>
+<ul>
+<li><code>unique_diffs = 4</code> →
+<code>drift_coefficient = 0.4</code></li>
+<li><code>failure_rate = 20%</code></li>
+</ul>
+<p>If that feels “too high,” the fix is not more instruction text.
+Tighten your slice, tighten your allowed edit region, and add validators
+that make structural variance fail fast.</p>
+<h2 id="why-ad-hoc-instructions-stop-scaling">Why Ad-hoc Instructions
+Stop Scaling</h2>
+<p>Your first instinct is reasonable: make the instructions more
+specific.</p>
+<pre><code>Update `product/docs/architecture.md`.
+Only edit content under `## Public Interfaces`.
+Format as:
+
+## Public Interfaces
+- `name(arg1, arg2)`</code></pre>
+<p>This helps. You might go from “wildly inconsistent” to “mostly
+consistent.” But you hit a ceiling:</p>
+<ol type="1">
+<li><p><strong>Longer instructions do not eliminate sampling.</strong>
+The model still produces variants.</p></li>
+<li><p><strong>You’re encoding constraints in text.</strong> Text is
+interpreted, not enforced.</p></li>
+<li><p><strong>You still need verification.</strong> Without Validators,
+you only learn the rules were violated after something breaks.</p></li>
+</ol>
+<p>Compare the two approaches:</p>
+<p><strong>Instruction-string approach:</strong></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>instructions <span class="op">=</span> load_text(<span class="st">&quot;public_interfaces_instructions.txt&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> model.generate(instructions)  <span class="co"># hope it followed the rules</span></span></code></pre></div>
+<p><strong>Physics approach:</strong></p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>context <span class="op">=</span> extract_public_signatures(<span class="st">&quot;product/src/&quot;</span>)  <span class="co"># deterministic extraction</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>template <span class="op">=</span> load_template(<span class="st">&quot;public_interfaces.jinja2&quot;</span>) <span class="co"># structure is defined</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>draft <span class="op">=</span> model.fill(template, context)            <span class="co"># bounded generation</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>validate_map_alignment(draft)                    <span class="co"># enforced, not hoped for</span></span></code></pre></div>
+<p>Instructions are suggestions. Physics are constraints.</p>
+<h2 id="why-this-matters-for-your-loop">Why This Matters for Your
+Loop</h2>
+<p>You built a working loop in Chapter 1. You wrapped the stochastic
+call in a Deterministic Sandwich in Chapter 2. You defined Validators in
+Chapter 3.</p>
+<p>Chapter 4 gives you the uncomfortable truth those patterns are
+designed to address:</p>
+<ul>
+<li>Without deterministic context and gates, your loop produces
+different outputs on every run.</li>
+<li>Even if the output “looks fine,” it can drift in ways that break
+downstream automation.</li>
+<li>Failures show up as non-reproducible production incidents, not clean
+local errors.</li>
+</ul>
+<p>The drift you measured is not a tuning problem. It’s an architectural
+property of stochastic generation.</p>
+<p>The next chapters show you how to constrain it:</p>
+<ul>
+<li><strong>Chapter 5:</strong> Loops that converge despite
+stochasticity.</li>
+<li><strong>Chapter 6:</strong> Context slicing that reduces
+variance.</li>
+<li><strong>Chapter 7:</strong> Mission Objects that make intent
+executable.</li>
+</ul>
+<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h2>
+<ol type="1">
+<li><p><strong>Measure drift on the change surface:</strong> Run the
+same Mission Object 10 times and count unique diffs. Record how often
+you hit <code>FAIL</code> and how many iterations it took to reach
+<code>PASS</code>.</p></li>
+<li><p><strong>Pick one invariant and enforce it:</strong> Choose one
+deterministic rule (exact signature surface, allowed edit region,
+required headings) and add a Validator that fails fast when the output
+drifts.</p></li>
+</ol>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="chapter-3-define-good-your-first-validators">← Chapter 3 – Define “Good” (Your First Validators)</a>
+    <a class="next-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 – The Ouroboros Protocol (Why Loops Converge) →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

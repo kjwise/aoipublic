@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Introduction | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Introduction">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/introduction">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Introduction</div>
+<h1 id="introduction">Introduction</h1>
+<p>Friday, 4:03 PM.</p>
+<p>An AI code assistant opens a pull request: “Add pagination to
+<code>GET /api/users</code>.”</p>
+<p>The diff looks reasonable. CI passes. You merge it.</p>
+<p>Saturday morning, your mobile app is down. The assistant introduced a
+contract drift: <code>limit</code> became a string in one place and an
+integer everywhere else. Your type checker never saw it, because the
+mismatch lived in a JSON surface.</p>
+<p>Three engineers spend the weekend rolling back and rebuilding
+confidence.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/openapi.json</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/openapi.json</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ -312,7 +312,7 @@</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   &quot;limit&quot;: {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">-    &quot;type&quot;: &quot;integer&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">+    &quot;type&quot;: &quot;string&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   }</span></code></pre></div>
+<p>Now the same scenario, but with Software Development as Code
+(SDaC).</p>
+<p>The assistant proposes the same change. This time, the gate runs
+before merge.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make validate-api-change</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Schema</span> validation FAILED: /api/users <span class="at">-</span> <span class="st">&#39;limit&#39;</span> must be integer, got string</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Blocking</span> merge.</span></code></pre></div>
+<p>The CI gate catches it in 8 seconds. Nobody’s weekend is ruined.
+That’s the difference.</p>
+<p>SDaC is Control Theory applied to stochastic generation. It pivots
+the industry conversation from tweaking instructions to <strong>Context
+Architecture</strong>: structured context, deterministic gates, and
+verifiable loops that you can debug. The goal is not a smarter
+assistant. The goal is a safer process.</p>
+<p>SDaC shifts your work from typing syntax to shaping changes: scoping
+the work, defining constraints, and reviewing small diffs that are
+already bounded by validators. Review throughput becomes the bottleneck,
+so the system must keep diffs small and scoped.</p>
+<p>At its core, SDaC treats every artifact as code: it lives in version
+control, and changes arrive as diffs. Every diff is gated by
+deterministic validators before it becomes real.</p>
+<p>This book will equip you to engineer systems where automated
+Effectors reliably enhance your codebase. You’ll learn to build an
+initial, verifiable loop, understand the principles that make it robust,
+and then scale and govern it to ensure safety and auditability in
+production.</p>
+<p>Start reading Friday, ship it Monday.</p>
+<hr />
+<h2 id="who-this-book-is-for">Who this book is for</h2>
+<p>This book is for senior engineers and platform architects who want
+mechanisms, not hype: deterministic context, hard gates, and auditable
+loops that survive production. It is for people shipping GenAI systems
+and discovering that ad-hoc instructions do not scale.</p>
+<p>If you want to build immediately, start with Part I. It gives you a
+working loop first, then we earn the theory by explaining why it
+works.</p>
+<h2 id="sdac-quickstart-read-this-first">SDaC Quickstart (Read this
+first)</h2>
+<p>This book is not about using AI inside CI. It’s about turning the
+software development lifecycle (SDLC) itself into a compiled artifact —
+<strong>Software Development as Code</strong>.</p>
+<blockquote>
+<p><strong>CI compiles the program. SDaC compiles the development of the
+program.</strong></p>
+</blockquote>
+<h3 id="why-now-economics">Why now (economics)</h3>
+<p>SDaC becomes practical once the economics of automation change.
+Foundation code that used to be prohibitively expensive to write and
+maintain—schemas, extractors, validators, runners—can now be generated
+and iterated cheaply under strict contracts.</p>
+<p>In parallel, models can take on SDLC tasks that were historically
+human-bound because they were primarily linguistic (planning
+decomposition, review summarization, heuristic classification, doc
+drafting).</p>
+<p>Models reduce scaffolding cost, but governance and review remain the
+irreducible cost.</p>
+<p><strong>Scrum, Waterfall, Kanban, and every other process are
+ultimately control loops</strong>: they define how work is selected,
+shaped into units, executed, inspected, and fed back into the next
+decision. The difference is that these loops are usually enforced by
+meetings, rituals, and social contracts.</p>
+<p><strong>SDaC compiles the loop itself into executable
+artifacts</strong>: Sensors choose work, Effectors produce candidate
+diffs, Validators score evidence, and governance gates control what is
+admitted to the codebase.</p>
+<h3 id="the-category-for-skeptics">The category (for skeptics)</h3>
+<p>CI is a gate on artifacts humans already produced. SDaC is the claim
+that the production of those artifacts becomes versioned, executable,
+reviewable code: code, tests, docs, plans, reviews, releases, and even
+the workflow itself.</p>
+<p>A useful ladder:</p>
+<ul>
+<li><strong>Code:</strong> the product.</li>
+<li><strong>CI:</strong> automate checks on submitted code
+(<code>build/test/lint</code>).</li>
+<li><strong>CD / Infrastructure as Code:</strong> automate shipping and
+environments.</li>
+<li><strong>Process as Code:</strong> encode how work happens (policies,
+checklists, required evidence).</li>
+<li><strong>Engineering as Code:</strong> orchestrate the SDLC as an
+executable system (Effectors + Validators + Ledger + Governance).</li>
+<li><strong>Self-evolving system (optional):</strong> the process layer
+can change itself — but only through controlled, audited pathways
+(Immutable Infrastructure + gates).</li>
+</ul>
+<p>In SDaC terms, CI becomes one Validator inside a broader machine.</p>
+<h3 id="the-litmus-test">The litmus test</h3>
+<p>If someone says “this is just CI,” ask:</p>
+<ul>
+<li>Can you recreate the team’s engineering behavior (planning →
+implementation → review → tests → release → postmortem → docs) from the
+repo + compute?</li>
+<li>Are the rules (contracts, validators, policies, merge criteria, risk
+thresholds) first-class, versioned, and enforceable?</li>
+<li>Is the model an assistant, or an <strong>Effector</strong> inside a
+constrained machine?</li>
+</ul>
+<p>If the answer is “no, humans are still the engine,” it’s CI-adjacent
+automation. If “yes, humans are operators of an executable system,”
+that’s SDaC.</p>
+<h3 id="start-here-one-loop-one-gate">Start here (one loop, one
+gate)</h3>
+<p>Go to Chapter 1 and run MVF v0 (“Quick Bootstrap”). Run
+<code>make all</code>. You should see a small diff and a deterministic
+<code>PASS/FAIL</code> gate.</p>
+<p>Minimum vocabulary for the first pass:</p>
+<ul>
+<li><strong>Terrain:</strong> what runs.</li>
+<li><strong>Map:</strong> a versioned intent surface derived from
+Terrain.</li>
+<li><strong>Ledger:</strong> evidence (diffs + validator output).</li>
+<li><strong>Sensor:</strong> read-only measurement that emits structured
+signals and targets.</li>
+<li><strong>Effector:</strong> proposes a patch.</li>
+<li><strong>Validator:</strong> returns <code>PASS/FAIL</code>.</li>
+<li><strong>Loop:</strong> Effector → Validator → commit only if
+PASS.</li>
+</ul>
+<h2 id="the-compilers-manifesto">The Compiler’s Manifesto</h2>
+<p>Software Development as Code</p>
+<h3 id="central-dogma">Central Dogma</h3>
+<p>Quickstart defines the category. This manifesto defines the
+stances.</p>
+<ul>
+<li>We do not optimize for “smart” models; we optimize for
+<strong>converging systems</strong>.</li>
+</ul>
+<p>AI is a <strong>stochastic engine</strong>. We do not negotiate with
+it. We <strong>constrain</strong> it.</p>
+<p>A GenAI system works in production when three things hold at
+once:</p>
+<ul>
+<li><p>It carries a clear Mission Object—durable intent and constraints
+teams can name, version, and test.</p></li>
+<li><p>It resists entropy as models, data, and people change.</p></li>
+<li><p>It adapts through a repeatable ratchet of feedback and revision,
+not heroic one-off instructions.</p></li>
+</ul>
+<p>When any of these slip, you get demo-ware: great on stage,
+unpredictable in production. SDaC keeps intent intact by designing the
+Context Architecture, wiring Effectors into small Pipelines, and
+wrapping everything in an Immune System.</p>
+<p>You can keep the whole system in your head as one chain:</p>
+<blockquote>
+<p><strong>Mission Object (Map) → Context Architecture → Effectors →
+Immune System → Ouroboros Protocol</strong></p>
+</blockquote>
+<p>If you only learn one skill from this book, make it this: turn intent
+into artifacts you can diff and validate.</p>
+<h3 id="the-meta-patterns">The Meta-Patterns</h3>
+<p>These are the stances that make the mechanisms compose.</p>
+<h4 id="dont-chat-compile">1) Don’t Chat, Compile</h4>
+<p>Chat is for ideation. Production work is an artifact you can version
+and rerun: a Mission Object (YAML/JSON) plus a deterministic runner
+(<code>make</code>, scripts) that produces a diff and a Decision
+Trace.</p>
+<p><strong>Rule:</strong> if it isn’t in a file, it isn’t an
+instruction. It’s just a vibe.</p>
+<h4 id="physics-is-law">2) Physics is Law</h4>
+<p>If a change fails Physics, it does not exist. Physics is binary and
+fast: schemas, linters, tests, and architectural constraints (dependency
+direction, protected surfaces).</p>
+<p>If you allow “just this once” exceptions, autonomy will scale the
+exception faster than you can review it.</p>
+<h4 id="recursion">3) Recursion</h4>
+<p>The same gates apply to human and automated changes. Scheduled
+maintenance turns entropy signals into Missions and runs them through
+the same Validators. No privileged mode.</p>
+<h3 id="the-goal">The Goal</h3>
+<p>Build a factory where <strong>intent (the Map)</strong> is
+systematically converted into <strong>reality (the Terrain)</strong>
+through verifiable loops (<strong>the Ouroboros Protocol</strong>)
+guarded by hard constraints (<strong>the Immune System</strong>) and
+recorded in an immutable <strong>Ledger</strong>, with a
+<strong>Decision Trace</strong> that explains why each diff exists.</p>
+<ul>
+<li>If it cannot be verified, it does not ship.</li>
+<li>If it cannot be reproduced, it does not exist.</li>
+</ul>
+<h3 id="where-the-concepts-live-dont-memorize">Where the concepts live
+(don’t memorize)</h3>
+<p>You don’t need to swallow the full canon up front. The terms are
+introduced where they become useful:</p>
+<ul>
+<li><strong>Chapter 1:</strong> Map, Terrain, Ledger, Effector,
+Validator (MVF v0: a loop you can run).</li>
+<li><strong>Chapter 2:</strong> The Deterministic Sandwich (Prep → Model
+→ Validation).</li>
+<li><strong>Chapter 3:</strong> Validators → Immune System (Physics you
+can enforce).</li>
+<li><strong>Chapter 4:</strong> Stochastic Drift (measure it, budget it,
+reduce it).</li>
+<li><strong>Chapter 5:</strong> The Ouroboros Protocol + Attractors +
+circuit breakers (debug convergence).</li>
+<li><strong>Chapter 6:</strong> Context Architecture + Context Graph +
+Branching Factor + Skeleton-First Rule (slice deterministically).</li>
+<li><strong>Chapters 7–9:</strong> Mission Objects, Map-Updaters, Dream
+(scale the loop into a system).</li>
+<li><strong>Chapters 10–12:</strong> Immutable Infrastructure +
+governance at machine speed (protect graders and blast radius).</li>
+<li><strong>Chapter 13:</strong> Hofstadter Bridge (optional limit
+case).</li>
+<li><strong>Appendix D:</strong> glossary + translation guide.</li>
+</ul>
+<h3 id="the-oath">The Oath</h3>
+<p>We buy down uncertainty with constraints, logs, and tests. We treat
+language as a contract. We do not ship vibes. We ship verifiable
+state.</p>
+<p>We do not trust the model. We trust the loop.</p>
+<p>Start Friday. Ship it Monday.</p>
+<h2 id="a-guided-ascent-dont-memorize-this">A Guided Ascent (Don’t
+Memorize This)</h2>
+<p>You do not need to memorize the canon up front. The terms arrive in
+the order you need them.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Where you are</th>
+<th style="text-align: left;">What you do</th>
+<th style="text-align: left;">Canon terms that matter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Introduction</td>
+<td style="text-align: left;">Adopt the mental model</td>
+<td style="text-align: left;">Mission Object, Map/Terrain, Stochastic
+Drift, Context Architecture</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part I</td>
+<td style="text-align: left;">Build a working loop</td>
+<td style="text-align: left;">spec / generator / checker → Map / Terrain
+/ Ledger, Effector, Validator</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part II</td>
+<td style="text-align: left;">Understand why it works</td>
+<td style="text-align: left;">Stochastic Drift, Ouroboros Protocol,
+Circuit Breakers, Context Graph</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part III–IV</td>
+<td style="text-align: left;">Scale and govern safely</td>
+<td style="text-align: left;">Mission Object, Judge, Adaptation State
+Machine, Map-Updaters, Immutable Infrastructure</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part V</td>
+<td style="text-align: left;">Optional limit cases</td>
+<td style="text-align: left;">Hofstadter Bridge</td>
+</tr>
+</tbody>
+</table>
+<p>If you want a dependency graph and a week-by-week build ladder, jump
+to Appendix A.</p>
+<hr />
+<h2 id="the-canon-of-truth">The Canon of Truth</h2>
+<p>In any automated system that modifies itself, establishing a clear
+hierarchy of truth—what we call the “canon”—is paramount. Without it, an
+AI could update documentation that contradicts code, or vice versa,
+leading to subtle, undetectable drift. SDaC introduces a tiered canon,
+where each tier represents a different level of authority and
+deterministic verifiability.</p>
+<div class="line-block">Tier | Source Examples | Characteristics | |
+:——– | :———————————————— | :——————————————————————————————————————— | |
+<strong>Tier 1</strong> | Code, Type Definitions, Schemas, Unit Cases,
+CI/CD | <strong>Deterministic Source of Truth.</strong>
+Machine-enforced.</div>
+<p>Changes here ripple to lower tiers. The <em>“physics”</em> of your
+system. | | <strong>Tier 2</strong> | Structured Configuration, Domain
+Models, <code>README.md</code> | <strong>Derived, but
+Authoritative.</strong> Human-readable, but often machine-checked
+against Tier 1. Defines <em>intent</em>. | | <strong>Tier 3</strong> |
+General Documentation, UI Text, Release Notes | <strong>Derived,
+Non-Authoritative.</strong> Needs to be consistent with higher tiers,
+but doesn’t dictate them. <em>Explains</em> the system. |</p>
+<p>Our goal is to ensure that any AI-generated change, particularly in
+lower tiers, is always consistent with and verifiable against the
+higher, more deterministic tiers. This tiered canon forms the foundation
+for our deterministic context and validation gates.</p>
+<hr />
+<h3 id="a-note-on-substrate">A Note on Substrate</h3>
+<p>While the principles of SDaC are universal, this book uses a
+concrete, accessible substrate for its examples: standard files, Git for
+version control, <code>make</code> for orchestrating effects, and Python
+for scripting. This combination provides a practical, widely understood
+environment to demonstrate the core concepts. The patterns and
+architectures you’ll learn are designed to be stack-agnostic, easily
+portable to other languages, build systems, and VCS platforms. Appendix
+C includes validator recipes for other stacks (for example
+TypeScript/Node). The focus is on the engineering principles, not the
+specific tooling.</p>
+<hr />
+<h2 id="prerequisites-assumed-knowledge">Prerequisites (Assumed
+Knowledge)</h2>
+<p>This book assumes you’re already comfortable with day-to-day software
+engineering.</p>
+<p>You should be able to:</p>
+<ul>
+<li>Use a terminal and run commands like <code>make</code>,
+<code>python3</code>, and <code>git</code>.</li>
+<li>Read a diff and understand what will change before it merges.</li>
+<li>Interpret Validator output (lint errors, schema failures, failing
+Immune System cases).</li>
+<li>Read and edit plain-text files (Markdown, JSON/YAML,
+configuration).</li>
+</ul>
+<p>You do not need:</p>
+<ul>
+<li>ML theory, model training, or GPU tooling.</li>
+<li>Control theory beyond the intuition we build as we go.</li>
+</ul>
+<hr />
+<h2 id="about-the-author">About the author</h2>
+<p>I’m Jóhann Haukur Gunnarsson, a systems architect and senior software
+engineer. I’ve built and operated reliability-critical systems,
+including in finance, where failure modes are not theoretical and audit
+trails matter.</p>
+<p>If you want to continue the conversation, you can reach me at:</p>
+<ul>
+<li>Email: <a href="mailto:johannhaukur@gmail.com"
+class="email">johannhaukur@gmail.com</a></li>
+<li>LinkedIn: <a href="https://www.linkedin.com/in/jhaukur/"
+class="uri">https://www.linkedin.com/in/jhaukur/</a></li>
+</ul>
+<p>I chose the Files/Git/<code>make</code>/Python substrate because it’s
+ubiquitous, has no compile step, and exposes deterministic control
+surfaces that both Humans and Agents can drive.</p>
+
+  </main>
+
+  <nav class="page-nav">
+    
+    <a class="next-link" href="chapter-1-the-minimum-viable-factory-your-first-loop">Chapter 1 – The Minimum Viable Factory (Your First Loop) →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

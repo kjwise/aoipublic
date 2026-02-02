@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part I Build It The Weekend Sprint</div>
+<h1 id="chapter-1-the-minimum-viable-factory-your-first-loop">Chapter 1
+– The Minimum Viable Factory (Your First Loop)</h1>
+<p>Build a tiny loop: Terrain → Effector → Map → Validator.</p>
+<p>You’ll have it running in less than an hour. We’ll keep the
+vocabulary plain until you’ve seen it run, then we’ll name the parts so
+we can reuse them precisely.</p>
+<h2 id="quick-bootstrap-mvf-v0-map-terrain-sync">Quick Bootstrap: MVF v0
+(Map-Terrain sync)</h2>
+<p>We’re going to build a weekend-grade factory that proves the
+substrate:</p>
+<ul>
+<li>one bounded surface of truth (<strong>Terrain</strong>)</li>
+<li>one versionable intent surface (<strong>Map</strong>)</li>
+<li>one <strong>Effector</strong> that proposes a patch</li>
+<li>one <strong>Validator</strong> that enforces alignment</li>
+</ul>
+<p>In MVF v0, intent is implicit: it’s hard-coded into CLI flags and
+Make targets. You can think of that as a “Mission v0.” In Chapter 7, we
+promote it into a typed Mission Object you can diff, version, and
+re-run.</p>
+<p>This first loop is deterministic on purpose. It lets you see the
+mechanics without keys, SDKs, or network calls. Later, you can swap in a
+stochastic Effector and keep everything else unchanged.</p>
+<h3 id="copypaste-and-run">Copy/paste and run</h3>
+<p>Copy the block below into an empty directory and run it. It creates a
+<code>factory/</code> and <code>product/</code>, plus a tiny Map/Terrain
+demo surface.</p>
+<p>To keep Chapter 1 readable, the full source for the two MVF tools
+lives in Appendix C. Before running the loop, create these files from
+Appendix C → “MVF v0: demo tools (full source)”:</p>
+<ul>
+<li><code>factory/tools/sync_public_interfaces.py</code> (Effector)</li>
+<li><code>factory/tools/validate_map_alignment.py</code>
+(Validator)</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li><p>If <code>git commit</code> fails because Git can’t identify you,
+set a local identity in the demo repo:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.email <span class="st">&quot;you@example.com&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.name <span class="st">&quot;Your Name&quot;</span></span></code></pre></div></li>
+<li><p>The sample Makefile later uses a GNU Make feature to avoid
+tab-indented recipes. If your <code>make</code> doesn’t support it, use
+a newer GNU Make (often <code>gmake</code>).</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> factory/tools product/src product/docs</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> product/src/tax_calculator.py <span class="op">&lt;&lt;&#39;PY&#39;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">def normalize_country(country: str) -&gt; str:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">    return country.strip().upper()</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">def calculate_tax(amount: float, country: str, rate: float) -&gt; float:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">    normalized = normalize_country(country)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">    return amount * rate</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">PY</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> product/docs/architecture.md <span class="op">&lt;&lt;&#39;MD&#39;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st"># Architecture</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">## Public Interfaces</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">- (generated)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">## Notes</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">This file is the Map surface for the MVF demo.</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="op">MD</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init <span class="at">-q</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;MVF v0 seed&quot;</span> <span class="at">-q</span></span></code></pre></div>
+<p>Now run the loop:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/sync_public_interfaces.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md <span class="at">--apply</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/validate_map_alignment.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--stat</span> <span class="kw">||</span> <span class="fu">true</span></span></code></pre></div>
+<h3 id="what-the-tools-do-interfaces-flow">What the tools do (interfaces
++ flow)</h3>
+<p>The two scripts are intentionally small and deterministic.</p>
+<p><strong>Effector interface:</strong></p>
+<pre class="text"><code>python3 factory/tools/sync_public_interfaces.py --src &lt;terrain_dir&gt; --doc &lt;map_file&gt; [--apply]</code></pre>
+<p><strong>Validator interface:</strong></p>
+<pre class="text"><code>python3 factory/tools/validate_map_alignment.py --src &lt;terrain_dir&gt; --doc &lt;map_file&gt;</code></pre>
+<p><strong>Logic flow (sketch):</strong></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effector</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sigs <span class="op">=</span> extract_public_signatures(src)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>after <span class="op">=</span> rewrite_public_interfaces_block(doc_text, sigs)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(unified_diff(before, after))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">apply</span>:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    write(after)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Validator</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>terrain <span class="op">=</span> extract_public_signatures(src)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>map_sigs <span class="op">=</span> parse_signatures_from_public_interfaces(doc_text)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> sets_match(terrain, map_sigs)</span></code></pre></div>
+<p>You now have a minimal loop that (1) senses drift, (2) proposes a
+patch, (3) applies it inside a bounded Map surface, and (4) proves
+Map/Terrain alignment with a deterministic Validator.</p>
+<p>Re-run the last three commands to confirm idempotence: the Effector
+should report no drift and the Validator should pass.</p>
+<h3 id="put-it-behind-make-recommended">Put it behind <code>make</code>
+(recommended)</h3>
+<p>This chapter uses direct commands so you can see the moving parts. In
+practice, you want a self-documenting control surface.</p>
+<p>Create a <code>Makefile</code>:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">.RECIPEPREFIX</span> <span class="ch">:=</span><span class="st"> &gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ot">.PHONY:</span><span class="dt"> all sync validate</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">SRC</span> <span class="ch">:=</span><span class="st"> product/src</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">DOC</span> <span class="ch">:=</span><span class="st"> product/docs/architecture.md</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dv">all:</span><span class="dt"> sync validate</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="dv">sync:</span><span class="dt"> </span><span class="co">## Propose/apply Map updates from Terrain</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>&gt; python3 factory/tools/sync_public_interfaces.py --src <span class="ch">$(</span><span class="dt">SRC</span><span class="ch">)</span> --doc <span class="ch">$(</span><span class="dt">DOC</span><span class="ch">)</span> --apply</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="dv">validate:</span><span class="dt"> </span><span class="co">## Enforce Map/Terrain alignment (Physics)</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>&gt; python3 factory/tools/validate_map_alignment.py --src <span class="ch">$(</span><span class="dt">SRC</span><span class="ch">)</span> --doc <span class="ch">$(</span><span class="dt">DOC</span><span class="ch">)</span></span></code></pre></div>
+<p>Now you can run <code>make all</code> and get the same loop with a
+stable interface.</p>
+<h3 id="hardening-ladder-mvf-v0-v1-v2">Hardening ladder: MVF v0 → v1 →
+v2</h3>
+<p>The factory grows by adding Physics and governance, not by widening
+autonomy.</p>
+<ul>
+<li><p><strong>MVF v0 (Weekend):</strong> Foreground loop, one narrow
+Effector, one Validator, one trace in Git.</p></li>
+<li><p><strong>MVF v1 (Week):</strong> Introduce explicit Mission
+Objects and bounded stochastic changes under hard gates.</p></li>
+<li><p><strong>MVF v2 (Month):</strong> Scheduled runs (Dream Daemon),
+Map-Updaters, and Immutable Infrastructure boundaries that protect
+graders and guardrails.</p></li>
+</ul>
+<h2 id="naming-the-parts-the-canon">Naming the parts (the canon)</h2>
+<p>You just ran an Effector and a Validator against a real boundary. In
+SDaC we give these pieces names so we can reason about them and build
+tooling around them.</p>
+<ul>
+<li><code>product/src/</code> → <strong>Terrain</strong> (runnable
+reality)</li>
+<li><code>product/docs/architecture.md</code> → <strong>Map</strong>
+(versioned intent surface)</li>
+<li>Git → <strong>Ledger</strong> (the history of diffs and
+decisions)</li>
+<li><code>sync_public_interfaces.py</code> → <strong>Effector</strong>
+(proposes/applies a patch)</li>
+<li><code>validate_map_alignment.py</code> → <strong>Validator</strong>
+(enforces <code>PASS/FAIL</code>)</li>
+</ul>
+<p>You do not need all of these terms on page one. You can keep thinking
+“code / doc / change script / check” for now. But the canonical names
+will show up throughout the book.</p>
+<h3 id="terrain-code-runnable-reality">Terrain = code (runnable
+reality)</h3>
+<p>The <code>product/src/</code> directory is our
+<strong>Terrain</strong>: the code that actually runs.</p>
+<h3 id="map-versioned-intent-surface">Map = versioned intent
+surface</h3>
+<p>The <code>product/docs/architecture.md</code> file is our
+<strong>Map</strong>: a structured representation of the Terrain that we
+can keep aligned.</p>
+<h3 id="version-control-ledger-audit-trail">Version control = Ledger
+(audit trail)</h3>
+<p>Git is the <strong>Ledger</strong>. Every commit records a
+transaction: what changed, when, and by whom. In a real SDaC system,
+each automated run also records provenance: which Mission Object, which
+inputs, which validators, and which outputs.</p>
+<h3 id="effector-bounded-change-proposer">Effector = bounded change
+proposer</h3>
+<p>The sync tool is an <strong>Effector</strong>: it observes Terrain
+and proposes a patch to a Map surface. Later, you can put a model call
+inside an Effector, but the contract stays the same: output a diff, then
+prove it admissible.</p>
+<h3 id="checker-validator-blocks-bad-changes">Checker = Validator
+(blocks bad changes)</h3>
+<p>The validator script is a <strong>Validator</strong>. It validates
+alignment between Map and Terrain. If it fails, the diff is blocked. No
+debates. No “looks fine.”</p>
+<h2 id="the-loop-in-action">The Loop in Action</h2>
+<p>What you’ve built is a fundamental loop:</p>
+<ol type="1">
+<li><p><strong>Edit the Terrain:</strong> you change code in
+<code>product/src/</code>.</p></li>
+<li><p><strong>Run the Effector:</strong> <code>make sync</code>
+proposes/applies a patch to the Map surface in
+<code>product/docs/architecture.md</code>. A <code>git diff</code> shows
+the change.</p></li>
+<li><p><strong>Run the Validator:</strong> <code>make validate</code>
+enforces whether Map and Terrain are aligned.</p></li>
+<li><p><strong>Diff &amp; gate:</strong> If the validator passes, you
+can commit the change to the Ledger. If it fails, the change is blocked
+and you refine.</p></li>
+</ol>
+<p>This loop gives you deterministic context (the Map), deterministic
+gates (the Validators), and verifiable loops (the Git Ledger and CI
+feedback). It tames the stochastic nature of GenAI by wrapping it in
+engineering rigor.</p>
+<p>At this point, you have a working factory. It’s minimal, but it
+demonstrates the core components.</p>
+<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h2>
+<ol type="1">
+<li><p><strong>Run the MVF v0 bootstrap</strong>: copy/paste the block
+above, copy the two MVF tools from Appendix C, then run:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div></li>
+<li><p><strong>Break it (create drift)</strong>:</p>
+<ul>
+<li><p>Add a new public function to
+<code>product/src/tax_calculator.py</code> (for example
+<code>def tax_rate(country: str) -&gt; float: ...</code>).</p></li>
+<li><p>Run only the validator:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> validate</span></code></pre></div></li>
+</ul>
+<p>It should fail with <code>missing_in_map=[...]</code>.</p></li>
+<li><p><strong>Fix it (restore alignment)</strong>:</p>
+<ul>
+<li><p>Run <code>make sync</code> and then <code>make validate</code>
+again.</p></li>
+<li><p>Inspect the diff:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div></li>
+</ul></li>
+<li><p><strong>Harden one step</strong>:</p>
+<ul>
+<li>Add one more Validator (formatting, type checks, or a schema
+Validator) and make <code>all</code> depend on it.</li>
+</ul></li>
+</ol>
+<p>This is the shape of the Minimum Viable Factory: small blast radius,
+concrete diffs, and <code>PASS/FAIL</code> gates.</p>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="introduction">← Introduction</a>
+    <a class="next-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter 2 – The Deterministic Sandwich (Your First Pattern) →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+

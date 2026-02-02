@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chapter 11 – Automated Refactoring Under Guards | Architects of Intent</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards">
+  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
+  <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="./">Home</a>
+      <a href="toc">Table of Contents</a>
+      <a href="concepts">Concepts</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="part-title">Part IV Govern It Safe Evolution</div>
+<h1 id="chapter-11-automated-refactoring-under-guards">Chapter 11 –
+Automated Refactoring Under Guards</h1>
+<p>In Chapter 10, we established Immutable Infrastructure: the
+non-negotiable boundary that keeps the system from rewriting the graders
+and guardrails that govern it.</p>
+<p>Part IV is about engineering a capability:
+<strong>Neuroplasticity</strong> (safe self-modification capability) —
+the ability to accept self-modification without collapsing into
+regressions.</p>
+<p>Refactoring is the action. Neuroplasticity is the capability.
+Immutable Infrastructure is the constraint that makes that capability
+safe.</p>
+<p>The mechanism is <strong>Automated Refactoring Under Guards</strong>:
+a deterministic loop that proposes a bounded change, measures impact,
+and commits only when the result is admissible under hard gates. This is
+how you get evolution without drift.</p>
+<h2 id="the-atomic-loop-measure-mutate-measure-commitrevert">The Atomic
+Loop: Measure → Mutate → Measure → Commit/Revert</h2>
+<p>At its heart, automated refactoring under guards is a four-phase loop
+that executes every proposed change within a tightly controlled
+sandbox.</p>
+<h3 id="phase-1-pre-mutation-measurement-the-baseline">Phase 1:
+Pre-Mutation Measurement (The Baseline)</h3>
+<p>Before any autonomous agent attempts a change, the system first
+establishes a comprehensive baseline of its current state and quality.
+This involves running all relevant static analysis tools, tests, and
+metrics collectors.</p>
+<p><strong>Typical Pre-Mutation Measurements:</strong></p>
+<ul>
+<li><p><strong>Immune System Execution:</strong> All unit, integration,
+and end-to-end cases must pass.</p></li>
+<li><p><strong>Code Coverage:</strong> Current percentage of code
+covered by tests.</p></li>
+<li><p><strong>Static Analysis:</strong> Linter warnings, security
+vulnerabilities detected by SAST (Static Application Security Testing)
+tools, complexity metrics.</p></li>
+<li><p><strong>Architectural Conformance:</strong> Checks against
+defined architectural rules (e.g., dependency inversion, package
+layering).</p></li>
+<li><p><strong>Performance Benchmarks:</strong> Baseline metrics for
+critical paths.</p></li>
+</ul>
+<p>The output of this phase is a detailed report of the system’s
+“health” <em>before</em> any change is applied. This report acts as the
+deterministic context against which the mutated state will be
+compared.</p>
+<h3 id="phase-2-automated-mutation-the-change-candidate">Phase 2:
+Automated Mutation (The Change Candidate)</h3>
+<p>With a baseline established, the autonomous agent proposes and
+applies a specific change. This mutation is often <em>stochastic</em> in
+its generation (e.g., a large language model suggesting a refactoring, a
+dependency updater identifying a new version, a linter autofix).
+However, its application must be precise and targeted.</p>
+<p><strong>Examples of Automated Mutations:</strong></p>
+<ul>
+<li><p><strong>Dependency Updates:</strong> Automatically upgrading a
+library to a newer patch or minor version.</p></li>
+<li><p><strong>Code Formatting/Linting:</strong> Applying
+<code>prettier</code> or <code>black</code> autofixes.</p></li>
+<li><p><strong>Refactoring Suggestions:</strong> Renaming variables,
+extracting methods, or simplifying expressions based on defined patterns
+or AI suggestions.</p></li>
+<li><p><strong>Security Patches:</strong> Applying known fixes for
+vulnerabilities identified in dependencies.</p></li>
+<li><p><strong>Configuration Updates:</strong> Adjusting settings based
+on environment changes or best practices.</p></li>
+</ul>
+<p>Crucially, this mutation happens in an isolated environment, often on
+a temporary branch or within a sandboxed container, never directly on
+the main development branch or a deployed system.</p>
+<h3 id="phase-3-post-mutation-validation-the-guards">Phase 3:
+Post-Mutation Validation (The Guards)</h3>
+<p>Immediately after the mutation is applied, the system repeats the
+same comprehensive measurement process as in Phase 1. This generates a
+new report reflecting the state <em>after</em> the change. The core of
+“Automated Refactoring Under Guards” lies in the deterministic
+comparison and validation performed here.</p>
+<p><strong>Deterministic Gates (Validators):</strong> A set of
+non-negotiable rules determines if the change is acceptable. These are
+your “guards.”</p>
+<ul>
+<li><p><strong>All Tests Must Pass:</strong> No regressions in existing
+functionality. This is the first and most fundamental guard.</p></li>
+<li><p><strong>The Ratchet Principle:</strong> This is a crucial
+concept. Quality metrics, once established, should only ever improve or
+remain the same; they must <em>never</em> degrade.</p>
+<ul>
+<li><p><strong>Code Coverage:</strong>
+<code>new_coverage &gt;= old_coverage</code>. A drop in coverage (even
+if tests still pass) indicates a potential problem.</p></li>
+<li><p><strong>Linting Errors/Warnings:</strong>
+<code>new_errors &lt;= old_errors</code>. No new warnings should be
+introduced. Ideally, the mutation fixes existing ones.</p></li>
+<li><p><strong>Security Vulnerabilities:</strong>
+<code>new_vulnerabilities &lt;= old_vulnerabilities</code>. The change
+must not introduce new security flaws.</p></li>
+<li><p><strong>Performance:</strong>
+<code>new_latency &lt;= old_latency</code> or
+<code>new_throughput &gt;= old_throughput</code> for critical paths,
+within a defined tolerance.</p></li>
+</ul></li>
+<li><p><strong>Architectural Conformance:</strong> The change must not
+violate any predefined architectural rules.</p></li>
+<li><p><strong>Blast Radius Limits:</strong> The scope of the change
+(e.g., number of lines changed, number of files affected) might be
+capped. Changes exceeding a certain threshold could automatically
+trigger a revert or require human review.</p></li>
+</ul>
+<h3 id="phase-4-the-decision-gate-commit-or-revert">Phase 4: The
+Decision Gate: Commit or Revert</h3>
+<p>Based on the post-mutation validation, the system makes an automated
+decision:</p>
+<ul>
+<li><p><strong>If all guards pass:</strong> The change is deemed safe
+and beneficial (or at least non-regressive). The mutation is then
+committed to the main branch (e.g., by automatically merging the
+temporary branch or applying the patch).</p></li>
+<li><p><strong>If any guard fails:</strong> The change is automatically
+discarded. The temporary branch is deleted, and the system reverts to
+its pre-mutation state. A detailed report of the failure (what guard was
+tripped, why) is generated and can be sent to a human for review. This
+prevents bad changes from ever reaching the codebase.</p></li>
+</ul>
+<h2 id="the-ratchet-ensuring-monotonic-quality">The Ratchet: Ensuring
+Monotonic Quality</h2>
+<p>The Ratchet principle is a cornerstone of safe autonomous evolution.
+It dictates that certain quality metrics can only move in one direction:
+upwards or staying constant. Imagine a ratchet mechanism: it allows
+movement forward but locks against backward motion.</p>
+<p>For example, if your codebase currently has 85% test coverage, any
+automated refactoring must result in coverage of 85% or higher. It
+cannot drop to 84.9%. Similarly, if you have 10 linting errors, an
+automated fix can reduce them to 0-9, but it cannot introduce an 11th
+error.</p>
+<p>This principle provides a powerful, deterministic mechanism to
+prevent the slow, insidious degradation of code quality that often
+plagues even well-intentioned human teams. It ensures that every
+automated step contributes to a higher standard.</p>
+<h2 id="containing-the-blast-radius">Containing the Blast Radius</h2>
+<p>Even with robust guards, it’s wise to limit the potential impact of
+any single automated change. Blast radius controls ensure that if an
+unforeseen issue <em>does</em> slip through, its effects are localized
+and easily reversible.</p>
+<ul>
+<li><p><strong>Small, Focused Changes:</strong> Automated agents should
+strive to make the smallest possible atomic changes. For instance, a
+dependency update for <em>one</em> library, not an entire
+<code>package.json</code> manifest.</p></li>
+<li><p><strong>File Path Restrictions:</strong> Define
+<code>CODEOWNERS</code>-like paths for automated agents, limiting them
+to specific directories or file types. An agent focused on
+<code>src/components</code> should not touch
+<code>src/database</code>.</p></li>
+<li><p><strong>Immutable Infrastructure Boundaries:</strong> As
+discussed in Chapter 10, automated changes to <em>deployed</em> systems
+should always involve provisioning new infrastructure or containers with
+the updated code, and then switching traffic. This allows for instant
+rollback by simply switching back to the previous, known-good version.
+The automated change doesn’t modify a running system in place, but
+rather prepares a new, verified one.</p></li>
+</ul>
+<h2 id="worked-example-an-automated-lint-fix">Worked Example: An
+Automated Lint Fix</h2>
+<p>Let’s walk through an example of an automated agent applying a lint
+fix using the Measure → Mutate → Measure → Commit/Revert loop.</p>
+<p>Imagine a <code>.js</code> file with an unused import that triggers a
+linter warning (<code>ESLint: no-unused-vars</code>).</p>
+<p><strong>1. Baseline Measurement:</strong> The CI pipeline is
+triggered (e.g., by a daily scheduled job or a change in a linting
+rule).</p>
+<ul>
+<li><p><code>npm test</code> → All tests pass.</p></li>
+<li><p><code>npm run lint</code> → Detects
+<code>1 error, 0 warnings</code> (due to
+<code>no-unused-vars</code>).</p></li>
+<li><p>Code coverage: 88%.</p></li>
+</ul>
+<p><strong>2. Automated Mutation:</strong> An autonomous agent (e.g., a
+script that runs <code>eslint --fix</code> on detected files) is
+invoked.</p>
+<ul>
+<li><p>It identifies <code>src/utils/data-parser.js</code> as having an
+unused import.</p></li>
+<li><p>It modifies the file:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/utils/data-parser.js</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/utils/data-parser.js</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">-import { someHelper } from &#39;./helpers&#39;; // Unused</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>import { otherFunction } from &#39;./other-module&#39;;</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>export function parseData(data) {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    // ... uses otherFunction ...</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+<li><p>This change is staged on a temporary Git branch, say
+<code>feat/autofix-eslint-20231027</code>.</p></li>
+</ul>
+<p><strong>3. Post-Mutation Validation:</strong> The CI pipeline runs
+again on the <code>feat/autofix-eslint-20231027</code> branch.</p>
+<ul>
+<li><p><code>npm test</code> → All tests pass (Success).</p></li>
+<li><p><code>npm run lint</code> → Detects
+<code>0 errors, 0 warnings</code> (Success, lint error fixed).</p></li>
+<li><p>Code coverage: 88% (Success, no drop from baseline).</p></li>
+<li><p>Blast Radius: Only 1 file changed, 1 line removed (Within
+limits).</p></li>
+</ul>
+<p><strong>4. Decision Gate:</strong></p>
+<ul>
+<li><p>All guards passed.</p></li>
+<li><p>The system automatically commits the change to the temporary
+branch and merges <code>feat/autofix-eslint-20231027</code> into
+<code>main</code>. The temporary branch is then deleted.</p></li>
+<li><p>An audit log entry is created, showing the agent, the change, the
+metrics before and after, and the successful merge.</p></li>
+</ul>
+<p>Had <code>npm test</code> failed, or if code coverage dropped, the
+agent would have automatically reverted its changes, deleted the branch,
+and logged the failure for human intervention. This entire cycle
+operates without human intervention, ensuring the codebase continuously
+adheres to its defined quality standards.</p>
+<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
+do this week</h2>
+<ol type="1">
+<li><p><strong>Identify a Monotonic Metric:</strong> Choose one quality
+metric in your project (e.g., code coverage, number of lint errors,
+number of security vulnerabilities) that you want to prevent from
+backsliding.</p></li>
+<li><p><strong>Add a “Ratchet” Check to CI:</strong> Configure your
+CI/CD pipeline to:</p>
+<ul>
+<li><p>Capture the current value of this metric (e.g.,
+<code>coverage.json</code>, <code>eslint-report.json</code>).</p></li>
+<li><p>During a build, compare the <em>new</em> metric value against a
+<em>persisted</em> baseline (e.g., from <code>main</code>
+branch).</p></li>
+<li><p>Fail the build if the new metric is worse than the baseline
+(e.g., <code>new_coverage &lt; old_coverage</code>,
+<code>new_errors &gt; old_errors</code>).</p></li>
+</ul></li>
+<li><p><strong>Experiment with an Automated Linter Fix:</strong> Set up
+a scheduled job or a local script that runs <code>eslint --fix</code>
+(or equivalent for your language) on a small, well-tested part of your
+codebase. Manually verify the changes, but envision how this would fit
+into the Measure → Mutate → Measure loop.</p></li>
+</ol>
+
+  </main>
+
+  <nav class="page-nav">
+    <a class="prev-link" href="chapter-10-immutable-infrastructure-the-guardrails">← Chapter 10 – Immutable Infrastructure (The Guardrails)</a>
+    <a class="next-link" href="chapter-12-governance-at-machine-speed">Chapter 12 – Governance at Machine Speed →</a>
+  </nav>
+
+  <footer class="site-footer">
+    <p>© Jóhann Haukur Gunnarsson</p>
+  </footer>
+</body>
+</html>
+
