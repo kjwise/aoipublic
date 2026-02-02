@@ -4,6 +4,146 @@
 let mermaidLoadPromise = null;
 let activeMermaidModal = null;
 
+const LANGUAGE_LABELS = {
+  bash: "Bash",
+  sh: "Shell",
+  shell: "Shell",
+  zsh: "Shell",
+  yaml: "YAML",
+  yml: "YAML",
+  json: "JSON",
+  toml: "TOML",
+  ini: "INI",
+  js: "JavaScript",
+  javascript: "JavaScript",
+  ts: "TypeScript",
+  typescript: "TypeScript",
+  html: "HTML",
+  css: "CSS",
+  python: "Python",
+  py: "Python",
+  go: "Go",
+  rust: "Rust",
+  rs: "Rust",
+  diff: "Diff",
+  patch: "Diff",
+};
+
+function formatLanguageLabel(lang) {
+  const normalized = (lang || "").toLowerCase().trim();
+  if (!normalized) return "";
+  if (LANGUAGE_LABELS[normalized]) return LANGUAGE_LABELS[normalized];
+  return normalized
+    .replace(/^language-/, "")
+    .replace(/^lang-/, "")
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function detectLanguageClass(pre, code) {
+  const classes = [];
+  if (code && code.classList) classes.push(...code.classList);
+  if (pre && pre.classList) classes.push(...pre.classList);
+
+  for (const cls of classes) {
+    if (cls.startsWith("language-")) return cls.slice("language-".length);
+    if (cls.startsWith("lang-")) return cls.slice("lang-".length);
+  }
+
+  // Pandoc: "sourceCode <lang>"
+  const pandocLang = classes.find((cls) => cls && cls !== "sourceCode" && cls !== "text");
+  return pandocLang || "";
+}
+
+function isMermaidCodeBlock(pre, code) {
+  if (pre && pre.classList && pre.classList.contains("mermaid")) return true;
+  if (!code || !code.classList) return false;
+  return code.classList.contains("language-mermaid") || code.classList.contains("mermaid");
+}
+
+function normalizeTrailingNewline(text) {
+  if (!text) return "";
+  return text.endsWith("\n") ? text.slice(0, -1) : text;
+}
+
+function addCopyButton(container, code) {
+  if (!container || !code) return;
+  if (container.querySelector(":scope > button.code-copy")) return;
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "code-copy";
+  button.textContent = "Copy";
+  button.setAttribute("aria-label", "Copy code to clipboard");
+
+  const setStatus = (label) => {
+    button.textContent = label;
+    window.clearTimeout(button.__resetTimer);
+    button.__resetTimer = window.setTimeout(() => {
+      button.textContent = "Copy";
+    }, 1400);
+  };
+
+  button.addEventListener("click", async () => {
+    const raw = normalizeTrailingNewline(code.textContent || "");
+    if (!raw) return;
+
+    try {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        await navigator.clipboard.writeText(raw);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = raw;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.top = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        textarea.remove();
+      }
+      setStatus("Copied");
+    } catch {
+      setStatus("Failed");
+    }
+  });
+
+  container.appendChild(button);
+}
+
+function enhanceCodeBlocks() {
+  // Pandoc blocks: <div class="sourceCode"><pre class="sourceCode ..."><code class="sourceCode ...">...</code></pre></div>
+  for (const container of document.querySelectorAll("div.sourceCode")) {
+    const pre = container.querySelector(":scope > pre");
+    const code = container.querySelector(":scope > pre > code");
+    if (!pre || !code) continue;
+    if (isMermaidCodeBlock(pre, code)) continue;
+
+    container.classList.add("codeblock");
+    const lang = formatLanguageLabel(detectLanguageClass(pre, code));
+    if (lang) container.dataset.lang = lang;
+    addCopyButton(container, code);
+  }
+
+  // Other fenced code blocks: <pre><code class="language-...">...</code></pre>
+  for (const pre of document.querySelectorAll("pre")) {
+    if (pre.closest("div.sourceCode")) continue;
+    const code = pre.querySelector(":scope > code");
+    if (!code) continue;
+    if (isMermaidCodeBlock(pre, code)) continue;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "codeblock";
+
+    const lang = formatLanguageLabel(detectLanguageClass(pre, code));
+    if (lang) wrapper.dataset.lang = lang;
+
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+    addCopyButton(wrapper, code);
+  }
+}
+
 function normalizeMermaidBlocks() {
   // Pandoc: <pre class="mermaid"><code>...</code></pre>
   for (const pre of document.querySelectorAll("pre.mermaid")) {
@@ -244,5 +384,6 @@ document.addEventListener("DOMContentLoaded", () => {
     link.rel = "noopener noreferrer";
   }
 
+  enhanceCodeBlocks();
   void renderMermaidIfPresent();
 });
