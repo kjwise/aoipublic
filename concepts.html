@@ -22,9 +22,9 @@
   </header>
 
   <main id="main" class="content">
-    <h1 id="key-concepts-v4">Key Concepts (v4)</h1>
+    <h1 id="key-concepts">Key Concepts</h1>
 <blockquote>
-<p>The canonical vocabulary for <em>Architects of Intent v4</em>.</p>
+<p>The canonical vocabulary for <em>Architects of Intent</em>.</p>
 </blockquote>
 <p>This canon is intentionally tiered:</p>
 <ul>
@@ -244,6 +244,15 @@ fire.</li>
 <p><strong>Tier:</strong> 2</p>
 <p><strong>What they are</strong> Hard stop conditions that keep loops
 finite: max iterations, max wall-clock, max diff size, min progress.</p>
+<h2 id="review-budget">Review Budget</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A cap on human review throughput
+allocated to autonomy (for example max open agent PRs, max agent PRs per
+day, diff size limits, and staleness windows).</p>
+<p><strong>Why it matters</strong> When the review queue collapses,
+governance becomes rubber-stamping. Review Budget turns “review
+throughput is the bottleneck” into a first-class constraint you can
+enforce.</p>
 <h2 id="structured-error-objects-signal-rich-failure">Structured Error
 Objects (Signal-Rich Failure)</h2>
 <p><strong>Tier:</strong> 2</p>

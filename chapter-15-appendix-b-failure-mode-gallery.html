@@ -36,6 +36,8 @@ and suggests diagnostic and mitigation strategies.</p>
 <p>The generative system (e.g., your Map or Updater) produces output
 that is either overwhelmingly broad and unfocused, or excessively
 granular and ineffective for the given task.</p>
+<p>If you want a fast refresher on slicing hygiene, see Chapter 2
+(“Slicing 101”). Chapter 6 is the deep dive on Context Architecture.</p>
 <ul>
 <li><p><strong>Slice Too Large</strong>: Output involves significant
 changes across many files, introduces complex new structures without
@@ -66,6 +68,12 @@ understand the broader implications of the change. This can also occur
 if validation rules are so strict that any meaningful change is
 immediately rejected, leading the LLM to attempt only the most minor
 (and often ineffective) adjustments.</p></li>
+<li><p><strong>Skeleton violation (Map Contamination)</strong>:
+Structural facts (signatures, routes, schema fields) are generated
+instead of extracted. The model invents or mutates the skeleton, and the
+invented structure enters the Map. Later runs treat it as “context,” and
+the loop starts optimizing against fiction. This often looks like
+persistent drift that never quite converges.</p></li>
 </ul>
 <h4 id="example">Example</h4>
 <p>Consider an Updater whose mission is to “refactor the
@@ -98,6 +106,16 @@ class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a href="
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> import json</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">-from typing import Dict, Any</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="va">+from typing import Any, Dict # Trivial reorder</span></span></code></pre></div></li>
+<li><p><strong>Skeleton violation → Map Contamination</strong>: A
+doc-sync Effector is supposed to update one bounded block (for example
+<code>## Public Interfaces</code>) from deterministically extracted
+signatures. Instead, the model is asked to “update the interface list”
+from a large context dump. It invents a helper that doesn’t exist (or
+mutates an existing signature), and that invented structure is written
+into the Map. The next run uses the Map as input, so the fiction
+persists.</p>
+<p>The symptom is stable drift: the system keeps proposing plausible
+interface edits that the Terrain never supported.</p></li>
 </ul>
 <h4 id="diagnostics">Diagnostics</h4>
 <ul>
@@ -119,6 +137,10 @@ not alter existing interfaces.”</p></li>
 <li><p><strong>Context Management</strong>: Provide only the necessary
 context. Too much context can lead to overreach; too little can lead to
 an inability to make meaningful changes.</p></li>
+<li><p><strong>Skeleton-First Rule</strong>: Extract structural facts
+deterministically and treat them as read-only. If the skeleton
+mismatches, fail fast. This prevents Map Contamination from becoming
+“authoritative context.”</p></li>
 <li><p><strong>Pre-computation/Planning</strong>: For larger tasks, use
 a <code>Map</code> step to break down the problem into smaller,
 well-defined <code>Updater</code> missions. This is the core

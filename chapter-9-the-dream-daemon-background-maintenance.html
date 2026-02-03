@@ -163,16 +163,20 @@ Hostile Terrain and Instruction Injection</h2>
 <p>So far, we’ve focused on protecting the repository from the agent
 (scope limits, Validators, protected graders). You also need the other
 half of the threat model: <strong>protecting the agent from hostile
-input</strong>. This is why Input Hygiene is a governance concern
-(Chapter 12) and why <code>Prep</code> must sanitize (Chapter 2).</p>
-<p>Dream increases the amount of Terrain text your system reads. That
-turns comments, tickets, and logs into an input channel, and you should
-treat it as adversarial.</p>
-<p>The concrete attack example and the <code>Prep</code> hardening
-posture live in Chapter 12. For Dream, keep a simple rule: untrusted
-text never becomes authority. It can only become evidence attached to a
-Mission Object compiled from allowlisted templates, with explicit
-budgets and gates.</p>
+input</strong>. This is why <code>Prep</code> must sanitize (Chapter 2)
+and why governance must include Input Hygiene at scale (Chapter 12).</p>
+<p>Dream increases the amount of Terrain text your system reads. Every
+TODO comment, every ticket description, and every log line becomes an
+input channel, and you should treat it as adversarial.</p>
+<p>The attack shape and <code>Prep</code>-layer defenses are covered in
+Chapter 2 (“The attack shape”). Chapter 12 extends this to
+governance-at-scale: policy validators that detect injection-shaped text
+and force safe outcomes (<code>defer</code>, <code>file_ticket</code>)
+rather than attempting execution.</p>
+<p>For Dream, keep a simple rule: untrusted text never becomes
+authority. It can only become evidence attached to a Mission Object
+compiled from allowlisted templates, with explicit budgets and
+gates.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">

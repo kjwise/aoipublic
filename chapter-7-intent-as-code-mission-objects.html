@@ -33,10 +33,9 @@ problem is that a raw instruction string is not a contract. It lacks
 explicit scope, verifiable gates, and a clear path for recovery when
 things go sideways.</p>
 <p>This chapter introduces the <strong>Mission Object</strong>: your
-typed, executable contract for what a GenAI system should achieve. It’s
-not just a longer instruction; it’s a structured declaration of intent
-that brings rigor and reliability to your AI-driven engineering
-tasks.</p>
+typed, executable contract for what a GenAI system should achieve. It is
+a structured declaration of intent that brings rigor and reliability to
+AI-driven engineering tasks.</p>
 <p>Terminology note: a <em>mission</em> is the abstract objective
 (“update the docs”). A <strong>Mission Object</strong> is the versioned
 YAML/JSON artifact that encodes that objective plus scope, budgets,
@@ -92,8 +91,8 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;README.md&quot;</span></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">regex_match</span><span class="kw">:</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;- `/v2/users`: Supports pagination and user resource management.&quot;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">      - </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="ch">&gt;-</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>          - `/v2/users`: Supports pagination and user resource management.</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Exact line for new endpoint description.&quot;</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">validator_script</span><span class="kw">:</span><span class="at"> ./scripts/validate_readme.sh</span></span>

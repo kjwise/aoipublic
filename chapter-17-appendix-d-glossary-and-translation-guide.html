@@ -94,6 +94,9 @@ specific failure signal, producing a smaller, cleaner diff.</p>
 <p><strong>Circuit Breakers</strong>: Hard stop conditions that keep
 loops finite (max iterations, max wall-clock, max diff size, min
 progress).</p>
+<p><strong>Review Budget</strong>: A cap on how much human review
+throughput autonomy is allowed to consume (for example max open agent
+PRs, max PRs per day, diff budgets, and staleness windows).</p>
 <p><strong>Structured Error Objects</strong>: Machine-readable failures
 (file, line, error code, failing validator, suggested fix) instead of
 vague prose.</p>
@@ -138,6 +141,13 @@ maintenance and safety)</h2>
 pipelines that grade and govern the system (validators, CI, policy).</p>
 <p><strong>Scope Guard</strong>: Blast-radius control via explicit path
 allowlists (the Mission scope).</p>
+<p><strong>Instruction Injection</strong>: Untrusted Terrain text that
+contains instruction-shaped content designed to override constraints
+(often called <code>prompt injection</code>). Defense is channel
+separation: compile intent from allowlisted templates, carry untrusted
+text only as tagged evidence with provenance, and default to safe
+outcomes (<code>defer</code>, <code>file_ticket</code>) when policy
+validators trigger.</p>
 <p><strong>Ratchet</strong>: Monotonic quality metrics:
 <code>metric_new ≥ metric_old</code> for chosen guardrail metrics.</p>
 <p><strong>Neuroplasticity</strong>: Safe self-modification capability:

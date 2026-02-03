@@ -46,6 +46,27 @@ quality and safety standards that protect you.</p>
 <p>The goal isn’t to impede the agent; it’s to guarantee its proposals
 are rigorously vetted against non-negotiable, human-defined policy
 before they become reality.</p>
+<h2 id="the-canon-of-truth-what-can-override-what">The Canon of Truth
+(what can override what)</h2>
+<p>In any automated system that modifies itself, disagreements between
+sources aren’t a documentation problem. They’re a governance bypass.</p>
+<p>So we define a canon: a practical hierarchy of truth. Higher tiers
+constrain lower tiers, and lower tiers are never allowed to “outvote”
+deterministic reality.</p>
+<div class="line-block">Tier | Source examples | What it means | | :– |
+:– | :– | | <strong>Tier 1</strong> | Code, type definitions, schemas,
+Immune System cases, CI gates | <strong>Deterministic truth.</strong>
+Machine-enforced. If Tier 1 says “no,” the change does not exist.<br />
+| <strong>Tier 2</strong> | Structured configuration, domain models,
+design docs, runbooks | <strong>Authoritative intent.</strong>
+Human-readable and often machine-checked against Tier 1. This is where
+you declare what you mean. | | <strong>Tier 3</strong> | General
+documentation, UI copy, release notes | <strong>Explanations.</strong>
+Useful, but non-authoritative. Must remain consistent with higher tiers.
+|</div>
+<p>Immutable Infrastructure is how you enforce this hierarchy in
+practice: you protect Tier 1 (and the gates that interpret it) so the
+system cannot weaken the very constraints that keep it safe.</p>
 <h2 id="the-meta-patterns-applied-to-governance">The Meta-Patterns
 Applied to Governance</h2>
 <p>Immutable Infrastructure is where the Meta-Patterns become
@@ -248,7 +269,7 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@&lt;pinned_sha&gt;</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install dependencies</span></span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm install -g @stoplight/spectral-cli</span><span class="co"> # Or any policy validation tool</span></span>
@@ -370,23 +391,25 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@&lt;pinned_sha&gt;</span></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">ref</span><span class="kw">:</span><span class="at"> main</span><span class="co"> # Checkout main to check for the kill switch branch</span></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check for kill switch branch</span></span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">id</span><span class="kw">:</span><span class="at"> check_branch</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>          if git branch --list disable-auto-merge | grep -q &quot;disable-auto-merge&quot;; then</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>            echo &quot;::error::Kill switch &#39;disable-auto-merge&#39; branch found. Autonomous merges are temporarily suspended.&quot;</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>            echo &quot;kill_switch_active=true&quot; &gt;&gt; $GITHUB_OUTPUT</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>          else</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>            echo &quot;kill_switch_active=false&quot; &gt;&gt; $GITHUB_OUTPUT</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>          fi</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch active</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">if</span><span class="kw">:</span><span class="at"> steps.check_branch.outputs.kill_switch_active == &#39;true&#39;</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> exit 1</span></span></code></pre></div>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>          set -euo pipefail</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>          branch=&quot;disable-auto-merge&quot;</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>          if git ls-remote --exit-code --heads origin &quot;$branch&quot; &gt;/dev/null; then</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>            echo &quot;::error::Kill switch &#39;$branch&#39; branch found; autonomous merges suspended.&quot;</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>            echo &quot;kill_switch_active=true&quot; &gt;&gt; &quot;$GITHUB_OUTPUT&quot;</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>          else</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>            echo &quot;kill_switch_active=false&quot; &gt;&gt; &quot;$GITHUB_OUTPUT&quot;</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>          fi</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch active</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">if</span><span class="kw">:</span><span class="at"> steps.check_branch.outputs.kill_switch_active == &#39;true&#39;</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> exit 1</span></span></code></pre></div>
 <p>This CI workflow ensures that if a branch named
 <code>disable-auto-merge</code> exists in the repository, any
 agent-generated PR to <code>main</code> will automatically fail its

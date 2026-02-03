@@ -26,12 +26,14 @@
 <h1
 id="chapter-14-appendix-a-setup-and-implementation-checklist">Chapter 14
 – Appendix A: Setup and Implementation Checklist</h1>
-<p>This appendix does two things:</p>
+<p>This appendix does three things:</p>
 <ol type="1">
 <li>It defines the minimal setup you need to run the examples and build
 your own SDaC loop.</li>
 <li>It provides an implementation checklist (a dependency graph plus
 milestones).</li>
+<li>It includes a concept map so you can skim the book without
+memorizing the canon.</li>
 </ol>
 <h2 id="minimal-toolchain">Minimal toolchain</h2>
 <p>You can implement Software Development as Code (SDaC) in any stack.
@@ -82,6 +84,85 @@ small loop that is correct, auditable, and easy to extend.</p>
   Guardrails --&gt; Refactor[Ch 11: Automated Refactoring Under Guards]
   Guardrails --&gt; Policy[Ch 12: Governance at Machine Speed]
   Policy --&gt; Reflect[Ch 13: Hofstadter Bridge (Optional)]</code></pre>
+<h2 id="concept-map-where-terms-live">Concept map (where terms
+live)</h2>
+<p>You don’t need to memorize the canon up front. The terms arrive in
+the order you need them.</p>
+<p>Use this section like an index:</p>
+<ul>
+<li>If you’re impatient, ignore it and start with Part I.</li>
+<li>If you’re skimming, it tells you where to look when a term shows
+up.</li>
+</ul>
+<h3 id="guided-ascent-high-level">Guided ascent (high level)</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Where you are</th>
+<th style="text-align: left;">What you do</th>
+<th style="text-align: left;">Canon terms that matter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Introduction</td>
+<td style="text-align: left;">Adopt the mental model</td>
+<td style="text-align: left;">Map/Terrain, Stochastic Drift, Context
+Architecture</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part I</td>
+<td style="text-align: left;">Build a working loop</td>
+<td style="text-align: left;">Map/Terrain/Ledger, Effector, Validator,
+Deterministic Sandwich, Immune System</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part II</td>
+<td style="text-align: left;">Understand why it works</td>
+<td style="text-align: left;">Stochastic Drift, Ouroboros Protocol,
+Circuit Breakers, Context Graph</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part III–IV</td>
+<td style="text-align: left;">Scale and govern safely</td>
+<td style="text-align: left;">Mission Object, Judge, Adaptation State
+Machine, Map-Updaters, Immutable Infrastructure</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part V</td>
+<td style="text-align: left;">Optional limit cases</td>
+<td style="text-align: left;">Hofstadter Bridge</td>
+</tr>
+</tbody>
+</table>
+<h3 id="where-key-concepts-are-introduced-chapter-level">Where key
+concepts are introduced (chapter-level)</h3>
+<ul>
+<li><strong>Chapter 1:</strong> Map, Terrain, Ledger, Effector,
+Validator (MVF v0: a loop you can run).</li>
+<li><strong>Chapter 2:</strong> The Deterministic Sandwich (Prep → Model
+→ Validation).</li>
+<li><strong>Chapter 3:</strong> Validators → Immune System (Physics you
+can enforce).</li>
+<li><strong>Chapter 4:</strong> Stochastic Drift (measure it, budget it,
+reduce it).</li>
+<li><strong>Chapter 5:</strong> The Ouroboros Protocol + Attractors +
+circuit breakers (debug convergence).</li>
+<li><strong>Chapter 6:</strong> Context Architecture + Context Graph +
+Branching Factor + Skeleton-First Rule (slice deterministically).</li>
+<li><strong>Chapters 7–9:</strong> Mission Objects, Map-Updaters, Dream
+(scale the loop into a system).</li>
+<li><strong>Chapters 10–12:</strong> Immutable Infrastructure +
+governance at machine speed (protect graders and blast radius).</li>
+<li><strong>Chapter 13:</strong> Hofstadter Bridge (optional limit
+case).</li>
+<li><strong>Appendix D:</strong> glossary + translation guide.</li>
+</ul>
 <h3 id="weekend-sprint-part-i-build-the-first-loop">Weekend sprint (Part
 I): Build the first loop</h3>
 <h4 id="milestone-1-a-loop-you-can-run-locally-chapter-1">Milestone 1: A

@@ -350,9 +350,9 @@ Your Immune System</h2>
 a more robust “immune system” for your generated artifacts. You can
 compose them by chaining them together, often using a simple script or a
 <code>Makefile</code>.</p>
-<p>Consider your <code>generated</code> directory contains not just
-JSON, but also Python code and documentation. Each might need its own
-type of validation:</p>
+<p>Consider a <code>generated</code> directory that contains JSON,
+Python code, and documentation. Each might need its own type of
+validation:</p>
 <ul>
 <li><p><code>.py</code> files: <code>black</code> (linter),
 <code>mypy</code> (type checker)</p></li>
@@ -425,6 +425,62 @@ users in your system.</p></li>
 <p>Each step up the ladder adds more reliability. The key is to build
 this incrementally, focusing on the highest-impact checks first, and
 tightening your grip on “good” over time.</p>
+<hr />
+<h2 id="the-manifesto-full">The Manifesto (Full)</h2>
+<p>Now that you’ve defined “good” as Physics, here’s the stance behind
+the mechanics.</p>
+<h3 id="central-dogma">Central dogma</h3>
+<p>We do not optimize for “smart” models; we optimize for converging
+systems.</p>
+<p>AI is a stochastic engine. We do not negotiate with it. We constrain
+it.</p>
+<p>A GenAI system works in production when three things hold at
+once:</p>
+<ul>
+<li>It carries durable intent: a Mission Object you can name, version,
+and test.</li>
+<li>It resists entropy as models, data, and people change.</li>
+<li>It adapts through a repeatable ratchet of feedback and revision, not
+heroic one-off instructions.</li>
+</ul>
+<p>You can keep the whole system in your head as one chain:</p>
+<blockquote>
+<p><strong>Mission Object → Context Architecture → Effectors → Immune
+System → Ouroboros Protocol</strong></p>
+</blockquote>
+<h3 id="the-meta-patterns">The meta-patterns</h3>
+<h4 id="dont-chat-compile">1) Don’t Chat, Compile</h4>
+<p>Chat is for ideation. Production work is an artifact you can version
+and rerun: a Mission Object plus a deterministic runner that produces a
+diff and a trace.</p>
+<p>Rule: if it isn’t in a file, it isn’t an instruction. It’s just a
+vibe.</p>
+<h4 id="physics-is-law">2) Physics is Law</h4>
+<p>If a change fails Physics, it does not exist. Physics is binary and
+fast: schemas, linters, tests, and architectural constraints.</p>
+<p>If you allow “just this once” exceptions, autonomy will scale the
+exception faster than you can review it.</p>
+<h4 id="recursion">3) Recursion</h4>
+<p>The same gates apply to human and automated changes. Scheduled
+maintenance turns entropy signals into Missions and runs them through
+the same Validators. No privileged mode.</p>
+<h3 id="the-goal">The goal</h3>
+<p>Build a factory where intent (the Map) is systematically converted
+into reality (the Terrain) through verifiable loops, guarded by hard
+constraints, and recorded in a Ledger with enough evidence to explain
+why each diff exists.</p>
+<ul>
+<li>If it cannot be verified, it does not ship.</li>
+<li>If it cannot be reproduced, it does not exist.</li>
+</ul>
+<h3 id="the-contract">The contract</h3>
+<ul>
+<li>We buy down uncertainty with constraints, logs, and tests.</li>
+<li>We treat language as a contract.</li>
+<li>We do not ship vibes. We ship verifiable state.</li>
+<li>We do not trust the model.</li>
+<li>We trust the loop.</li>
+</ul>
 <hr />
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>

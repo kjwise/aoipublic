@@ -86,17 +86,13 @@ Its <code>Map</code> might define explicit allowed communication
 patterns: Service A can call Service B, but Service C cannot call
 Service A.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># services/payment-service/architecture.yaml</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> payment-service</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">depends_on</span><span class="kw">:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> user-service</span><span class="co"> # allowed dependency</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> notification-service</span><span class="co"> # allowed dependency</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">not_allowed_to_call</span><span class="kw">:</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> audit-log-service</span><span class="co"> # specific forbidden dependency</span></span></code></pre></div>
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># services/payment-service/architecture.yaml</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> payment-service</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> user-service</span><span class="co"> # allowed dependency</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> notification-service</span><span class="co"> # allowed dependency</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">not_allowed_to_call</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> audit-log-service</span><span class="co"> # specific forbidden dependency</span></span></code></pre></div>
 <p>On a Hofstadter Bridge system, this <code>architecture.yaml</code>
 isn’t just a diagram to be updated manually. It’s compiled into the
 deployment pipeline. Before a new version of
@@ -148,6 +144,81 @@ principles</em>. The book, as a formal spec, becomes a living,
 executable contract that the system self-validates against. This implies
 a level of meta-programming and introspection that pushes the boundaries
 of current engineering.</p>
+<h2
+id="the-smallest-step-toward-the-bridge-one-generated-block-one-gate">The
+Smallest Step Toward the Bridge: One Generated Block + One Gate</h2>
+<p>The Hofstadter Bridge can sound like a requirement to turn prose into
+a theorem prover. You don’t have to. The smallest useful move is to make
+<strong>one bounded block</strong> of a document executable and leave
+the rest as human prose.</p>
+<p>The pattern is simple:</p>
+<ol type="1">
+<li><p>Pick a single heading in a Map file (for example
+<code>## Public Interfaces</code>, <code>## Routes</code>,
+<code>## Ownership</code>, or
+<code>## Allowed Dependencies</code>).</p></li>
+<li><p>Define the block’s <strong>skeleton</strong> as a list of facts
+you can extract deterministically from the Terrain (function signatures,
+endpoint paths, dependency edges, policy allowlists).</p></li>
+<li><p>Write two tiny deterministic programs:</p>
+<ul>
+<li><p>An <strong>Effector</strong> that rewrites only that block from
+the extracted skeleton (diff-first, apply optional).</p></li>
+<li><p>A <strong>Validator</strong> that re-extracts the skeleton and
+fails if Map and Terrain disagree.</p></li>
+</ul></li>
+<li><p>Put the Validator in CI and treat failure as Physics.</p></li>
+</ol>
+<p>Here’s what that “micro-Bridge” looks like in pseudocode for a
+<code>## Public Interfaces</code> block.</p>
+<p><strong>The Map file contains a bounded block:</strong></p>
+<pre class="text"><code>## Public Interfaces
+
+- `do_thing(x, y)`
+- `list_things(user_id)`</code></pre>
+<p><strong>Effector (diff-first, apply optional):</strong></p>
+<pre class="text"><code>signatures = EXTRACT_PUBLIC_SIGNATURES(terrain_dir)
+
+doc_before = READ_TEXT(map_file)
+doc_after = REWRITE_HEADING_BLOCK(
+  doc_before,
+  heading=&quot;## Public Interfaces&quot;,
+  items=FORMAT_AS_BULLETS(signatures),
+)
+
+IF doc_before == doc_after:
+  PRINT(&quot;[effector] no drift detected&quot;)
+  EXIT(0)
+
+PRINT(UNIFIED_DIFF(doc_before, doc_after))
+IF apply:
+  WRITE_TEXT(map_file, doc_after)</code></pre>
+<p><strong>Validator (hard fail on mismatch):</strong></p>
+<pre class="text"><code>terrain_items = EXTRACT_PUBLIC_SIGNATURES(terrain_dir)
+map_items = PARSE_ITEMS_FROM_HEADING_BLOCK(map_file, heading=&quot;## Public Interfaces&quot;)
+
+missing = terrain_items - map_items
+extra = map_items - terrain_items
+
+IF missing OR extra:
+  FAIL(
+    code=&quot;map_terrain_sync_fail&quot;,
+    missing_in_map=SORTED(missing),
+    extra_in_map=SORTED(extra),
+  )
+PASS()</code></pre>
+<p>Wire those behind two stable commands (whatever your substrate is),
+and run the Validator in CI:</p>
+<pre class="text"><code>sync --terrain &lt;dir&gt; --map &lt;file&gt; [--apply]
+validate --terrain &lt;dir&gt; --map &lt;file&gt;</code></pre>
+<p>At that point, one slice of documentation has crossed the Bridge: it
+cannot be “out of date” without tripping a deterministic gate. And
+because it’s bounded to a heading, you can adopt it without rewriting
+your entire documentation system.</p>
+<p>If you want an even smaller step, make prose-adjacent rules
+executable too: enforce a deterministic style/structure linter (“Text
+Physics”) and a deterministic vocabulary linter (“Terminology Physics”)
+as pre-merge gates.</p>
 <h2 id="why-it-matters-and-why-most-teams-wont-need-it">Why It Matters,
 and Why Most Teams Won’t Need It</h2>
 <p>The Hofstadter Bridge matters immensely for systems that demand the
@@ -207,23 +278,25 @@ formalize and entrust to autonomous enforcement.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
-<li><p><strong>Identify a single “advisory” document:</strong> Pick one
-piece of critical documentation in your project (e.g., an API spec, a
-security policy, a code style guide) that is currently <em>only</em>
-human-read.</p></li>
-<li><p><strong>Formalize a single constraint:</strong> From that
-document, extract one clear, unambiguous rule or constraint.</p></li>
-<li><p><strong>Automate enforcement (even partially):</strong> Write a
-simple script, linter rule, or CI/CD check that automatically validates
-<em>that single constraint</em> against your codebase or deployed
-system. For example, if your document says “all API endpoints must be
-authenticated,” write a script to grep for unauthenticated routes in
-your API definitions.</p></li>
-<li><p><strong>Reflect:</strong> Consider the effort involved in
-formalizing that single constraint. How much of your existing
-documentation could realistically be transformed into executable
-constraints? What are the immediate benefits and significant
-challenges?</p></li>
+<li><p><strong>Choose one document + one heading:</strong> Pick a single
+“advisory” document in your project (an API spec, security policy,
+architecture doc) and select one heading you can treat as a bounded Map
+surface.</p></li>
+<li><p><strong>Define the skeleton:</strong> Write down the list of
+facts that heading should contain, in a form you can extract
+deterministically from the Terrain (a list of routes, a list of public
+functions, a dependency allowlist, a schema inventory).</p></li>
+<li><p><strong>Build the micro-loop:</strong> Implement two scripts: a
+diff-first Effector that rewrites only that heading’s block, and a
+Validator that fails when Map and Terrain disagree. Wire them behind
+<code>make sync</code> and <code>make validate</code>.</p></li>
+<li><p><strong>Make it a gate:</strong> Run <code>make validate</code>
+in CI. If the Map drifts, the build fails and the PR cannot merge
+without fixing the drift or changing the rule.</p></li>
+<li><p><strong>Reflect:</strong> Notice what got easier (drift
+detection, review clarity) and what got harder (making intent
+unambiguous). That trade is the real cost of moving toward the
+Bridge.</p></li>
 </ol>
 
   </main>

@@ -39,6 +39,12 @@ systems in production. It’s why “better Mission Objects” alone stops
 scaling.</p>
 <p>Reliable GenAI systems don’t just <em>have</em> context; they
 <em>engineer</em> it.</p>
+<p>If you want the Part I version first: Chapter 2 introduced slicing
+hygiene as a <code>Prep</code> responsibility (“Slicing 101” and the
+Skeleton-First Rule). This chapter is the full treatment: Context
+Graphs, Branching Factor, and the failure modes that show up in real
+systems. Appendix B is the quick debugging atlas when a loop starts
+producing weird diffs or thrashing.</p>
 <h2 id="from-context-windows-to-context-graphs">From Context Windows to
 Context Graphs</h2>
 <p>A raw context window is like giving a junior engineer access to your
@@ -268,6 +274,9 @@ signal.</li>
 <li><strong>Slice too big:</strong> you drown the anchor in noise and
 invite scope leak.</li>
 </ul>
+<p>If you’re debugging a real loop, Appendix B has a longer failure mode
+gallery (including slice-too-big / slice-too-small patterns and how to
+recognize them quickly).</p>
 <h3 id="slice-too-small-missing-the-contract">Slice too small: missing
 the contract</h3>
 <p>You want to Refine a bug in <code>calculate_income_tax()</code>. You

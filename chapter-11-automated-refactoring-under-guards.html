@@ -231,17 +231,18 @@ limits).</p></li>
 <p><strong>4. Decision Gate:</strong></p>
 <ul>
 <li><p>All guards passed.</p></li>
-<li><p>The system automatically commits the change to the temporary
-branch and merges <code>feat/autofix-eslint-20231027</code> into
-<code>main</code>. The temporary branch is then deleted.</p></li>
+<li><p>The system commits the change to the temporary branch and opens
+(or updates) a pull request for review. Merge is allowed only if policy
+explicitly permits auto-merge for this change class; otherwise the loop
+stops at a human approval gate (see Chapter 12).</p></li>
 <li><p>An audit log entry is created, showing the agent, the change, the
 metrics before and after, and the successful merge.</p></li>
 </ul>
 <p>Had <code>npm test</code> failed, or if code coverage dropped, the
-agent would have automatically reverted its changes, deleted the branch,
-and logged the failure for human intervention. This entire cycle
-operates without human intervention, ensuring the codebase continuously
-adheres to its defined quality standards.</p>
+automation would revert its changes, delete the branch, and log the
+failure for human attention. This cycle can run unattended only for
+explicitly approved low-risk change classes; otherwise it must stop at a
+human approval gate.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
