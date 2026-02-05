@@ -52,6 +52,23 @@ safe.</p>
 a deterministic loop that proposes a bounded change, measures impact,
 and commits only when the result is admissible under hard gates. This is
 how you get evolution without drift.</p>
+<p>Here’s the same loop in the book’s vocabulary:</p>
+<ul>
+<li><p><strong>Sensor:</strong> capture baseline + post-mutation
+measurements.</p></li>
+<li><p><strong>Effector:</strong> apply one bounded refactor under an
+explicit Mission Object (scope, budgets, acceptance criteria).</p></li>
+<li><p><strong>Validator:</strong> run the <strong>Immune
+System</strong> plus ratchets and policy gates; emit
+<code>PASS/FAIL</code>.</p></li>
+<li><p><strong>Judge:</strong> decide <code>commit</code> vs
+<code>revert</code> from Validator output.</p></li>
+<li><p><strong>Ledger:</strong> persist the diff and the before/after
+evidence so audits are reproducible.</p></li>
+</ul>
+<p>Treat the codebase as <strong>Terrain</strong>. Treat baselines and
+policies as <strong>Map</strong> surfaces derived from that Terrain. The
+loop is safe only when Sensors and Validators stay deterministic.</p>
 <h2 id="the-atomic-loop-measure-mutate-measure-commitrevert">The Atomic
 Loop: Measure → Mutate → Measure → Commit/Revert</h2>
 <p>At its heart, automated refactoring under guards is a four-phase loop
@@ -292,7 +309,7 @@ into the Measure → Mutate → Measure loop.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>b472f5e1fa46</code>
+      Version: <code>5d1240ad66fa</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

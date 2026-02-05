@@ -45,6 +45,11 @@ step—this chapter is about the engineering controls that make that
 mutation safe and predictable. We shift from <em>how</em> an agent
 changes code to <em>how we ensure it changes code responsibly</em>, at
 machine speed.</p>
+<p>Chapter 10 established the immutable boundary (protected paths,
+branch protection, and guardrails the system cannot rewrite). This
+chapter assumes that boundary exists. Here we focus on what runs
+<em>inside</em> it: policy validators, input hygiene, and audit evidence
+that keeps autonomy reversible.</p>
 <p>Governance in the SDaC world isn’t about slowing down progress with
 bureaucratic layers. It’s about encoding safety nets and guardrails
 directly into the system, enabling high velocity by taming the inherent
@@ -135,6 +140,8 @@ file/line/time).</li>
 <code>defer</code>, <code>file_ticket</code>,
 <code>quarantine</code>).</li>
 </ul>
+<p>That bundle is the Ledger entry: enough to reconstruct what the
+system saw and why it acted (or refused to act).</p>
 <p>This keeps post-incident analysis tractable: you can reconstruct what
 the system saw and why it acted (or refused to act).</p>
 <h3 id="the-90-defense-dont-execute-suspicious-work">The 90% defense:
@@ -289,7 +296,7 @@ This starts building your audit trail.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>b472f5e1fa46</code>
+      Version: <code>5d1240ad66fa</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

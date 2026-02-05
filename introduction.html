@@ -41,10 +41,13 @@
 <p>An AI code assistant opens a pull request: “Add pagination to
 <code>GET /api/users</code>.”</p>
 <p>The diff looks reasonable. CI passes. You merge it.</p>
-<p>Saturday morning, your mobile app is down. The assistant introduced a
-contract drift: <code>limit</code> became a string in one place and an
-integer everywhere else. Your type checker never saw it, because the
-mismatch lived in a JSON surface.</p>
+<p>CI compiled the service. It didn’t compile the contract surface your
+mobile client ships against.</p>
+<p>Saturday morning, your mobile app is down.</p>
+<p>The assistant introduced a contract drift: <code>limit</code> became
+a string in the OpenAPI spec while the rest of the system still treats
+it as an integer. Your type system never saw it, because the mismatch
+lived in a JSON Map surface.</p>
 <p>Three engineers spend the weekend rolling back and rebuilding
 confidence.</p>
 <div class="sourceCode" id="cb1"><pre
@@ -57,14 +60,24 @@ class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a href="
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   }</span></code></pre></div>
 <p>Now the same scenario, but with Software Development as Code
 (SDaC).</p>
-<p>The assistant proposes the same change. This time, the gate runs
-before merge.</p>
+<p>In SDaC, the assistant doesn’t get to “open a PR.” It’s an Effector
+inside a compiled workflow: slice context → propose a diff → run
+deterministic gates → retry until Physics passes → record evidence in
+the Ledger.</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make validate-api-change</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Schema</span> validation FAILED: /api/users <span class="at">-</span> <span class="st">&#39;limit&#39;</span> must be integer, got string</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Blocking</span> merge.</span></code></pre></div>
-<p>The CI gate catches it in 8 seconds. Nobody’s weekend is ruined.
-That’s the difference.</p>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make ship MISSION=<span class="st">&quot;Paginate GET /api/users&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[PREP]</span> Slice: openapi.json, src/users_handler.ts, clients/mobile/<span class="pp">*</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 1: proposed patch</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Map/Terrain alignment: FAIL <span class="er">(</span><span class="ex">openapi.json:</span> limit must remain integer<span class="kw">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[REFINE]</span> Retrying with constraint: keep <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> as integer everywhere</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 2: proposed patch</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Map/Terrain alignment: PASS</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Generated client Validator: PASS</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[LEDGER]</span> build/ledger/2026-02-06T1603Z/ <span class="er">(</span><span class="fu">diff</span> + validator output<span class="kw">)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[RESULT]</span> PR ready for review <span class="er">(</span><span class="ex">gates</span> passing<span class="kw">)</span></span></code></pre></div>
+<p><em>Composite example (representative).</em></p>
+<p>The gate catches it in seconds, before review. Nobody’s weekend is
+ruined. That’s the difference.</p>
 <p>Software Development as Code (SDaC) is how you make that outcome
 routine. You treat development work as an executable, versioned system:
 bounded context in, diffs out, deterministic gates decide what can
@@ -207,7 +220,7 @@ surfaces that both Humans and Agents can drive.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>b472f5e1fa46</code>
+      Version: <code>5d1240ad66fa</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
