@@ -347,6 +347,33 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="
 manager, existing CI), ideally using Context Graph identity for the
 target node. That keeps Mission Objects portable across stacks and keeps
 tool details out of intent.</p>
+<h4 id="a-common-implementation-the-makefile-is-the-driver-interface">A
+common implementation: the Makefile <em>is</em> the driver
+interface</h4>
+<p>If you standardize on a canonical CLI per repo (or per
+language-root), you can implement the Driver Pattern by convention
+instead of by introspection.</p>
+<p>This is the same move you saw in Chapter 1 (“Makefiles as the repo’s
+command panel”): <code>make</code> becomes the stable control surface,
+and each repository maps that surface to its local toolchain.</p>
+<ul>
+<li>Mission Objects express intent (<code>run_tests</code>).</li>
+<li>The runner calls one mechanism everywhere (<code>make test</code> in
+the target root).</li>
+<li>The repo’s <code>Makefile</code> hides the incantation
+(<code>pytest</code> vs <code>npm test</code> vs <code>mvn test</code>)
+and bakes in paths, env vars, and flags.</li>
+</ul>
+<p>This works especially well when your boundaries are clean: one
+language/toolchain per repo, or a monorepo that is deliberately split
+into language-root folders with their own command panels. In that world,
+“select the mechanism” often reduces to “cd into the right root and
+press the same button.”</p>
+<p>Make is only one substrate. You can swap it for any task runner
+(<code>just</code>, <code>task</code>, <code>bazel</code>,
+<code>npm scripts</code>, CI-native wrappers). The Driver Pattern is the
+invariant: one canonical interface per project, with swappable
+implementations underneath.</p>
 <h4 id="driver-resolution-algorithm-identity-command-fail-fast">Driver
 resolution algorithm (identity → command, fail fast)</h4>
 <p>Keep driver resolution deterministic and explicit:</p>
@@ -515,7 +542,7 @@ loop.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8f978fd718d3</code>
+      Version: <code>b472f5e1fa46</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
