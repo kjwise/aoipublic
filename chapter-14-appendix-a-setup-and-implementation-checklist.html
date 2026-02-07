@@ -80,6 +80,16 @@ pass/fail.</li>
 </ol>
 <p>If you cannot do those three things, your SDaC loop will be
 “creative,” not reliable.</p>
+<h2 id="git-hooks-optional-recommended">Git hooks (optional,
+recommended)</h2>
+<p>Git hooks are a cheap way to push Physics earlier: run deterministic
+checks before changes enter history.</p>
+<p>In this repository, install the hooks with:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> hooks-install</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--get</span> core.hooksPath</span></code></pre></div>
+<p>If hooks are installed, <code>core.hooksPath</code> should print
+<code>.githooks</code>.</p>
 <h2 id="implementation-checklist">Implementation checklist</h2>
 <p>The goal is not to implement every chapter. The goal is to ship a
 small loop that is correct, auditable, and easy to extend.</p>
@@ -341,7 +351,7 @@ human review for it.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>5d1240ad66fa</code>
+      Version: <code>0469921ae2e9</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

@@ -43,8 +43,9 @@
 loop reusable: one stochastic call pinned between two deterministic
 layers.</p>
 <p>LLMs drift. Run the same Mission Object twice and you can get a
-different diff. In production, that variance is where regressions
-hide.</p>
+different diff. If that term is new, treat it as “the typed request +
+constraints bundle” for now; Chapter 7 formalizes it. In production,
+that variance is where regressions hide.</p>
 <p>The fix is not longer instructions. The fix is structure: Prep →
 Model → Validation. We call it the <strong>Deterministic
 Sandwich</strong>.</p>
@@ -652,7 +653,7 @@ does.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>5d1240ad66fa</code>
+      Version: <code>0469921ae2e9</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
