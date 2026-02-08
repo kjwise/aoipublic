@@ -355,6 +355,10 @@ async function renderMermaidIfPresent() {
     startOnLoad: false,
     theme: "dark",
     securityLevel: "strict",
+    flowchart: {
+      useMaxWidth: false,
+      htmlLabels: true,
+    },
   });
 
   if (typeof mermaid.run === "function") {

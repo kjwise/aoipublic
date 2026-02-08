@@ -278,10 +278,28 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 .content pre.mermaid {
   text-align: left;
   cursor: zoom-in;
+  padding: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(0, 0, 0, 0.08)), var(--code-block-bg);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.content pre.mermaid::before {
+  content: "Diagram";
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--code-muted);
+  margin-bottom: 0.55rem;
 }
 
 .content pre.mermaid svg {
-  max-width: 100%;
+  width: auto;
+  min-width: 100%;
+  max-width: none;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -578,6 +596,15 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 
   .content pre {
     font-size: 0.84rem;
+  }
+
+  .content pre.mermaid {
+    padding: 0.75rem;
+  }
+
+  .content pre.mermaid::before {
+    font-size: 0.62rem;
+    margin-bottom: 0.45rem;
   }
 
   .content table {
