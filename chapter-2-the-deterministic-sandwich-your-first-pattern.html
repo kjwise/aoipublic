@@ -70,6 +70,10 @@ rules.</p></li>
 external service. You control what goes in, you control how you
 interpret what comes out, and you reject anything that doesn’t meet your
 contract.</p>
+<p>If you want a frame: this is RSI-as-lens. You can recurse (retry with
+tighter constraints, improve the harness), but only the middle is
+stochastic; <code>Prep</code> and <code>Validation</code> stay
+deterministic.</p>
 <p><strong>Portability map (keep the roles; swap the
 tooling):</strong></p>
 <pre class="text"><code>Python: ruff / mypy / pytest
@@ -653,7 +657,7 @@ does.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>0469921ae2e9</code>
+      Version: <code>bc0921fb6118</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

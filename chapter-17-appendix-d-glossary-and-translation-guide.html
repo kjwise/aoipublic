@@ -92,6 +92,17 @@ decides the next move.</p>
 after Judgement: <strong>Revert</strong>, <strong>Iterate</strong>,
 <strong>Update Environment</strong> (and optionally escalate to a
 Human).</p>
+<h3 id="tier-1-examples-one-repo">Tier 1 examples (one repo)</h3>
+<ul>
+<li><strong>Map</strong>: <code>openapi.json</code>,
+<code>docs/architecture.md</code>, <code>docs/policy.md</code></li>
+<li><strong>Terrain</strong>: <code>src/</code>, <code>schemas/</code>,
+<code>infra/</code></li>
+<li><strong>Ledger</strong>: Git history +
+<code>build/ledger/&lt;run_id&gt;/</code> (diff + validator output)</li>
+<li><strong>Immune System</strong>: <code>make test</code>,
+<code>make lint</code>, <code>make validate</code></li>
+</ul>
 <h2 id="tier-2-loop-once-the-loop-runs">Tier 2 (Loop: once the loop
 runs)</h2>
 <p><strong>The Three-Tier Frame (Substrate → Loop →
@@ -133,6 +144,9 @@ act.”</p>
 Nodes (apps, packages, modules) carry identity (language, framework,
 build tooling). Edges encode dependencies and contracts. The graph is
 what lets Drivers select the correct mechanism without guessing.</p>
+<p><strong>Hollow Map (Flashlight)</strong>: A brownfield slicing
+pattern: build an ephemeral, anchor-based Context Graph for one Mission
+(reachable imports only, strict budget), then discard it.</p>
 <p><strong>Driver Pattern</strong>: Decouple intent from mechanism
 (Mission says “run tests,” driver selects <code>pytest</code> vs
 <code>vitest</code> vs <code>mvn test</code>).</p>
@@ -142,6 +156,9 @@ patches to keep Map surfaces synchronized with the Terrain.</p>
 and Terrain becomes a build failure.</p>
 <p><strong>Mission Gate</strong>: Run a Mission’s acceptance criteria
 (Physics) without running the model.</p>
+<p><strong>Dry Run (Plan Mode)</strong>: Run <code>Prep</code> and print
+the slice, budgets, and planned gates without calling the model. Catch
+“wrong files, wrong scope, wrong cost” before you spend tokens.</p>
 <h3 id="meta-patterns">Meta-Patterns</h3>
 <p><strong>Meta-Pattern: Don’t Chat, Compile</strong>: Use chat for
 ideation, but ship work through versioned Missions and deterministic
@@ -212,7 +229,7 @@ building reliable loops.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>0469921ae2e9</code>
+      Version: <code>bc0921fb6118</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

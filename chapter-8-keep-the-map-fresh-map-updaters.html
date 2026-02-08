@@ -108,6 +108,26 @@ the allowed region.</li>
 <li>Validate: re-extract the skeleton from the proposed Map and require
 exact match.</li>
 </ul>
+<h2 id="brownfield-adoption-the-hollow-map-flashlight">Brownfield
+Adoption: The Hollow Map (Flashlight)</h2>
+<p>In a legacy monolith, a full Context Graph is often the wrong first
+project. If you try to map the whole Terrain at once, you’ll stall
+before you ship the first loop.</p>
+<p>The Hollow Map pattern is a brownfield on-ramp: you build a temporary
+Map that contains only the path you’re touching today, then you throw it
+away.</p>
+<ul>
+<li><strong>Ignore the dark:</strong> do not index the whole repo.</li>
+<li><strong>Spotlight the path:</strong> start from one anchor (an
+entrypoint, a failing test, a function), then include only the imports
+reachable from that anchor up to a small depth and a strict budget.</li>
+<li><strong>Discard:</strong> treat the resulting graph and context
+packet as build artifacts for one Mission. Once the loop finishes,
+delete them.</li>
+</ul>
+<p>If the same slice keeps showing up, promote it into a cached snapshot
+later. But do not start by trying to maintain a “perfect architecture
+doc” for a system you can’t yet reason about.</p>
 <h3
 id="a-self-referential-map-updater-keep-agent-instructions-aligned">A
 self-referential Map-Updater: keep agent instructions aligned</h3>
@@ -211,7 +231,7 @@ evidence to review.</li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>0469921ae2e9</code>
+      Version: <code>bc0921fb6118</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
