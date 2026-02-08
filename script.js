@@ -377,6 +377,116 @@ async function renderMermaidIfPresent() {
   }
 }
 
+function setupSharePanels() {
+  const panels = document.querySelectorAll(".share-panel");
+  if (!panels.length) return;
+
+  const canonicalLink = document.querySelector("link[rel='canonical']");
+  const defaultUrl = canonicalLink ? canonicalLink.href : window.location.href;
+  const ogTitleEl = document.querySelector("meta[property='og:title']");
+  const metaDescriptionEl = document.querySelector("meta[name='description']");
+  const defaultTitle = ogTitleEl && ogTitleEl.content ? ogTitleEl.content : document.title;
+  const defaultDescription = metaDescriptionEl && metaDescriptionEl.content
+    ? metaDescriptionEl.content
+    : defaultTitle;
+
+  panels.forEach((panel) => {
+    const shareTitle = (panel.dataset.shareTitle || defaultTitle || "").trim();
+    const shareUrl = (panel.dataset.shareUrl || defaultUrl || "").trim();
+    const shareText = (panel.dataset.shareText || defaultDescription || shareTitle).trim();
+    const statusEl = panel.querySelector(".share-status");
+    let statusTimeout = null;
+
+    const updateStatus = (message) => {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+      statusEl.classList.add("is-visible");
+      if (statusTimeout) window.clearTimeout(statusTimeout);
+      statusTimeout = window.setTimeout(() => {
+        statusEl.textContent = "";
+        statusEl.classList.remove("is-visible");
+      }, 2200);
+    };
+
+    const copyToClipboard = async (message = "Link copied.") => {
+      let copied = false;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(shareUrl);
+          copied = true;
+        }
+      } catch {
+        copied = false;
+      }
+
+      if (!copied) {
+        const tempInput = document.createElement("textarea");
+        tempInput.value = shareUrl;
+        tempInput.setAttribute("readonly", "");
+        tempInput.style.position = "absolute";
+        tempInput.style.left = "-9999px";
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        try {
+          copied = document.execCommand("copy");
+        } catch {
+          copied = false;
+        } finally {
+          document.body.removeChild(tempInput);
+        }
+      }
+
+      updateStatus(copied ? message : "Copy failed. Use the address bar.");
+    };
+
+    const encodedUrl = encodeURIComponent(shareUrl);
+    const encodedTitle = encodeURIComponent(shareTitle);
+    const emailBody = shareText ? `${shareText}\n\n${shareUrl}` : `${shareTitle}\n${shareUrl}`;
+    const encodedBody = encodeURIComponent(emailBody);
+
+    const xLink = panel.querySelector("a[data-share='x']");
+    if (xLink) xLink.href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+
+    const fbLink = panel.querySelector("a[data-share='facebook']");
+    if (fbLink) fbLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+    const linkedinLink = panel.querySelector("a[data-share='linkedin']");
+    if (linkedinLink) linkedinLink.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+
+    const redditLink = panel.querySelector("a[data-share='reddit']");
+    if (redditLink) redditLink.href = `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
+
+    const emailLink = panel.querySelector("a[data-share='email']");
+    if (emailLink) emailLink.href = `mailto:?subject=${encodedTitle}&body=${encodedBody}`;
+
+    const copyButton = panel.querySelector("button[data-share='copy']");
+    if (copyButton) {
+      copyButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        void copyToClipboard();
+      });
+    }
+
+    const nativeButton = panel.querySelector("button[data-share='native']");
+    if (nativeButton) {
+      if (!navigator.share) {
+        nativeButton.hidden = true;
+      } else {
+        nativeButton.addEventListener("click", async (event) => {
+          event.preventDefault();
+          try {
+            await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+          } catch (err) {
+            if (err && err.name !== "AbortError") {
+              void copyToClipboard();
+            }
+          }
+        });
+      }
+    }
+  });
+}
+
 // Ensure external links open in a new tab.
 document.addEventListener("DOMContentLoaded", () => {
   for (const link of document.querySelectorAll("a[href^='http']")) {
@@ -384,6 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
     link.rel = "noopener noreferrer";
   }
 
+  setupSharePanels();
   enhanceCodeBlocks();
   void renderMermaidIfPresent();
 });

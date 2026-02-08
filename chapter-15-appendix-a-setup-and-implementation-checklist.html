@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Chapter 14 – Appendix A: Setup and Implementation Checklist | Architects of Intent</title>
+  <title>Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 14 – Appendix A: Setup and Implementation Checklist">
+  <meta name="description" content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist">
   <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
   <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-14-appendix-a-setup-and-implementation-checklist">
+  <link rel="canonical" href="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist">
   <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
 
   <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 14 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 14 – Appendix A: Setup and Implementation Checklist">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-14-appendix-a-setup-and-implementation-checklist">
+  <meta property="og:title" content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
+  <meta property="og:description" content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist">
+  <meta property="og:url" content="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist">
   <meta property="og:type" content="article">
+  <meta property="og:image" content="https://architectsofintent.com/og-image.png">
+  <meta property="og:image:alt" content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
+  <meta property="og:image:type" content="image/png">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 14 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 14 – Appendix A: Setup and Implementation Checklist">
+  <meta name="twitter:title" content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
+  <meta name="twitter:description" content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist">
+  <meta name="twitter:image" content="https://architectsofintent.com/og-image.png">
+  <meta name="twitter:image:alt" content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
 
   
   <link rel="stylesheet" href="style.css">
@@ -36,8 +41,9 @@
 
   <main id="main" class="content">
     <div class="part-title">Part VI Appendices</div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 <h1
-id="chapter-14-appendix-a-setup-and-implementation-checklist">Chapter 14
+id="chapter-15-appendix-a-setup-and-implementation-checklist">Chapter 15
 – Appendix A: Setup and Implementation Checklist</h1>
 <p>This appendix does three things:</p>
 <ol type="1">
@@ -106,7 +112,7 @@ small loop that is correct, auditable, and easy to extend.</p>
   Validators --&gt; Guardrails[Ch 10: Immutable Infrastructure]
   Guardrails --&gt; Refactor[Ch 11: Automated Refactoring Under Guards]
   Guardrails --&gt; Policy[Ch 12: Governance at Machine Speed]
-  Policy --&gt; Reflect[Ch 13: Hofstadter Bridge (Optional)]</code></pre>
+  Policy --&gt; Reflect[Ch 13: Hofstadter Bridge]</code></pre>
 <h2 id="concept-map-where-terms-live">Concept map (where terms
 live)</h2>
 <p>You don’t need to memorize the canon up front. The terms arrive in
@@ -158,8 +164,9 @@ Machine, Map-Updaters, Immutable Infrastructure</td>
 </tr>
 <tr>
 <td style="text-align: left;">Part V</td>
-<td style="text-align: left;">Optional limit cases</td>
-<td style="text-align: left;">Hofstadter Bridge</td>
+<td style="text-align: left;">Limit cases + stakes</td>
+<td style="text-align: left;">Hofstadter Bridge, Race to Reliable
+Autonomy</td>
 </tr>
 </tbody>
 </table>
@@ -182,8 +189,10 @@ Branching Factor + Skeleton-First Rule (slice deterministically).</li>
 (scale the loop into a system).</li>
 <li><strong>Chapters 10–12:</strong> Immutable Infrastructure +
 governance at machine speed (protect graders and blast radius).</li>
-<li><strong>Chapter 13:</strong> Hofstadter Bridge (optional limit
-case).</li>
+<li><strong>Chapter 13:</strong> Hofstadter Bridge (limit case: when the
+Map becomes enforceable).</li>
+<li><strong>Chapter 14:</strong> The Race to Reliable Autonomy (stakes:
+why the bar is rising).</li>
 <li><strong>Appendix D:</strong> glossary + translation guide.</li>
 </ul>
 <h3 id="weekend-sprint-part-i-build-the-first-loop">Weekend sprint (Part
@@ -327,7 +336,8 @@ intentional waiver.</li>
 <li>Blast radius boundaries are explicit and enforced.</li>
 <li>Audit artifacts are retained (logs, diffs, run metadata).</li>
 </ul>
-<h3 id="optional-part-v-reflections">Optional (Part V): Reflections</h3>
+<h3 id="part-v-reflections-limit-cases">Part V: Reflections (limit
+cases)</h3>
 <p>Chapter 13 is a useful limit case. Treat it as a tool for thinking,
 not a build requirement.</p>
 <h3 id="actionable-what-you-can-do-this-week">Actionable: What you can
@@ -343,15 +353,29 @@ human review for it.</p></li>
 
   </main>
 
+  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist" data-share-text="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist">
+  <div class="share-panel__label">Share</div>
+  <div class="share-panel__actions">
+    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
+    <a class="share-button" data-share="x" href="#" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
+    <a class="share-button" data-share="linkedin" href="#" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+    <a class="share-button" data-share="facebook" href="#" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
+    <a class="share-button" data-share="reddit" href="#" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
+    <a class="share-button" data-share="email" href="#" aria-label="Share by email">email</a>
+    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
+  </div>
+  <span class="share-status" aria-live="polite"></span>
+</section>
+
   <nav class="page-nav">
-    <a class="prev-link" href="chapter-13-the-hofstadter-bridge">← Chapter 13 – The Hofstadter Bridge</a>
-    <a class="next-link" href="chapter-15-appendix-b-failure-mode-gallery">Chapter 15 – Appendix B: Failure Mode Gallery →</a>
+    <a class="prev-link" href="chapter-14-the-race-to-reliable-autonomy">← Chapter 14 – The Race to Reliable Autonomy</a>
+    <a class="next-link" href="chapter-16-appendix-b-failure-mode-gallery">Chapter 16 – Appendix B: Failure Mode Gallery →</a>
   </nav>
 
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>bc0921fb6118</code>
+      Version: <code>1e0711da9425</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
