@@ -547,39 +547,141 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 
   .site-nav {
     padding: 0.75rem var(--pad);
+    gap: 0.2rem 0.4rem;
+  }
+
+  .site-nav a {
+    font-size: 0.92rem;
+    padding: 0.28rem 0.45rem;
+  }
+
+  .site-nav a.brand {
+    flex-basis: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0.2rem;
+  }
+
+  .content {
+    width: calc(100% - 1rem);
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .content h1 {
+    font-size: 1.72rem;
+  }
+
+  .content h2 {
+    font-size: 1.34rem;
+  }
+
+  .content pre {
+    font-size: 0.84rem;
+  }
+
+  .content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .content a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .content ul,
+  .content ol {
+    padding-left: 1.1em;
+  }
+
+  .codeblock[data-lang]::before {
+    top: 0.45rem;
+    left: 0.55rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+  }
+
+  .codeblock .code-copy {
+    top: 0.32rem;
+    right: 0.32rem;
+    font-size: 0.78rem;
+    padding: 0.22rem 0.45rem;
+    min-height: 1.8rem;
+  }
+
+  .codeblock > pre {
+    padding-top: 1.95rem;
   }
 
   .toc-list li {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 0.3rem 0.55rem;
     border-bottom: none;
     padding: 0.25rem 0;
   }
 
   .toc-read-time {
     display: inline-block;
-    margin-left: 0.4rem;
+    margin-left: 0;
+    font-size: 0.8rem;
   }
 
   .share-panel {
     grid-template-columns: 1fr;
-    justify-items: start;
+    justify-items: stretch;
+    width: calc(100% - 1rem);
+    padding: 0.75rem;
+    gap: 0.55rem;
+  }
+
+  .share-panel__label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
   }
 
   .share-panel__actions {
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .share-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 2.5rem;
+    padding: 0.4rem 0.35rem;
+    font-size: 0.82rem;
+    touch-action: manipulation;
   }
 
   .share-status {
     text-align: left;
+    min-height: 1.2em;
   }
 
   .page-nav {
     flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 2rem;
   }
 
   .prev-link, .next-link {
+    display: block;
     width: 100%;
     text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .share-panel__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
