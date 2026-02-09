@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Introduction</div>
-<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+<div class="chapter-meta"><span class="read-time">9 min read</span></div>
 <h1 id="introduction">Introduction</h1>
 <h2 id="the-shape-of-all-work">The Shape of All Work</h2>
 <p>Every productive process has the same shape:</p>
@@ -155,13 +155,13 @@ one Friday—the kind of Friday that reveals what’s missing.</p>
 <p>Friday, 4:03 PM.</p>
 <p>You vibe-code a feature with an AI assistant:</p>
 <p>“Add pagination to <code>GET /api/users</code>.”</p>
-<p>It drafts the handler, tweaks a test, edits OpenAPI, and slips in a
-refactor you didn’t ask for.</p>
+<p>It drafts the handler, tweaks a test, edits the API contract
+(OpenAPI), and slips in a refactor you didn’t ask for.</p>
 <p>The diff looks reasonable. CI passes. You merge it.</p>
 <p>This is what vibe coding feels like: high velocity, low friction, and
 a widening gap between what shipped and what you can confidently
 explain.</p>
-<p>CI compiled the service. It didn’t compile the contract surface your
+<p>CI compiled the service. It didn’t validate the API contract your
 mobile client ships against.</p>
 <p>Saturday morning, your mobile app is down.</p>
 <p>The assistant introduced a contract drift: <code>limit</code> became
@@ -169,7 +169,7 @@ a string in the OpenAPI spec while the rest of the system still treats
 it as an integer.</p>
 <p>Variants include enum changes, breaking nested object structures, and
 silently dropping required fields. Your type system never saw it; the
-mismatch lived in a JSON Map surface.</p>
+mismatch lived in a JSON contract surface.</p>
 <p>Three engineers spend the weekend rolling back and rebuilding
 confidence.</p>
 <div class="sourceCode" id="cb1"><pre
@@ -181,11 +181,16 @@ class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a href="
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">+    &quot;type&quot;: &quot;string&quot;</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   }</span></code></pre></div>
 <p>Now the same scenario, but with SDaC.</p>
-<p>In SDaC, the assistant doesn’t get to “just make the change.” It’s an
-Effector inside a compiled workflow: slice context → propose a diff →
-run deterministic gates → retry until Physics passes → record evidence
-in the Ledger. It can’t disable the gates; graders are protected
-surfaces.</p>
+<p>In SDaC, the assistant doesn’t get to “just make the change.” It
+proposes a diff inside a loop: narrow the context → propose a patch →
+run fast deterministic gates → tighten constraints and retry → record
+evidence.</p>
+<p>Think of it like a factory line: a robot can place parts quickly, but
+the product only ships if the QA gate says PASS.</p>
+<p>Later we’ll give names to these pieces: the diff-writer is an
+<strong>Effector</strong>, the gates are <strong>Validators</strong>
+(together, the system’s “Physics”), and the evidence trail is the
+<strong>Ledger</strong>.</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make ship MISSION=<span class="st">&quot;Paginate GET /api/users&quot;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[PREP]</span> Slice: openapi.json, src/users_handler.ts, clients/mobile/<span class="pp">*</span></span>
@@ -207,14 +212,13 @@ why.</p>
 <p>The goal is not a smarter assistant. The goal is a safer process.</p>
 <p>SDaC shifts your work from typing syntax to shaping changes: scoping
 the work, defining constraints, and reviewing small diffs that are
-already bounded by Validators.</p>
+already bounded by deterministic checks (Validators).</p>
 <blockquote>
 <p><strong>Architect of Intent (role):</strong> This is <strong>Intent
-Architecture</strong>: you design the artifacts that make autonomy safe.
-(1) <strong>Intent surfaces</strong> (Mission Objects, Maps,
-Directives). (2) <strong>Physics</strong> (validators, budgets, stop
-conditions). (3) <strong>Evidence</strong> (Ledger traces that make
-every change auditable).</p>
+Architecture</strong>: you design the rules and receipts that make
+autonomy safe. (1) What we want (missions, specs). (2) What must be true
+before we ship (validators, budgets, stop conditions). (3) What we
+record (diffs + traces that make every change auditable).</p>
 </blockquote>
 <p>This book will equip you to build a verifiable loop, understand why
 it works, then scale and govern it so it survives production.</p>
@@ -237,15 +241,18 @@ software development lifecycle (SDLC) itself into a compiled artifact —
 program.</strong></p>
 </blockquote>
 <p>SDaC in one picture:</p>
+<p>Read this left-to-right as: intent → slice context → propose a patch
+→ run checks → record evidence → merge. On FAIL, tighten constraints and
+retry.</p>
 <pre class="mermaid"><code>flowchart TB
-  H[Human intent] --&gt; M[Mission Object]
-  M --&gt; P[Prep: Context Packet]
+  H[Human intent] --&gt; M[&quot;Mission Object&lt;br/&gt;(structured request)&quot;]
+  M --&gt; P[&quot;Prep: Context Packet&lt;br/&gt;(the slice)&quot;]
   P --&gt; LLM[Model]
-  LLM --&gt; D[Candidate Diff]
-  D --&gt; V[Validation: Physics]
-  V --&gt;|PASS| L[Ledger Evidence]
+  LLM --&gt; D[&quot;Candidate Diff&lt;br/&gt;(proposed patch)&quot;]
+  D --&gt; V[&quot;Validation: Physics&lt;br/&gt;(checks)&quot;]
+  V --&gt;|PASS| L[&quot;Ledger Evidence&lt;br/&gt;(receipts)&quot;]
   L --&gt; R[Review + Merge]
-  V --&gt;|FAIL| F[Refine / Revert]
+  V --&gt;|FAIL| F[&quot;Refine / Revert&lt;br/&gt;(tighten + retry)&quot;]
   F --&gt; M</code></pre>
 <p>Caption: The FAIL path loops back to refine context and retry—this is
 the core mechanism that makes the loop self-correcting.</p>
@@ -280,15 +287,17 @@ gate)</h3>
 small diff and a deterministic <code>PASS/FAIL</code> gate.</p>
 <p>Minimum vocabulary for the first pass:</p>
 <ul>
-<li><strong>Terrain:</strong> what runs.</li>
-<li><strong>Map:</strong> a versioned intent surface derived from
-Terrain.</li>
-<li><strong>Ledger:</strong> evidence (diffs + validator output).</li>
-<li><strong>Sensor:</strong> read-only measurement that emits structured
-signals and targets.</li>
-<li><strong>Effector:</strong> proposes a patch.</li>
-<li><strong>Validator:</strong> returns <code>PASS/FAIL</code>.</li>
-<li><strong>Loop:</strong> Effector → Validator → commit only if
+<li><strong>Terrain:</strong> what runs (real behavior).</li>
+<li><strong>Map:</strong> a versioned intent surface (contracts,
+schemas, docs).</li>
+<li><strong>Ledger:</strong> evidence log (diffs + Validator
+output).</li>
+<li><strong>Sensor:</strong> read-only measurement (emits structured
+signals).</li>
+<li><strong>Effector:</strong> proposes a patch (writes diffs).</li>
+<li><strong>Validator:</strong> returns <code>PASS/FAIL</code> (tests,
+checks, invariants).</li>
+<li><strong>Loop:</strong> repeat Effector → Validator; commit only if
 PASS.</li>
 </ul>
 <p>If you want a dependency graph, a week-by-week ladder, and a concept
@@ -382,7 +391,7 @@ class="uri">https://www.linkedin.com/in/jhaukur/</a></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>2417759ef357</code>
+      Version: <code>8cf1a96c610e</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
