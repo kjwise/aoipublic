@@ -63,105 +63,6 @@ executable constraints. It’s the point where your architectural diagrams
 aren’t just checked by a human architect, but are directly consumed by
 the system to <em>govern</em> its own structure and behavior. The Map is
 no longer advisory; it is enforced.</p>
-<h2 id="when-documentation-becomes-executable-constraints">When
-Documentation Becomes Executable Constraints</h2>
-<p>The concept of documentation as executable constraints isn’t entirely
-new. We’ve seen glimmers of it in various forms:</p>
-<ul>
-<li><p><strong>API Specifications (e.g., OpenAPI):</strong> A
-well-defined OpenAPI document is not just human-readable API
-documentation. It can generate client SDKs, server stubs, and even drive
-runtime validation of requests and responses. The <code>spec.yaml</code>
-file <em>is</em> the constraint.</p></li>
-<li><p><strong>Infrastructure as Code (IaC):</strong> Terraform,
-CloudFormation, and similar tools use declarative configurations as the
-source of truth for infrastructure. The <code>.tf</code> file isn’t just
-a description of your infrastructure; it’s the executable blueprint that
-provisions and maintains it. Deviations are detected and often
-remediated.</p></li>
-<li><p><strong>Policy as Code (PaC):</strong> Tools like Open Policy
-Agent (OPA) allow you to write security, compliance, or operational
-policies in a declarative language (Rego). These policies are then
-evaluated against live system state or proposed changes, acting as gates
-that prevent non-compliant actions.</p></li>
-</ul>
-<p>In each of these cases, a human-authored document, written in a
-structured, often declarative format, directly dictates the behavior or
-structure of a system. The “documentation” is the <em>mechanism</em> of
-enforcement.</p>
-<p>For SDaC, this means taking our <code>Map</code>—which includes
-everything from architectural decision records (ADRs) to data schemas
-and security policies—and embedding it so deeply into the system that it
-becomes a non-negotiable part of the execution loop. Imagine if your
-system’s <code>Judge</code> wasn’t just <em>checking</em> against the
-<code>Map</code>, but the <code>Map</code> itself was compiled into the
-<code>Judge</code>’s executable logic, making any deviation an
-immediate, unrecoverable error.</p>
-<p><strong>Example: Enforcing architectural boundaries with
-code</strong></p>
-<p>Consider an SDaC system that manages a microservices architecture.
-Its <code>Map</code> might define explicit allowed communication
-patterns: Service A can call Service B, but Service C cannot call
-Service A.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># services/payment-service/architecture.yaml</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> payment-service</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">depends_on</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> user-service</span><span class="co"> # allowed dependency</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> notification-service</span><span class="co"> # allowed dependency</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">not_allowed_to_call</span><span class="kw">:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> audit-log-service</span><span class="co"> # specific forbidden dependency</span></span></code></pre></div>
-<p>On a Hofstadter Bridge system, this <code>architecture.yaml</code>
-isn’t just a diagram to be updated manually. It’s compiled into the
-deployment pipeline. Before a new version of
-<code>payment-service</code> is deployed, the system would:</p>
-<ol type="1">
-<li><p>Analyze its actual runtime dependencies (e.g., by scanning
-imported packages or network calls).</p></li>
-<li><p>Compare these to <code>architecture.yaml</code>.</p></li>
-<li><p>If <code>payment-service</code> is found to be calling
-<code>audit-log-service</code>, the deployment is blocked, or the
-runtime traffic is actively prevented by network policies derived from
-this exact YAML.</p></li>
-</ol>
-<p>At this point, the documentation (the <code>architecture.yaml</code>)
-has become an executable constraint: a gate.</p>
-<h2
-id="the-mirror-thought-experiment-the-system-reads-this-book-as-a-spec">The
-Mirror Thought Experiment: The System Reads This Book as a Spec</h2>
-<p>To truly grasp the Hofstadter Bridge, let’s engage in a thought
-experiment we call “The Mirror.” Imagine a sophisticated SDaC system
-whose ultimate goal is to embody the principles and patterns described
-in <em>this very book</em>.</p>
-<p>For most systems, a book like this serves as human guidance. It’s a
-reference, a training manual. But what if the system itself could “read”
-and interpret this book, using it as its own operational
-specification?</p>
-<ul>
-<li><p><strong>“Every GenAI output must pass a
-<code>Judge</code>.”</strong> The system would parse this sentence (or a
-formal representation of it) and enforce that every generated artifact
-is routed through a <code>Judge</code> agent before being integrated or
-deployed. If a <code>Generate</code> agent produced output directly to
-production, the system would identify this as a violation of its own
-spec and halt.</p></li>
-<li><p><strong>“All loops must be verifiable.”</strong> The system would
-identify all control loops within its own operation, then demand and
-verify the presence of explicit validation steps, provenance tracking,
-and rollback mechanisms for each. If a loop lacked an auditable trail,
-it would flag itself as non-compliant.</p></li>
-<li><p><strong>“Deterministic context is paramount for taming stochastic
-generation.”</strong> The system would actively scan its generation
-pipelines to ensure that context objects are consistently applied,
-versioned, and immutable during a given generation step, raising an
-alert if it found a drift or an unversioned context being used.</p></li>
-</ul>
-<p>This is a structural shift. The system isn’t just <em>following</em>
-rules; it’s <em>enforcing its own documented operational
-principles</em>. The book, as a formal spec, becomes a living,
-executable contract that the system self-validates against. This implies
-a level of meta-programming and introspection that pushes the boundaries
-of current engineering.</p>
 <h2
 id="the-smallest-step-toward-the-bridge-one-generated-block-one-gate">The
 Smallest Step Toward the Bridge: One Generated Block + One Gate</h2>
@@ -237,6 +138,69 @@ your entire documentation system.</p>
 executable too: enforce a deterministic style/structure linter (“Text
 Physics”) and a deterministic vocabulary linter (“Terminology Physics”)
 as pre-merge gates.</p>
+<h2 id="when-documentation-becomes-executable-constraints">When
+Documentation Becomes Executable Constraints</h2>
+<p>The concept of documentation as executable constraints isn’t entirely
+new. We’ve seen glimmers of it in various forms:</p>
+<ul>
+<li><p><strong>API Specifications (e.g., OpenAPI):</strong> A
+well-defined OpenAPI document is not just human-readable API
+documentation. It can generate client SDKs, server stubs, and even drive
+runtime validation of requests and responses. The <code>spec.yaml</code>
+file <em>is</em> the constraint.</p></li>
+<li><p><strong>Infrastructure as Code (IaC):</strong> Terraform,
+CloudFormation, and similar tools use declarative configurations as the
+source of truth for infrastructure. The <code>.tf</code> file isn’t just
+a description of your infrastructure; it’s the executable blueprint that
+provisions and maintains it. Deviations are detected and often
+remediated.</p></li>
+<li><p><strong>Policy as Code (PaC):</strong> Tools like Open Policy
+Agent (OPA) allow you to write security, compliance, or operational
+policies in a declarative language (Rego). These policies are then
+evaluated against live system state or proposed changes, acting as gates
+that prevent non-compliant actions.</p></li>
+</ul>
+<p>In each of these cases, a human-authored document, written in a
+structured, often declarative format, directly dictates the behavior or
+structure of a system. The “documentation” is the <em>mechanism</em> of
+enforcement.</p>
+<p>For SDaC, this means taking our <code>Map</code>—which includes
+everything from architectural decision records (ADRs) to data schemas
+and security policies—and embedding it so deeply into the system that it
+becomes a non-negotiable part of the execution loop. Imagine if your
+system’s <code>Judge</code> wasn’t just <em>checking</em> against the
+<code>Map</code>, but the <code>Map</code> itself was compiled into the
+<code>Judge</code>’s executable logic, making any deviation an
+immediate, unrecoverable error.</p>
+<p><strong>Example: Enforcing architectural boundaries with
+code</strong></p>
+<p>Consider an SDaC system that manages a microservices architecture.
+Its <code>Map</code> might define explicit allowed communication
+patterns: Service A can call Service B, but Service C cannot call
+Service A.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># services/payment-service/architecture.yaml</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> payment-service</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> user-service</span><span class="co"> # allowed dependency</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> notification-service</span><span class="co"> # allowed dependency</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">not_allowed_to_call</span><span class="kw">:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> audit-log-service</span><span class="co"> # specific forbidden dependency</span></span></code></pre></div>
+<p>On a Hofstadter Bridge system, this <code>architecture.yaml</code>
+isn’t just a diagram to be updated manually. It’s compiled into the
+deployment pipeline. Before a new version of
+<code>payment-service</code> is deployed, the system would:</p>
+<ol type="1">
+<li><p>Analyze its actual runtime dependencies (e.g., by scanning
+imported packages or network calls).</p></li>
+<li><p>Compare these to <code>architecture.yaml</code>.</p></li>
+<li><p>If <code>payment-service</code> is found to be calling
+<code>audit-log-service</code>, the deployment is blocked, or the
+runtime traffic is actively prevented by network policies derived from
+this exact YAML.</p></li>
+</ol>
+<p>At this point, the documentation (the <code>architecture.yaml</code>)
+has become an executable constraint: a gate.</p>
 <h2 id="why-it-matters-and-why-the-bar-is-rising">Why It Matters (and
 Why the Bar Is Rising)</h2>
 <p>The Hofstadter Bridge matters because it eliminates entire classes of
@@ -327,6 +291,42 @@ unsafe moves, and survivors become substrate for the next iteration.</p>
 can define what “safe attempt” means. If you can, SDaC applies. If you
 can’t, you’re operating without guardrails, and the loop will eventually
 pay you back in drift.</p>
+<h2 id="optional-epilogue-the-mirror-thought-experiment">Optional
+Epilogue: The Mirror Thought Experiment</h2>
+<blockquote>
+<p>Optional: a limit-case thought experiment. Skip this section if you
+just want the actionable path.</p>
+</blockquote>
+<p>To push the Hofstadter Bridge to its limit, imagine an SDaC system
+whose goal is to embody the principles and patterns described in
+<em>this very book</em>.</p>
+<p>For most systems, a book like this serves as human guidance. It’s a
+reference, a training manual. But what if the system itself could “read”
+and interpret this book, using it as its own operational
+specification?</p>
+<ul>
+<li><p><strong>“Every GenAI output must pass a
+<code>Judge</code>.”</strong> The system would parse this sentence (or a
+formal representation of it) and enforce that every generated artifact
+is routed through a <code>Judge</code> agent before being integrated or
+deployed. If a <code>Generate</code> agent produced output directly to
+production, the system would identify this as a violation of its own
+spec and halt.</p></li>
+<li><p><strong>“All loops must be verifiable.”</strong> The system would
+identify all control loops within its own operation, then demand and
+verify the presence of explicit validation steps, provenance tracking,
+and rollback mechanisms for each. If a loop lacked an auditable trail,
+it would flag itself as non-compliant.</p></li>
+<li><p><strong>“Deterministic context is paramount for taming stochastic
+generation.”</strong> The system would actively scan its generation
+pipelines to ensure that context objects are consistently applied,
+versioned, and immutable during a given generation step, raising an
+alert if it found a drift or an unversioned context being used.</p></li>
+</ul>
+<p>This is a structural shift. The system isn’t just <em>following</em>
+rules; it’s <em>enforcing its own documented operational
+principles</em>. The book, as a formal spec, becomes a living,
+executable contract that the system self-validates against.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
@@ -375,7 +375,7 @@ Bridge.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>bc8d23989366</code>
+      Version: <code>3fdd6a325e3b</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

@@ -41,80 +41,28 @@
 
   <main id="main" class="content">
     <div class="part-title">Introduction</div>
-<div class="chapter-meta"><span class="read-time">9 min read</span></div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
 <h1 id="introduction">Introduction</h1>
-<p>Friday, 4:03 PM.</p>
-<p>You vibe code a feature with an AI assistant.</p>
-<p>You ask: “Add pagination to <code>GET /api/users</code>.”</p>
-<p>The assistant drafts the change fast: handler code, a test tweak, an
-OpenAPI edit, and a little refactoring you didn’t ask for.</p>
-<p>The diff looks reasonable. CI passes. You merge it.</p>
-<p>This is what vibe coding feels like: high velocity, low friction, and
-a growing gap between what shipped and what you can confidently
-explain.</p>
-<p>CI compiled the service. It didn’t compile the contract surface your
-mobile client ships against.</p>
-<p>Saturday morning, your mobile app is down.</p>
-<p>The assistant introduced a contract drift: <code>limit</code> became
-a string in the OpenAPI spec while the rest of the system still treats
-it as an integer. (Real-world variants include enum changes, breaking
-nested object structures, and silently dropping required fields.) Your
-type system never saw it, because the mismatch lived in a JSON Map
-surface.</p>
-<p>Three engineers spend the weekend rolling back and rebuilding
-confidence.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/openapi.json</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/openapi.json</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ -312,7 +312,7 @@</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   &quot;limit&quot;: {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">-    &quot;type&quot;: &quot;integer&quot;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">+    &quot;type&quot;: &quot;string&quot;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   }</span></code></pre></div>
-<p>Now the same scenario, but with Software Development as Code
-(SDaC).</p>
-<p>In SDaC, the assistant doesn’t get to “just make the change.” It’s an
-Effector inside a compiled workflow: slice context → propose a diff →
-run deterministic gates → retry until Physics passes → record evidence
-in the Ledger. It can’t disable the gates; graders are protected
-surfaces.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make ship MISSION=<span class="st">&quot;Paginate GET /api/users&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[PREP]</span> Slice: openapi.json, src/users_handler.ts, clients/mobile/<span class="pp">*</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 1: proposed patch</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Map/Terrain alignment: FAIL <span class="er">(</span><span class="ex">openapi.json:</span> limit must remain integer<span class="kw">)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[REFINE]</span> Retrying with constraint: keep <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> as integer everywhere</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 2: proposed patch</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Map/Terrain alignment: PASS</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Generated client Validator: PASS</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[LEDGER]</span> build/ledger/2026-02-06T1603Z/ <span class="er">(</span><span class="fu">diff</span> + validator output<span class="kw">)</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[RESULT]</span> PR ready for review <span class="er">(</span><span class="ex">gates</span> passing<span class="kw">)</span></span></code></pre></div>
-<p><em>Composite example (representative).</em></p>
-<p>The gate catches it in seconds, before review. Nobody’s weekend is
-ruined. That’s the difference.</p>
 <h2 id="the-shape-of-all-work">The Shape of All Work</h2>
 <p>Every productive process has the same shape:</p>
-<p><span
-class="math display"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span></p>
-<p>A process <span class="math inline"><em>P</em></span> applied to a
-state <span class="math inline"><em>Z</em><sub><em>n</em></sub></span>
-yields the next state <span
-class="math inline"><em>Z</em><sub><em>n</em> + 1</sub></span>. You
-start somewhere, you do something, you end up somewhere new. This is a
-day of programming. A sprint cycle. A product iteration. A career.</p>
+<p><code>P(Z_n) = Z_{n+1}</code></p>
+<p>Start with a state (<code>Z_n</code>). Run a process
+(<code>P</code>). You get the next state (<code>Z_{n+1}</code>). This is
+a day of programming. A sprint cycle. A product iteration. A career.</p>
 <p>The hope—always—is that the new state is <em>better</em>:</p>
-<p><span
-class="math display"><em>Z</em><sub><em>n</em> + 1</sub> ≻ <em>Z</em><sub><em>n</em></sub></span></p>
-<p>Better by some measure. Closer to the goal. More stable. More
-complete.</p>
-<p>But here’s what makes this recursive, not just iterative: the process
-itself can change.</p>
-<p><span
-class="math display"><em>P</em><sub><em>k</em></sub>(<em>Z</em><sub><em>n</em></sub>) → (<em>P</em><sub><em>k</em> + 1</sub>, <em>Z</em><sub><em>n</em> + 1</sub>)</span></p>
-<p>Each iteration doesn’t just produce a new state—it can produce a new
-process. You write code, and you also refine how you write code. You
-ship a feature, and you also learn what features to ship. The system
-that does the work becomes part of the work being done.</p>
+<p><code>Z_{n+1} ≻ Z_n</code></p>
+<p>Here <code>≻</code> just means “better than,” by whatever measure
+matters: closer to the goal, more stable, more complete, more income,
+more productive, more efficient.</p>
+<p>But here’s what makes this recursive: the process itself can
+change.</p>
+<p><code>P_k(Z_n) -&gt; (P_{k+1}, Z_{n+1})</code></p>
+<p><code>k</code> indexes the process itself over time. Each iteration
+doesn’t just produce a new state—it can produce a new process. You write
+code, and you also refine how you write code. You ship a feature, and
+you also learn what features to ship.</p>
+<p>The system that does the work becomes part of the work being
+done.</p>
 <p>This is fractal. Zoom in: a single function evolves through edits.
 Zoom out: a company evolves through quarters. Same shape at every
 scale:</p>
@@ -122,8 +70,8 @@ scale:</p>
 <thead>
 <tr>
 <th>Scale</th>
-<th>State (<span class="math inline"><em>Z</em></span>)</th>
-<th>Process (<span class="math inline"><em>P</em></span>)</th>
+<th>State (Z)</th>
+<th>Process (P)</th>
 <th>Iteration</th>
 </tr>
 </thead>
@@ -173,17 +121,17 @@ without structure isn’t progress; it’s chaos. A faster loop that drifts
 is just faster drift. A faster loop that breaks is just faster breakage.
 Speed amplifies whatever’s already there: good practices become
 superpowers, bad practices become disasters.</p>
-<p><strong>This is the question SDaC answers: How do you harness
-accelerated iteration without accelerating into a wall?</strong></p>
+<p><strong>This is the question Software Development as Code (SDaC)
+answers: How do you harness accelerated iteration without accelerating
+into a wall?</strong></p>
 <p>The answer is deceptively simple: you make the loop itself the
 product.</p>
 <p>Not the code. Not the features. Not the output. The <em>loop</em>—the
 process that produces output—becomes the thing you design, validate, and
 improve. If your loop is sound, the outputs will follow. If your loop is
 broken, no amount of effort saves you.</p>
-<p><span class="math display">If <em>P</em> is validated, then
-<em>P</em>(<em>Z</em><sub><em>n</em></sub>) → <em>Z</em><sub><em>n</em> + 1</sub>
-is trustworthy</span></p>
+<p>If the process is validated, then <code>P(Z_n) = Z_{n+1}</code> is
+trustworthy.</p>
 <p>This is why the book is structured the way it is. Part I builds a
 loop. Not a product, not a feature—a loop. Once you have a validated
 loop, you can feed it anything. The loop is the moat.</p>
@@ -195,16 +143,60 @@ differ. The artifacts differ. But the shape is the same.</p>
 <p>SDaC doesn’t give you a better way to write code. It gives you a
 better way to <em>iterate</em>—and since all work is iteration, that’s
 the same as giving you a better way to work.</p>
-<p>The rest of this book is about making that concrete.</p>
-<p>Software Development as Code (SDaC) is how you make that outcome
-routine. You treat development work as an executable, versioned system:
-bounded context in, diffs out, deterministic gates decide what can
-merge, and the Ledger records why.</p>
-<p>If you want a frame: SDaC is recursive self-improvement (RSI) for
-programming, in the plain sense that the loop improves the product and
-the factory that runs the loop. The difference is that recursion is
-bounded by hard Physics and recorded in a Ledger, so it converges
-instead of drifting.</p>
+<p>The rest of this book is about making that concrete. Let’s zoom in to
+one Friday—the kind of Friday that reveals what’s missing.</p>
+<p>Friday, 4:03 PM.</p>
+<p>You vibe-code a feature with an AI assistant:</p>
+<p>“Add pagination to <code>GET /api/users</code>.”</p>
+<p>It drafts the handler, tweaks a test, edits OpenAPI, and slips in a
+refactor you didn’t ask for.</p>
+<p>The diff looks reasonable. CI passes. You merge it.</p>
+<p>This is what vibe coding feels like: high velocity, low friction, and
+a widening gap between what shipped and what you can confidently
+explain.</p>
+<p>CI compiled the service. It didn’t compile the contract surface your
+mobile client ships against.</p>
+<p>Saturday morning, your mobile app is down.</p>
+<p>The assistant introduced a contract drift: <code>limit</code> became
+a string in the OpenAPI spec while the rest of the system still treats
+it as an integer.</p>
+<p>Variants include enum changes, breaking nested object structures, and
+silently dropping required fields. Your type system never saw it; the
+mismatch lived in a JSON Map surface.</p>
+<p>Three engineers spend the weekend rolling back and rebuilding
+confidence.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/openapi.json</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/openapi.json</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ -312,7 +312,7 @@</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   &quot;limit&quot;: {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">-    &quot;type&quot;: &quot;integer&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">+    &quot;type&quot;: &quot;string&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   }</span></code></pre></div>
+<p>Now the same scenario, but with SDaC.</p>
+<p>In SDaC, the assistant doesn’t get to “just make the change.” It’s an
+Effector inside a compiled workflow: slice context → propose a diff →
+run deterministic gates → retry until Physics passes → record evidence
+in the Ledger. It can’t disable the gates; graders are protected
+surfaces.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make ship MISSION=<span class="st">&quot;Paginate GET /api/users&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[PREP]</span> Slice: openapi.json, src/users_handler.ts, clients/mobile/<span class="pp">*</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 1: proposed patch</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Map/Terrain alignment: FAIL <span class="er">(</span><span class="ex">openapi.json:</span> limit must remain integer<span class="kw">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[REFINE]</span> Retrying with constraint: keep <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> as integer everywhere</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 2: proposed patch</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Map/Terrain alignment: PASS</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Generated client Validator: PASS</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[LEDGER]</span> build/ledger/2026-02-06T1603Z/ <span class="er">(</span><span class="fu">diff</span> + validator output<span class="kw">)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[RESULT]</span> PR ready for review <span class="er">(</span><span class="ex">gates</span> passing<span class="kw">)</span></span></code></pre></div>
+<p><em>Composite example (representative).</em></p>
+<p>The gate catches it in seconds, before review. Nobody’s weekend is
+ruined. That’s the difference.</p>
+<p>SDaC makes that outcome routine. You treat development work as an
+executable, versioned system: bounded context in, diffs out,
+deterministic gates decide what can merge, and the Ledger records
+why.</p>
 <p>The goal is not a smarter assistant. The goal is a safer process.</p>
 <p>SDaC shifts your work from typing syntax to shaping changes: scoping
 the work, defining constraints, and reviewing small diffs that are
@@ -248,9 +240,8 @@ program.</strong></p>
   L --&gt; R[Review + Merge]
   V --&gt;|FAIL| F[Refine / Revert]
   F --&gt; M</code></pre>
-<p>Caption: Refinement usually stays inside the same Mission Object by
-tightening context/constraints and retrying; creating a new Mission
-Object is an explicit handoff, not an implicit side effect.</p>
+<p>Caption: The FAIL path loops back to refine context and retry—this is
+the core mechanism that makes the loop self-correcting.</p>
 <h3 id="why-now-economics">Why now (economics)</h3>
 <p>SDaC becomes practical once the economics of automation change.
 Foundation work that used to be expensive to build and maintain—schemas,
@@ -260,8 +251,8 @@ checks.</p>
 <p>At the same time, models are good at the linguistic parts of
 engineering (decomposition, summarization, classification, doc
 drafting). Generation got cheap. Governance and review did not. The
-bottleneck becomes review throughput (your <strong>Review
-Budget</strong>).</p>
+bottleneck becomes review throughput: how many diffs humans can
+govern.</p>
 <h3 id="the-litmus-test">The litmus test</h3>
 <p>If someone says “this is just CI,” ask:</p>
 <ul>
@@ -359,9 +350,6 @@ class="email">johannhaukur@gmail.com</a></li>
 <li>LinkedIn: <a href="https://www.linkedin.com/in/jhaukur/"
 class="uri">https://www.linkedin.com/in/jhaukur/</a></li>
 </ul>
-<p>I chose the Files/Git/<code>make</code>/Python substrate because it’s
-ubiquitous, has no compile step, and exposes deterministic control
-surfaces that both Humans and Agents can drive.</p>
 
   </main>
 
@@ -387,7 +375,7 @@ surfaces that both Humans and Agents can drive.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>bc8d23989366</code>
+      Version: <code>3fdd6a325e3b</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
