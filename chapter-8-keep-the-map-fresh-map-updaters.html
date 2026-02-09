@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+<div class="chapter-meta"><span class="read-time">7 min read</span></div>
 <h1 id="chapter-8-keep-the-map-fresh-map-updaters">Chapter 8 – Keep the
 Map Fresh (Map-Updaters)</h1>
 <p>Drift is the default state. Docs fall behind code. Specs lag behind
@@ -208,6 +208,81 @@ explores that limit case (the Hofstadter Bridge): the Map stops being
 advisory and starts acting as an enforcer.</p>
 <p>If you want that future safely, you start here: deterministic
 skeletons, bounded diffs, and hard gates.</p>
+<h3 id="meta-maps-when-maps-need-maps">Meta-Maps: When Maps Need
+Maps</h3>
+<p>A slice map (a saved Context Packet: what’s in, what’s out, and why)
+works for a feature. A handful of slice maps work for a release. But
+what happens when you have fifty slice maps across twelve teams?</p>
+<p>You need a map of maps—a <strong>meta-map</strong>.</p>
+<p>This isn’t new complexity; it’s the fractal structure asserting
+itself at scale. Just as a function’s docstring is a Map for its
+implementation, and a module’s API is a Map for its functions, a
+meta-map is a Map for your collection of slice maps.</p>
+<pre class="text"><code>┌─────────────────────────────────────────────────┐
+│                   Meta-Map                       │
+│  &quot;Q2 Platform Migration&quot;                         │
+│                                                 │
+│  ┌─────────────┐ ┌─────────────┐ ┌────────────┐ │
+│  │ Slice Map A │ │ Slice Map B │ │ Slice Map C│ │
+│  │ Auth Service│ │ Data Layer  │ │ API Gateway│ │
+│  │ 12 slices   │ │ 8 slices    │ │ 15 slices  │ │
+│  │ ████████░░  │ │ ██████░░░░  │ │ ███░░░░░░░ │ │
+│  │ 80%         │ │ 60%         │ │ 20%        │ │
+│  └─────────────┘ └─────────────┘ └────────────┘ │
+│                                                 │
+│  Dependencies: A → B → C                         │
+│  Status: B blocked on A slice 9                  │
+│  Next convergence check: Friday                  │
+└─────────────────────────────────────────────────┘</code></pre>
+<p><strong>What a meta-map tracks:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Child slice maps</td>
+<td>Which maps roll up to this one</td>
+</tr>
+<tr>
+<td>Cross-map dependencies</td>
+<td>Which slices in Map A gate slices in Map B</td>
+</tr>
+<tr>
+<td>Aggregate progress</td>
+<td>Convergence status across all children</td>
+</tr>
+<tr>
+<td>Escalation triggers</td>
+<td>When to surface blockers to humans</td>
+</tr>
+<tr>
+<td>Rollup schedule</td>
+<td>When child maps report status</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The key insight:</strong> Meta-maps don’t require new
+primitives. They use the same structure—explicit intent, typed
+artifacts, validation gates—just applied to maps instead of code. The
+Mission Object for a meta-map is “coordinate these child maps toward
+this milestone.” The Immune System checks cross-map invariants.</p>
+<p>This is how SDaC scales without becoming a different system at each
+level. The recursion is the scaling mechanism.</p>
+<p><strong>When you need a meta-map:</strong></p>
+<ul>
+<li>More than ~7 active slice maps (attention dilution threshold)</li>
+<li>Cross-team dependencies that need explicit tracking</li>
+<li>Milestones that span multiple maps</li>
+<li>Autonomous agents (Dream Daemon depth 2+) orchestrating multiple
+workstreams</li>
+</ul>
+<p>At depth 0-1, humans hold meta-maps in their heads or in project
+management tools. At depth 2+, meta-maps become explicit artifacts that
+agents read and update—the system managing its own coordination.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <p>Choose one Map surface in your current project that drifts often.</p>
@@ -251,7 +326,7 @@ evidence to review.</li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>efb0c409c86b</code>
+      Version: <code>bc8d23989366</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Introduction</div>
-<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+<div class="chapter-meta"><span class="read-time">9 min read</span></div>
 <h1 id="introduction">Introduction</h1>
 <p>Friday, 4:03 PM.</p>
 <p>You vibe code a feature with an AI assistant.</p>
@@ -92,6 +92,110 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="
 <p><em>Composite example (representative).</em></p>
 <p>The gate catches it in seconds, before review. Nobody’s weekend is
 ruined. That’s the difference.</p>
+<h2 id="the-shape-of-all-work">The Shape of All Work</h2>
+<p>Every productive process has the same shape:</p>
+<p><span
+class="math display"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span></p>
+<p>A process <span class="math inline"><em>P</em></span> applied to a
+state <span class="math inline"><em>Z</em><sub><em>n</em></sub></span>
+yields the next state <span
+class="math inline"><em>Z</em><sub><em>n</em> + 1</sub></span>. You
+start somewhere, you do something, you end up somewhere new. This is a
+day of programming. A sprint cycle. A product iteration. A career.</p>
+<p>The hope—always—is that the new state is <em>better</em>:</p>
+<p><span
+class="math display"><em>Z</em><sub><em>n</em> + 1</sub> ≻ <em>Z</em><sub><em>n</em></sub></span></p>
+<p>Better by some measure. Closer to the goal. More stable. More
+complete.</p>
+<p>But here’s what makes this recursive, not just iterative: the process
+itself can change.</p>
+<p><span
+class="math display"><em>P</em><sub><em>k</em></sub>(<em>Z</em><sub><em>n</em></sub>) → (<em>P</em><sub><em>k</em> + 1</sub>, <em>Z</em><sub><em>n</em> + 1</sub>)</span></p>
+<p>Each iteration doesn’t just produce a new state—it can produce a new
+process. You write code, and you also refine how you write code. You
+ship a feature, and you also learn what features to ship. The system
+that does the work becomes part of the work being done.</p>
+<p>This is fractal. Zoom in: a single function evolves through edits.
+Zoom out: a company evolves through quarters. Same shape at every
+scale:</p>
+<table>
+<thead>
+<tr>
+<th>Scale</th>
+<th>State (<span class="math inline"><em>Z</em></span>)</th>
+<th>Process (<span class="math inline"><em>P</em></span>)</th>
+<th>Iteration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Keystroke</td>
+<td>Buffer content</td>
+<td>Editor + habits</td>
+<td>~100ms</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>Implementation</td>
+<td>Developer + tools</td>
+<td>~minutes</td>
+</tr>
+<tr>
+<td>Feature</td>
+<td>Codebase</td>
+<td>Team + practices</td>
+<td>~days</td>
+</tr>
+<tr>
+<td>Product</td>
+<td>System</td>
+<td>Organization + strategy</td>
+<td>~months</td>
+</tr>
+<tr>
+<td>Company</td>
+<td>Market position</td>
+<td>Culture + leadership</td>
+<td>~years</td>
+</tr>
+</tbody>
+</table>
+<p>Each level contains the levels below it. Each level’s “state” is the
+cumulative output of faster iterations beneath it. This is why small
+improvements compound and why dysfunction at lower levels eventually
+surfaces at higher ones.</p>
+<p><strong>What AI changes is the clock speed.</strong></p>
+<p>The iteration that took a day now takes minutes. The cycle that took
+a sprint now takes a day. The process that required a team now runs with
+one person and an agent.</p>
+<p>This sounds like pure acceleration—and it is. But acceleration
+without structure isn’t progress; it’s chaos. A faster loop that drifts
+is just faster drift. A faster loop that breaks is just faster breakage.
+Speed amplifies whatever’s already there: good practices become
+superpowers, bad practices become disasters.</p>
+<p><strong>This is the question SDaC answers: How do you harness
+accelerated iteration without accelerating into a wall?</strong></p>
+<p>The answer is deceptively simple: you make the loop itself the
+product.</p>
+<p>Not the code. Not the features. Not the output. The <em>loop</em>—the
+process that produces output—becomes the thing you design, validate, and
+improve. If your loop is sound, the outputs will follow. If your loop is
+broken, no amount of effort saves you.</p>
+<p><span class="math display">If <em>P</em> is validated, then
+<em>P</em>(<em>Z</em><sub><em>n</em></sub>) → <em>Z</em><sub><em>n</em> + 1</sub>
+is trustworthy</span></p>
+<p>This is why the book is structured the way it is. Part I builds a
+loop. Not a product, not a feature—a loop. Once you have a validated
+loop, you can feed it anything. The loop is the moat.</p>
+<p><strong>The fractal structure means this scales.</strong></p>
+<p>A validated loop at the function level is the same pattern as a
+validated loop at the organization level. The primitives (intent →
+attempt → validation → integration) are identical. The clock speeds
+differ. The artifacts differ. But the shape is the same.</p>
+<p>SDaC doesn’t give you a better way to write code. It gives you a
+better way to <em>iterate</em>—and since all work is iteration, that’s
+the same as giving you a better way to work.</p>
+<p>The rest of this book is about making that concrete.</p>
 <p>Software Development as Code (SDaC) is how you make that outcome
 routine. You treat development work as an executable, versioned system:
 bounded context in, diffs out, deterministic gates decide what can
@@ -283,7 +387,7 @@ surfaces that both Humans and Agents can drive.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>efb0c409c86b</code>
+      Version: <code>bc8d23989366</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">7 min read</span></div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
 <h1 id="chapter-11-automated-refactoring-under-guards">Chapter 11 –
 Automated Refactoring Under Guards</h1>
 <p>In Chapter 10, we established Immutable Infrastructure: the
@@ -182,21 +182,124 @@ its pre-mutation state. A detailed report of the failure (what guard was
 tripped, why) is generated and can be sent to a human for review. This
 prevents bad changes from ever reaching the codebase.</p></li>
 </ul>
-<h2 id="the-ratchet-ensuring-monotonic-quality">The Ratchet: Ensuring
-Monotonic Quality</h2>
-<p>The Ratchet principle is a cornerstone of safe autonomous evolution.
-It dictates that certain quality metrics can only move in one direction:
-upwards or staying constant. Imagine a ratchet mechanism: it allows
-movement forward but locks against backward motion.</p>
-<p>For example, if your codebase currently has 85% test coverage, any
-automated refactoring must result in coverage of 85% or higher. It
-cannot drop to 84.9%. Similarly, if you have 10 linting errors, an
-automated fix can reduce them to 0-9, but it cannot introduce an 11th
-error.</p>
-<p>This principle provides a powerful, deterministic mechanism to
-prevent the slow, insidious degradation of code quality that often
-plagues even well-intentioned human teams. It ensures that every
-automated step contributes to a higher standard.</p>
+<h2 id="the-ratchet-metrics-that-cant-go-backward">The Ratchet: Metrics
+That Can’t Go Backward</h2>
+<p>Here’s a failure mode that kills Neuroplasticity:</p>
+<p>The system learns to pass tests by weakening the tests.</p>
+<p>If an autonomous loop can modify both the code <em>and</em> the
+validators, it will eventually discover that the easiest way to achieve
+“all tests pass” is to delete the hard tests. This isn’t malice—it’s
+optimization finding the shortest path.</p>
+<p>The <strong>Ratchet</strong> prevents this. It’s a governance
+mechanism that treats critical metrics as strictly monotonic:</p>
+<p><code>metric_new &gt;= metric_old</code></p>
+<p>If the new value is worse, the commit is rejected—regardless of
+whether tests pass.</p>
+<p><strong>What to ratchet:</strong></p>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 51%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Ratchet Rule</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test count</td>
+<td>Can’t decrease</td>
+<td>Prevents “pass by deletion”</td>
+</tr>
+<tr>
+<td>Coverage %</td>
+<td>Can’t decrease</td>
+<td>Prevents coverage gaming</td>
+</tr>
+<tr>
+<td>Type coverage</td>
+<td>Can’t decrease</td>
+<td>Prevents <code>any</code> creep</td>
+</tr>
+<tr>
+<td>Lint violations</td>
+<td>Can’t increase</td>
+<td>Prevents gradual decay</td>
+</tr>
+<tr>
+<td>Security findings</td>
+<td>Can’t increase</td>
+<td>Prevents vulnerability accumulation</td>
+</tr>
+<tr>
+<td>API surface</td>
+<td>Can’t expand without approval</td>
+<td>Prevents scope creep</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Implementation:</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In your governance config or CI pipeline</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ratchets</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test_count</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/test_count.json</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">coverage_percent</span><span class="kw">:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/coverage.json</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.1</span><span class="co">  # Allow tiny fluctuations from test timing</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lint_errors</span><span class="kw">:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> down</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/lint.json</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
+<p>The baseline files are updated only when a commit passes all
+ratchets. They become the new floor.</p>
+<p>The deeper principle:</p>
+<p>A ratchet is a monotonic invariant—a property that can only move in
+one direction over the system’s lifetime. This is how you prevent drift
+in self-modifying systems.</p>
+<p>Without ratchets, every quality metric becomes a negotiation. “We’ll
+fix the coverage later.” “This test was flaky anyway.” “The lint rule is
+too strict.” Each exception is small; the cumulative effect is
+decay.</p>
+<p>With ratchets, the negotiation happens once—when you set the
+baseline. After that, the direction is locked.</p>
+<h3 id="releasing-a-ratchet-human-only">Releasing a ratchet
+(human-only)</h3>
+<p>Ratchets aren’t permanent. Legitimate reasons to reset a
+baseline:</p>
+<ul>
+<li>Major architectural change (intentional coverage reset)</li>
+<li>Deprecated module removal (test count drops, but that’s
+correct)</li>
+<li>Security policy update (old findings reclassified)</li>
+</ul>
+<p>The key: releasing a ratchet requires explicit human approval and
+documentation. The system can’t release its own ratchets—that’s the
+point.</p>
+<pre class="text"><code>┌─────────────────────────────────────────────────────────┐
+│  Ratchet Release Request                                │
+│                                                         │
+│  Metric: test_count                                     │
+│  Current baseline: 847                                  │
+│  Proposed baseline: 812                                 │
+│  Reason: Removed deprecated billing module (35 tests)    │
+│  Approved by: @platform-lead                            │
+│  Date: 2024-03-15                                       │
+│                                                         │
+│  [Approve] [Reject] [Request more context]              │
+└─────────────────────────────────────────────────────────┘</code></pre>
+<p>This audit trail is governance. Anyone can see when baselines changed
+and why.</p>
 <h2 id="containing-the-blast-radius">Containing the Blast Radius</h2>
 <p>Even with robust guards, it’s wise to limit the potential impact of
 any single automated change. Blast radius controls ensure that if an
@@ -243,14 +346,14 @@ invoked.</p>
 <li><p>It identifies <code>src/utils/data-parser.js</code> as having an
 unused import.</p></li>
 <li><p>It modifies the file:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/utils/data-parser.js</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/utils/data-parser.js</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">-import { someHelper } from &#39;./helpers&#39;; // Unused</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>import { otherFunction } from &#39;./other-module&#39;;</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>export function parseData(data) {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    // ... uses otherFunction ...</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode diff"><code class="sourceCode diff"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/utils/data-parser.js</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/utils/data-parser.js</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">-import { someHelper } from &#39;./helpers&#39;; // Unused</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>import { otherFunction } from &#39;./other-module&#39;;</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>export function parseData(data) {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    // ... uses otherFunction ...</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
 <li><p>This change is staged on a temporary Git branch, say
 <code>feat/autofix-eslint-20231027</code>.</p></li>
 </ul>
@@ -329,7 +432,7 @@ into the Measure → Mutate → Measure loop.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>efb0c409c86b</code>
+      Version: <code>bc8d23989366</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

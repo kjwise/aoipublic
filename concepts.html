@@ -40,8 +40,435 @@
   </header>
 
   <main id="main" class="content">
-    <h1 id="concepts">Concepts</h1>
-<p>Concept definitions are not available in this draft export.</p>
+    <h1 id="key-concepts">Key Concepts</h1>
+<blockquote>
+<p>The canonical vocabulary for <em>Architects of Intent</em>.</p>
+</blockquote>
+<p>This canon is intentionally tiered:</p>
+<ul>
+<li><p><strong>Tier 1</strong>: Substrate (use everywhere).</p></li>
+<li><p><strong>Tier 2</strong>: Loop (once the loop runs).</p></li>
+<li><p><strong>Tier 3</strong>: Governance (when autonomy grows and
+governance matters).</p></li>
+</ul>
+<h2 id="map-terrain-ledger">Map / Terrain / Ledger</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What they are</strong></p>
+<ul>
+<li><p><strong>Terrain</strong>: reality-as-code (source, configs,
+schemas, runtime behavior).</p></li>
+<li><p><strong>Map</strong>: the structured, machine-readable
+representation of that reality (docs, inventories, contracts, indexes,
+derived views).</p></li>
+<li><p><strong>Ledger</strong>: the append-only history of changes and
+evidence (diffs, validator output, decision traces).</p></li>
+</ul>
+<p><strong>Why they matter</strong> Autonomy is safe only when intent
+(Map) and reality (Terrain) are explicit, and every change is traceable
+(Ledger).</p>
+<h2 id="physics">Physics</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> Deterministic constraints that shape a
+stochastic process: schemas, linters, tests, architectural rules, gates,
+budgets, and stopping conditions.</p>
+<p><strong>Why it matters</strong> Physics turns “seems fine” into
+PASS/FAIL signals the system can act on.</p>
+<h2 id="mechanism">Mechanism</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> A specific, checkable implementation
+detail (a validator, a parser, a build target, a CI gate) — not a
+metaphor.</p>
+<p><strong>Why it matters</strong> This book earns trust by cashing
+claims out into mechanisms you can run.</p>
+<h2 id="deterministic-sandwich">Deterministic Sandwich</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> The unit pattern for safe autonomy: pin
+one stochastic call between two deterministic layers.</p>
+<ol type="1">
+<li><p><strong>Prep</strong>: normalize the Mission Object and assemble
+a bounded context slice.</p></li>
+<li><p><strong>Model</strong>: one bounded stochastic generation
+step.</p></li>
+<li><p><strong>Validation</strong>: parse strictly and run validators;
+accept only if admissible.</p></li>
+</ol>
+<h2 id="validator">Validator</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> One deterministic gate: a linter, a type
+validator, a schema validator, a contract test, or a policy
+validator.</p>
+<h2 id="immune-system">Immune System</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> The suite of Validators that defines
+“good enough” for a surface.</p>
+<p><strong>Why it matters</strong> It moves you from “looks good” to
+“passes,” which makes loops auditable and repeatable.</p>
+<h2 id="immune-system-case">Immune System case</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> One concrete PASS/FAIL case inside the
+Immune System suite (a test case, a contract check, a policy rule, or a
+schema validation).</p>
+<h2 id="effector">Effector</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> A bounded transformation that proposes a
+patch/diff to the Terrain (or a Map surface) under constraints.</p>
+<h2 id="sensor">Sensor</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> A read-only measurement of the Terrain
+that emits structured signals (counts, diffs, failing invariants,
+hotspots).</p>
+<h2 id="mission-object">Mission Object</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> Typed intent and state: goal, scope,
+constraints, budgets, quality gate, fallbacks, telemetry, plus lifecycle
+fields (for example <code>status</code> and <code>completed_at</code>).
+A persistent artifact (YAML/JSON) that acts as an executable pull
+request and the state of record for one unit of work.</p>
+<h2 id="judge">Judge</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> Consumes validator signals + evidence and
+decides the next move.</p>
+<h2 id="adaptation-state-machine-asm">Adaptation State Machine
+(ASM)</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> The allowed moves after Judgement:</p>
+<ul>
+<li><p><strong>Revert</strong>: roll back the diff.</p></li>
+<li><p><strong>Iterate</strong>: try again with refined context or
+tighter constraints.</p></li>
+<li><p><strong>Update Environment</strong>: change the tools or Physics
+(add a validator, tighten a budget, fix a missing extractor).</p></li>
+<li><p><strong>Escalate</strong>: hand control to a human for a policy
+decision.</p></li>
+</ul>
+<p><strong>Why it matters</strong> Explicit state transitions make loops
+deterministic and finite: no silent failure modes, no infinite retries,
+no “keep going until it feels done.”</p>
+<h2 id="agent">Agent</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> A model running inside a constrained
+environment with explicit Tools, Physics, and a Ledger. It does not
+“want” anything; it executes a loop.</p>
+<h2 id="engine">Engine</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> The full SDaC system: substrate + Sensors
++ Effectors + Immune System + Judge + Ledger. The Agent (model) is one
+component inside the Engine, not the system itself.</p>
+<h2 id="the-three-tier-frame-substrate-loop-governance">The Three-Tier
+Frame (Substrate → Loop → Governance)</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A compact frame for SDaC systems:
+Substrate (Map/Terrain/Ledger + Physics + Context Graph), Loop
+(Deterministic Sandwich + feedback-driven refinement), and Governance
+(blast-radius limits + protected graders).</p>
+<p><strong>Why it matters</strong> It’s a completeness check: if you’re
+missing a layer, autonomy fails in a predictable way.</p>
+<h2 id="meta-pattern-dont-chat-compile">Meta-Pattern: Don’t Chat,
+Compile</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Shift interaction from ephemeral chat to
+executable artifacts: Missions, deterministic runners, diffs, and
+logs.</p>
+<p><strong>Why it matters</strong> It makes intent reproducible and
+makes provenance cheap.</p>
+<h2 id="meta-pattern-physics-is-law">Meta-Pattern: Physics is Law</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> The stance that Physics is enforced,
+binary, and non-bypassable. If a change fails Physics, it does not
+exist.</p>
+<p><strong>Why it matters</strong> Autonomy exploits loopholes. “Law”
+closes them.</p>
+<h2 id="meta-pattern-skeleton-first-rule">Meta-Pattern: Skeleton-First
+Rule</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Extract structure deterministically;
+generate prose stochastically.</p>
+<p>In practice: build Maps on a skeleton of facts computed by Sensors
+(deterministic extractors: AST-extracted signatures, routes, schemas,
+inventories). The model is allowed to add “flesh” (descriptions,
+formatting, bounded implementation) but must not invent the
+skeleton.</p>
+<p><strong>Why it matters</strong> If the model is allowed to generate
+structure, it can invent facts and feed them back into the loop as
+“context.” Over time, the system converges on a self-consistent story
+instead of reality.</p>
+<p><strong>Mechanism</strong> Treat skeleton mismatch as a hard failure:
+re-extract the skeleton from the proposed Map and require exact match
+against the Sensor output.</p>
+<h2 id="map-contamination">Map Contamination</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> The failure mode where generation
+contaminates what later steps treat as extracted fact: invented skeleton
+facts enter the Map, then reappear as “authoritative context” in later
+runs.</p>
+<p><strong>Why it matters</strong> It corrupts the Ledger with plausible
+fiction. Validators and Judges can’t reliably debug or govern a system
+whose context is no longer grounded in the Terrain.</p>
+<h2 id="meta-pattern-recursion">Meta-Pattern: Recursion</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> The same toolchain used by humans is used
+by maintenance loops (Dream Daemon emitting Missions, the loop
+validating itself under Immutable Infrastructure boundaries).</p>
+<p><strong>Why it matters</strong> It turns maintenance into a pipeline
+instead of a calendar reminder.</p>
+<h2 id="stochastic-drift">Stochastic Drift</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Variance in output and behavior under the
+same Mission Object and context slice.</p>
+<p><strong>Why it matters</strong> Drift is the default. The question is
+not “how do I remove drift?” but “how do I constrain it so it becomes
+safe to integrate?”</p>
+<h2 id="drift-coefficient">Drift Coefficient</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A simple metric for measuring stochastic
+variance across repeated runs of the same Mission Object:</p>
+<p><code>drift_coefficient = unique_diffs / total_runs</code></p>
+<p><strong>Why it matters</strong> It turns drift into a measurable
+system property. You can set thresholds, compare changes, and track
+whether your Physics is actually reducing variance.</p>
+<h2 id="ouroboros-protocol">Ouroboros Protocol</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> The iterative loop:
+<code>Write → Judge → Refine</code> until convergence or a circuit
+breaker. Refine is a constrained mutation step in response to a specific
+failure signal, producing a smaller, cleaner diff.</p>
+<h2 id="convergence">Convergence</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> The state where the loop produces an
+output that passes Physics and satisfies the Mission Object’s acceptance
+criteria. The opposite is thrashing: iteration count goes up, but errors
+do not decrease.</p>
+<p><strong>Why it matters</strong> It lets you distinguish productive
+loops (moving toward PASS) from waste (spinning without progress), and
+it gives you a clear stop condition.</p>
+<h2 id="attractor">Attractor</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> System geometry for “Done”: an attractor
+is the region of solution space where your Immune System is satisfied
+(the candidate parses cleanly, stays in scope, respects budgets, and
+passes every Validator).</p>
+<p>You can think of it as a “valley” the loop settles into once the
+constraints are well-posed.</p>
+<p><strong>Why it matters</strong> It turns thrashing from “bad luck”
+into a debuggable failure:</p>
+<ul>
+<li>If the attractor is too flat (constraints too loose), the loop
+wanders and you get churn.</li>
+<li>If no attractor exists (constraints too tight or contradictory),
+<code>PASS</code> is not reachable and circuit breakers should
+fire.</li>
+</ul>
+<h2 id="circuit-breakers">Circuit Breakers</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What they are</strong> Hard stop conditions that keep loops
+finite: max iterations, max wall-clock, max diff size, min progress.</p>
+<h2 id="review-budget">Review Budget</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A cap on human review throughput
+allocated to autonomy (for example max open agent PRs, max agent PRs per
+day, diff size limits, and staleness windows).</p>
+<p><strong>Why it matters</strong> When the review queue collapses,
+governance becomes rubber-stamping. Review Budget turns “review
+throughput is the bottleneck” into a first-class constraint you can
+enforce.</p>
+<h2 id="structured-error-objects-signal-rich-failure">Structured Error
+Objects (Signal-Rich Failure)</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What they are</strong> Machine-readable failures (file path,
+line, error code, failing validator, suggested fix) rather than vague
+strings.</p>
+<p><strong>Why they matter</strong> The cost of a loop is inversely
+proportional to the precision of the Judge.</p>
+<h2 id="feedback-injection">Feedback Injection</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Feeding the exact failure signal (stderr,
+linter output, failing test lines) back into the next iteration —
+ideally normalized into Structured Error Objects.</p>
+<p><strong>Why it matters</strong> It turns “try again” into targeted
+correction.</p>
+<h2 id="quarantine">Quarantine</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A designated directory pattern (for
+example <code>.sdac/workflow-quarantine/</code>) where failed attempts
+are archived with their diffs, logs, and validator output instead of
+being deleted.</p>
+<p><strong>Why it matters</strong> It preserves useful fragments for
+manual recovery or analysis without re-running expensive model
+calls.</p>
+<h2 id="salvage-protocol">Salvage Protocol</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A loss-aversion mechanism: the Quarantine
+directory pattern plus the habit (and tooling) to search it and recover
+useful fragments from failed runs.</p>
+<h2 id="intent-architecture">Intent Architecture</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Engineering how intent is captured,
+versioned, and executed: Mission Objects + Maps + Directives compiled
+into bounded diffs under non-bypassable Physics.</p>
+<p><strong>Why it matters</strong> If intent is implicit or scattered,
+autonomy becomes unsafe and un-auditable. Intent Architecture makes the
+“what” replayable; Context Architecture makes the “evidence”
+admissible.</p>
+<h2 id="context-architecture">Context Architecture</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Engineering how context is selected,
+structured, and bounded so a model can act deterministically.</p>
+<h2 id="branching-factor-rule-of-seven">Branching Factor (Rule of
+Seven)</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A simple topology heuristic for
+Map/Terrain structure and Context Graph slices: aim for ~7 (±2) siblings
+per conceptual layer (directory children, heading siblings, grouped
+constraints).</p>
+<p><strong>Why it matters</strong> Too high and you get junk drawers
+(signal dilution). Too low and you get rabbit holes (token waste on
+traversal). A healthy branching factor keeps slices queryable and
+reviewable.</p>
+<p><strong>Mechanism</strong> Measure fan-out deterministically and lint
+it:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Directory fan-out: immediate children at this layer</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> services/api <span class="at">-maxdepth</span> 1 <span class="at">-mindepth</span> 1 <span class="at">-print</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Doc fan-out: sibling sections at this layer</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">rg</span> <span class="at">-n</span> <span class="st">&#39;^### &#39;</span> docs/feature_x.md <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<h2 id="context-graph">Context Graph</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A queryable topology of the codebase.
+Nodes represent units (apps, packages, modules, surfaces) and carry
+identity (language, framework, build tooling). Edges represent
+dependencies and contracts. Slices are derived deterministically for one
+task.</p>
+<h2 id="context-packet">Context Packet</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A Mission-specific context bundle derived
+from the Context Graph: anchor nodes, included Map/Terrain surfaces,
+excluded surfaces with reasons, budgets, and provenance (commit hash,
+extractor/tool versions, and a graph snapshot identifier).</p>
+<p><strong>Why it matters</strong> The packet is what the model actually
+sees. It makes context selection auditable and reproducible.</p>
+<h2 id="directives">Directives</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Human-authored behavioral laws for the
+Agent (for example <code>agent_directives.md</code>). Unlike Physics
+(enforced mechanically), Directives are enforced by the agent
+instruction layer and review policy. They define “who you are” and “how
+you act,” not just what to build.</p>
+<p><strong>Why it matters</strong> They cover constraints that are hard
+to validate mechanically (tone, style, approach) but still critical for
+output quality and operator trust.</p>
+<h2 id="driver-pattern">Driver Pattern</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A translation layer that decouples intent
+from mechanism. The Mission says “run tests,” and the system selects how
+(<code>pytest</code>, <code>vitest</code>, <code>mvn test</code>) based
+on the repository substrate.</p>
+<p><strong>Why it matters</strong> It keeps Missions portable across
+stacks and prevents tool-tour prompting (“use vitest”) from leaking into
+intent.</p>
+<h2 id="map-updater">Map-Updater</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Sense → Normalize → Compare → Propose
+patches to keep Map surfaces synchronized with the Terrain.</p>
+<h2 id="ci-gate-mapterrain-sync">CI Gate (Map–Terrain Sync)</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Operational enforcement: divergence
+between Map and Terrain becomes a build failure, identical to a syntax
+error.</p>
+<h2 id="mission-gate">Mission Gate</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> A CI check that runs a Mission’s
+acceptance criteria (Physics) without running the model. It answers:
+“Would this diff be admissible?” independent of who authored it.</p>
+<p><strong>Why it matters</strong> It decouples Validation from
+Generation and gives you an impartial judge for both human and AI
+changes.</p>
+<h2 id="cache">Cache</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Crystallized state (snapshots of slices,
+reports, and derived views) to avoid re-computation and preserve
+replayability.</p>
+<h2 id="provenance">Provenance</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> The metadata trail that makes a run
+reproducible: commit hash, context slice identifiers, tool versions,
+Mission Object ID, timestamps, and validator versions.</p>
+<p><strong>Why it matters</strong> Without provenance, you can’t
+reliably reproduce failures or prove that a loop ran under the
+constraints you think it did.</p>
+<h2 id="immutable-infrastructure">Immutable Infrastructure</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> Protected paths and pipelines that grade
+and govern the system (validators, CI, policy). The system can propose
+changes, but cannot merge them without human approval.</p>
+<h2 id="scope-guard">Scope Guard</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> Blast-radius control enforced by the
+system: the agent is only allowed to write to an explicit allowlist of
+paths (the Mission scope), with all other paths denied.</p>
+<p><strong>Why it matters</strong> It prevents scope leak and makes
+autonomy safe enough to run unattended.</p>
+<h2 id="ratchet">Ratchet</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> Monotonic quality metrics: metric_new ≥
+metric_old for specific guardrail metrics (coverage floors, security
+gates, policy boundaries).</p>
+<h2
+id="neuroplasticity-safe-self-modification-capability">Neuroplasticity
+(Safe Self-Modification Capability)</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> The system-level capability to absorb
+refactorings and other self-modifications without collapsing into
+regressions.</p>
+<p>Refactoring is the action. Neuroplasticity is the capability.</p>
+<p><strong>Why it matters</strong> Without this capability, autonomy
+turns into churn: the system can change itself, but cannot reliably stay
+correct, safe, or reversible as it changes.</p>
+<p><strong>Mechanisms (how you build it)</strong></p>
+<ul>
+<li>Immutable Infrastructure (protect graders and policies).</li>
+<li>Scope Guard + diff budgets (limit blast radius).</li>
+<li>Mission Gate (validate acceptance criteria without the model).</li>
+<li>Ratchet metrics (no silent backsliding).</li>
+<li>Rollbacks and circuit breakers (stop and revert when progress
+stalls).</li>
+</ul>
+<h2 id="dream-manifest">Dream Manifest</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> Measurable maintenance targets: an
+entropy backlog expressed as concrete work selectors.</p>
+<h2 id="dream-daemon">Dream Daemon</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> Scheduled background maintenance. Most
+teams start with the “90% solution”: human-approved scheduled runs.</p>
+<h2 id="automated-refactoring-under-guards">Automated Refactoring Under
+Guards</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> Measure → Mutate → Measure →
+Commit/Revert under strict Validators, blast-radius limits, and
+Immutable Infrastructure boundaries.</p>
+<h2 id="hofstadter-bridge">Hofstadter Bridge</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> The boundary where documentation becomes
+executable constraints: the Map is no longer advisory; it is
+enforced.</p>
+<h2 id="mirror">Mirror</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> A limit case: a system can treat its own
+book/spec as an input to its maintenance and governance loops.</p>
+<h2 id="translation-guide-one-time-bridge-then-use-canon">Translation
+guide (one-time bridge, then use canon)</h2>
+<ul>
+<li><p><strong>Immune System</strong> → suite of validators (including
+tests)</p></li>
+<li><p><strong>Effector</strong> → transformation pipeline / mutation
+operator</p></li>
+<li><p><strong>Map/Terrain</strong> →
+specification/implementation</p></li>
+<li><p><strong>Mission Object</strong> → typed change request</p></li>
+<li><p><strong>Neuroplasticity</strong> → safe self-modification
+capability</p></li>
+</ul>
 
   </main>
 
@@ -67,7 +494,7 @@
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>efb0c409c86b</code>
+      Version: <code>bc8d23989366</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

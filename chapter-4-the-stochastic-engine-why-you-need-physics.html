@@ -41,23 +41,93 @@
 
   <main id="main" class="content">
     <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">4 min read</span></div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 <h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
 – The Stochastic Engine (Why You Need Physics)</h1>
+<p>Before we talk about drift, a quick recap from Part I:</p>
+<ul>
+<li><strong>Terrain:</strong> what runs (code, configs, runtime
+behavior).</li>
+<li><strong>Map:</strong> a versioned intent surface derived from that
+Terrain (docs, specs, inventories).</li>
+</ul>
+<h2 id="the-fractal-structure">The Fractal Structure</h2>
+<p>Map and Terrain aren’t just two layers—they nest.</p>
+<p>What counts as Terrain at one level becomes the Map for the level
+above. A function is Terrain to the developer writing it, but that
+function is part of a module, and the module is Map for the service that
+consumes it. The service is Terrain to the team that owns it, but Map to
+the platform team orchestrating multiple services.</p>
+<p>This continues in both directions:</p>
+<ul>
+<li><strong>Zoom in:</strong> A single function has its own Map (the
+docstring, the type signature, the intent) and Terrain (the
+implementation, the actual behavior).</li>
+<li><strong>Zoom out:</strong> An organization has its own Map
+(architecture diagrams, team charters, strategy docs) and Terrain (the
+running systems, the actual workflows, the emergent behavior).</li>
+</ul>
+<p>SDaC works at every level because the pattern is the same: explicit
+intent (Map), validated reality (Terrain), and a loop that keeps them
+aligned.</p>
+<pre class="mermaid"><code>graph TB
+    subgraph &quot;Organization Level&quot;
+        O_Map[&quot;Strategy Docs&lt;br/&gt;(Map)&quot;]
+        O_Terrain[&quot;Running Systems&lt;br/&gt;(Terrain)&quot;]
+    end
+
+    subgraph &quot;Service Level&quot;
+        S_Map[&quot;API Contracts&lt;br/&gt;(Map)&quot;]
+        S_Terrain[&quot;Deployed Services&lt;br/&gt;(Terrain)&quot;]
+    end
+
+    subgraph &quot;Module Level&quot;
+        M_Map[&quot;Type Signatures&lt;br/&gt;(Map)&quot;]
+        M_Terrain[&quot;Implementations&lt;br/&gt;(Terrain)&quot;]
+    end
+
+    subgraph &quot;Function Level&quot;
+        F_Map[&quot;Docstring + Signature&lt;br/&gt;(Map)&quot;]
+        F_Terrain[&quot;Function Body&lt;br/&gt;(Terrain)&quot;]
+    end
+
+    O_Terrain --&gt; S_Map
+    S_Terrain --&gt; M_Map
+    M_Terrain --&gt; F_Map
+
+    style O_Map fill:#e1f5fe
+    style S_Map fill:#e1f5fe
+    style M_Map fill:#e1f5fe
+    style F_Map fill:#e1f5fe
+    style O_Terrain fill:#fff3e0
+    style S_Terrain fill:#fff3e0
+    style M_Terrain fill:#fff3e0
+    style F_Terrain fill:#fff3e0</code></pre>
+<p>The arrows show the recursion: each level’s Terrain becomes the next
+level’s Map. This is why SDaC scales—you’re not managing one loop,
+you’re managing a fractal of loops, each with the same
+validate-before-trust structure.</p>
+<p>This also explains why “just document everything” fails.
+Documentation that doesn’t nest—that tries to capture all levels in one
+flat Map—becomes unmanageable. The fractal structure lets you work at
+the level you’re at, trusting that adjacent levels have their own
+Map/Terrain alignment.</p>
+<p>Now let’s zoom back to a small, bounded surface and watch drift
+appear.</p>
 <p>Here’s what happens when you take the Chapter 1 Map/Terrain sync loop
 and swap the deterministic Effector for a stochastic one.</p>
 <p><strong>Run 1:</strong></p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Public Interfaces</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`normalize_country(country)`</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_tax(amount, country, rate)`</span></span></code></pre></div>
-<p><strong>Run 2:</strong></p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Public Interfaces</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`normalize_country(country: str)`</span> — Normalize an input country string.</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_tax(amount: float, country: str, rate: float)`</span> — Compute tax for an amount.</span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`normalize_country(country)`</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_tax(amount, country, rate)`</span></span></code></pre></div>
+<p><strong>Run 2:</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Public Interfaces</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`normalize_country(country: str)`</span> — Normalize an input country string.</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_tax(amount: float, country: str, rate: float)`</span> — Compute tax for an amount.</span></code></pre></div>
 <p>Both are “reasonable.” If your only validators are “valid Markdown”
 and “the doc mentions the right function names,” both pass. But they’re
 different: different signature surfaces, extra prose, different
@@ -110,15 +180,15 @@ budget).</li>
 the patch is admissible under your Validators.</li>
 </ul>
 <p><strong>One simple proxy: count unique diffs</strong></p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace `run_effector_once` with your one-shot, diff-emitting command.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The only rule: every run starts from the same baseline state.</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">10</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> checkout <span class="at">--</span> product/docs/architecture.md</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">run_effector_once</span> <span class="op">&gt;</span> <span class="st">&quot;run_</span><span class="va">${i}</span><span class="st">.diff&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;FAIL run=</span><span class="va">${i}</span><span class="st">&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">shasum</span> <span class="st">&quot;run_</span><span class="va">${i}</span><span class="st">.diff&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39; &#39;</span> <span class="at">-f1</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace `run_effector_once` with your one-shot, diff-emitting command.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The only rule: every run starts from the same baseline state.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">10</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> checkout <span class="at">--</span> product/docs/architecture.md</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">run_effector_once</span> <span class="op">&gt;</span> <span class="st">&quot;run_</span><span class="va">${i}</span><span class="st">.diff&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;FAIL run=</span><span class="va">${i}</span><span class="st">&quot;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">shasum</span> <span class="st">&quot;run_</span><span class="va">${i}</span><span class="st">.diff&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39; &#39;</span> <span class="at">-f1</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
 <p><strong>Example summary (your numbers will vary):</strong></p>
 <pre class="text"><code>mission_id=doc_sync:public_interfaces runs=10
 unique_diffs=4
@@ -238,15 +308,15 @@ you only learn the rules were violated after something breaks.</p></li>
 </ol>
 <p>Compare the two approaches:</p>
 <p><strong>Instruction-string approach:</strong></p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>instructions <span class="op">=</span> load_text(<span class="st">&quot;public_interfaces_instructions.txt&quot;</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> model.generate(instructions)  <span class="co"># hope it followed the rules</span></span></code></pre></div>
-<p><strong>Physics approach:</strong></p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>context <span class="op">=</span> extract_public_signatures(<span class="st">&quot;product/src/&quot;</span>)  <span class="co"># deterministic extraction</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>template <span class="op">=</span> load_template(<span class="st">&quot;public_interfaces.jinja2&quot;</span>) <span class="co"># structure is defined</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>draft <span class="op">=</span> model.fill(template, context)            <span class="co"># bounded generation</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>validate_map_alignment(draft)                    <span class="co"># enforced, not hoped for</span></span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>instructions <span class="op">=</span> load_text(<span class="st">&quot;public_interfaces_instructions.txt&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> model.generate(instructions)  <span class="co"># hope it followed the rules</span></span></code></pre></div>
+<p><strong>Physics approach:</strong></p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>context <span class="op">=</span> extract_public_signatures(<span class="st">&quot;product/src/&quot;</span>)  <span class="co"># deterministic extraction</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>template <span class="op">=</span> load_template(<span class="st">&quot;public_interfaces.jinja2&quot;</span>) <span class="co"># structure is defined</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>draft <span class="op">=</span> model.fill(template, context)            <span class="co"># bounded generation</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>validate_map_alignment(draft)                    <span class="co"># enforced, not hoped for</span></span></code></pre></div>
 <p>Instructions are suggestions. Physics are constraints.</p>
 <h2 id="why-this-matters-for-your-loop">Why This Matters for Your
 Loop</h2>
@@ -311,7 +381,7 @@ drifts.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>efb0c409c86b</code>
+      Version: <code>bc8d23989366</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
