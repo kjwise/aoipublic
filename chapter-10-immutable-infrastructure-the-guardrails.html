@@ -303,9 +303,10 @@ required.</li>
 <li><strong>Follow-up:</strong> post-mortem required within 24
 hours.</li>
 </ol>
-<p>If you want a concrete <code>BREAK_GLASS.md</code> template and CI
-examples, see the companion repo at
-<code>github.com/kjwise/aoi_code</code>.</p>
+<p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
+a <code>governance/BREAK_GLASS.md</code> template and a CI workflow
+(<code>governance/ci/break_glass_checker.yml</code>) that demonstrates
+how to enforce this.</p>
 <p>This procedure makes it <em>possible</em> to act fast in a crisis,
 but ensures it’s not done lightly and always leaves an audit trail for
 accountability and learning.</p>
@@ -347,8 +348,9 @@ merging.</p></li>
 need: “if kill switch is active, agent PRs can’t merge.” Implement it
 however your platform supports (feature flags, CI checks, required
 status checks).</p>
-<p>If you want a concrete CI snippet for the branch-based kill switch,
-see the companion repo at <code>github.com/kjwise/aoi_code</code>.</p>
+<p>The companion repo includes a
+<code>governance/ci/agent_merge_blocker.yml</code> workflow that
+implements a branch-based kill switch.</p>
 <p>Immutable infrastructure, protected paths, and emergency controls are
 the bedrock of safe SDaC. They establish the boundaries within which
 autonomous agents can operate, ensuring that innovation doesn’t come at
@@ -412,7 +414,7 @@ auditability and post-mortem requirements.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

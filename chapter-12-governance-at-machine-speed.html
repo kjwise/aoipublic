@@ -225,50 +225,65 @@ critical feedback mechanism that tells you if your governance framework
 is working as intended.</p>
 <h2 id="field-report-near-miss-and-how-governance-caught-it">Field
 Report: Near-Miss and How Governance Caught It</h2>
-<p>Here’s how a well-implemented governance system can prevent a major
-incident.</p>
-<p>A large FinTech company was experimenting with a “Performance Tuning
-Agent” (PTA) for one of its internal microservices,
-<code>TradeProcessor</code>. The PTA’s goal was to identify and
-implement minor code optimizations to reduce latency. Its scope was
-strictly limited to <code>/services/trade-processor/src/**</code>.</p>
-<p>One Tuesday afternoon, the PTA submitted a pull request. The change
-seemed innocuous—a small refactor of a utility function. However, the
-automated CI/CD pipeline, augmented with policy-as-code, immediately
-rejected the PR.</p>
+<p>Here’s a real-world example of how a well-implemented governance
+system can prevent a major incident. The <code>aoi_code</code>
+repository includes a GitHub Actions workflow template
+(<code>governance/ci/agent_merge_blocker.yml</code>) that demonstrates a
+simple but powerful governance control: a “kill switch” branch.</p>
+<p><strong>The Scenario:</strong></p>
+<p>A team is using an autonomous agent to automatically refactor parts
+of their codebase. The agent is configured to open pull requests, which
+are then automatically merged if all CI checks pass. To maintain
+control, the team has a policy: if a branch named
+<code>disable-auto-merge</code> exists, no agent-authored PRs can be
+merged.</p>
 <p><strong>The Governance Check:</strong></p>
-<ol type="1">
-<li><p><strong>Policy:</strong> The company had a strict policy: “Agents
-operating on <code>/services/trade-processor/**</code> are forbidden
-from modifying files in <code>/shared-libraries/crypto-utils/**</code>.”
-This policy was enforced by an OPA Gatekeeper rule integrated into the
-PR validation step.</p></li>
-<li><p><strong>Evidence:</strong> The PTA’s proposed PR included changes
-not only to <code>/services/trade-processor/src/optimizer.py</code> but
-also, inadvertently, to
-<code>/shared-libraries/crypto-utils/encryption_helpers.py</code>. The
-agent’s complex optimization algorithm, attempting to inline a function
-for performance, had reached across service boundaries.</p></li>
-<li><p><strong>Audit Loop:</strong> The Gatekeeper rule identified the
-change to <code>encryption_helpers.py</code> as a violation of the blast
-radius policy. The PR was automatically blocked with a clear message:
-“Policy Violation: Agent <code>PTA-TradeProcessor-v1.2</code> attempted
-to modify protected library
-<code>/shared-libraries/crypto-utils/</code>. Change rejected.”</p></li>
-</ol>
+<p>The <code>agent_merge_blocker.yml</code> workflow implements this
+policy:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># governance/ci/agent_merge_blocker.yml</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Agent Merge Blocker</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">opened</span><span class="kw">,</span><span class="at"> synchronize</span><span class="kw">,</span><span class="at"> reopened</span><span class="kw">]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">check-kill-switch</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">fetch-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch branch exists</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>          set -euo pipefail</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>          branch=&quot;disable-auto-merge&quot;</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>          if git ls-remote --exit-code --heads origin &quot;$branch&quot; &gt;/dev/null; then</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            echo &quot;::error::Kill switch &#39;$branch&#39; found; autonomous merges suspended.&quot;</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            exit 1</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>          fi</span></code></pre></div>
+<p>This workflow runs on every pull request. It checks for the existence
+of the <code>disable-auto-merge</code> remote branch. If the branch is
+found, the workflow fails, which in turn blocks the pull request from
+being merged.</p>
+<p><strong>The Near-Miss:</strong></p>
+<p>One day, a developer pushes the <code>disable-auto-merge</code>
+branch to temporarily halt automated changes while they investigate a
+production issue. A few minutes later, the refactoring agent, unaware of
+the situation, submits a new pull request with a set of optimizations.
+The PR passes all tests and linting checks.</p>
 <p><strong>Outcome:</strong></p>
-<p>The issue was caught instantly, <em>before</em> any human review,
-<em>before</em> it was merged, and <em>certainly before</em> it could
-impact production. The change to <code>crypto-utils</code> might have
-been benign, but unauthorized modifications to core shared libraries
-posed a significant security and stability risk across the entire
-platform.</p>
-<p>The audit logs clearly showed which agent made the attempt, what the
-proposed change was, and which policy was violated. This allowed the
-engineering team to review the PTA’s internal logic, fine-tune its
-scope, and prevent similar attempts in the future. The incident
-reinforced the team’s trust in their automated governance, proving that
-machine-speed changes could be tamed with deterministic controls.</p>
+<p>Without the governance check, the PR would have been automatically
+merged, potentially complicating the ongoing production investigation.
+However, the <code>Agent Merge Blocker</code> workflow immediately
+fails, adding a red ‘X’ to the pull request and a clear error message:
+<code>::error::Kill switch 'disable-auto-merge' found; autonomous merges suspended.</code></p>
+<p>The merge is blocked. The on-call engineer can continue their
+investigation without interruption. Once the issue is resolved and the
+kill switch branch is deleted, the agent’s PR can be safely reviewed and
+merged. This simple, deterministic control, enforced by the CI system,
+provides a crucial safety layer that allows humans to remain in ultimate
+control of the system.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
@@ -316,7 +331,7 @@ This starts building your audit trail.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

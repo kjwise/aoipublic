@@ -152,8 +152,11 @@ dependencies.</li>
 <li><strong>Prune:</strong> one failing case, one-hop edges, strict
 budgets.</li>
 </ul>
-<p>If you want runnable extractors and storage options, see the
-companion repo at <code>github.com/kjwise/aoi_code</code>.</p>
+<p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
+<code>make graph</code> and <code>make slice</code> targets that
+demonstrate this. <code>build_context_graph.py</code> is a simple
+extractor, and <code>slice_context_graph.py</code> consumes the graph to
+produce a bounded context packet.</p>
 <h2 id="how-to-slice-a-context-graph-for-deterministic-action">How to
 Slice a Context Graph for Deterministic Action</h2>
 <p>The goal of slicing is precision: the minimum necessary context to
@@ -245,8 +248,9 @@ missing a sub-abstraction. If you’re at 1, flatten.</li>
 <li>If you’re consistently above ~10, create a sub-abstraction; if
 you’re at 1, flatten.</li>
 </ul>
-<p>If you want to enforce this as Physics, lint it (see the companion
-repo at <code>github.com/kjwise/aoi_code</code> for examples).</p>
+<p>The companion repo includes a <code>make branching-factor</code>
+target that runs <code>lint_branching_factor.py</code> to demonstrate
+this kind of linting.</p>
 <p>This layered approach ensures that the LLM receives relevant context
 in a structure that guides deterministic behavior, reducing the surface
 area for stochastic generation.</p>
@@ -378,9 +382,9 @@ validators:
   - diff_budget(files&lt;=1, lines&lt;=50)</code></pre>
 <p>Now the Judge has the contract, the symptom, and the exact edit
 surface. The model is not “being smart”; it’s being constrained.</p>
-<p>If you want the full worked example (test, buggy implementation, and
-slice builder), see the companion repo at
-<code>github.com/kjwise/aoi_code</code>.</p>
+<p>The <code>examples/tax_service</code> directory in the companion repo
+provides a full, runnable example of this, including the test, a buggy
+implementation, and the tools to build and slice its context graph.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <p>Start thinking about the context you provide to your own GenAI
@@ -423,7 +427,7 @@ strays from the core task.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

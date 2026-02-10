@@ -525,8 +525,11 @@ etc.) to construct the instruction string.</p>
 <p>This approach guarantees a deterministic mapping of your Mission
 Object slice to template parameters.</p>
 <p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
-a small runnable example of this: a structured context object + a
-template that renders a diff-only request for the doc-sync surface.</p>
+a small runnable example of this. The <code>make request</code> target
+uses a structured context object
+(<code>build/doc_sync_context.json</code>) and a template
+(<code>factory/templates/doc_sync_diff_request.txt</code>) to render a
+diff-only request for the doc-sync surface.</p>
 <p>This approach ensures that:</p>
 <ul>
 <li>Required fields (task id, target path, allowed edit region,
@@ -595,7 +598,7 @@ does.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

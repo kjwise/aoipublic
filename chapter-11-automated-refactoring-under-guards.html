@@ -265,8 +265,11 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
 <p>The baseline files are updated only when a commit passes all
 ratchets. They become the new floor.</p>
-<p>If you want runnable ratchet checks (baseline capture + compare), see
-the companion repo at <code>github.com/kjwise/aoi_code</code>.</p>
+<p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
+<code>ratchet-check</code> and <code>ratchet-baseline</code> targets
+that demonstrate this. <code>ratchet_check.py</code> compares current
+metrics against a baseline, and <code>ratchet_baseline.py</code> updates
+the baseline.</p>
 <p>The deeper principle:</p>
 <p>A ratchet is a monotonic invariant—a property that can only move in
 one direction over the system’s lifetime. This is how you prevent drift
@@ -428,7 +431,7 @@ into the Measure → Mutate → Measure loop.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

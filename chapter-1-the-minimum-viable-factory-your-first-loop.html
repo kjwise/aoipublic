@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part I Build It The Weekend Sprint</div>
-<div class="chapter-meta"><span class="read-time">5 min read</span></div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 <h1 id="chapter-1-the-minimum-viable-factory-your-first-loop">Chapter 1
 – The Minimum Viable Factory (Your First Loop)</h1>
 <p>Build a tiny loop: Terrain → Effector → Map → Validator.</p>
@@ -69,19 +69,47 @@ stochastic Effector and keep everything else unchanged.</p>
 (recommended): run the companion code repo</h3>
 <p>All runnable code for MVF v0 lives in the companion repo:
 <code>kjwise/aoi_code</code> on GitHub.</p>
-<p>Clone or download it, then from the repo root:</p>
+<p>First, clone the repository and run the full loop:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/kjwise/aoi_code.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
-<p>You should see the validator print <code>map_terrain_sync=pass</code>
-and a small diff touching <code>product/docs/architecture.md</code>.</p>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clone the companion code repo</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/kjwise/aoi_code.git</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter the directory</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the sync + validate loop</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
+<p>This command will first run the <strong>Effector</strong>
+(<code>sync_public_interfaces.py</code>) to update the documentation
+Map, then run the <strong>Validator</strong>
+(<code>validate_map_alignment.py</code>) to confirm the Map and Terrain
+are aligned.</p>
+<p>You should see the following output, including a diff showing the
+change to the documentation and a final <code>pass</code> signal from
+the validator:</p>
+<pre class="text"><code>python3 factory/tools/sync_public_interfaces.py --src product/src --doc product/docs/architecture.md --apply
+--- product/docs/architecture.md
++++ product/docs/architecture.md
+@@ -2,7 +2,9 @@
+ 
+ ## Public Interfaces
+ 
+-- (generated)
++- `calculate_tax(amount, country, rate)`
++
++- `normalize_country(country)`
+ 
+ ## Notes
+ 
+[effector] applied patch to product/docs/architecture.md
+python3 factory/tools/validate_map_alignment.py --src product/src --doc product/docs/architecture.md
+[validator] map_terrain_sync=pass</code></pre>
 <p>Run it a second time to confirm idempotence: the Effector should
 report <code>no drift detected</code> and the Validator should still
 pass.</p>
 <p>If you want to reset the demo between runs:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div>
 <p>If you want to read the implementation details, start here (in the
 companion repo):</p>
 <ul>
@@ -135,15 +163,26 @@ the hood without changing callers.</li>
 <h3 id="hardening-ladder-mvf-v0-v1-v2">Hardening ladder: MVF v0 → v1 →
 v2</h3>
 <p>The factory grows by adding Physics and governance, not by widening
-autonomy.</p>
+autonomy. This ladder provides a practical path from a simple,
+deterministic loop to a more robust, autonomous system.</p>
 <ul>
-<li><p><strong>MVF v0 (Weekend):</strong> Foreground loop, one narrow
-Effector, one Validator, one trace in Git.</p></li>
-<li><p><strong>MVF v1 (Week):</strong> Introduce explicit Mission
-Objects and bounded stochastic changes under hard gates.</p></li>
-<li><p><strong>MVF v2 (Month):</strong> Scheduled runs (Dream Daemon),
-Map-Updaters, and Immutable Infrastructure boundaries that protect
-graders and guardrails.</p></li>
+<li><p><strong>MVF v0 (Weekend):</strong> This is what you’ve just
+built. It’s a foreground loop with one narrow, deterministic Effector,
+one Validator, and a clear trace of its work in the Git Ledger. It
+proves the core mechanics are sound.</p></li>
+<li><p><strong>MVF v1 (Week):</strong> The next step is to introduce
+explicit <strong>Mission Objects</strong> (Chapter 7), which are
+structured, versionable requests that replace implicit CLI flags. This
+allows you to introduce bounded stochastic changes (i.e., using an LLM)
+within the same hard gates you’ve already established. The loop remains
+safe because the Physics haven’t changed.</p></li>
+<li><p><strong>MVF v2 (Month):</strong> With a reliable loop and
+explicit missions, you can now scale its operation. This involves
+scheduled runs via a <strong>Dream Daemon</strong> (Chapter 9) to
+perform background maintenance, building <strong>Map-Updaters</strong>
+(Chapter 8) to keep more complex documentation in sync, and establishing
+<strong>Immutable Infrastructure</strong> (Chapter 10) to create
+protected boundaries that even the system itself cannot change.</p></li>
 </ul>
 <h2 id="naming-the-parts-the-canon">Naming the parts (the canon)</h2>
 <p>You just ran an Effector and a Validator against a real boundary. In
@@ -225,20 +264,20 @@ knowing what a safe iteration looks like (also Chapter 13).</p>
 do this week</h2>
 <ol type="1">
 <li><p><strong>Run MVF v0 (recommended path):</strong></p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
-<p>If you want a clean baseline between runs:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div></li>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
+<p>If you want a clean baseline between runs:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div></li>
 <li><p><strong>Break it (create drift)</strong>:</p>
 <ul>
 <li><p>Add a new public function to
 <code>product/src/tax_calculator.py</code> (for example
 <code>def tax_rate(country: str) -&gt; float: ...</code>).</p></li>
 <li><p>Run only the validator:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> validate</span></code></pre></div></li>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> validate</span></code></pre></div></li>
 </ul>
 <p>It should fail with <code>missing_in_map=[...]</code>.</p></li>
 <li><p><strong>Fix it (restore alignment)</strong>:</p>
@@ -246,8 +285,8 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="
 <li><p>Run <code>make sync</code> and then <code>make validate</code>
 again.</p></li>
 <li><p>Inspect the diff:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div></li>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div></li>
 </ul>
 <p>If the diff touches more than you intended, treat it as a
 blast-radius failure. Appendix B has a quick diagnostic for “slice too
@@ -280,14 +319,14 @@ concrete diffs, and <code>pass/fail</code> gates.</p>
 </section>
 
   <nav class="page-nav">
-    <a class="prev-link" href="introduction">← Introduction</a>
+    <a class="prev-link" href="chapter-0-introduction">← Chapter 0 – Introduction</a>
     <a class="next-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter 2 – The Deterministic Sandwich (Your First Pattern) →</a>
   </nav>
 
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

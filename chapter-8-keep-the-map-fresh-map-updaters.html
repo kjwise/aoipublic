@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">7 min read</span></div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
 <h1 id="chapter-8-keep-the-map-fresh-map-updaters">Chapter 8 – Keep the
 Map Fresh (Map-Updaters)</h1>
 <p>Drift is the default state. Docs fall behind code. Specs lag behind
@@ -137,25 +137,71 @@ doc” for a system you can’t yet reason about.</p>
 <h3
 id="a-self-referential-map-updater-keep-agent-instructions-aligned">A
 self-referential Map-Updater: keep agent instructions aligned</h3>
-<p>This repository has a second class of Map surface: directory-level
-agent instructions. They are the local laws of motion—how to work in a
-directory safely, what commands to run, and what boundaries to
-respect.</p>
-<p>After a file changes, run a Map-Updater that proposes minimal updates
-to the instruction file in the same directory.</p>
-<p>It implements the loop in a pragmatic form:</p>
+<p>A powerful application of a Map-Updater is to keep its own operating
+instructions current. The <code>aoi_code</code> companion repository
+contains a file, <code>AGENTS.md</code>, which serves as a local
+instruction manual for both human developers and automated agents. It
+defines how to work within that directory, what commands are available,
+and what boundaries to respect.</p>
+<p>The <code>Makefile</code> itself is the Terrain—the source of truth
+for available commands. The <code>AGENTS.md</code> file is the Map. When
+the <code>Makefile</code> changes, the <code>AGENTS.md</code> file can
+drift.</p>
+<p>The <code>agents-suggest</code> target in the companion repo is a
+Map-Updater designed to solve this. It implements the loop in a
+pragmatic form:</p>
 <ol type="1">
-<li><strong>Sense:</strong> read the changed file and the existing
-instruction file (if any).</li>
-<li><strong>Normalize:</strong> trim large inputs and resolve which
-project profile applies to that path.</li>
-<li><strong>Propose:</strong> generate patch-style suggestions for the
-instruction file.</li>
-<li><strong>Emit:</strong> write suggestions under
-<code>build/update_agents/</code> for review.</li>
+<li><strong>Sense:</strong> It reads the output of
+<code>make help</code> to get the canonical list of commands.</li>
+<li><strong>Normalize:</strong> It parses the help text into a
+structured list of targets and descriptions.</li>
+<li><strong>Compare:</strong> It reads the current
+<code>AGENTS.md</code> and compares its command list to the one
+extracted from the <code>Makefile</code>.</li>
+<li><strong>Propose:</strong> It generates a patch file containing the
+exact changes needed to bring <code>AGENTS.md</code> into
+alignment.</li>
 </ol>
-<p>If you want a runnable example of this loop, see the companion repo
-at <code>github.com/kjwise/aoi_code</code>.</p>
+<p>Here is the loop in action. Running the command produces a patch file
+in the <code>build/</code> directory:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make agents-suggest</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/update_agents.py <span class="at">--path</span> Makefile</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[update_agents]</span> wrote patch suggestions to build/update_agents/update_agents_20260210T012549Z.patch</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[update_agents]</span> apply with: git apply <span class="op">&lt;</span>patchfile<span class="op">&gt;</span></span></code></pre></div>
+<p>The generated patch is a standard unified diff, making it easy to
+review and apply:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- AGENTS.md</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ AGENTS.md</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ -6,10 +6,24 @@</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> ## Commands</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">-(This section is intentionally incomplete. Run `make agents-suggest` to generate a patch that brings it back in sync with `make help`.)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="va">+This repo is designed to be run via `make` from the repo root.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">-- `make all`</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">-- `make test`</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make all` — (Ch1) sync + validate</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make sync` — (Ch1) propose/apply Map updates from Terrain</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make validate` — (Ch1) enforce Map/Terrain alignment</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make request` — (Ch2) render a diff-only request from template + context</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make drift` — (Ch4) measure diff variance from a stochastic effector</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make mission-dry-run` — (Ch5) print slice + validators + budgets</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make graph` — (Ch6) build a tiny context graph snapshot</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make slice` — (Ch6) emit a slice packet from an anchor</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make branching-factor` — (Ch6) lint fan-out heuristics</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make driver-demo` — (Ch7) resolve a driver from deterministic identity</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make agents-suggest` — (Ch8) propose updates to AGENTS.md (Map-Updater demo)</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make dream-scan` — (Ch9) read-only entropy scan (Depth 0)</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make test` — run local unit tests (stdlib unittest)</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make ratchet-check` — (Ch11) compare current metrics to baselines</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make ratchet-baseline` — (Ch11) update baselines from current metrics</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make clean` — remove build artifacts</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a> ## Notes</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a> </span></code></pre></div>
 <p>The important point is not the particular file name. The point is the
 direction: your terrain changed, so you update the Map that tells future
 operators how to move through that terrain.</p>
@@ -323,7 +369,7 @@ evidence to review.</li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+<div class="chapter-meta"><span class="read-time">7 min read</span></div>
 <h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
 – The Stochastic Engine (Why You Need Physics)</h1>
 <p>Before we talk about drift, a quick recap from Part I:</p>
@@ -190,13 +190,20 @@ diff.</li>
 </ol>
 <p>If you want a runnable script, see the companion repo at
 <code>github.com/kjwise/aoi_code</code> (drift measurement example).</p>
-<p><strong>Example summary (your numbers will vary):</strong></p>
-<ul>
-<li><code>runs=10</code></li>
-<li><code>unique_diffs=4</code></li>
-<li><code>failure_rate=20%</code> (2/10 exceeded circuit breakers)</li>
-<li><code>iterations_to_converge: p50=2 p90=6</code></li>
-</ul>
+<p>The companion repo includes a <code>drift</code> target that runs
+this experiment. It uses a <em>stochastic</em> effector
+(<code>stochastic_sync_public_interfaces.py</code>) that intentionally
+introduces variance in formatting, ordering, and content.</p>
+<p>Running it produces a summary like this:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make drift</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/measure_drift.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md <span class="at">--runs</span> 10</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">runs</span><span class="op">=</span>10 <span class="va">unique_diffs</span><span class="op">=</span>8 <span class="va">drift_coefficient</span><span class="op">=</span>0.800 <span class="va">failures</span><span class="op">=</span>0</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">example_unique_runs</span><span class="op">=</span>1, <span class="ex">2,</span> 3, 4, 5</span></code></pre></div>
+<p>This output tells us: - Out of 10 runs, we got 8 unique diffs. - The
+drift coefficient is a high 0.8, meaning the output is highly variable.
+- There were no outright failures (e.g., crashes), but the high drift
+means the surface is not stable.</p>
 <p>This is <strong>Stochastic Drift</strong> with a ruler next to it:
 you can measure it, budget it, and reduce it by tightening context
 selection and hardening validators.</p>
@@ -389,7 +396,7 @@ drifts.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

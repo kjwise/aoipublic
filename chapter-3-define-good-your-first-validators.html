@@ -246,9 +246,11 @@ deterministically fails with a type error at
 <li>Exit code <code>0</code> on success, non-zero on failure</li>
 </ul>
 <p>That exit code is the universal signal a runner needs to halt the
-loop. It’s also why MVF v0 works: in
-<code>github.com/kjwise/aoi_code</code>, <code>make validate</code> is a
-deterministic gate that can block integration without debate.</p>
+loop. It’s also why MVF v0 works: in the companion repo
+(<code>github.com/kjwise/aoi_code</code>), <code>make validate</code> is
+a deterministic gate that can block integration without debate. The
+<code>validate_map_alignment.py</code> script is a concrete example of a
+Validator that enforces a specific, hard rule.</p>
 <h2 id="failure-modes-false-positives-and-false-negatives">Failure
 Modes: False Positives and False Negatives</h2>
 <p>Once you have Validators, you’ll hit the two classic failure
@@ -469,7 +471,7 @@ validator, or making the selection logic explicit in
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

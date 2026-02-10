@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">5 min read</span></div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 <h1 id="chapter-9-the-dream-daemon-background-maintenance">Chapter 9 –
 The Dream Daemon (Background Maintenance)</h1>
 <p>We’ve explored how to build individual <code>Mission Objects</code>
@@ -125,15 +125,32 @@ specific:</p>
 <li>you stop doing maintenance only when something breaks</li>
 <li>you get a consistent stream of small, reviewable targets</li>
 </ul>
-<p><strong>Example output (signals as data):</strong></p>
-<pre class="text"><code>signal=coverage_low     file=services/billing/tax.py cov=58.0
-signal=complexity_high  file=services/payments/routing.py cc=22
-signal=duplication_high file=services/api/handlers.py dup=3.1</code></pre>
-<p>At Depth 0, the “Decide” step is simply ranking + budgeting the
-report: sort signals by severity, blast radius, and recency, then emit
-the top <span class="math inline"><em>N</em></span> with evidence.</p>
-<p>If you want a runnable Depth 0 scanner skeleton, see the companion
-repo at <code>github.com/kjwise/aoi_code</code>.</p>
+<p>The companion repo contains a <code>dream-scan</code> target that
+runs a simple, configurable entropy scan. It looks for functions with
+high cyclomatic complexity and files that are too long.</p>
+<p>By default, the repository is clean and produces no signals:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make dream-scan</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/dream_scan.py <span class="at">--root</span> .</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[dream]</span> no signals</span></code></pre></div>
+<p>However, if we temporarily lower the complexity threshold, we can see
+the scanner detect functions that are more complex than our new, lower
+standard:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python3 factory/tools/dream_scan.py <span class="at">--root</span> . <span class="at">--cc-threshold</span> 5</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/build_context_graph.py <span class="va">symbol</span><span class="op">=</span>main <span class="va">cc</span><span class="op">=</span>9</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/dream_scan.py <span class="va">symbol</span><span class="op">=</span>main <span class="va">cc</span><span class="op">=</span>9</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/lint_branching_factor.py <span class="va">symbol</span><span class="op">=</span>main <span class="va">cc</span><span class="op">=</span>5</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/mission_dry_run.py <span class="va">symbol</span><span class="op">=</span>main <span class="va">cc</span><span class="op">=</span>9</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/ratchet_check.py <span class="va">symbol</span><span class="op">=</span>main <span class="va">cc</span><span class="op">=</span>7</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/resolve_driver.py <span class="va">symbol</span><span class="op">=</span>_detect_language <span class="va">cc</span><span class="op">=</span>5</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/slice_context_graph.py <span class="va">symbol</span><span class="op">=</span>main <span class="va">cc</span><span class="op">=</span>7</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/stochastic_sync_public_interfaces.py <span class="va">symbol</span><span class="op">=</span>_rewrite_public_interfaces_block <span class="va">cc</span><span class="op">=</span>6</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/update_agents.py <span class="va">symbol</span><span class="op">=</span>_upsert_section <span class="va">cc</span><span class="op">=</span>6</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">signal</span><span class="op">=</span>complexity_high <span class="va">file</span><span class="op">=</span>factory/tools/update_agents.py <span class="va">symbol</span><span class="op">=</span>main <span class="va">cc</span><span class="op">=</span>6</span></code></pre></div>
+<p>At Depth 0, the “Decide” step is simply ranking and budgeting this
+report. You can sort these signals by severity, blast radius, or
+recency, and then emit the top N targets for human review.</p>
 <p>Then a human chooses one item and runs a normal SDaC loop (Ouroboros
 or a one-shot Refactor) against that bounded target, under the same
 Physics gates.</p>
@@ -236,7 +253,7 @@ human-approved.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

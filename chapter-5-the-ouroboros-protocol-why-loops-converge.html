@@ -291,8 +291,10 @@ should print:</p>
 <li>the validators that will gate the change</li>
 <li>an estimate of token/cost budget</li>
 </ul>
-<p>If you want a runnable CLI and sample outputs, see the companion repo
-at <code>github.com/kjwise/aoi_code</code>.</p>
+<p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
+a <code>mission-dry-run</code> target that demonstrates this. It reads a
+Mission Object and prints the slice, validators, and budgets without
+actually calling a model.</p>
 <h3 id="precedence-order-cheap-checks-first">Precedence Order (Cheap
 Checks First)</h3>
 <p>A practical check order:</p>
@@ -407,7 +409,7 @@ deterministic <code>Judge</code> drives the stochastic LLM.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ca026a996f17</code>
+      Version: <code>ea6bc11cc844</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
