@@ -1,52 +1,51 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part III Scale It From Loop to System</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part III Scale It From Loop to System</div>
 <div class="chapter-meta"><span class="read-time">9 min read</span></div>
 <h1 id="chapter-9-the-dream-daemon-background-maintenance">Chapter 9 –
 The Dream Daemon (Background Maintenance)</h1>
 <p>We’ve explored how to build individual <code>Mission Objects</code>
-to encapsulate intent (Chapter 7) and how <code>Map-Updaters</code> keep
-our system’s understanding of its environment fresh (Chapter 8). These
+to encapsulate intent (<a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>) and how <code>Map-Updaters</code> keep
+our system’s understanding of its environment fresh (<a class="chapter-link" href="chapter-8-keep-the-map-fresh-map-updaters#chapter-8-keep-the-map-fresh-map-updaters" title="Go to: Chapter 8">Chapter 8</a>). These
 mechanisms shine when triggered by explicit events: a code commit, a
 schema change, or a manual command. But many maintenance tasks aren’t
 tied to specific events; they’re about the slow accumulation of entropy.
@@ -55,7 +54,7 @@ diverge.</p>
 <p>This is where background maintenance comes in. For systems that
 evolve over months and years, you need mechanisms to systematically
 combat entropy, not just react to it.</p>
-<p>This chapter introduces the Dream Daemon as a
+<p>This chapter introduces the <a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a> as a
 <strong>pattern</strong>: a controller that turns entropy signals into
 bounded maintenance work. We’ll start at <strong>Depth 0</strong>
 (sensors only) and then outline deeper implementations you can grow
@@ -93,7 +92,7 @@ merges.</li>
 </ol>
 <p>The pattern stays the same. What changes is the depth of
 implementation: at Depth 0 you only Sense + Decide. A human performs
-Act. Verification still runs through the Immune System.</p>
+Act. Verification still runs through the <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a>.</p>
 <p>Dream reads both directions:</p>
 <ul>
 <li>It reads <strong>Terrain</strong> (code, metrics, drift signals) to
@@ -112,10 +111,10 @@ maintenance that is low risk and easy to verify. That is a task
 selection problem, not an agent problem.</p>
 <h3 id="a-practical-task-taxonomy">A practical task taxonomy</h3>
 <p>Not all maintenance work is daemon-shaped. A simple taxonomy:</p>
-<div class="line-block">Task category | Good Dream targets?<br />
+<div class="line-block">Task category | Good Dream targets?<br/>
 Why | |—|—|—| | Deterministic hygiene (formatters, lint fixes, dead
 imports) | Yes | Low risk, high feasibility, easy to verify | | Coverage
-gaps and missing tests | Often | The Validator signal is clear, but
+gaps and missing tests | Often | The <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> signal is clear, but
 scope must be bounded | | Local refactors (simplify a function, reduce
 complexity) | Sometimes | Useful when scoped to one symbol/file with
 strict budgets | | Deduplication (remove repeated helpers, merge
@@ -125,7 +124,7 @@ default | High risk, ambiguous intent, requires domain judgment | |
 Architecture changes (new modules, moving boundaries) | Rare | Expensive
 and destabilizing unless tightly constrained |</div>
 <p>Dream becomes safe when it is not “a general fixer,” but a controller
-for an allowlisted catalog of actions, each with known Physics.</p>
+for an allowlisted catalog of actions, each with known <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>.</p>
 <h3 id="a-scoring-heuristic-impact-feasibility-cost-risk">A scoring
 heuristic (impact × feasibility ÷ cost × risk)</h3>
 <p>Dream doesn’t need a perfect model of value. It needs a conservative
@@ -207,13 +206,13 @@ inconsistent fixes)</li>
 <p>Then it chooses one file and one allowlisted action. The rough logic
 is:</p>
 <pre class="text"><code>if coverage is low:
-    choose action = &quot;tests&quot;
+    choose action = "tests"
 elif duplication dominates:
-    choose action = &quot;dedupe&quot;
+    choose action = "dedupe"
 elif file is bloated (too long or too complex):
-    choose action = &quot;split&quot;
+    choose action = "split"
 else:
-    choose action = &quot;refactor&quot;</code></pre>
+    choose action = "refactor"</code></pre>
 <p>This is not a universal truth. It is a starting heuristic you can
 tune. The win is that the “Decide” step is explicit and versioned. You
 can inspect it, adjust thresholds, and argue about it with evidence.</p>
@@ -225,19 +224,19 @@ can inspect it, adjust thresholds, and argue about it with evidence.</p>
     dup = duplication_score(file)      # higher = more repeated units
 
     if cov &lt; 60:
-        action = &quot;tests&quot;
+        action = "tests"
         score = 120 - cov              # lower coverage = higher priority
     elif cov &lt; 75:
-        action = &quot;tests&quot;
+        action = "tests"
         score = 90 - cov
     elif dup is dominating:
-        action = &quot;dedupe&quot;
+        action = "dedupe"
         score = base + weight(dup)
     elif file is bloated:
-        action = &quot;split&quot;
+        action = "split"
         score = base + penalties(size, complexity)
     else:
-        action = &quot;refactor&quot;
+        action = "refactor"
         score = base
 
 choose the file with highest score, then do one bounded action</code></pre>
@@ -247,7 +246,7 @@ run a normal SDaC loop against that bounded target, under the same
 Physics gates.</p>
 <p>If you do implement a writer, keep the unit of work small: one target
 per cycle, strict diff budgets, and a hard stop when the signal doesn’t
-improve (Chapter 5’s minimum-progress ratchets).</p>
+improve (<a class="chapter-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge#chapter-5-the-ouroboros-protocol-why-loops-converge" title="Go to: Chapter 5">Chapter 5</a>’s minimum-progress ratchets).</p>
 <h3 id="depth-0.5-scheduled-reports-no-diffs">Depth 0.5: Scheduled
 reports (no diffs)</h3>
 <p>Depth 0.5 is Depth 0 on a schedule.</p>
@@ -298,7 +297,7 @@ Safety Controls (Budgets, Gates, Kill Switches)</h2>
 (files/lines).</li>
 <li><strong>Timeouts:</strong> per-effector wall-clock caps; no infinite
 retries.</li>
-<li><strong>Cost caps:</strong> token budgets and circuit breakers
+<li><strong>Cost caps:</strong> token budgets and <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a>
 (Chapter 5).</li>
 <li><strong>Cool-down:</strong> after any mutation, wait before
 attempting another.</li>
@@ -327,9 +326,9 @@ over tasks that create it.</li>
 Hostile Terrain and Instruction Injection</h2>
 <p>So far, we’ve focused on protecting the repository from the agent
 (scope limits, Validators, protected graders). You also need the other
-half of the threat model: <strong>protecting the agent from hostile
+half of the threat model: <strong>protecting the <a class="concept-link" href="concepts#agent" title="See concept: Agent">agent</a> from hostile
 input</strong>. This is why <code>Prep</code> must sanitize (Chapter 2)
-and why governance must include Input Hygiene at scale (Chapter 12).</p>
+and why governance must include Input Hygiene at scale (<a class="chapter-link" href="chapter-12-governance-at-machine-speed#chapter-12-governance-at-machine-speed" title="Go to: Chapter 12">Chapter 12</a>).</p>
 <p>Dream increases the amount of Terrain text your system reads. Every
 TODO comment, every ticket description, and every log line becomes an
 input channel, and you should treat it as adversarial.</p>
@@ -339,13 +338,13 @@ governance-at-scale: policy validators that detect injection-shaped text
 and force safe outcomes (<code>defer</code>, <code>file_ticket</code>)
 rather than attempting execution.</p>
 <p>For Dream, keep a simple rule: untrusted text never becomes
-authority. It can only become evidence attached to a Mission Object
+authority. It can only become evidence attached to a <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>
 compiled from allowlisted templates, with explicit budgets and
 gates.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
-<li><p><strong>Pick one entropy sensor:</strong> coverage gaps,
+<li><p><strong>Pick one entropy <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">sensor</a>:</strong> coverage gaps,
 complexity hotspots, duplication, or drift between a Map surface and
 Terrain.</p></li>
 <li><p><strong>Implement Depth 0:</strong> write a deterministic scan
@@ -358,35 +357,31 @@ bounded loop with explicit Physics gates.</p></li>
 failure modes, add Depth 1 proposals and keep them
 human-approved.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance" data-share-text="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance&amp;text=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance&amp;title=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)" data-share-title="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance&amp;text=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance&amp;title=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-8-keep-the-map-fresh-map-updaters">← Chapter 8 – Keep the Map Fresh (Map-Updaters)</a>
-    <a class="next-link" href="chapter-10-immutable-infrastructure-the-guardrails">Chapter 10 – Immutable Infrastructure (The Guardrails) →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-8-keep-the-map-fresh-map-updaters">← Chapter 8 – Keep the Map Fresh (Map-Updaters)</a>
+<a class="next-link" href="chapter-10-immutable-infrastructure-the-guardrails">Chapter 10 – Immutable Infrastructure (The Guardrails) →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

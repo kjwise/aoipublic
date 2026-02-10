@@ -1,50 +1,49 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part I Build It The Weekend Sprint</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part I Build It The Weekend Sprint</div>
 <div class="chapter-meta"><span class="read-time">7 min read</span></div>
 <h1 id="chapter-1-the-minimum-viable-factory-your-first-loop">Chapter 1
 – The Minimum Viable Factory (Your First Loop)</h1>
-<p>Build a tiny loop: Terrain → Effector → Map → Validator.</p>
+<p>Build a tiny loop: Terrain → <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> → Map → <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>.</p>
 <p>You can have it running in about an hour. We’ll keep the vocabulary
 plain until you’ve seen it run, then we’ll name the parts so we can
 reuse them precisely.</p>
@@ -58,11 +57,11 @@ substrate:</p>
 <li>one <strong>Effector</strong> that proposes a patch</li>
 <li>one <strong>Validator</strong> that enforces alignment</li>
 </ul>
-<p>That Validator is our first example of <strong>Physics</strong>:
+<p>That Validator is our first example of <strong><a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a></strong>:
 deterministic constraints the Effector cannot argue with.</p>
 <p>In MVF v0, intent is implicit: it’s hard-coded into CLI flags and
-Make targets. You can think of that as a “Mission v0.” In Chapter 7, we
-promote it into a typed Mission Object you can diff, version, and
+Make targets. You can think of that as a “Mission v0.” In <a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>, we
+promote it into a typed <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> you can diff, version, and
 re-run.</p>
 <p>This first loop is deterministic on purpose. It lets you see the
 mechanics without keys, SDKs, or network calls. Later, you can swap in a
@@ -78,30 +77,29 @@ paths, or unparseable structure.</li>
 <li><strong>Scope creep:</strong> edits outside the allowed region or
 touching unrelated files.</li>
 <li><strong>Invented structure:</strong> interfaces, routes, or fields
-that never existed in the Terrain (a Map Contamination risk).</li>
+that never existed in the Terrain (a <a class="concept-link" href="concepts#map-contamination" title="See concept: Map Contamination">Map Contamination</a> risk).</li>
 <li><strong>API failures:</strong> rate limits, timeouts, transient
 errors.</li>
-<li><strong>Non-convergence:</strong> repeated retries that never reach
-<code>pass</code> without circuit breakers.</li>
+<li><strong>Non-<a class="concept-link" href="concepts#convergence" title="See concept: Convergence">convergence</a>:</strong> repeated retries that never reach
+<code>pass</code> without <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a>.</li>
 </ul>
 <p>Chapters 2 and 5 show the core mitigations: strict output contracts +
 parsing, structured validator findings fed back into retries, and hard
-stop conditions. Appendix B is a quick diagnostic atlas when the loop
+stop conditions. <a class="chapter-link" href="chapter-16-appendix-b-failure-mode-gallery#chapter-16-appendix-b-failure-mode-gallery" title="Go to: Appendix B">Appendix B</a> is a quick diagnostic atlas when the loop
 misbehaves.</p>
 <h3 id="fast-path-recommended-run-the-companion-code-repo">Fast path
 (recommended): run the companion code repo</h3>
 <p>All runnable code for MVF v0 lives in the companion repo:
 <code>kjwise/aoi_code</code> on GitHub.</p>
 <p>First, clone the repository and run the full loop:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clone the companion code repo</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/kjwise/aoi_code.git</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Enter the directory</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the sync + validate loop</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="co"># Clone the companion code repo</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/kjwise/aoi_code.git</span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a><span class="co"># Enter the directory</span></span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="co"># Run the sync + validate loop</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
 <p>This command will first run the <strong>Effector</strong>
 (<code>sync_public_interfaces.py</code>) to update the documentation
 Map, then run the <strong>Validator</strong>
@@ -127,8 +125,7 @@ python3 factory/tools/validate_map_alignment.py --src product/src --doc product/
 report <code>no drift detected</code> and the Validator should still
 pass.</p>
 <p>If you want to reset the demo between runs:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div>
 <p>If you want to read the implementation details, start here (in the
 companion repo):</p>
 <ul>
@@ -200,10 +197,10 @@ within the same hard gates you’ve already established. The loop remains
 safe because the Physics haven’t changed.</p></li>
 <li><p><strong>MVF v2 (Month):</strong> With a reliable loop and
 explicit missions, you can now scale its operation. This involves
-scheduled runs via a <strong>Dream Daemon</strong> (Chapter 9) to
+scheduled runs via a <strong><a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a></strong> (<a class="chapter-link" href="chapter-9-the-dream-daemon-background-maintenance#chapter-9-the-dream-daemon-background-maintenance" title="Go to: Chapter 9">Chapter 9</a>) to
 perform background maintenance, building <strong>Map-Updaters</strong>
-(Chapter 8) to keep more complex documentation in sync, and establishing
-<strong>Immutable Infrastructure</strong> (Chapter 10) to create
+(<a class="chapter-link" href="chapter-8-keep-the-map-fresh-map-updaters#chapter-8-keep-the-map-fresh-map-updaters" title="Go to: Chapter 8">Chapter 8</a>) to keep more complex documentation in sync, and establishing
+<strong><a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a></strong> (<a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a>) to create
 protected boundaries that even the system itself cannot change.</p></li>
 </ul>
 <h2 id="naming-the-parts-the-canon">Naming the parts (the canon)</h2>
@@ -271,11 +268,11 @@ gates (the Validators), and verifiable loops (the Git Ledger and CI
 feedback). It tames the stochastic nature of GenAI by wrapping it in
 engineering rigor.</p>
 <p>If you want a frame: it’s recursive self-improvement (RSI) for
-programming, with the recursion bounded by Physics and recorded in the
+programming, with the <a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a> bounded by Physics and recorded in the
 Ledger.</p>
 <p>At this point, you have a working factory. It’s minimal, but it
 demonstrates the core components.</p>
-<p>Where this leads: in Chapter 13 (The Hofstadter Bridge), we take this
+<p>Where this leads: in <a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a> (The <a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a>), we take this
 same pattern (one bounded block + one Effector + one Validator) and
 apply it to documentation itself. That “micro-loop” is the smallest step
 toward making parts of the Map enforceable instead of merely
@@ -286,20 +283,17 @@ knowing what a safe iteration looks like (also Chapter 13).</p>
 do this week</h2>
 <ol type="1">
 <li><p><strong>Run MVF v0 (recommended path):</strong></p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
 <p>If you want a clean baseline between runs:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div></li>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div></li>
 <li><p><strong>Break it (create drift)</strong>:</p>
 <ul>
 <li><p>Add a new public function to
 <code>product/src/tax_calculator.py</code> (for example
 <code>def tax_rate(country: str) -&gt; float: ...</code>).</p></li>
 <li><p>Run only the validator:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> validate</span></code></pre></div></li>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="fu">make</span> validate</span></code></pre></div></li>
 </ul>
 <p>It should fail with <code>missing_in_map=[...]</code>.</p></li>
 <li><p><strong>Fix it (restore alignment)</strong>:</p>
@@ -307,8 +301,7 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="
 <li><p>Run <code>make sync</code> and then <code>make validate</code>
 again.</p></li>
 <li><p>Inspect the diff:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div></li>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a aria-hidden="true" href="#cb8-1" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div></li>
 </ul>
 <p>If the diff touches more than you intended, treat it as a
 blast-radius failure. Appendix B has a quick diagnostic for “slice too
@@ -323,35 +316,31 @@ Validator) and make <code>all</code> depend on it.</li>
 </ol>
 <p>This is the shape of the Minimum Viable Factory: small blast radius,
 concrete diffs, and <code>pass/fail</code> gates.</p>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop" data-share-text="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop&amp;text=Chapter%201%20%E2%80%93%20The%20Minimum%20Viable%20Factory%20%28Your%20First%20Loop%29%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop&amp;title=Chapter%201%20%E2%80%93%20The%20Minimum%20Viable%20Factory%20%28Your%20First%20Loop%29%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%201%20%E2%80%93%20The%20Minimum%20Viable%20Factory%20%28Your%20First%20Loop%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%201%20%E2%80%93%20The%20Minimum%20Viable%20Factory%20%28Your%20First%20Loop%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 1 – The Minimum Viable Factory (Your First Loop)" data-share-title="Chapter 1 – The Minimum Viable Factory (Your First Loop) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop&amp;text=Chapter%201%20%E2%80%93%20The%20Minimum%20Viable%20Factory%20%28Your%20First%20Loop%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop&amp;title=Chapter%201%20%E2%80%93%20The%20Minimum%20Viable%20Factory%20%28Your%20First%20Loop%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%201%20%E2%80%93%20The%20Minimum%20Viable%20Factory%20%28Your%20First%20Loop%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%201%20%E2%80%93%20The%20Minimum%20Viable%20Factory%20%28Your%20First%20Loop%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-1-the-minimum-viable-factory-your-first-loop">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-0-introduction">← Chapter 0 – Introduction</a>
-    <a class="next-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter 2 – The Deterministic Sandwich (Your First Pattern) →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-0-introduction">← Chapter 0 – Introduction</a>
+<a class="next-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter 2 – The Deterministic Sandwich (Your First Pattern) →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

@@ -1,46 +1,45 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 17 – Appendix C: Pattern Library | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 17 – Appendix C: Pattern Library">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-17-appendix-c-pattern-library">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 17 – Appendix C: Pattern Library | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 17 – Appendix C: Pattern Library">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-17-appendix-c-pattern-library">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 17 – Appendix C: Pattern Library | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 17 – Appendix C: Pattern Library | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 17 – Appendix C: Pattern Library">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 17 – Appendix C: Pattern Library | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 17 – Appendix C: Pattern Library | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 17 – Appendix C: Pattern Library" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-17-appendix-c-pattern-library" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 17 – Appendix C: Pattern Library | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 17 – Appendix C: Pattern Library" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-17-appendix-c-pattern-library" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 17 – Appendix C: Pattern Library | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 17 – Appendix C: Pattern Library | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 17 – Appendix C: Pattern Library" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 17 – Appendix C: Pattern Library | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part VI Appendices</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part VI Appendices</div>
 <div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-17-appendix-c-pattern-library">Chapter 17 – Appendix C:
 Pattern Library</h1>
@@ -50,20 +49,20 @@ Code (SDaC) loop. Exhausted engineers and technical leaders need
 blueprints, not just concepts. Here, you’ll find concrete examples for
 defining missions, crafting robust validators for common technology
 stacks, configuring effectors to integrate with your existing workflows,
-and establishing circuit breakers for safety and control.</p>
+and establishing <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a> for safety and control.</p>
 <p>These patterns are designed to be immediately actionable. Treat them
 as starting points, adapting them to your specific environment and
 requirements. Each pattern emphasizes clarity, auditable configuration,
 and a focus on verifiable outcomes.</p>
 <h2 id="mvf-v0-demo-tools-companion-repo">MVF v0: demo tools (companion
 repo)</h2>
-<p>Chapter 1’s MVF v0 loop lives in the companion code repo:
+<p><a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a>’s MVF v0 loop lives in the companion code repo:
 <code>github.com/kjwise/aoi_code</code>.</p>
 <p>If you want to read or modify the runnable tools, start here:</p>
 <ul>
-<li><code>factory/tools/sync_public_interfaces.py</code> — Effector
+<li><code>factory/tools/sync_public_interfaces.py</code> — <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>
 (diff-first; apply optional)</li>
-<li><code>factory/tools/validate_map_alignment.py</code> — Validator
+<li><code>factory/tools/validate_map_alignment.py</code> — <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>
 (Map/Terrain alignment)</li>
 <li><code>Makefile</code> — command panel (<code>make sync</code>,
 <code>make validate</code>, <code>make all</code>)</li>
@@ -81,13 +80,13 @@ repo)</h2>
 <p><strong>Logic flow (sketch):</strong></p>
 <pre class="text"><code># Effector
 signatures = extract_public_signatures(src)
-doc_after = rewrite_heading_block(doc_before, heading=&quot;## Public Interfaces&quot;, items=signatures)
+doc_after = rewrite_heading_block(doc_before, heading="## Public Interfaces", items=signatures)
 diff = unified_diff(doc_before, doc_after)
 if apply: write(doc_after)
 
 # Validator
 terrain = extract_public_signatures(src)
-map_items = parse_items_from_heading_block(doc_text, heading=&quot;## Public Interfaces&quot;)
+map_items = parse_items_from_heading_block(doc_text, heading="## Public Interfaces")
 pass if sets_match(terrain, map_items)</code></pre>
 <p>This is the smallest useful Map surface: one bounded heading block
 that can’t drift without tripping a deterministic gate.</p>
@@ -98,15 +97,15 @@ you’re missing one layer, the system fails in a predictable way.</p>
 <h3 id="substrate-existential-foundation">Substrate (existential
 foundation)</h3>
 <ul>
-<li><p><strong>Map / Terrain / Ledger</strong>: explicit intent,
+<li><p><strong><a class="concept-link" href="concepts#map-terrain-ledger" title="See concept: Map / Terrain / Ledger">Map / Terrain / Ledger</a></strong>: explicit intent,
 explicit reality, and an auditable history.</p></li>
-<li><p><strong>Physics</strong>: deterministic rules that halt bad
+<li><p><strong><a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a></strong>: deterministic rules that halt bad
 changes (lint, schema, tests, architectural constraints).</p></li>
-<li><p><strong>Context Graph</strong>: topology and identity you can
+<li><p><strong><a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a></strong>: topology and identity you can
 query (nodes: apps/packages; edges: dependencies). Nodes carry
 language/framework identity so Drivers select the right mechanisms
 without guessing.</p></li>
-<li><p><strong>Mission Object</strong> (Chapter 7): the unit-of-work
+<li><p><strong><a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a></strong> (<a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>): the unit-of-work
 contract + state of record (goal, scope, budgets, gates, lifecycle
 status).</p></li>
 </ul>
@@ -140,7 +139,7 @@ path, symbol name, doc heading).</li>
 <p><strong>Identity is computed, not inferred</strong></p>
 <p>Treat identity as a deterministic extraction problem: read manifests
 and attach the result to nodes. A node should carry enough identity for
-the Driver Pattern to select the right mechanism without guessing.</p>
+the <a class="concept-link" href="concepts#driver-pattern" title="See concept: Driver Pattern">Driver Pattern</a> to select the right mechanism without guessing.</p>
 <p><strong>Storage options (pick the simplest that works)</strong></p>
 <ul>
 <li>In-memory adjacency maps (small repos, fast iteration).</li>
@@ -193,8 +192,7 @@ per node)</li>
 </ul>
 <p>The point is not the absolute size. The point is that a
 <em>slice</em> is small, bounded, and reproducible.</p>
-<h4
-id="implementation-options-for-code-repositories-from-light-to-heavy">Implementation
+<h4 id="implementation-options-for-code-repositories-from-light-to-heavy">Implementation
 options for code repositories (from light to heavy)</h4>
 <p>You can “roll your own” Context Graph, or you can adopt parts of
 existing graph tooling. The correct choice depends on the questions you
@@ -235,45 +233,43 @@ implement the minimal graph and sensors that answer them
 deterministically.</p>
 <h3 id="loop-operational-mechanisms">Loop (operational mechanisms)</h3>
 <ul>
-<li><p><strong>Deterministic Sandwich</strong>: prep → model →
+<li><p><strong><a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a></strong>: prep → model →
 validation.</p></li>
-<li><p><strong>Feedback Injection</strong>: feed the failing signal back
+<li><p><strong><a class="concept-link" href="concepts#feedback-injection" title="See concept: Feedback Injection">Feedback Injection</a></strong>: feed the failing signal back
 into the next iteration (stderr, linter lines, test output).</p></li>
 <li><p><strong>Driver Pattern</strong>: decouple “what to do” from “how
 to do it” across polyglot stacks.</p></li>
-<li><p><strong>Salvage Protocol</strong>: move failed/reverted attempts
-into a Quarantine directory (for example
+<li><p><strong><a class="concept-link" href="concepts#salvage-protocol" title="See concept: Salvage Protocol">Salvage Protocol</a></strong>: move failed/reverted attempts
+into a <a class="concept-link" href="concepts#quarantine" title="See concept: Quarantine">Quarantine</a> directory (for example
 <code>.sdac/workflow-quarantine/</code>) so useful fragments are
 recoverable.</p></li>
 </ul>
 <h3 id="governance-automated-sovereignty">Governance (automated
 sovereignty)</h3>
 <ul>
-<li><p><strong>Scope Guard</strong>: blast-radius control via explicit
+<li><p><strong><a class="concept-link" href="concepts#scope-guard" title="See concept: Scope Guard">Scope Guard</a></strong>: blast-radius control via explicit
 path allowlists.</p></li>
-<li><p><strong>Mission Gate</strong>: run acceptance criteria without
+<li><p><strong><a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">Mission Gate</a></strong>: run acceptance criteria without
 running the model.</p></li>
-<li><p><strong>Dream Daemon</strong>: scheduled maintenance that emits
+<li><p><strong><a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a></strong>: scheduled maintenance that emits
 Missions from entropy signals.</p></li>
-<li><p><strong>Immutable Infrastructure</strong>: protect graders and
+<li><p><strong><a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a></strong>: protect graders and
 guardrails from self-editing.</p></li>
-<li><p><strong>Directives</strong>: human-authored behavioral laws (for
+<li><p><strong><a class="concept-link" href="concepts#directives" title="See concept: Directives">Directives</a></strong>: human-authored behavioral laws (for
 example <code>agent_directives.md</code>). Unlike Physics, Directives
 constrain the agent instruction layer and should be treated as protected
 surfaces.</p></li>
-<li><p><strong>Mirror</strong>: keep the system’s self-image consistent
+<li><p><strong><a class="concept-link" href="concepts#mirror" title="See concept: Mirror">Mirror</a></strong>: keep the system’s self-image consistent
 with its implementation.</p></li>
 </ul>
-<h4
-id="reference-implementation-note-dream-in-the-genaibook-engine">Reference
+<h4 id="reference-implementation-note-dream-in-the-genaibook-engine">Reference
 implementation note: Dream in the genAIbook engine</h4>
 <p>The book is not a “here is the finished system” handoff. But it can
 be useful to see one real Dream loop wiring so you know what “Depth 2”
 looks like in practice.</p>
 <p>In this repository, Dream is exposed as Make targets:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> dream</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> dream-loop</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="fu">make</span> dream</span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="fu">make</span> dream-loop</span></code></pre></div>
 <p>Under the hood it runs <code>python -m tools.dream</code>, which
 builds a <code>core.workflow.Workflow</code> with explicit Steps:</p>
 <ul>
@@ -282,7 +278,7 @@ builds a <code>core.workflow.Workflow</code> with explicit Steps:</p>
 <li>decide action (<code>test</code>, <code>refactor</code>,
 <code>split</code>, <code>dedupe</code>, or <code>reflect</code>)</li>
 <li>run the selected action via Make targets</li>
-<li>run the full Immune System suite as a post-check</li>
+<li>run the full <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> suite as a post-check</li>
 </ul>
 <p>The important pattern is visible: Dream does not invent new
 capabilities from text. It chooses from an allowlisted action set, runs
@@ -293,9 +289,9 @@ deterministic gates, and emits evidence you can audit.</p>
 <li><p><strong>Don’t Chat, Compile</strong>: use chat for ideation, but
 run production work through versioned Mission Objects and deterministic
 runners that produce diffs and logs.</p></li>
-<li><p><strong>Physics is Law</strong>: if a change fails Physics, it
+<li><p><strong><a class="concept-link" href="concepts#meta-pattern-physics-is-law" title="See concept: Meta-Pattern: Physics is Law">Physics is Law</a></strong>: if a change fails Physics, it
 does not exist. No warnings. No loopholes.</p></li>
-<li><p><strong>Recursion</strong>: the system uses the same toolchain to
+<li><p><strong><a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">Recursion</a></strong>: the system uses the same toolchain to
 maintain itself (Dream Daemon emits Missions; the loop validates those
 changes under the same gates).</p></li>
 </ul>
@@ -334,7 +330,7 @@ Scope and safety:
 
 Failure mode (fail closed):
 - If you cannot comply with the output contract or constraints, output a single JSON object (and nothing else):
-  {&quot;status&quot;:&quot;fail&quot;,&quot;reason&quot;:&quot;&lt;one sentence&gt;&quot;,&quot;blocking_issue&quot;:&quot;&lt;short label&gt;&quot;}
+  {"status":"fail","reason":"&lt;one sentence&gt;","blocking_issue":"&lt;short label&gt;"}
 
 You will be given:
 - A Mission Object (intent, scope, constraints, acceptance criteria)
@@ -358,14 +354,14 @@ Output contract:
 
 Failure mode (fail closed):
 - If you cannot produce valid JSON that matches the schema, output:
-  {&quot;status&quot;:&quot;fail&quot;,&quot;reason&quot;:&quot;&lt;one sentence&gt;&quot;,&quot;blocking_issue&quot;:&quot;&lt;short label&gt;&quot;}
+  {"status":"fail","reason":"&lt;one sentence&gt;","blocking_issue":"&lt;short label&gt;"}
 
 Now output the JSON.</code></pre>
 <h3 id="notes-what-this-pattern-does-and-doesnt-do">Notes (what this
 pattern does and doesn’t do)</h3>
 <ul>
 <li>This pattern makes the stochastic step easier to integrate: the
-Judge can immediately validate “is it parseable?” before spending effort
+<a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> can immediately validate “is it parseable?” before spending effort
 on deeper Physics.</li>
 <li>It does not replace Validators. A model that outputs a perfectly
 formed diff can still be wrong; Physics decides.</li>
@@ -384,105 +380,102 @@ semantics stable: <em>goal + scope + budgets + gates +
 rollback</em>.</p>
 <h3 id="minimal-mission-object-skeleton-copy-then-specialize">Minimal
 Mission Object skeleton (copy, then specialize)</h3>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> change-one-surface</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Make one bounded change, proven by a deterministic gate&quot;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> path/to/one_or_two_files.ext</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">do_not_touch</span><span class="kw">:</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> .github/**</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> governance/**</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">120</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;make test&quot;</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">rollback_on</span><span class="kw">:</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;quality_gate_fail&quot;</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;scope_violation&quot;</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> change-one-surface</span></span>
+<span id="cb7-2"><a aria-hidden="true" href="#cb7-2" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb7-3"><a aria-hidden="true" href="#cb7-3" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Make one bounded change, proven by a deterministic gate"</span></span>
+<span id="cb7-4"><a aria-hidden="true" href="#cb7-4" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb7-5"><a aria-hidden="true" href="#cb7-5" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
+<span id="cb7-6"><a aria-hidden="true" href="#cb7-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> path/to/one_or_two_files.ext</span></span>
+<span id="cb7-7"><a aria-hidden="true" href="#cb7-7" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span></span>
+<span id="cb7-8"><a aria-hidden="true" href="#cb7-8" tabindex="-1"></a><span class="at">  </span><span class="fu">do_not_touch</span><span class="kw">:</span></span>
+<span id="cb7-9"><a aria-hidden="true" href="#cb7-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> .github/**</span></span>
+<span id="cb7-10"><a aria-hidden="true" href="#cb7-10" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> governance/**</span></span>
+<span id="cb7-11"><a aria-hidden="true" href="#cb7-11" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb7-12"><a aria-hidden="true" href="#cb7-12" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb7-13"><a aria-hidden="true" href="#cb7-13" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">120</span></span>
+<span id="cb7-14"><a aria-hidden="true" href="#cb7-14" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
+<span id="cb7-15"><a aria-hidden="true" href="#cb7-15" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">"make test"</span></span>
+<span id="cb7-16"><a aria-hidden="true" href="#cb7-16" tabindex="-1"></a><span class="fu">rollback_on</span><span class="kw">:</span></span>
+<span id="cb7-17"><a aria-hidden="true" href="#cb7-17" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"quality_gate_fail"</span></span>
+<span id="cb7-18"><a aria-hidden="true" href="#cb7-18" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"scope_violation"</span></span>
+<span id="cb7-19"><a aria-hidden="true" href="#cb7-19" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
+<span id="cb7-20"><a aria-hidden="true" href="#cb7-20" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb7-21"><a aria-hidden="true" href="#cb7-21" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span></span></code></pre></div>
 <h3 id="basic-feature-development-mission">Basic Feature Development
 Mission</h3>
 <p>This template outlines a mission to implement a new API endpoint. It
 specifies the functional requirements, scope, and expected
 validation.</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> add-user-profile-endpoint</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Add GET /api/v1/users/{user_id} for user profiles&quot;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> backend/src/schemas/user.py</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> backend/tests/api/v1/test_users.py</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/src/api/v1/users.py</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/tests/api/v1/test_users.py</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/src/schemas/user.py</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">do_not_touch</span><span class="kw">:</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> .github/**</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> governance/**</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> infra/**</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">constraints</span><span class="kw">:</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">forbidden</span><span class="kw">:</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;Skip authentication/authorization checks&quot;</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">acceptance_criteria</span><span class="kw">:</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_be_true</span><span class="kw">:</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;GET /api/v1/users/{id} returns 200 for valid ID and authorized user&quot;</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;GET /api/v1/users/{id} returns 404 for invalid ID&quot;</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;GET /api/v1/users/{id} returns 401 for unauthenticated requests&quot;</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;GET /api/v1/users/{id} returns 403 for unauthorized users&quot;</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">250</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;pytest -q backend/tests/api/v1/test_users.py&quot;</span></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="fu">rollback_on</span><span class="kw">:</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;quality_gate_fail&quot;</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;scope_violation&quot;</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> escalate</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a aria-hidden="true" href="#cb8-1" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> add-user-profile-endpoint</span></span>
+<span id="cb8-2"><a aria-hidden="true" href="#cb8-2" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb8-3"><a aria-hidden="true" href="#cb8-3" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Add GET /api/v1/users/{user_id} for user profiles"</span></span>
+<span id="cb8-4"><a aria-hidden="true" href="#cb8-4" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb8-5"><a aria-hidden="true" href="#cb8-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> backend/src/schemas/user.py</span></span>
+<span id="cb8-6"><a aria-hidden="true" href="#cb8-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> backend/tests/api/v1/test_users.py</span></span>
+<span id="cb8-7"><a aria-hidden="true" href="#cb8-7" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb8-8"><a aria-hidden="true" href="#cb8-8" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
+<span id="cb8-9"><a aria-hidden="true" href="#cb8-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/src/api/v1/users.py</span></span>
+<span id="cb8-10"><a aria-hidden="true" href="#cb8-10" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/tests/api/v1/test_users.py</span></span>
+<span id="cb8-11"><a aria-hidden="true" href="#cb8-11" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span></span>
+<span id="cb8-12"><a aria-hidden="true" href="#cb8-12" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/src/schemas/user.py</span></span>
+<span id="cb8-13"><a aria-hidden="true" href="#cb8-13" tabindex="-1"></a><span class="at">  </span><span class="fu">do_not_touch</span><span class="kw">:</span></span>
+<span id="cb8-14"><a aria-hidden="true" href="#cb8-14" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> .github/**</span></span>
+<span id="cb8-15"><a aria-hidden="true" href="#cb8-15" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> governance/**</span></span>
+<span id="cb8-16"><a aria-hidden="true" href="#cb8-16" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> infra/**</span></span>
+<span id="cb8-17"><a aria-hidden="true" href="#cb8-17" tabindex="-1"></a><span class="fu">constraints</span><span class="kw">:</span></span>
+<span id="cb8-18"><a aria-hidden="true" href="#cb8-18" tabindex="-1"></a><span class="at">  </span><span class="fu">forbidden</span><span class="kw">:</span></span>
+<span id="cb8-19"><a aria-hidden="true" href="#cb8-19" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"Skip authentication/authorization checks"</span></span>
+<span id="cb8-20"><a aria-hidden="true" href="#cb8-20" tabindex="-1"></a><span class="fu">acceptance_criteria</span><span class="kw">:</span></span>
+<span id="cb8-21"><a aria-hidden="true" href="#cb8-21" tabindex="-1"></a><span class="at">  </span><span class="fu">must_be_true</span><span class="kw">:</span></span>
+<span id="cb8-22"><a aria-hidden="true" href="#cb8-22" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"GET /api/v1/users/{id} returns 200 for valid ID and authorized user"</span></span>
+<span id="cb8-23"><a aria-hidden="true" href="#cb8-23" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"GET /api/v1/users/{id} returns 404 for invalid ID"</span></span>
+<span id="cb8-24"><a aria-hidden="true" href="#cb8-24" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"GET /api/v1/users/{id} returns 401 for unauthenticated requests"</span></span>
+<span id="cb8-25"><a aria-hidden="true" href="#cb8-25" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"GET /api/v1/users/{id} returns 403 for unauthorized users"</span></span>
+<span id="cb8-26"><a aria-hidden="true" href="#cb8-26" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb8-27"><a aria-hidden="true" href="#cb8-27" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb8-28"><a aria-hidden="true" href="#cb8-28" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">250</span></span>
+<span id="cb8-29"><a aria-hidden="true" href="#cb8-29" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
+<span id="cb8-30"><a aria-hidden="true" href="#cb8-30" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">"pytest -q backend/tests/api/v1/test_users.py"</span></span>
+<span id="cb8-31"><a aria-hidden="true" href="#cb8-31" tabindex="-1"></a><span class="fu">rollback_on</span><span class="kw">:</span></span>
+<span id="cb8-32"><a aria-hidden="true" href="#cb8-32" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"quality_gate_fail"</span></span>
+<span id="cb8-33"><a aria-hidden="true" href="#cb8-33" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"scope_violation"</span></span>
+<span id="cb8-34"><a aria-hidden="true" href="#cb8-34" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
+<span id="cb8-35"><a aria-hidden="true" href="#cb8-35" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb8-36"><a aria-hidden="true" href="#cb8-36" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> escalate</span></span></code></pre></div>
 <h3 id="bug-fix-mission">Bug Fix Mission</h3>
 <p>This template focuses on reproducing, fixing, and verifying a
 specific bug. The emphasis is on clear reproduction steps and
 test-driven verification.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> fix-pagination-off-by-one</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Fix pagination off-by-one in product list&quot;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/src/services/product_service.py</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/tests/services/test_product_service.py</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/src/repositories/product_repository.py</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">do_not_touch</span><span class="kw">:</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> .github/**</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> governance/**</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">constraints</span><span class="kw">:</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">forbidden</span><span class="kw">:</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;Change public API response shape&quot;</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">acceptance_criteria</span><span class="kw">:</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_be_true</span><span class="kw">:</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;No duplicate items appear across page boundaries&quot;</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;A new regression test reproduces the old bug and passes after the fix&quot;</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">180</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;pytest -q backend/tests/services/test_product_service.py&quot;</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rollback_on</span><span class="kw">:</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;quality_gate_fail&quot;</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;scope_violation&quot;</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> fix-pagination-off-by-one</span></span>
+<span id="cb9-2"><a aria-hidden="true" href="#cb9-2" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb9-3"><a aria-hidden="true" href="#cb9-3" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Fix pagination off-by-one in product list"</span></span>
+<span id="cb9-4"><a aria-hidden="true" href="#cb9-4" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb9-5"><a aria-hidden="true" href="#cb9-5" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
+<span id="cb9-6"><a aria-hidden="true" href="#cb9-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/src/services/product_service.py</span></span>
+<span id="cb9-7"><a aria-hidden="true" href="#cb9-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/tests/services/test_product_service.py</span></span>
+<span id="cb9-8"><a aria-hidden="true" href="#cb9-8" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span></span>
+<span id="cb9-9"><a aria-hidden="true" href="#cb9-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> backend/src/repositories/product_repository.py</span></span>
+<span id="cb9-10"><a aria-hidden="true" href="#cb9-10" tabindex="-1"></a><span class="at">  </span><span class="fu">do_not_touch</span><span class="kw">:</span></span>
+<span id="cb9-11"><a aria-hidden="true" href="#cb9-11" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> .github/**</span></span>
+<span id="cb9-12"><a aria-hidden="true" href="#cb9-12" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> governance/**</span></span>
+<span id="cb9-13"><a aria-hidden="true" href="#cb9-13" tabindex="-1"></a><span class="fu">constraints</span><span class="kw">:</span></span>
+<span id="cb9-14"><a aria-hidden="true" href="#cb9-14" tabindex="-1"></a><span class="at">  </span><span class="fu">forbidden</span><span class="kw">:</span></span>
+<span id="cb9-15"><a aria-hidden="true" href="#cb9-15" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"Change public API response shape"</span></span>
+<span id="cb9-16"><a aria-hidden="true" href="#cb9-16" tabindex="-1"></a><span class="fu">acceptance_criteria</span><span class="kw">:</span></span>
+<span id="cb9-17"><a aria-hidden="true" href="#cb9-17" tabindex="-1"></a><span class="at">  </span><span class="fu">must_be_true</span><span class="kw">:</span></span>
+<span id="cb9-18"><a aria-hidden="true" href="#cb9-18" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"No duplicate items appear across page boundaries"</span></span>
+<span id="cb9-19"><a aria-hidden="true" href="#cb9-19" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"A new regression test reproduces the old bug and passes after the fix"</span></span>
+<span id="cb9-20"><a aria-hidden="true" href="#cb9-20" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb9-21"><a aria-hidden="true" href="#cb9-21" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb9-22"><a aria-hidden="true" href="#cb9-22" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">180</span></span>
+<span id="cb9-23"><a aria-hidden="true" href="#cb9-23" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
+<span id="cb9-24"><a aria-hidden="true" href="#cb9-24" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> </span><span class="st">"pytest -q backend/tests/services/test_product_service.py"</span></span>
+<span id="cb9-25"><a aria-hidden="true" href="#cb9-25" tabindex="-1"></a><span class="fu">rollback_on</span><span class="kw">:</span></span>
+<span id="cb9-26"><a aria-hidden="true" href="#cb9-26" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"quality_gate_fail"</span></span>
+<span id="cb9-27"><a aria-hidden="true" href="#cb9-27" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"scope_violation"</span></span>
+<span id="cb9-28"><a aria-hidden="true" href="#cb9-28" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
+<span id="cb9-29"><a aria-hidden="true" href="#cb9-29" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
+<span id="cb9-30"><a aria-hidden="true" href="#cb9-30" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span></span></code></pre></div>
 <h2 id="validator-recipes-by-stack">Validator Recipes by Stack</h2>
 <p>Validators are the bedrock of SDaC as defined in this book, providing
 deterministic gates that ensure quality, correctness, and adherence to
@@ -492,143 +485,140 @@ technology stacks.</p>
 <p>A robust Python validation pipeline typically includes schema
 validation (e.g., Pydantic), static type checking, linting, and unit
 tests.</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validators</span><span class="kw">:</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> PythonTypeChecker</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Ensures type annotations are consistent and correct.&quot;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;mypy&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--strict&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;src/&quot;</span><span class="kw">]</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;backend/&quot;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;regex&quot;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">      # Example: file:line: error: message</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;^(.*?):(</span><span class="sc">\\</span><span class="st">d+): error: (.*)$&quot;</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">groups</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;file&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;line&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;message&quot;</span><span class="kw">]</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> PythonLinter</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Checks code style and common pitfalls.&quot;</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;flake8&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;src/&quot;</span><span class="kw">]</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;backend/&quot;</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;regex&quot;</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">      # Example: file:line:col: message</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;^(.*?):(</span><span class="sc">\\</span><span class="st">d+):(</span><span class="sc">\\</span><span class="st">d+): (.*)$&quot;</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">groups</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;file&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;line&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;column&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;message&quot;</span><span class="kw">]</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> PythonUnitTests</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Executes unit tests and checks for failures.&quot;</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pytest</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --cov=src</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --json-report</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --json-report-file=.pytest_cache/report.json</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;backend/&quot;</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;jsonpath&quot;</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;$.summary.failed&quot;</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co">    # Assumes the value is the number of failed tests.</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;value == 0&quot;</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> PydanticSchemaValidation</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Ensures generated API schemas are valid Pydantic models (requires custom script).&quot;</span></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;python&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;scripts/validate_pydantic_schemas.py&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;src/schemas&quot;</span><span class="kw">]</span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;backend/&quot;</span></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co">    # Assuming the script exits with 0 for success, non-0 for failure.</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a aria-hidden="true" href="#cb10-1" tabindex="-1"></a><span class="fu">validators</span><span class="kw">:</span></span>
+<span id="cb10-2"><a aria-hidden="true" href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a aria-hidden="true" href="#cb10-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> PythonTypeChecker</span></span>
+<span id="cb10-4"><a aria-hidden="true" href="#cb10-4" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Ensures type annotations are consistent and correct."</span></span>
+<span id="cb10-5"><a aria-hidden="true" href="#cb10-5" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"mypy"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--strict"</span><span class="kw">,</span><span class="at"> </span><span class="st">"src/"</span><span class="kw">]</span></span>
+<span id="cb10-6"><a aria-hidden="true" href="#cb10-6" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"backend/"</span></span>
+<span id="cb10-7"><a aria-hidden="true" href="#cb10-7" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb10-8"><a aria-hidden="true" href="#cb10-8" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
+<span id="cb10-9"><a aria-hidden="true" href="#cb10-9" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"regex"</span></span>
+<span id="cb10-10"><a aria-hidden="true" href="#cb10-10" tabindex="-1"></a><span class="co">      # Example: file:line: error: message</span></span>
+<span id="cb10-11"><a aria-hidden="true" href="#cb10-11" tabindex="-1"></a><span class="at">      </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="st">"^(.*?):(</span><span class="sc">\\</span><span class="st">d+): error: (.*)$"</span></span>
+<span id="cb10-12"><a aria-hidden="true" href="#cb10-12" tabindex="-1"></a><span class="at">      </span><span class="fu">groups</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"file"</span><span class="kw">,</span><span class="at"> </span><span class="st">"line"</span><span class="kw">,</span><span class="at"> </span><span class="st">"message"</span><span class="kw">]</span></span>
+<span id="cb10-13"><a aria-hidden="true" href="#cb10-13" tabindex="-1"></a></span>
+<span id="cb10-14"><a aria-hidden="true" href="#cb10-14" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> PythonLinter</span></span>
+<span id="cb10-15"><a aria-hidden="true" href="#cb10-15" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Checks code style and common pitfalls."</span></span>
+<span id="cb10-16"><a aria-hidden="true" href="#cb10-16" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"flake8"</span><span class="kw">,</span><span class="at"> </span><span class="st">"src/"</span><span class="kw">]</span></span>
+<span id="cb10-17"><a aria-hidden="true" href="#cb10-17" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"backend/"</span></span>
+<span id="cb10-18"><a aria-hidden="true" href="#cb10-18" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb10-19"><a aria-hidden="true" href="#cb10-19" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
+<span id="cb10-20"><a aria-hidden="true" href="#cb10-20" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"regex"</span></span>
+<span id="cb10-21"><a aria-hidden="true" href="#cb10-21" tabindex="-1"></a><span class="co">      # Example: file:line:col: message</span></span>
+<span id="cb10-22"><a aria-hidden="true" href="#cb10-22" tabindex="-1"></a><span class="at">      </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="st">"^(.*?):(</span><span class="sc">\\</span><span class="st">d+):(</span><span class="sc">\\</span><span class="st">d+): (.*)$"</span></span>
+<span id="cb10-23"><a aria-hidden="true" href="#cb10-23" tabindex="-1"></a><span class="at">      </span><span class="fu">groups</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"file"</span><span class="kw">,</span><span class="at"> </span><span class="st">"line"</span><span class="kw">,</span><span class="at"> </span><span class="st">"column"</span><span class="kw">,</span><span class="at"> </span><span class="st">"message"</span><span class="kw">]</span></span>
+<span id="cb10-24"><a aria-hidden="true" href="#cb10-24" tabindex="-1"></a></span>
+<span id="cb10-25"><a aria-hidden="true" href="#cb10-25" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> PythonUnitTests</span></span>
+<span id="cb10-26"><a aria-hidden="true" href="#cb10-26" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Executes unit tests and checks for failures."</span></span>
+<span id="cb10-27"><a aria-hidden="true" href="#cb10-27" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span></span>
+<span id="cb10-28"><a aria-hidden="true" href="#cb10-28" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> pytest</span></span>
+<span id="cb10-29"><a aria-hidden="true" href="#cb10-29" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --cov=src</span></span>
+<span id="cb10-30"><a aria-hidden="true" href="#cb10-30" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --json-report</span></span>
+<span id="cb10-31"><a aria-hidden="true" href="#cb10-31" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --json-report-file=.pytest_cache/report.json</span></span>
+<span id="cb10-32"><a aria-hidden="true" href="#cb10-32" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"backend/"</span></span>
+<span id="cb10-33"><a aria-hidden="true" href="#cb10-33" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb10-34"><a aria-hidden="true" href="#cb10-34" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
+<span id="cb10-35"><a aria-hidden="true" href="#cb10-35" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"jsonpath"</span></span>
+<span id="cb10-36"><a aria-hidden="true" href="#cb10-36" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"$.summary.failed"</span></span>
+<span id="cb10-37"><a aria-hidden="true" href="#cb10-37" tabindex="-1"></a><span class="co">    # Assumes the value is the number of failed tests.</span></span>
+<span id="cb10-38"><a aria-hidden="true" href="#cb10-38" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">"value == 0"</span></span>
+<span id="cb10-39"><a aria-hidden="true" href="#cb10-39" tabindex="-1"></a></span>
+<span id="cb10-40"><a aria-hidden="true" href="#cb10-40" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> PydanticSchemaValidation</span></span>
+<span id="cb10-41"><a aria-hidden="true" href="#cb10-41" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Ensures generated API schemas are valid Pydantic models (requires custom script)."</span></span>
+<span id="cb10-42"><a aria-hidden="true" href="#cb10-42" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"python"</span><span class="kw">,</span><span class="at"> </span><span class="st">"scripts/validate_pydantic_schemas.py"</span><span class="kw">,</span><span class="at"> </span><span class="st">"src/schemas"</span><span class="kw">]</span></span>
+<span id="cb10-43"><a aria-hidden="true" href="#cb10-43" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"backend/"</span></span>
+<span id="cb10-44"><a aria-hidden="true" href="#cb10-44" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb10-45"><a aria-hidden="true" href="#cb10-45" tabindex="-1"></a></span>
+<span id="cb10-46"><a aria-hidden="true" href="#cb10-46" tabindex="-1"></a><span class="co">    # Assuming the script exits with 0 for success, non-0 for failure.</span></span></code></pre></div>
 <h3 id="typescriptnode-development-stack">TypeScript/Node Development
 Stack</h3>
 <p>For TypeScript, critical validators include the TypeScript compiler,
 ESLint for code quality, and a unit testing framework like Jest.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validators</span><span class="kw">:</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> TypeScriptCompiler</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Verifies TypeScript syntax and type correctness.&quot;</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;tsc&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--noEmit&quot;</span><span class="kw">]</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;frontend/&quot;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;regex&quot;</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">      # Example: file(line,col): error TSxxxx: message</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;^(.*?)</span><span class="sc">\\</span><span class="st">((</span><span class="sc">\\</span><span class="st">d+),(</span><span class="sc">\\</span><span class="st">d+)</span><span class="sc">\\</span><span class="st">): error (TS</span><span class="sc">\\</span><span class="st">d+): (.*)$&quot;</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">groups</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;file&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;line&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;column&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;errorCode&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;message&quot;</span><span class="kw">]</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> ESLintLinter</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Enforces code style and best practices for TypeScript/JavaScript.&quot;</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;eslint&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--format&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;json&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;src/&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--max-warnings=0&quot;</span><span class="kw">]</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;frontend/&quot;</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;jsonpath&quot;</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">      # Check if any files have errors (errorCount &gt; 0).</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;$.[?(@.errorCount &gt; 0)].errorCount&quot;</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;value.length == 0&quot;</span><span class="co"> # Value is an array of error counts, should be empty</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> JestUnitTests</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Runs Jest unit tests and reports failures.&quot;</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;jest&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--ci&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--json&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--outputFile=jest-report.json&quot;</span><span class="kw">]</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;frontend/&quot;</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;jsonpath&quot;</span></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;$.numFailedTests&quot;</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;value == 0&quot;</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> ZodSchemaValidation</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Ensures data schemas adhere to Zod definitions (e.g., for API contracts).&quot;</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;node&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;scripts/validate_zod_schemas.js&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;src/schemas&quot;</span><span class="kw">]</span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;frontend/&quot;</span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="co">    # Assuming script exits with 0 for success.</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a aria-hidden="true" href="#cb11-1" tabindex="-1"></a><span class="fu">validators</span><span class="kw">:</span></span>
+<span id="cb11-2"><a aria-hidden="true" href="#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a aria-hidden="true" href="#cb11-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> TypeScriptCompiler</span></span>
+<span id="cb11-4"><a aria-hidden="true" href="#cb11-4" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Verifies TypeScript syntax and type correctness."</span></span>
+<span id="cb11-5"><a aria-hidden="true" href="#cb11-5" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"tsc"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--noEmit"</span><span class="kw">]</span></span>
+<span id="cb11-6"><a aria-hidden="true" href="#cb11-6" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"frontend/"</span></span>
+<span id="cb11-7"><a aria-hidden="true" href="#cb11-7" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb11-8"><a aria-hidden="true" href="#cb11-8" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
+<span id="cb11-9"><a aria-hidden="true" href="#cb11-9" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"regex"</span></span>
+<span id="cb11-10"><a aria-hidden="true" href="#cb11-10" tabindex="-1"></a><span class="co">      # Example: file(line,col): error TSxxxx: message</span></span>
+<span id="cb11-11"><a aria-hidden="true" href="#cb11-11" tabindex="-1"></a><span class="at">      </span><span class="fu">pattern</span><span class="kw">:</span><span class="at"> </span><span class="st">"^(.*?)</span><span class="sc">\\</span><span class="st">((</span><span class="sc">\\</span><span class="st">d+),(</span><span class="sc">\\</span><span class="st">d+)</span><span class="sc">\\</span><span class="st">): error (TS</span><span class="sc">\\</span><span class="st">d+): (.*)$"</span></span>
+<span id="cb11-12"><a aria-hidden="true" href="#cb11-12" tabindex="-1"></a><span class="at">      </span><span class="fu">groups</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"file"</span><span class="kw">,</span><span class="at"> </span><span class="st">"line"</span><span class="kw">,</span><span class="at"> </span><span class="st">"column"</span><span class="kw">,</span><span class="at"> </span><span class="st">"errorCode"</span><span class="kw">,</span><span class="at"> </span><span class="st">"message"</span><span class="kw">]</span></span>
+<span id="cb11-13"><a aria-hidden="true" href="#cb11-13" tabindex="-1"></a></span>
+<span id="cb11-14"><a aria-hidden="true" href="#cb11-14" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> ESLintLinter</span></span>
+<span id="cb11-15"><a aria-hidden="true" href="#cb11-15" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Enforces code style and best practices for TypeScript/JavaScript."</span></span>
+<span id="cb11-16"><a aria-hidden="true" href="#cb11-16" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"eslint"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--format"</span><span class="kw">,</span><span class="at"> </span><span class="st">"json"</span><span class="kw">,</span><span class="at"> </span><span class="st">"src/"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--max-warnings=0"</span><span class="kw">]</span></span>
+<span id="cb11-17"><a aria-hidden="true" href="#cb11-17" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"frontend/"</span></span>
+<span id="cb11-18"><a aria-hidden="true" href="#cb11-18" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb11-19"><a aria-hidden="true" href="#cb11-19" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
+<span id="cb11-20"><a aria-hidden="true" href="#cb11-20" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"jsonpath"</span></span>
+<span id="cb11-21"><a aria-hidden="true" href="#cb11-21" tabindex="-1"></a><span class="co">      # Check if any files have errors (errorCount &gt; 0).</span></span>
+<span id="cb11-22"><a aria-hidden="true" href="#cb11-22" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"$.[?(@.errorCount &gt; 0)].errorCount"</span></span>
+<span id="cb11-23"><a aria-hidden="true" href="#cb11-23" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">"value.length == 0"</span><span class="co"> # Value is an array of error counts, should be empty</span></span>
+<span id="cb11-24"><a aria-hidden="true" href="#cb11-24" tabindex="-1"></a></span>
+<span id="cb11-25"><a aria-hidden="true" href="#cb11-25" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> JestUnitTests</span></span>
+<span id="cb11-26"><a aria-hidden="true" href="#cb11-26" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Runs Jest unit tests and reports failures."</span></span>
+<span id="cb11-27"><a aria-hidden="true" href="#cb11-27" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"jest"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--ci"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--json"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--outputFile=jest-report.json"</span><span class="kw">]</span></span>
+<span id="cb11-28"><a aria-hidden="true" href="#cb11-28" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"frontend/"</span></span>
+<span id="cb11-29"><a aria-hidden="true" href="#cb11-29" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb11-30"><a aria-hidden="true" href="#cb11-30" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
+<span id="cb11-31"><a aria-hidden="true" href="#cb11-31" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"jsonpath"</span></span>
+<span id="cb11-32"><a aria-hidden="true" href="#cb11-32" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"$.numFailedTests"</span></span>
+<span id="cb11-33"><a aria-hidden="true" href="#cb11-33" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">"value == 0"</span></span>
+<span id="cb11-34"><a aria-hidden="true" href="#cb11-34" tabindex="-1"></a></span>
+<span id="cb11-35"><a aria-hidden="true" href="#cb11-35" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> ZodSchemaValidation</span></span>
+<span id="cb11-36"><a aria-hidden="true" href="#cb11-36" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Ensures data schemas adhere to Zod definitions (e.g., for API contracts)."</span></span>
+<span id="cb11-37"><a aria-hidden="true" href="#cb11-37" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"node"</span><span class="kw">,</span><span class="at"> </span><span class="st">"scripts/validate_zod_schemas.js"</span><span class="kw">,</span><span class="at"> </span><span class="st">"src/schemas"</span><span class="kw">]</span></span>
+<span id="cb11-38"><a aria-hidden="true" href="#cb11-38" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"frontend/"</span></span>
+<span id="cb11-39"><a aria-hidden="true" href="#cb11-39" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb11-40"><a aria-hidden="true" href="#cb11-40" tabindex="-1"></a></span>
+<span id="cb11-41"><a aria-hidden="true" href="#cb11-41" tabindex="-1"></a><span class="co">    # Assuming script exits with 0 for success.</span></span></code></pre></div>
 <h3 id="terraforminfrastructure-as-code-stack">Terraform/Infrastructure
 as Code Stack</h3>
 <p>Infrastructure as Code (IaC) requires specialized validation for
 syntax, best practices, security, and idempotency.</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validators</span><span class="kw">:</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> TerraformSyntaxValidate</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Checks Terraform configuration syntax and argument validity.&quot;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;terraform&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;validate&quot;</span><span class="kw">]</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;infra/aws/&quot;</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> TFLint</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Lints Terraform code for errors, warnings, and best practices.&quot;</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;tflint&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--recursive&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--format&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;json&quot;</span><span class="kw">]</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;infra/aws/&quot;</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;jsonpath&quot;</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;$.issues&quot;</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;value.length == 0&quot;</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> CheckovSecurityScan</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Scans Terraform for common security misconfigurations and policy violations.&quot;</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;checkov&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;-f&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;.&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--framework&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;terraform&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;--output&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;json&quot;</span><span class="kw">]</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;infra/aws/&quot;</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;jsonpath&quot;</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;$.results.failed_checks&quot;</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;value.length == 0&quot;</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> TerraformPlanDiffCheck</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Generates a Terraform plan and checks if any resource changes are proposed.&quot;</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> bash</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> -c</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="kw">      - </span><span class="ch">&gt;-</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>          terraform plan -no-color |</span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>          grep &#39;No changes. Your infrastructure matches the configuration.&#39;</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;infra/aws/&quot;</span></span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;fail_and_retry&quot;</span><span class="co"> # If plan proposes changes, something is wrong or the mission wasn&#39;t to change.</span></span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;exit_code == 0&quot;</span><span class="co"> # grep will return 0 if the string is found (no changes)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a aria-hidden="true" href="#cb12-1" tabindex="-1"></a><span class="fu">validators</span><span class="kw">:</span></span>
+<span id="cb12-2"><a aria-hidden="true" href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a aria-hidden="true" href="#cb12-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> TerraformSyntaxValidate</span></span>
+<span id="cb12-4"><a aria-hidden="true" href="#cb12-4" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Checks Terraform configuration syntax and argument validity."</span></span>
+<span id="cb12-5"><a aria-hidden="true" href="#cb12-5" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"terraform"</span><span class="kw">,</span><span class="at"> </span><span class="st">"validate"</span><span class="kw">]</span></span>
+<span id="cb12-6"><a aria-hidden="true" href="#cb12-6" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"infra/aws/"</span></span>
+<span id="cb12-7"><a aria-hidden="true" href="#cb12-7" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb12-8"><a aria-hidden="true" href="#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a aria-hidden="true" href="#cb12-9" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> TFLint</span></span>
+<span id="cb12-10"><a aria-hidden="true" href="#cb12-10" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Lints Terraform code for errors, warnings, and best practices."</span></span>
+<span id="cb12-11"><a aria-hidden="true" href="#cb12-11" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"tflint"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--recursive"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--format"</span><span class="kw">,</span><span class="at"> </span><span class="st">"json"</span><span class="kw">]</span></span>
+<span id="cb12-12"><a aria-hidden="true" href="#cb12-12" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"infra/aws/"</span></span>
+<span id="cb12-13"><a aria-hidden="true" href="#cb12-13" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb12-14"><a aria-hidden="true" href="#cb12-14" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
+<span id="cb12-15"><a aria-hidden="true" href="#cb12-15" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"jsonpath"</span></span>
+<span id="cb12-16"><a aria-hidden="true" href="#cb12-16" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"$.issues"</span></span>
+<span id="cb12-17"><a aria-hidden="true" href="#cb12-17" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">"value.length == 0"</span></span>
+<span id="cb12-18"><a aria-hidden="true" href="#cb12-18" tabindex="-1"></a></span>
+<span id="cb12-19"><a aria-hidden="true" href="#cb12-19" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> CheckovSecurityScan</span></span>
+<span id="cb12-20"><a aria-hidden="true" href="#cb12-20" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Scans Terraform for common security misconfigurations and policy violations."</span></span>
+<span id="cb12-21"><a aria-hidden="true" href="#cb12-21" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"checkov"</span><span class="kw">,</span><span class="at"> </span><span class="st">"-f"</span><span class="kw">,</span><span class="at"> </span><span class="st">"."</span><span class="kw">,</span><span class="at"> </span><span class="st">"--framework"</span><span class="kw">,</span><span class="at"> </span><span class="st">"terraform"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--output"</span><span class="kw">,</span><span class="at"> </span><span class="st">"json"</span><span class="kw">]</span></span>
+<span id="cb12-22"><a aria-hidden="true" href="#cb12-22" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"infra/aws/"</span></span>
+<span id="cb12-23"><a aria-hidden="true" href="#cb12-23" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span></span>
+<span id="cb12-24"><a aria-hidden="true" href="#cb12-24" tabindex="-1"></a><span class="at">    </span><span class="fu">output_parser</span><span class="kw">:</span></span>
+<span id="cb12-25"><a aria-hidden="true" href="#cb12-25" tabindex="-1"></a><span class="at">      </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"jsonpath"</span></span>
+<span id="cb12-26"><a aria-hidden="true" href="#cb12-26" tabindex="-1"></a><span class="at">      </span><span class="fu">path</span><span class="kw">:</span><span class="at"> </span><span class="st">"$.results.failed_checks"</span></span>
+<span id="cb12-27"><a aria-hidden="true" href="#cb12-27" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">"value.length == 0"</span></span>
+<span id="cb12-28"><a aria-hidden="true" href="#cb12-28" tabindex="-1"></a></span>
+<span id="cb12-29"><a aria-hidden="true" href="#cb12-29" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> TerraformPlanDiffCheck</span></span>
+<span id="cb12-30"><a aria-hidden="true" href="#cb12-30" tabindex="-1"></a><span class="at">    </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"Generates a Terraform plan and checks if any resource changes are proposed."</span></span>
+<span id="cb12-31"><a aria-hidden="true" href="#cb12-31" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span></span>
+<span id="cb12-32"><a aria-hidden="true" href="#cb12-32" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> bash</span></span>
+<span id="cb12-33"><a aria-hidden="true" href="#cb12-33" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> -c</span></span>
+<span id="cb12-34"><a aria-hidden="true" href="#cb12-34" tabindex="-1"></a><span class="kw">      - </span><span class="ch">&gt;-</span></span>
+<span id="cb12-35"><a aria-hidden="true" href="#cb12-35" tabindex="-1"></a>          terraform plan -no-color |</span>
+<span id="cb12-36"><a aria-hidden="true" href="#cb12-36" tabindex="-1"></a>          grep 'No changes. Your infrastructure matches the configuration.'</span>
+<span id="cb12-37"><a aria-hidden="true" href="#cb12-37" tabindex="-1"></a><span class="at">    </span><span class="fu">cwd</span><span class="kw">:</span><span class="at"> </span><span class="st">"infra/aws/"</span></span>
+<span id="cb12-38"><a aria-hidden="true" href="#cb12-38" tabindex="-1"></a><span class="at">    </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> </span><span class="st">"fail_and_retry"</span><span class="co"> # If plan proposes changes, something is wrong or the mission wasn't to change.</span></span>
+<span id="cb12-39"><a aria-hidden="true" href="#cb12-39" tabindex="-1"></a><span class="at">    </span><span class="fu">success_criteria</span><span class="kw">:</span><span class="at"> </span><span class="st">"exit_code == 0"</span><span class="co"> # grep will return 0 if the string is found (no changes)</span></span></code></pre></div>
 <h2 id="effector-patterns">Effector Patterns</h2>
 <p>Effectors are the final stage of a successful SDaC loop, taking the
 validated changes and applying them to the external world. These
@@ -636,73 +626,69 @@ patterns integrate with common development workflows.</p>
 <h3 id="git-commit-effector">Git Commit Effector</h3>
 <p>This effector commits the generated and validated changes to a Git
 repository, potentially pushing to a remote.</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effector</span><span class="kw">:</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;git_commit&quot;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">auto_push</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branch_prefix</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;sdac-&quot;</span><span class="co"> # New branch names will start with &#39;sdac-&#39;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branch_name_template</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;{mission_id}-v{mission_version}-{run_id_short}&quot;</span><span class="co"> # e.g., sdac-fix-pagination-off-by-one-v1-abc123</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">    commit_message_template</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      sdac({mission_id}@{mission_version}): {goal}</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      Automated by SDaC loop.</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>      Audit trace: {audit_trace_url}</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">git_repo_path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;./&quot;</span><span class="co"> # Relative path to the git repository</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a aria-hidden="true" href="#cb13-1" tabindex="-1"></a><span class="fu">effector</span><span class="kw">:</span></span>
+<span id="cb13-2"><a aria-hidden="true" href="#cb13-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"git_commit"</span></span>
+<span id="cb13-3"><a aria-hidden="true" href="#cb13-3" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb13-4"><a aria-hidden="true" href="#cb13-4" tabindex="-1"></a><span class="at">    </span><span class="fu">auto_push</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb13-5"><a aria-hidden="true" href="#cb13-5" tabindex="-1"></a><span class="at">    </span><span class="fu">branch_prefix</span><span class="kw">:</span><span class="at"> </span><span class="st">"sdac-"</span><span class="co"> # New branch names will start with 'sdac-'</span></span>
+<span id="cb13-6"><a aria-hidden="true" href="#cb13-6" tabindex="-1"></a><span class="at">    </span><span class="fu">branch_name_template</span><span class="kw">:</span><span class="at"> </span><span class="st">"{mission_id}-v{mission_version}-{run_id_short}"</span><span class="co"> # e.g., sdac-fix-pagination-off-by-one-v1-abc123</span></span>
+<span id="cb13-7"><a aria-hidden="true" href="#cb13-7" tabindex="-1"></a><span class="fu">    commit_message_template</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb13-8"><a aria-hidden="true" href="#cb13-8" tabindex="-1"></a>      sdac({mission_id}@{mission_version}): {goal}</span>
+<span id="cb13-9"><a aria-hidden="true" href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a aria-hidden="true" href="#cb13-10" tabindex="-1"></a>      Automated by SDaC loop.</span>
+<span id="cb13-11"><a aria-hidden="true" href="#cb13-11" tabindex="-1"></a>      Audit trace: {audit_trace_url}</span>
+<span id="cb13-12"><a aria-hidden="true" href="#cb13-12" tabindex="-1"></a><span class="at">    </span><span class="fu">git_repo_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"./"</span><span class="co"> # Relative path to the git repository</span></span></code></pre></div>
 <h3 id="pull-request-creation-effector-github">Pull Request Creation
 Effector (GitHub)</h3>
 <p>After committing, this pattern automatically opens a pull request on
 GitHub, ready for human review.</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effector</span><span class="kw">:</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;github_pull_request&quot;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">git_repo_path</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;./&quot;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">base_branch</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;main&quot;</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">title_template</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;[SDaC] {mission_id}@{mission_version}: {goal}&quot;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">    body_template</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>      This Pull Request was automatically generated by an SDaC loop.</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      **Mission:** {mission_id}@{mission_version}</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>      **Goal:** {goal}</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>      **Audit Trace:** {audit_trace_url}</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>      Please review the changes carefully.</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">labels</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;sdac-automated&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;awaiting-review&quot;</span><span class="kw">]</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">reviewers</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;@dev-lead&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;@qa-engineer&quot;</span><span class="kw">]</span><span class="co"> # Optional: Request specific reviewers</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # Creates a draft PR initially</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a aria-hidden="true" href="#cb14-1" tabindex="-1"></a><span class="fu">effector</span><span class="kw">:</span></span>
+<span id="cb14-2"><a aria-hidden="true" href="#cb14-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"github_pull_request"</span></span>
+<span id="cb14-3"><a aria-hidden="true" href="#cb14-3" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb14-4"><a aria-hidden="true" href="#cb14-4" tabindex="-1"></a><span class="at">    </span><span class="fu">git_repo_path</span><span class="kw">:</span><span class="at"> </span><span class="st">"./"</span></span>
+<span id="cb14-5"><a aria-hidden="true" href="#cb14-5" tabindex="-1"></a><span class="at">    </span><span class="fu">base_branch</span><span class="kw">:</span><span class="at"> </span><span class="st">"main"</span></span>
+<span id="cb14-6"><a aria-hidden="true" href="#cb14-6" tabindex="-1"></a><span class="at">    </span><span class="fu">title_template</span><span class="kw">:</span><span class="at"> </span><span class="st">"[SDaC] {mission_id}@{mission_version}: {goal}"</span></span>
+<span id="cb14-7"><a aria-hidden="true" href="#cb14-7" tabindex="-1"></a><span class="fu">    body_template</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb14-8"><a aria-hidden="true" href="#cb14-8" tabindex="-1"></a>      This Pull Request was automatically generated by an SDaC loop.</span>
+<span id="cb14-9"><a aria-hidden="true" href="#cb14-9" tabindex="-1"></a></span>
+<span id="cb14-10"><a aria-hidden="true" href="#cb14-10" tabindex="-1"></a>      **Mission:** {mission_id}@{mission_version}</span>
+<span id="cb14-11"><a aria-hidden="true" href="#cb14-11" tabindex="-1"></a></span>
+<span id="cb14-12"><a aria-hidden="true" href="#cb14-12" tabindex="-1"></a>      **Goal:** {goal}</span>
+<span id="cb14-13"><a aria-hidden="true" href="#cb14-13" tabindex="-1"></a></span>
+<span id="cb14-14"><a aria-hidden="true" href="#cb14-14" tabindex="-1"></a>      **Audit Trace:** {audit_trace_url}</span>
+<span id="cb14-15"><a aria-hidden="true" href="#cb14-15" tabindex="-1"></a></span>
+<span id="cb14-16"><a aria-hidden="true" href="#cb14-16" tabindex="-1"></a>      Please review the changes carefully.</span>
+<span id="cb14-17"><a aria-hidden="true" href="#cb14-17" tabindex="-1"></a><span class="at">    </span><span class="fu">labels</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"sdac-automated"</span><span class="kw">,</span><span class="at"> </span><span class="st">"awaiting-review"</span><span class="kw">]</span></span>
+<span id="cb14-18"><a aria-hidden="true" href="#cb14-18" tabindex="-1"></a><span class="at">    </span><span class="fu">reviewers</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"@dev-lead"</span><span class="kw">,</span><span class="at"> </span><span class="st">"@qa-engineer"</span><span class="kw">]</span><span class="co"> # Optional: Request specific reviewers</span></span>
+<span id="cb14-19"><a aria-hidden="true" href="#cb14-19" tabindex="-1"></a><span class="at">    </span><span class="fu">draft</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span><span class="co"> # Creates a draft PR initially</span></span></code></pre></div>
 <h3 id="cicd-trigger-effector-webhook">CI/CD Trigger Effector
 (Webhook)</h3>
 <p>This effector sends a webhook to trigger a CI/CD pipeline, allowing
 further automated checks or deployment.</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effector</span><span class="kw">:</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;webhook&quot;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://api.github.com/repos/{github_org}/{github_repo}/dispatches&quot;</span><span class="co"> # GitHub Actions example</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">method</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;POST&quot;</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">headers</span><span class="kw">:</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">Authorization</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Bearer {github_token}&quot;</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">Accept</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;application/vnd.github.v3+json&quot;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">payload</span><span class="kw">:</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">event_type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;sdac_changes_detected&quot;</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">client_payload</span><span class="kw">:</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;{mission_id}&quot;</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">branch</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;{branch_name}&quot;</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">commit_sha</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;{commit_sha}&quot;</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">repo_name</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;{github_repo}&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb15-1"><a aria-hidden="true" href="#cb15-1" tabindex="-1"></a><span class="fu">effector</span><span class="kw">:</span></span>
+<span id="cb15-2"><a aria-hidden="true" href="#cb15-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"webhook"</span></span>
+<span id="cb15-3"><a aria-hidden="true" href="#cb15-3" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb15-4"><a aria-hidden="true" href="#cb15-4" tabindex="-1"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> </span><span class="st">"https://api.github.com/repos/{github_org}/{github_repo}/dispatches"</span><span class="co"> # GitHub Actions example</span></span>
+<span id="cb15-5"><a aria-hidden="true" href="#cb15-5" tabindex="-1"></a><span class="at">    </span><span class="fu">method</span><span class="kw">:</span><span class="at"> </span><span class="st">"POST"</span></span>
+<span id="cb15-6"><a aria-hidden="true" href="#cb15-6" tabindex="-1"></a><span class="at">    </span><span class="fu">headers</span><span class="kw">:</span></span>
+<span id="cb15-7"><a aria-hidden="true" href="#cb15-7" tabindex="-1"></a><span class="at">      </span><span class="fu">Authorization</span><span class="kw">:</span><span class="at"> </span><span class="st">"Bearer {github_token}"</span></span>
+<span id="cb15-8"><a aria-hidden="true" href="#cb15-8" tabindex="-1"></a><span class="at">      </span><span class="fu">Accept</span><span class="kw">:</span><span class="at"> </span><span class="st">"application/vnd.github.v3+json"</span></span>
+<span id="cb15-9"><a aria-hidden="true" href="#cb15-9" tabindex="-1"></a><span class="at">    </span><span class="fu">payload</span><span class="kw">:</span></span>
+<span id="cb15-10"><a aria-hidden="true" href="#cb15-10" tabindex="-1"></a><span class="at">      </span><span class="fu">event_type</span><span class="kw">:</span><span class="at"> </span><span class="st">"sdac_changes_detected"</span></span>
+<span id="cb15-11"><a aria-hidden="true" href="#cb15-11" tabindex="-1"></a><span class="at">      </span><span class="fu">client_payload</span><span class="kw">:</span></span>
+<span id="cb15-12"><a aria-hidden="true" href="#cb15-12" tabindex="-1"></a><span class="at">        </span><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> </span><span class="st">"{mission_id}"</span></span>
+<span id="cb15-13"><a aria-hidden="true" href="#cb15-13" tabindex="-1"></a><span class="at">        </span><span class="fu">branch</span><span class="kw">:</span><span class="at"> </span><span class="st">"{branch_name}"</span></span>
+<span id="cb15-14"><a aria-hidden="true" href="#cb15-14" tabindex="-1"></a><span class="at">        </span><span class="fu">commit_sha</span><span class="kw">:</span><span class="at"> </span><span class="st">"{commit_sha}"</span></span>
+<span id="cb15-15"><a aria-hidden="true" href="#cb15-15" tabindex="-1"></a><span class="at">        </span><span class="fu">repo_name</span><span class="kw">:</span><span class="at"> </span><span class="st">"{github_repo}"</span></span></code></pre></div>
 <h3 id="local-file-system-effector">Local File System Effector</h3>
 <p>For local development and rapid iteration, this effector saves the
 generated changes to a specific local directory.</p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effector</span><span class="kw">:</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;local_filesystem&quot;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output_directory</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;sdac_artifacts/{mission_id}&quot;</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">filename_template</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;{mission_id}-v{mission_version}_changes.patch&quot;</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">format</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;diff&quot;</span><span class="co"> # Can also be &#39;full_files&#39; for complete changed files</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a aria-hidden="true" href="#cb16-1" tabindex="-1"></a><span class="fu">effector</span><span class="kw">:</span></span>
+<span id="cb16-2"><a aria-hidden="true" href="#cb16-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"local_filesystem"</span></span>
+<span id="cb16-3"><a aria-hidden="true" href="#cb16-3" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb16-4"><a aria-hidden="true" href="#cb16-4" tabindex="-1"></a><span class="at">    </span><span class="fu">output_directory</span><span class="kw">:</span><span class="at"> </span><span class="st">"sdac_artifacts/{mission_id}"</span></span>
+<span id="cb16-5"><a aria-hidden="true" href="#cb16-5" tabindex="-1"></a><span class="at">    </span><span class="fu">filename_template</span><span class="kw">:</span><span class="at"> </span><span class="st">"{mission_id}-v{mission_version}_changes.patch"</span></span>
+<span id="cb16-6"><a aria-hidden="true" href="#cb16-6" tabindex="-1"></a><span class="at">    </span><span class="fu">format</span><span class="kw">:</span><span class="at"> </span><span class="st">"diff"</span><span class="co"> # Can also be 'full_files' for complete changed files</span></span></code></pre></div>
 <h2 id="circuit-breaker-configurations">Circuit Breaker
 Configurations</h2>
 <p>Circuit breakers are critical safety mechanisms that prevent an SDaC
@@ -710,53 +696,49 @@ loop from running out of control, consuming excessive resources, or
 making too many unsuccessful attempts.</p>
 <h3 id="max-iterations-breaker">Max Iterations Breaker</h3>
 <p>This is one of the simplest circuit breakers: limit the number of
-times the Map-Updater can attempt to satisfy a mission.</p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circuit_breaker</span><span class="kw">:</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;max_iterations&quot;</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">limit</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span><span class="co"> # Stop after 10 attempts by the Map-Updater</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_break</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;log_and_notify&quot;</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">notification_channel</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;slack_#sdac-alerts&quot;</span></span></code></pre></div>
+times the <a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> can attempt to satisfy a mission.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a aria-hidden="true" href="#cb17-1" tabindex="-1"></a><span class="fu">circuit_breaker</span><span class="kw">:</span></span>
+<span id="cb17-2"><a aria-hidden="true" href="#cb17-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"max_iterations"</span></span>
+<span id="cb17-3"><a aria-hidden="true" href="#cb17-3" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb17-4"><a aria-hidden="true" href="#cb17-4" tabindex="-1"></a><span class="at">    </span><span class="fu">limit</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span><span class="co"> # Stop after 10 attempts by the Map-Updater</span></span>
+<span id="cb17-5"><a aria-hidden="true" href="#cb17-5" tabindex="-1"></a><span class="at">    </span><span class="fu">on_break</span><span class="kw">:</span><span class="at"> </span><span class="st">"log_and_notify"</span></span>
+<span id="cb17-6"><a aria-hidden="true" href="#cb17-6" tabindex="-1"></a><span class="at">    </span><span class="fu">notification_channel</span><span class="kw">:</span><span class="at"> </span><span class="st">"slack_#sdac-alerts"</span></span></code></pre></div>
 <h3 id="time-limit-breaker">Time Limit Breaker</h3>
 <p>Prevents a single SDaC loop execution from running for an
 unreasonably long time, indicating a potential stall or complex
 problem.</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circuit_breaker</span><span class="kw">:</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;time_limit&quot;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">duration_seconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">900</span><span class="co"> # Stop after 15 minutes (900 seconds)</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_break</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;log_and_cancel&quot;</span><span class="co"> # Cancel any ongoing Map-Updater processes</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">notification_channel</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;pagerduty_on_call&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a aria-hidden="true" href="#cb18-1" tabindex="-1"></a><span class="fu">circuit_breaker</span><span class="kw">:</span></span>
+<span id="cb18-2"><a aria-hidden="true" href="#cb18-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"time_limit"</span></span>
+<span id="cb18-3"><a aria-hidden="true" href="#cb18-3" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb18-4"><a aria-hidden="true" href="#cb18-4" tabindex="-1"></a><span class="at">    </span><span class="fu">duration_seconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">900</span><span class="co"> # Stop after 15 minutes (900 seconds)</span></span>
+<span id="cb18-5"><a aria-hidden="true" href="#cb18-5" tabindex="-1"></a><span class="at">    </span><span class="fu">on_break</span><span class="kw">:</span><span class="at"> </span><span class="st">"log_and_cancel"</span><span class="co"> # Cancel any ongoing Map-Updater processes</span></span>
+<span id="cb18-6"><a aria-hidden="true" href="#cb18-6" tabindex="-1"></a><span class="at">    </span><span class="fu">notification_channel</span><span class="kw">:</span><span class="at"> </span><span class="st">"pagerduty_on_call"</span></span></code></pre></div>
 <h3 id="validation-failure-threshold-breaker">Validation Failure
 Threshold Breaker</h3>
 <p>Halts the loop if the Map-Updater consistently fails validation,
 suggesting it’s unable to produce correct output or the mission is
 ill-defined.</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circuit_breaker</span><span class="kw">:</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;validation_failure_threshold&quot;</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">consecutive_failures</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span><span class="co"> # Stop if 3 consecutive validation runs fail</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">total_failures</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span><span class="co">       # Stop if 5 total validation runs fail across all iterations</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_break</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;log_and_suspend&quot;</span><span class="co"> # Suspend the loop, require manual intervention to resume</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">notification_channel</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;email_sdac-owners&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a aria-hidden="true" href="#cb19-1" tabindex="-1"></a><span class="fu">circuit_breaker</span><span class="kw">:</span></span>
+<span id="cb19-2"><a aria-hidden="true" href="#cb19-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"validation_failure_threshold"</span></span>
+<span id="cb19-3"><a aria-hidden="true" href="#cb19-3" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb19-4"><a aria-hidden="true" href="#cb19-4" tabindex="-1"></a><span class="at">    </span><span class="fu">consecutive_failures</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span><span class="co"> # Stop if 3 consecutive validation runs fail</span></span>
+<span id="cb19-5"><a aria-hidden="true" href="#cb19-5" tabindex="-1"></a><span class="at">    </span><span class="fu">total_failures</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span><span class="co">       # Stop if 5 total validation runs fail across all iterations</span></span>
+<span id="cb19-6"><a aria-hidden="true" href="#cb19-6" tabindex="-1"></a><span class="at">    </span><span class="fu">on_break</span><span class="kw">:</span><span class="at"> </span><span class="st">"log_and_suspend"</span><span class="co"> # Suspend the loop, require manual intervention to resume</span></span>
+<span id="cb19-7"><a aria-hidden="true" href="#cb19-7" tabindex="-1"></a><span class="at">    </span><span class="fu">notification_channel</span><span class="kw">:</span><span class="at"> </span><span class="st">"email_sdac-owners"</span></span></code></pre></div>
 <h3 id="human-intervention-breaker">Human Intervention Breaker</h3>
 <p>Introduces a manual approval step into the loop, allowing engineers
 to review changes before further automation proceeds. This is
 particularly useful for sensitive operations or after a certain number
 of automatic retries.</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">circuit_breaker</span><span class="kw">:</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;manual_approval&quot;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">require_after_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span><span class="co"> # After 3 automatic iterations, require human approval</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">prompt_message</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;SDaC loop has made 3 attempts. Review proposed changes before proceeding.&quot;</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">notification_channel</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;slack_#sdac-approvals&quot;</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">approval_timeout_minutes</span><span class="kw">:</span><span class="at"> </span><span class="dv">60</span><span class="co"> # If no approval within 60 minutes, break the loop</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_break</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;log_and_discard_changes&quot;</span></span></code></pre></div>
-<hr />
+<div class="sourceCode" id="cb20"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb20-1"><a aria-hidden="true" href="#cb20-1" tabindex="-1"></a><span class="fu">circuit_breaker</span><span class="kw">:</span></span>
+<span id="cb20-2"><a aria-hidden="true" href="#cb20-2" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> </span><span class="st">"manual_approval"</span></span>
+<span id="cb20-3"><a aria-hidden="true" href="#cb20-3" tabindex="-1"></a><span class="at">  </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb20-4"><a aria-hidden="true" href="#cb20-4" tabindex="-1"></a><span class="at">    </span><span class="fu">require_after_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span><span class="co"> # After 3 automatic iterations, require human approval</span></span>
+<span id="cb20-5"><a aria-hidden="true" href="#cb20-5" tabindex="-1"></a><span class="at">    </span><span class="fu">prompt_message</span><span class="kw">:</span><span class="at"> </span><span class="st">"SDaC loop has made 3 attempts. Review proposed changes before proceeding."</span></span>
+<span id="cb20-6"><a aria-hidden="true" href="#cb20-6" tabindex="-1"></a><span class="at">    </span><span class="fu">notification_channel</span><span class="kw">:</span><span class="at"> </span><span class="st">"slack_#sdac-approvals"</span></span>
+<span id="cb20-7"><a aria-hidden="true" href="#cb20-7" tabindex="-1"></a><span class="at">    </span><span class="fu">approval_timeout_minutes</span><span class="kw">:</span><span class="at"> </span><span class="dv">60</span><span class="co"> # If no approval within 60 minutes, break the loop</span></span>
+<span id="cb20-8"><a aria-hidden="true" href="#cb20-8" tabindex="-1"></a><span class="at">    </span><span class="fu">on_break</span><span class="kw">:</span><span class="at"> </span><span class="st">"log_and_discard_changes"</span></span></code></pre></div>
+<hr/>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
@@ -775,35 +757,31 @@ output a diff to a local directory.</p></li>
 “Max Iterations Breaker” and set a low limit (e.g., 2 or 3) to observe
 how the system handles reaching that threshold.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 17 – Appendix C: Pattern Library | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-17-appendix-c-pattern-library" data-share-text="Architects of Intent — Chapter 17 – Appendix C: Pattern Library">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library&amp;text=Chapter%2017%20%E2%80%93%20Appendix%20C%3A%20Pattern%20Library%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library&amp;title=Chapter%2017%20%E2%80%93%20Appendix%20C%3A%20Pattern%20Library%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%2017%20%E2%80%93%20Appendix%20C%3A%20Pattern%20Library%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2017%20%E2%80%93%20Appendix%20C%3A%20Pattern%20Library%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 17 – Appendix C: Pattern Library" data-share-title="Chapter 17 – Appendix C: Pattern Library | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-17-appendix-c-pattern-library" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library&amp;text=Chapter%2017%20%E2%80%93%20Appendix%20C%3A%20Pattern%20Library%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library&amp;title=Chapter%2017%20%E2%80%93%20Appendix%20C%3A%20Pattern%20Library%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2017%20%E2%80%93%20Appendix%20C%3A%20Pattern%20Library%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2017%20%E2%80%93%20Appendix%20C%3A%20Pattern%20Library%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-17-appendix-c-pattern-library">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-16-appendix-b-failure-mode-gallery">← Chapter 16 – Appendix B: Failure Mode Gallery</a>
-    <a class="next-link" href="chapter-18-appendix-d-glossary-and-translation-guide">Chapter 18 – Appendix D: Glossary & Translation Guide →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-16-appendix-b-failure-mode-gallery">← Chapter 16 – Appendix B: Failure Mode Gallery</a>
+<a class="next-link" href="chapter-18-appendix-d-glossary-and-translation-guide">Chapter 18 – Appendix D: Glossary &amp; Translation Guide →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

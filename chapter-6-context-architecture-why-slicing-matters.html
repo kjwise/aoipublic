@@ -1,46 +1,45 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part II Understand It The Theory Behind Reliability</div>
 <div class="chapter-meta"><span class="read-time">14 min read</span></div>
 <h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
 Context Architecture (Why Slicing Matters)</h1>
@@ -53,11 +52,11 @@ you’ve encountered the context window: the maximum amount of text a
 model can process in one call. Context windows range from thousands to
 hundreds of thousands of tokens and keep expanding, but the patterns in
 this chapter don’t depend on a specific number.</p>
-<p>The limit itself is Physics. What you choose to put inside the window
+<p>The limit itself is <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>. What you choose to put inside the window
 is architecture. It’s tempting to treat the window like a bucket: dump
 everything relevant (and often irrelevant) into it and hope the model
 figures it out. This approach might work for quick demos, but it’s a
-recipe for non-determinism, Stochastic Drift, and unreliable systems in
+recipe for non-determinism, <a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a>, and unreliable systems in
 production. It’s why “better Mission Objects” alone stops scaling.</p>
 <p>Even when a model accepts enormous contexts, attention is not
 uniform. A huge context window is not a huge attention budget:
@@ -79,8 +78,9 @@ step spends its budget on the right surface.</p>
 <p>If you want the Part I version first: Chapter 2 introduced slicing
 hygiene as a <code>Prep</code> responsibility (“Slicing 101” and the
 Skeleton-First Rule). This chapter is the full treatment: Context
-Graphs, Branching Factor, and the failure modes that show up in real
-systems. Appendix B is the quick debugging atlas when a loop starts
+Graphs, <a class="concept-link" href="concepts#branching-factor-rule-of-seven" title="See concept: Branching Factor (Rule of
+Seven)">Branching Factor</a>, and the failure modes that show up in real
+systems. <a class="chapter-link" href="chapter-16-appendix-b-failure-mode-gallery#chapter-16-appendix-b-failure-mode-gallery" title="Go to: Appendix B">Appendix B</a> is the quick debugging atlas when a loop starts
 producing weird diffs or thrashing.</p>
 <h2 id="from-context-windows-to-context-graphs">From Context Windows to
 Context Graphs</h2>
@@ -89,7 +89,7 @@ entire codebase, asking them to Refine a specific bug, and telling them,
 “It’s in there somewhere.” They’ll spend more time sifting through noise
 than Refining the problem, and their solution might introduce new issues
 because they misunderstood the boundaries of their task.</p>
-<p>This is where <strong>Context Architecture</strong> comes in. It’s
+<p>This is where <strong><a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a></strong> comes in. It’s
 the discipline of engineering how context is selected, structured, and
 bounded so an LLM (or any agent) can act deterministically. It moves
 beyond raw text dumps to a precise, verifiable understanding of what
@@ -97,13 +97,13 @@ information is relevant and how it relates.</p>
 <p>The core artifact of Context Architecture is the <strong>Context
 Graph</strong>. Imagine a graph where nodes represent discrete units of
 information—files, functions, classes, symbols, documentation segments,
-API contracts, Immune System cases, or even specific lines of code.
+API contracts, <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> cases, or even specific lines of code.
 Edges represent typed relationships: “depends on,” “implements,” “is
 validated by,” “calls,” “references,” “is documented by.”</p>
 <p>In polyglot repositories, the graph also needs
 <strong>identity</strong>. A node isn’t just “a folder”; it’s “a Rust
 crate built with Cargo” or “a Python package built with pyproject.” That
-identity is how the Driver Pattern can select the right mechanism
+identity is how the <a class="concept-link" href="concepts#driver-pattern" title="See concept: Driver Pattern">Driver Pattern</a> can select the right mechanism
 without guessing.</p>
 <p><strong>Example: node identity (computed
 deterministically)</strong></p>
@@ -117,13 +117,12 @@ deterministically)</strong></p>
 deterministic extractors compute by reading manifests
 (<code>Cargo.toml</code>, <code>pyproject.toml</code>) and attaching the
 results to nodes.</p>
-<p>Instead of a monolithic blob, a Context Graph allows you to
+<p>Instead of a monolithic blob, a <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a> allows you to
 <em>slice</em> the exact subset of information pertinent to a single
 task. The slice is produced by deterministic rules. It should include
 three things: the information itself, why it matters to the task, and
 how it should be interpreted.</p>
-<h3
-id="deterministic-scope-routing-a-self-referential-example">Deterministic
+<h3 id="deterministic-scope-routing-a-self-referential-example">Deterministic
 scope routing (a self-referential example)</h3>
 <p>Slicing starts one step earlier than “pick files”: it starts by
 deciding which plane you are in (docs, code, infra, data).</p>
@@ -144,7 +143,7 @@ the Context Graph (Deterministic Extraction)</h2>
 extractor that produces stable nodes and stable edges.</p>
 <p>If you want implementation guidance (storage options, incremental
 rebuilds, and query shapes), see the Context Graph implementation guide
-in Appendix C.</p>
+in <a class="chapter-link" href="chapter-17-appendix-c-pattern-library#chapter-17-appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a>.</p>
 <p>At minimum, build it in two passes:</p>
 <ol type="1">
 <li><strong>Extract nodes:</strong> files, symbols, doc sections,
@@ -162,7 +161,7 @@ reliable move:</p>
 </ul>
 <p><strong>Example: anchor → slice (conceptual)</strong></p>
 <ul>
-<li><strong>Anchor:</strong> the failing Immune System case.</li>
+<li><strong>Anchor:</strong> the failing <a class="concept-link" href="concepts#immune-system-case" title="See concept: Immune System case">Immune System case</a>.</li>
 <li><strong>Map:</strong> the contract (schema / rules doc) that defines
 correctness.</li>
 <li><strong>Terrain:</strong> the implementation under test + direct
@@ -174,7 +173,7 @@ budgets.</li>
 <code>make graph</code> and <code>make slice</code> targets that
 demonstrate this. <code>build_context_graph.py</code> is a simple
 extractor, and <code>slice_context_graph.py</code> consumes the graph to
-produce a bounded context packet.</p>
+produce a bounded <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">context packet</a>.</p>
 <h2 id="how-to-slice-a-context-graph-for-deterministic-action">How to
 Slice a Context Graph for Deterministic Action</h2>
 <p>The goal of slicing is precision: the minimum necessary context to
@@ -248,9 +247,9 @@ stack (what to include first)</h3>
 <p>When you have a fixed context budget, prioritization matters more
 than cleverness. A practical ordering:</p>
 <ol type="1">
-<li><strong>Authority:</strong> system instructions + Mission Object
+<li><strong>Authority:</strong> system instructions + <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>
 (what is allowed, what “done” means).</li>
-<li><strong>Latest deterministic findings:</strong> the last Judge
+<li><strong>Latest deterministic findings:</strong> the last <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>
 output (structured failures, file/line, error codes).</li>
 <li><strong>The anchor surface:</strong> the exact file/region/symbol
 you’re changing.</li>
@@ -266,7 +265,7 @@ only if you can justify the edge.</li>
 </ol>
 <p>If you’re forced to choose between “more code” and “the contract,”
 choose the contract. The fastest way to create drift is to let the
-Effector guess what the contract was supposed to be.</p>
+<a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> guess what the contract was supposed to be.</p>
 <h3 id="chunking-patterns-when-the-slice-still-doesnt-fit">Chunking
 patterns (when the slice still doesn’t fit)</h3>
 <p>Sometimes the minimal neighborhood still exceeds the budget (big
@@ -319,7 +318,7 @@ edits.</li>
 </ul>
 <p>Guardrails:</p>
 <ul>
-<li>Treat retrieved text as <strong>evidence with provenance</strong>
+<li>Treat retrieved text as <strong>evidence with <a class="concept-link" href="concepts#provenance" title="See concept: Provenance">provenance</a></strong>
 (file + line), not authority.</li>
 <li>Run deterministic filters after retrieval: scope allowlists,
 dependency rules, and node/token budgets.</li>
@@ -354,10 +353,9 @@ tokenizers, and your request needs space for the model’s response.</p>
 <span class="math inline"><em>B</em></span> tokens, aim to use at most
 ~<span class="math inline">0.8<em>B</em></span> for inputs, then let the
 output and tooling fit in the rest.</p>
-<h3
-id="repo-shaped-pseudo-example-fixing-contract-drift-with-a-bounded-slice">Repo-shaped
+<h3 id="repo-shaped-pseudo-example-fixing-contract-drift-with-a-bounded-slice">Repo-shaped
 pseudo-example: Fixing contract drift with a bounded slice</h3>
-<p>Suppose a CI Validator fails because your API contract drifted:</p>
+<p>Suppose a CI <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> fails because your API contract drifted:</p>
 <pre class="text"><code>[validator] FAIL: openapi_drift
   path=/api/users GET parameter.limit.type
   expected=integer
@@ -380,19 +378,18 @@ any policy that constrains it).</p>
 <code>GET /api/users</code> and <code>limit</code></p></li>
 <li><p>the Mission Object for the repair (scope allowlist + budgets +
 acceptance criteria), for example:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Restore contract alignment for GET /api/users pagination&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scope_allowlist</span><span class="kw">:</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> openapi.json</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/users_handler.ts</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> clients/mobile/src/types.ts</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> validate_openapi_compat</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_tests</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mobile_typecheck</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Restore contract alignment for GET /api/users pagination"</span></span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="fu">scope_allowlist</span><span class="kw">:</span></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> openapi.json</span></span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/users_handler.ts</span></span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> clients/mobile/src/types.ts</span></span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
+<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> validate_openapi_compat</span></span>
+<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_tests</span></span>
+<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mobile_typecheck</span></span></code></pre></div></li>
 </ul>
 <p><strong>Terrain second:</strong> include only the code and the Immune
 System cases that interpret that contract.</p>
@@ -428,7 +425,7 @@ relationships.</li>
 (directories, headings, grouped constraints). If you’re at 20, you’re
 missing a sub-abstraction. If you’re at 1, flatten.</li>
 </ul>
-<p><strong>Mechanism: quick branching-factor checks</strong></p>
+<p><strong><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">Mechanism</a>: quick branching-factor checks</strong></p>
 <ul>
 <li>Count immediate children in a directory layer.</li>
 <li>Count sibling headings in a doc layer.</li>
@@ -500,8 +497,7 @@ steps.</p>
 <p>Slicing is not about giving the model more. It’s about giving it the
 <em>right</em> evidence, in a bounded packet, so the loop can
 converge.</p>
-<h2
-id="skeleton-first-rule-sensors-extract-models-generate">Skeleton-First
+<h2 id="skeleton-first-rule-sensors-extract-models-generate">Skeleton-First
 Rule: Sensors Extract, Models Generate</h2>
 <p>One of the core ideas for taming stochastic generation is to separate
 the “skeleton” from the “flesh.”</p>
@@ -524,7 +520,7 @@ boundaries.</p>
 </ul>
 <p>These are elements that, if changed randomly by an LLM, would break
 the system’s architecture or external contracts. A
-<strong>Sensor</strong> (deterministic extractor: AST walker, schema
+<strong><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></strong> (deterministic extractor: AST walker, schema
 parser, router introspector) extracts these elements from the existing
 codebase and provides them as immutable context. The LLM is then
 instructed (and often constrained by tools) to operate <em>within</em>
@@ -535,8 +531,7 @@ deterministically extracted by a Sensor and provided as context. The LLM
 can then <em>only</em> generate the body of the method, ensuring it
 adheres to the contract. This significantly reduces the model’s degrees
 of freedom, pushing it towards reliable and verifiable outputs.</p>
-<h2
-id="worked-example-debugging-a-tax-calculation-with-a-precise-slice">Worked
+<h2 id="worked-example-debugging-a-tax-calculation-with-a-precise-slice">Worked
 Example: Debugging a Tax Calculation with a Precise Slice</h2>
 <p>Imagine a tax function is failing one Immune System case. You want
 the agent to fix the bug without rewriting the service.</p>
@@ -588,35 +583,31 @@ the intent or constraints.</p></li>
 output quality and determinism compared to a larger, less structured
 one. Pay attention to how many tokens you use, and how often the model
 strays from the core task.</p>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" data-share-text="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;text=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;title=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)" data-share-title="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;text=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;title=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge">← Chapter 5 – The Ouroboros Protocol (Why Loops Converge)</a>
-    <a class="next-link" href="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as Code (Mission Objects) →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge">← Chapter 5 – The Ouroboros Protocol (Why Loops Converge)</a>
+<a class="next-link" href="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as Code (Mission Objects) →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

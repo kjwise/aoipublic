@@ -1,46 +1,45 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part IV Govern It Safe Evolution</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part IV Govern It Safe Evolution</div>
 <div class="chapter-meta"><span class="read-time">12 min read</span></div>
 <h1 id="chapter-10-immutable-infrastructure-the-guardrails">Chapter 10 –
 Immutable Infrastructure (The Guardrails)</h1>
@@ -52,7 +51,7 @@ prevents it from rewriting the very rules and graders that govern its
 behavior? What happens when a self-modifying system decides to grant
 itself more power, or worse, remove the checks designed to keep it
 safe?</p>
-<p>This is where <em>immutable infrastructure</em> becomes
+<p>This is where <em><a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">immutable infrastructure</a></em> becomes
 non-negotiable. In the context of Software Development as Code (SDaC),
 immutable infrastructure refers to the protected paths and pipelines
 that are designed to grade and govern the system. These are the
@@ -74,8 +73,8 @@ constrain lower tiers, and lower tiers are never allowed to “outvote”
 deterministic reality.</p>
 <div class="line-block">Tier | Source examples | What it means | | :– |
 :– | :– | | <strong>Tier 1</strong> | Code, type definitions, schemas,
-Immune System cases, CI gates | <strong>Deterministic truth.</strong>
-Machine-enforced. If Tier 1 says “no,” the change does not exist.<br />
+<a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> cases, CI gates | <strong>Deterministic truth.</strong>
+Machine-enforced. If Tier 1 says “no,” the change does not exist.<br/>
 | <strong>Tier 2</strong> | Structured configuration, domain models,
 design docs, runbooks | <strong>Authoritative intent.</strong>
 Human-readable and often machine-checked against Tier 1. This is where
@@ -108,7 +107,7 @@ the work of closing bypass paths:</p>
 <h3 id="recursion">3) Recursion</h3>
 <p>The same gates apply to everyone: humans, agents, and maintenance
 loops.</p>
-<p>There is no privileged mode for the Dream Daemon. It emits Missions
+<p>There is no privileged mode for the <a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a>. It emits Missions
 and runs the same Validators, under the same Immutable Infrastructure
 boundaries.</p>
 <h2 id="the-core-problem-guardrails-that-can-grade-themselves">The Core
@@ -138,8 +137,7 @@ scrutiny.</p>
 <p>If the Map is your intent and the Terrain is your code, immutable
 infrastructure is the bedrock: you build on it, but you don’t let the
 loop rewrite it.</p>
-<h3
-id="directory-topology-as-governance-a-self-referential-example">Directory
+<h3 id="directory-topology-as-governance-a-self-referential-example">Directory
 topology as governance (a self-referential example)</h3>
 <p>In this repository, we make the governance boundary legible in the
 filesystem. The “engine” that runs loops is separated from the
@@ -163,10 +161,10 @@ radius, or weaken its graders, it belongs behind the immutable
 boundary.</p>
 </blockquote>
 <p>Use a simple rubric:</p>
-<div class="line-block">Surface | Mutable by the Effector? | Rationale |
+<div class="line-block">Surface | Mutable by the <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>? | Rationale |
 | :– | :– | :– | | Application code | Yes | This is the work. It’s what
 you’re automating. | | Unit tests | Yes | Tests are part of the
-artifact; they travel with code changes.<br />
+artifact; they travel with code changes.<br/>
 | Integration tests | Limited | Higher cost and higher flake risk; often
 need human review when touching real systems. | | CI/CD workflows | No |
 They control deployment safety and can silently weaken gates. | |
@@ -184,7 +182,7 @@ controls that all say “no” in different ways.</p>
 <ol type="1">
 <li><strong>Userspace boundary (OS permissions):</strong> the loop runs
 as a dedicated user that simply cannot write protected paths.</li>
-<li><strong>Runtime scope guard:</strong> the runner refuses to write
+<li><strong>Runtime <a class="concept-link" href="concepts#scope-guard" title="See concept: Scope Guard">scope guard</a>:</strong> the runner refuses to write
 outside an allowlist, even in its working copy.</li>
 <li><strong>CI diff gate:</strong> CI rejects any change that touches
 immutable paths, even if the runner was misconfigured.</li>
@@ -220,41 +218,39 @@ immutable manifest + deterministic gate</h4>
 inspectable. Then enforce it with a deterministic validator that fails
 on any touched immutable path.</p>
 <p><strong>Example manifest:</strong></p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .sdac/immutable.yaml</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">immutable</span><span class="kw">:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">paths</span><span class="kw">:</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;.github/workflows/**&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;policies/**&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;validators/**&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;config/production.yaml&quot;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;.sdac/immutable.yaml&quot;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">patterns</span><span class="kw">:</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;*.pem&quot;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;*.key&quot;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">reasons</span><span class="kw">:</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">&quot;.sdac/immutable.yaml&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Defines the immutable boundary&quot;</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">&quot;config/production.yaml&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Production configuration&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="co"># .sdac/immutable.yaml</span></span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="fu">immutable</span><span class="kw">:</span></span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="at">  </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".github/workflows/**"</span></span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"policies/**"</span></span>
+<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"validators/**"</span></span>
+<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"config/production.yaml"</span></span>
+<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".sdac/immutable.yaml"</span></span>
+<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="at">  </span><span class="fu">patterns</span><span class="kw">:</span></span>
+<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"*.pem"</span></span>
+<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"*.key"</span></span>
+<span id="cb3-13"><a aria-hidden="true" href="#cb3-13" tabindex="-1"></a><span class="fu">reasons</span><span class="kw">:</span></span>
+<span id="cb3-14"><a aria-hidden="true" href="#cb3-14" tabindex="-1"></a><span class="at">  </span><span class="fu">".sdac/immutable.yaml"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Defines the immutable boundary"</span></span>
+<span id="cb3-15"><a aria-hidden="true" href="#cb3-15" tabindex="-1"></a><span class="at">  </span><span class="fu">"config/production.yaml"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Production configuration"</span></span></code></pre></div>
 <p><strong>Example gate (illustrative):</strong></p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fnmatch</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>IMMUTABLE <span class="op">=</span> [</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.github/workflows/**&quot;</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;policies/**&quot;</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;validators/**&quot;</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;config/production.yaml&quot;</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.sdac/immutable.yaml&quot;</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_immutable(path: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">any</span>(fnmatch.fnmatch(path, pat) <span class="cf">for</span> pat <span class="kw">in</span> IMMUTABLE)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> validate_touched_paths(touched_paths: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    violations <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> touched_paths <span class="cf">if</span> is_immutable(p)]</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> violations:</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="ss">f&quot;Immutable path(s) modified: </span><span class="sc">{</span>violations<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="im">import</span> fnmatch</span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>IMMUTABLE <span class="op">=</span> [</span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>    <span class="st">".github/workflows/**"</span>,</span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a>    <span class="st">"policies/**"</span>,</span>
+<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a>    <span class="st">"validators/**"</span>,</span>
+<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a>    <span class="st">"config/production.yaml"</span>,</span>
+<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a>    <span class="st">".sdac/immutable.yaml"</span>,</span>
+<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a>]</span>
+<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a aria-hidden="true" href="#cb4-11" tabindex="-1"></a><span class="kw">def</span> is_immutable(path: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb4-12"><a aria-hidden="true" href="#cb4-12" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">any</span>(fnmatch.fnmatch(path, pat) <span class="cf">for</span> pat <span class="kw">in</span> IMMUTABLE)</span>
+<span id="cb4-13"><a aria-hidden="true" href="#cb4-13" tabindex="-1"></a></span>
+<span id="cb4-14"><a aria-hidden="true" href="#cb4-14" tabindex="-1"></a><span class="kw">def</span> validate_touched_paths(touched_paths: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb4-15"><a aria-hidden="true" href="#cb4-15" tabindex="-1"></a>    violations <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> touched_paths <span class="cf">if</span> is_immutable(p)]</span>
+<span id="cb4-16"><a aria-hidden="true" href="#cb4-16" tabindex="-1"></a>    <span class="cf">if</span> violations:</span>
+<span id="cb4-17"><a aria-hidden="true" href="#cb4-17" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="ss">f"Immutable path(s) modified: </span><span class="sc">{</span>violations<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div>
 <p>This gate belongs in CI, not in the agent. A <code>.gitignore</code>
 rule does not count as enforcement; it hides files, but it doesn’t
 prevent changes.</p>
@@ -287,8 +283,7 @@ touches your engine, Validators, policies, or CI workflow definitions.
 Crucially, changes to the <code>CODEOWNERS</code> file itself are also
 protected, preventing an agent (or even a malicious human actor) from
 easily bypassing these rules.</p>
-<h3
-id="branch-protection-rules-enforcing-the-rules-of-engagement">Branch
+<h3 id="branch-protection-rules-enforcing-the-rules-of-engagement">Branch
 Protection Rules: Enforcing the Rules of Engagement</h3>
 <p><code>CODEOWNERS</code> is powerful, but it relies on humans to
 respect its guidance. Branch protection rules (available in virtually
@@ -332,25 +327,24 @@ the Mission scope.</p></li>
 allowed paths.</p></li>
 </ul>
 <p><strong>Example (Mission scope):</strong></p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">write_allowlist</span><span class="kw">:</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;src/**&quot;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;tests/**&quot;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">denylist</span><span class="kw">:</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;.github/**&quot;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;policies/**&quot;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;validators/**&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="at">  </span><span class="fu">write_allowlist</span><span class="kw">:</span></span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"src/**"</span></span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"tests/**"</span></span>
+<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a><span class="at">  </span><span class="fu">denylist</span><span class="kw">:</span></span>
+<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".github/**"</span></span>
+<span id="cb6-7"><a aria-hidden="true" href="#cb6-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"policies/**"</span></span>
+<span id="cb6-8"><a aria-hidden="true" href="#cb6-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"validators/**"</span></span></code></pre></div>
 <p>This is how you keep autonomy focused: the Mission defines the blast
 radius, and the system enforces it mechanically.</p>
 <h3 id="mission-gate-validation-without-the-agent">Mission Gate:
 Validation Without the Agent</h3>
-<p>To keep Physics impartial, decouple validation from generation. A
-<strong>Mission Gate</strong> runs a Mission’s acceptance criteria
+<p>To keep <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> impartial, decouple validation from generation. A
+<strong><a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">Mission Gate</a></strong> runs a Mission’s acceptance criteria
 without running the model.</p>
 <p>In practice:</p>
 <ul>
-<li><p>The PR declares the Mission Object it is meant to
+<li><p>The PR declares the <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> it is meant to
 satisfy.</p></li>
 <li><p>CI runs the Mission Gate: scope checks + validators + policy
 checks.</p></li>
@@ -496,7 +490,7 @@ it).</p></li>
 <li><p><strong>Implement a basic Kill Switch:</strong> Choose one of the
 kill switch mechanisms (environment variable, feature flag, or
 <code>disable-auto-merge</code> Git branch). Implement it in your
-agent’s logic or a CI gate. Test that flipping the switch successfully
+agent’s logic or a <a class="concept-link" href="concepts#ci-gate-mapterrain-sync" title="See concept: CI Gate (Map–Terrain Sync)">CI gate</a>. Test that flipping the switch successfully
 prevents your agent from merging PRs.</p></li>
 <li><p><strong>Draft a Break-Glass Procedure (initial version):</strong>
 Work with your team leads to draft a preliminary
@@ -504,35 +498,31 @@ Work with your team leads to draft a preliminary
 bypass standard controls in a critical emergency, emphasizing
 auditability and post-mortem requirements.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails" data-share-text="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails&amp;text=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails&amp;title=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)" data-share-title="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails&amp;text=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails&amp;title=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-9-the-dream-daemon-background-maintenance">← Chapter 9 – The Dream Daemon (Background Maintenance)</a>
-    <a class="next-link" href="chapter-11-automated-refactoring-under-guards">Chapter 11 – Automated Refactoring Under Guards →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-9-the-dream-daemon-background-maintenance">← Chapter 9 – The Dream Daemon (Background Maintenance)</a>
+<a class="next-link" href="chapter-11-automated-refactoring-under-guards">Chapter 11 – Automated Refactoring Under Guards →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

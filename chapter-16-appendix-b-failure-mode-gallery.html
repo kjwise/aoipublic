@@ -1,46 +1,45 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 16 – Appendix B: Failure Mode Gallery">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-16-appendix-b-failure-mode-gallery">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 16 – Appendix B: Failure Mode Gallery">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-16-appendix-b-failure-mode-gallery">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 16 – Appendix B: Failure Mode Gallery">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 16 – Appendix B: Failure Mode Gallery" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-16-appendix-b-failure-mode-gallery" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 16 – Appendix B: Failure Mode Gallery" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-16-appendix-b-failure-mode-gallery" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 16 – Appendix B: Failure Mode Gallery" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part VI Appendices</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part VI Appendices</div>
 <div class="chapter-meta"><span class="read-time">13 min read</span></div>
 <h1 id="chapter-16-appendix-b-failure-mode-gallery">Chapter 16 –
 Appendix B: Failure Mode Gallery</h1>
@@ -55,20 +54,20 @@ and suggests diagnostic and mitigation strategies.</p>
 code it touches).</p>
 <div class="line-block">Symptom | Likely Cause | Check | | — | — | — | |
 Invented structure (new signatures/routes/fields appear “from nowhere”)
-| Map Contamination | Was the skeleton extracted by Sensors or generated
+| <a class="concept-link" href="concepts#map-contamination" title="See concept: Map Contamination">Map Contamination</a> | Was the skeleton extracted by Sensors or generated
 by the model?</div>
 <p>Is the Map asserting structure the Terrain never had? | | Endless
-cycling / circuit breakers trip | Missing attractor (no reachable
+cycling / <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a> trip | Missing attractor (no reachable
 <code>PASS</code>) | Can any candidate satisfy all Validators and
 budgets? Can a human-written diff pass under the same gates? | | Fixes
 A, breaks B | Slice too wide | Did the slice include unrelated surfaces?
-Are you changing multiple contracts in one Mission Object? | | Same
-error every iteration | Insufficient feedback | Is the Judge signal
+Are you changing multiple contracts in one <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>? | | Same
+error every iteration | Insufficient feedback | Is the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> signal
 specific (file/line/symbol)? Are failures actionable, or just “no”? | |
 Output ignores constraints | Context dilution | Is the slice too large?
 Are constraints buried among noise? Is Skeleton-First enforced? | |
-Validator always fails | Validator bug or impossible constraint | Can a
-hand-written diff pass? Is the Validator checking the right baseline and
+<a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> always fails | <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> bug or impossible constraint | Can a
+hand-written diff pass? Is the <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> checking the right baseline and
 scope? |</p>
 <h2 id="slice-too-large-or-too-small">Slice Too Large or Too Small</h2>
 <h3 id="what-it-looks-like">What it looks like</h3>
@@ -76,7 +75,7 @@ scope? |</p>
 that is either overwhelmingly broad and unfocused, or excessively
 granular and ineffective for the given task.</p>
 <p>If you want a fast refresher on slicing hygiene, see Chapter 2
-(“Slicing 101”). Chapter 6 is the deep dive on Context Architecture.</p>
+(“Slicing 101”). <a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a> is the deep dive on <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a>.</p>
 <ul>
 <li><p><strong>Slice Too Large</strong>: Output involves significant
 changes across many files, introduces complex new structures without
@@ -122,31 +121,29 @@ persistent drift that never quite converges.</p></li>
 <code>UserPreferences.py</code> but also modifies database schemas,
 introduces a new caching layer, and changes API endpoints—none of which
 were explicitly requested or scoped. The generated pull request touches
-50+ files and breaks existing integration Immune System checks.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/services/user_preferences.py</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/services/user_preferences.py</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a># (extensive changes to caching, new database calls, etc.)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/database/schema.sql</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/database/schema.sql</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a># (new table for user preference cache)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/api/v1/preferences.py</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/api/v1/preferences.py</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a># (new API endpoint for cache invalidation)</span></code></pre></div></li>
+50+ files and breaks existing integration <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> checks.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="kw">--- a/src/services/user_preferences.py</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="dt">+++ b/src/services/user_preferences.py</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a># (extensive changes to caching, new database calls, etc.)</span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a><span class="kw">--- a/src/database/schema.sql</span></span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="dt">+++ b/src/database/schema.sql</span></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a># (new table for user preference cache)</span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="kw">--- a/src/api/v1/preferences.py</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a><span class="dt">+++ b/src/api/v1/preferences.py</span></span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a># (new API endpoint for cache invalidation)</span></code></pre></div></li>
 <li><p><strong>Slice Too Small</strong>: The Updater only reorders
 imports in <code>UserPreferences.py</code> or changes a single variable
 name, failing to address any performance concerns. The generated pull
 request is trivial and does not resolve the original mission.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/services/user_preferences.py</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/services/user_preferences.py</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ -1,6 +1,6 @@</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> import os</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> import json</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">-from typing import Dict, Any</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="va">+from typing import Any, Dict # Trivial reorder</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="kw">--- a/src/services/user_preferences.py</span></span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="dt">+++ b/src/services/user_preferences.py</span></span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="dt">@@ -1,6 +1,6 @@</span></span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a> import os</span>
+<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a> import json</span>
+<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a><span class="st">-from typing import Dict, Any</span></span>
+<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a><span class="va">+from typing import Any, Dict # Trivial reorder</span></span></code></pre></div></li>
 <li><p><strong>Skeleton violation → Map Contamination</strong>: A
-doc-sync Effector is supposed to update one bounded block (for example
+doc-sync <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> is supposed to update one bounded block (for example
 <code>## Public Interfaces</code>) from deterministically extracted
 signatures. Instead, the model is asked to “update the interface list”
 from a large context dump. It invents a helper that doesn’t exist (or
@@ -231,20 +228,18 @@ docstrings.” A Validator enforces the presence of docstrings and also a
 <ol type="1">
 <li><p><strong>Updater</strong>: Adds a docstring to a function, but the
 docstring makes the line exceed 80 characters.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_sum(a, b):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;This function calculates the sum of two numbers, a and b, and returns the result.&quot;&quot;&quot;</span> <span class="co"># Line too long</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div></li>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="kw">def</span> calculate_sum(a, b):</span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a>    <span class="co">"""This function calculates the sum of two numbers, a and b, and returns the result."""</span> <span class="co"># Line too long</span></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div></li>
 <li><p><strong>Validator</strong>: Fails due to line length.</p></li>
 <li><p><strong>Updater</strong>: Tries to Refine the line length, but in
 doing so, either removes part of the docstring (making it too short or
 invalid) or formats it in a way that the Validator <em>still</em> finds
 problematic, or simply tries to wrap it without realizing that the
 original docstring content itself is too verbose.</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_sum(a, b):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Calculates the sum of two numbers.&quot;&quot;&quot;</span> <span class="co"># Valid line, but less descriptive. Original mission was not to shorten it.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="kw">def</span> calculate_sum(a, b):</span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a>    <span class="co">"""Calculates the sum of two numbers."""</span> <span class="co"># Valid line, but less descriptive. Original mission was not to shorten it.</span></span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div>
 <p>(Or, if the Updater focuses <em>only</em> on the line length, it
 might remove the docstring entirely, failing the original docstring
 mission.)</p></li>
@@ -304,7 +299,7 @@ undocumented architectural pattern).</p></li>
 that breaks existing parsers).</p></li>
 </ul>
 <h4 id="why-it-happens-2">Why it happens</h4>
-<p>This is a form of Stochastic Drift or over-creativity, often stemming
+<p>This is a form of <a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a> or over-creativity, often stemming
 from an overly broad mission or insufficient guardrails.</p>
 <ul>
 <li><p><strong>Broad Mission, No Constraints</strong>: The Mission
@@ -360,7 +355,7 @@ propagate.</p></li>
 </ul>
 <h4 id="mitigation-2">Mitigation</h4>
 <ul>
-<li><p><strong>Structural Directives in Mission Objects</strong>:
+<li><p><strong>Structural <a class="concept-link" href="concepts#directives" title="See concept: Directives">Directives</a> in Mission Objects</strong>:
 Explicitly instruct the generative model on <em>where</em> to make
 changes. Use Mission Objects like “Create
 <code>src/app/services/notification_service.py</code>” or “Modify
@@ -423,13 +418,12 @@ variables.</p>
 primarily uses older <code>.format()</code> calls, leading to a false
 positive even though <code>f-strings</code> are standard Python 3.6+
 practice.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode diff"><code class="sourceCode diff"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/utils/string_formatter.py</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/utils/string_formatter.py</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ -1,3 +1,3 @@</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> def format_message(name, event):</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">-    return &quot;Hello, &quot; + name + &quot;! Welcome to &quot; + event + &quot;.&quot;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="va">+    return f&quot;Hello, {name}! Welcome to {event}.&quot; # Validator flags this line: &quot;Avoid f-strings; use .format() instead.&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="kw">--- a/src/utils/string_formatter.py</span></span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="dt">+++ b/src/utils/string_formatter.py</span></span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="dt">@@ -1,3 +1,3 @@</span></span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a> def format_message(name, event):</span>
+<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a><span class="st">-    return "Hello, " + name + "! Welcome to " + event + "."</span></span>
+<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a><span class="va">+    return f"Hello, {name}! Welcome to {event}." # Validator flags this line: "Avoid f-strings; use .format() instead."</span></span></code></pre></div>
 <h4 id="diagnostics-3">Diagnostics</h4>
 <ul>
 <li><p><strong>Human Review of Validator Output</strong>: When a
@@ -496,35 +490,31 @@ models away from the failure modes discussed here. For example, add a
 line like “Only modify files within <code>src/feature_x/</code>” if
 you’re seeing overreach.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-16-appendix-b-failure-mode-gallery" data-share-text="Architects of Intent — Chapter 16 – Appendix B: Failure Mode Gallery">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery&amp;text=Chapter%2016%20%E2%80%93%20Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery&amp;title=Chapter%2016%20%E2%80%93%20Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%2016%20%E2%80%93%20Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2016%20%E2%80%93%20Appendix%20B%3A%20Failure%20Mode%20Gallery%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 16 – Appendix B: Failure Mode Gallery" data-share-title="Chapter 16 – Appendix B: Failure Mode Gallery | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-16-appendix-b-failure-mode-gallery" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery&amp;text=Chapter%2016%20%E2%80%93%20Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery&amp;title=Chapter%2016%20%E2%80%93%20Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2016%20%E2%80%93%20Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2016%20%E2%80%93%20Appendix%20B%3A%20Failure%20Mode%20Gallery%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-16-appendix-b-failure-mode-gallery">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-15-appendix-a-setup-and-implementation-checklist">← Chapter 15 – Appendix A: Setup and Implementation Checklist</a>
-    <a class="next-link" href="chapter-17-appendix-c-pattern-library">Chapter 17 – Appendix C: Pattern Library →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-15-appendix-a-setup-and-implementation-checklist">← Chapter 15 – Appendix A: Setup and Implementation Checklist</a>
+<a class="next-link" href="chapter-17-appendix-c-pattern-library">Chapter 17 – Appendix C: Pattern Library →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

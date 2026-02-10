@@ -491,6 +491,235 @@ function setupSharePanels() {
   });
 }
 
+let searchIndexPromise = null;
+
+function tokenizeQuery(query) {
+  return (query || "")
+    .toLowerCase()
+    .trim()
+    .split(/[^a-z0-9]+/g)
+    .filter(Boolean)
+    .slice(0, 12);
+}
+
+function countOccurrences(haystack, needle) {
+  if (!haystack || !needle) return 0;
+  let count = 0;
+  let idx = 0;
+  while (true) {
+    idx = haystack.indexOf(needle, idx);
+    if (idx === -1) break;
+    count += 1;
+    idx += needle.length;
+  }
+  return count;
+}
+
+function escapeRegExp(text) {
+  return (text || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildHighlightRegex(tokens) {
+  const escaped = (tokens || [])
+    .map((t) => escapeRegExp(t))
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length);
+  if (!escaped.length) return null;
+  return new RegExp(`(${escaped.join("|")})`, "ig");
+}
+
+function appendHighlightedText(el, text, regex) {
+  if (!el) return;
+  const raw = text || "";
+  if (!regex) {
+    el.textContent = raw;
+    return;
+  }
+
+  let lastIndex = 0;
+  for (const match of raw.matchAll(regex)) {
+    const start = match.index ?? 0;
+    const end = start + match[0].length;
+    if (start > lastIndex) {
+      el.appendChild(document.createTextNode(raw.slice(lastIndex, start)));
+    }
+    const mark = document.createElement("mark");
+    mark.textContent = raw.slice(start, end);
+    el.appendChild(mark);
+    lastIndex = end;
+  }
+
+  if (lastIndex < raw.length) {
+    el.appendChild(document.createTextNode(raw.slice(lastIndex)));
+  }
+}
+
+function makeSnippet(text, tokens) {
+  const raw = (text || "").trim();
+  if (!raw) return "";
+
+  const lower = raw.toLowerCase();
+  let firstPos = -1;
+  for (const token of tokens) {
+    const pos = lower.indexOf(token);
+    if (pos !== -1 && (firstPos === -1 || pos < firstPos)) firstPos = pos;
+  }
+
+  const maxLen = 220;
+  if (firstPos === -1) return raw.slice(0, maxLen) + (raw.length > maxLen ? "…" : "");
+
+  const start = Math.max(0, firstPos - 90);
+  const end = Math.min(raw.length, firstPos + 160);
+  let snippet = raw.slice(start, end).trim();
+  if (start > 0) snippet = `…${snippet}`;
+  if (end < raw.length) snippet = `${snippet}…`;
+  return snippet;
+}
+
+async function loadSearchIndex() {
+  if (searchIndexPromise) return searchIndexPromise;
+  searchIndexPromise = (async () => {
+    try {
+      const res = await fetch("search-index.json", { cache: "force-cache" });
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (!data || !Array.isArray(data.docs)) return null;
+      return data;
+    } catch {
+      return null;
+    }
+  })();
+  return searchIndexPromise;
+}
+
+function setupSearchPage() {
+  const input = document.getElementById("search-input");
+  const form = input ? input.closest("form") : null;
+  const resultsEl = document.getElementById("search-results");
+  const statusEl = document.getElementById("search-status");
+  if (!input || !resultsEl || !statusEl) return;
+
+  const setStatus = (text) => {
+    statusEl.textContent = text || "";
+  };
+
+  const clearResults = () => {
+    resultsEl.innerHTML = "";
+  };
+
+  const updateUrl = (query) => {
+    const url = new URL(window.location.href);
+    const q = (query || "").trim();
+    if (q) url.searchParams.set("q", q);
+    else url.searchParams.delete("q");
+    window.history.replaceState({}, "", url.toString());
+  };
+
+  const renderResults = (items, tokens) => {
+    clearResults();
+    const regex = buildHighlightRegex(tokens);
+
+    for (const { doc, score } of items) {
+      const li = document.createElement("li");
+      li.className = "search-result";
+
+      const titleLink = document.createElement("a");
+      titleLink.className = "search-result__title";
+      titleLink.href = doc.href || "";
+      titleLink.textContent = doc.title || doc.href || "Untitled";
+
+      const meta = document.createElement("div");
+      meta.className = "search-result__meta";
+      meta.textContent = doc.section ? `${doc.section}` : (doc.kind || "Page");
+
+      const snippetText = makeSnippet(doc.text || "", tokens);
+      const snippet = document.createElement("div");
+      snippet.className = "search-result__snippet";
+      appendHighlightedText(snippet, snippetText, regex);
+
+      const debug = document.createElement("div");
+      debug.className = "search-result__score";
+      debug.textContent = `Score: ${Math.round(score)}`;
+      debug.hidden = true;
+
+      li.append(titleLink, meta, snippet, debug);
+      resultsEl.appendChild(li);
+    }
+  };
+
+  const scoreDoc = (doc, tokens) => {
+    const title = (doc.title || "").toLowerCase();
+    const text = (doc.text || "").toLowerCase();
+
+    let score = 0;
+    for (const token of tokens) {
+      const inTitle = countOccurrences(title, token);
+      const inText = countOccurrences(text, token);
+      if (!inTitle && !inText) return 0;
+      score += inTitle * 25 + inText * 4;
+    }
+
+    if (doc.kind === "chapter") score += 2;
+    if (doc.kind === "concepts") score += 1;
+    return score;
+  };
+
+  let lastQuery = "";
+  let debounceTimer = null;
+
+  const runSearch = async (query) => {
+    lastQuery = query;
+    const tokens = tokenizeQuery(query);
+    updateUrl(query);
+
+    if (!tokens.length) {
+      clearResults();
+      setStatus("Type to search.");
+      return;
+    }
+
+    setStatus("Searching…");
+    const index = await loadSearchIndex();
+    if (!index) {
+      setStatus("Search index not available.");
+      return;
+    }
+
+    const docs = index.docs || [];
+    const scored = [];
+    for (const doc of docs) {
+      if (!doc || doc.kind === "search") continue;
+      const score = scoreDoc(doc, tokens);
+      if (score > 0) scored.push({ doc, score });
+    }
+    scored.sort((a, b) => b.score - a.score);
+
+    const top = scored.slice(0, 30);
+    renderResults(top, tokens);
+    setStatus(`${scored.length} result${scored.length === 1 ? "" : "s"} for “${query.trim()}”.`);
+  };
+
+  const onInput = () => {
+    const query = input.value || "";
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => {
+      void runSearch(query);
+    }, 90);
+  };
+
+  input.addEventListener("input", onInput);
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      void runSearch(input.value || "");
+    });
+  }
+
+  const initial = new URLSearchParams(window.location.search).get("q") || "";
+  if (initial) input.value = initial;
+  void runSearch(initial);
+}
+
 // Ensure external links open in a new tab.
 document.addEventListener("DOMContentLoaded", () => {
   for (const link of document.querySelectorAll("a[href^='http']")) {
@@ -498,6 +727,7 @@ document.addEventListener("DOMContentLoaded", () => {
     link.rel = "noopener noreferrer";
   }
 
+  setupSearchPage();
   setupSharePanels();
   enhanceCodeBlocks();
   void renderMermaidIfPresent();

@@ -1,46 +1,45 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-3-define-good-your-first-validators">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-3-define-good-your-first-validators">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-3-define-good-your-first-validators" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-3-define-good-your-first-validators" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part I Build It The Weekend Sprint</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part I Build It The Weekend Sprint</div>
 <div class="chapter-meta"><span class="read-time">12 min read</span></div>
 <h1 id="chapter-3-define-good-your-first-validators">Chapter 3 – Define
 “Good” (Your First Validators)</h1>
@@ -52,8 +51,8 @@ small: hard physics first (linters, types, schemas), then a few
 task-specific checks you can tighten over time.</p>
 <p>Two practical rules:</p>
 <ul>
-<li>A <strong>Validator</strong> is a <strong>Sensor</strong>, not a
-Judge. It emits a structured signal; the Judge decides whether to
+<li>A <strong><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a></strong> is a <strong><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></strong>, not a
+<a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>. It emits a structured signal; the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> decides whether to
 refine, revert, or escalate.</li>
 <li>Put the cheapest Validators first. Failing fast is not pessimism;
 it’s throughput.</li>
@@ -69,7 +68,7 @@ scripts.” They tend to exist as explicit <strong>Steps</strong> in a
 <strong>Workflow</strong> graph so the loop is inspectable and
 reproducible.</p>
 <p>In the engine behind this book, the workflow runtime lives in
-<code>core/workflow.py</code>, and common Physics checks are implemented
+<code>core/workflow.py</code>, and common <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> checks are implemented
 as Step classes in <code>core/steps/</code> (for example
 <code>LintStep</code>, <code>TypeCheckStep</code>,
 <code>CoverageStep</code>, and <code>TestStep</code> in
@@ -80,22 +79,21 @@ a trace.</p>
 nodes, you can tag them, order them, retry them, visualize them, and
 reuse the same gates across every loop (human-written or machine-written
 changes).</p>
-<p>The Effector phase can be a single model call, a chain, or a
+<p>The <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> phase can be a single model call, a chain, or a
 multi-agent swarm; the loop doesn’t care because Physics validates the
 output artifact, not the process that produced it.</p>
 <p>A useful Validator output shape looks like this:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;validator&quot;</span><span class="fu">:</span> <span class="st">&quot;json_schema&quot;</span><span class="fu">,</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;fail&quot;</span><span class="fu">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;artifact&quot;</span><span class="fu">:</span> <span class="st">&quot;generated/pr_summary_bad.json&quot;</span><span class="fu">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;errors&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;reviewer_suggestions&quot;</span><span class="fu">,</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;&#39;charlie_qa&#39; is not of type &#39;array&#39;&quot;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>  <span class="dt">"validator"</span><span class="fu">:</span> <span class="st">"json_schema"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a>  <span class="dt">"status"</span><span class="fu">:</span> <span class="st">"fail"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>  <span class="dt">"artifact"</span><span class="fu">:</span> <span class="st">"generated/pr_summary_bad.json"</span><span class="fu">,</span></span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>  <span class="dt">"errors"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a>      <span class="dt">"path"</span><span class="fu">:</span> <span class="st">"reviewer_suggestions"</span><span class="fu">,</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a>      <span class="dt">"message"</span><span class="fu">:</span> <span class="st">"'charlie_qa' is not of type 'array'"</span></span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <h2 id="the-hard-physics-of-validation">The Hard Physics of
 Validation</h2>
 <p>Forget the philosophical debates about AI truthfulness for a moment.
@@ -123,7 +121,7 @@ invalid. This is your anchor in the sea of stochastic generation.</p>
 Hard First, Then Semantic</h3>
 <p>Hard physics gets you admissible artifacts. It does not get you
 correct artifacts.</p>
-<p>In practice, an Immune System blends:</p>
+<p>In practice, an <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> blends:</p>
 <ul>
 <li><strong>Hard Physics Validators:</strong> syntax, formatting, types,
 schemas, path invariants.</li>
@@ -138,10 +136,10 @@ docs,” “diff touches only allowed paths”).</li>
 <p>Use this as a planning grid:</p>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
 </colgroup>
 <thead>
 <tr>
@@ -241,14 +239,14 @@ merge.</li>
 <p>They should emit structured signals, not opinions:</p>
 <pre class="text"><code>[validator] semantic_invariant_fail
   code=missing_docs_for_public_api
-  detail=&quot;public surface changed but docs did not&quot;</code></pre>
+  detail="public surface changed but docs did not"</code></pre>
 <h3 id="sufficiency-criteria-what-good-enough-looks-like">Sufficiency
 criteria (what “good enough” looks like)</h3>
 <p>There is no universal threshold, but teams do converge on practical
 bars. Treat these as heuristics you can ratchet over time:</p>
 <ul>
 <li><strong>Minimum bar (local loop):</strong> formatting + lint + basic
-types (if you have them) + one fast Immune System case gate that catches
+types (if you have them) + one fast <a class="concept-link" href="concepts#immune-system-case" title="See concept: Immune System case">Immune System case</a> gate that catches
 the common failure mode for your surface.</li>
 <li><strong>Professional bar (shared repo):</strong> above + Immune
 System cases for invariants + a scope validator (paths + allowed edit
@@ -280,11 +278,10 @@ is only trustworthy when you can show a case where it fails and a case
 where it passes. Treat “add a validator” as a normal change that itself
 goes through gates.</li>
 </ul>
-<p>Chapter 10 is where we make this enforceable: protected paths,
+<p><a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a> is where we make this enforceable: protected paths,
 CODEOWNERS, and a userspace boundary so the loop cannot edit its own
 graders.</p>
-<h3
-id="validation-vs.-evaluation-keep-the-gate-deterministic">Validation
+<h3 id="validation-vs.-evaluation-keep-the-gate-deterministic">Validation
 vs. evaluation (keep the gate deterministic)</h3>
 <p>It’s easy to blur two different activities:</p>
 <ul>
@@ -301,8 +298,7 @@ Physics.</p>
 <p>Rule: if you can’t make it deterministic, it isn’t a Validator. Treat
 it as a Sensor and keep it downstream of human review or hard
 policy.</p>
-<h3
-id="property-based-tests-soft-physics-and-how-to-design-properties">Property-based
+<h3 id="property-based-tests-soft-physics-and-how-to-design-properties">Property-based
 tests (Soft Physics) and how to design properties</h3>
 <p>Property-based tests are powerful because they explore the input
 space systematically. The trap is that “the function does the right
@@ -320,13 +316,12 @@ negatives, monotonicity, sortedness).</li>
 known-correct reference (even if slower).</li>
 </ol>
 <p>Example (illustrative, Python + Hypothesis):</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hypothesis <span class="im">import</span> given, strategies <span class="im">as</span> st</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">@given</span>(st.text(), st.text())</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_concatenate_preserves_length(a, b):</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> concatenate(a, b)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(result) <span class="op">==</span> <span class="bu">len</span>(a) <span class="op">+</span> <span class="bu">len</span>(b)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="im">from</span> hypothesis <span class="im">import</span> given, strategies <span class="im">as</span> st</span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="at">@given</span>(st.text(), st.text())</span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="kw">def</span> test_concatenate_preserves_length(a, b):</span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a>    result <span class="op">=</span> concatenate(a, b)</span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(result) <span class="op">==</span> <span class="bu">len</span>(a) <span class="op">+</span> <span class="bu">len</span>(b)</span></code></pre></div>
 <p>The point isn’t the toy domain. It’s the move: choose a property that
 is cheap to evaluate, hard to game, and directly tied to the bug class
 you care about (off-by-one, boundary handling, unexpected nulls).</p>
@@ -375,7 +370,7 @@ deterministic PASS/FAIL signals do not.</p>
 <p>This is not limited to application code. Infrastructure and policy
 surfaces have hard physics too. For Terraform, a deterministic validator
 suite might include <code>terraform validate</code>,
-<code>tflint</code>, and a policy scanner; see Appendix C for a
+<code>tflint</code>, and a policy scanner; see <a class="chapter-link" href="chapter-17-appendix-c-pattern-library#chapter-17-appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a> for a
 ready-to-copy recipe.</p>
 <p>For security tooling, the exact choices vary, but common examples
 include Bandit (Python), Semgrep (multi-language), and dependency
@@ -395,14 +390,13 @@ structure.</p>
 <p>First, define a JSON Schema for the smallest invariant you care
 about. For example: “<code>reviewer_suggestions</code> must be an array
 of strings.”</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;reviewer_suggestions&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;reviewer_suggestions&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span> <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">}</span> <span class="fu">}</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a>  <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"object"</span><span class="fu">,</span></span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>  <span class="dt">"required"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"reviewer_suggestions"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>  <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a>    <span class="dt">"reviewer_suggestions"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"array"</span><span class="fu">,</span> <span class="dt">"items"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span> <span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p>Now if the model outputs
 <code>"reviewer_suggestions": "charlie_qa"</code>, schema validation
 deterministically fails with a type error at
@@ -520,7 +514,7 @@ users in your system.</p></li>
 <p>Each step up the ladder adds more reliability. The key is to build
 this incrementally, focusing on the highest-impact checks first, and
 tightening your grip on “good” over time.</p>
-<hr />
+<hr/>
 <h2 id="the-manifesto-full">The Manifesto (Full)</h2>
 <p>Now that you’ve defined “good” as Physics, here’s the stance behind
 the mechanics.</p>
@@ -532,7 +526,7 @@ it.</p>
 <p>A GenAI system is more likely to hold up in production when three
 things hold at once:</p>
 <ul>
-<li>It carries durable intent: a Mission Object you can name, version,
+<li>It carries durable intent: a <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> you can name, version,
 and test.</li>
 <li>It resists entropy as models, data, and people change.</li>
 <li>It adapts through a repeatable ratchet of feedback and revision, not
@@ -540,8 +534,8 @@ heroic one-off instructions.</li>
 </ul>
 <p>You can keep the whole system in your head as one chain:</p>
 <blockquote>
-<p><strong>Mission Object → Context Architecture → Effectors → Immune
-System → Ouroboros Protocol</strong></p>
+<p><strong>Mission Object → <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a> → Effectors → Immune
+System → <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a></strong></p>
 </blockquote>
 <h3 id="the-meta-patterns">The meta-patterns</h3>
 <h4 id="dont-chat-compile">1) Don’t Chat, Compile</h4>
@@ -576,7 +570,7 @@ why each diff exists.</p>
 <li>We do not trust the model.</li>
 <li>We trust the loop.</li>
 </ul>
-<hr />
+<hr/>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
@@ -614,35 +608,31 @@ or false negative and fix it by splitting schemas, adding a semantic
 validator, or making the selection logic explicit in
 <code>Prep</code>.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-3-define-good-your-first-validators" data-share-text="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;text=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;title=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)" data-share-title="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-3-define-good-your-first-validators" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;text=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;title=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">← Chapter 2 – The Deterministic Sandwich (Your First Pattern)</a>
-    <a class="next-link" href="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4 – The Stochastic Engine (Why You Need Physics) →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">← Chapter 2 – The Deterministic Sandwich (Your First Pattern)</a>
+<a class="next-link" href="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4 – The Stochastic Engine (Why You Need Physics) →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

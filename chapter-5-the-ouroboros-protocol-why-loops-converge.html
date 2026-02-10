@@ -1,46 +1,45 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part II Understand It The Theory Behind Reliability</div>
 <div class="chapter-meta"><span class="read-time">13 min read</span></div>
 <h1 id="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 –
 The Ouroboros Protocol (Why Loops Converge)</h1>
@@ -48,24 +47,24 @@ The Ouroboros Protocol (Why Loops Converge)</h1>
 validate it, and if it fails, feed the error signal into the next
 attempt. This iterative process is the engine of reliability for
 Software Development as Code.</p>
-<p>We call it the Ouroboros Protocol because each iteration consumes its
+<p>We call it the <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a> because each iteration consumes its
 own artifacts as input: the last diff and the deterministic failure
-signal. But this is not an endless cycle. It is recursion with an exit
+signal. But this is not an endless cycle. It is <a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a> with an exit
 strategy: converge to a stable passing state, or abort via circuit
 breakers and leave the Terrain unchanged.</p>
 <p>Two properties make this loop more than “retry until it passes”:</p>
 <ol type="1">
 <li><p><strong>Self-reference is a feature.</strong> The loop treats its
-own artifacts as input: the last diff, the last Validator failures, the
+own artifacts as input: the last diff, the last <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> failures, the
 last scope decision, the last trace. It is not “try again.” It is “try
 again with the evidence of why you failed.”</p></li>
 <li><p><strong>Maintenance is drift repair.</strong> Over time, the
 Terrain changes and the Map lags behind (docs, inventories, indexes, and
 rules drift). Ouroboros is the unit process that turns drift into a
-bounded repair under Physics — whether the diff touches code (Terrain)
+bounded repair under <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> — whether the diff touches code (Terrain)
 or a Map surface.</p></li>
 </ol>
-<p>Ouroboros is finite per Mission Object. A single run should end in
+<p>Ouroboros is finite per <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>. A single run should end in
 one of a few outcomes: <code>PASS</code> and commit, <code>FAIL</code>
 and revert, or defer/escalate with evidence. The system can run many
 Ouroboros loops over months. That is where continuous renewal lives —
@@ -81,10 +80,10 @@ Refine</h2>
 <li><p><strong>Write</strong>: The LLM, given context and a Mission
 Object (which may include prior errors), generates a candidate output.
 This output is the LLM’s best attempt to fulfill the current task. Since
-LLMs are stochastic engines (Chapter 4), this step is inherently
+LLMs are stochastic engines (<a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a>), this step is inherently
 probabilistic. Even with identical inputs, the output might vary
 slightly between runs.</p></li>
-<li><p><strong>Judge</strong>: Run deterministic Validators (Physics) to
+<li><p><strong><a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a></strong>: Run deterministic Validators (Physics) to
 produce structured findings. In the simplest loops, the Judge is just
 the validator suite. In richer loops, it also selects the next move
 (commit, refine, revert/defer) from explicit policy.</p></li>
@@ -92,7 +91,7 @@ the validator suite. In richer loops, it also selects the next move
 or non-compliance, the <code>Refine</code> step prepares the feedback
 for the next iteration. This usually involves formatting the
 <code>Judge</code>’s output (e.g., error messages, diffs against a
-target, failing Immune System cases) and feeding it into the next model
+target, failing <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> cases) and feeding it into the next model
 request. The LLM then attempts to incorporate this specific,
 deterministic feedback to improve its next generation.</p></li>
 </ol>
@@ -227,7 +226,7 @@ only” and make strict parsing the first gate.</p>
 SDaC systems.</p>
 <h3 id="convergence-when-the-loop-settles">Convergence: When the Loop
 Settles</h3>
-<p>Convergence occurs when the <code>Write → Judge → Refine</code> loop
+<p><a class="concept-link" href="concepts#convergence" title="See concept: Convergence">Convergence</a> occurs when the <code>Write → Judge → Refine</code> loop
 successfully guides the LLM to an output that satisfies all
 <code>Judge</code> criteria. This looks like:</p>
 <ul>
@@ -254,7 +253,7 @@ reliability.</p>
 <h3 id="attractors-system-geometry-for-done">Attractors: System Geometry
 for “Done”</h3>
 <p>Convergence is not luck. It’s geometry.</p>
-<p>An <strong>Attractor</strong> is the region of “solution space” where
+<p>An <strong><a class="concept-link" href="concepts#attractor" title="See concept: Attractor">Attractor</a></strong> is the region of “solution space” where
 your Immune System is satisfied: the candidate parses cleanly, stays in
 scope, respects budgets, and passes every Validator.</p>
 <p>You can picture it as a “valley” in the space of possible diffs: once
@@ -301,7 +300,7 @@ and validators that reject churn.)</li>
 <li><strong>Signal quality:</strong> does the Judge output point to
 specific files/lines/checks? (Vague errors produce wander; fix
 validators to emit structured failures.)</li>
-<li><strong>Circuit breakers:</strong> are iteration/time budgets and
+<li><strong><a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">Circuit breakers</a>:</strong> are iteration/time budgets and
 “minimum progress” checks enforced?</li>
 </ul>
 </blockquote>
@@ -311,9 +310,9 @@ criteria (heuristics you can implement)</h3>
 enough to <em>guide</em> a loop. For guidance you need heuristics:
 small, deterministic functions that answer “are we moving toward the
 attractor?”</p>
-<p>These heuristics are where the <strong>Ratchet Principle</strong>
+<p>These heuristics are where the <strong><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> Principle</strong>
 shows up inside Ouroboros: once you can measure progress (or safety),
-you refuse to let it slip. (Chapter 11 applies the same idea to
+you refuse to let it slip. (<a class="chapter-link" href="chapter-11-automated-refactoring-under-guards#chapter-11-automated-refactoring-under-guards" title="Go to: Chapter 11">Chapter 11</a> applies the same idea to
 repo-wide quality metrics over time.)</p>
 <h4 id="reachability-prove-pass-is-possible">1) Reachability: prove
 <code>PASS</code> is possible</h4>
@@ -358,7 +357,7 @@ detection: catch A↔︎B ping-pong</h4>
 signatures:</p>
 <pre class="text"><code>signature = (diff_hash, sorted(failing_validator_codes))
 if signature repeats within last K attempts:
-  abort(&quot;oscillation detected; split mission or tighten slice&quot;)</code></pre>
+  abort("oscillation detected; split mission or tighten slice")</code></pre>
 <p>This turns “it feels stuck” into a deterministic stop condition.</p>
 <h4 id="failure-classes-dont-treat-all-failures-as-equal">4) Failure
 classes: don’t treat all failures as equal</h4>
@@ -380,8 +379,7 @@ failure, and honest about when a human needs to intervene.</p>
 <blockquote>
 <p><strong>Why Loops Converge (Or Don’t)</strong></p>
 <p>The SDaC loop is a dynamical system. Each iteration transforms state:
-<span
-class="math inline"><em>s</em><sub><em>n</em> + 1</sub> = <em>F</em>(<em>s</em><sub><em>n</em></sub>)</span>.
+<span class="math inline"><em>s</em><sub><em>n</em> + 1</sub> = <em>F</em>(<em>s</em><sub><em>n</em></sub>)</span>.
 Understanding <em>why</em> some loops stabilize while others thrash
 forever comes from one concept: <strong>attractors</strong>.</p>
 <p>An <strong>attractor</strong> is a state the system settles
@@ -410,7 +408,7 @@ settles. This is why slice size matters—large slices mean large state
 jumps, which can hop over the attractor entirely.</p>
 <p><strong>Why small changes sometimes break everything:</strong> The
 boundary between “converges” and “diverges” can be fractal. Tiny changes
-to the Context Graph, the Mission Object, or generation parameters can
+to the <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a>, the Mission Object, or generation parameters can
 shift which basin you’re in. This isn’t a bug in SDaC—it’s the nature of
 iterative systems. The defense is validation at every step, so you
 detect divergence early.</p>
@@ -464,8 +462,7 @@ Guardrails for Stochasticity</h2>
 <p>A loop that can retry can also thrash. Circuit breakers make failure
 cheap and deterministic.</p>
 <ul>
-<li><strong>Iteration limit:</strong> stop after <span
-class="math inline"><em>N</em></span> attempts.</li>
+<li><strong>Iteration limit:</strong> stop after <span class="math inline"><em>N</em></span> attempts.</li>
 <li><strong>Scope + diff budgets:</strong> stop when the candidate
 touches protected paths or exceeds file/line limits.</li>
 <li><strong>Cost + time budgets:</strong> stop when you hit spend or
@@ -654,35 +651,31 @@ so the loop is guessing?</li>
 </ol>
 <p>This exercise will give you a visceral understanding of how the
 deterministic <code>Judge</code> drives the stochastic LLM.</p>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge" data-share-text="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge&amp;text=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge&amp;title=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)" data-share-title="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge&amp;text=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge&amp;title=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-4-the-stochastic-engine-why-you-need-physics">← Chapter 4 – The Stochastic Engine (Why You Need Physics)</a>
-    <a class="next-link" href="chapter-6-context-architecture-why-slicing-matters">Chapter 6 – Context Architecture (Why Slicing Matters) →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-4-the-stochastic-engine-why-you-need-physics">← Chapter 4 – The Stochastic Engine (Why You Need Physics)</a>
+<a class="next-link" href="chapter-6-context-architecture-why-slicing-matters">Chapter 6 – Context Architecture (Why Slicing Matters) →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

@@ -1,51 +1,50 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 12 – Governance at Machine Speed | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 12 – Governance at Machine Speed">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-12-governance-at-machine-speed">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 12 – Governance at Machine Speed | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 12 – Governance at Machine Speed">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-12-governance-at-machine-speed">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 12 – Governance at Machine Speed | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 12 – Governance at Machine Speed | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 12 – Governance at Machine Speed">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 12 – Governance at Machine Speed | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 12 – Governance at Machine Speed | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 12 – Governance at Machine Speed" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-12-governance-at-machine-speed" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 12 – Governance at Machine Speed | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 12 – Governance at Machine Speed" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-12-governance-at-machine-speed" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 12 – Governance at Machine Speed | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 12 – Governance at Machine Speed | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 12 – Governance at Machine Speed" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 12 – Governance at Machine Speed | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part IV Govern It Safe Evolution</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part IV Govern It Safe Evolution</div>
 <div class="chapter-meta"><span class="read-time">11 min read</span></div>
 <h1 id="chapter-12-governance-at-machine-speed">Chapter 12 – Governance
 at Machine Speed</h1>
 <p>The promise of Software Development as Code (SDaC) is rapid,
-autonomous evolution. But speed without control is chaos. If Chapter 11
+autonomous evolution. But speed without control is chaos. If <a class="chapter-link" href="chapter-11-automated-refactoring-under-guards#chapter-11-automated-refactoring-under-guards" title="Go to: Chapter 11">Chapter 11</a>
 focused on the mechanics of automated refactoring—the <em>mutate</em>
 step—this chapter is about the engineering controls that make that
 mutation safe and predictable. We shift from <em>how</em> an agent
@@ -54,7 +53,7 @@ machine speed.</p>
 <p>Part I built the loop. Part IV governs it: what the loop is allowed
 to touch, what it must prove before merge, and what evidence it must
 leave behind.</p>
-<p>Chapter 10 established the immutable boundary (protected paths,
+<p><a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a> established the immutable boundary (protected paths,
 branch protection, and guardrails the system cannot rewrite). This
 chapter assumes that boundary exists. Here we focus on what runs
 <em>inside</em> it: policy validators, input hygiene, and audit evidence
@@ -79,9 +78,9 @@ cause issues.</p>
 (Terrain) or your specs (Map). It governs how they interact. It defines
 which Maps are authoritative, which Terrains are writable, and which
 Validators are hard gates versus advisory Sensors.</p>
-<p><strong>Mechanism: Policy as Code</strong></p>
+<p><strong><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">Mechanism</a>: Policy as Code</strong></p>
 <p>Just as infrastructure is code and configuration is code, policy is
-code. Frameworks like Open Policy Agent (OPA) or custom scripts written
+code. Frameworks like Open Policy <a class="concept-link" href="concepts#agent" title="See concept: Agent">Agent</a> (OPA) or custom scripts written
 in Python or Go allow you to define rules that can be evaluated against
 any incoming change.</p>
 <p>A policy might dictate:</p>
@@ -114,74 +113,69 @@ compliance before a human even needs to glance at a PR, or to prevent
 unauthorized direct pushes entirely.</p>
 <h3 id="concrete-policy-as-code-three-minimal-examples">Concrete
 policy-as-code (three minimal examples)</h3>
-<p>Policy-as-code is not a slogan. It is a Validator chain with
+<p>Policy-as-code is not a slogan. It is a <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> chain with
 deterministic outputs.</p>
 <p>Here is a minimal shape:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PolicyFinding:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    rule: <span class="bu">str</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    message: <span class="bu">str</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    path: <span class="bu">str</span> <span class="op">|</span> <span class="va">None</span> <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PolicyResult:</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    status: <span class="bu">str</span>  <span class="co"># &quot;pass&quot; | &quot;warn&quot; | &quot;block&quot;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    findings: <span class="bu">list</span>[PolicyFinding]</span></code></pre></div>
-<p><strong>1) Protected paths (scope guard):</strong></p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> policy_protected_paths(changed_paths: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> PolicyResult:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    protected_prefixes <span class="op">=</span> (</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;.github/&quot;</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;scripts/deploy&quot;</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;config/production&quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    hits <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> changed_paths <span class="cf">if</span> p.startswith(protected_prefixes)]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            status<span class="op">=</span><span class="st">&quot;block&quot;</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">&quot;paths.protected&quot;</span>, message<span class="op">=</span><span class="st">&quot;Protected path touched&quot;</span>, path<span class="op">=</span>p) <span class="cf">for</span> p <span class="kw">in</span> hits],</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">&quot;pass&quot;</span>, findings<span class="op">=</span>[])</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a><span class="kw">class</span> PolicyFinding:</span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>    rule: <span class="bu">str</span></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a>    message: <span class="bu">str</span></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a>    path: <span class="bu">str</span> <span class="op">|</span> <span class="va">None</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a><span class="kw">class</span> PolicyResult:</span>
+<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a>    status: <span class="bu">str</span>  <span class="co"># "pass" | "warn" | "block"</span></span>
+<span id="cb1-12"><a aria-hidden="true" href="#cb1-12" tabindex="-1"></a>    findings: <span class="bu">list</span>[PolicyFinding]</span></code></pre></div>
+<p><strong>1) Protected paths (<a class="concept-link" href="concepts#scope-guard" title="See concept: Scope Guard">scope guard</a>):</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="kw">def</span> policy_protected_paths(changed_paths: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> PolicyResult:</span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a>    protected_prefixes <span class="op">=</span> (</span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a>        <span class="st">".github/"</span>,</span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a>        <span class="st">"scripts/deploy"</span>,</span>
+<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a>        <span class="st">"config/production"</span>,</span>
+<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a>    )</span>
+<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a>    hits <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> changed_paths <span class="cf">if</span> p.startswith(protected_prefixes)]</span>
+<span id="cb2-8"><a aria-hidden="true" href="#cb2-8" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
+<span id="cb2-9"><a aria-hidden="true" href="#cb2-9" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
+<span id="cb2-10"><a aria-hidden="true" href="#cb2-10" tabindex="-1"></a>            status<span class="op">=</span><span class="st">"block"</span>,</span>
+<span id="cb2-11"><a aria-hidden="true" href="#cb2-11" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">"paths.protected"</span>, message<span class="op">=</span><span class="st">"Protected path touched"</span>, path<span class="op">=</span>p) <span class="cf">for</span> p <span class="kw">in</span> hits],</span>
+<span id="cb2-12"><a aria-hidden="true" href="#cb2-12" tabindex="-1"></a>        )</span>
+<span id="cb2-13"><a aria-hidden="true" href="#cb2-13" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">"pass"</span>, findings<span class="op">=</span>[])</span></code></pre></div>
 <p><strong>2) Secret detection (cheap, fail-fast):</strong></p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> policy_no_hardcoded_secrets(diff_text: <span class="bu">str</span>) <span class="op">-&gt;</span> PolicyResult:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    patterns <span class="op">=</span> [</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;password</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">][^&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="op">+</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="vs">&#39;</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;api_key</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">][^&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="op">+</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="vs">&#39;</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;secret</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">][^&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="op">+</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="vs">&#39;</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    hits: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> []</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pat <span class="kw">in</span> patterns:</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        hits.extend(re.findall(pat, diff_text))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            status<span class="op">=</span><span class="st">&quot;block&quot;</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">&quot;secrets.hardcoded&quot;</span>, message<span class="op">=</span><span class="st">&quot;Possible hardcoded secret in diff&quot;</span>)],</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">&quot;pass&quot;</span>, findings<span class="op">=</span>[])</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="kw">def</span> policy_no_hardcoded_secrets(diff_text: <span class="bu">str</span>) <span class="op">-&gt;</span> PolicyResult:</span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a>    patterns <span class="op">=</span> [</span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a>        <span class="vs">r'password</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">["</span><span class="ch">\\\'</span><span class="pp">][^"</span><span class="ch">\\\'</span><span class="pp">]</span><span class="op">+</span><span class="pp">["</span><span class="ch">\\\'</span><span class="pp">]</span><span class="vs">'</span>,</span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a>        <span class="vs">r'api_key</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">["</span><span class="ch">\\\'</span><span class="pp">][^"</span><span class="ch">\\\'</span><span class="pp">]</span><span class="op">+</span><span class="pp">["</span><span class="ch">\\\'</span><span class="pp">]</span><span class="vs">'</span>,</span>
+<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a>        <span class="vs">r'secret</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">["</span><span class="ch">\\\'</span><span class="pp">][^"</span><span class="ch">\\\'</span><span class="pp">]</span><span class="op">+</span><span class="pp">["</span><span class="ch">\\\'</span><span class="pp">]</span><span class="vs">'</span>,</span>
+<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a>    ]</span>
+<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a>    hits: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> []</span>
+<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a>    <span class="cf">for</span> pat <span class="kw">in</span> patterns:</span>
+<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a>        hits.extend(re.findall(pat, diff_text))</span>
+<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
+<span id="cb3-13"><a aria-hidden="true" href="#cb3-13" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
+<span id="cb3-14"><a aria-hidden="true" href="#cb3-14" tabindex="-1"></a>            status<span class="op">=</span><span class="st">"block"</span>,</span>
+<span id="cb3-15"><a aria-hidden="true" href="#cb3-15" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">"secrets.hardcoded"</span>, message<span class="op">=</span><span class="st">"Possible hardcoded secret in diff"</span>)],</span>
+<span id="cb3-16"><a aria-hidden="true" href="#cb3-16" tabindex="-1"></a>        )</span>
+<span id="cb3-17"><a aria-hidden="true" href="#cb3-17" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">"pass"</span>, findings<span class="op">=</span>[])</span></code></pre></div>
 <p><strong>3) Dangerous constructs (forbid by default):</strong></p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> policy_no_eval_or_exec(diff_text: <span class="bu">str</span>) <span class="op">-&gt;</span> PolicyResult:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    forbidden <span class="op">=</span> (<span class="st">&quot;eval(&quot;</span>, <span class="st">&quot;exec(&quot;</span>, <span class="st">&quot;__import__(&quot;</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    hits <span class="op">=</span> [tok <span class="cf">for</span> tok <span class="kw">in</span> forbidden <span class="cf">if</span> tok <span class="kw">in</span> diff_text]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            status<span class="op">=</span><span class="st">&quot;block&quot;</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">&quot;code.dynamic_exec&quot;</span>, message<span class="op">=</span><span class="ss">f&quot;Forbidden construct: </span><span class="sc">{</span>tok<span class="sc">}</span><span class="ss">&quot;</span>) <span class="cf">for</span> tok <span class="kw">in</span> hits],</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">&quot;pass&quot;</span>, findings<span class="op">=</span>[])</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="kw">def</span> policy_no_eval_or_exec(diff_text: <span class="bu">str</span>) <span class="op">-&gt;</span> PolicyResult:</span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a>    forbidden <span class="op">=</span> (<span class="st">"eval("</span>, <span class="st">"exec("</span>, <span class="st">"__import__("</span>)</span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>    hits <span class="op">=</span> [tok <span class="cf">for</span> tok <span class="kw">in</span> forbidden <span class="cf">if</span> tok <span class="kw">in</span> diff_text]</span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
+<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a>            status<span class="op">=</span><span class="st">"block"</span>,</span>
+<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">"code.dynamic_exec"</span>, message<span class="op">=</span><span class="ss">f"Forbidden construct: </span><span class="sc">{</span>tok<span class="sc">}</span><span class="ss">"</span>) <span class="cf">for</span> tok <span class="kw">in</span> hits],</span>
+<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a>        )</span>
+<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">"pass"</span>, findings<span class="op">=</span>[])</span></code></pre></div>
 <p>Chain them in a cheap-to-expensive order:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>POLICIES <span class="op">=</span> [</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    policy_protected_paths,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    policy_no_hardcoded_secrets,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    policy_no_eval_or_exec,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a>POLICIES <span class="op">=</span> [</span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a>    policy_protected_paths,</span>
+<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a>    policy_no_hardcoded_secrets,</span>
+<span id="cb5-4"><a aria-hidden="true" href="#cb5-4" tabindex="-1"></a>    policy_no_eval_or_exec,</span>
+<span id="cb5-5"><a aria-hidden="true" href="#cb5-5" tabindex="-1"></a>]</span></code></pre></div>
 <p>The most important property is not cleverness. It is determinism:
 same diff, same decision.</p>
 <h3 id="automate-the-rule-based-80">Automate the rule-based 80%</h3>
@@ -198,33 +192,31 @@ situations, and legitimate exceptions.</li>
 <p>Machine-speed governance is valuable not only because it is fast, but
 because it is consistent, comprehensive (applies to every change), and
 legible (policies are versioned artifacts, not oral tradition).</p>
-<h3
-id="escalation-workflows-block-warn-defer-time-bounded-exceptions">Escalation
+<h3 id="escalation-workflows-block-warn-defer-time-bounded-exceptions">Escalation
 workflows (block, warn, defer, time-bounded exceptions)</h3>
 <p>Policies need outcomes, not just booleans. A common pattern is to map
 each policy to a default action on failure.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">policies</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> secrets.hardcoded</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> block</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">notify</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">security-team</span><span class="kw">]</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> perf.regression</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> warn</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">require_acknowledgment</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> architecture.change</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> escalate</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">reviewers</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">tech-leads</span><span class="kw">]</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">exception_process</span><span class="kw">:</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> requester submits exception with justification and scope</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> policy owner reviews</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> if approved, exception is logged and time-bounded</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> exception expires unless renewed</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">policies</span><span class="kw">:</span></span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> secrets.hardcoded</span></span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> block</span></span>
+<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a><span class="at">      </span><span class="fu">notify</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">security-team</span><span class="kw">]</span></span>
+<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a aria-hidden="true" href="#cb6-7" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> perf.regression</span></span>
+<span id="cb6-8"><a aria-hidden="true" href="#cb6-8" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
+<span id="cb6-9"><a aria-hidden="true" href="#cb6-9" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> warn</span></span>
+<span id="cb6-10"><a aria-hidden="true" href="#cb6-10" tabindex="-1"></a><span class="at">      </span><span class="fu">require_acknowledgment</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-11"><a aria-hidden="true" href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a aria-hidden="true" href="#cb6-12" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> architecture.change</span></span>
+<span id="cb6-13"><a aria-hidden="true" href="#cb6-13" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
+<span id="cb6-14"><a aria-hidden="true" href="#cb6-14" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> escalate</span></span>
+<span id="cb6-15"><a aria-hidden="true" href="#cb6-15" tabindex="-1"></a><span class="at">      </span><span class="fu">reviewers</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">tech-leads</span><span class="kw">]</span></span>
+<span id="cb6-16"><a aria-hidden="true" href="#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a aria-hidden="true" href="#cb6-17" tabindex="-1"></a><span class="fu">exception_process</span><span class="kw">:</span></span>
+<span id="cb6-18"><a aria-hidden="true" href="#cb6-18" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> requester submits exception with justification and scope</span></span>
+<span id="cb6-19"><a aria-hidden="true" href="#cb6-19" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> policy owner reviews</span></span>
+<span id="cb6-20"><a aria-hidden="true" href="#cb6-20" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> if approved, exception is logged and time-bounded</span></span>
+<span id="cb6-21"><a aria-hidden="true" href="#cb6-21" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> exception expires unless renewed</span></span></code></pre></div>
 <p>The key move is time-bounding. “Just this once” is how drift becomes
 policy.</p>
 <h3 id="conflicts-precedence-and-policy-ordering">Conflicts, precedence,
@@ -250,44 +242,41 @@ critical component:</p>
 effective.</li>
 <li><strong>Test policies</strong> with known-pass and known-fail
 fixtures.</li>
-<li><strong>Ratchet policy drift</strong>: exceptions should be rare,
+<li><strong><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> policy drift</strong>: exceptions should be rare,
 logged, and reviewed.</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">policy</span><span class="kw">:</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">id</span><span class="kw">:</span><span class="at"> secrets.hardcoded</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">2.0.0</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">effective_date</span><span class="kw">:</span><span class="at"> 2026-01-01</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">migration_period_days</span><span class="kw">:</span><span class="at"> </span><span class="dv">30</span></span></code></pre></div>
-<p>And give policies their own tiny Immune System:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_policy_no_eval_blocks_eval():</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> <span class="st">&#39;+ x = eval(&quot;2+2&quot;)</span><span class="ch">\\</span><span class="st">n&#39;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> policy_no_eval_or_exec(diff)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> res.status <span class="op">==</span> <span class="st">&quot;block&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="fu">policy</span><span class="kw">:</span></span>
+<span id="cb7-2"><a aria-hidden="true" href="#cb7-2" tabindex="-1"></a><span class="at">  </span><span class="fu">id</span><span class="kw">:</span><span class="at"> secrets.hardcoded</span></span>
+<span id="cb7-3"><a aria-hidden="true" href="#cb7-3" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">2.0.0</span></span>
+<span id="cb7-4"><a aria-hidden="true" href="#cb7-4" tabindex="-1"></a><span class="at">  </span><span class="fu">effective_date</span><span class="kw">:</span><span class="at"> 2026-01-01</span></span>
+<span id="cb7-5"><a aria-hidden="true" href="#cb7-5" tabindex="-1"></a><span class="at">  </span><span class="fu">migration_period_days</span><span class="kw">:</span><span class="at"> </span><span class="dv">30</span></span></code></pre></div>
+<p>And give policies their own tiny <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a aria-hidden="true" href="#cb8-1" tabindex="-1"></a><span class="kw">def</span> test_policy_no_eval_blocks_eval():</span>
+<span id="cb8-2"><a aria-hidden="true" href="#cb8-2" tabindex="-1"></a>    diff <span class="op">=</span> <span class="st">'+ x = eval("2+2")</span><span class="ch">\\</span><span class="st">n'</span></span>
+<span id="cb8-3"><a aria-hidden="true" href="#cb8-3" tabindex="-1"></a>    res <span class="op">=</span> policy_no_eval_or_exec(diff)</span>
+<span id="cb8-4"><a aria-hidden="true" href="#cb8-4" tabindex="-1"></a>    <span class="cf">assert</span> res.status <span class="op">==</span> <span class="st">"block"</span></span></code></pre></div>
 <h3 id="ci-integration-run-policy-gates-before-merge">CI integration
 (run policy gates before merge)</h3>
 <p>Policies don’t help if they run “sometimes.” They help when they run
 on every relevant change, before merge.</p>
 <p>An example CI wiring (GitHub Actions shape; adapt to your
 runner):</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Governance Checks</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">pull_request</span><span class="kw">]</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">policy</span><span class="kw">:</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run policy validators</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>          python -m governance.check --base origin/main --head HEAD</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Record audit evidence</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>          python -m governance.audit --pr ${{ github.event.number }}</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Governance Checks</span></span>
+<span id="cb9-2"><a aria-hidden="true" href="#cb9-2" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">pull_request</span><span class="kw">]</span></span>
+<span id="cb9-3"><a aria-hidden="true" href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a aria-hidden="true" href="#cb9-4" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb9-5"><a aria-hidden="true" href="#cb9-5" tabindex="-1"></a><span class="at">  </span><span class="fu">policy</span><span class="kw">:</span></span>
+<span id="cb9-6"><a aria-hidden="true" href="#cb9-6" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb9-7"><a aria-hidden="true" href="#cb9-7" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb9-8"><a aria-hidden="true" href="#cb9-8" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb9-9"><a aria-hidden="true" href="#cb9-9" tabindex="-1"></a></span>
+<span id="cb9-10"><a aria-hidden="true" href="#cb9-10" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run policy validators</span></span>
+<span id="cb9-11"><a aria-hidden="true" href="#cb9-11" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-12"><a aria-hidden="true" href="#cb9-12" tabindex="-1"></a>          python -m governance.check --base origin/main --head HEAD</span>
+<span id="cb9-13"><a aria-hidden="true" href="#cb9-13" tabindex="-1"></a></span>
+<span id="cb9-14"><a aria-hidden="true" href="#cb9-14" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Record audit evidence</span></span>
+<span id="cb9-15"><a aria-hidden="true" href="#cb9-15" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-16"><a aria-hidden="true" href="#cb9-16" tabindex="-1"></a>          python -m governance.audit --pr ${{ github.event.number }}</span></code></pre></div>
 <h2 id="the-skill-shift-whats-the-job-now">The Skill Shift (what’s the
 job now?)</h2>
 <p>A common cultural objection to SDaC could sound like this: “If the
@@ -303,7 +292,7 @@ repeatable:</p>
 <ul>
 <li><strong>Defining intent:</strong> Mission Objects, templates, and
 bounded change surfaces.</li>
-<li><strong>Defining Physics:</strong> Validators and Immune System
+<li><strong>Defining <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>:</strong> Validators and Immune System
 cases that encode invariants.</li>
 <li><strong>Defining governance:</strong> budgets, protected paths,
 escalation rules, and audit evidence.</li>
@@ -312,7 +301,7 @@ stop conditions when convergence fails.</li>
 <li><strong>Owning surfaces:</strong> keeping Map/Terrain alignment true
 as reality changes.</li>
 </ul>
-<p>Writing a good Validator (or a good Immune System case) often
+<p>Writing a good Validator (or a good <a class="concept-link" href="concepts#immune-system-case" title="See concept: Immune System case">Immune System case</a>) often
 requires <em>more</em> domain understanding than writing the
 implementation it constrains. Implementation can be locally plausible.
 Constraints have to be globally true.</p>
@@ -396,7 +385,7 @@ require human approval.</li>
 applies.</li>
 </ul>
 <p>Even with hygiene, keep the last line of defense: Scope Guard limits
-writes, Mission Gate validates without the model, and Immutable
+writes, <a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">Mission Gate</a> validates without the model, and Immutable
 Infrastructure protects your graders and policies.</p>
 <h2 id="continuous-audit-loop-policy-evidence">Continuous Audit Loop
 (Policy + Evidence)</h2>
@@ -444,18 +433,17 @@ want an audit record that is:</p>
 </ul>
 <p>A practical format is JSONL: one JSON object per line, written as an
 append-only log.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GovernanceEvent:</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    timestamp: datetime</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    event_type: <span class="bu">str</span>  <span class="co"># &quot;policy_check&quot; | &quot;exception&quot; | &quot;merge_blocked&quot; | &quot;override&quot; | &quot;rollback&quot;</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    actor: <span class="bu">str</span>       <span class="co"># &quot;agent:&lt;name&gt;&quot; | &quot;human:&lt;user&gt;&quot; | &quot;ci&quot;</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    policy_id: <span class="bu">str</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    result: <span class="bu">str</span>      <span class="co"># &quot;pass&quot; | &quot;warn&quot; | &quot;block&quot; | &quot;exception&quot;</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    context: <span class="bu">dict</span>    <span class="co"># pr, commit, changed_paths, budgets, links to logs</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a aria-hidden="true" href="#cb11-1" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb11-2"><a aria-hidden="true" href="#cb11-2" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb11-3"><a aria-hidden="true" href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a aria-hidden="true" href="#cb11-4" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-5"><a aria-hidden="true" href="#cb11-5" tabindex="-1"></a><span class="kw">class</span> GovernanceEvent:</span>
+<span id="cb11-6"><a aria-hidden="true" href="#cb11-6" tabindex="-1"></a>    timestamp: datetime</span>
+<span id="cb11-7"><a aria-hidden="true" href="#cb11-7" tabindex="-1"></a>    event_type: <span class="bu">str</span>  <span class="co"># "policy_check" | "exception" | "merge_blocked" | "override" | "rollback"</span></span>
+<span id="cb11-8"><a aria-hidden="true" href="#cb11-8" tabindex="-1"></a>    actor: <span class="bu">str</span>       <span class="co"># "agent:&lt;name&gt;" | "human:&lt;user&gt;" | "ci"</span></span>
+<span id="cb11-9"><a aria-hidden="true" href="#cb11-9" tabindex="-1"></a>    policy_id: <span class="bu">str</span></span>
+<span id="cb11-10"><a aria-hidden="true" href="#cb11-10" tabindex="-1"></a>    result: <span class="bu">str</span>      <span class="co"># "pass" | "warn" | "block" | "exception"</span></span>
+<span id="cb11-11"><a aria-hidden="true" href="#cb11-11" tabindex="-1"></a>    context: <span class="bu">dict</span>    <span class="co"># pr, commit, changed_paths, budgets, links to logs</span></span></code></pre></div>
 <p>What to record at minimum:</p>
 <ul>
 <li>policy inputs (diff hash, changed paths, mission id/version)</li>
@@ -514,28 +502,27 @@ merged.</p>
 <p><strong>The Governance Check:</strong></p>
 <p>The <code>agent_merge_blocker.yml</code> workflow implements this
 policy:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># governance/ci/agent_merge_blocker.yml</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Agent Merge Blocker</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">opened</span><span class="kw">,</span><span class="at"> synchronize</span><span class="kw">,</span><span class="at"> reopened</span><span class="kw">]</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">check-kill-switch</span><span class="kw">:</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">fetch-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch branch exists</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>          set -euo pipefail</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>          branch=&quot;disable-auto-merge&quot;</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>          if git ls-remote --exit-code --heads origin &quot;$branch&quot; &gt;/dev/null; then</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            echo &quot;::error::Kill switch &#39;$branch&#39; found; autonomous merges suspended.&quot;</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            exit 1</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>          fi</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a aria-hidden="true" href="#cb12-1" tabindex="-1"></a><span class="co"># governance/ci/agent_merge_blocker.yml</span></span>
+<span id="cb12-2"><a aria-hidden="true" href="#cb12-2" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Agent Merge Blocker</span></span>
+<span id="cb12-3"><a aria-hidden="true" href="#cb12-3" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb12-4"><a aria-hidden="true" href="#cb12-4" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
+<span id="cb12-5"><a aria-hidden="true" href="#cb12-5" tabindex="-1"></a><span class="at">    </span><span class="fu">types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">opened</span><span class="kw">,</span><span class="at"> synchronize</span><span class="kw">,</span><span class="at"> reopened</span><span class="kw">]</span></span>
+<span id="cb12-6"><a aria-hidden="true" href="#cb12-6" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb12-7"><a aria-hidden="true" href="#cb12-7" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb12-8"><a aria-hidden="true" href="#cb12-8" tabindex="-1"></a><span class="at">  </span><span class="fu">check-kill-switch</span><span class="kw">:</span></span>
+<span id="cb12-9"><a aria-hidden="true" href="#cb12-9" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb12-10"><a aria-hidden="true" href="#cb12-10" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb12-11"><a aria-hidden="true" href="#cb12-11" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb12-12"><a aria-hidden="true" href="#cb12-12" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb12-13"><a aria-hidden="true" href="#cb12-13" tabindex="-1"></a><span class="at">          </span><span class="fu">fetch-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb12-14"><a aria-hidden="true" href="#cb12-14" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch branch exists</span></span>
+<span id="cb12-15"><a aria-hidden="true" href="#cb12-15" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb12-16"><a aria-hidden="true" href="#cb12-16" tabindex="-1"></a>          set -euo pipefail</span>
+<span id="cb12-17"><a aria-hidden="true" href="#cb12-17" tabindex="-1"></a>          branch="disable-auto-merge"</span>
+<span id="cb12-18"><a aria-hidden="true" href="#cb12-18" tabindex="-1"></a>          if git ls-remote --exit-code --heads origin "$branch" &gt;/dev/null; then</span>
+<span id="cb12-19"><a aria-hidden="true" href="#cb12-19" tabindex="-1"></a>            echo "::error::Kill switch '$branch' found; autonomous merges suspended."</span>
+<span id="cb12-20"><a aria-hidden="true" href="#cb12-20" tabindex="-1"></a>            exit 1</span>
+<span id="cb12-21"><a aria-hidden="true" href="#cb12-21" tabindex="-1"></a>          fi</span></code></pre></div>
 <p>This workflow runs on every pull request. It checks for the existence
 of the <code>disable-auto-merge</code> remote branch. If the branch is
 found, the workflow fails, which in turn blocks the pull request from
@@ -580,35 +567,31 @@ code.”</p></li>
 clearly record whether the policy validator passed or failed, and why.
 This starts building your audit trail.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 12 – Governance at Machine Speed | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-12-governance-at-machine-speed" data-share-text="Architects of Intent — Chapter 12 – Governance at Machine Speed">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed&amp;text=Chapter%2012%20%E2%80%93%20Governance%20at%20Machine%20Speed%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed&amp;title=Chapter%2012%20%E2%80%93%20Governance%20at%20Machine%20Speed%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%2012%20%E2%80%93%20Governance%20at%20Machine%20Speed%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2012%20%E2%80%93%20Governance%20at%20Machine%20Speed%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 12 – Governance at Machine Speed" data-share-title="Chapter 12 – Governance at Machine Speed | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-12-governance-at-machine-speed" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed&amp;text=Chapter%2012%20%E2%80%93%20Governance%20at%20Machine%20Speed%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed&amp;title=Chapter%2012%20%E2%80%93%20Governance%20at%20Machine%20Speed%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2012%20%E2%80%93%20Governance%20at%20Machine%20Speed%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2012%20%E2%80%93%20Governance%20at%20Machine%20Speed%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-12-governance-at-machine-speed">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-11-automated-refactoring-under-guards">← Chapter 11 – Automated Refactoring Under Guards</a>
-    <a class="next-link" href="chapter-13-the-hofstadter-bridge">Chapter 13 – The Hofstadter Bridge →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-11-automated-refactoring-under-guards">← Chapter 11 – Automated Refactoring Under Guards</a>
+<a class="next-link" href="chapter-13-the-hofstadter-bridge">Chapter 13 – The Hofstadter Bridge →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

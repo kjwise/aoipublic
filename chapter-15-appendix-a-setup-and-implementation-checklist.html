@@ -1,49 +1,47 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part VI Appendices</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part VI Appendices</div>
 <div class="chapter-meta"><span class="read-time">6 min read</span></div>
-<h1
-id="chapter-15-appendix-a-setup-and-implementation-checklist">Chapter 15
+<h1 id="chapter-15-appendix-a-setup-and-implementation-checklist">Chapter 15
 – Appendix A: Setup and Implementation Checklist</h1>
 <p>This appendix does three things:</p>
 <ol type="1">
@@ -106,12 +104,11 @@ pass/fail.</li>
 “creative,” not reliable.</p>
 <h2 id="git-hooks-optional-recommended">Git hooks (optional,
 recommended)</h2>
-<p>Git hooks are a cheap way to push Physics earlier: run deterministic
+<p>Git hooks are a cheap way to push <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> earlier: run deterministic
 checks before changes enter history.</p>
 <p>In this repository, install the hooks with:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> hooks-install</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--get</span> core.hooksPath</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">make</span> hooks-install</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--get</span> core.hooksPath</span></code></pre></div>
 <p>If hooks are installed, <code>core.hooksPath</code> should print
 <code>.githooks</code>.</p>
 <h2 id="implementation-checklist">Implementation checklist</h2>
@@ -144,9 +141,9 @@ up.</li>
 <h3 id="guided-ascent-high-level">Guided ascent (high level)</h3>
 <table>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
 </colgroup>
 <thead>
 <tr>
@@ -159,31 +156,31 @@ up.</li>
 <tr>
 <td style="text-align: left;">Introduction</td>
 <td style="text-align: left;">Adopt the mental model</td>
-<td style="text-align: left;">Map/Terrain, Stochastic Drift, Context
+<td style="text-align: left;">Map/Terrain, <a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a>, Context
 Architecture</td>
 </tr>
 <tr>
 <td style="text-align: left;">Part I</td>
 <td style="text-align: left;">Build a working loop</td>
-<td style="text-align: left;">Map/Terrain/Ledger, Effector, Validator,
-Deterministic Sandwich, Immune System</td>
+<td style="text-align: left;">Map/Terrain/Ledger, <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>, <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>,
+<a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>, <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">Part II</td>
 <td style="text-align: left;">Understand why it works</td>
-<td style="text-align: left;">Stochastic Drift, Ouroboros Protocol,
-Circuit Breakers, Context Graph</td>
+<td style="text-align: left;">Stochastic Drift, <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a>,
+<a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">Circuit Breakers</a>, <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">Part III–IV</td>
 <td style="text-align: left;">Scale and govern safely</td>
-<td style="text-align: left;">Mission Object, Judge, Adaptation State
-Machine, Map-Updaters, Immutable Infrastructure</td>
+<td style="text-align: left;"><a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>, <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>, Adaptation State
+Machine, Map-Updaters, <a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a></td>
 </tr>
 <tr>
 <td style="text-align: left;">Part V</td>
 <td style="text-align: left;">Limit cases + stakes</td>
-<td style="text-align: left;">Hofstadter Bridge, Race to Reliable
+<td style="text-align: left;"><a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a>, Race to Reliable
 Autonomy</td>
 </tr>
 </tbody>
@@ -191,27 +188,28 @@ Autonomy</td>
 <h3 id="where-key-concepts-are-introduced-chapter-level">Where key
 concepts are introduced (chapter-level)</h3>
 <ul>
-<li><strong>Chapter 1:</strong> Map, Terrain, Ledger, Effector,
+<li><strong><a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a>:</strong> Map, Terrain, Ledger, Effector,
 Validator (MVF v0: a loop you can run).</li>
 <li><strong>Chapter 2:</strong> The Deterministic Sandwich (Prep → Model
 → Validation).</li>
-<li><strong>Chapter 3:</strong> Validators → Immune System (Physics you
+<li><strong><a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>:</strong> Validators → Immune System (Physics you
 can enforce).</li>
-<li><strong>Chapter 4:</strong> Stochastic Drift (measure it, budget it,
+<li><strong><a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a>:</strong> Stochastic Drift (measure it, budget it,
 reduce it).</li>
-<li><strong>Chapter 5:</strong> The Ouroboros Protocol + Attractors +
+<li><strong><a class="chapter-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge#chapter-5-the-ouroboros-protocol-why-loops-converge" title="Go to: Chapter 5">Chapter 5</a>:</strong> The Ouroboros Protocol + Attractors +
 circuit breakers (debug convergence).</li>
-<li><strong>Chapter 6:</strong> Context Architecture + Context Graph +
-Branching Factor + Skeleton-First Rule (slice deterministically).</li>
+<li><strong><a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a>:</strong> <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a> + Context Graph +
+<a class="concept-link" href="concepts#branching-factor-rule-of-seven" title="See concept: Branching Factor (Rule of
+Seven)">Branching Factor</a> + Skeleton-First Rule (slice deterministically).</li>
 <li><strong>Chapters 7–9:</strong> Mission Objects, Map-Updaters, Dream
 (scale the loop into a system).</li>
 <li><strong>Chapters 10–12:</strong> Immutable Infrastructure +
 governance at machine speed (protect graders and blast radius).</li>
-<li><strong>Chapter 13:</strong> Hofstadter Bridge (limit case: when the
+<li><strong><a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a>:</strong> Hofstadter Bridge (limit case: when the
 Map becomes enforceable).</li>
-<li><strong>Chapter 14:</strong> The Race to Reliable Autonomy (stakes:
+<li><strong><a class="chapter-link" href="chapter-14-the-race-to-reliable-autonomy#chapter-14-the-race-to-reliable-autonomy" title="Go to: Chapter 14">Chapter 14</a>:</strong> The Race to Reliable Autonomy (stakes:
 why the bar is rising).</li>
-<li><strong>Appendix D:</strong> glossary + translation guide.</li>
+<li><strong><a class="chapter-link" href="chapter-18-appendix-d-glossary-and-translation-guide#chapter-18-appendix-d-glossary-translation-guide" title="Go to: Appendix D">Appendix D</a>:</strong> glossary + translation guide.</li>
 </ul>
 <h3 id="weekend-sprint-part-i-build-the-first-loop">Weekend sprint (Part
 I): Build the first loop</h3>
@@ -288,7 +286,7 @@ terminates.</li>
 6: Slice the graph, do not dump it (Chapter 6)</h4>
 <p>Definition of done:</p>
 <ul>
-<li>A repeatable way to build a context packet for a single task.</li>
+<li>A repeatable way to build a <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">context packet</a> for a single task.</li>
 <li>The slice is small enough to fit comfortably in one model call.</li>
 <li>You can show one failure from a raw dump and one success from a
 slice.</li>
@@ -309,11 +307,11 @@ strings.</li>
 Map fresh (Chapter 8)</h4>
 <p>Definition of done:</p>
 <ul>
-<li>A Map-Updater that extracts a deterministic skeleton from the
+<li>A <a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> that extracts a deterministic skeleton from the
 Terrain.</li>
 <li>A compare step that detects drift.</li>
 <li>A propose step that emits a unified diff (and nothing else).</li>
-<li>A CI gate that fails on drift and tells you how to repair it.</li>
+<li>A <a class="concept-link" href="concepts#ci-gate-mapterrain-sync" title="See concept: CI Gate (Map–Terrain Sync)">CI gate</a> that fails on drift and tells you how to repair it.</li>
 </ul>
 <h4 id="milestone-9-the-90-maintenance-system-chapter-9">Milestone 9:
 The 90% maintenance system (Chapter 9)</h4>
@@ -322,7 +320,7 @@ The 90% maintenance system (Chapter 9)</h4>
 <li>Scheduled runs (nightly or weekly) that propose maintenance
 patches.</li>
 <li>Human approval before merge.</li>
-<li>A short “Dream Manifest” of what you measure and why (defects, flaky
+<li>A short “<a class="concept-link" href="concepts#dream-manifest" title="See concept: Dream Manifest">Dream Manifest</a>” of what you measure and why (defects, flaky
 tests, complexity hotspots).</li>
 </ul>
 <h3 id="ongoing-part-iv-govern-safe-evolution">Ongoing (Part IV): Govern
@@ -337,13 +335,12 @@ validators, CI rules) without a human.</li>
 (CODEOWNERS / branch protection).</li>
 <li>A break-glass procedure exists and is rehearsed.</li>
 </ul>
-<h4
-id="milestone-11-automated-refactoring-under-guards-chapter-11">Milestone
+<h4 id="milestone-11-automated-refactoring-under-guards-chapter-11">Milestone
 11: Automated refactoring under guards (Chapter 11)</h4>
 <p>Definition of done:</p>
 <ul>
 <li>A small, metric-driven refactor loop with commit/revert rules.</li>
-<li>The Ratchet is explicit: quality metrics do not regress without an
+<li>The <a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> is explicit: quality metrics do not regress without an
 intentional waiver.</li>
 </ul>
 <h4 id="milestone-12-governance-at-machine-speed-chapter-12">Milestone
@@ -368,35 +365,31 @@ loop working.</p></li>
 <li><p>Put one protected path in place (tests/validators/CI) and require
 human review for it.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist" data-share-text="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist&amp;text=Chapter%2015%20%E2%80%93%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist&amp;title=Chapter%2015%20%E2%80%93%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%2015%20%E2%80%93%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2015%20%E2%80%93%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist" data-share-title="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist&amp;text=Chapter%2015%20%E2%80%93%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist&amp;title=Chapter%2015%20%E2%80%93%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2015%20%E2%80%93%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2015%20%E2%80%93%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-15-appendix-a-setup-and-implementation-checklist">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-14-the-race-to-reliable-autonomy">← Chapter 14 – The Race to Reliable Autonomy</a>
-    <a class="next-link" href="chapter-16-appendix-b-failure-mode-gallery">Chapter 16 – Appendix B: Failure Mode Gallery →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-14-the-race-to-reliable-autonomy">← Chapter 14 – The Race to Reliable Autonomy</a>
+<a class="next-link" href="chapter-16-appendix-b-failure-mode-gallery">Chapter 16 – Appendix B: Failure Mode Gallery →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

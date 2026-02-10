@@ -1,46 +1,45 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 13 – The Hofstadter Bridge | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 13 – The Hofstadter Bridge">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-13-the-hofstadter-bridge">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 13 – The Hofstadter Bridge | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 13 – The Hofstadter Bridge">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-13-the-hofstadter-bridge">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 13 – The Hofstadter Bridge | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 13 – The Hofstadter Bridge | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 13 – The Hofstadter Bridge">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 13 – The Hofstadter Bridge | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 13 – The Hofstadter Bridge | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 13 – The Hofstadter Bridge" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-13-the-hofstadter-bridge" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 13 – The Hofstadter Bridge | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 13 – The Hofstadter Bridge" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-13-the-hofstadter-bridge" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 13 – The Hofstadter Bridge | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 13 – The Hofstadter Bridge | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 13 – The Hofstadter Bridge" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 13 – The Hofstadter Bridge | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part V Reflect Limit Cases</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part V Reflect Limit Cases</div>
 <div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-13-the-hofstadter-bridge">Chapter 13 – The Hofstadter
 Bridge</h1>
@@ -53,11 +52,10 @@ the Map becomes enforceable, not just advisory.</p>
 inventories, and policies that shape what changes are allowed to do. But
 most Maps are still advisory. They can drift for months without anything
 breaking.</p>
-<p>The <strong>Hofstadter Bridge</strong> is the boundary where that
+<p>The <strong><a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a></strong> is the boundary where that
 stops being true. Parts of the Map become enforceable: drift turns into
 a failing gate.</p>
-<h2
-id="the-smallest-step-toward-the-bridge-one-generated-block-one-gate">The
+<h2 id="the-smallest-step-toward-the-bridge-one-generated-block-one-gate">The
 Smallest Step Toward the Bridge: One Generated Block + One Gate</h2>
 <p>The Hofstadter Bridge can sound like a requirement to turn prose into
 a theorem prover. You don’t have to. The smallest useful move is to make
@@ -74,12 +72,12 @@ you can extract deterministically from the Terrain (function signatures,
 endpoint paths, dependency edges, policy allowlists).</p></li>
 <li><p>Write two tiny deterministic programs:</p>
 <ul>
-<li><p>An <strong>Effector</strong> that rewrites only that block from
+<li><p>An <strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a></strong> that rewrites only that block from
 the extracted skeleton (diff-first, apply optional).</p></li>
-<li><p>A <strong>Validator</strong> that re-extracts the skeleton and
+<li><p>A <strong><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a></strong> that re-extracts the skeleton and
 fails if Map and Terrain disagree.</p></li>
 </ul></li>
-<li><p>Put the Validator in CI and treat failure as Physics.</p></li>
+<li><p>Put the Validator in CI and treat failure as <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>.</p></li>
 </ol>
 <p>Here’s what that “micro-Bridge” looks like in pseudocode for a
 <code>## Public Interfaces</code> block.</p>
@@ -94,12 +92,12 @@ fails if Map and Terrain disagree.</p></li>
 doc_before = READ_TEXT(map_file)
 doc_after = REWRITE_HEADING_BLOCK(
   doc_before,
-  heading=&quot;## Public Interfaces&quot;,
+  heading="## Public Interfaces",
   items=FORMAT_AS_BULLETS(signatures),
 )
 
 IF doc_before == doc_after:
-  PRINT(&quot;[effector] no drift detected&quot;)
+  PRINT("[effector] no drift detected")
   EXIT(0)
 
 PRINT(UNIFIED_DIFF(doc_before, doc_after))
@@ -107,14 +105,14 @@ IF apply:
   WRITE_TEXT(map_file, doc_after)</code></pre>
 <p><strong>Validator (hard fail on mismatch):</strong></p>
 <pre class="text"><code>terrain_items = EXTRACT_PUBLIC_SIGNATURES(terrain_dir)
-map_items = PARSE_ITEMS_FROM_HEADING_BLOCK(map_file, heading=&quot;## Public Interfaces&quot;)
+map_items = PARSE_ITEMS_FROM_HEADING_BLOCK(map_file, heading="## Public Interfaces")
 
 missing = terrain_items - map_items
 extra = map_items - terrain_items
 
 IF missing OR extra:
   FAIL(
-    code=&quot;map_terrain_sync_fail&quot;,
+    code="map_terrain_sync_fail",
     missing_in_map=SORTED(missing),
     extra_in_map=SORTED(extra),
   )
@@ -148,14 +146,14 @@ a description of your infrastructure; it’s the executable blueprint that
 provisions and maintains it. Deviations are detected and often
 remediated.</p></li>
 <li><p><strong>Policy as Code (PaC):</strong> Tools like Open Policy
-Agent (OPA) allow you to write security, compliance, or operational
+<a class="concept-link" href="concepts#agent" title="See concept: Agent">Agent</a> (OPA) allow you to write security, compliance, or operational
 policies in a declarative language (Rego). These policies are then
 evaluated against live system state or proposed changes, acting as gates
 that prevent non-compliant actions.</p></li>
 </ul>
 <p>In each of these cases, a human-authored document, written in a
 structured, often declarative format, directly dictates the behavior or
-structure of a system. The “documentation” is the <em>mechanism</em> of
+structure of a system. The “documentation” is the <em><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">mechanism</a></em> of
 enforcement.</p>
 <p>For SDaC, this means taking our <code>Map</code>—which includes
 everything from architectural decision records (ADRs) to data schemas
@@ -171,14 +169,13 @@ code</strong></p>
 Its <code>Map</code> might define explicit allowed communication
 patterns: Service A can call Service B, but Service C cannot call
 Service A.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># services/payment-service/architecture.yaml</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> payment-service</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">depends_on</span><span class="kw">:</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> user-service</span><span class="co"> # allowed dependency</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> notification-service</span><span class="co"> # allowed dependency</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">not_allowed_to_call</span><span class="kw">:</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> audit-log-service</span><span class="co"> # specific forbidden dependency</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="co"># services/payment-service/architecture.yaml</span></span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> payment-service</span></span>
+<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb5-4"><a aria-hidden="true" href="#cb5-4" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> user-service</span><span class="co"> # allowed dependency</span></span>
+<span id="cb5-5"><a aria-hidden="true" href="#cb5-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> notification-service</span><span class="co"> # allowed dependency</span></span>
+<span id="cb5-6"><a aria-hidden="true" href="#cb5-6" tabindex="-1"></a><span class="fu">not_allowed_to_call</span><span class="kw">:</span></span>
+<span id="cb5-7"><a aria-hidden="true" href="#cb5-7" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> audit-log-service</span><span class="co"> # specific forbidden dependency</span></span></code></pre></div>
 <p>On a Hofstadter Bridge system, this <code>architecture.yaml</code>
 isn’t just a diagram to be updated manually. It’s compiled into the
 deployment pipeline. Before a new version of
@@ -253,21 +250,20 @@ non-negotiable.</li>
 remains aspirational for many systems. But the direction is consistent:
 the more autonomy you deploy, the more of your intent needs to become
 enforceable, or your loop can optimize against fiction.</p>
-<h2
-id="self-reference-safety-what-can-change-and-under-what-approval">Self-Reference
+<h2 id="self-reference-safety-what-can-change-and-under-what-approval">Self-Reference
 Safety (what can change, and under what approval?)</h2>
 <p>Crossing the Bridge creates a new temptation: tune the gates to
 reduce pain.</p>
 <p>If a system can rewrite its own guards, it can learn to make the
 guards easier instead of making the code better. That’s not malice. It’s
-optimization. Chapter 11’s ratchets exist because this failure mode is
+optimization. <a class="chapter-link" href="chapter-11-automated-refactoring-under-guards#chapter-11-automated-refactoring-under-guards" title="Go to: Chapter 11">Chapter 11</a>’s ratchets exist because this failure mode is
 predictable.</p>
 <p>A practical self-modification hierarchy:</p>
 <table>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
 </colgroup>
 <thead>
 <tr>
@@ -284,7 +280,7 @@ predictable.</p>
 </tr>
 <tr>
 <td>1</td>
-<td>Tests and Immune System cases</td>
+<td>Tests and <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> cases</td>
 <td>Modifiable, but guarded by coverage/ratchets and review budgets</td>
 </tr>
 <tr>
@@ -306,7 +302,7 @@ time-bounded</td>
 </tr>
 <tr>
 <td>5</td>
-<td>Immutable infrastructure (branch rules, protected surfaces)</td>
+<td><a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable infrastructure</a> (branch rules, protected surfaces)</td>
 <td>Off-limits to the Effector</td>
 </tr>
 </tbody>
@@ -325,7 +321,7 @@ edited repeatedly, freeze and escalate.</li>
 <li><strong>Band limits:</strong> thresholds and budgets can move only
 inside a bounded interval.</li>
 <li><strong>Kill switch:</strong> one deterministic control that stops
-autonomous merges immediately (Chapter 12).</li>
+autonomous merges immediately (<a class="chapter-link" href="chapter-12-governance-at-machine-speed#chapter-12-governance-at-machine-speed" title="Go to: Chapter 12">Chapter 12</a>).</li>
 <li><strong>Reversibility:</strong> keep a history of governance state
 so you can rollback to a known-good configuration.</li>
 </ul>
@@ -423,35 +419,31 @@ detection, review clarity) and what got harder (making intent
 unambiguous). That trade is the real cost of moving toward the
 Bridge.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 13 – The Hofstadter Bridge | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-13-the-hofstadter-bridge" data-share-text="Architects of Intent — Chapter 13 – The Hofstadter Bridge">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge&amp;text=Chapter%2013%20%E2%80%93%20The%20Hofstadter%20Bridge%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge&amp;title=Chapter%2013%20%E2%80%93%20The%20Hofstadter%20Bridge%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%2013%20%E2%80%93%20The%20Hofstadter%20Bridge%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2013%20%E2%80%93%20The%20Hofstadter%20Bridge%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 13 – The Hofstadter Bridge" data-share-title="Chapter 13 – The Hofstadter Bridge | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-13-the-hofstadter-bridge" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge&amp;text=Chapter%2013%20%E2%80%93%20The%20Hofstadter%20Bridge%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge&amp;title=Chapter%2013%20%E2%80%93%20The%20Hofstadter%20Bridge%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2013%20%E2%80%93%20The%20Hofstadter%20Bridge%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2013%20%E2%80%93%20The%20Hofstadter%20Bridge%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-13-the-hofstadter-bridge">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-12-governance-at-machine-speed">← Chapter 12 – Governance at Machine Speed</a>
-    <a class="next-link" href="chapter-14-the-race-to-reliable-autonomy">Chapter 14 – The Race to Reliable Autonomy →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-12-governance-at-machine-speed">← Chapter 12 – Governance at Machine Speed</a>
+<a class="next-link" href="chapter-14-the-race-to-reliable-autonomy">Chapter 14 – The Race to Reliable Autonomy →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

@@ -52,6 +52,17 @@ body {
 a { color: var(--link); text-decoration: none; text-underline-offset: 0.14em; }
 a:hover { color: var(--link-hover); text-decoration: underline; }
 
+.content a.concept-link,
+.content a.chapter-link {
+  text-decoration: underline dotted rgba(122, 162, 247, 0.55);
+  text-underline-offset: 0.18em;
+}
+
+.content a.concept-link:hover,
+.content a.chapter-link:hover {
+  text-decoration-style: solid;
+}
+
 .content .cta-button {
   display: inline-flex;
   align-items: center;
@@ -110,10 +121,19 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0.9rem var(--pad);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   gap: 0.25rem 0.6rem;
   align-items: center;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+  justify-self: end;
 }
 
 .site-nav a {
@@ -134,6 +154,23 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   color: var(--text-strong);
   font-weight: 650;
   letter-spacing: 0.01em;
+  justify-self: start;
+}
+
+.site-nav a.site-nav__toc {
+  justify-self: center;
+  text-align: center;
+  color: var(--text);
+}
+
+.site-nav a.nav-search {
+  color: var(--text);
+  border: 1px solid rgba(122, 162, 247, 0.35);
+  background: rgba(122, 162, 247, 0.10);
+}
+
+.site-nav a.nav-search:hover {
+  background: rgba(122, 162, 247, 0.16);
 }
 
 .content {
@@ -165,6 +202,108 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 .content p { margin: 1rem 0; }
 .content > :first-child { margin-top: 0; }
 .content > :last-child { margin-bottom: 0; }
+
+.search-form {
+  margin: 1.2rem 0 0.75rem 0;
+}
+
+.search-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.search-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  font: inherit;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
+  padding: 0.65rem 0.8rem;
+}
+
+.search-input::placeholder {
+  color: rgba(181, 182, 191, 0.7);
+}
+
+.search-button {
+  appearance: none;
+  font: inherit;
+  font-weight: 650;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.search-button:hover {
+  background: rgba(122, 162, 247, 0.12);
+  border-color: rgba(122, 162, 247, 0.6);
+  transform: translateY(-1px);
+}
+
+.search-hint {
+  margin: 0.4rem 0 0.9rem 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.search-status {
+  margin: 0.3rem 0 0.8rem 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.search-results {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.85rem 0 0 0;
+}
+
+.search-result {
+  padding: 0.85rem 0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.10);
+}
+
+.search-result:first-child {
+  border-top: none;
+}
+
+.search-result__title {
+  display: inline-block;
+  font-weight: 680;
+  letter-spacing: 0.01em;
+}
+
+.search-result__meta {
+  margin-top: 0.12rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.search-result__snippet {
+  margin-top: 0.45rem;
+  color: rgba(231, 231, 234, 0.93);
+  font-size: 0.95rem;
+}
+
+.content mark {
+  background: rgba(122, 162, 247, 0.22);
+  color: var(--text-strong);
+  border-radius: 6px;
+  padding: 0 0.15em;
+}
 
 .content strong, .content b { color: var(--text-strong); }
 .content em { color: rgba(231, 231, 234, 0.96); }
@@ -298,8 +437,7 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 
 .content pre.mermaid svg {
   width: auto;
-  min-width: 100%;
-  max-width: none;
+  max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -566,6 +704,8 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   .site-nav {
     padding: 0.75rem var(--pad);
     gap: 0.2rem 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .site-nav a {
@@ -578,6 +718,12 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
     padding-left: 0;
     padding-right: 0;
     margin-bottom: 0.2rem;
+  }
+
+  .site-nav__links {
+    margin-left: auto;
+    justify-content: flex-end;
+    width: auto;
   }
 
   .content {
@@ -607,6 +753,11 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
     margin-bottom: 0.45rem;
   }
 
+  .content pre.mermaid svg {
+    min-width: 100%;
+    max-width: none;
+  }
+
   .content table {
     display: block;
     overflow-x: auto;
@@ -621,6 +772,15 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   .content ul,
   .content ol {
     padding-left: 1.1em;
+  }
+
+  .search-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-button {
+    width: 100%;
   }
 
   .codeblock[data-lang]::before {

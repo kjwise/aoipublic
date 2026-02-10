@@ -1,54 +1,54 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 11 – Automated Refactoring Under Guards | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 11 – Automated Refactoring Under Guards | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part IV Govern It Safe Evolution</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part IV Govern It Safe Evolution</div>
 <div class="chapter-meta"><span class="read-time">11 min read</span></div>
 <h1 id="chapter-11-automated-refactoring-under-guards">Chapter 11 –
 Automated Refactoring Under Guards</h1>
-<p>In Chapter 10, we established Immutable Infrastructure: the
+<p>In <a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a>, we established <a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a>: the
 non-negotiable boundary that keeps the system from rewriting the graders
 and guardrails that govern it.</p>
 <p>Part IV is about engineering a capability:
-<strong>Neuroplasticity</strong> (safe self-modification capability) —
+<strong><a class="concept-link" href="concepts#neuroplasticity-safe-self-modification-capability" title="See concept: Neuroplasticity
+(Safe Self-Modification Capability)">Neuroplasticity</a></strong> (safe self-modification capability) —
 the ability to accept self-modification without collapsing into
 regressions.</p>
 <p>Refactoring is the action. Neuroplasticity is the capability.
@@ -60,14 +60,14 @@ and commits only when the result is admissible under hard gates. This is
 how you get evolution without drift.</p>
 <p>Here’s the same loop in the book’s vocabulary:</p>
 <ul>
-<li><p><strong>Sensor:</strong> capture baseline + post-mutation
+<li><p><strong><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a>:</strong> capture baseline + post-mutation
 measurements.</p></li>
-<li><p><strong>Effector:</strong> apply one bounded refactor under an
-explicit Mission Object (scope, budgets, acceptance criteria).</p></li>
-<li><p><strong>Validator:</strong> run the <strong>Immune
+<li><p><strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>:</strong> apply one bounded refactor under an
+explicit <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> (scope, budgets, acceptance criteria).</p></li>
+<li><p><strong><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>:</strong> run the <strong>Immune
 System</strong> plus ratchets and policy gates; emit
 <code>PASS/FAIL</code>.</p></li>
-<li><p><strong>Judge:</strong> decide <code>commit</code> vs
+<li><p><strong><a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>:</strong> decide <code>commit</code> vs
 <code>revert</code> from Validator output.</p></li>
 <li><p><strong>Ledger:</strong> persist the diff and the before/after
 evidence so audits are reproducible.</p></li>
@@ -88,7 +88,7 @@ This involves running all relevant static analysis tools, tests, and
 metrics collectors.</p>
 <p><strong>Typical Pre-Mutation Measurements:</strong></p>
 <ul>
-<li><p><strong>Immune System Execution:</strong> All unit, integration,
+<li><p><strong><a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> Execution:</strong> All unit, integration,
 and end-to-end cases must pass.</p></li>
 <li><p><strong>Code Coverage:</strong> Current percentage of code
 covered by tests.</p></li>
@@ -142,7 +142,7 @@ your “guards.”</p>
 <ul>
 <li><p><strong>All Tests Must Pass:</strong> No regressions in existing
 functionality. This is the first and most fundamental guard.</p></li>
-<li><p><strong>The Ratchet Principle:</strong> This is a crucial
+<li><p><strong>The <a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> Principle:</strong> This is a crucial
 concept. Quality metrics, once established, should only ever improve or
 remain the same; they must <em>never</em> degrade.</p>
 <ul>
@@ -204,10 +204,10 @@ require stronger, more diverse guards.</strong></p>
 decision:</p>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
 </colgroup>
 <thead>
 <tr>
@@ -260,30 +260,28 @@ guard for your guards)</h3>
 sensitive to behavioral changes. The tool edits your code in small ways
 (flip a comparison, remove a branch) and verifies that tests fail.</p>
 <p>Example (Python):</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install once</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install mutmut</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run mutations on a bounded surface</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mutmut</span> run <span class="at">--paths-to-mutate</span><span class="op">=</span>src/auth/ <span class="at">--tests-dir</span><span class="op">=</span>tests/auth/</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect survivors (mutations that tests failed to catch)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">mutmut</span> results</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="co"># Install once</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="ex">pip</span> install mutmut</span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a><span class="co"># Run mutations on a bounded surface</span></span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="ex">mutmut</span> run <span class="at">--paths-to-mutate</span><span class="op">=</span>src/auth/ <span class="at">--tests-dir</span><span class="op">=</span>tests/auth/</span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="co"># Inspect survivors (mutations that tests failed to catch)</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a><span class="ex">mutmut</span> results</span></code></pre></div>
 <p>Use mutation testing selectively. It’s too expensive as a default
 gate, but it can be the right tool for deciding whether a module is safe
 to refactor autonomously.</p>
-<h2
-id="scope-boundaries-how-wide-is-the-refactor-allowed-to-reach">Scope
+<h2 id="scope-boundaries-how-wide-is-the-refactor-allowed-to-reach">Scope
 Boundaries (How wide is the refactor allowed to reach?)</h2>
 <p>“Refactor the code” is not a Mission. A refactoring mission needs
 explicit boundaries.</p>
 <p>One way to frame scope:</p>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
 </colgroup>
 <thead>
 <tr>
@@ -329,8 +327,7 @@ explicit boundaries.</p>
 <p>This is the same idea as blast radius limits, but moved earlier in
 the pipeline: <strong>scope is part of the mission, not an
 afterthought.</strong></p>
-<h2
-id="equivalence-classes-what-does-no-behavior-change-mean">Equivalence
+<h2 id="equivalence-classes-what-does-no-behavior-change-mean">Equivalence
 Classes (What does “no behavior change” mean?)</h2>
 <p>Refactoring is “change the how, keep the what.” But “the what” has
 layers:</p>
@@ -356,18 +353,16 @@ validators, it can discover that the easiest way to achieve “all tests
 pass” is to delete the hard tests. This isn’t malice—it’s optimization
 finding the shortest path.</p>
 <p>The <strong>Ratchet</strong> prevents this. It’s a governance
-mechanism that treats a chosen metric value <span
-class="math inline"><em>m</em></span> as strictly monotonic:</p>
-<p><span
-class="math display"><em>m</em><sub>new</sub> ≥ <em>m</em><sub>old</sub></span></p>
+mechanism that treats a chosen metric value <span class="math inline"><em>m</em></span> as strictly monotonic:</p>
+<p><span class="math display"><em>m</em><sub>new</sub> ≥ <em>m</em><sub>old</sub></span></p>
 <p>If the new value is worse, the commit is rejected—regardless of
 whether tests pass.</p>
 <p><strong>What to ratchet:</strong></p>
 <table>
 <colgroup>
-<col style="width: 29%" />
-<col style="width: 51%" />
-<col style="width: 18%" />
+<col style="width: 29%"/>
+<col style="width: 51%"/>
+<col style="width: 18%"/>
 </colgroup>
 <thead>
 <tr>
@@ -410,24 +405,23 @@ whether tests pass.</p>
 </tbody>
 </table>
 <p><strong>Implementation:</strong></p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In your governance config or CI pipeline</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ratchets</span><span class="kw">:</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test_count</span><span class="kw">:</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/test_count.json</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">coverage_percent</span><span class="kw">:</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/coverage.json</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.1</span><span class="co">  # Allow tiny fluctuations from test timing</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lint_errors</span><span class="kw">:</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> down</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/lint.json</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="co"># In your governance config or CI pipeline</span></span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="fu">ratchets</span><span class="kw">:</span></span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="at">  </span><span class="fu">test_count</span><span class="kw">:</span></span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
+<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/test_count.json</span></span>
+<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
+<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a aria-hidden="true" href="#cb2-8" tabindex="-1"></a><span class="at">  </span><span class="fu">coverage_percent</span><span class="kw">:</span></span>
+<span id="cb2-9"><a aria-hidden="true" href="#cb2-9" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
+<span id="cb2-10"><a aria-hidden="true" href="#cb2-10" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/coverage.json</span></span>
+<span id="cb2-11"><a aria-hidden="true" href="#cb2-11" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
+<span id="cb2-12"><a aria-hidden="true" href="#cb2-12" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.1</span><span class="co">  # Allow tiny fluctuations from test timing</span></span>
+<span id="cb2-13"><a aria-hidden="true" href="#cb2-13" tabindex="-1"></a></span>
+<span id="cb2-14"><a aria-hidden="true" href="#cb2-14" tabindex="-1"></a><span class="at">  </span><span class="fu">lint_errors</span><span class="kw">:</span></span>
+<span id="cb2-15"><a aria-hidden="true" href="#cb2-15" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> down</span></span>
+<span id="cb2-16"><a aria-hidden="true" href="#cb2-16" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/lint.json</span></span>
+<span id="cb2-17"><a aria-hidden="true" href="#cb2-17" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
 <p>The baseline files are updated only when a commit passes all
 ratchets. They become the new floor.</p>
 <p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
@@ -495,18 +489,17 @@ rollback by simply switching back to the previous, known-good version.
 The automated change doesn’t modify a running system in place, but
 rather prepares a new, verified one.</p></li>
 </ul>
-<h2
-id="refactoring-pattern-gallery-and-the-guards-that-make-them-safe">Refactoring
+<h2 id="refactoring-pattern-gallery-and-the-guards-that-make-them-safe">Refactoring
 Pattern Gallery (and the guards that make them safe)</h2>
 <p>Refactoring patterns are useful because they define a bounded change
 shape. Guards become easier to write when you can name what the Effector
 is allowed to do.</p>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
 </colgroup>
 <thead>
 <tr>
@@ -610,7 +603,7 @@ limits).</p></li>
 <li><p>The system commits the change to the temporary branch and opens
 (or updates) a pull request for review. Merge is allowed only if policy
 explicitly permits auto-merge for this change class; otherwise the loop
-stops at a human approval gate (see Chapter 12).</p></li>
+stops at a human approval gate (see <a class="chapter-link" href="chapter-12-governance-at-machine-speed#chapter-12-governance-at-machine-speed" title="Go to: Chapter 12">Chapter 12</a>).</p></li>
 <li><p>An audit log entry is created, showing the agent, the change, the
 metrics before and after, and the successful merge.</p></li>
 </ul>
@@ -644,35 +637,31 @@ a scheduled job or a local script that runs <code>eslint --fix</code>
 codebase. Manually verify the changes, but envision how this would fit
 into the Measure → Mutate → Measure loop.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" data-share-text="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards&amp;text=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards&amp;title=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 11 – Automated Refactoring Under Guards" data-share-title="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards&amp;text=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards&amp;title=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-10-immutable-infrastructure-the-guardrails">← Chapter 10 – Immutable Infrastructure (The Guardrails)</a>
-    <a class="next-link" href="chapter-12-governance-at-machine-speed">Chapter 12 – Governance at Machine Speed →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-10-immutable-infrastructure-the-guardrails">← Chapter 10 – Immutable Infrastructure (The Guardrails)</a>
+<a class="next-link" href="chapter-12-governance-at-machine-speed">Chapter 12 – Governance at Machine Speed →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>

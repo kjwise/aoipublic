@@ -1,46 +1,45 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <title>Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)">
-  <meta name="keywords" content="Architects of Intent, Jóhann Haukur Gunnarsson">
-  <meta name="author" content="Jóhann Haukur Gunnarsson">
-  <link rel="canonical" href="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
-
-  <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent">
-  <meta property="og:description" content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)">
-  <meta property="og:url" content="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent">
-  <meta property="og:image:type" content="image/jpeg">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent">
-  <meta name="twitter:description" content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)">
-  <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent">
-
-  
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<title>Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<link href="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics" rel="canonical"/>
+<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" property="og:title"/>
+<meta content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" name="twitter:title"/>
+<meta content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" name="twitter:image:alt"/>
+<link href="style.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary">
-      <a class="brand" href="./">Architects of Intent</a>
-      <a href="toc">Contents</a>
-      <a href="concepts">Concepts</a>
-    </nav>
-  </header>
-
-  <main id="main" class="content">
-    <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">Architects of Intent</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content" id="main">
+<div class="part-title">Part II Understand It The Theory Behind Reliability</div>
 <div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
 – The Stochastic Engine (Why You Need Physics)</h1>
@@ -81,24 +80,24 @@ body.</li>
 same: explicit intent (Map), validated reality (Terrain), and a loop
 that keeps them aligned.</p>
 <pre class="mermaid"><code>graph TB
-    subgraph &quot;Organization Level&quot;
-        O_Map[&quot;Strategy Docs&lt;br/&gt;(Map)&quot;]
-        O_Terrain[&quot;Running Systems&lt;br/&gt;(Terrain)&quot;]
+    subgraph "Organization Level"
+        O_Map["Strategy Docs&lt;br/&gt;(Map)"]
+        O_Terrain["Running Systems&lt;br/&gt;(Terrain)"]
     end
 
-    subgraph &quot;Service Level&quot;
-        S_Map[&quot;API Contracts&lt;br/&gt;(Map)&quot;]
-        S_Terrain[&quot;Deployed Services&lt;br/&gt;(Terrain)&quot;]
+    subgraph "Service Level"
+        S_Map["API Contracts&lt;br/&gt;(Map)"]
+        S_Terrain["Deployed Services&lt;br/&gt;(Terrain)"]
     end
 
-    subgraph &quot;Module Level&quot;
-        M_Map[&quot;Type Signatures&lt;br/&gt;(Map)&quot;]
-        M_Terrain[&quot;Implementations&lt;br/&gt;(Terrain)&quot;]
+    subgraph "Module Level"
+        M_Map["Type Signatures&lt;br/&gt;(Map)"]
+        M_Terrain["Implementations&lt;br/&gt;(Terrain)"]
     end
 
-    subgraph &quot;Function Level&quot;
-        F_Map[&quot;Docstring + Signature&lt;br/&gt;(Map)&quot;]
-        F_Terrain[&quot;Function Body&lt;br/&gt;(Terrain)&quot;]
+    subgraph "Function Level"
+        F_Map["Docstring + Signature&lt;br/&gt;(Map)"]
+        F_Terrain["Function Body&lt;br/&gt;(Terrain)"]
     end
 
     O_Terrain --&gt; S_Map
@@ -113,7 +112,7 @@ that keeps them aligned.</p>
     style S_Terrain fill:#fff3e0
     style M_Terrain fill:#fff3e0
     style F_Terrain fill:#fff3e0</code></pre>
-<p>The arrows show the recursion: each level’s Terrain becomes the next
+<p>The arrows show the <a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a>: each level’s Terrain becomes the next
 level’s Map. This is why SDaC scales—you’re not managing one loop,
 you’re managing a fractal of loops, each with the same
 validate-before-trust structure.</p>
@@ -124,8 +123,8 @@ the level you’re at, trusting that adjacent levels have their own
 Map/Terrain alignment.</p>
 <p>Now let’s zoom back to a small, bounded surface and watch drift
 appear.</p>
-<p>Here’s what happens when you take the Chapter 1 Map/Terrain sync loop
-and swap the deterministic Effector for a stochastic one.</p>
+<p>Here’s what happens when you take the <a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a> Map/Terrain sync loop
+and swap the deterministic <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> for a stochastic one.</p>
 <p><strong>Run 1:</strong></p>
 <ul>
 <li><code>normalize_country(country)</code></li>
@@ -145,7 +144,7 @@ formatting.</p>
 <p>This isn’t a bug in your loop. This is the nature of the engine.</p>
 <p>Large Language Models (LLMs) are <em>stochastic engines</em>:
 probability machines that produce plausible outputs, not guaranteed
-ones. If you want reliable automation, you have to add Physics around
+ones. If you want reliable automation, you have to add <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> around
 the generation.</p>
 <h2 id="llms-are-probability-engines">LLMs Are Probability Engines</h2>
 <p>At its heart, an LLM assigns probabilities to possible next tokens,
@@ -154,7 +153,7 @@ still a 10% tail. That tail is where regressions come from.</p>
 <p>Three implications matter in SDaC:</p>
 <ul>
 <li><p><strong>No guarantee of identical output</strong>: With sampling
-enabled, the same Mission Object can produce slightly different
+enabled, the same <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> can produce slightly different
 candidates across runs. Even at very low temperature (or temperature
 <code>0</code>), treat outputs as near-reproducible, not a
 contract.</p></li>
@@ -166,13 +165,11 @@ execution path.</p></li>
 </ul>
 <p>This is why SDaC treats generation as a component, not a plan: you
 measure variance, constrain it, and gate it.</p>
-<h2
-id="operating-the-stochastic-engine-controls-budgets-tiering">Operating
+<h2 id="operating-the-stochastic-engine-controls-budgets-tiering">Operating
 the Stochastic Engine (Controls, Budgets, Tiering)</h2>
 <p>If you’re going to wire an LLM into a real pipeline, you need
 operating discipline: controls, budgets, and a selection strategy.</p>
-<h3
-id="sampling-controls-temperature-is-a-dial-not-a-guarantee">Sampling
+<h3 id="sampling-controls-temperature-is-a-dial-not-a-guarantee">Sampling
 controls (temperature is a dial, not a guarantee)</h3>
 <p>Sampling parameters shape variance.</p>
 <ul>
@@ -196,8 +193,7 @@ safe.</strong></p>
 time, and review throughput.</p>
 <p>Treat cost as a first-class budget, just like diff size or scope:</p>
 <ul>
-<li><strong>Max attempts:</strong> stop after <span
-class="math inline"><em>N</em></span> candidates.</li>
+<li><strong>Max attempts:</strong> stop after <span class="math inline"><em>N</em></span> candidates.</li>
 <li><strong>Max spend:</strong> stop after a token/cost cap for this
 Mission.</li>
 <li><strong>Max wall-clock:</strong> stop after a time limit (especially
@@ -205,21 +201,20 @@ in CI).</li>
 <li><strong>Max review load:</strong> cap how many agent PRs can exist
 concurrently.</li>
 </ul>
-<p>Chapter 5 is where we engineer circuit breakers in detail (including
+<p><a class="chapter-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge#chapter-5-the-ouroboros-protocol-why-loops-converge" title="Go to: Chapter 5">Chapter 5</a> is where we engineer <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a> in detail (including
 the economics of determinism). The key move here is simpler:
 <strong>make “stop” deterministic before you make “generate”
 powerful.</strong></p>
-<h3
-id="model-selection-rubric-pick-the-smallest-engine-that-converges">Model
+<h3 id="model-selection-rubric-pick-the-smallest-engine-that-converges">Model
 selection rubric (pick the smallest engine that converges)</h3>
 <p>Model selection is not “best model you can afford.” It’s “smallest
 model that converges under your Physics.”</p>
 <p>Use a simple rubric:</p>
 <table>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
 </colgroup>
 <thead>
 <tr>
@@ -258,33 +253,31 @@ strategy</td>
 </table>
 <p>How to evaluate fit for your repo: run the drift experiment (next
 section) across your candidate model tiers and compare <strong>failure
-rate</strong> and <strong>time-to-convergence</strong>, not vibes.</p>
+rate</strong> and <strong>time-to-<a class="concept-link" href="concepts#convergence" title="See concept: Convergence">convergence</a></strong>, not vibes.</p>
 <h3 id="retry-strategy-feed-back-deterministic-failures">Retry strategy
 (feed back deterministic failures)</h3>
 <p>A retry loop should not be “try again.” It should be: “try again with
 the exact failure signal.”</p>
 <p>Illustrative shape:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>findings <span class="op">=</span> []</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> attempt <span class="kw">in</span> <span class="bu">range</span>(max_attempts):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> choose_model_tier(attempt)  <span class="co"># e.g., fast first, flagship on failure</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    request <span class="op">=</span> render_request(mission, <span class="bu">slice</span>, findings)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    candidate <span class="op">=</span> effector_call(model, request)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    report <span class="op">=</span> validate(candidate)  <span class="co"># schemas, lint, tests, scope, policy</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> report.passed:</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> candidate</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    findings.append(report.findings)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    maybe_backoff(report, attempt)  <span class="co"># rate limits, transient errors</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">raise</span> NonConverged(<span class="st">&quot;Exceeded budget; escalate to human or split the mission&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a>findings <span class="op">=</span> []</span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="cf">for</span> attempt <span class="kw">in</span> <span class="bu">range</span>(max_attempts):</span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a>    model <span class="op">=</span> choose_model_tier(attempt)  <span class="co"># e.g., fast first, flagship on failure</span></span>
+<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a>    request <span class="op">=</span> render_request(mission, <span class="bu">slice</span>, findings)</span>
+<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a>    candidate <span class="op">=</span> effector_call(model, request)</span>
+<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a aria-hidden="true" href="#cb2-8" tabindex="-1"></a>    report <span class="op">=</span> validate(candidate)  <span class="co"># schemas, lint, tests, scope, policy</span></span>
+<span id="cb2-9"><a aria-hidden="true" href="#cb2-9" tabindex="-1"></a>    <span class="cf">if</span> report.passed:</span>
+<span id="cb2-10"><a aria-hidden="true" href="#cb2-10" tabindex="-1"></a>        <span class="cf">return</span> candidate</span>
+<span id="cb2-11"><a aria-hidden="true" href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a aria-hidden="true" href="#cb2-12" tabindex="-1"></a>    findings.append(report.findings)</span>
+<span id="cb2-13"><a aria-hidden="true" href="#cb2-13" tabindex="-1"></a>    maybe_backoff(report, attempt)  <span class="co"># rate limits, transient errors</span></span>
+<span id="cb2-14"><a aria-hidden="true" href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a aria-hidden="true" href="#cb2-15" tabindex="-1"></a><span class="cf">raise</span> NonConverged(<span class="st">"Exceeded budget; escalate to human or split the mission"</span>)</span></code></pre></div>
 <p>The loop converges when each retry is narrower than the last. If you
 keep seeing the same failure, treat it as a signal problem (bad slice,
 wrong contract, impossible constraint), not a “model problem.”</p>
-<h3
-id="instruction-channel-hardening-authority-vs.-evidence">Instruction-channel
+<h3 id="instruction-channel-hardening-authority-vs.-evidence">Instruction-channel
 hardening (authority vs. evidence)</h3>
 <p>LLMs often follow instruction-shaped text even when it comes from
 untrusted sources (tickets, comments, logs, README snippets). If you
@@ -299,7 +292,7 @@ source).</li>
 <li>Enforce scope mechanically (write allowlists + diff gates), not
 rhetorically.</li>
 </ul>
-<p>Chapter 2 shows the attack shape and the defense; Chapter 12 shows
+<p>Chapter 2 shows the attack shape and the defense; <a class="chapter-link" href="chapter-12-governance-at-machine-speed#chapter-12-governance-at-machine-speed" title="Go to: Chapter 12">Chapter 12</a> shows
 how to scale it with policy validators.</p>
 <h2 id="internal-reasoning-does-not-replace-the-loop">Internal Reasoning
 Does Not Replace the Loop</h2>
@@ -313,7 +306,7 @@ compiler, linter, schema validator, or runtime. At best, it is
 simulating what validation <em>might</em> say.</p>
 <p><strong>External loop (SDaC):</strong> The system talks to Physics:
 compilers, tests, schemas, linters, and policy gates. It validates
-against reality. The Judge does not care how confident the model sounds;
+against reality. The <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> does not care how confident the model sounds;
 it cares whether the artifact passes the gates.</p>
 <p>Reasoning models can be better Effectors: they often produce
 higher-quality candidates and reduce the number of iterations needed to
@@ -349,8 +342,7 @@ the patch is admissible under your Validators.</li>
 <ol type="1">
 <li>Start from the same baseline each run (reset the file you’re
 generating).</li>
-<li>Run the one-shot effector <span
-class="math inline"><em>n</em></span> times, saving each emitted
+<li>Run the one-shot effector <span class="math inline"><em>n</em></span> times, saving each emitted
 diff.</li>
 <li>Hash the diffs and count unique hashes.</li>
 </ol>
@@ -361,20 +353,19 @@ this experiment. It uses a <em>stochastic</em> effector
 (<code>stochastic_sync_public_interfaces.py</code>) that intentionally
 introduces variance in formatting, ordering, and content.</p>
 <p>Running it produces a summary like this:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make drift</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/measure_drift.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md <span class="at">--runs</span> 10</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">runs</span><span class="op">=</span>10 <span class="va">unique_diffs</span><span class="op">=</span>8 <span class="va">drift_coefficient</span><span class="op">=</span>0.800 <span class="va">failures</span><span class="op">=</span>0</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">example_unique_runs</span><span class="op">=</span>1, <span class="ex">2,</span> 3, 4, 5</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> make drift</span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="ex">python3</span> factory/tools/measure_drift.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md <span class="at">--runs</span> 10</span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="va">runs</span><span class="op">=</span>10 <span class="va">unique_diffs</span><span class="op">=</span>8 <span class="va">drift_coefficient</span><span class="op">=</span>0.800 <span class="va">failures</span><span class="op">=</span>0</span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="va">example_unique_runs</span><span class="op">=</span>1, <span class="ex">2,</span> 3, 4, 5</span></code></pre></div>
 <p>This output tells us:</p>
 <ul>
 <li>Out of 10 runs, we got 8 unique diffs.</li>
-<li>The drift coefficient is a high 0.8, meaning the output is highly
+<li>The <a class="concept-link" href="concepts#drift-coefficient" title="See concept: Drift Coefficient">drift coefficient</a> is a high 0.8, meaning the output is highly
 variable.</li>
 <li>There were no outright failures (e.g., crashes), but the high drift
 means the surface is not stable.</li>
 </ul>
-<p>This is <strong>Stochastic Drift</strong> with a ruler next to it:
+<p>This is <strong><a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a></strong> with a ruler next to it:
 you can measure it, budget it, and reduce it by tightening context
 selection and hardening validators.</p>
 <h3 id="a-simple-drift-coefficient-plus-an-illustrative-run-log">A
@@ -465,8 +456,7 @@ different edit regions, new files).</p>
 <p>From that log:</p>
 <ul>
 <li>With <span class="math inline"><em>u</em> = 4</span> unique diffs
-out of <span class="math inline"><em>n</em> = 10</span> runs, <span
-class="math inline"><em>d</em> = 0.4</span>.</li>
+out of <span class="math inline"><em>n</em> = 10</span> runs, <span class="math inline"><em>d</em> = 0.4</span>.</li>
 <li>Failure rate = <span class="math inline">20%</span>.</li>
 </ul>
 <p>If that feels “too high,” the fix is not more instruction text.
@@ -506,9 +496,9 @@ region, schema)</li>
 <h2 id="why-this-matters-for-your-loop">Why This Matters for Your
 Loop</h2>
 <p>You built a working loop in Chapter 1. You wrapped the stochastic
-call in a Deterministic Sandwich in Chapter 2. You defined Validators in
-Chapter 3.</p>
-<p>Chapter 4 gives you the uncomfortable truth those patterns are
+call in a <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a> in Chapter 2. You defined Validators in
+<a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>.</p>
+<p><a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a> gives you the uncomfortable truth those patterns are
 designed to address:</p>
 <ul>
 <li>Without deterministic context and gates, your loop produces
@@ -524,9 +514,9 @@ property of stochastic generation.</p>
 <ul>
 <li><strong>Chapter 5:</strong> Loops that converge despite
 stochasticity.</li>
-<li><strong>Chapter 6:</strong> Context slicing that reduces
+<li><strong><a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a>:</strong> Context slicing that reduces
 variance.</li>
-<li><strong>Chapter 7:</strong> Mission Objects that make intent
+<li><strong><a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>:</strong> Mission Objects that make intent
 executable.</li>
 </ul>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
@@ -538,38 +528,34 @@ you hit <code>FAIL</code> and how many iterations it took to reach
 <code>PASS</code>.</p></li>
 <li><p><strong>Pick one invariant and enforce it:</strong> Choose one
 deterministic rule (exact signature surface, allowed edit region,
-required headings) and add a Validator that fails fast when the output
+required headings) and add a <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> that fails fast when the output
 drifts.</p></li>
 </ol>
-
-  </main>
-
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics" data-share-text="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)">
-  <div class="share-panel__label">Share</div>
-  <div class="share-panel__actions">
-    <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics&amp;text=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
-    <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
-    <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics&amp;title=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics" aria-label="Share by email">email</a>
-    <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
-  </div>
-  <span class="share-status" aria-live="polite"></span>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)" data-share-title="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics&amp;text=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics&amp;title=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
 </section>
-
-  <nav class="page-nav">
-    <a class="prev-link" href="chapter-3-define-good-your-first-validators">← Chapter 3 – Define “Good” (Your First Validators)</a>
-    <a class="next-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 – The Ouroboros Protocol (Why Loops Converge) →</a>
-  </nav>
-
-  <footer class="site-footer">
-    <p>© Jóhann Haukur Gunnarsson</p>
-    <p>
-      Version: <code>a23032da0771</code>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-3-define-good-your-first-validators">← Chapter 3 – Define “Good” (Your First Validators)</a>
+<a class="next-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 – The Ouroboros Protocol (Why Loops Converge) →</a>
+</nav>
+<footer class="site-footer">
+<p>© Jóhann Haukur Gunnarsson</p>
+<p>
+      Version: <code>0bb5bbb7f271</code>
       ·
-      <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+</p>
+</footer>
 </body>
 </html>
