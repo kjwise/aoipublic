@@ -41,28 +41,21 @@
 
   <main id="main" class="content">
     <div class="part-title">Part V Reflect Limit Cases</div>
-<div class="chapter-meta"><span class="read-time">9 min read</span></div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
 <h1 id="chapter-13-the-hofstadter-bridge">Chapter 13 – The Hofstadter
 Bridge</h1>
 <blockquote>
 <p><strong>Limit case:</strong> A design meditation on what happens when
 the Map becomes enforceable, not just advisory.</p>
 </blockquote>
-<p>In the journey through Software Development as Code (SDaC), we’ve
-built systems that observe, evaluate, and even self-correct. Our aim has
-been to tame the stochastic nature of generation with deterministic
-context and verifiable loops. So far, the <code>Map</code>—our
-structured documentation, architecture decisions, and policy
-definitions—has served as a guide for both humans and the automated
-<code>Judge</code> agents.</p>
-<p>But what if the <code>Map</code> was more than a guide? What if it
-became an <em>enforcer</em>?</p>
-<p>The <strong>Hofstadter Bridge</strong> is the boundary where
-documentation ceases to be merely advisory and transforms into
-executable constraints. It’s the point where your architectural diagrams
-aren’t just checked by a human architect, but are directly consumed by
-the system to <em>govern</em> its own structure and behavior. The Map is
-no longer advisory; it is enforced.</p>
+<p>Documentation rots because nothing makes it true.</p>
+<p>In Part I–IV, the Map has been an input to the loop: specs, docs,
+inventories, and policies that shape what changes are allowed to do. But
+most Maps are still advisory. They can drift for months without anything
+breaking.</p>
+<p>The <strong>Hofstadter Bridge</strong> is the boundary where that
+stops being true. Parts of the Map become enforceable: drift turns into
+a failing gate.</p>
 <h2
 id="the-smallest-step-toward-the-bridge-one-generated-block-one-gate">The
 Smallest Step Toward the Bridge: One Generated Block + One Gate</h2>
@@ -375,7 +368,7 @@ Bridge.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8cf1a96c610e</code>
+      Version: <code>ca026a996f17</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

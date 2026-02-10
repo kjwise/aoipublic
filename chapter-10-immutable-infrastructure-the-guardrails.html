@@ -158,31 +158,16 @@ defense. It specifies which teams or individuals are responsible for
 reviewing code in particular directories or file types. For SDaC, this
 is crucial for protecting the agent’s definition, its policies, and the
 validation pipelines.</p>
-<p><strong>Example:</strong></p>
-<pre><code>
-# CODEOWNERS
-
-# This file ensures that critical parts of the SDaC system
-
-# require specific team approvals.
-
-# All agent definitions and core logic
-/agents/ @sdac-core-team
-
-# All validation logic (linters, security checks, tests)
-/validators/ @platform-engineering @security-team
-
-# All policy definitions (e.g., how the agent is allowed to behave)
-/policies/ @sdac-core-team @legal-compliance
-
-# CI/CD pipeline definitions
+<p><strong>Example (trimmed):</strong></p>
+<pre class="text"><code># CODEOWNERS (illustrative)
+/core/              @platform-engineering
+/tools/             @platform-engineering
+/validators/        @platform-engineering @security-team
+/policies/          @platform-engineering @security-team
 /.github/workflows/ @platform-engineering
-
-# This CODEOWNERS file itself!
-/CODEOWNERS @platform-engineering @lead-architects</code></pre>
-<p>With this configuration, any pull request (PR) that touches files in
-<code>/agents/</code>, <code>/validators/</code>,
-<code>/policies/</code>, or the CI workflow definitions will
+/CODEOWNERS         @platform-engineering</code></pre>
+<p>With this configuration, any pull request (PR) that touches your
+engine, Validators, policies, or CI workflow definitions will
 automatically require approval from the specified teams. Crucially,
 changes to the <code>CODEOWNERS</code> file itself are also protected,
 preventing an agent (or even a malicious human actor) from easily
@@ -266,39 +251,11 @@ path filters in your CI/CD pipelines allow you to trigger
 proposes a change to a policy file, you might want to run a more
 extensive formal verification or compliance check that wouldn’t be
 necessary for a simple application code change.</p>
-<p><strong>Example:</strong></p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/policy-validator.yml</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Validate SDaC Policies</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> main</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">paths</span><span class="kw">:</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;policies/**&#39;</span><span class="co"> # Only run this workflow if files in the policies directory change</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;validators/policy-schema.json&#39;</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">validate-policies</span><span class="kw">:</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@&lt;pinned_sha&gt;</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install dependencies</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm install -g @stoplight/spectral-cli</span><span class="co"> # Or any policy validation tool</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run policy schema validation</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> spectral lint policies/my-agent-rules.yaml --ruleset validators/policy-schema.json</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run compliance audit checks</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python scripts/audit_policy_compliance.py --policy-file policies/my-agent-rules.yaml</span></span></code></pre></div>
-<p>This workflow ensures that any change affecting your SDaC policies or
+<p>Mechanically, this is just: “when <code>policies/**</code> changes,
+run the policy suite,” and “when <code>.github/workflows/**</code>
+changes, run the CI self-check suite.” Your everyday app PRs stay fast;
+your governance surfaces get extra scrutiny.</p>
+<p>This pattern ensures that any change affecting your SDaC policies or
 their validation schema triggers dedicated, rigorous checks. It’s a
 pragmatic way to scale governance without slowing down every single pull
 request.</p>
@@ -335,27 +292,20 @@ post-mortem to understand <em>why</em> it was needed and how to prevent
 future occurrences.</p></li>
 </ol>
 <p><strong>Example:</strong></p>
-<pre><code>
-# Break-Glass Procedure: Emergency Merge to Main
-
-**Purpose:** To merge critical fixes or security patches to &#39;main&#39; branch that cannot wait for standard PR review cycle.
-
-**Invocation:**
-
-1.  **Identify Criticality:** Must be a Severity-1 or Severity-2 incident (P0/P1 outage, critical security vulnerability).
-
-2.  **Authorization:** Requires explicit approval from at least two of [Lead Architect, Head of Engineering, CTO].
-
-3.  **Action:**
-    a.  A designated &quot;emergency responder&quot; (from authorized list) creates a feature branch with the fix.
-    b.  Responder **forces push** to `main` branch (bypassing PR and branch protection).
-    c.  Immediately after push, create an incident ticket (`INC-XXXX`).
-    d.  Link the incident ticket to the force push commit message.
-
-4.  **Audit &amp; Follow-up:**
-    a.  Automated alert triggered on force-push to `main` (Slack, PagerDuty).
-    b.  Automated audit log entry created, linking commit, user, and timestamp.
-    c.  Within 24 hours, a post-mortem meeting must be scheduled to analyze the root cause and implement preventative measures to avoid future break-glass situations.</code></pre>
+<p>Keep it compact and enforceable:</p>
+<ol type="1">
+<li><strong>Trigger:</strong> only Sev-1 / Sev-2 incidents.</li>
+<li><strong>Approvals:</strong> at least two designated approvers.</li>
+<li><strong>Action:</strong> designated responder performs the emergency
+merge.</li>
+<li><strong>Audit:</strong> incident ticket id required; alerts and logs
+required.</li>
+<li><strong>Follow-up:</strong> post-mortem required within 24
+hours.</li>
+</ol>
+<p>If you want a concrete <code>BREAK_GLASS.md</code> template and CI
+examples, see the companion repo at
+<code>github.com/kjwise/aoi_code</code>.</p>
 <p>This procedure makes it <em>possible</em> to act fast in a crisis,
 but ensures it’s not done lightly and always leaves an audit trail for
 accountability and learning.</p>
@@ -393,48 +343,12 @@ agent-generated PR could check for the existence of this branch. If it
 exists, the CI job automatically fails, preventing the agent from
 merging.</p></li>
 </ol>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/agent-pr-gate.yml</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Agent Merge Blocker</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">opened</span><span class="kw">,</span><span class="at"> synchronize</span><span class="kw">,</span><span class="at"> reopened</span><span class="kw">]</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> main</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">check-kill-switch</span><span class="kw">:</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@&lt;pinned_sha&gt;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">ref</span><span class="kw">:</span><span class="at"> main</span><span class="co"> # Checkout main to check for the kill switch branch</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check for kill switch branch</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">id</span><span class="kw">:</span><span class="at"> check_branch</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>          set -euo pipefail</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>          branch=&quot;disable-auto-merge&quot;</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>          if git ls-remote --exit-code --heads origin &quot;$branch&quot; &gt;/dev/null; then</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>            echo &quot;::error::Kill switch &#39;$branch&#39; branch found; autonomous merges suspended.&quot;</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>            echo &quot;kill_switch_active=true&quot; &gt;&gt; &quot;$GITHUB_OUTPUT&quot;</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>          else</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>            echo &quot;kill_switch_active=false&quot; &gt;&gt; &quot;$GITHUB_OUTPUT&quot;</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>          fi</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch active</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">if</span><span class="kw">:</span><span class="at"> steps.check_branch.outputs.kill_switch_active == &#39;true&#39;</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> exit 1</span></span></code></pre></div>
-<p>This CI workflow ensures that if a branch named
-<code>disable-auto-merge</code> exists in the repository, any
-agent-generated PR to <code>main</code> will automatically fail its
-checks, thus preventing merges. To re-enable, simply delete the
-<code>disable-auto-merge</code> branch. It’s a clear, auditable, and
-instantly effective way to pause the agent’s merging capability.</p>
+<p>You don’t need a complex workflow to get the safety property. You
+need: “if kill switch is active, agent PRs can’t merge.” Implement it
+however your platform supports (feature flags, CI checks, required
+status checks).</p>
+<p>If you want a concrete CI snippet for the branch-based kill switch,
+see the companion repo at <code>github.com/kjwise/aoi_code</code>.</p>
 <p>Immutable infrastructure, protected paths, and emergency controls are
 the bedrock of safe SDaC. They establish the boundaries within which
 autonomous agents can operate, ensuring that innovation doesn’t come at
@@ -498,7 +412,7 @@ auditability and post-mortem requirements.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8cf1a96c610e</code>
+      Version: <code>ca026a996f17</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

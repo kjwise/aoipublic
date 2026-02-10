@@ -117,17 +117,17 @@ appear.</p>
 <p>Here’s what happens when you take the Chapter 1 Map/Terrain sync loop
 and swap the deterministic Effector for a stochastic one.</p>
 <p><strong>Run 1:</strong></p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Public Interfaces</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`normalize_country(country)`</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_tax(amount, country, rate)`</span></span></code></pre></div>
+<ul>
+<li><code>normalize_country(country)</code></li>
+<li><code>calculate_tax(amount, country, rate)</code></li>
+</ul>
 <p><strong>Run 2:</strong></p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Public Interfaces</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`normalize_country(country: str)`</span> — Normalize an input country string.</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`calculate_tax(amount: float, country: str, rate: float)`</span> — Compute tax for an amount.</span></code></pre></div>
+<ul>
+<li><code>normalize_country(country: str)</code> — Normalize an input
+country string.</li>
+<li><code>calculate_tax(amount: float, country: str, rate: float)</code>
+— Compute tax for an amount.</li>
+</ul>
 <p>Both are “reasonable.” If your only validators are “valid Markdown”
 and “the doc mentions the right function names,” both pass. But they’re
 different: different signature surfaces, extra prose, different
@@ -180,20 +180,23 @@ budget).</li>
 the patch is admissible under your Validators.</li>
 </ul>
 <p><strong>One simple proxy: count unique diffs</strong></p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace `run_effector_once` with your one-shot, diff-emitting command.</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The only rule: every run starts from the same baseline state.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">10</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> checkout <span class="at">--</span> product/docs/architecture.md</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">run_effector_once</span> <span class="op">&gt;</span> <span class="st">&quot;run_</span><span class="va">${i}</span><span class="st">.diff&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;FAIL run=</span><span class="va">${i}</span><span class="st">&quot;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">shasum</span> <span class="st">&quot;run_</span><span class="va">${i}</span><span class="st">.diff&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39; &#39;</span> <span class="at">-f1</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-u</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code></pre></div>
+<ol type="1">
+<li>Start from the same baseline each run (reset the file you’re
+generating).</li>
+<li>Run the one-shot effector <span
+class="math inline"><em>n</em></span> times, saving each emitted
+diff.</li>
+<li>Hash the diffs and count unique hashes.</li>
+</ol>
+<p>If you want a runnable script, see the companion repo at
+<code>github.com/kjwise/aoi_code</code> (drift measurement example).</p>
 <p><strong>Example summary (your numbers will vary):</strong></p>
-<pre class="text"><code>mission_id=doc_sync:public_interfaces runs=10
-unique_diffs=4
-failure_rate=20%  (2/10 exceeded circuit breakers)
-iterations_to_converge: p50=2 p90=6</code></pre>
+<ul>
+<li><code>runs=10</code></li>
+<li><code>unique_diffs=4</code></li>
+<li><code>failure_rate=20%</code> (2/10 exceeded circuit breakers)</li>
+<li><code>iterations_to_converge: p50=2 p90=6</code></li>
+</ul>
 <p>This is <strong>Stochastic Drift</strong> with a ruler next to it:
 you can measure it, budget it, and reduce it by tightening context
 selection and hardening validators.</p>
@@ -201,16 +204,21 @@ selection and hardening validators.</p>
 simple drift coefficient (plus an illustrative run log)</h3>
 <p>You don’t need a perfect statistical model to make drift operational.
 Start with a simple, auditable coefficient:</p>
-<p><code>drift_coefficient = unique_diffs / total_runs</code></p>
+<p><span class="math display">$$
+d = \frac{u}{n}
+$$</span></p>
+<p>where <span class="math inline"><em>u</em></span> is the number of
+unique diffs, and <span class="math inline"><em>n</em></span> is the
+total runs.</p>
 <p>This is an operational proxy, not a statistical claim or a benchmark.
 Use it to compare the same workflow over time, set budgets, and detect
 regressions — not to compare different repositories or teams.</p>
 <p>Interpretation:</p>
 <ul>
-<li><code>0.1</code> means “one in ten runs differs” (stable enough for
-many workflows).</li>
-<li><code>1.0</code> means “every run is different” (you do not have a
-reusable automation surface yet).</li>
+<li><span class="math inline"><em>d</em> = 0.1</span> means “one in ten
+runs differs” (stable enough for many workflows).</li>
+<li><span class="math inline"><em>d</em> = 1.0</span> means “every run
+is different” (you do not have a reusable automation surface yet).</li>
 </ul>
 <p>It also helps to classify variance. Some differences are harmless
 (whitespace, reordering). Some are structural (different interfaces,
@@ -279,9 +287,10 @@ different edit regions, new files).</p>
 </table>
 <p>From that log:</p>
 <ul>
-<li><code>unique_diffs = 4</code> →
-<code>drift_coefficient = 0.4</code></li>
-<li><code>failure_rate = 20%</code></li>
+<li>With <span class="math inline"><em>u</em> = 4</span> unique diffs
+out of <span class="math inline"><em>n</em> = 10</span> runs, <span
+class="math inline"><em>d</em> = 0.4</span>.</li>
+<li>Failure rate = <span class="math inline">20%</span>.</li>
 </ul>
 <p>If that feels “too high,” the fix is not more instruction text.
 Tighten your slice, tighten your allowed edit region, and add validators
@@ -308,15 +317,14 @@ you only learn the rules were violated after something breaks.</p></li>
 </ol>
 <p>Compare the two approaches:</p>
 <p><strong>Instruction-string approach:</strong></p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>instructions <span class="op">=</span> load_text(<span class="st">&quot;public_interfaces_instructions.txt&quot;</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>output <span class="op">=</span> model.generate(instructions)  <span class="co"># hope it followed the rules</span></span></code></pre></div>
+<p>You encode constraints in prose and hope they’re followed.</p>
 <p><strong>Physics approach:</strong></p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>context <span class="op">=</span> extract_public_signatures(<span class="st">&quot;product/src/&quot;</span>)  <span class="co"># deterministic extraction</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>template <span class="op">=</span> load_template(<span class="st">&quot;public_interfaces.jinja2&quot;</span>) <span class="co"># structure is defined</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>draft <span class="op">=</span> model.fill(template, context)            <span class="co"># bounded generation</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>validate_map_alignment(draft)                    <span class="co"># enforced, not hoped for</span></span></code></pre></div>
+<ul>
+<li>deterministically extract the skeleton (signatures, allowed edit
+region, schema)</li>
+<li>generate only within that boundary (templates help)</li>
+<li>validate alignment and reject variance you don’t want to review</li>
+</ul>
 <p>Instructions are suggestions. Physics are constraints.</p>
 <h2 id="why-this-matters-for-your-loop">Why This Matters for Your
 Loop</h2>
@@ -381,7 +389,7 @@ drifts.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8cf1a96c610e</code>
+      Version: <code>ca026a996f17</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

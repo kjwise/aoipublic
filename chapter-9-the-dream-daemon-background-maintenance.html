@@ -130,11 +130,10 @@ specific:</p>
 signal=complexity_high  file=services/payments/routing.py cc=22
 signal=duplication_high file=services/api/handlers.py dup=3.1</code></pre>
 <p>At Depth 0, the “Decide” step is simply ranking + budgeting the
-report:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>signals <span class="op">=</span> sense_entropy(roots)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ranked <span class="op">=</span> rank(signals, key<span class="op">=</span>[<span class="st">&quot;severity&quot;</span>, <span class="st">&quot;blast_radius&quot;</span>, <span class="st">&quot;recency&quot;</span>])</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>emit_report(ranked[:<span class="dv">10</span>])</span></code></pre></div>
+report: sort signals by severity, blast radius, and recency, then emit
+the top <span class="math inline"><em>N</em></span> with evidence.</p>
+<p>If you want a runnable Depth 0 scanner skeleton, see the companion
+repo at <code>github.com/kjwise/aoi_code</code>.</p>
 <p>Then a human chooses one item and runs a normal SDaC loop (Ouroboros
 or a one-shot Refactor) against that bounded target, under the same
 Physics gates.</p>
@@ -237,7 +236,7 @@ human-approved.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8cf1a96c610e</code>
+      Version: <code>ca026a996f17</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

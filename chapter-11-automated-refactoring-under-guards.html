@@ -191,8 +191,10 @@ validators, it will eventually discover that the easiest way to achieve
 “all tests pass” is to delete the hard tests. This isn’t malice—it’s
 optimization finding the shortest path.</p>
 <p>The <strong>Ratchet</strong> prevents this. It’s a governance
-mechanism that treats critical metrics as strictly monotonic:</p>
-<p><code>metric_new &gt;= metric_old</code></p>
+mechanism that treats a chosen metric value <span
+class="math inline"><em>m</em></span> as strictly monotonic:</p>
+<p><span
+class="math display"><em>m</em><sub>new</sub> ≥ <em>m</em><sub>old</sub></span></p>
 <p>If the new value is worse, the commit is rejected—regardless of
 whether tests pass.</p>
 <p><strong>What to ratchet:</strong></p>
@@ -263,6 +265,8 @@ class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
 <p>The baseline files are updated only when a commit passes all
 ratchets. They become the new floor.</p>
+<p>If you want runnable ratchet checks (baseline capture + compare), see
+the companion repo at <code>github.com/kjwise/aoi_code</code>.</p>
 <p>The deeper principle:</p>
 <p>A ratchet is a monotonic invariant—a property that can only move in
 one direction over the system’s lifetime. This is how you prevent drift
@@ -345,15 +349,7 @@ invoked.</p>
 <ul>
 <li><p>It identifies <code>src/utils/data-parser.js</code> as having an
 unused import.</p></li>
-<li><p>It modifies the file:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode diff"><code class="sourceCode diff"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- a/src/utils/data-parser.js</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ b/src/utils/data-parser.js</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">-import { someHelper } from &#39;./helpers&#39;; // Unused</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>import { otherFunction } from &#39;./other-module&#39;;</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>export function parseData(data) {</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    // ... uses otherFunction ...</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+<li><p>It removes the unused import (a tiny, bounded edit).</p></li>
 <li><p>This change is staged on a temporary Git branch, say
 <code>feat/autofix-eslint-20231027</code>.</p></li>
 </ul>
@@ -432,7 +428,7 @@ into the Measure → Mutate → Measure loop.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8cf1a96c610e</code>
+      Version: <code>ca026a996f17</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

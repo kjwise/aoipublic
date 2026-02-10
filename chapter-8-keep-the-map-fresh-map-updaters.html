@@ -141,9 +141,8 @@ self-referential Map-Updater: keep agent instructions aligned</h3>
 agent instructions. They are the local laws of motion—how to work in a
 directory safely, what commands to run, and what boundaries to
 respect.</p>
-<p>After a file changes, we run a Map-Updater that proposes minimal
-updates to the instruction file in the same directory. The tool is
-<code>tools/update_agents.py</code>.</p>
+<p>After a file changes, run a Map-Updater that proposes minimal updates
+to the instruction file in the same directory.</p>
 <p>It implements the loop in a pragmatic form:</p>
 <ol type="1">
 <li><strong>Sense:</strong> read the changed file and the existing
@@ -155,10 +154,8 @@ instruction file.</li>
 <li><strong>Emit:</strong> write suggestions under
 <code>build/update_agents/</code> for review.</li>
 </ol>
-<p><strong>Example invocations (from repo root):</strong></p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> tools.update_agents <span class="at">--path</span> core/scope.py</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> tools.update_agents <span class="at">--path</span> tools/dream.py</span></code></pre></div>
+<p>If you want a runnable example of this loop, see the companion repo
+at <code>github.com/kjwise/aoi_code</code>.</p>
 <p>The important point is not the particular file name. The point is the
 direction: your terrain changed, so you update the Map that tells future
 operators how to move through that terrain.</p>
@@ -326,7 +323,7 @@ evidence to review.</li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8cf1a96c610e</code>
+      Version: <code>ca026a996f17</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

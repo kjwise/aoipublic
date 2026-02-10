@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">12 min read</span></div>
+<div class="chapter-meta"><span class="read-time">9 min read</span></div>
 <h1 id="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 –
 The Ouroboros Protocol (Why Loops Converge)</h1>
 <p>In Part I, you built a working loop: take a goal, propose a change,
@@ -265,393 +265,87 @@ valuable audit information, highlighting areas where your context, your
 Mission Object, or your validation rules need improvement.</p>
 <h2 id="circuit-breakers-guardrails-for-stochasticity">Circuit Breakers:
 Guardrails for Stochasticity</h2>
-<p>Because LLMs are stochastic and can, under certain conditions, thrash
-indefinitely, it’s critical to implement circuit breakers. These are
-deterministic rules that stop the Ouroboros loop before it runs out of
-control, saving compute resources and preventing endless, unproductive
-cycles.</p>
+<p>A loop that can retry can also thrash. Circuit breakers make failure
+cheap and deterministic.</p>
+<ul>
+<li><strong>Iteration limit:</strong> stop after <span
+class="math inline"><em>N</em></span> attempts.</li>
+<li><strong>Scope + diff budgets:</strong> stop when the candidate
+touches protected paths or exceeds file/line limits.</li>
+<li><strong>Cost + time budgets:</strong> stop when you hit spend or
+wall-clock limits.</li>
+<li><strong>Minimum progress:</strong> stop when the Judge signal isn’t
+improving (same errors, same churn).</li>
+<li><strong>Review throughput limits (humans are scarce):</strong> cap
+how many agent PRs can be open / created per day so governance stays
+real.</li>
+<li><strong>Deployment guardrails (when loops ship):</strong> validate
+in a sandbox, canary first, ship behind flags, and automate rollback on
+regressions.</li>
+</ul>
+<h3 id="dry-runs-plan-mode">Dry Runs (Plan Mode)</h3>
+<p>Before you call the model, run <code>Prep</code> only. A dry run
+should print:</p>
+<ul>
+<li>the slice (what evidence is in-bounds)</li>
+<li>the validators that will gate the change</li>
+<li>an estimate of token/cost budget</li>
+</ul>
+<p>If you want a runnable CLI and sample outputs, see the companion repo
+at <code>github.com/kjwise/aoi_code</code>.</p>
+<h3 id="precedence-order-cheap-checks-first">Precedence Order (Cheap
+Checks First)</h3>
+<p>A practical check order:</p>
 <ol type="1">
-<li><p><strong>Maximum Iterations</strong>: The most common and simplest
-circuit breaker. The loop stops after a predefined number of
-<code>Write → Judge → Refine</code> cycles, regardless of convergence
-status. This prevents infinite loops and sets an upper bound on
-computation time.</p>
-<p><em>Example</em>: If a configuration should be generated within 5
-attempts, <code>max_iterations = 5</code>.</p></li>
-<li><p><strong>Diff Budget (Blast Radius)</strong>: This circuit breaker
-limits how large a proposed change is allowed to be. If the candidate
-diff exceeds your budget (files touched, lines changed, or
-protected-path violations), the loop terminates. This prevents “fix one
-thing, rewrite the world” behavior.</p>
-<p><em>Example</em>: <code>max_files_changed = 3</code>,
-<code>max_lines_changed = 200</code>. If the diff is larger, abort and
-shrink scope.</p></li>
-<li><p><strong>Cost Limit</strong>: This circuit breaker monitors the
-resources consumed by the loop, such as API calls to the LLM, compute
-time, or token usage. If the cost exceeds a set threshold, the loop
-terminates. This is crucial for managing operational expenses.</p>
-<p><em>Example</em>: If each LLM call costs $0.01 and a loop has a
-budget of $0.10, it will stop after 10 calls, even if
-<code>max_iterations</code> is higher.</p></li>
-<li><p><strong>Minimum Progress</strong>: A more sophisticated circuit
-breaker that monitors the <em>effectiveness</em> of the refinement. The
-loop terminates if the <code>Judge</code> does not report any
-improvement after a certain number of iterations. “Improvement” can be
-defined as:</p>
-<ul>
-<li><p>A reduction in the number of errors.</p></li>
-<li><p>A decrease in the size of the diff against a target
-output.</p></li>
-<li><p>No new errors introduced.</p></li>
-</ul></li>
+<li><strong>Parse/structure:</strong> if you can’t parse the candidate,
+you can’t judge it.</li>
+<li><strong>Policy:</strong> scope allowlists, protected paths, diff
+budgets, review limits.</li>
+<li><strong>Validation:</strong> run the Judge and collect signal-rich
+failures.</li>
+<li><strong>Stop conditions:</strong> max iterations, time/cost limits,
+minimum-progress windows.</li>
 </ol>
-<p><em>Example</em>: If the error count remains at 3 for three
-consecutive iterations, the loop terminates, indicating the LLM is
-stuck. This prevents the system from burning cycles on a problem it
-cannot solve with the current context or Mission Object.</p>
-<ol start="5" type="1">
-<li><p><strong>Review Budget (Rate Limits for Humans)</strong>: If your
-loop emits pull requests, the review queue becomes a scarce resource.
-Without a cap, autonomy doesn’t just generate diffs; it generates
-backlog faster than humans can govern it.</p>
-<p>A realistic failure mode:</p>
+<h2 id="convergence-and-thrashing-compressed-traces">Convergence and
+Thrashing (Compressed Traces)</h2>
+<p>You don’t need long logs to spot the pattern.</p>
+<p><strong>Converging loop:</strong> the Judge’s error set shrinks.</p>
+<table>
+<thead>
+<tr>
+<th>attempt</th>
+<th>Judge signal</th>
+<th>Next move</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>missing required field</td>
+<td>refine with the exact failure</td>
+</tr>
+<tr>
+<td>2</td>
+<td>missing nested field</td>
+<td>refine again</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>PASS</code></td>
+<td>commit and exit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Thrashing loop:</strong> the error set doesn’t shrink (or
+becomes unjudgeable).</p>
 <ul>
-<li>A scheduled daemon runs across ten services and opens five PRs a
-night.</li>
-<li>Someone adds a second run for dependency updates.</li>
-<li>Two weeks later you have 60 open PRs, half of them stale or
-conflicting.</li>
+<li>attempt 1: errors=3</li>
+<li>attempt 2: errors=3 (same)</li>
+<li>abort: minimum-progress violated → revert/defer</li>
 </ul>
-<p>Nothing is “unsafe” yet. But the queue has collapsed. Review quality
-drops, and governance becomes rubber-stamping.</p>
-<p>Mitigations that actually work:</p>
-<ul>
-<li>cap open agent PRs (per repo, per service, per agent)</li>
-<li>cap PRs per day</li>
-<li>enforce diff budgets (files/lines) and hard scope allowlists</li>
-<li>auto-escalate stale work (close/requeue and file a ticket with
-evidence)</li>
-</ul>
-<p><strong>Example: review budget (policy inputs)</strong></p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">review_budget</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_open_agent_prs</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_agent_prs_per_day</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">200</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">stale_after_hours</span><span class="kw">:</span><span class="at"> </span><span class="dv">48</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">escalation</span><span class="kw">:</span><span class="at"> file_ticket</span></span></code></pre></div></li>
-<li><p><strong>Rollback and Deployment Guardrails</strong>: Not every
-loop stops at merge. For changes that ship, add circuit breakers beyond
-the repo:</p>
-<ul>
-<li>validate in a sandbox environment that mirrors production</li>
-<li>canary deploy first and watch metrics</li>
-<li>ship behind feature flags so you can turn off without a revert</li>
-<li>trigger automated rollback when latency/error/usage regress</li>
-</ul>
-<p>If you can’t revert quickly, you aren’t doing automation. You’re
-doing roulette.</p></li>
-</ol>
-<h3 id="developer-experience-the-dry-run-plan-mode">Developer
-Experience: The Dry Run (Plan Mode)</h3>
-<p>The easiest way to waste time and tokens is to discover a bad slice
-after you’ve already paid for the model call.</p>
-<p>Before you run <code>Write</code>, run <code>Prep</code> only.
-Terraform calls this <code>plan</code>. In SDaC, a dry run should print
-the bounded work packet and the gates, without calling the model and
-without mutating the repo.</p>
-<p>Illustrative interface:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> mission-dry-run MISSION=update_docs.yaml</span></code></pre></div>
-<p>Illustrative output:</p>
-<pre class="text"><code>[DRY RUN] slice:
-  - docs/architecture.md#Public Interfaces
-  - src/tax_calculator.py
-[DRY RUN] token_estimate=12400
-[DRY RUN] validators:
-  - map_terrain_sync
-  - diff_budget(max_files=3, max_lines=200)
-  - tests(pytest)</code></pre>
-<p>If your slice accidentally includes <code>node_modules/</code> or
-half the repo, the dry run catches it for free. More importantly, it
-makes the loop locally iterable: you can debug selection, budgets, and
-gates before you ever involve CI or a daemon.</p>
-<h3 id="circuit-breaker-precedence-recommended-check-order">Circuit
-breaker precedence (recommended check order)</h3>
-<p>Circuit breakers work best when they fire deterministically and
-predictably. That means a consistent precedence order: cheap checks
-first, and “can’t even evaluate” failures before “try again”
-failures.</p>
-<p>A practical order:</p>
-<ol type="1">
-<li><strong>Parse/structure errors</strong> (you cannot even judge the
-candidate).</li>
-<li><strong>Scope and policy violations</strong> (protected paths, diff
-budgets, review budget).</li>
-<li><strong>Judgement/validation</strong> (collect signal-rich failures
-for refinement).</li>
-<li><strong>Stop conditions</strong> (max iterations, time limit, cost
-limit, no-progress).</li>
-</ol>
-<p>One way to wire it:</p>
-<pre class="text"><code>for attempt in 1..max_iterations:
-  candidate = write()
-  if parse_failed(candidate): abort(&quot;unreadable output&quot;)
-  if policy_violation(candidate): abort(&quot;scope/diff/review budget&quot;)
-
-  findings = judge(candidate)
-  if findings.pass: commit_and_exit()
-
-  if time_exceeded() or cost_exceeded(): abort(&quot;budget exceeded&quot;)
-  if no_progress_window_exceeded(findings): abort(&quot;thrashing&quot;)
-
-  refine(findings)
-abort(&quot;max iterations&quot;)</code></pre>
-<h2 id="one-realistic-trace-the-loop-settles">One Real(istic) Trace: The
-Loop Settles</h2>
-<p>Let’s illustrate convergence with a realistic trace. Imagine we’re
-asking our SDaC system to generate a <code>deployment.yaml</code> file
-for a Kubernetes application, which must strictly adhere to a predefined
-JSON schema.</p>
-<p><strong>Goal:</strong> Generate a Kubernetes
-<code>deployment.yaml</code> that passes a strict JSON schema
-validation.</p>
-<hr />
-<h3 id="iteration-1"><strong>Iteration 1</strong></h3>
-<p><strong>Write:</strong> The LLM generates the initial YAML.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app-container</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myrepo/my-app:latest</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span></code></pre></div>
-<p><strong>Judge:</strong> The schema validator runs.</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0]&quot;</span><span class="fu">,</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Required property &#39;livenessProbe&#39; is missing.&quot;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector&quot;</span><span class="fu">,</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Property &#39;matchLabels&#39; is missing required property &#39;matchExpressions&#39;.&quot;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
-<p><strong>Refine:</strong> The raw JSON errors are fed back into the
-next model request. “The following errors were found in your YAML
-output. Please correct them:” followed by the JSON above.</p>
-<hr />
-<h3 id="iteration-2"><strong>Iteration 2</strong></h3>
-<p><strong>Write:</strong> The LLM receives the errors and tries to
-correct them.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">    # Note: LLM misunderstood &#39;matchExpressions&#39; requirement, didn&#39;t add it</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app-container</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myrepo/my-app:latest</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">livenessProbe</span><span class="kw">:</span><span class="co"> # Fixed missing livenessProbe</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">httpGet</span><span class="kw">:</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /healthz</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">initialDelaySeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">periodSeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span></code></pre></div>
-<p><strong>Judge:</strong> The validator runs again.</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector&quot;</span><span class="fu">,</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Property &#39;matchLabels&#39; is missing required property &#39;matchExpressions&#39;.&quot;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0].livenessProbe.httpGet&quot;</span><span class="fu">,</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Required property &#39;scheme&#39; is missing.&quot;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
-<p><em>Observation</em>: The <code>livenessProbe</code> was added, but
-the LLM introduced a new, minor error within it, and the
-<code>matchExpressions</code> error persists. Progress, but not full
-convergence.</p>
-<p><strong>Refine:</strong> New errors are fed back to the LLM.</p>
-<hr />
-<h3 id="iteration-3"><strong>Iteration 3</strong></h3>
-<p><strong>Write:</strong> The LLM attempts to Refine the remaining
-issues.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchExpressions</span><span class="kw">:</span><span class="at"> </span><span class="kw">[]</span><span class="co"> # Added matchExpressions, but as an empty array</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app-container</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myrepo/my-app:latest</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">livenessProbe</span><span class="kw">:</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">httpGet</span><span class="kw">:</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /healthz</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">scheme</span><span class="kw">:</span><span class="at"> HTTP</span><span class="co"> # Fixed missing &#39;scheme&#39;</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">initialDelaySeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">periodSeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span></code></pre></div>
-<p><strong>Judge:</strong> The validator runs.</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;field&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector.matchExpressions&quot;</span><span class="fu">,</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Array must have at least 1 element(s).&quot;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
-<p><em>Observation</em>: The <code>livenessProbe</code> is now fully
-compliant. Only one minor error remains regarding
-<code>matchExpressions</code>. Close to convergence.</p>
-<p><strong>Refine:</strong> The final error is fed back.</p>
-<hr />
-<h3 id="iteration-4"><strong>Iteration 4</strong></h3>
-<p><strong>Write:</strong> The LLM addresses the last error.</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apiVersion</span><span class="kw">:</span><span class="at"> apps/v1</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kind</span><span class="kw">:</span><span class="at"> Deployment</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">spec</span><span class="kw">:</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">replicas</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selector</span><span class="kw">:</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchLabels</span><span class="kw">:</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">matchExpressions</span><span class="kw">:</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">key</span><span class="kw">:</span><span class="at"> environment</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">operator</span><span class="kw">:</span><span class="at"> In</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">values</span><span class="kw">:</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> production</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">metadata</span><span class="kw">:</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">labels</span><span class="kw">:</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">app</span><span class="kw">:</span><span class="at"> my-app</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">spec</span><span class="kw">:</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">containers</span><span class="kw">:</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> my-app-container</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">image</span><span class="kw">:</span><span class="at"> myrepo/my-app:latest</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> </span><span class="fu">containerPort</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">livenessProbe</span><span class="kw">:</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">httpGet</span><span class="kw">:</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">path</span><span class="kw">:</span><span class="at"> /healthz</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">port</span><span class="kw">:</span><span class="at"> </span><span class="dv">8080</span></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">scheme</span><span class="kw">:</span><span class="at"> HTTP</span></span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">initialDelaySeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">periodSeconds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span></code></pre></div>
-<p><strong>Judge:</strong> The validator runs.</p>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[]</span></span></code></pre></div>
-<p><em>Observation</em>: The <code>Judge</code> returns an empty array,
-indicating no errors. The loop has converged successfully.</p>
-<hr />
-<p>This trace demonstrates how specific, deterministic feedback from the
-<code>Judge</code> can guide a stochastic LLM to a compliant, verifiable
-output, even if it takes a few iterations and a bit of trial-and-error.
-The key is that the <em>errors</em> are not subjective; they are
-concrete, machine-readable validation failures.</p>
-<h2 id="one-realistic-trace-the-loop-thrashes">One Real(istic) Trace:
-The Loop Thrashes</h2>
-<p>Convergence is the happy path. You also need to recognize the failure
-path: when the loop is not getting closer to <code>PASS</code>.</p>
-<p>Here’s what thrashing looks like in logs.</p>
-<p><strong>Goal:</strong> Generate a compliant
-<code>deployment.yaml</code> with a liveness probe and strict label
-selector rules.</p>
-<h3 id="iteration-1-1">Iteration 1</h3>
-<p><strong>Judge:</strong></p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;missing_field&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0].livenessProbe is required&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;schema_mismatch&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector.matchExpressions must be a list of objects&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;invalid_value&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;resources.limits.cpu must match pattern &#39;^</span><span class="ch">\\</span><span class="st">d+m$&#39;&quot;</span><span class="fu">}</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
-<h3 id="iteration-2-1">Iteration 2</h3>
-<p>The model adds a probe but breaks YAML structure. Now you can’t even
-parse the file.</p>
-<p><strong>Judge:</strong></p>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;parse_error&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;YAML parse failed: mapping values are not allowed here (line 27)&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;missing_field&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0].livenessProbe is required&quot;</span><span class="fu">}</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
-<h3 id="iteration-3-1">Iteration 3</h3>
-<p>The file parses again, but the error set isn’t shrinking. It’s
-cycling.</p>
-<p><strong>Judge:</strong></p>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;missing_field&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.template.spec.containers[0].livenessProbe is required&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;schema_mismatch&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;spec.selector.matchExpressions must be a list of objects&quot;</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;invalid_value&quot;</span><span class="fu">,</span> <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;resources.limits.cpu must match pattern &#39;^</span><span class="ch">\\</span><span class="st">d+m$&#39;&quot;</span><span class="fu">}</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
-<p>At this point the system should stop.</p>
-<pre class="text"><code>[ouroboros] abort: min_progress violated (error_count unchanged across 2 iterations)
-[ouroboros] outcome: REVERT (no changes applied)</code></pre>
-<p>This is a successful outcome: you avoided spending more compute on
-guessing. The move is not “try harder.” The move is to improve the
-signal:</p>
-<ul>
-<li>Tighten the Mission Object (more constraints, smaller scope).</li>
-<li>Improve the context slice (include the schema, not just the
-file).</li>
-<li>Improve the Judge output (more localization, fewer vague
-messages).</li>
-</ul>
+<p>When you see thrash, the move is not “try harder.” The move is to
+tighten the slice, tighten the attractor, or split the Mission
+Object.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
@@ -713,7 +407,7 @@ deterministic <code>Judge</code> drives the stochastic LLM.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8cf1a96c610e</code>
+      Version: <code>ca026a996f17</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

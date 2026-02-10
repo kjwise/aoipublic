@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part I Build It The Weekend Sprint</div>
-<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+<div class="chapter-meta"><span class="read-time">5 min read</span></div>
 <h1 id="chapter-1-the-minimum-viable-factory-your-first-loop">Chapter 1
 – The Minimum Viable Factory (Your First Loop)</h1>
 <p>Build a tiny loop: Terrain → Effector → Map → Validator.</p>
@@ -65,178 +65,73 @@ re-run.</p>
 <p>This first loop is deterministic on purpose. It lets you see the
 mechanics without keys, SDKs, or network calls. Later, you can swap in a
 stochastic Effector and keep everything else unchanged.</p>
-<h3 id="copypaste-and-run">Copy/paste and run</h3>
-<p>Copy the block below into an empty directory and run it. It creates a
-<code>factory/</code> and <code>product/</code>, plus a tiny Map/Terrain
-demo surface.</p>
-<p>To keep Chapter 1 readable, the full source for the two MVF tools
-lives in Appendix C. Before running the loop, create these files from
-Appendix C → “MVF v0: demo tools (full source)”:</p>
+<h3 id="fast-path-recommended-run-the-companion-code-repo">Fast path
+(recommended): run the companion code repo</h3>
+<p>All runnable code for MVF v0 lives in the companion repo:
+<code>kjwise/aoi_code</code> on GitHub.</p>
+<p>Clone or download it, then from the repo root:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/kjwise/aoi_code.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
+<p>You should see the validator print <code>map_terrain_sync=pass</code>
+and a small diff touching <code>product/docs/architecture.md</code>.</p>
+<p>Run it a second time to confirm idempotence: the Effector should
+report <code>no drift detected</code> and the Validator should still
+pass.</p>
+<p>If you want to reset the demo between runs:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div>
+<p>If you want to read the implementation details, start here (in the
+companion repo):</p>
 <ul>
 <li><code>factory/tools/sync_public_interfaces.py</code> (Effector)</li>
 <li><code>factory/tools/validate_map_alignment.py</code>
 (Validator)</li>
+<li><code>Makefile</code> (command panel)</li>
 </ul>
-<p>Notes:</p>
-<ul>
-<li><p>If <code>git commit</code> fails because Git can’t identify you,
-set a local identity in the demo repo:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.email <span class="st">&quot;you@example.com&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config user.name <span class="st">&quot;Your Name&quot;</span></span></code></pre></div></li>
-<li><p>Make recipes must be tab-indented. If you see
-<code>missing separator</code>, you likely replaced a tab with
-spaces.</p></li>
-</ul>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> factory/tools product/src product/docs</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> product/src/tax_calculator.py <span class="op">&lt;&lt;&#39;PY&#39;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">def normalize_country(country: str) -&gt; str:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">    return country.strip().upper()</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">def calculate_tax(amount: float, country: str, rate: float) -&gt; float:</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">    normalized = normalize_country(country)</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">    return amount * rate</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">PY</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&gt;</span> product/docs/architecture.md <span class="op">&lt;&lt;&#39;MD&#39;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st"># Architecture</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">## Public Interfaces</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">- (generated)</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="st">## Notes</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">This file is the Map surface for the MVF demo.</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="op">MD</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init <span class="at">-q</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;MVF v0 seed&quot;</span> <span class="at">-q</span></span></code></pre></div>
-<p>Now run the loop:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/sync_public_interfaces.py <span class="dt">\</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--src</span> product/src <span class="dt">\</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--doc</span> product/docs/architecture.md <span class="dt">\</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--apply</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/validate_map_alignment.py <span class="dt">\</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--src</span> product/src <span class="dt">\</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--doc</span> product/docs/architecture.md</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--stat</span> <span class="kw">||</span> <span class="fu">true</span></span></code></pre></div>
 <h3 id="what-the-tools-do-interfaces-flow">What the tools do (interfaces
 + flow)</h3>
-<p>The two scripts are intentionally small and deterministic.</p>
-<p><strong>Effector interface:</strong></p>
-<pre class="text"><code>python3 factory/tools/sync_public_interfaces.py \
-  --src &lt;terrain_dir&gt; \
-  --doc &lt;map_file&gt; \
-  [--apply]</code></pre>
-<p><strong>Validator interface:</strong></p>
-<pre class="text"><code>python3 factory/tools/validate_map_alignment.py \
-  --src &lt;terrain_dir&gt; \
-  --doc &lt;map_file&gt;</code></pre>
-<p><strong>Logic flow (sketch):</strong></p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effector</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sigs <span class="op">=</span> extract_public_signatures(src)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>after <span class="op">=</span> rewrite_public_interfaces_block(doc_text, sigs)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(unified_diff(before, after))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">apply</span>:</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    write(after)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Validator</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>terrain <span class="op">=</span> extract_public_signatures(src)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>map_sigs <span class="op">=</span> parse_signatures_from_public_interfaces(doc_text)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> sets_match(terrain, map_sigs)</span></code></pre></div>
+<p>The two scripts are intentionally small and deterministic:</p>
+<ul>
+<li><p>The <strong>Effector</strong> extracts a list of public function
+signatures from the Terrain (<code>product/src/</code>) and rewrites a
+bounded block under <code>## Public Interfaces</code> in the Map
+(<code>product/docs/architecture.md</code>). It emits a diff-first patch
+and can apply it.</p></li>
+<li><p>The <strong>Validator</strong> re-extracts those signatures from
+the Terrain, parses the same bounded Map block, and returns
+<code>pass/fail</code> based on set equality.</p></li>
+</ul>
 <p>You now have a minimal loop that (1) senses drift, (2) proposes a
 patch, (3) applies it inside a bounded Map surface, and (4) proves
 Map/Terrain alignment with a deterministic Validator.</p>
-<p>Re-run the last three commands to confirm idempotence: the Effector
-should report no drift and the Validator should pass.</p>
-<h3 id="put-it-behind-make-recommended">Put it behind <code>make</code>
-(recommended)</h3>
-<p>This chapter uses direct commands so you can see the moving parts. In
-practice, you want a self-documenting control surface.</p>
-<p>Create a <code>Makefile</code>:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode makefile"><code class="sourceCode makefile"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">.RECIPEPREFIX</span> <span class="ch">:=</span><span class="st"> &gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ot">.PHONY:</span><span class="dt"> all sync validate</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">SRC</span> <span class="ch">=</span><span class="st"> product/src</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">DOC</span> <span class="ch">=</span><span class="st"> product/docs/architecture.md</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dt">SYNC_CMD</span> <span class="ch">=</span><span class="st"> python3 factory/tools/sync_public_interfaces.py </span><span class="ch">\</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">  --src </span><span class="ch">$(</span><span class="dt">SRC</span><span class="ch">)</span><span class="st"> </span><span class="ch">\</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">  --doc </span><span class="ch">$(</span><span class="dt">DOC</span><span class="ch">)</span><span class="st"> </span><span class="ch">\</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">  --apply</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="dt">VALIDATE_CMD</span> <span class="ch">=</span><span class="st"> python3 factory/tools/validate_map_alignment.py </span><span class="ch">\</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">  --src </span><span class="ch">$(</span><span class="dt">SRC</span><span class="ch">)</span><span class="st"> </span><span class="ch">\</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">  --doc </span><span class="ch">$(</span><span class="dt">DOC</span><span class="ch">)</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="dv">all:</span><span class="dt"> sync validate</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="dv">sync:</span><span class="dt"> </span><span class="co">## Propose/apply Map updates from Terrain</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>&gt; <span class="ch">$(</span><span class="dt">SYNC_CMD</span><span class="ch">)</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="dv">validate:</span><span class="dt"> </span><span class="co">## Enforce Map/Terrain alignment (Physics)</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>&gt; <span class="ch">$(</span><span class="dt">VALIDATE_CMD</span><span class="ch">)</span></span></code></pre></div>
-<p>Now you can run <code>make all</code> and get the same loop with a
-stable interface.</p>
-<h3
-id="makefiles-as-the-repos-command-panel-the-canonical-cli">Makefiles as
-the repo’s command panel (the canonical CLI)</h3>
-<p>In this book, <code>make</code> is the control surface. You can
-replace it with any task runner, but the idea is the same: one canonical
-CLI for repeatable workflows.</p>
-<p>Prefer <code>make</code> targets over ad-hoc shell scripts: the
-Makefile is the public interface, and scripts are implementation details
-behind that interface.</p>
-<p>Make the interface discoverable: add a <code>help</code> target so
-<code>make help</code> prints a menu of supported workflows.</p>
-<p>Keep parity across operators: humans, CI, and agents should all call
-the same targets (<code>make test</code>, <code>make validate</code>,
-<code>make pdf</code>) instead of re-encoding logic in bespoke YAML or
-ad-hoc text instructions.</p>
-<p>I recommend GNU Make because it’s mature, ubiquitous, and polyglot.
-It gives you one stable interface over many toolchains (Python, Node,
-Go, Rust, Terraform), which matters even more when AI is doing most of
-the “glue work”: standard entrypoints reduce tool-tour instructions and
-make results reproducible.</p>
-<p>If you need Windows support, standardize on GNU Make via WSL, a
-devcontainer, or Docker so every operator runs the same targets.</p>
-<p>In larger repos, keep this split:</p>
+<p>Re-run <code>make all</code> to confirm idempotence: the Effector
+should report <code>no drift detected</code> and the Validator should
+still pass.</p>
+<h3 id="the-command-panel-make">The command panel:
+<code>make</code></h3>
+<p>In the companion repo, those scripts are already wired behind a
+stable interface (<code>make sync</code>, <code>make validate</code>,
+<code>make all</code>).</p>
+<p>Expected output (after you’ve synced once) looks like this:</p>
+<pre class="text"><code>[effector] no drift detected (Map matches Terrain)
+[validator] map_terrain_sync=pass</code></pre>
+<p>That’s the same loop, now behind a stable interface.</p>
+<h3 id="why-make-shows-up-in-this-book">Why <code>make</code> shows up
+in this book</h3>
+<p>In this book, <code>make</code> is the default command panel: one
+stable command surface that humans, CI, and agents can all call.</p>
+<p>You can replace <code>make</code> with any task runner. The point is
+the interface, not the tool:</p>
 <ul>
-<li><code>Makefile</code> = the command panel (targets, help text,
-wiring, defaults).</li>
-<li><code>mk/*.mk</code> (or <code>scripts/</code>) = the
-implementations (the concrete incantations).</li>
+<li><strong>Discoverable:</strong> <code>make help</code> can print a
+menu of supported workflows.</li>
+<li><strong>Consistent:</strong> humans, CI, and agents all call the
+same targets.</li>
+<li><strong>Swappable internals:</strong> you can replace scripts under
+the hood without changing callers.</li>
 </ul>
-<p>That separation becomes a map of the repo: targets are the public
-surface area, and everything else is internals.</p>
-<p>Why it matters:</p>
-<ul>
-<li><strong>Discoverable menu:</strong> <code>make help</code> shows
-what the repo can do.</li>
-<li><strong>One stable interface:</strong> targets become the “buttons”
-you press for common workflows (build, check, validate, ship).</li>
-<li><strong>Correct incantations:</strong> the Makefile encodes paths,
-environment variables, and tool flags so you don’t have to remember
-fragile multi-command sequences.</li>
-<li><strong>Implementation stays swappable:</strong> you can replace
-Bash → Python → Rust under the hood without changing callers.</li>
-<li><strong>Composable and auditable:</strong> targets compose into
-larger workflows; scripts do the work; the same entrypoints run locally
-and in CI.</li>
-</ul>
-<p>Keep Make as a dispatcher: complex logic belongs in real
-scripts/modules, and recipes should fail fast.</p>
-<p>Make is the repo’s API: stable targets on top, swappable
-implementations underneath.</p>
 <h3 id="hardening-ladder-mvf-v0-v1-v2">Hardening ladder: MVF v0 → v1 →
 v2</h3>
 <p>The factory grows by adding Physics and governance, not by widening
@@ -264,7 +159,7 @@ decisions)</li>
 <li><code>sync_public_interfaces.py</code> → <strong>Effector</strong>
 (proposes/applies a patch)</li>
 <li><code>validate_map_alignment.py</code> → <strong>Validator</strong>
-(enforces <code>PASS/FAIL</code>)</li>
+(enforces <code>pass/fail</code>)</li>
 </ul>
 <p>You do not need all of these terms on page one. You can keep thinking
 “code / doc / change script / check” for now. But the canonical names
@@ -329,18 +224,21 @@ knowing what a safe iteration looks like (also Chapter 13).</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
-<li><p><strong>Run the MVF v0 bootstrap</strong>: copy/paste the block
-above, copy the two MVF tools from Appendix C, then run:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div></li>
+<li><p><strong>Run MVF v0 (recommended path):</strong></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
+<p>If you want a clean baseline between runs:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore product/docs/architecture.md</span></code></pre></div></li>
 <li><p><strong>Break it (create drift)</strong>:</p>
 <ul>
 <li><p>Add a new public function to
 <code>product/src/tax_calculator.py</code> (for example
 <code>def tax_rate(country: str) -&gt; float: ...</code>).</p></li>
 <li><p>Run only the validator:</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> validate</span></code></pre></div></li>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> validate</span></code></pre></div></li>
 </ul>
 <p>It should fail with <code>missing_in_map=[...]</code>.</p></li>
 <li><p><strong>Fix it (restore alignment)</strong>:</p>
@@ -348,8 +246,8 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="
 <li><p>Run <code>make sync</code> and then <code>make validate</code>
 again.</p></li>
 <li><p>Inspect the diff:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div></li>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span></code></pre></div></li>
 </ul>
 <p>If the diff touches more than you intended, treat it as a
 blast-radius failure. Appendix B has a quick diagnostic for “slice too
@@ -363,7 +261,7 @@ Validator) and make <code>all</code> depend on it.</li>
 </ul></li>
 </ol>
 <p>This is the shape of the Minimum Viable Factory: small blast radius,
-concrete diffs, and <code>PASS/FAIL</code> gates.</p>
+concrete diffs, and <code>pass/fail</code> gates.</p>
 
   </main>
 
@@ -389,7 +287,7 @@ concrete diffs, and <code>PASS/FAIL</code> gates.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>8cf1a96c610e</code>
+      Version: <code>ca026a996f17</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
