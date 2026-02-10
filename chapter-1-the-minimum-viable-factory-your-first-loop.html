@@ -45,9 +45,9 @@
 <h1 id="chapter-1-the-minimum-viable-factory-your-first-loop">Chapter 1
 – The Minimum Viable Factory (Your First Loop)</h1>
 <p>Build a tiny loop: Terrain → Effector → Map → Validator.</p>
-<p>You’ll have it running in less than an hour. We’ll keep the
-vocabulary plain until you’ve seen it run, then we’ll name the parts so
-we can reuse them precisely.</p>
+<p>You can have it running in about an hour. We’ll keep the vocabulary
+plain until you’ve seen it run, then we’ll name the parts so we can
+reuse them precisely.</p>
 <h2 id="quick-bootstrap-mvf-v0-map-terrain-sync">Quick Bootstrap: MVF v0
 (Map-Terrain sync)</h2>
 <p>We’re going to build a weekend-grade factory that proves the
@@ -91,16 +91,12 @@ the validator:</p>
 --- product/docs/architecture.md
 +++ product/docs/architecture.md
 @@ -2,7 +2,9 @@
- 
  ## Public Interfaces
- 
 -- (generated)
 +- `calculate_tax(amount, country, rate)`
 +
 +- `normalize_country(country)`
- 
  ## Notes
- 
 [effector] applied patch to product/docs/architecture.md
 python3 factory/tools/validate_map_alignment.py --src product/src --doc product/docs/architecture.md
 [validator] map_terrain_sync=pass</code></pre>
@@ -326,7 +322,7 @@ concrete diffs, and <code>pass/fail</code> gates.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

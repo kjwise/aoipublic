@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">7 min read</span></div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
 <h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
 – The Stochastic Engine (Why You Need Physics)</h1>
 <p>Before we talk about drift, a quick recap from Part I:</p>
@@ -67,9 +67,19 @@ implementation, the actual behavior).</li>
 (architecture diagrams, team charters, strategy docs) and Terrain (the
 running systems, the actual workflows, the emergent behavior).</li>
 </ul>
-<p>SDaC works at every level because the pattern is the same: explicit
-intent (Map), validated reality (Terrain), and a loop that keeps them
-aligned.</p>
+<p>Concrete examples help:</p>
+<ul>
+<li>An agent instruction file in a directory (for example
+<code>agents.md</code>) is a Map for the Terrain that directory
+contains: its purpose, boundaries, and “how to operate it.”</li>
+<li>A header at the top of a source file (module docstring, top comment)
+is a Map for that file’s Terrain.</li>
+<li>A function signature and docstring are a Map for the function
+body.</li>
+</ul>
+<p>The SDaC pattern can apply at many levels because the shape is the
+same: explicit intent (Map), validated reality (Terrain), and a loop
+that keeps them aligned.</p>
 <pre class="mermaid"><code>graph TB
     subgraph &quot;Organization Level&quot;
         O_Map[&quot;Strategy Docs&lt;br/&gt;(Map)&quot;]
@@ -154,6 +164,25 @@ execution path.</p></li>
 </ul>
 <p>This is why SDaC treats generation as a component, not a plan: you
 measure variance, constrain it, and gate it.</p>
+<h2 id="internal-reasoning-does-not-replace-the-loop">Internal Reasoning
+Does Not Replace the Loop</h2>
+<p>Some model interfaces expose intermediate reasoning (often called
+“chain-of-thought”) before the final output. You might think this
+replaces the SDaC loop. It does not.</p>
+<p><strong>Internal loop (model deliberation):</strong> The model “talks
+to itself” to increase plausibility and internal consistency. It is
+still operating in language space. It does not have access to your
+compiler, linter, schema validator, or runtime. At best, it is
+simulating what validation <em>might</em> say.</p>
+<p><strong>External loop (SDaC):</strong> The system talks to Physics:
+compilers, tests, schemas, linters, and policy gates. It validates
+against reality. The Judge does not care how confident the model sounds;
+it cares whether the artifact passes the gates.</p>
+<p>Reasoning models can be better Effectors: they often produce
+higher-quality candidates and reduce the number of iterations needed to
+converge. But they are not Validators, and they do not remove the need
+for the Judge.</p>
+<p>Don’t confuse a model “thinking hard” with a test passing.</p>
 <h2 id="the-drift-experiment-measure-structural-variance">The Drift
 Experiment: Measure Structural Variance</h2>
 <p>Run the same Mission Object 10 times. The goal is to make variance
@@ -200,10 +229,14 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/measure_drift.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md <span class="at">--runs</span> 10</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">runs</span><span class="op">=</span>10 <span class="va">unique_diffs</span><span class="op">=</span>8 <span class="va">drift_coefficient</span><span class="op">=</span>0.800 <span class="va">failures</span><span class="op">=</span>0</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">example_unique_runs</span><span class="op">=</span>1, <span class="ex">2,</span> 3, 4, 5</span></code></pre></div>
-<p>This output tells us: - Out of 10 runs, we got 8 unique diffs. - The
-drift coefficient is a high 0.8, meaning the output is highly variable.
-- There were no outright failures (e.g., crashes), but the high drift
-means the surface is not stable.</p>
+<p>This output tells us:</p>
+<ul>
+<li>Out of 10 runs, we got 8 unique diffs.</li>
+<li>The drift coefficient is a high 0.8, meaning the output is highly
+variable.</li>
+<li>There were no outright failures (e.g., crashes), but the high drift
+means the surface is not stable.</li>
+</ul>
 <p>This is <strong>Stochastic Drift</strong> with a ruler next to it:
 you can measure it, budget it, and reduce it by tightening context
 selection and hardening validators.</p>
@@ -396,7 +429,7 @@ drifts.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

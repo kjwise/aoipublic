@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">7 min read</span></div>
+<div class="chapter-meta"><span class="read-time">9 min read</span></div>
 <h1 id="chapter-12-governance-at-machine-speed">Chapter 12 – Governance
 at Machine Speed</h1>
 <p>The promise of Software Development as Code (SDaC) is rapid,
@@ -105,6 +105,55 @@ providing fine-grained, dynamic checks that go beyond simple ownership
 or merge conditions. They’re the automated “reviewers” that ensure
 compliance before a human even needs to glance at a PR, or to prevent
 unauthorized direct pushes entirely.</p>
+<h2 id="the-skill-shift-whats-the-job-now">The Skill Shift (what’s the
+job now?)</h2>
+<p>A common cultural objection to SDaC could sound like this: “If the
+loop writes implementation and the gate is <code>PASS/FAIL</code>,
+what’s left for engineers?”</p>
+<p>The answer is that the center of gravity moves. The valuable work
+shifts from <em>typing</em> code to <em>defining constraints that make
+code correct</em>, and then operating the system that enforces those
+constraints.</p>
+<p>Across the industry, generation is getting cheaper and faster. The
+scarce work is everything that makes generation safe and repeatable:</p>
+<ul>
+<li><strong>Defining intent:</strong> Mission Objects, templates, and
+bounded change surfaces.</li>
+<li><strong>Defining Physics:</strong> Validators and Immune System
+cases that encode invariants.</li>
+<li><strong>Defining governance:</strong> budgets, protected paths,
+escalation rules, and audit evidence.</li>
+<li><strong>Debugging the loop:</strong> improving slices, signals, and
+stop conditions when convergence fails.</li>
+<li><strong>Owning surfaces:</strong> keeping Map/Terrain alignment true
+as reality changes.</li>
+</ul>
+<p>Writing a good Validator (or a good Immune System case) often
+requires <em>more</em> domain understanding than writing the
+implementation it constrains. Implementation can be locally plausible.
+Constraints have to be globally true.</p>
+<p>In practice, teams build capability through a ladder that is
+independent of titles:</p>
+<ol type="1">
+<li><strong>Run loops and read traces:</strong> learn what “good” looks
+like by inspecting diffs, validator outputs, and failure signals.</li>
+<li><strong>Write Mission Objects for bounded work:</strong> learn to
+name intent, scope change surfaces, and specify acceptance
+criteria.</li>
+<li><strong>Add Immune System cases:</strong> turn “I think this should
+work” into deterministic evidence.</li>
+<li><strong>Extend Validators:</strong> encode one new invariant at a
+time (cheap checks first).</li>
+<li><strong>Own a surface:</strong> maintain the Map/Terrain alignment
+for one module or workflow.</li>
+</ol>
+<p>Frame it explicitly:</p>
+<blockquote>
+<p>The skill progression shifts from “write code that works” to “define
+constraints that guarantee correctness for a bounded surface.” This is
+harder, not easier. In a world of cheap generation, constraints and
+governance become the craft.</p>
+</blockquote>
 <h2 id="input-hygiene-at-scale">Input Hygiene at Scale</h2>
 <p>Chapter 2 introduced the attack shape: untrusted Terrain text
 (comments, tickets, logs) can contain instruction-shaped content that
@@ -331,7 +380,7 @@ This starts building your audit trail.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

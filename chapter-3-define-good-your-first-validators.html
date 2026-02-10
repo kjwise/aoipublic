@@ -60,8 +60,8 @@ it’s throughput.</li>
 </ul>
 <h2 id="where-validators-live-in-real-systems">Where Validators live in
 real systems</h2>
-<p>In production SDaC tooling, Validators are rarely “just scripts.”
-They usually exist as explicit <strong>Steps</strong> in a
+<p>In production-grade implementations, Validators are rarely “just
+scripts.” They tend to exist as explicit <strong>Steps</strong> in a
 <strong>Workflow</strong> graph so the loop is inspectable and
 reproducible.</p>
 <p>In the engine behind this book, the workflow runtime lives in
@@ -76,6 +76,9 @@ a trace.</p>
 nodes, you can tag them, order them, retry them, visualize them, and
 reuse the same gates across every loop (human-written or machine-written
 changes).</p>
+<p>The Effector phase can be a single model call, a chain, or a
+multi-agent swarm; the loop doesn’t care because Physics validates the
+output artifact, not the process that produced it.</p>
 <p>A useful Validator output shape looks like this:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
@@ -361,8 +364,8 @@ the mechanics.</p>
 systems.</p>
 <p>AI is a stochastic engine. We do not negotiate with it. We constrain
 it.</p>
-<p>A GenAI system works in production when three things hold at
-once:</p>
+<p>A GenAI system is more likely to hold up in production when three
+things hold at once:</p>
 <ul>
 <li>It carries durable intent: a Mission Object you can name, version,
 and test.</li>
@@ -471,7 +474,7 @@ validator, or making the selection logic explicit in
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

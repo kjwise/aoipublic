@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">9 min read</span></div>
+<div class="chapter-meta"><span class="read-time">11 min read</span></div>
 <h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
 Context Architecture (Why Slicing Matters)</h1>
 <p>You’ve built your first SDaC loop in Part I. You’ve seen it reliably
@@ -50,12 +50,27 @@ generate, judge, and refine code. Now, in Part II, we drill into
 context.</p>
 <p>If you’ve spent any time working with large language models (LLMs),
 you’ve encountered the “context window” problem. It’s the maximum amount
-of text an LLM can process at once. Most engineers treat this like a
+of text an LLM can process at once. It’s tempting to treat this like a
 bucket: dump everything relevant (and often irrelevant) into it and hope
 the model figures it out. This approach might work for quick demos, but
 it’s a recipe for non-determinism, Stochastic Drift, and unreliable
 systems in production. It’s why “better Mission Objects” alone stops
 scaling.</p>
+<p>Even when a model accepts enormous contexts, attention is not
+uniform. A huge context window is not a huge attention budget:
+information buried in the middle of long contexts is easy to underuse
+(“lost in the middle”). Slicing isn’t about fitting more data in — it’s
+about focusing attention to reduce Stochastic Drift. Structure is
+compression for attention: it shrinks the surface area where generation
+can wander into irrelevant edits or invented structure.</p>
+<p>In practice, the Map is an essential part of a context slice. A
+well-kept Map is a compression artifact: it turns a large Terrain into a
+smaller set of identities, constraints, and invariants. For many tasks,
+that Map carries more meaning per token than dumping the entire
+Terrain.</p>
+<p>From one perspective, SDaC is about maximizing semantic density: pack
+the slice with contracts, evidence, and boundaries so the stochastic
+step spends its budget on the right surface.</p>
 <p>Reliable GenAI systems don’t just <em>have</em> context; they
 <em>engineer</em> it.</p>
 <p>If you want the Part I version first: Chapter 2 introduced slicing
@@ -225,6 +240,64 @@ tools, or even simple <code>grep</code> commands for symbol
 resolution.</p></li>
 </ul></li>
 </ol>
+<h3
+id="repo-shaped-pseudo-example-fixing-contract-drift-with-a-bounded-slice">Repo-shaped
+pseudo-example: Fixing contract drift with a bounded slice</h3>
+<p>Suppose a CI Validator fails because your API contract drifted:</p>
+<pre class="text"><code>[validator] FAIL: openapi_drift
+  path=/api/users GET parameter.limit.type
+  expected=integer
+  actual=string</code></pre>
+<p>Your repository might look like this:</p>
+<pre class="text"><code>repo/
+  openapi.json                 # Map: the public contract surface
+  src/users_handler.ts         # Terrain: runtime behavior
+  tests/test_users_api.py      # Immune System cases
+  clients/mobile/src/api.ts    # downstream consumer
+  clients/mobile/src/types.ts  # downstream contract surface</code></pre>
+<p><strong>Anchor:</strong> the failing Validator finding
+(<code>openapi_drift</code>) is your anchor node. It already tells you
+<em>where correctness lives</em> (the contract) and <em>what broke</em>
+(a specific field/type).</p>
+<p><strong>Map first:</strong> include only the contract surface (and
+any policy that constrains it).</p>
+<ul>
+<li><p>the exact <code>openapi.json</code> region that defines
+<code>GET /api/users</code> and <code>limit</code></p></li>
+<li><p>the Mission Object for the repair (scope allowlist + budgets +
+acceptance criteria), for example:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Restore contract alignment for GET /api/users pagination&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scope_allowlist</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> openapi.json</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/users_handler.ts</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> clients/mobile/src/types.ts</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> validate_openapi_compat</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_tests</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mobile_typecheck</span></span></code></pre></div></li>
+</ul>
+<p><strong>Terrain second:</strong> include only the code and the Immune
+System cases that interpret that contract.</p>
+<ul>
+<li><code>src/users_handler.ts</code> (the parsing/serialization path
+for <code>limit</code>)</li>
+<li>the one failing Immune System case (or contract-compat case) that
+proves the drift</li>
+<li><code>clients/mobile/src/types.ts</code> only if it is directly
+coupled to the contract surface (otherwise omit it)</li>
+</ul>
+<p><strong>Prune:</strong> do <em>not</em> include
+<code>clients/mobile/</code> wholesale, the entire OpenAPI file, or
+unrelated endpoints. If a file isn’t on the dependency chain of the
+anchor, it’s noise.</p>
+<p>Now the Effector is constrained by (1) a precise anchor, (2) a
+bounded contract slice, (3) the exact runtime path that implements it,
+and (4) gates that can prove the fix. That is what makes “fix this
+drift” deterministic instead of creative.</p>
 <h3 id="branching-factor-rule-of-seven">Branching Factor (Rule of
 Seven)</h3>
 <p>Structure is a compression algorithm for attention. Keep your Map and
@@ -353,8 +426,7 @@ id="worked-example-debugging-a-tax-calculation-with-a-precise-slice">Worked
 Example: Debugging a Tax Calculation with a Precise Slice</h2>
 <p>Imagine a tax function is failing one Immune System case. You want
 the agent to fix the bug without rewriting the service.</p>
-<p>The mistake most teams make is to slice
-<em>implementation-only</em>:</p>
+<p>A common mistake is to slice <em>implementation-only</em>:</p>
 <ul>
 <li>include: the source file</li>
 <li>omit: the failing case and the rule that defines correctness</li>
@@ -427,7 +499,7 @@ strays from the core task.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">9 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 –
 The Ouroboros Protocol (Why Loops Converge)</h1>
 <p>In Part I, you built a working loop: take a goal, propose a change,
@@ -308,6 +308,80 @@ failures.</li>
 <li><strong>Stop conditions:</strong> max iterations, time/cost limits,
 minimum-progress windows.</li>
 </ol>
+<h2 id="the-economics-of-determinism-and-why-inference-is-strategy">The
+Economics of Determinism (and Why Inference Is Strategy)</h2>
+<p>The book has talked about ROI for <em>building</em> loops. You also
+need ROI for <em>running</em> them.</p>
+<p>The right comparison is not “a loop costs tokens.” It’s “a loop costs
+tokens” versus “a human costs time” versus “production costs money and
+trust.”</p>
+<p><strong>Illustrative cost comparison (order of magnitude; plug in
+your numbers):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Typical cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>N</code> retries inside a constrained loop</td>
+<td>~$0.50–$2.00</td>
+</tr>
+<tr>
+<td>One human debugging session</td>
+<td>~$100–$300</td>
+</tr>
+<tr>
+<td>One production incident</td>
+<td>~$5,000+</td>
+</tr>
+</tbody>
+</table>
+<p>This is why circuit breakers matter. You want to spend a small,
+bounded budget <em>before merge</em> so you don’t spend an unbounded
+budget <em>after deploy</em>.</p>
+<p>Now widen the lens: <strong>inference economics is strategy</strong>.
+Your inference contract determines whether you can afford retries,
+strict gating, and background maintenance at scale.</p>
+<table>
+<thead>
+<tr>
+<th>Inference model</th>
+<th>Cost structure</th>
+<th>Moat durability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pay-per-token API</td>
+<td>Variable, provider-controlled</td>
+<td>Fragile</td>
+</tr>
+<tr>
+<td>Fixed-cost SLA</td>
+<td>Predictable, negotiated</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td>Self-hosted / owned inference</td>
+<td>CapEx + energy, you control</td>
+<td>Strong</td>
+</tr>
+</tbody>
+</table>
+<p>State the thesis explicitly:</p>
+<blockquote>
+<p><strong>A constrained loop with a weaker model beats an unconstrained
+flagship model.</strong> Teams that own their inference — including
+open-weight models behind validated loops — will outcompete teams
+renting flagship models without constraints. The model is the engine;
+the loop is the vehicle.</p>
+</blockquote>
+<p>“Vehicle” is not poetry here. It’s governance: your loop defines
+scope, budgets, validation, and audit evidence. That is what lets you
+scale autonomy without scaling incidents.</p>
 <h2 id="convergence-and-thrashing-compressed-traces">Convergence and
 Thrashing (Compressed Traces)</h2>
 <p>You don’t need long logs to spot the pattern.</p>
@@ -409,7 +483,7 @@ deterministic <code>Judge</code> drives the stochastic LLM.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

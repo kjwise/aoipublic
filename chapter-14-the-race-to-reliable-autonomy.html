@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part V Reflect Limit Cases</div>
-<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+<div class="chapter-meta"><span class="read-time">9 min read</span></div>
 <h1 id="chapter-14-the-race-to-reliable-autonomy">Chapter 14 – The Race
 to Reliable Autonomy</h1>
 <blockquote>
@@ -52,14 +52,14 @@ to Reliable Autonomy</h1>
 (Chapter 1). We’ve stayed close to the code, the validators, the
 diffs.</p>
 <p>But mechanisms exist in a context, and the context is changing faster
-than most teams realize.</p>
-<p>This chapter is about why the patterns in this book are shifting from
-“best practice” to baseline. This isn’t a zero-sum story. It’s that the
-floor is moving: faster iteration amplifies either drift or
-discipline.</p>
+than many teams realize.</p>
+<p>This chapter is about why I think the patterns in this book could
+shift from “best practice” to baseline. This isn’t a zero-sum story.
+It’s that the floor is moving: faster iteration amplifies either drift
+or discipline.</p>
 <hr />
 <h2 id="the-velocity-trap">The Velocity Trap</h2>
-<p>AI makes everyone faster. This is obvious and true.</p>
+<p>AI makes many teams faster. That part is easy to see.</p>
 <p>What is less obvious: faster without rigor compounds technical debt
 at machine speed.</p>
 <p>The vibe-coded feature that “looks fine” ships in an hour instead of
@@ -73,7 +73,7 @@ So is the liability.</p>
 shipping features, hitting deadlines, impressing stakeholders. But
 they’re doing it by borrowing against a future they assume will be
 forgiving.</p>
-<p>It won’t be.</p>
+<p>It may not be.</p>
 <p>The teams that seem “slower”: the ones building validators, writing
 Mission Objects (Chapter 7), enforcing Physics (Chapter 3), are not
 behind. They’re compounding in the other direction. Every loop they
@@ -125,32 +125,32 @@ marathon.</strong></p>
 <p>The divergence is not yet visible in most metrics. Both paths ship
 features. Both paths hit quarterly goals. But the gap is widening
 underneath.</p>
-<p>In the near term, Path A teams will start hitting walls: incidents
+<p>In the near term, Path A teams often start hitting walls: incidents
 that take weeks to debug, audits that reveal gaps, refactors that are
 too risky to attempt, and new hires who can’t understand the system
 because no one can.</p>
-<p>In the same timeframe, Path B teams will be accelerating: onboarding
-is fast because the Maps are true, refactors are safe because the Immune
-System (Chapter 3) is comprehensive, and incidents are rare because the
-gates caught the drift before it shipped.</p>
-<p><strong>The divergence is coming. The only question is which path
+<p>In the same timeframe, Path B teams can accelerate: onboarding gets
+faster because the Maps stay truer, refactors get safer because the
+Immune System (Chapter 3) is comprehensive, and incidents get less
+frequent because the gates catch drift before it ships.</p>
+<p><strong>I expect the divergence to widen. The question is which path
 you’re on.</strong></p>
 <hr />
 <h2 id="the-new-table-stakes">The New Table Stakes</h2>
 <p>Every generation of software engineering has its table stakes: the
 practices that shift from “best practice” to “minimum viable.”</p>
 <p>Continuous integration was a competitive advantage in 2010. By 2020,
-a team without CI was not a serious team.</p>
+a team without CI was at a serious disadvantage.</p>
 <p>Automated testing was “nice to have” in 2005. By 2015, shipping
-without tests was shipping with your eyes closed.</p>
-<p><strong>SDaC is undergoing the same transition.</strong></p>
-<p>Today, most teams treat the patterns in this book as advanced: “We’ll
+without tests increasingly felt like shipping with your eyes closed.</p>
+<p><strong>SDaC could undergo a similar transition.</strong></p>
+<p>Today, many teams treat the patterns in this book as advanced: “We’ll
 add validators when we have time.” “Mission Objects are overkill for our
 stage.” “We’ll formalize the loop after we find product-market fit.”</p>
 <p>This is the same logic that said “we’ll add tests later” in 2008.
 Later never comes. The debt compounds. The wall approaches.</p>
-<p>Within a few years, the teams that survive will be the teams that
-treat SDaC as foundational:</p>
+<p>If these dynamics continue, within a few years the teams that survive
+may be the teams that treat SDaC as foundational:</p>
 <ul>
 <li>Every AI-assisted change goes through a Deterministic Sandwich
 (Chapter 2).</li>
@@ -160,9 +160,9 @@ treat SDaC as foundational:</p>
 <li>Every merge has evidence in a Ledger (Chapter 1).</li>
 </ul>
 <p>The Hofstadter Bridge (Chapter 13): documentation as executable
-constraints, is not a luxury for regulated industries. It is the
-direction of travel for everyone. You don’t have to cross it fully. But
-you have to be walking toward it.</p>
+constraints, is not a luxury for regulated industries. It’s a direction
+of travel for any team shipping autonomy at scale. You don’t have to
+cross it fully. But you have to be walking toward it.</p>
 <p><strong>The bar is rising. “Good enough” is a moving target. And it’s
 moving faster than you think.</strong></p>
 <hr />
@@ -172,7 +172,7 @@ the Bridge</h2>
 time to write validators.” “Formalizing our architecture would take
 months.” “We’re a startup, we need to move fast.”</p>
 <p>This objection assumed that humans write all the scaffolding.</p>
-<p>That assumption is now false.</p>
+<p>That assumption is increasingly false.</p>
 <p>The same AI that generates application code can generate the
 meta-infrastructure:</p>
 <ul>
@@ -198,16 +198,16 @@ few days of focused work, with AI assistance, building infrastructure
 that compounds.”</p>
 <p>Paying this cost now builds a moat. Deferring it usually means paying
 later: incidents, rewrites, and engineers tired of firefighting.</p>
-<p><strong>The economics have changed. The objection no longer
-holds.</strong></p>
+<p><strong>The economics have changed. The objection is weaker than it
+used to be.</strong></p>
 <hr />
 <h2 id="the-moat">The Moat</h2>
 <p>In a world where AI can generate code, code alone is not a moat.</p>
 <p>Anyone can ask the same model and get similar output. The marginal
 cost of a feature is approaching zero. The marginal cost of a bug is
 not: it’s constant or rising.</p>
-<p>In a world where everyone has access to data, data is a temporary
-moat.</p>
+<p>In a world where data and models are increasingly accessible, data is
+a temporary moat.</p>
 <p>The advantage lasts until someone else collects similar data, or
 until a foundation model is trained on a corpus that includes yours.
 Data matters, but it’s not durable.</p>
@@ -229,6 +229,16 @@ rewrite.</li>
 <p>This is not something you can ask for in a chat window. It’s the
 accumulated discipline of building feedback loops that converge,
 hardening them over time, and compounding their reliability.</p>
+<p>One more dimension of moat durability is inference strategy. If you
+rent a flagship model via pay-per-token APIs, your unit economics and
+availability are provider-controlled. If you can move toward a
+predictable contract (or run owned inference behind your own SLA), you
+can afford more retries, stricter Validators, and more background
+maintenance without asking permission.</p>
+<p>This is why Chapter 5 made the point bluntly: <strong>a constrained
+loop with a weaker model beats an unconstrained flagship model.</strong>
+The model is the engine. The loop is the vehicle: the thing that turns
+raw capability into bounded, auditable, compounding work.</p>
 <p>Many teams can generate code now. The scarce thing is trust: can you
 prove your system does what it claims? Can you audit a year of changes
 in an afternoon?</p>
@@ -324,7 +334,7 @@ compound effect starts small.</li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

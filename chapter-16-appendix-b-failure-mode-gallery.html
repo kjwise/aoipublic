@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part VI Appendices</div>
-<div class="chapter-meta"><span class="read-time">12 min read</span></div>
+<div class="chapter-meta"><span class="read-time">13 min read</span></div>
 <h1 id="chapter-16-appendix-b-failure-mode-gallery">Chapter 16 –
 Appendix B: Failure Mode Gallery</h1>
 <p>This appendix catalogues common failure modes encountered when
@@ -50,6 +50,26 @@ Understanding these patterns helps in designing robust systems, writing
 effective Mission Objects, and debugging issues when they arise. Each
 entry describes the failure, its typical causes, provides an example,
 and suggests diagnostic and mitigation strategies.</p>
+<h2 id="loop-diagnostics-cheat-sheet">Loop Diagnostics Cheat Sheet</h2>
+<p>Use this when you’re debugging the <em>loop itself</em> (not just the
+code it touches).</p>
+<div class="line-block">Symptom | Likely Cause | Check | | — | — | — | |
+Invented structure (new signatures/routes/fields appear “from nowhere”)
+| Map Contamination | Was the skeleton extracted by Sensors or generated
+by the model?</div>
+<p>Is the Map asserting structure the Terrain never had? | | Endless
+cycling / circuit breakers trip | Missing attractor (no reachable
+<code>PASS</code>) | Can any candidate satisfy all Validators and
+budgets? Can a human-written diff pass under the same gates? | | Fixes
+A, breaks B | Slice too wide | Did the slice include unrelated surfaces?
+Are you changing multiple contracts in one Mission Object? | | Same
+error every iteration | Insufficient feedback | Is the Judge signal
+specific (file/line/symbol)? Are failures actionable, or just “no”? | |
+Output ignores constraints | Context dilution | Is the slice too large?
+Are constraints buried among noise? Is Skeleton-First enforced? | |
+Validator always fails | Validator bug or impossible constraint | Can a
+hand-written diff pass? Is the Validator checking the right baseline and
+scope? |</p>
 <h2 id="slice-too-large-or-too-small">Slice Too Large or Too Small</h2>
 <h3 id="what-it-looks-like">What it looks like</h3>
 <p>The generative system (e.g., your Map or Updater) produces output
@@ -501,7 +521,7 @@ you’re seeing overreach.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

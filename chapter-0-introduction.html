@@ -133,6 +133,9 @@ superpowers, bad practices become disasters.</p>
 <p><strong>This is the question Software Development as Code (SDaC)
 answers: How do you harness accelerated iteration without accelerating
 into a wall?</strong></p>
+<p>In this book, SDaC is the name I’m giving to the bundle of mechanisms
+that make accelerated iteration safe: explicit intent surfaces, bounded
+effectors, deterministic validators, and loops that converge.</p>
 <p>The answer is deceptively simple: you make the loop itself the
 product.</p>
 <p>Not the code. Not the features. Not the output. The <em>loop</em>—the
@@ -216,7 +219,7 @@ matches the service behavior (Terrain). The validator rejects type drift
 before it escapes into production.</p>
 <p>The gate catches it in seconds, before review. Nobody’s weekend is
 ruined. That’s the difference.</p>
-<p>SDaC makes that outcome routine. You treat development work as an
+<p>SDaC can make that outcome routine. You treat development work as an
 executable, versioned system: bounded context in, diffs out,
 deterministic gates decide what can merge, and the Ledger records
 why.</p>
@@ -330,12 +333,12 @@ state.</p>
 <p>If you want the longer version (the stance behind the mechanics), it
 appears at the end of Part I, after you’ve built the first loop.</p>
 <h2 id="a-note-on-substrate">A Note on Substrate</h2>
-<p>While the principles of SDaC are universal, this book uses a
-concrete, accessible substrate for its examples: standard files, Git for
-version control, <code>make</code> for orchestrating effects, and Python
-for scripting. This combination provides a practical, widely understood
-environment to demonstrate the core concepts. The patterns and
-architectures you’ll learn are designed to be stack-agnostic, easily
+<p>While the principles in this book are meant to be portable, this book
+uses a concrete, accessible substrate for its examples: standard files,
+Git for version control, <code>make</code> for orchestrating effects,
+and Python for scripting. This combination provides a practical, widely
+understood environment to demonstrate the core concepts. The patterns
+and architectures you’ll learn are designed to be stack-agnostic, easily
 portable to other languages, build systems, and VCS platforms. Appendix
 C includes validator recipes for other stacks (for example
 TypeScript/Node). The focus is on the engineering principles, not the
@@ -406,7 +409,7 @@ class="uri">https://www.linkedin.com/in/jhaukur/</a></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

@@ -224,19 +224,19 @@ the model.</li>
 </ul>
 <p>Salvage is not “keep broken code.” It’s “keep the best parts of a
 failed attempt with provenance.”</p>
-<p>This structured error object is critical. Instead of a vague
-“validation failed,” we get:</p>
+<p>This is why structured errors matter: they turn <code>FAIL</code>
+into a specific next move. Instead of “validation failed,” you get
+machine-readable facts the loop can route and inject:</p>
 <ul>
-<li><p>A clear <code>validation_status</code>.</p></li>
-<li><p>A high-level <code>reason</code>.</p></li>
-<li><p>Granular <code>details</code> for each check, including
-<code>actual</code> vs. <code>expected_pattern</code> for specific
-failures.</p></li>
-<li><p>Actionable <code>recommendations</code>.</p></li>
+<li>which check failed (<code>check</code> /
+<code>error_code</code>)</li>
+<li>where it failed (<code>file</code> / <code>path</code>, ideally with
+line)</li>
+<li>what was expected vs what happened</li>
+<li>one concrete fix to try next</li>
 </ul>
-<p>This is the “deterministic context” that tames stochastic generation.
-When the AI fails, we get precise signals on <em>how</em> to guide its
-next attempt, rather than just knowing it failed.</p>
+<p>That is the unit of feedback that makes Refine converge instead of
+wander.</p>
 <h2 id="the-adaptation-state-machine-asm">The Adaptation State Machine
 (ASM)</h2>
 <p>Receiving structured feedback is powerful, but what do we <em>do</em>
@@ -284,7 +284,7 @@ where <strong>Mission Object Templates</strong> come in.</p>
 and <code>fallbacks</code> for specific categories of changes. They
 allow engineers to invoke complex, AI-driven workflows with minimal
 input, inheriting a robust set of guardrails and validation logic.</p>
-<p>Here are examples of how templates can simplify common SDaC
+<p>Here are examples of how templates can simplify recurring SDaC
 workflows:</p>
 <h3 id="driver-pattern-decouple-intent-from-mechanism">Driver Pattern
 (decouple intent from mechanism)</h3>
@@ -450,7 +450,7 @@ loop.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>ea6bc11cc844</code>
+      Version: <code>66899566abe1</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
