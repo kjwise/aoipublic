@@ -41,16 +41,18 @@
 
   <main id="main" class="content">
     <div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">10 min read</span></div>
+<div class="chapter-meta"><span class="read-time">13 min read</span></div>
 <h1 id="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as
 Code (Mission Objects)</h1>
 <p>The dream of a fully autonomous engineering system often gets bogged
-down in the reality of instruction tweaking. We’ve all been there: a
-meticulously crafted instruction, revised endlessly, still produces
-inconsistent results, or worse, confidently wrong output. The core
-problem is that a raw instruction string is not a contract. It lacks
-explicit scope, verifiable gates, and a clear path for recovery when
-things go sideways.</p>
+down in the reality of instruction tweaking. Intent is often implicit or
+scattered across tickets, docs, and conversations, then compressed into
+one brittle instruction string. We’ve all been there: a meticulously
+crafted instruction, revised endlessly, still produces inconsistent
+results, or worse, confidently wrong output. The core problem is that a
+raw instruction string is not a contract. It lacks explicit scope,
+verifiable gates, and a clear path for recovery when things go
+sideways.</p>
 <p>This chapter introduces the <strong>Mission Object</strong>: your
 typed, executable contract for what a GenAI system should achieve. It is
 a structured declaration of intent that brings rigor and reliability to
@@ -81,32 +83,109 @@ formatting? How do we fix it?</p></li>
 into a clear, executable specification. It’s a structured data format
 (often YAML or JSON) that codifies the <em>goal</em>, <em>scope</em>,
 <em>constraints</em>, <em>quality gate</em>, <em>fallbacks</em>, and
-<em>telemetry</em> for a task.</p>
+<em>telemetry</em> for a task. YAML is readable, but error-prone — treat
+the Mission Object itself as a build input and validate it
+deterministically before you run anything.</p>
 <p>Here’s how a Mission Object might look for our README update
 task:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> update-readme-api-endpoint</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Ensure README documents /v2/users&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">file</span><span class="kw">:</span><span class="at"> README.md</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">section</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;API Endpoints&quot;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">constraints</span><span class="kw">:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_contain</span><span class="kw">:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;/v2/users&quot;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;pagination&quot;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_not_contain</span><span class="kw">:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;/v1/users&quot;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> ./scripts/validate_readme.sh</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span></span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Ensure README documents /v2/users&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> docs/api/openapi.json</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> README.md</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> docs/api/openapi.json</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">do_not_touch</span><span class="kw">:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> .github/**</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> policies/**</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">edit_regions</span><span class="kw">:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">README.md</span><span class="kw">:</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;## API Endpoints&quot;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">constraints</span><span class="kw">:</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">forbidden</span><span class="kw">:</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;Introduce endpoints not present in openapi.json&quot;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">acceptance_criteria</span><span class="kw">:</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_contain</span><span class="kw">:</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;/v2/users&quot;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;pagination&quot;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">must_not_contain</span><span class="kw">:</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;/v1/users&quot;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">60</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> ./scripts/validate_readme.sh</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">rollback_on</span><span class="kw">:</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;quality_gate_fail&quot;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;scope_violation&quot;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span></span></code></pre></div>
 <p>This is still readable. But now the system has something it can
 compile: bounded scope, explicit constraints, an executable gate, and a
 safe failure policy.</p>
+<h3
+id="mission-object-anatomy-what-vs.-boundaries-vs.-verification">Mission
+Object anatomy (what vs. boundaries vs. verification)</h3>
+<p>When Mission Objects get muddy, loops thrash. The fix is to keep the
+categories crisp:</p>
+<ol type="1">
+<li><strong>Objective (the what):</strong> the intended outcome.
+<ul>
+<li>Example: “Implement token validation.”</li>
+</ul></li>
+<li><strong>Interface contracts (the surface area):</strong> the
+skeleton you must preserve or evolve.
+<ul>
+<li>Example: function signature, JSON Schema, API route table.</li>
+<li>In practice, these often belong in <code>scope.read_only</code> and
+in your slice as deterministically extracted skeleton.</li>
+</ul></li>
+<li><strong>Constraints (the how-not):</strong> forbidden behaviors and
+hard boundaries.
+<ul>
+<li>Example: “no network calls,” “do not modify
+<code>.github/**</code>,” “only edit this region,” “do not add new
+endpoints.”</li>
+</ul></li>
+<li><strong>Acceptance criteria (the how to verify):</strong> statements
+you can test deterministically.
+<ul>
+<li>Good: “p99 latency &lt; 100ms under benchmark X.”</li>
+<li>Bad: “fast enough.”</li>
+<li>Good: “output is valid JSON and conforms to schema Y.”</li>
+<li>Bad: “well structured.”</li>
+</ul></li>
+</ol>
+<p>If a criterion cannot be validated deterministically, it doesn’t
+become Physics. It becomes an operator check: a required human review
+item, or a deferred quality goal you ratchet in later.</p>
+<h3
+id="mission-objects-from-natural-language-assistive-not-authoritative">Mission
+Objects from natural language (assistive, not authoritative)</h3>
+<p>It’s tempting to use a model to convert a ticket into a Mission
+Object. That can be a useful accelerator, but treat it as
+<strong>drafting</strong>, not authority:</p>
+<ul>
+<li>A human validates that the structured Mission Object actually
+matches intent (especially for scope boundaries and forbidden
+actions).</li>
+<li>The Mission Object is schema-validated before it becomes a runnable
+input.</li>
+<li>Guardrails that protect the loop itself (protected paths, denylist,
+policy gates) must not be solely authored by the Effector they constrain
+(Chapter 10).</li>
+</ul>
 <p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
-a <code>missions/templates/doc_sync.yml</code> file that serves as a
-concrete example of a Mission Object template.</p>
+runnable mission templates such as
+<code>missions/templates/doc_sync.mission.json</code> and
+<code>missions/templates/update_readme_api_endpoint.mission.yaml</code>.
+They use the companion repo’s local schema, but the semantics match the
+canon here: goal + bounded scope + budgets + gates.</p>
 <h2
 id="mission-objects-are-stateful-artifacts-executable-pr-state-of-record">Mission
 Objects are stateful artifacts (Executable PR + state of record)</h2>
@@ -124,6 +203,36 @@ traces)</li>
 <p>The Mission stays human-readable, but it stops being prose. It
 becomes an executable pull request: goal + scope + budgets + gates, plus
 outcome and evidence.</p>
+<h3 id="lifecycle-and-versioning-draft-active-completed">Lifecycle and
+versioning (Draft → Active → Completed)</h3>
+<p>Mission Objects live in version control, so they need a lifecycle
+that keeps provenance clean.</p>
+<p>A pragmatic lifecycle:</p>
+<ol type="1">
+<li><strong>Draft:</strong> created from a human idea, a ticket, or a
+template.</li>
+<li><strong>Under review:</strong> boundaries and gates are inspected
+like code (scope, budgets, rollback).</li>
+<li><strong>Active:</strong> the runnable Mission Object version that a
+loop is executing.</li>
+<li><strong>Completed / Reverted:</strong> finished with evidence
+(<code>PASS</code> + diff) or safely aborted (<code>FAIL</code> +
+trace).</li>
+<li><strong>Archived:</strong> retained for audit and pattern
+mining.</li>
+</ol>
+<p>Two rules keep the Ledger honest:</p>
+<ul>
+<li><strong>Once Active, Mission Objects are append-only.</strong> If
+you need to change intent, create a new version
+(<code>mission_version: 2</code>) or a new <code>mission_id</code>.
+Don’t silently rewrite the record of what the loop was asked to do.</li>
+<li><strong>Every diff is attributable to a Mission Object
+version.</strong> In practice, tag PRs/branches/commit trailers with
+<code>mission_id@mission_version</code>, and store traces under a
+directory named the same way. That’s how you answer “which Mission
+produced this change?” without guesswork.</li>
+</ul>
 <h2 id="the-meta-patterns-applied-to-missions">The Meta-Patterns Applied
 to Missions</h2>
 <p>Mission Objects are where the Meta-Patterns become concrete.</p>
@@ -153,6 +262,122 @@ and/or tests).</p></li>
 </ul>
 <p>If the gate fails, the correct result is <code>FAIL</code> and a
 revert.</p>
+<h4
+id="schema-validate-mission-objects-input-hygiene-before-autonomy">Schema-validate
+Mission Objects (input hygiene before autonomy)</h4>
+<p>A Mission Object is authority. A malformed Mission is not “bad luck”
+— it’s a bug in your intent surface.</p>
+<p>Before you call any model:</p>
+<ul>
+<li>Parse the Mission deterministically.</li>
+<li>Validate it against a schema (and fail fast on missing fields or
+unknown keys).</li>
+<li>Enforce minimum invariants: bounded scope, non-empty gates, and
+explicit rollback policy.</li>
+</ul>
+<p><strong>Illustrative JSON Schema (trimmed):</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;mission_id&quot;</span><span class="ot">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;mission_version&quot;</span><span class="ot">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;goal&quot;</span><span class="ot">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;scope&quot;</span><span class="ot">,</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;quality_gate&quot;</span><span class="ot">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;fallbacks&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;mission_id&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span><span class="fu">,</span> <span class="dt">&quot;minLength&quot;</span><span class="fu">:</span> <span class="dv">3</span> <span class="fu">},</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;mission_version&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;integer&quot;</span><span class="fu">,</span> <span class="dt">&quot;minimum&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;goal&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span><span class="fu">,</span> <span class="dt">&quot;minLength&quot;</span><span class="fu">:</span> <span class="dv">10</span> <span class="fu">},</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;dependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span> <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;scope&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;modify&quot;</span><span class="ot">,</span> <span class="st">&quot;do_not_touch&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;modify&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span> <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">},</span> <span class="dt">&quot;minItems&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;read_only&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span> <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;do_not_touch&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span> <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">},</span> <span class="dt">&quot;minItems&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">}</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;constraints&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span> <span class="fu">},</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;acceptance_criteria&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span> <span class="fu">},</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;budgets&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span> <span class="fu">},</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;quality_gate&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;cmd&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;cmd&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span><span class="fu">,</span> <span class="dt">&quot;minLength&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;rollback_on&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span> <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;fallbacks&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;max_iterations&quot;</span><span class="ot">,</span> <span class="st">&quot;on_fail&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;max_iterations&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;integer&quot;</span><span class="fu">,</span> <span class="dt">&quot;minimum&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;on_fail&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span><span class="fu">,</span> <span class="dt">&quot;enum&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;revert&quot;</span><span class="ot">,</span> <span class="st">&quot;escalate&quot;</span><span class="ot">]</span> <span class="fu">}</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;additionalProperties&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Treat this schema like Physics: version it, run it in CI, and protect
+it behind immutable boundaries (Chapter 10).</p>
+<h4
+id="constraint-gate-mapping-what-can-be-enforced-vs.-what-needs-review">Constraint
+→ gate mapping (what can be enforced vs. what needs review)</h4>
+<p>Mission Objects don’t magically enforce themselves. A constraint is
+only real when you can map it to a deterministic gate.</p>
+<p>Examples:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Mission field</th>
+<th>Example</th>
+<th>Enforcement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scope.do_not_touch</code></td>
+<td><code>.github/**</code></td>
+<td>diff gate + protected paths + userspace boundary</td>
+</tr>
+<tr>
+<td><code>scope.edit_regions</code></td>
+<td><code>README.md</code> under <code>## API Endpoints</code></td>
+<td>edit-region validator</td>
+</tr>
+<tr>
+<td><code>budgets.max_lines_changed</code></td>
+<td><code>60</code></td>
+<td>diff budget validator</td>
+</tr>
+<tr>
+<td><code>acceptance_criteria.must_contain</code></td>
+<td><code>/v2/users</code></td>
+<td>deterministic content check (<code>grep</code>-style)</td>
+</tr>
+<tr>
+<td>latency / cost targets</td>
+<td><code>p99 &lt; 100ms</code></td>
+<td>benchmark gate + budgeted circuit breakers</td>
+</tr>
+<tr>
+<td>subjective criteria</td>
+<td>“maintainable,” “best practice”</td>
+<td>explicit human review item (not Physics)</td>
+</tr>
+</tbody>
+</table>
+<p>If you add a new constraint type and you don’t have a gate for it
+yet, make that explicit: either fail fast (“unknown constraint”) or
+route to escalation. Silent “constraints” are just prose.</p>
 <h3 id="recursion-missions-are-system-currency">3) Recursion (Missions
 are system currency)</h3>
 <p>Once Missions exist as artifacts, maintenance loops can emit them
@@ -185,17 +410,17 @@ your system runs the validator. The validator doesn’t just return an
 exit code; it emits structured findings.</p>
 <p>Here’s an example of what that validator script might output if it
 fails:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;FAILED&quot;</span><span class="fu">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;failed_checks&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;check&quot;</span><span class="fu">:</span> <span class="st">&quot;endpoint_description&quot;</span><span class="fu">,</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;expected&quot;</span><span class="fu">:</span> <span class="st">&quot;The /v2/users line mentions pagination&quot;</span><span class="fu">,</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;actual&quot;</span><span class="fu">:</span> <span class="st">&quot;- `/v2/users`: Manages user resources.&quot;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="st">&quot;FAILED&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;failed_checks&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;check&quot;</span><span class="fu">:</span> <span class="st">&quot;endpoint_description&quot;</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;expected&quot;</span><span class="fu">:</span> <span class="st">&quot;The /v2/users line mentions pagination&quot;</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;actual&quot;</span><span class="fu">:</span> <span class="st">&quot;- `/v2/users`: Manages user resources.&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p>That JSON output is not just a report. It is the next iteration’s
 input.</p>
 <p>When you feed the failing checks back into the next Refine step
@@ -224,18 +449,16 @@ the model.</li>
 </ul>
 <p>Salvage is not “keep broken code.” It’s “keep the best parts of a
 failed attempt with provenance.”</p>
-<p>This is why structured errors matter: they turn <code>FAIL</code>
-into a specific next move. Instead of “validation failed,” you get
-machine-readable facts the loop can route and inject:</p>
+<p>This is why structured findings matter: they turn <code>FAIL</code>
+into a specific next move. Instead of “validation failed,” the loop gets
+facts it can route and inject:</p>
 <ul>
-<li>which check failed (<code>check</code> /
-<code>error_code</code>)</li>
+<li>what failed (<code>check</code> / <code>error_code</code>)</li>
 <li>where it failed (<code>file</code> / <code>path</code>, ideally with
 line)</li>
-<li>what was expected vs what happened</li>
-<li>one concrete fix to try next</li>
+<li>expected vs actual, plus one concrete fix to try next</li>
 </ul>
-<p>That is the unit of feedback that makes Refine converge instead of
+<p>That feedback unit is what makes Refine converge instead of
 wander.</p>
 <h2 id="the-adaptation-state-machine-asm">The Adaptation State Machine
 (ASM)</h2>
@@ -392,7 +615,7 @@ the local Immune System plus static checks.</p></li>
 <p>By using templates, teams can establish robust, pre-vetted patterns
 for AI-driven changes. This promotes consistency, reduces the risk of
 novel instruction-injection failures, and allows engineers to focus on
-higher-level problems, trusting that the underlying SDaC system will
+higher-level problems, trusting that the underlying SDaC system can
 execute routine tasks safely and reliably within well-defined
 boundaries.</p>
 <p>The companion repo includes a <code>driver-demo</code> target that
@@ -450,7 +673,7 @@ loop.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

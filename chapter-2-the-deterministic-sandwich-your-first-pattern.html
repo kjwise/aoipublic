@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part I Build It The Weekend Sprint</div>
-<div class="chapter-meta"><span class="read-time">15 min read</span></div>
+<div class="chapter-meta"><span class="read-time">16 min read</span></div>
 <h1 id="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter
 2 – The Deterministic Sandwich (Your First Pattern)</h1>
 <p>In Chapter 1, you built a loop that produces a diff and a
@@ -76,6 +76,27 @@ rules.</p></li>
 external service. You control what goes in, you control how you
 interpret what comes out, and you reject anything that doesn’t meet your
 contract.</p>
+<p>A quick diagram:</p>
+<pre class="text"><code>Mission Object + Terrain evidence
+        |
+        v
+     [Prep]
+ (validate inputs, slice, separate authority/evidence)
+        |
+        v
+     [Model]
+ (one bounded generation step)
+        |
+        v
+  [Validation / Physics]
+   (parse + run gates)
+        |
+   PASS / FAIL (+ findings)</code></pre>
+<p>One nuance: the sandwich has different bread. <code>Prep</code>
+validates and shapes <em>inputs</em> (Maps + evidence).
+<code>Validation</code> validates <em>outputs</em> (candidate diffs /
+JSON / artifacts). They’re both deterministic in execution, but they
+guard different surfaces.</p>
 <p>If you want a frame: this is RSI-as-lens. You can recurse (retry with
 tighter constraints, improve the harness), but only the middle is
 stochastic; <code>Prep</code> and <code>Validation</code> stay
@@ -100,6 +121,30 @@ diagnosis</li>
 <li>Engineering trade-offs: boilerplate fatigue + ROI triggers</li>
 <li><code>Prep</code> formalization: template-driven requests</li>
 </ul>
+<h3 id="deterministic-execution-vs-complete-specification">Deterministic
+execution vs complete specification</h3>
+<p>In this book, “deterministic” means <strong>execution
+determinism</strong>: given the same input, the layer returns the same
+output every time.</p>
+<p>That is not the same thing as <strong>specification
+completeness</strong>: whether your Validators actually check everything
+that matters (and only what matters). A Validator can be perfectly
+deterministic and still be incomplete, wrong, or misaligned with the
+real contract.</p>
+<p><strong>A useful shorthand: Physics has a hardness
+ladder.</strong></p>
+<ul>
+<li><strong>Hard Physics:</strong> parsers, compilers, type checkers —
+grounded in formal rules and hard to negotiate with.</li>
+<li><strong>Firm Physics:</strong> linters, policy checks, security
+scanners — deterministic, but often heuristic or rule-authored.</li>
+<li><strong>Soft Physics:</strong> tests, benchmarks, golden files —
+executed deterministically, but the assertions and coverage are
+human-authored and can be incomplete.</li>
+</ul>
+<p>SDaC works because you can <em>iterate on Physics</em>: tighten it
+when you discover a failure mode, and keep it minimal when it becomes
+friction without payback.</p>
 <h3 id="prep-setting-the-stage-deterministically">1. Prep: Setting the
 Stage Deterministically</h3>
 <p>The <code>Prep</code> layer is about making sure your AI receives
@@ -300,9 +345,12 @@ generated file path exist? Does a generated code snippet conform to
 linting rules? Does a generated summary actually reflect the source
 content (more on this in Chapter 3)?</p></li>
 </ul>
-<p>If any validation fails, the entire output is rejected. The SDaC loop
-stops, and a clear error signal is generated, just like the
-<code>FAIL</code> state you saw in Chapter 1.</p>
+<p>If any validation fails, the candidate is rejected and a clear error
+signal is generated, just like the <code>FAIL</code> state you saw in
+Chapter 1. In a real loop, you normalize that signal into structured
+findings, feed it into Refine, and retry within a budget (N attempts,
+circuit breakers, human escalation). Designing that retry strategy is
+non-trivial; Chapter 5 is where we engineer it.</p>
 <h2 id="worked-example-from-stochastic-failure-to-clean-diff">Worked
 Example: From Stochastic Failure to Clean Diff</h2>
 <p>Let’s revisit the Chapter 1 Map/Terrain sync loop. Imagine you
@@ -324,22 +372,22 @@ the signature surface doesn’t match the Terrain. Your
 <code>Validation</code> layer runs the Map/Terrain sync Validator. It
 returns a structured error object:</p>
 <p><strong>Example: Validator output (structured)</strong></p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;file_path&quot;</span><span class="fu">:</span> <span class="st">&quot;product/docs/architecture.md&quot;</span><span class="fu">,</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;map_terrain_sync_fail&quot;</span><span class="fu">,</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;missing_in_map&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;calculate_tax(amount, country, rate)&quot;</span><span class="ot">,</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;normalize_country(country)&quot;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;extra_in_map&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;calculate_tax(amount: float, country: str, rate: float)&quot;</span><span class="ot">,</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;normalize_country(country: str)&quot;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;suggested_fix&quot;</span><span class="fu">:</span> <span class="st">&quot;Use the exact signature surface extracted from code: name(arg1, arg2).&quot;</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;file_path&quot;</span><span class="fu">:</span> <span class="st">&quot;product/docs/architecture.md&quot;</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;error_code&quot;</span><span class="fu">:</span> <span class="st">&quot;map_terrain_sync_fail&quot;</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;missing_in_map&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;calculate_tax(amount, country, rate)&quot;</span><span class="ot">,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;normalize_country(country)&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;extra_in_map&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;calculate_tax(amount: float, country: str, rate: float)&quot;</span><span class="ot">,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;normalize_country(country: str)&quot;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;suggested_fix&quot;</span><span class="fu">:</span> <span class="st">&quot;Use the exact signature surface extracted from code: name(arg1, arg2).&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div>
 <p>This immediately causes the <code>PASS/FAIL</code> gate to
 <code>FAIL</code>. The patch is rejected. No invalid change is
 committed.</p>
@@ -409,6 +457,9 @@ as the repo evolves.</p>
 small, tighten over time)</h3>
 <p>You don’t start with five layers. You ratchet up only when the work
 repeats or the risk matters.</p>
+<p>Each Validator you add costs you something: CI time, false
+positives/negatives, and an operator burden. The art is knowing when to
+stop.</p>
 <ol type="1">
 <li><p><strong>One command + one gate:</strong> a single
 <code>make validate</code> that fails fast. No YAML. No templates. Just
@@ -598,7 +649,7 @@ does.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

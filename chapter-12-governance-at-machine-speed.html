@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">9 min read</span></div>
+<div class="chapter-meta"><span class="read-time">11 min read</span></div>
 <h1 id="chapter-12-governance-at-machine-speed">Chapter 12 – Governance
 at Machine Speed</h1>
 <p>The promise of Software Development as Code (SDaC) is rapid,
@@ -51,6 +51,9 @@ step—this chapter is about the engineering controls that make that
 mutation safe and predictable. We shift from <em>how</em> an agent
 changes code to <em>how we ensure it changes code responsibly</em>, at
 machine speed.</p>
+<p>Part I built the loop. Part IV governs it: what the loop is allowed
+to touch, what it must prove before merge, and what evidence it must
+leave behind.</p>
 <p>Chapter 10 established the immutable boundary (protected paths,
 branch protection, and guardrails the system cannot rewrite). This
 chapter assumes that boundary exists. Here we focus on what runs
@@ -72,6 +75,10 @@ These rules dictate everything from file access permissions to
 acceptable code quality metrics. They act as automated gates, rejecting
 changes that fall outside defined boundaries <em>before</em> they can
 cause issues.</p>
+<p>Governance is a meta-layer: it doesn’t live in your feature code
+(Terrain) or your specs (Map). It governs how they interact. It defines
+which Maps are authoritative, which Terrains are writable, and which
+Validators are hard gates versus advisory Sensors.</p>
 <p><strong>Mechanism: Policy as Code</strong></p>
 <p>Just as infrastructure is code and configuration is code, policy is
 code. Frameworks like Open Policy Agent (OPA) or custom scripts written
@@ -105,6 +112,182 @@ providing fine-grained, dynamic checks that go beyond simple ownership
 or merge conditions. They’re the automated “reviewers” that ensure
 compliance before a human even needs to glance at a PR, or to prevent
 unauthorized direct pushes entirely.</p>
+<h3 id="concrete-policy-as-code-three-minimal-examples">Concrete
+policy-as-code (three minimal examples)</h3>
+<p>Policy-as-code is not a slogan. It is a Validator chain with
+deterministic outputs.</p>
+<p>Here is a minimal shape:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PolicyFinding:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    rule: <span class="bu">str</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    message: <span class="bu">str</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    path: <span class="bu">str</span> <span class="op">|</span> <span class="va">None</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PolicyResult:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    status: <span class="bu">str</span>  <span class="co"># &quot;pass&quot; | &quot;warn&quot; | &quot;block&quot;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    findings: <span class="bu">list</span>[PolicyFinding]</span></code></pre></div>
+<p><strong>1) Protected paths (scope guard):</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> policy_protected_paths(changed_paths: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> PolicyResult:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    protected_prefixes <span class="op">=</span> (</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;.github/&quot;</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;scripts/deploy&quot;</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;config/production&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    hits <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> changed_paths <span class="cf">if</span> p.startswith(protected_prefixes)]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            status<span class="op">=</span><span class="st">&quot;block&quot;</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">&quot;paths.protected&quot;</span>, message<span class="op">=</span><span class="st">&quot;Protected path touched&quot;</span>, path<span class="op">=</span>p) <span class="cf">for</span> p <span class="kw">in</span> hits],</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">&quot;pass&quot;</span>, findings<span class="op">=</span>[])</span></code></pre></div>
+<p><strong>2) Secret detection (cheap, fail-fast):</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> policy_no_hardcoded_secrets(diff_text: <span class="bu">str</span>) <span class="op">-&gt;</span> PolicyResult:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    patterns <span class="op">=</span> [</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;password</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">][^&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="op">+</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="vs">&#39;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;api_key</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">][^&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="op">+</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="vs">&#39;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="vs">r&#39;secret</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="vs">=</span><span class="ch">\\</span><span class="vs">s</span><span class="op">*</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">][^&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="op">+</span><span class="pp">[&quot;</span><span class="ch">\\\&#39;</span><span class="pp">]</span><span class="vs">&#39;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    hits: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> []</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pat <span class="kw">in</span> patterns:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        hits.extend(re.findall(pat, diff_text))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            status<span class="op">=</span><span class="st">&quot;block&quot;</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">&quot;secrets.hardcoded&quot;</span>, message<span class="op">=</span><span class="st">&quot;Possible hardcoded secret in diff&quot;</span>)],</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">&quot;pass&quot;</span>, findings<span class="op">=</span>[])</span></code></pre></div>
+<p><strong>3) Dangerous constructs (forbid by default):</strong></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> policy_no_eval_or_exec(diff_text: <span class="bu">str</span>) <span class="op">-&gt;</span> PolicyResult:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    forbidden <span class="op">=</span> (<span class="st">&quot;eval(&quot;</span>, <span class="st">&quot;exec(&quot;</span>, <span class="st">&quot;__import__(&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    hits <span class="op">=</span> [tok <span class="cf">for</span> tok <span class="kw">in</span> forbidden <span class="cf">if</span> tok <span class="kw">in</span> diff_text]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> hits:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> PolicyResult(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            status<span class="op">=</span><span class="st">&quot;block&quot;</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            findings<span class="op">=</span>[PolicyFinding(rule<span class="op">=</span><span class="st">&quot;code.dynamic_exec&quot;</span>, message<span class="op">=</span><span class="ss">f&quot;Forbidden construct: </span><span class="sc">{</span>tok<span class="sc">}</span><span class="ss">&quot;</span>) <span class="cf">for</span> tok <span class="kw">in</span> hits],</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PolicyResult(status<span class="op">=</span><span class="st">&quot;pass&quot;</span>, findings<span class="op">=</span>[])</span></code></pre></div>
+<p>Chain them in a cheap-to-expensive order:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>POLICIES <span class="op">=</span> [</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    policy_protected_paths,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    policy_no_hardcoded_secrets,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    policy_no_eval_or_exec,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<p>The most important property is not cleverness. It is determinism:
+same diff, same decision.</p>
+<h3 id="automate-the-rule-based-80">Automate the rule-based 80%</h3>
+<p>Not everything can be automated. Some governance questions require
+trade-offs and context.</p>
+<p>The practical split is:</p>
+<ul>
+<li><strong>Automate rule-based decisions:</strong> scope boundaries,
+forbidden constructs, required evidence, required approvals, monotonic
+ratchets.</li>
+<li><strong>Escalate judgment calls:</strong> intent disputes, novel
+situations, and legitimate exceptions.</li>
+</ul>
+<p>Machine-speed governance is valuable not only because it is fast, but
+because it is consistent, comprehensive (applies to every change), and
+legible (policies are versioned artifacts, not oral tradition).</p>
+<h3
+id="escalation-workflows-block-warn-defer-time-bounded-exceptions">Escalation
+workflows (block, warn, defer, time-bounded exceptions)</h3>
+<p>Policies need outcomes, not just booleans. A common pattern is to map
+each policy to a default action on failure.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">policies</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> secrets.hardcoded</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> block</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">notify</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">security-team</span><span class="kw">]</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> perf.regression</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> warn</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">require_acknowledgment</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> architecture.change</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">action</span><span class="kw">:</span><span class="at"> escalate</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">reviewers</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">tech-leads</span><span class="kw">]</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">exception_process</span><span class="kw">:</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> requester submits exception with justification and scope</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> policy owner reviews</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> if approved, exception is logged and time-bounded</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> exception expires unless renewed</span></span></code></pre></div>
+<p>The key move is time-bounding. “Just this once” is how drift becomes
+policy.</p>
+<h3 id="conflicts-precedence-and-policy-ordering">Conflicts, precedence,
+and policy ordering</h3>
+<p>Policies will conflict. A performance gate might want one change; a
+security gate might forbid it. Don’t pretend this won’t happen—design
+for it.</p>
+<p>Practical rules:</p>
+<ul>
+<li>Order policies by precedence (security &gt; scope &gt; correctness
+&gt; style).</li>
+<li>Make the outcome explicit when a higher-precedence policy fires: it
+blocks; no downstream negotiation.</li>
+<li>When two equal-precedence policies conflict, escalate to human
+review with the evidence attached.</li>
+</ul>
+<h3 id="policy-versioning-and-testing-who-tests-the-policies">Policy
+versioning and testing (who tests the policies?)</h3>
+<p>Policies are code. They can be wrong. Treat them like any other
+critical component:</p>
+<ul>
+<li><strong>Version policies</strong> and record when they become
+effective.</li>
+<li><strong>Test policies</strong> with known-pass and known-fail
+fixtures.</li>
+<li><strong>Ratchet policy drift</strong>: exceptions should be rare,
+logged, and reviewed.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">policy</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">id</span><span class="kw">:</span><span class="at"> secrets.hardcoded</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">2.0.0</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">effective_date</span><span class="kw">:</span><span class="at"> 2026-01-01</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">migration_period_days</span><span class="kw">:</span><span class="at"> </span><span class="dv">30</span></span></code></pre></div>
+<p>And give policies their own tiny Immune System:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_policy_no_eval_blocks_eval():</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> <span class="st">&#39;+ x = eval(&quot;2+2&quot;)</span><span class="ch">\\</span><span class="st">n&#39;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> policy_no_eval_or_exec(diff)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> res.status <span class="op">==</span> <span class="st">&quot;block&quot;</span></span></code></pre></div>
+<h3 id="ci-integration-run-policy-gates-before-merge">CI integration
+(run policy gates before merge)</h3>
+<p>Policies don’t help if they run “sometimes.” They help when they run
+on every relevant change, before merge.</p>
+<p>An example CI wiring (GitHub Actions shape; adapt to your
+runner):</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Governance Checks</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">pull_request</span><span class="kw">]</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">policy</span><span class="kw">:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run policy validators</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>          python -m governance.check --base origin/main --head HEAD</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Record audit evidence</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>          python -m governance.audit --pr ${{ github.event.number }}</span></code></pre></div>
 <h2 id="the-skill-shift-whats-the-job-now">The Skill Shift (what’s the
 job now?)</h2>
 <p>A common cultural objection to SDaC could sound like this: “If the
@@ -114,8 +297,9 @@ what’s left for engineers?”</p>
 shifts from <em>typing</em> code to <em>defining constraints that make
 code correct</em>, and then operating the system that enforces those
 constraints.</p>
-<p>Across the industry, generation is getting cheaper and faster. The
-scarce work is everything that makes generation safe and repeatable:</p>
+<p>Across much of the industry, generation is getting cheaper and
+faster. The scarce work is everything that makes generation safe and
+repeatable:</p>
 <ul>
 <li><strong>Defining intent:</strong> Mission Objects, templates, and
 bounded change surfaces.</li>
@@ -249,6 +433,48 @@ performance (e.g., number of PRs submitted, success rate, rollback rate)
 and traces of their execution paths to understand their internal
 reasoning.</p></li>
 </ol>
+<h3 id="audit-record-shape-what-to-log-in-what-format">Audit record
+shape (what to log, in what format)</h3>
+<p>If governance is executable, auditing must be executable too. You
+want an audit record that is:</p>
+<ul>
+<li>append-only (no silent edits)</li>
+<li>machine-queryable (not screenshots)</li>
+<li>linked to evidence (diffs, logs, policy outputs)</li>
+</ul>
+<p>A practical format is JSONL: one JSON object per line, written as an
+append-only log.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GovernanceEvent:</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    timestamp: datetime</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    event_type: <span class="bu">str</span>  <span class="co"># &quot;policy_check&quot; | &quot;exception&quot; | &quot;merge_blocked&quot; | &quot;override&quot; | &quot;rollback&quot;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    actor: <span class="bu">str</span>       <span class="co"># &quot;agent:&lt;name&gt;&quot; | &quot;human:&lt;user&gt;&quot; | &quot;ci&quot;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    policy_id: <span class="bu">str</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    result: <span class="bu">str</span>      <span class="co"># &quot;pass&quot; | &quot;warn&quot; | &quot;block&quot; | &quot;exception&quot;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    context: <span class="bu">dict</span>    <span class="co"># pr, commit, changed_paths, budgets, links to logs</span></span></code></pre></div>
+<p>What to record at minimum:</p>
+<ul>
+<li>policy inputs (diff hash, changed paths, mission id/version)</li>
+<li>policy outputs (which rules fired, findings, action taken)</li>
+<li>decision outcome (blocked, warned, deferred, merged, rolled
+back)</li>
+<li>exception metadata (who approved, why, and when it expires)</li>
+</ul>
+<p>Retention is not one-size-fits-all. Keep audit logs long enough to
+cover incident response and any regulatory/compliance obligations you
+have. The core requirement is that a post-incident review can
+reconstruct what the system saw and why it acted.</p>
+<p>And make the logs usable. Common queries:</p>
+<ul>
+<li>“Show all blocked merges by policy_id in the last N days.”</li>
+<li>“Show all time-bounded exceptions that are near expiration.”</li>
+<li>“Show overrides: when did humans waive a policy, and what evidence
+was attached?”</li>
+</ul>
 <p><strong>Automated Auditing:</strong></p>
 <p>With evidence collected, the next step is to continuously audit it
 against your policies.</p>
@@ -264,9 +490,8 @@ dashboards showing the current state of agent governance: active
 policies, recent agent activities, policy violations (if any), and human
 override rates.</p></li>
 <li><p><strong>Alerting on Anomalies:</strong> Configure alerts for any
-policy violation, unexpected agent behavior (e.g., an agent attempting
-to operate outside its designated hours), or unusual audit log
-patterns.</p></li>
+policy violation, unexpected agent behavior (e.g., operating outside
+allowlisted scope/budgets), or unusual audit log patterns.</p></li>
 </ul>
 <p>This audit loop provides transparency, accountability, and the
 ability to detect and respond to issues before they escalate. It’s the
@@ -289,28 +514,28 @@ merged.</p>
 <p><strong>The Governance Check:</strong></p>
 <p>The <code>agent_merge_blocker.yml</code> workflow implements this
 policy:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># governance/ci/agent_merge_blocker.yml</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Agent Merge Blocker</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">opened</span><span class="kw">,</span><span class="at"> synchronize</span><span class="kw">,</span><span class="at"> reopened</span><span class="kw">]</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">check-kill-switch</span><span class="kw">:</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">fetch-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch branch exists</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>          set -euo pipefail</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>          branch=&quot;disable-auto-merge&quot;</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>          if git ls-remote --exit-code --heads origin &quot;$branch&quot; &gt;/dev/null; then</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            echo &quot;::error::Kill switch &#39;$branch&#39; found; autonomous merges suspended.&quot;</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            exit 1</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>          fi</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># governance/ci/agent_merge_blocker.yml</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Agent Merge Blocker</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">types</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">opened</span><span class="kw">,</span><span class="at"> synchronize</span><span class="kw">,</span><span class="at"> reopened</span><span class="kw">]</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">check-kill-switch</span><span class="kw">:</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">fetch-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Fail if kill switch branch exists</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>          set -euo pipefail</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>          branch=&quot;disable-auto-merge&quot;</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>          if git ls-remote --exit-code --heads origin &quot;$branch&quot; &gt;/dev/null; then</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            echo &quot;::error::Kill switch &#39;$branch&#39; found; autonomous merges suspended.&quot;</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            exit 1</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>          fi</span></code></pre></div>
 <p>This workflow runs on every pull request. It checks for the existence
 of the <code>disable-auto-merge</code> remote branch. If the branch is
 found, the workflow fails, which in turn blocks the pull request from
@@ -380,7 +605,7 @@ This starts building your audit trail.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

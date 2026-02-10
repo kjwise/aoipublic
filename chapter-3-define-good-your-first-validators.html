@@ -41,15 +41,15 @@
 
   <main id="main" class="content">
     <div class="part-title">Part I Build It The Weekend Sprint</div>
-<div class="chapter-meta"><span class="read-time">9 min read</span></div>
+<div class="chapter-meta"><span class="read-time">12 min read</span></div>
 <h1 id="chapter-3-define-good-your-first-validators">Chapter 3 – Define
 “Good” (Your First Validators)</h1>
 <p>You’ve built a loop and named the sandwich. Now define “good” so the
 gate means something.</p>
-<p>Validators turn “looks fine” into <code>PASS/FAIL</code> and give you
-deterministic failure you can act on. Start small: hard physics first
-(linters, types, schemas), then a few task-specific checks you can
-tighten over time.</p>
+<p>Validators turn “looks fine” into a deterministic signal (often
+<code>PASS/FAIL</code>) and give you failure you can act on. Start
+small: hard physics first (linters, types, schemas), then a few
+task-specific checks you can tighten over time.</p>
 <p>Two practical rules:</p>
 <ul>
 <li>A <strong>Validator</strong> is a <strong>Sensor</strong>, not a
@@ -58,6 +58,10 @@ refine, revert, or escalate.</li>
 <li>Put the cheapest Validators first. Failing fast is not pessimism;
 it’s throughput.</li>
 </ul>
+<p>One reality check up front: Validators are not omniscient. They are
+executable opinions about what matters. Your job is to keep them
+<em>cheap, terminating, and aligned</em> with the invariants you
+actually care about.</p>
 <h2 id="where-validators-live-in-real-systems">Where Validators live in
 real systems</h2>
 <p>In production-grade implementations, Validators are rarely “just
@@ -131,6 +135,92 @@ docs,” “diff touches only allowed paths”).</li>
 <li><strong>Policy Validators:</strong> security and compliance rules
 (secrets scanning, licensing checks, dependency allow/deny lists).</li>
 </ul>
+<p>Use this as a planning grid:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Validator type</th>
+<th style="text-align: left;">What it catches</th>
+<th style="text-align: left;">What it misses</th>
+<th style="text-align: left;">Effort to implement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Type checker</td>
+<td style="text-align: left;">type mismatches, missing fields (typed
+surfaces)</td>
+<td style="text-align: left;">business logic, runtime behavior</td>
+<td style="text-align: left;">Low (greenfield), Medium (retrofit)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Formatter / linter</td>
+<td style="text-align: left;">invalid syntax, common bug patterns, style
+drift</td>
+<td style="text-align: left;">deep semantics</td>
+<td style="text-align: left;">Low</td>
+</tr>
+<tr>
+<td style="text-align: left;">Schema validator</td>
+<td style="text-align: left;">structural correctness of
+JSON/YAML/etc</td>
+<td style="text-align: left;">semantic meaning (“does this spec make
+sense?”)</td>
+<td style="text-align: left;">Low</td>
+</tr>
+<tr>
+<td style="text-align: left;">Immune System cases (unit)</td>
+<td style="text-align: left;">local logic errors (covered paths)</td>
+<td style="text-align: left;">uncovered paths, integration
+boundaries</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+<tr>
+<td style="text-align: left;">Immune System cases (integration)</td>
+<td style="text-align: left;">interface mismatches across
+components</td>
+<td style="text-align: left;">full production environment behavior</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;">Property-based tests</td>
+<td style="text-align: left;">edge cases via systematic input
+exploration</td>
+<td style="text-align: left;">wrong or incomplete properties /
+generators</td>
+<td style="text-align: left;">Medium–High</td>
+</tr>
+<tr>
+<td style="text-align: left;">Security scanners</td>
+<td style="text-align: left;">known vulnerability patterns</td>
+<td style="text-align: left;">novel vulnerabilities, business abuse
+cases</td>
+<td style="text-align: left;">Low–Medium</td>
+</tr>
+<tr>
+<td style="text-align: left;">Policy / scope checks</td>
+<td style="text-align: left;">protected paths, budgets, governance
+invariants</td>
+<td style="text-align: left;">correctness of the policy itself</td>
+<td style="text-align: left;">Low–Medium</td>
+</tr>
+<tr>
+<td style="text-align: left;">Semantic invariants</td>
+<td style="text-align: left;">the rules that are “true for <em>this</em>
+system”</td>
+<td style="text-align: left;">whatever you didn’t encode</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+</tbody>
+</table>
+<p>The table has a bias: it’s easier to add a new Validator than it is
+to decide what “good” should mean. That decision is the craft.</p>
 <h4 id="semantic-validators-a-few-non-trivial-cases">Semantic
 Validators: A few non-trivial cases</h4>
 <p>Semantic Validators are where you encode “this would pass schema +
@@ -152,6 +242,47 @@ merge.</li>
 <pre class="text"><code>[validator] semantic_invariant_fail
   code=missing_docs_for_public_api
   detail=&quot;public surface changed but docs did not&quot;</code></pre>
+<h3 id="sufficiency-criteria-what-good-enough-looks-like">Sufficiency
+criteria (what “good enough” looks like)</h3>
+<p>There is no universal threshold, but teams do converge on practical
+bars. Treat these as heuristics you can ratchet over time:</p>
+<ul>
+<li><strong>Minimum bar (local loop):</strong> formatting + lint + basic
+types (if you have them) + one fast Immune System case gate that catches
+the common failure mode for your surface.</li>
+<li><strong>Professional bar (shared repo):</strong> above + Immune
+System cases for invariants + a scope validator (paths + allowed edit
+regions) + at least one security check (secrets scan and/or static
+analysis).</li>
+<li><strong>Production-critical bar (blast radius is real):</strong>
+above + integration tests for key flows + property-based tests for the
+core parser/serializer or money/auth logic + explicit policy gates
+(budgets, protected paths) + human approval on governance surfaces.</li>
+</ul>
+<p>Notice what’s missing: “100% coverage.” The goal is not to prove
+perfection. The goal is to make drift expensive and failures
+legible.</p>
+<h3 id="who-writes-the-physics-authorship-without-circularity">Who
+writes the Physics? (authorship without circularity)</h3>
+<p>If Validators are the laws, you don’t want a system that can quietly
+rewrite its own laws to make the gates green.</p>
+<p>A practical middle ground:</p>
+<ul>
+<li><strong>Core invariants are human-authored and protected.</strong>
+The Validator that enforces “don’t touch protected paths” should not be
+solely written by the agent it constrains.</li>
+<li><strong>Derived validators can be AI-assisted.</strong> Let the
+Effector propose a new Immune System case, a schema update, or a
+semantic invariant — but require it to pass existing Physics, and
+require human review when it changes governance surfaces.</li>
+<li><strong>Validators must be testable artifacts.</strong> A Validator
+is only trustworthy when you can show a case where it fails and a case
+where it passes. Treat “add a validator” as a normal change that itself
+goes through gates.</li>
+</ul>
+<p>Chapter 10 is where we make this enforceable: protected paths,
+CODEOWNERS, and a userspace boundary so the loop cannot edit its own
+graders.</p>
 <h3
 id="validation-vs.-evaluation-keep-the-gate-deterministic">Validation
 vs. evaluation (keep the gate deterministic)</h3>
@@ -170,6 +301,35 @@ Physics.</p>
 <p>Rule: if you can’t make it deterministic, it isn’t a Validator. Treat
 it as a Sensor and keep it downstream of human review or hard
 policy.</p>
+<h3
+id="property-based-tests-soft-physics-and-how-to-design-properties">Property-based
+tests (Soft Physics) and how to design properties</h3>
+<p>Property-based tests are powerful because they explore the input
+space systematically. The trap is that “the function does the right
+thing” is not a property. You need a property you can <em>assert
+deterministically</em>.</p>
+<p>Property design patterns that actually work:</p>
+<ol type="1">
+<li><strong>Round-trip:</strong> <code>decode(encode(x)) == x</code>
+(serializers, codecs, parsers).</li>
+<li><strong>Idempotence:</strong> <code>f(f(x)) == f(x)</code>
+(normalizers, formatters, canonicalizers).</li>
+<li><strong>Invariants:</strong> output stays inside a valid range (no
+negatives, monotonicity, sortedness).</li>
+<li><strong>Reference comparison:</strong> new implementation matches a
+known-correct reference (even if slower).</li>
+</ol>
+<p>Example (illustrative, Python + Hypothesis):</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> hypothesis <span class="im">import</span> given, strategies <span class="im">as</span> st</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">@given</span>(st.text(), st.text())</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_concatenate_preserves_length(a, b):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> concatenate(a, b)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(result) <span class="op">==</span> <span class="bu">len</span>(a) <span class="op">+</span> <span class="bu">len</span>(b)</span></code></pre></div>
+<p>The point isn’t the toy domain. It’s the move: choose a property that
+is cheap to evaluate, hard to game, and directly tied to the bug class
+you care about (off-by-one, boundary handling, unexpected nulls).</p>
 <h3 id="portability-map-same-physics-different-tooling">Portability Map:
 Same Physics, Different Tooling</h3>
 <p>The pattern is stack-agnostic. The tool names change; the
@@ -217,6 +377,11 @@ surfaces have hard physics too. For Terraform, a deterministic validator
 suite might include <code>terraform validate</code>,
 <code>tflint</code>, and a policy scanner; see Appendix C for a
 ready-to-copy recipe.</p>
+<p>For security tooling, the exact choices vary, but common examples
+include Bandit (Python), Semgrep (multi-language), and dependency
+vulnerability scanners (Snyk, OSV-Scanner, or platform-native
+equivalents). The tool doesn’t matter as much as the contract:
+deterministic <code>PASS/FAIL</code> on a bounded surface.</p>
 <h2 id="a-validator-that-catches-a-real-bug">A Validator That Catches a
 Real Bug</h2>
 <p>Let’s anchor this with a concrete example. Imagine you’re using an
@@ -230,14 +395,14 @@ structure.</p>
 <p>First, define a JSON Schema for the smallest invariant you care
 about. For example: “<code>reviewer_suggestions</code> must be an array
 of strings.”</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;reviewer_suggestions&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;reviewer_suggestions&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span> <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">}</span> <span class="fu">}</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;reviewer_suggestions&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;reviewer_suggestions&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span> <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span> <span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p>Now if the model outputs
 <code>"reviewer_suggestions": "charlie_qa"</code>, schema validation
 deterministically fails with a type error at
@@ -388,7 +553,7 @@ vibe.</p>
 <h4 id="physics-is-law">2) Physics is Law</h4>
 <p>If a change fails Physics, it does not exist. Physics is binary and
 fast: schemas, linters, tests, and architectural constraints.</p>
-<p>If you allow “just this once” exceptions, autonomy will scale the
+<p>If you allow “just this once” exceptions, autonomy can scale the
 exception faster than you can review it.</p>
 <h4 id="recursion">3) Recursion</h4>
 <p>The same gates apply to human and automated changes. Scheduled
@@ -474,7 +639,7 @@ validator, or making the selection logic explicit in
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

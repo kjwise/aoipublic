@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part V Reflect Limit Cases</div>
-<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-13-the-hofstadter-bridge">Chapter 13 – The Hofstadter
 Bridge</h1>
 <blockquote>
@@ -222,7 +222,8 @@ specs, and build the meta-infrastructure to keep them aligned.</p>
 <p>That objection assumed humans would write and maintain most of the
 scaffolding by hand. But the same SDaC loops you’re building can
 generate and maintain scaffolding too: schemas, extractors, validators,
-inventories, and policy rules. The setup cost is dropping.</p>
+inventories, and policy rules. That can make the setup cost lower than
+it used to be.</p>
 <p>This does not make the Bridge free. It shifts the bottleneck:</p>
 <ul>
 <li>from “writing every artifact manually” to “choosing the right
@@ -251,7 +252,86 @@ non-negotiable.</li>
 <p>Full crossing (where most documentation is executable and enforced)
 remains aspirational for many systems. But the direction is consistent:
 the more autonomy you deploy, the more of your intent needs to become
-enforceable, or your loop will optimize against fiction.</p>
+enforceable, or your loop can optimize against fiction.</p>
+<h2
+id="self-reference-safety-what-can-change-and-under-what-approval">Self-Reference
+Safety (what can change, and under what approval?)</h2>
+<p>Crossing the Bridge creates a new temptation: tune the gates to
+reduce pain.</p>
+<p>If a system can rewrite its own guards, it can learn to make the
+guards easier instead of making the code better. That’s not malice. It’s
+optimization. Chapter 11’s ratchets exist because this failure mode is
+predictable.</p>
+<p>A practical self-modification hierarchy:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Level</th>
+<th>Surface</th>
+<th>Default rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Application code (the feature Terrain)</td>
+<td>Modifiable under normal Physics gates</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Tests and Immune System cases</td>
+<td>Modifiable, but guarded by coverage/ratchets and review budgets</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Validator parameters (thresholds, budgets)</td>
+<td>Modifiable only within allowlisted ranges, recorded in the
+Ledger</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Validator implementations (the graders)</td>
+<td>Human approval required; treat as protected paths</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Governance policies (what blocks merge)</td>
+<td>Human approval required; exceptions must be explicit and
+time-bounded</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Immutable infrastructure (branch rules, protected surfaces)</td>
+<td>Off-limits to the Effector</td>
+</tr>
+</tbody>
+</table>
+<p>The Bridge does not require “full self-modification.” The safe
+version is narrower: allow the system to propose improvements to Level
+1–2 surfaces, and treat Level 3–5 as governance surfaces with explicit
+human ownership.</p>
+<p>Safety mechanisms for self-reference are the same mechanisms you use
+everywhere else, just pointed inward:</p>
+<ul>
+<li><strong>Rate limits:</strong> cap how many self-modifying proposals
+can be created per day.</li>
+<li><strong>Oscillation detection:</strong> if the same surface is being
+edited repeatedly, freeze and escalate.</li>
+<li><strong>Band limits:</strong> thresholds and budgets can move only
+inside a bounded interval.</li>
+<li><strong>Kill switch:</strong> one deterministic control that stops
+autonomous merges immediately (Chapter 12).</li>
+<li><strong>Reversibility:</strong> keep a history of governance state
+so you can rollback to a known-good configuration.</li>
+</ul>
+<p>Bootstrap is human: start with conservative governance, observe real
+failure modes, then allow narrow parameter tuning only after you have
+evidence and an audit trail.</p>
 <h2 id="what-sdac-does-not-require">What SDaC Does Not Require</h2>
 <p>An easy misreading is that SDaC only works when you can specify the
 outcome up front.</p>
@@ -282,7 +362,7 @@ validated iteration: the loop produces candidates, Physics rejects
 unsafe moves, and survivors become substrate for the next iteration.</p>
 <p>The real boundary isn’t known vs unknown problems. It’s whether you
 can define what “safe attempt” means. If you can, SDaC applies. If you
-can’t, you’re operating without guardrails, and the loop will eventually
+can’t, you’re operating without guardrails, and the loop can eventually
 pay you back in drift.</p>
 <h2 id="optional-epilogue-the-mirror-thought-experiment">Optional
 Epilogue: The Mirror Thought Experiment</h2>
@@ -368,7 +448,7 @@ Bridge.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

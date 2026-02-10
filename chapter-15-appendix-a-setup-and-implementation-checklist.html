@@ -74,6 +74,24 @@ return machine-readable failures.</li>
 <ul>
 <li>A Markdown renderer to produce PDFs.</li>
 </ul>
+<h2 id="runnability-legend-how-to-read-code-blocks">Runnability legend
+(how to read code blocks)</h2>
+<p>This book mixes three kinds of snippets:</p>
+<ol type="1">
+<li><strong>Runnable (companion repo):</strong> commands or file paths
+tied to <code>github.com/kjwise/aoi_code</code>. If you
+<code>git clone</code> that repo, you can run these examples as
+written.</li>
+<li><strong>Runnable (adapt):</strong> realistic configs and scripts
+that will run once you substitute your own paths, tool names, and CI
+environment. They are “copy, then specialize.”</li>
+<li><strong>Illustrative:</strong> pseudocode, sketches, and schemas
+that explain shape and contracts. They are not meant to run without
+surrounding implementation.</li>
+</ol>
+<p>When provenance matters, the text calls out the source (companion
+repo, this repo, or “illustrative”). When it doesn’t, treat the snippet
+as a pattern template.</p>
 <h2 id="quick-sanity-check-for-any-repo">Quick sanity check (for any
 repo)</h2>
 <p>Before you build autonomy, verify you can deterministically reproduce
@@ -84,7 +102,7 @@ reality:</p>
 pass/fail.</li>
 <li>Generate a diff and revert it cleanly.</li>
 </ol>
-<p>If you cannot do those three things, your SDaC loop will be
+<p>If you cannot do those three things, your SDaC loop is likely to be
 “creative,” not reliable.</p>
 <h2 id="git-hooks-optional-recommended">Git hooks (optional,
 recommended)</h2>
@@ -375,7 +393,7 @@ human review for it.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

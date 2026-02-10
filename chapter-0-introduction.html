@@ -140,8 +140,8 @@ effectors, deterministic validators, and loops that converge.</p>
 product.</p>
 <p>Not the code. Not the features. Not the output. The <em>loop</em>—the
 process that produces output—becomes the thing you design, validate, and
-improve. If your loop is sound, the outputs will follow. If your loop is
-broken, no amount of effort saves you.</p>
+improve. If your loop is sound, the outputs tend to follow. If your loop
+is broken, no amount of effort saves you.</p>
 <p>If the process is validated, then <span
 class="math inline"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span>
 is trustworthy.</p>
@@ -171,6 +171,8 @@ one Friday—the kind of Friday that reveals what’s missing.</p>
 <p>This is what vibe coding feels like: high velocity, low friction, and
 a widening gap between what shipped and what you can confidently
 explain.</p>
+<p>Vibe coding isn’t irrational—it produces rapid prototypes and demos.
+The problem emerges on Day 30, not Day 1.</p>
 <p>CI compiled the service. It didn’t validate the API contract your
 mobile client ships against.</p>
 <p>Saturday morning, your mobile app is down.</p>
@@ -219,33 +221,21 @@ matches the service behavior (Terrain). The validator rejects type drift
 before it escapes into production.</p>
 <p>The gate catches it in seconds, before review. Nobody’s weekend is
 ruined. That’s the difference.</p>
-<p>SDaC can make that outcome routine. You treat development work as an
-executable, versioned system: bounded context in, diffs out,
-deterministic gates decide what can merge, and the Ledger records
-why.</p>
-<p>The goal is not a smarter assistant. The goal is a safer process.</p>
-<p>SDaC shifts your work from typing syntax to shaping changes: scoping
-the work, defining constraints, and reviewing small diffs that are
-already bounded by deterministic checks (Validators).</p>
+<p>The goal is not a smarter assistant. The goal is a safer process:
+bounded context in, diffs out, deterministic gates decide what can
+merge, and the Ledger records why.</p>
 <blockquote>
 <p><strong>Architect of Intent (role):</strong> This is <strong>Intent
 Architecture</strong>: you design the rules and receipts that make
-autonomy safe. (1) What we want (missions, specs). (2) What must be true
-before we ship (validators, budgets, stop conditions). (3) What we
-record (diffs + traces that make every change auditable).</p>
+autonomy safe — missions and specs, Validators and budgets, and a Ledger
+that makes changes auditable.</p>
 </blockquote>
-<p>This book will equip you to build a verifiable loop, understand why
-it works, then scale and govern it so it survives production.</p>
 <hr />
 <h2 id="who-this-book-is-for">Who this book is for</h2>
-<p>This book is written for senior engineers and platform architects who
-want mechanisms, not hype: deterministic context, hard gates, and
-auditable loops that survive production. It is also accessible to
-mid-level engineers who are comfortable reading diffs and running
-commands—and want the same rigor.</p>
-<p>If you want to build immediately, start with Part I. It gives you a
-working loop first, then we earn the theory by explaining why it
-works.</p>
+<p>This book is for engineers building or governing AI-assisted
+development who want mechanisms, not hype. If you want to build
+immediately, start with Part I: it gives you a working loop first, then
+we earn the theory by explaining why it works.</p>
 <h2 id="what-sdac-is-quickstart">What SDaC is (Quickstart)</h2>
 <p>This book is not about using AI inside CI. It’s about turning the
 software development lifecycle (SDLC) itself into a compiled artifact —
@@ -409,7 +399,7 @@ class="uri">https://www.linkedin.com/in/jhaukur/</a></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

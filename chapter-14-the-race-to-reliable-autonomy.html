@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part V Reflect Limit Cases</div>
-<div class="chapter-meta"><span class="read-time">9 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-14-the-race-to-reliable-autonomy">Chapter 14 – The Race
 to Reliable Autonomy</h1>
 <blockquote>
@@ -53,10 +53,60 @@ to Reliable Autonomy</h1>
 diffs.</p>
 <p>But mechanisms exist in a context, and the context is changing faster
 than many teams realize.</p>
-<p>This chapter is about why I think the patterns in this book could
-shift from “best practice” to baseline. This isn’t a zero-sum story.
-It’s that the floor is moving: faster iteration amplifies either drift
-or discipline.</p>
+<p>This chapter is about why I think the patterns in this book matter
+more as iteration speeds up. This isn’t a zero-sum story. It’s that the
+floor is moving: faster iteration amplifies either drift or
+discipline.</p>
+<p>Before we talk about the race, define the finish line. By
+<em>reliable autonomy</em> I mean: systems that can do real work without
+constant human babysitting, while staying inside explicit constraints
+and leaving evidence behind.</p>
+<p>One way to make that concrete is to name autonomy levels:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Level</th>
+<th>What the system does</th>
+<th>What humans do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>AI assists a developer (snippets, reviews)</td>
+<td>Humans implement and merge</td>
+</tr>
+<tr>
+<td>1</td>
+<td>AI proposes diffs</td>
+<td>Humans approve each change</td>
+</tr>
+<tr>
+<td>2</td>
+<td>AI merges within tight boundaries</td>
+<td>Humans review batches and exceptions</td>
+</tr>
+<tr>
+<td>3</td>
+<td>AI runs background maintenance loops</td>
+<td>Humans tune policies and handle escalations</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AI handles exceptions autonomously</td>
+<td>Humans audit (aspirational)</td>
+</tr>
+</tbody>
+</table>
+<p>And to define “reliable” operationally: rollbacks are rare, incidents
+are exceptional, and every change is explainable after the fact because
+the system kept the evidence (diffs, Validator output, and
+provenance).</p>
 <hr />
 <h2 id="the-velocity-trap">The Velocity Trap</h2>
 <p>AI makes many teams faster. That part is easy to see.</p>
@@ -85,7 +135,7 @@ toward a wall.</strong></p>
 <h2 id="the-divergence">The Divergence</h2>
 <p>Two paths are emerging. You can see them in how teams talk about
 AI-assisted development.</p>
-<pre class="mermaid"><code>flowchart TB
+<pre class="mermaid"><code>flowchart TD
   subgraph PathA[&quot;Path A: Vibe Coding&quot;]
     A1[Chat request] --&gt; A2[Code] --&gt; A3[Merge]
     A3 -.-&gt;|&quot;drift accumulates&quot;| A4[Wall]
@@ -135,6 +185,59 @@ Immune System (Chapter 3) is comprehensive, and incidents get less
 frequent because the gates catch drift before it ships.</p>
 <p><strong>I expect the divergence to widen. The question is which path
 you’re on.</strong></p>
+<h3 id="sdac-among-other-approaches">SDaC among other approaches</h3>
+<p>The two-path framing is a simplification. There are other serious
+approaches to reliability, and SDaC is compatible with most of them.
+SDaC is less a competing religion and more a wrapper: a way to force
+whichever approach you choose to produce evidence and pass gates.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Strength</th>
+<th>Weakness</th>
+<th>Relationship to SDaC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vibe coding</td>
+<td>Speed, demos</td>
+<td>Drift, low auditability</td>
+<td>Useful for prototypes; unsafe as a default</td>
+</tr>
+<tr>
+<td>Pair programming (human + AI)</td>
+<td>Judgment in the loop</td>
+<td>Bottlenecked by reviewers</td>
+<td>SDaC reduces review load by moving checks to Physics</td>
+</tr>
+<tr>
+<td>Formal methods (TLA+, Coq)</td>
+<td>Strong guarantees</td>
+<td>Skill and scope costs</td>
+<td>SDaC can treat proofs/specs as high-grade Validators</td>
+</tr>
+<tr>
+<td>Reasoning models and chains</td>
+<td>Better attempts per token</td>
+<td>Not validation</td>
+<td>Better Effectors; still need Judges</td>
+</tr>
+<tr>
+<td>Multi-agent systems</td>
+<td>Decomposition and coverage</td>
+<td>More moving parts</td>
+<td>Implementation detail; Physics stays the contract</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="the-new-table-stakes">The New Table Stakes</h2>
 <p>Every generation of software engineering has its table stakes: the
@@ -149,8 +252,7 @@ add validators when we have time.” “Mission Objects are overkill for our
 stage.” “We’ll formalize the loop after we find product-market fit.”</p>
 <p>This is the same logic that said “we’ll add tests later” in 2008.
 Later never comes. The debt compounds. The wall approaches.</p>
-<p>If these dynamics continue, within a few years the teams that survive
-may be the teams that treat SDaC as foundational:</p>
+<p>A practical response is to treat SDaC as foundational:</p>
 <ul>
 <li>Every AI-assisted change goes through a Deterministic Sandwich
 (Chapter 2).</li>
@@ -193,13 +295,13 @@ auditable).</li>
 <li>Use the same workflow to extend the suite as you add surfaces.</li>
 <li>Each extension is faster because the harness already exists.</li>
 </ol>
-<p>The setup cost is no longer “months of senior engineer time.” It’s “a
-few days of focused work, with AI assistance, building infrastructure
-that compounds.”</p>
+<p>For bounded surfaces, the setup cost can be closer to “a few days of
+focused work, with AI assistance, building infrastructure that
+compounds” than “months of senior engineer time.”</p>
 <p>Paying this cost now builds a moat. Deferring it usually means paying
 later: incidents, rewrites, and engineers tired of firefighting.</p>
-<p><strong>The economics have changed. The objection is weaker than it
-used to be.</strong></p>
+<p><strong>The economics are changing. The objection can be weaker than
+it used to be.</strong></p>
 <hr />
 <h2 id="the-moat">The Moat</h2>
 <p>In a world where AI can generate code, code alone is not a moat.</p>
@@ -262,7 +364,7 @@ constrain it.</em></p>
 </blockquote>
 <p>This is not a prediction about technology. It’s a prediction about
 selection pressure. The environment is changing. Teams that can prove
-what they ship will spend less time rebuilding trust, and more time
+what they ship tend to spend less time rebuilding trust, and more time
 compounding it.</p>
 <blockquote>
 <p><em>The loop is the moat.</em></p>
@@ -277,8 +379,8 @@ it did so.</p>
 an hour. The appendices gave you templates, validators, and recipes.</p>
 <p>The only question left is whether you act.</p>
 <hr />
-<p>The bar is rising. The divergence is happening. The clock is faster
-now.</p>
+<p>The bar is rising. The divergence is visible. The cycle time is
+shorter now.</p>
 <p><strong>Ship verifiable state. Build the loop. Compound
 trust.</strong></p>
 <p>We don’t trust the model.</p>
@@ -334,7 +436,7 @@ compound effect starts small.</li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

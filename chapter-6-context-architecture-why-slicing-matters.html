@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">11 min read</span></div>
+<div class="chapter-meta"><span class="read-time">14 min read</span></div>
 <h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
 Context Architecture (Why Slicing Matters)</h1>
 <p>You’ve built your first SDaC loop in Part I. You’ve seen it reliably
@@ -49,13 +49,16 @@ generate, judge, and refine code. Now, in Part II, we drill into
 <em>why</em> it works, starting with the most critical ingredient:
 context.</p>
 <p>If you’ve spent any time working with large language models (LLMs),
-you’ve encountered the “context window” problem. It’s the maximum amount
-of text an LLM can process at once. It’s tempting to treat this like a
-bucket: dump everything relevant (and often irrelevant) into it and hope
-the model figures it out. This approach might work for quick demos, but
-it’s a recipe for non-determinism, Stochastic Drift, and unreliable
-systems in production. It’s why “better Mission Objects” alone stops
-scaling.</p>
+you’ve encountered the context window: the maximum amount of text a
+model can process in one call. Context windows range from thousands to
+hundreds of thousands of tokens and keep expanding, but the patterns in
+this chapter don’t depend on a specific number.</p>
+<p>The limit itself is Physics. What you choose to put inside the window
+is architecture. It’s tempting to treat the window like a bucket: dump
+everything relevant (and often irrelevant) into it and hope the model
+figures it out. This approach might work for quick demos, but it’s a
+recipe for non-determinism, Stochastic Drift, and unreliable systems in
+production. It’s why “better Mission Objects” alone stops scaling.</p>
 <p>Even when a model accepts enormous contexts, attention is not
 uniform. A huge context window is not a huge attention budget:
 information buried in the middle of long contexts is easy to underuse
@@ -240,6 +243,117 @@ tools, or even simple <code>grep</code> commands for symbol
 resolution.</p></li>
 </ul></li>
 </ol>
+<h3 id="context-priority-stack-what-to-include-first">Context priority
+stack (what to include first)</h3>
+<p>When you have a fixed context budget, prioritization matters more
+than cleverness. A practical ordering:</p>
+<ol type="1">
+<li><strong>Authority:</strong> system instructions + Mission Object
+(what is allowed, what “done” means).</li>
+<li><strong>Latest deterministic findings:</strong> the last Judge
+output (structured failures, file/line, error codes).</li>
+<li><strong>The anchor surface:</strong> the exact file/region/symbol
+you’re changing.</li>
+<li><strong>Interfaces and contracts:</strong> signatures, schemas,
+route tables, inventories (skeleton-first).</li>
+<li><strong>Immune System expectations:</strong> the one failing case
+(or the one contract-compat check) and the assertion surface that
+defines “correct.”</li>
+<li><strong>Direct dependencies:</strong> one-hop imports/calls/types
+needed to make the anchor executable.</li>
+<li><strong>Everything else:</strong> only if you still have budget, and
+only if you can justify the edge.</li>
+</ol>
+<p>If you’re forced to choose between “more code” and “the contract,”
+choose the contract. The fastest way to create drift is to let the
+Effector guess what the contract was supposed to be.</p>
+<h3 id="chunking-patterns-when-the-slice-still-doesnt-fit">Chunking
+patterns (when the slice still doesn’t fit)</h3>
+<p>Sometimes the minimal neighborhood still exceeds the budget (big
+files, big contracts, or a high fan-out module). When that happens,
+chunking is not “split the text.” It’s: <em>choose a boundary that
+preserves meaning, then keep Physics in the loop.</em></p>
+<p>Common chunking patterns and trade-offs:</p>
+<ol type="1">
+<li><strong>File-level chunking:</strong> each file is a chunk. Simple,
+but weak on cross-file reasoning unless you also include extracted
+interfaces.</li>
+<li><strong>Dependency-aware chunking:</strong> anchor file + one-hop
+dependencies as separate chunks. Strong default for code, because
+boundaries follow imports/calls.</li>
+<li><strong>Task-focused chunking:</strong> split by role, not by size:
+contract chunk, implementation chunk, failing-case chunk. This often
+outperforms naive file splits.</li>
+<li><strong>Sliding-window chunking (large files):</strong> split one
+file into overlapping regions, but treat overlap as evidence, not
+permission to edit everywhere. Always pair this with allowed edit
+regions.</li>
+</ol>
+<p>Recombining outputs should also be deterministic:</p>
+<ul>
+<li>Prefer <strong>diff-shaped outputs</strong> against a working tree,
+not free-form rewrites.</li>
+<li>Validate <strong>each candidate</strong> locally (parse/scope first)
+before you attempt to merge it with other candidates.</li>
+<li>If chunk A implies a change in chunk B, don’t “guess the other
+chunk.” Expand the slice and run another iteration with the missing
+contract/code present.</li>
+</ul>
+<p>Chunking is a sign your slice is doing real work. It is not a
+failure. It’s a reminder that context is a resource you budget, not an
+ocean you swim in.</p>
+<h3 id="retrieval-rag-as-a-slice-hint-not-a-decision">Retrieval (RAG) as
+a slice hint, not a decision</h3>
+<p>Retrieval-augmented generation can help when you don’t know where the
+relevant context lives. But retrieval is not the same thing as slicing.
+Retrieval proposes candidates; slicing enforces boundaries.</p>
+<p>A pragmatic approach in codebases is hybrid:</p>
+<ul>
+<li><strong>Lexical retrieval:</strong> symbol/name search (fast, high
+precision when you have good anchors).</li>
+<li><strong>Structural retrieval:</strong> import graphs, call graphs,
+test-to-code mappings (deterministic, semantics-aware).</li>
+<li><strong>Embedding retrieval:</strong> useful for prose and “what
+file talks about X” questions, less reliable as a sole signal for code
+edits.</li>
+</ul>
+<p>Guardrails:</p>
+<ul>
+<li>Treat retrieved text as <strong>evidence with provenance</strong>
+(file + line), not authority.</li>
+<li>Run deterministic filters after retrieval: scope allowlists,
+dependency rules, and node/token budgets.</li>
+<li>Expect retrieval errors (false positives/negatives). If the loop is
+thrashing, treat it as a slice problem before you blame the model.</li>
+</ul>
+<p>If you don’t have retrieval infrastructure, don’t block on it. You
+can get far with deterministic anchors (failing cases, stack traces,
+schemas) and cheap lexical search.</p>
+<h3 id="summarization-is-lossy-compression-use-it-last">Summarization is
+lossy compression (use it last)</h3>
+<p>Summarization can compress context, but it introduces new failure
+modes: it can drop constraints, blur interfaces, or smuggle in invented
+structure.</p>
+<p>Rules of thumb:</p>
+<ul>
+<li>Never summarize the Mission Object or the latest Judge
+findings.</li>
+<li>Prefer deterministic extraction (skeleton-first) over stochastic
+summarization for contracts and interfaces.</li>
+<li>If you must summarize, do it on <strong>low-authority
+evidence</strong> (background docs) and carry provenance so a human can
+verify.</li>
+<li>Treat summaries as a cache you can invalidate: when a summary
+becomes suspicious, re-extract from the Terrain.</li>
+</ul>
+<h3 id="token-budgeting-leave-headroom">Token budgeting: leave
+headroom</h3>
+<p>Token counting is approximate. Different models use different
+tokenizers, and your request needs space for the model’s response.</p>
+<p>Practical rule: reserve ~20% headroom. If your maximum context is
+<span class="math inline"><em>B</em></span> tokens, aim to use at most
+~<span class="math inline">0.8<em>B</em></span> for inputs, then let the
+output and tooling fit in the rest.</p>
 <h3
 id="repo-shaped-pseudo-example-fixing-contract-drift-with-a-bounded-slice">Repo-shaped
 pseudo-example: Fixing contract drift with a bounded slice</h3>
@@ -499,7 +613,7 @@ strays from the core task.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

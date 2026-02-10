@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">10 min read</span></div>
+<div class="chapter-meta"><span class="read-time">12 min read</span></div>
 <h1 id="chapter-10-immutable-infrastructure-the-guardrails">Chapter 10 –
 Immutable Infrastructure (The Guardrails)</h1>
 <p>We built a loop that lets your system write its own code. We
@@ -135,6 +135,9 @@ Your Engineering Constitution</h2>
 within your repository that represent the “constitution” of your
 engineering practices. Changes to these paths are subject to the highest
 scrutiny.</p>
+<p>If the Map is your intent and the Terrain is your code, immutable
+infrastructure is the bedrock: you build on it, but you don’t let the
+loop rewrite it.</p>
 <h3
 id="directory-topology-as-governance-a-self-referential-example">Directory
 topology as governance (a self-referential example)</h3>
@@ -150,6 +153,117 @@ immutable infrastructure: changes to <code>core/</code> and
 <code>tools/</code> change the machine that grades work, so they deserve
 stricter review than changes to a manuscript file under
 <code>dist/</code>.</p>
+<h3 id="what-should-be-immutable-a-decision-framework">What should be
+immutable? (a decision framework)</h3>
+<p>There’s no canonical list, but teams tend to draw the boundary along
+one principle:</p>
+<blockquote>
+<p>If a surface can change the loop’s privileges, widen its blast
+radius, or weaken its graders, it belongs behind the immutable
+boundary.</p>
+</blockquote>
+<p>Use a simple rubric:</p>
+<div class="line-block">Surface | Mutable by the Effector? | Rationale |
+| :– | :– | :– | | Application code | Yes | This is the work. It’s what
+you’re automating. | | Unit tests | Yes | Tests are part of the
+artifact; they travel with code changes.<br />
+| Integration tests | Limited | Higher cost and higher flake risk; often
+need human review when touching real systems. | | CI/CD workflows | No |
+They control deployment safety and can silently weaken gates. | |
+Production configs | No | Direct production impact; small mistakes can
+create large outages. | | Security policies / secrets surfaces | No |
+Trust boundary; protect from both drift and exfiltration. | | Database
+migrations | Human review | Data integrity risk; allow assistance,
+require approval and audits. | | The immutable manifest itself | No | If
+the Effector can edit the boundary, it can remove the boundary. |</div>
+<h3 id="immutability-enforcement-defense-in-depth">Immutability
+enforcement (defense in depth)</h3>
+<p>Immutability is not a single mechanism. It’s a stack of independent
+controls that all say “no” in different ways.</p>
+<p>At minimum, you want:</p>
+<ol type="1">
+<li><strong>Userspace boundary (OS permissions):</strong> the loop runs
+as a dedicated user that simply cannot write protected paths.</li>
+<li><strong>Runtime scope guard:</strong> the runner refuses to write
+outside an allowlist, even in its working copy.</li>
+<li><strong>CI diff gate:</strong> CI rejects any change that touches
+immutable paths, even if the runner was misconfigured.</li>
+</ol>
+<p>Then you layer in VCS governance (CODEOWNERS + branch protection) so
+changes to the boundary itself require humans.</p>
+<p>Immutability here means “not modifiable by the Effector.” Humans can
+still change these paths through normal review processes. The point is
+that autonomy cannot silently weaken its own graders.</p>
+<h4 id="layer-0-userspace-boundary-make-it-physically-unwritable">Layer
+0: userspace boundary (make it physically unwritable)</h4>
+<p>This is the missing piece in many “protected paths” stories: if the
+loop runs with the same OS privileges as a human developer, then
+“immutable” is a convention, not a property.</p>
+<p>On Unix-like systems, the simplest invariant is: the process cannot
+open the file for write. Run your loop as a dedicated user (for example
+<code>sdac-bot</code>) and use file access bits / ACLs so protected
+directories are writable only by a human-owned group.</p>
+<p><strong>Example (illustrative):</strong></p>
+<pre class="text"><code># Protected surfaces owned by platform/security; agent user has read-only access.
+chgrp -R platform .github policies validators .sdac
+chmod -R g-w,o-w .github policies validators .sdac
+
+# Run the loop as a dedicated user with no sudo.
+# (Containerize if you want a cleaner boundary.)</code></pre>
+<p>In containers, you can mount protected paths read-only and only mount
+a writable workspace for allowlisted surfaces. The principle is the
+same: the Effector can propose changes, but it cannot mutate the
+bedrock.</p>
+<h4 id="layer-1-immutable-manifest-deterministic-gate">Layer 1:
+immutable manifest + deterministic gate</h4>
+<p>Keep the boundary in a manifest so the policy is versioned and
+inspectable. Then enforce it with a deterministic validator that fails
+on any touched immutable path.</p>
+<p><strong>Example manifest:</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .sdac/immutable.yaml</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">immutable</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;.github/workflows/**&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;policies/**&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;validators/**&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;config/production.yaml&quot;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;.sdac/immutable.yaml&quot;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">patterns</span><span class="kw">:</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;*.pem&quot;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;*.key&quot;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">reasons</span><span class="kw">:</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">&quot;.sdac/immutable.yaml&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Defines the immutable boundary&quot;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">&quot;config/production.yaml&quot;</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Production configuration&quot;</span></span></code></pre></div>
+<p><strong>Example gate (illustrative):</strong></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fnmatch</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>IMMUTABLE <span class="op">=</span> [</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.github/workflows/**&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;policies/**&quot;</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;validators/**&quot;</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;config/production.yaml&quot;</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.sdac/immutable.yaml&quot;</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_immutable(path: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">any</span>(fnmatch.fnmatch(path, pat) <span class="cf">for</span> pat <span class="kw">in</span> IMMUTABLE)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> validate_touched_paths(touched_paths: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    violations <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> touched_paths <span class="cf">if</span> is_immutable(p)]</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> violations:</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="ss">f&quot;Immutable path(s) modified: </span><span class="sc">{</span>violations<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<p>This gate belongs in CI, not in the agent. A <code>.gitignore</code>
+rule does not count as enforcement; it hides files, but it doesn’t
+prevent changes.</p>
+<h4 id="layer-2-immutable-doesnt-mean-trusted-input">Layer 2: immutable
+doesn’t mean “trusted input”</h4>
+<p>Even when a file is immutable, it can still contain
+instruction-shaped text. If you include immutable configs, runbooks, or
+tickets in context, treat them as evidence with provenance (Chapter 2),
+not as authority.</p>
 <h3 id="codeowners-defining-human-responsibility">CODEOWNERS: Defining
 Human Responsibility</h3>
 <p>The <code>CODEOWNERS</code> file, a common feature in Git-based
@@ -164,14 +278,15 @@ validation pipelines.</p>
 /tools/             @platform-engineering
 /validators/        @platform-engineering @security-team
 /policies/          @platform-engineering @security-team
+/.sdac/             @platform-engineering @security-team
 /.github/workflows/ @platform-engineering
 /CODEOWNERS         @platform-engineering</code></pre>
-<p>With this configuration, any pull request (PR) that touches your
-engine, Validators, policies, or CI workflow definitions will
-automatically require approval from the specified teams. Crucially,
-changes to the <code>CODEOWNERS</code> file itself are also protected,
-preventing an agent (or even a malicious human actor) from easily
-bypassing these rules.</p>
+<p>With this configuration, most modern Git platforms can automatically
+require approval from the specified teams when a pull request (PR)
+touches your engine, Validators, policies, or CI workflow definitions.
+Crucially, changes to the <code>CODEOWNERS</code> file itself are also
+protected, preventing an agent (or even a malicious human actor) from
+easily bypassing these rules.</p>
 <h3
 id="branch-protection-rules-enforcing-the-rules-of-engagement">Branch
 Protection Rules: Enforcing the Rules of Engagement</h3>
@@ -217,15 +332,15 @@ the Mission scope.</p></li>
 allowed paths.</p></li>
 </ul>
 <p><strong>Example (Mission scope):</strong></p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">write_allowlist</span><span class="kw">:</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;src/**&quot;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;tests/**&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">denylist</span><span class="kw">:</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;.github/**&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;policies/**&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;validators/**&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">write_allowlist</span><span class="kw">:</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;src/**&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;tests/**&quot;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">denylist</span><span class="kw">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;.github/**&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;policies/**&quot;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;validators/**&quot;</span></span></code></pre></div>
 <p>This is how you keep autonomy focused: the Mission defines the blast
 radius, and the system enforces it mechanically.</p>
 <h3 id="mission-gate-validation-without-the-agent">Mission Gate:
@@ -414,7 +529,7 @@ auditability and post-mortem requirements.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

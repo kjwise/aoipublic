@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part I Build It The Weekend Sprint</div>
-<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+<div class="chapter-meta"><span class="read-time">7 min read</span></div>
 <h1 id="chapter-1-the-minimum-viable-factory-your-first-loop">Chapter 1
 – The Minimum Viable Factory (Your First Loop)</h1>
 <p>Build a tiny loop: Terrain → Effector → Map → Validator.</p>
@@ -58,6 +58,8 @@ substrate:</p>
 <li>one <strong>Effector</strong> that proposes a patch</li>
 <li>one <strong>Validator</strong> that enforces alignment</li>
 </ul>
+<p>That Validator is our first example of <strong>Physics</strong>:
+deterministic constraints the Effector cannot argue with.</p>
 <p>In MVF v0, intent is implicit: it’s hard-coded into CLI flags and
 Make targets. You can think of that as a “Mission v0.” In Chapter 7, we
 promote it into a typed Mission Object you can diff, version, and
@@ -65,6 +67,27 @@ re-run.</p>
 <p>This first loop is deterministic on purpose. It lets you see the
 mechanics without keys, SDKs, or network calls. Later, you can swap in a
 stochastic Effector and keep everything else unchanged.</p>
+<h3 id="what-can-go-wrong-when-you-add-a-model">What can go wrong (when
+you add a model)</h3>
+<p>MVF v0 avoids model failure modes by design. The moment you replace
+the deterministic Effector with a stochastic one, a few “Day 2” issues
+appear:</p>
+<ul>
+<li><strong>Malformed output:</strong> wrong format (not a diff), wrong
+paths, or unparseable structure.</li>
+<li><strong>Scope creep:</strong> edits outside the allowed region or
+touching unrelated files.</li>
+<li><strong>Invented structure:</strong> interfaces, routes, or fields
+that never existed in the Terrain (a Map Contamination risk).</li>
+<li><strong>API failures:</strong> rate limits, timeouts, transient
+errors.</li>
+<li><strong>Non-convergence:</strong> repeated retries that never reach
+<code>pass</code> without circuit breakers.</li>
+</ul>
+<p>Chapters 2 and 5 show the core mitigations: strict output contracts +
+parsing, structured validator findings fed back into retries, and hard
+stop conditions. Appendix B is a quick diagnostic atlas when the loop
+misbehaves.</p>
 <h3 id="fast-path-recommended-run-the-companion-code-repo">Fast path
 (recommended): run the companion code repo</h3>
 <p>All runnable code for MVF v0 lives in the companion repo:
@@ -123,6 +146,9 @@ signatures from the Terrain (<code>product/src/</code>) and rewrites a
 bounded block under <code>## Public Interfaces</code> in the Map
 (<code>product/docs/architecture.md</code>). It emits a diff-first patch
 and can apply it.</p></li>
+<li><p>The bounded Map block is intentionally schema-like: a list of
+backticked signatures under one heading. If you change that surface, you
+change both the Effector’s rewrite and the Validator’s parse.</p></li>
 <li><p>The <strong>Validator</strong> re-extracts those signatures from
 the Terrain, parses the same bounded Map block, and returns
 <code>pass/fail</code> based on set equality.</p></li>
@@ -322,7 +348,7 @@ concrete diffs, and <code>pass/fail</code> gates.</p>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

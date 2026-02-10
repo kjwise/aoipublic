@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
 – The Stochastic Engine (Why You Need Physics)</h1>
 <p>Before we talk about drift, a quick recap from Part I:</p>
@@ -153,9 +153,11 @@ then samples one. Even if the “best” token has a 90% chance, there’s
 still a 10% tail. That tail is where regressions come from.</p>
 <p>Three implications matter in SDaC:</p>
 <ul>
-<li><p><strong>No guarantee of identical output</strong>: The same
-Mission Object, given to the same model, with the same temperature, can
-produce slightly different results across runs.</p></li>
+<li><p><strong>No guarantee of identical output</strong>: With sampling
+enabled, the same Mission Object can produce slightly different
+candidates across runs. Even at very low temperature (or temperature
+<code>0</code>), treat outputs as near-reproducible, not a
+contract.</p></li>
 <li><p><strong>Contextual sensitivity</strong>: Small changes in input
 or context can shift the distribution and change the output.</p></li>
 <li><p><strong>Non-local failure modes</strong>: A tiny variation can
@@ -164,6 +166,141 @@ execution path.</p></li>
 </ul>
 <p>This is why SDaC treats generation as a component, not a plan: you
 measure variance, constrain it, and gate it.</p>
+<h2
+id="operating-the-stochastic-engine-controls-budgets-tiering">Operating
+the Stochastic Engine (Controls, Budgets, Tiering)</h2>
+<p>If you’re going to wire an LLM into a real pipeline, you need
+operating discipline: controls, budgets, and a selection strategy.</p>
+<h3
+id="sampling-controls-temperature-is-a-dial-not-a-guarantee">Sampling
+controls (temperature is a dial, not a guarantee)</h3>
+<p>Sampling parameters shape variance.</p>
+<ul>
+<li>Lower temperature typically reduces drift (fewer weird
+variants).</li>
+<li>Higher temperature typically increases exploration (more diverse
+candidates).</li>
+</ul>
+<p>In many tasks, you want <strong>near-reproducibility</strong>, not
+“creativity.” That usually means a low temperature (often in the
+<code>0.1–0.2</code> range) and a tight output contract (diff-only,
+JSON-only, schema-first). Exact <code>0</code> can be useful, but it’s
+not a guarantee: distributed inference can still vary across calls, and
+some models degrade when you clamp too hard.</p>
+<p>The point is not to find the perfect temperature. The point is:
+<strong>assume variance exists, and design Physics that makes variance
+safe.</strong></p>
+<h3 id="cost-aware-generation-budgeted-retries">Cost-aware generation
+(budgeted retries)</h3>
+<p>Retries are not free. A loop that can retry can also burn tokens,
+time, and review throughput.</p>
+<p>Treat cost as a first-class budget, just like diff size or scope:</p>
+<ul>
+<li><strong>Max attempts:</strong> stop after <span
+class="math inline"><em>N</em></span> candidates.</li>
+<li><strong>Max spend:</strong> stop after a token/cost cap for this
+Mission.</li>
+<li><strong>Max wall-clock:</strong> stop after a time limit (especially
+in CI).</li>
+<li><strong>Max review load:</strong> cap how many agent PRs can exist
+concurrently.</li>
+</ul>
+<p>Chapter 5 is where we engineer circuit breakers in detail (including
+the economics of determinism). The key move here is simpler:
+<strong>make “stop” deterministic before you make “generate”
+powerful.</strong></p>
+<h3
+id="model-selection-rubric-pick-the-smallest-engine-that-converges">Model
+selection rubric (pick the smallest engine that converges)</h3>
+<p>Model selection is not “best model you can afford.” It’s “smallest
+model that converges under your Physics.”</p>
+<p>Use a simple rubric:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Task type</th>
+<th>Recommended model class</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mechanical edits under strict gates (formatting, renames,
+schema-shaped JSON)</td>
+<td>Fast / cheap</td>
+<td>Low semantic load; validators do most of the work</td>
+</tr>
+<tr>
+<td>Constrained refactors (multiple files, must satisfy tests + types +
+style)</td>
+<td>Flagship</td>
+<td>Needs to hold more constraints simultaneously</td>
+</tr>
+<tr>
+<td>High-branch-factor work (architecture changes, ambiguous
+requirements)</td>
+<td>Flagship + human</td>
+<td>The hard part is intent and slicing, not token prediction</td>
+</tr>
+<tr>
+<td>Background maintenance at scale (Map-Updaters, doc sync, evergreen
+chores)</td>
+<td>Owned inference behind a loop</td>
+<td>You can afford retries and frequency; availability becomes
+strategy</td>
+</tr>
+</tbody>
+</table>
+<p>How to evaluate fit for your repo: run the drift experiment (next
+section) across your candidate model tiers and compare <strong>failure
+rate</strong> and <strong>time-to-convergence</strong>, not vibes.</p>
+<h3 id="retry-strategy-feed-back-deterministic-failures">Retry strategy
+(feed back deterministic failures)</h3>
+<p>A retry loop should not be “try again.” It should be: “try again with
+the exact failure signal.”</p>
+<p>Illustrative shape:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>findings <span class="op">=</span> []</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> attempt <span class="kw">in</span> <span class="bu">range</span>(max_attempts):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> choose_model_tier(attempt)  <span class="co"># e.g., fast first, flagship on failure</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    request <span class="op">=</span> render_request(mission, <span class="bu">slice</span>, findings)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    candidate <span class="op">=</span> effector_call(model, request)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    report <span class="op">=</span> validate(candidate)  <span class="co"># schemas, lint, tests, scope, policy</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> report.passed:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> candidate</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    findings.append(report.findings)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    maybe_backoff(report, attempt)  <span class="co"># rate limits, transient errors</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">raise</span> NonConverged(<span class="st">&quot;Exceeded budget; escalate to human or split the mission&quot;</span>)</span></code></pre></div>
+<p>The loop converges when each retry is narrower than the last. If you
+keep seeing the same failure, treat it as a signal problem (bad slice,
+wrong contract, impossible constraint), not a “model problem.”</p>
+<h3
+id="instruction-channel-hardening-authority-vs.-evidence">Instruction-channel
+hardening (authority vs. evidence)</h3>
+<p>LLMs often follow instruction-shaped text even when it comes from
+untrusted sources (tickets, comments, logs, README snippets). If you
+don’t harden the instruction channel, you can build a perfect loop and
+still get a bypass (often called <code>prompt injection</code>).</p>
+<p>This is a <code>Prep</code>-layer problem:</p>
+<ul>
+<li>Compile authority from allowlisted templates (Mission Objects,
+policies).</li>
+<li>Carry untrusted text as tagged evidence with provenance (file, line,
+source).</li>
+<li>Enforce scope mechanically (write allowlists + diff gates), not
+rhetorically.</li>
+</ul>
+<p>Chapter 2 shows the attack shape and the defense; Chapter 12 shows
+how to scale it with policy validators.</p>
 <h2 id="internal-reasoning-does-not-replace-the-loop">Internal Reasoning
 Does Not Replace the Loop</h2>
 <p>Some model interfaces expose intermediate reasoning (often called
@@ -224,11 +361,11 @@ this experiment. It uses a <em>stochastic</em> effector
 (<code>stochastic_sync_public_interfaces.py</code>) that intentionally
 introduces variance in formatting, ordering, and content.</p>
 <p>Running it produces a summary like this:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make drift</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/measure_drift.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md <span class="at">--runs</span> 10</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">runs</span><span class="op">=</span>10 <span class="va">unique_diffs</span><span class="op">=</span>8 <span class="va">drift_coefficient</span><span class="op">=</span>0.800 <span class="va">failures</span><span class="op">=</span>0</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">example_unique_runs</span><span class="op">=</span>1, <span class="ex">2,</span> 3, 4, 5</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make drift</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/measure_drift.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md <span class="at">--runs</span> 10</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">runs</span><span class="op">=</span>10 <span class="va">unique_diffs</span><span class="op">=</span>8 <span class="va">drift_coefficient</span><span class="op">=</span>0.800 <span class="va">failures</span><span class="op">=</span>0</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">example_unique_runs</span><span class="op">=</span>1, <span class="ex">2,</span> 3, 4, 5</span></code></pre></div>
 <p>This output tells us:</p>
 <ul>
 <li>Out of 10 runs, we got 8 unique diffs.</li>
@@ -429,7 +566,7 @@ drifts.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

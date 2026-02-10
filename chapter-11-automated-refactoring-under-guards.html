@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+<div class="chapter-meta"><span class="read-time">11 min read</span></div>
 <h1 id="chapter-11-automated-refactoring-under-guards">Chapter 11 –
 Automated Refactoring Under Guards</h1>
 <p>In Chapter 10, we established Immutable Infrastructure: the
@@ -173,23 +173,188 @@ Decision Gate: Commit or Revert</h3>
 decision:</p>
 <ul>
 <li><p><strong>If all guards pass:</strong> The change is deemed safe
-and beneficial (or at least non-regressive). The mutation is then
-committed to the main branch (e.g., by automatically merging the
-temporary branch or applying the patch).</p></li>
+and beneficial (or at least non-regressive). The mutation is proposed as
+a pull request with the before/after evidence attached. Merge can be
+automatic only for explicitly allowlisted change classes; otherwise this
+is where human review happens.</p></li>
 <li><p><strong>If any guard fails:</strong> The change is automatically
 discarded. The temporary branch is deleted, and the system reverts to
 its pre-mutation state. A detailed report of the failure (what guard was
 tripped, why) is generated and can be sent to a human for review. This
 prevents bad changes from ever reaching the codebase.</p></li>
 </ul>
+<h2 id="guard-sufficiency-what-counts-as-comprehensive">Guard
+Sufficiency (What counts as “comprehensive”?)</h2>
+<p>The phrase “comprehensive tests” is doing a lot of work.</p>
+<p>Guard sufficiency is not a single number. It is a relationship
+between:</p>
+<ul>
+<li><strong>Refactor scope:</strong> how wide the mutation is allowed to
+reach.</li>
+<li><strong>Guard strength:</strong> what Validators you run, and what
+they actually constrain.</li>
+<li><strong>Signal quality:</strong> whether your tests contain
+meaningful assertions, not just line execution.</li>
+</ul>
+<p>You can think of it as a simple rule: <strong>bigger refactors
+require stronger, more diverse guards.</strong></p>
+<h3 id="sufficiency-signals-useful-but-not-decisive">Sufficiency signals
+(useful, but not decisive)</h3>
+<p>Some practical signals that can inform the “safe enough”
+decision:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Signal</th>
+<th>What it measures</th>
+<th>Why it helps</th>
+<th>Failure mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line and branch coverage</td>
+<td>Reachability</td>
+<td>Tells you what’s even being exercised</td>
+<td>High coverage can still have weak assertions</td>
+</tr>
+<tr>
+<td>Type checking strictness</td>
+<td>Static invariants</td>
+<td>Catches interface drift and many refactor mistakes early</td>
+<td>Types can be missing or too permissive</td>
+</tr>
+<tr>
+<td>Mutation score</td>
+<td>Test strength</td>
+<td>Checks whether tests detect small semantic changes</td>
+<td>Expensive; can be noisy without stable tests</td>
+</tr>
+<tr>
+<td>Contract/integration tests</td>
+<td>Cross-module invariants</td>
+<td>Protects public interfaces and side effects</td>
+<td>Often slow; requires environment realism</td>
+</tr>
+<tr>
+<td>Benchmarks/ratchets</td>
+<td>Non-functional invariants</td>
+<td>Catches “refactor that passes tests but regresses performance”</td>
+<td>Requires stable harness and tolerance</td>
+</tr>
+</tbody>
+</table>
+<p>The pragmatic posture is to <strong>refuse broad refactors when
+guards are weak</strong>. Instead, run a “guard strengthening” mission
+first: add one missing test, add one contract check, or add one ratchet,
+then refactor.</p>
+<h3 id="mutation-testing-a-guard-for-your-guards">Mutation testing (a
+guard for your guards)</h3>
+<p>Mutation testing is a direct way to check whether your tests are
+sensitive to behavioral changes. The tool edits your code in small ways
+(flip a comparison, remove a branch) and verifies that tests fail.</p>
+<p>Example (Python):</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install once</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install mutmut</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run mutations on a bounded surface</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mutmut</span> run <span class="at">--paths-to-mutate</span><span class="op">=</span>src/auth/ <span class="at">--tests-dir</span><span class="op">=</span>tests/auth/</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect survivors (mutations that tests failed to catch)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">mutmut</span> results</span></code></pre></div>
+<p>Use mutation testing selectively. It’s too expensive as a default
+gate, but it can be the right tool for deciding whether a module is safe
+to refactor autonomously.</p>
+<h2
+id="scope-boundaries-how-wide-is-the-refactor-allowed-to-reach">Scope
+Boundaries (How wide is the refactor allowed to reach?)</h2>
+<p>“Refactor the code” is not a Mission. A refactoring mission needs
+explicit boundaries.</p>
+<p>One way to frame scope:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Refactor type</th>
+<th>Typical scope</th>
+<th>Minimum guards</th>
+<th>Default posture</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Within-function cleanup</td>
+<td>One symbol</td>
+<td>Unit tests + types + lint</td>
+<td>Often safe</td>
+</tr>
+<tr>
+<td>Extract method / simplify logic</td>
+<td>One module</td>
+<td>Module tests + coverage signal + types</td>
+<td>Usually safe when bounded</td>
+</tr>
+<tr>
+<td>Rename with callers</td>
+<td>One module or package</td>
+<td>Tests + type checks + contract tests (if public)</td>
+<td>Require tighter review</td>
+</tr>
+<tr>
+<td>Public interface change</td>
+<td>Multiple modules</td>
+<td>Integration/consumer tests + explicit deprecation plan</td>
+<td>Human review by default</td>
+</tr>
+<tr>
+<td>Architecture change</td>
+<td>System-wide</td>
+<td>Full system checks + explicit approval</td>
+<td>Rare and expensive</td>
+</tr>
+</tbody>
+</table>
+<p>This is the same idea as blast radius limits, but moved earlier in
+the pipeline: <strong>scope is part of the mission, not an
+afterthought.</strong></p>
+<h2
+id="equivalence-classes-what-does-no-behavior-change-mean">Equivalence
+Classes (What does “no behavior change” mean?)</h2>
+<p>Refactoring is “change the how, keep the what.” But “the what” has
+layers:</p>
+<ul>
+<li><strong>Strict equivalence:</strong> same outputs for the same
+inputs. Always required.</li>
+<li><strong>Observational equivalence:</strong> same externally
+observable behavior (responses, persisted state, emitted events), with
+different internals. Usually acceptable.</li>
+<li><strong>Semantic equivalence:</strong> same business meaning, but
+with a different representation or different trade-offs. Requires
+explicit review because it can shift edge cases.</li>
+</ul>
+<p>This is where performance, memory, logging, and side-effect timing
+enter the picture. If they matter, they need to be promoted into the
+Map: benchmarks, invariants, and ratchets that make them gateable.</p>
 <h2 id="the-ratchet-metrics-that-cant-go-backward">The Ratchet: Metrics
 That Can’t Go Backward</h2>
 <p>Here’s a failure mode that kills Neuroplasticity:</p>
 <p>The system learns to pass tests by weakening the tests.</p>
 <p>If an autonomous loop can modify both the code <em>and</em> the
-validators, it will eventually discover that the easiest way to achieve
-“all tests pass” is to delete the hard tests. This isn’t malice—it’s
-optimization finding the shortest path.</p>
+validators, it can discover that the easiest way to achieve “all tests
+pass” is to delete the hard tests. This isn’t malice—it’s optimization
+finding the shortest path.</p>
 <p>The <strong>Ratchet</strong> prevents this. It’s a governance
 mechanism that treats a chosen metric value <span
 class="math inline"><em>m</em></span> as strictly monotonic:</p>
@@ -245,31 +410,31 @@ whether tests pass.</p>
 </tbody>
 </table>
 <p><strong>Implementation:</strong></p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In your governance config or CI pipeline</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ratchets</span><span class="kw">:</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test_count</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/test_count.json</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">coverage_percent</span><span class="kw">:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/coverage.json</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.1</span><span class="co">  # Allow tiny fluctuations from test timing</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lint_errors</span><span class="kw">:</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> down</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/lint.json</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In your governance config or CI pipeline</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ratchets</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test_count</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/test_count.json</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">coverage_percent</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/coverage.json</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.1</span><span class="co">  # Allow tiny fluctuations from test timing</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lint_errors</span><span class="kw">:</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> down</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/lint.json</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
 <p>The baseline files are updated only when a commit passes all
 ratchets. They become the new floor.</p>
 <p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
 <code>ratchet-check</code> and <code>ratchet-baseline</code> targets
 that demonstrate this. <code>ratchet_check.py</code> compares current
-metrics against a baseline, and <code>ratchet_baseline.py</code> updates
-the baseline.</p>
+metrics against a baseline, and <code>ratchet_update_baseline.py</code>
+updates the baseline.</p>
 <p>The deeper principle:</p>
 <p>A ratchet is a monotonic invariant—a property that can only move in
 one direction over the system’s lifetime. This is how you prevent drift
@@ -329,6 +494,79 @@ the updated code, and then switching traffic. This allows for instant
 rollback by simply switching back to the previous, known-good version.
 The automated change doesn’t modify a running system in place, but
 rather prepares a new, verified one.</p></li>
+</ul>
+<h2
+id="refactoring-pattern-gallery-and-the-guards-that-make-them-safe">Refactoring
+Pattern Gallery (and the guards that make them safe)</h2>
+<p>Refactoring patterns are useful because they define a bounded change
+shape. Guards become easier to write when you can name what the Effector
+is allowed to do.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Typical scope</th>
+<th>Minimum guards</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extract function</td>
+<td>One module</td>
+<td>Tests + types + lint</td>
+<td>Prefer one extraction per diff</td>
+</tr>
+<tr>
+<td>Inline variable</td>
+<td>One function</td>
+<td>Tests + lint</td>
+<td>Safe when assertions are strong</td>
+</tr>
+<tr>
+<td>Rename symbol (private)</td>
+<td>One module</td>
+<td>Tests + type checks</td>
+<td>Prefer automated rename tooling when available</td>
+</tr>
+<tr>
+<td>Introduce parameter object</td>
+<td>One module (sometimes cross-module)</td>
+<td>Tests + types + integration checks</td>
+<td>Easy to break call sites; keep diff small</td>
+</tr>
+<tr>
+<td>Replace conditional with dispatch</td>
+<td>One module/package</td>
+<td>Tests + contract checks</td>
+<td>Can change edge cases; watch equivalence class</td>
+</tr>
+<tr>
+<td>Move function/class</td>
+<td>Multi-file</td>
+<td>Integration tests + ratchets</td>
+<td>Treat as higher risk; enforce strict scope</td>
+</tr>
+</tbody>
+</table>
+<h3 id="multi-step-refactors-chains">Multi-step refactors (chains)</h3>
+<p>Some refactors need multiple steps (extract → rename → move). Handle
+these as a chain of atomic diffs:</p>
+<ul>
+<li>Run guards after each step. If a step fails, revert the chain, not
+just the last edit.</li>
+<li>Keep intermediate artifacts in a quarantine directory (candidate
+diff + guard output) so humans can salvage useful fragments without
+re-running the Effector.</li>
+<li>Prefer squashing “refactor noise” into one logical commit once the
+chain is proven safe. Your Ledger is the PR evidence; your Git history
+is the narrative.</li>
 </ul>
 <h2 id="worked-example-an-automated-lint-fix">Worked Example: An
 Automated Lint Fix</h2>
@@ -431,7 +669,7 @@ into the Measure → Mutate → Measure loop.</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>

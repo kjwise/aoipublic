@@ -41,7 +41,7 @@
 
   <main id="main" class="content">
     <div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-8-keep-the-map-fresh-map-updaters">Chapter 8 – Keep the
 Map Fresh (Map-Updaters)</h1>
 <p>Drift is the default state. Docs fall behind code. Specs lag behind
@@ -54,6 +54,12 @@ specialized loop designed to keep a specific Map surface synchronized
 with its corresponding Terrain. It does this by observing reality,
 comparing it to expectations, and proposing concrete, reviewable patches
 to reconcile any differences.</p>
+<p>A Map-Updater matters because <strong>a Map is part of a context
+slice</strong>. You rarely want to pass “the whole Terrain” into an
+Effector. You want a compact Map that says what matters, what is
+in-bounds, and what invariants must hold. A well-kept Map can be more
+expressive than a dump of raw Terrain because it is intentional
+compression: higher semantic density, lower drift.</p>
 <h2 id="the-map-updater-loop-sense-normalize-compare-propose">The
 Map-Updater Loop: Sense → Normalize → Compare → Propose</h2>
 <p>A Map-Updater follows a consistent four-step process:</p>
@@ -83,6 +89,17 @@ surface.</p>
 mechanical: <code>PASS</code> means “admissible diff,” <code>FAIL</code>
 means “drift still exists.” Record the diff + Validator output in the
 <strong>Ledger</strong> so the next run is explainable.</p>
+<p>If you want the loop in one screen:</p>
+<pre class="text"><code>terrain = normalize(sense_terrain())
+map = normalize(read_map())
+diff = compare(map, terrain)
+if diff:
+    propose_patch(diff)  # reviewable output, not prose advice</code></pre>
+<p>One key reversal to name explicitly: Chapters 1–7 mostly run
+<strong>Map → Terrain</strong> (intent drives changes). Map-Updaters
+often run <strong>Terrain → Map</strong> (reality updates documentation
+and intent artifacts). Both directions are valid, but they require a
+clear authority model.</p>
 <h2
 id="meta-pattern-skeleton-first-rule-maps-get-skeletons-from-sensors">Meta-Pattern:
 Skeleton-First Rule (Maps get skeletons from Sensors)</h2>
@@ -114,6 +131,11 @@ the allowed region.</li>
 <li>Validate: re-extract the skeleton from the proposed Map and require
 exact match.</li>
 </ul>
+<p>When you can, make the skeleton the whole story: generate the Map
+deterministically from Sensors. This repository’s
+<code>tools/flow_report.py</code> does exactly that for Workflow wiring:
+it produces a Flow Map report from code structure, with zero AI in the
+critical path.</p>
 <h2 id="brownfield-adoption-the-hollow-map-flashlight">Brownfield
 Adoption: The Hollow Map (Flashlight)</h2>
 <p>In a legacy monolith, a full Context Graph is often the wrong first
@@ -134,69 +156,52 @@ delete them.</li>
 <p>If the same slice keeps showing up, promote it into a cached snapshot
 later. But do not start by trying to maintain a “perfect architecture
 doc” for a system you can’t yet reason about.</p>
-<h3
-id="a-self-referential-map-updater-keep-agent-instructions-aligned">A
-self-referential Map-Updater: keep agent instructions aligned</h3>
-<p>A powerful application of a Map-Updater is to keep its own operating
-instructions current. The <code>aoi_code</code> companion repository
-includes an agent instructions file that serves as a local manual for
-both human developers and automated agents. It defines how to work
-within that directory, what commands are available, and what boundaries
-to respect.</p>
-<p>The <code>Makefile</code> itself is the Terrain—the source of truth
-for available commands. The agent instructions file is the Map. When the
-<code>Makefile</code> changes, that Map can drift.</p>
-<p>The <code>agents-suggest</code> target in the companion repo is a
-Map-Updater designed to solve this. It implements the loop in a
-pragmatic form:</p>
-<ol type="1">
-<li><strong>Sense:</strong> It reads the output of
-<code>make help</code> to get the canonical list of commands.</li>
-<li><strong>Normalize:</strong> It parses the help text into a
-structured list of targets and descriptions.</li>
-<li><strong>Compare:</strong> It reads the current instructions file and
-compares its command list to the one extracted from the
-<code>Makefile</code>.</li>
-<li><strong>Propose:</strong> It generates a patch file containing the
-exact changes needed to bring the instructions file into alignment.</li>
-</ol>
-<p>Here is the loop in action. Running the command produces a patch file
-in the <code>build/</code> directory:</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make agents-suggest</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> factory/tools/update_agents.py <span class="at">--path</span> Makefile</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[update_agents]</span> wrote patch suggestions to build/update_agents/update_agents_20260210T012549Z.patch</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[update_agents]</span> apply with: git apply <span class="op">&lt;</span>patchfile<span class="op">&gt;</span></span></code></pre></div>
-<p>The generated patch is a standard unified diff, making it easy to
-review and apply:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- AGENTS.md</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ AGENTS.md</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">@@ -6,10 +6,24 @@</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> ## Commands</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">-(This section is intentionally incomplete. Run `make agents-suggest` to generate a patch that brings it back in sync with `make help`.)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="va">+This repo is designed to be run via `make` from the repo root.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">-- `make all`</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">-- `make test`</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make all` — (Ch1) sync + validate</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make sync` — (Ch1) propose/apply Map updates from Terrain</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make validate` — (Ch1) enforce Map/Terrain alignment</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make request` — (Ch2) render a diff-only request from template + context</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make drift` — (Ch4) measure diff variance from a stochastic effector</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make mission-dry-run` — (Ch5) print slice + validators + budgets</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make graph` — (Ch6) build a tiny context graph snapshot</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make slice` — (Ch6) emit a slice packet from an anchor</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make branching-factor` — (Ch6) lint fan-out heuristics</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make driver-demo` — (Ch7) resolve a driver from deterministic identity</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make agents-suggest` — (Ch8) propose updates to AGENTS.md (Map-Updater demo)</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make dream-scan` — (Ch9) read-only entropy scan (Depth 0)</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make test` — run local unit tests (stdlib unittest)</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make ratchet-check` — (Ch11) compare current metrics to baselines</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make ratchet-baseline` — (Ch11) update baselines from current metrics</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="va">+- `make clean` — remove build artifacts</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a> ## Notes</span></code></pre></div>
-<h4 id="alternative-the-low-tech-start">Alternative: The Low-Tech
-Start</h4>
+<h2
+id="example-keep-agent-instructions-aligned-a-self-referential-map-updater">Example:
+Keep agent instructions aligned (a self-referential Map-Updater)</h2>
+<p>A powerful (and practical) Map-Updater is one that keeps its own
+operating instructions current.</p>
+<p>In this repository, we keep per-directory agent-instructions files as
+local operator manuals: what this directory is for, what invariants
+matter, and how to run the tools here. Different agent runtimes use
+different conventions, but the pattern is the same: keep a small Map
+close to the Terrain it governs.</p>
+<p>The concrete implementation is the agent-instructions
+Map-Updater:</p>
+<ul>
+<li>Tool: <code>tools/update_agents.py</code></li>
+<li>Run:
+<code>python -m tools.update_agents --path &lt;changed_file&gt;</code></li>
+<li>Output:
+<code>build/update_agents/&lt;dir_slug&gt;_agents_suggestions.md</code>
+(patch-style hunks, designed for review)</li>
+<li>Apply:
+<code>python -m tools.apply_meta_suggestions --suggestions build/update_agents</code>
+(or wire it into a Make target)</li>
+</ul>
+<p>This is intentionally an <strong>advisory</strong> updater: if AI is
+unavailable it emits an explicit no-change marker and returns success.
+That keeps your build deterministic while still making drift visible
+when the tool can run.</p>
+<pre class="text"><code>@@ NO CHANGE @@</code></pre>
+<p>Here is the loop in action:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> tools.update_agents <span class="at">--path</span> mk/book.mk</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">INFO:</span> AGENTS update suggestions written to build/update_agents/mk_agents_suggestions.md</span></code></pre></div>
+<p>The suggestions file is a small, reviewable patch format:</p>
+<pre class="text"><code>FILE: mk/AGENTS.md
+@@ SUGGESTED PATCH @@
+@@
+-&lt;old lines…&gt;
++&lt;new lines…&gt;</code></pre>
+<p>If you want a fully automated “maintenance sweep,” this repo includes
+an example Make target that runs the instructions updater on a few
+anchor files and then applies the suggestions in one pass:
+<code>make update-agents-epoch</code>. The key move is that it still
+leaves you with a clean <code>git diff</code> to review: the loop
+proposes; humans accept.</p>
+<h3 id="alternative-the-low-tech-start">Alternative: The Low-Tech
+Start</h3>
 <p>You can also do a “cheap Map-Updater” version without wiring the full
 deterministic pipeline yet: keep a small instruction file close to the
 code it governs, then ask a programming AI agent to propose an update
@@ -220,6 +225,29 @@ to anchor on.</p>
 <p>The important point is not the particular file name. The point is the
 direction: your terrain changed, so you update the Map that tells future
 operators how to move through that terrain.</p>
+<h2
+id="example-update-meta-from-chapters-map-surfaces-for-the-manuscript">Example:
+Update meta/ from chapters (Map surfaces for the manuscript)</h2>
+<p>Not every Map surface is an operations manual. In this book’s engine,
+<code>meta/</code> is a Map for the manuscript: it carries the concepts,
+outline, and the editorial constraints that make downstream writing
+tools converge instead of drift.</p>
+<p>This repo contains a Workflow-based Map-Updater that proposes changes
+to <code>meta/</code> based on a chapter’s current prose:</p>
+<ul>
+<li>Tool: <code>tools/update_meta.py</code></li>
+<li>Run:
+<code>make update-meta TARGET=&lt;chapter|part|book&gt;</code></li>
+<li>Output: patch-style suggestions under
+<code>build/update_meta/</code></li>
+<li>Apply:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> apply-meta SUGGESTIONS=build/update_meta</span></code></pre></div>
+<p>This is the same pattern as the agent-instructions updater, pointed
+at a different Map surface: observe Terrain (chapter prose), normalize
+(extract candidates), compare to the current Map, then propose a
+reviewable patch.</p>
 <h2 id="authority-models-terrain-first-vs.-map-first-surfaces">Authority
 Models: Terrain-first vs. Map-first Surfaces</h2>
 <p>The direction of the patch is determined by the <strong>authority
@@ -238,6 +266,49 @@ the infrastructure until the scan matches.</p></li>
 <p>Trying to make one surface both Terrain-first and Map-first produces
 an unstable equilibrium where automated systems fight over what “truth”
 is.</p>
+<h2 id="map-quality-criteria-what-fresh-means">Map Quality Criteria
+(what “fresh” means)</h2>
+<p>Keeping a Map “fresh” is not the same as making it long. A good Map
+is:</p>
+<table>
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr>
+<th>Property</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bounded</td>
+<td>A Map that tries to cover everything becomes noise</td>
+</tr>
+<tr>
+<td>Skeleton-anchored</td>
+<td>The non-negotiable structure comes from Sensors, not generation</td>
+</tr>
+<tr>
+<td>Explicit about scope</td>
+<td>What the updater may edit (and must not touch) is written down</td>
+</tr>
+<tr>
+<td>Reviewable</td>
+<td>Output is a diff, not a paragraph</td>
+</tr>
+<tr>
+<td>Auditable</td>
+<td>Every change has evidence (diff + validator output) in the
+Ledger</td>
+</tr>
+<tr>
+<td>Stable under iteration</td>
+<td>It doesn’t oscillate because the authority model is clear</td>
+</tr>
+</tbody>
+</table>
 <h2 id="ci-gate-drift-becomes-a-build-failure">CI Gate: Drift Becomes a
 Build Failure</h2>
 <p>A Map-Updater becomes powerful when drift becomes non-ignorable:</p>
@@ -250,13 +321,41 @@ require an explicit waiver.</li>
 </ol>
 <p>This turns drift from a quiet, compounding problem into an immediate,
 bounded, reviewable change.</p>
+<p>Two practical constraints matter in CI:</p>
+<ul>
+<li><strong>Relevance:</strong> do not run expensive updaters on every
+commit; trigger on the paths that can actually cause drift.</li>
+<li><strong>Budget:</strong> an updater that “never stops retrying” is
+not a gate; it’s a denial-of-service. Give it timeouts, retry limits,
+and cost caps.</li>
+</ul>
 <p>Not every updater is a pure Physics gate. Some Map-Updaters are
 advisory (they generate suggested prose patches). That’s still valuable:
 the output becomes part of the Decision Trace, and humans can review and
 accept or reject the update.</p>
-<h3
+<h2 id="documentation-physics-validators-for-maps">Documentation Physics
+(validators for Maps)</h2>
+<p>If a Map-Updater can write prose, you need Physics for prose.</p>
+<p>At minimum, you want validators that catch structural drift and
+invented structure:</p>
+<ul>
+<li><strong>Structure lint:</strong> headings, single H1, no heading
+jumps, no banned markers</li>
+<li><strong>Terminology physics:</strong> concept bans and redirects
+(Map vocabulary control)</li>
+<li><strong>Skeleton match:</strong> re-extract
+signatures/routes/schemas and require exact match</li>
+<li><strong>Link checks / references:</strong> ensure internal links
+resolve; ensure quoted identifiers exist</li>
+</ul>
+<p>In this repo, the manuscript has its own Physics targets (for example
+<code>make text-health</code> plus <code>tools.lint_concepts</code>).
+The existence of these validators is the point: a Map-Updater only
+becomes trustworthy when the Map surface is gated by constraints it
+cannot argue with.</p>
+<h2
 id="north-star-map-updaters-are-a-plank-of-the-hofstadter-bridge">North
-Star: Map-Updaters are a plank of the Hofstadter Bridge</h3>
+Star: Map-Updaters are a plank of the Hofstadter Bridge</h2>
 <p>At first, a Map-Updater feels like housekeeping: “keep docs
 fresh.”</p>
 <p>The higher-leverage view is that you’re turning documentation from an
@@ -266,8 +365,8 @@ explores that limit case (the Hofstadter Bridge): the Map stops being
 advisory and starts acting as an enforcer.</p>
 <p>If you want that future safely, you start here: deterministic
 skeletons, bounded diffs, and hard gates.</p>
-<h3 id="meta-maps-when-maps-need-maps">Meta-Maps: When Maps Need
-Maps</h3>
+<h2 id="meta-maps-when-maps-need-maps">Meta-Maps: When Maps Need
+Maps</h2>
 <p>A slice map (a saved Context Packet: what’s in, what’s out, and why)
 works for a feature. A handful of slice maps work for a release. But
 what happens when you have fifty slice maps across twelve teams?</p>
@@ -284,8 +383,7 @@ meta-map is a Map for your collection of slice maps.</p>
 │  │ Slice Map A │ │ Slice Map B │ │ Slice Map C│ │
 │  │ Auth Service│ │ Data Layer  │ │ API Gateway│ │
 │  │ 12 slices   │ │ 8 slices    │ │ 15 slices  │ │
-│  │ ████████░░  │ │ ██████░░░░  │ │ ███░░░░░░░ │ │
-│  │ 80%         │ │ 60%         │ │ 20%        │ │
+│  │ Converging  │ │ Mixed       │ │ Early      │ │
 │  └─────────────┘ └─────────────┘ └────────────┘ │
 │                                                 │
 │  Dependencies: A → B → C                         │
@@ -384,7 +482,7 @@ evidence to review.</li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>66899566abe1</code>
+      Version: <code>a23032da0771</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
     </p>
