@@ -113,49 +113,16 @@ specific, machine-readable failures.</li>
 <li><strong>Budgets + escalation:</strong> stop deterministically when
 progress stalls; route hard cases to humans.</li>
 </ol>
-<pre class="text"><code>┌──────────┐
-│  START   │
-└────┬─────┘
-     ▼
-┌──────────────────────────┐
-│ PREP                     │
-│ - build slice            │
-│ - compile authority      │
-│ - select validators      │
-│ - set budgets            │
-└────┬─────────────────────┘
-     ▼
-┌──────────────────────────┐
-│ WRITE (Effector)         │
-│ - propose candidate      │
-│   (diff / JSON / etc.)   │
-└────┬─────────────────────┘
-     ▼
-┌──────────────────────────┐
-│ JUDGE (Physics)          │
-│ - parse + scope + policy │
-│ - run validators         │
-└────┬─────────────────────┘
-     ▼
-   ┌─────────┐
-   │  PASS?  │
-   └──┬───┬──┘
-    yes  no
-     │    │
-     ▼    ▼
-┌──────────┐   ┌──────────────────────────┐
-│ COMMIT + │   │ BUDGETS / PROGRESS OK?   │
-│ TRACE    │   └───────┬───────────┬──────┘
-└────┬─────┘         yes          no
-     │                │            │
-     ▼                ▼            ▼
-  ┌───────┐   ┌────────────────┐  ┌──────────────┐
-  │  END  │   │ REFINE FEEDBACK │  │ ESCALATE /   │
-  └───────┘   │ + UPDATE STATE  │  │ DEFER + TRACE│
-              └───────┬────────┘  └──────┬───────┘
-                      │                 │
-                      └────── back ─────┘
-                           to WRITE</code></pre>
+<pre class="mermaid"><code>flowchart TD
+  Start([START]) --&gt; Prep["PREP&lt;br/&gt;- build slice&lt;br/&gt;- compile authority&lt;br/&gt;- select validators&lt;br/&gt;- set budgets"]
+  Prep --&gt; Write["WRITE (Effector)&lt;br/&gt;- propose candidate&lt;br/&gt;(diff / JSON / etc.)"]
+  Write --&gt; Judge["JUDGE (Physics)&lt;br/&gt;- parse + scope + policy&lt;br/&gt;- run validators"]
+  Judge --&gt; Pass{PASS?}
+
+  Pass -- yes --&gt; Commit["COMMIT + TRACE"] --&gt; End([END])
+  Pass -- no --&gt; Budgets{"BUDGETS / PROGRESS OK?"}
+  Budgets -- yes --&gt; Refine["REFINE FEEDBACK&lt;br/&gt;+ UPDATE STATE"] --&gt; Write
+  Budgets -- no --&gt; Escalate["ESCALATE / DEFER + TRACE"] --&gt; Write</code></pre>
 <h3 id="state-what-the-loop-remembers">State (what the loop
 remembers)</h3>
 <p>There are two “memories” in Ouroboros:</p>
@@ -386,22 +353,11 @@ forever comes from one concept: <strong>attractors</strong>.</p>
 into—where the Immune System passes and the loop stops mutating. Think
 of it as a basin: once you’re close enough, iterations pull you toward
 the stable point.</p>
-<pre><code>    Iteration
-        │
-        ▼
-   ┌─────────┐
-   │ State 1 │──┐
-   └─────────┘  │
-        │      │
-        ▼      │  Basin of attraction
-   ┌─────────┐ │
-   │ State 2 │ │
-   └─────────┘ │
-        │      │
-        ▼      │
-   ┌─────────┐◄┘
-   │ Stable  │  ← Attractor (tests pass, loop exits)
-   └─────────┘</code></pre>
+<pre class="mermaid"><code>flowchart TD
+  subgraph Basin["Basin of attraction"]
+    S1["State 1"] --&gt; S2["State 2"] --&gt; Stable["Stable&lt;br/&gt;(Attractor: tests pass, loop exits)"]
+  end
+  I[Iteration] --&gt; S1</code></pre>
 <p><strong>Why loops thrash:</strong> When the attractor basin is small
 or the iteration steps are too large, the system overshoots and never
 settles. This is why slice size matters—large slices mean large state
@@ -672,7 +628,7 @@ deterministic <code>Judge</code> drives the stochastic LLM.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0bb5bbb7f271</code>
+      Version: <code>9c5767a89819</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
 </p>

@@ -76,21 +76,11 @@ external service. You control what goes in, you control how you
 interpret what comes out, and you reject anything that doesn’t meet your
 contract.</p>
 <p>A quick diagram:</p>
-<pre class="text"><code>Mission Object + Terrain evidence
-        |
-        v
-     [Prep]
- (validate inputs, slice, separate authority/evidence)
-        |
-        v
-     [Model]
- (one bounded generation step)
-        |
-        v
-  [Validation / Physics]
-   (parse + run gates)
-        |
-   PASS / FAIL (+ findings)</code></pre>
+<pre class="mermaid"><code>flowchart TD
+  A["Mission Object&lt;br/&gt;+ Terrain evidence"] --&gt; B["Prep&lt;br/&gt;(validate inputs, slice,&lt;br/&gt;separate authority/evidence)"]
+  B --&gt; C["Model&lt;br/&gt;(one bounded generation step)"]
+  C --&gt; D["Validation / Physics&lt;br/&gt;(parse + run gates)"]
+  D --&gt; E["PASS / FAIL&lt;br/&gt;(+ findings)"]</code></pre>
 <p>One nuance: the sandwich has different bread. <code>Prep</code>
 validates and shapes <em>inputs</em> (Maps + evidence).
 <code>Validation</code> validates <em>outputs</em> (candidate diffs /
@@ -642,7 +632,7 @@ does.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0bb5bbb7f271</code>
+      Version: <code>9c5767a89819</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
 </p>

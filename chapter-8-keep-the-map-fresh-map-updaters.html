@@ -368,21 +368,11 @@ what happens when you have fifty slice maps across twelve teams?</p>
 itself at scale. Just as a function’s docstring is a Map for its
 implementation, and a module’s API is a Map for its functions, a
 meta-map is a Map for your collection of slice maps.</p>
-<pre class="text"><code>┌─────────────────────────────────────────────────┐
-│                   Meta-Map                       │
-│  "Q2 Platform Migration"                         │
-│                                                 │
-│  ┌─────────────┐ ┌─────────────┐ ┌────────────┐ │
-│  │ Slice Map A │ │ Slice Map B │ │ Slice Map C│ │
-│  │ Auth Service│ │ Data Layer  │ │ API Gateway│ │
-│  │ 12 slices   │ │ 8 slices    │ │ 15 slices  │ │
-│  │ Converging  │ │ Mixed       │ │ Early      │ │
-│  └─────────────┘ └─────────────┘ └────────────┘ │
-│                                                 │
-│  Dependencies: A → B → C                         │
-│  Status: B blocked on A slice 9                  │
-│  Next convergence check: Friday                  │
-└─────────────────────────────────────────────────┘</code></pre>
+<pre class="mermaid"><code>flowchart TD
+  subgraph Meta["Meta-Map&lt;br/&gt;Q2 Platform Migration"]
+    A["Slice Map A&lt;br/&gt;Auth Service&lt;br/&gt;12 slices&lt;br/&gt;Converging"] --&gt; B["Slice Map B&lt;br/&gt;Data Layer&lt;br/&gt;8 slices&lt;br/&gt;Mixed"] --&gt; C["Slice Map C&lt;br/&gt;API Gateway&lt;br/&gt;15 slices&lt;br/&gt;Early"]
+    B --- Status["Status: B blocked on A slice 9&lt;br/&gt;Next convergence check: Friday"]
+  end</code></pre>
 <p><strong>What a meta-map tracks:</strong></p>
 <table>
 <thead>
@@ -471,7 +461,7 @@ evidence to review.</li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0bb5bbb7f271</code>
+      Version: <code>9c5767a89819</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
 </p>

@@ -100,7 +100,13 @@ learn what is true.</li>
 <li>It reads <strong>Map</strong> (policies, budgets, protected paths,
 ratchets) to learn what is allowed.</li>
 </ul>
-<pre class="text"><code>[Sensors] -&gt; [Rank + Budget] -&gt; [Mission] -&gt; [Effector] -&gt; [Immune System] -&gt; [PR] -&gt; [Review]</code></pre>
+<pre class="mermaid"><code>flowchart TD
+  S[Sensors] --&gt; RB["Rank + Budget"]
+  RB --&gt; M[Mission]
+  M --&gt; E[Effector]
+  E --&gt; IS["Immune System"]
+  IS --&gt; PR[PR]
+  PR --&gt; R[Review]</code></pre>
 <h2 id="task-selection-is-the-problem">Task Selection Is the
 Problem</h2>
 <p>“Run a maintenance daemon” is easy to say. The hard question is:
@@ -378,7 +384,7 @@ human-approved.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0bb5bbb7f271</code>
+      Version: <code>9c5767a89819</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
 </p>

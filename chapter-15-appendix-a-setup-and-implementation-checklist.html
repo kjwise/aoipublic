@@ -40,7 +40,7 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part VI Appendices</div>
-<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+<div class="chapter-meta"><span class="read-time">7 min read</span></div>
 <h1 id="chapter-15-appendix-a-setup-and-implementation-checklist">Chapter 15
 – Appendix A: Setup and Implementation Checklist</h1>
 <p>This appendix does three things:</p>
@@ -74,6 +74,8 @@ return machine-readable failures.</li>
 </ul>
 <h2 id="runnability-legend-how-to-read-code-blocks">Runnability legend
 (how to read code blocks)</h2>
+<p>This book is published for web reading, so treat code blocks as
+patterns unless the text explicitly marks them as runnable.</p>
 <p>This book mixes three kinds of snippets:</p>
 <ol type="1">
 <li><strong>Runnable (companion repo):</strong> commands or file paths
@@ -106,120 +108,43 @@ pass/fail.</li>
 recommended)</h2>
 <p>Git hooks are a cheap way to push <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> earlier: run deterministic
 checks before changes enter history.</p>
-<p>In this repository, install the hooks with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">make</span> hooks-install</span>
+<p>If you want repo-local, versioned hooks, point Git at a hooks
+directory inside your repo (for example <code>.githooks</code>):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">git</span> config core.hooksPath .githooks</span>
 <span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--get</span> core.hooksPath</span></code></pre></div>
+<p>Some repos also provide a convenience target for this (for example
+<code>make hooks-install</code>).</p>
 <p>If hooks are installed, <code>core.hooksPath</code> should print
 <code>.githooks</code>.</p>
 <h2 id="implementation-checklist">Implementation checklist</h2>
 <p>The goal is not to implement every chapter. The goal is to ship a
 small loop that is correct, auditable, and easy to extend.</p>
 <h3 id="the-dependency-graph">The dependency graph</h3>
-<pre class="mermaid"><code>graph TD
-  MVF[Ch 1: Minimum Viable Factory] --&gt; Sandwich[Ch 2: Deterministic Sandwich]
-  Sandwich --&gt; Validators[Ch 3: Define Good (Validators)]
-  Validators --&gt; Drift[Ch 4: Drift Measurement]
-  Validators --&gt; Ouroboros[Ch 5: Ouroboros Protocol]
-  Ouroboros --&gt; Slice[Ch 6: Context Slicing]
-  Slice --&gt; Missions[Ch 7: Mission Objects]
-  Missions --&gt; MapUpdaters[Ch 8: Map-Updaters + CI Gate]
-  MapUpdaters --&gt; Dream[Ch 9: Scheduled Maintenance / Dream Daemon]
-  Validators --&gt; Guardrails[Ch 10: Immutable Infrastructure]
-  Guardrails --&gt; Refactor[Ch 11: Automated Refactoring Under Guards]
-  Guardrails --&gt; Policy[Ch 12: Governance at Machine Speed]
-  Policy --&gt; Reflect[Ch 13: Hofstadter Bridge]</code></pre>
-<h2 id="concept-map-where-terms-live">Concept map (where terms
-live)</h2>
-<p>You don’t need to memorize the canon up front. The terms arrive in
-the order you need them.</p>
-<p>Use this section like an index:</p>
-<ul>
-<li>If you’re impatient, ignore it and start with Part I.</li>
-<li>If you’re skimming, it tells you where to look when a term shows
-up.</li>
-</ul>
-<h3 id="guided-ascent-high-level">Guided ascent (high level)</h3>
-<table>
-<colgroup>
-<col style="width: 33%"/>
-<col style="width: 33%"/>
-<col style="width: 33%"/>
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Where you are</th>
-<th style="text-align: left;">What you do</th>
-<th style="text-align: left;">Canon terms that matter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Introduction</td>
-<td style="text-align: left;">Adopt the mental model</td>
-<td style="text-align: left;">Map/Terrain, <a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a>, Context
-Architecture</td>
-</tr>
-<tr>
-<td style="text-align: left;">Part I</td>
-<td style="text-align: left;">Build a working loop</td>
-<td style="text-align: left;">Map/Terrain/Ledger, <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>, <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>,
-<a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>, <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Part II</td>
-<td style="text-align: left;">Understand why it works</td>
-<td style="text-align: left;">Stochastic Drift, <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a>,
-<a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">Circuit Breakers</a>, <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Part III–IV</td>
-<td style="text-align: left;">Scale and govern safely</td>
-<td style="text-align: left;"><a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>, <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>, Adaptation State
-Machine, Map-Updaters, <a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a></td>
-</tr>
-<tr>
-<td style="text-align: left;">Part V</td>
-<td style="text-align: left;">Limit cases + stakes</td>
-<td style="text-align: left;"><a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a>, Race to Reliable
-Autonomy</td>
-</tr>
-</tbody>
-</table>
-<h3 id="where-key-concepts-are-introduced-chapter-level">Where key
-concepts are introduced (chapter-level)</h3>
-<ul>
-<li><strong><a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a>:</strong> Map, Terrain, Ledger, Effector,
-Validator (MVF v0: a loop you can run).</li>
-<li><strong>Chapter 2:</strong> The Deterministic Sandwich (Prep → Model
-→ Validation).</li>
-<li><strong><a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>:</strong> Validators → Immune System (Physics you
-can enforce).</li>
-<li><strong><a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a>:</strong> Stochastic Drift (measure it, budget it,
-reduce it).</li>
-<li><strong><a class="chapter-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge#chapter-5-the-ouroboros-protocol-why-loops-converge" title="Go to: Chapter 5">Chapter 5</a>:</strong> The Ouroboros Protocol + Attractors +
-circuit breakers (debug convergence).</li>
-<li><strong><a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a>:</strong> <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a> + Context Graph +
-<a class="concept-link" href="concepts#branching-factor-rule-of-seven" title="See concept: Branching Factor (Rule of
-Seven)">Branching Factor</a> + Skeleton-First Rule (slice deterministically).</li>
-<li><strong>Chapters 7–9:</strong> Mission Objects, Map-Updaters, Dream
-(scale the loop into a system).</li>
-<li><strong>Chapters 10–12:</strong> Immutable Infrastructure +
-governance at machine speed (protect graders and blast radius).</li>
-<li><strong><a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a>:</strong> Hofstadter Bridge (limit case: when the
-Map becomes enforceable).</li>
-<li><strong><a class="chapter-link" href="chapter-14-the-race-to-reliable-autonomy#chapter-14-the-race-to-reliable-autonomy" title="Go to: Chapter 14">Chapter 14</a>:</strong> The Race to Reliable Autonomy (stakes:
-why the bar is rising).</li>
-<li><strong><a class="chapter-link" href="chapter-18-appendix-d-glossary-and-translation-guide#chapter-18-appendix-d-glossary-translation-guide" title="Go to: Appendix D">Appendix D</a>:</strong> glossary + translation guide.</li>
-</ul>
+<pre class="mermaid"><code>flowchart TD
+  MVF["Ch 1:\nMinimum Viable Factory"] --&gt; Sandwich["Ch 2:\nDeterministic Sandwich"]
+  Sandwich --&gt; Validators["Ch 3:\nDefine Good (Validators)"]
+  Validators --&gt; Drift["Ch 4:\nDrift Measurement"]
+  Validators --&gt; Ouroboros["Ch 5:\nOuroboros Protocol"]
+  Ouroboros --&gt; Slice["Ch 6:\nContext Slicing"]
+  Slice --&gt; Missions["Ch 7:\nMission Objects"]
+  Missions --&gt; MapUpdaters["Ch 8:\nMap-Updaters + CI Gate"]
+  MapUpdaters --&gt; Dream["Ch 9:\nScheduled Maintenance / Dream Daemon"]
+  Validators --&gt; Guardrails["Ch 10:\nImmutable Infrastructure"]
+  Guardrails --&gt; Refactor["Ch 11:\nAutomated Refactoring Under Guards"]
+  Guardrails --&gt; Policy["Ch 12:\nGovernance at Machine Speed"]
+  Policy --&gt; Reflect["Ch 13:\nHofstadter Bridge"]</code></pre>
+<p><a class="chapter-link" href="chapter-14-the-race-to-reliable-autonomy#chapter-14-the-race-to-reliable-autonomy" title="Go to: Chapter 14">Chapter 14</a> (“The Race to Reliable Autonomy”) is intentionally not a
+build dependency. Read it any time you want more pressure about why the
+bar is rising.</p>
 <h3 id="weekend-sprint-part-i-build-the-first-loop">Weekend sprint (Part
 I): Build the first loop</h3>
 <h4 id="milestone-1-a-loop-you-can-run-locally-chapter-1">Milestone 1: A
 loop you can run locally (Chapter 1)</h4>
 <p>Definition of done:</p>
 <ul>
-<li>One Effector that updates an artifact (docs, config, or code) from a
+<li>One <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> that updates an artifact (docs, config, or code) from a
 Map input.</li>
-<li>One Validator that deterministically gates the result.</li>
+<li>One <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> that deterministically gates the result.</li>
 <li>One command that runs <code>effector -&gt; validator</code>
 end-to-end and fails fast on violations.</li>
 </ul>
@@ -265,7 +190,7 @@ Understand why it works</h3>
 (Chapter 4)</h4>
 <p>Definition of done:</p>
 <ul>
-<li>Run the same Mission Object 10 times.</li>
+<li>Run the same <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> 10 times.</li>
 <li>Track at least one drift metric:
 <ul>
 <li>Unique diffs (how many distinct outputs)</li>
@@ -279,8 +204,8 @@ Build a loop that converges (Chapter 5)</h4>
 <ul>
 <li>A <code>Write -&gt; Judge -&gt; Refine</code> loop that
 terminates.</li>
-<li>The Judge returns structured diagnostics, not vague prose.</li>
-<li>You have circuit breakers (max iterations + wall-clock budget).</li>
+<li>The <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> returns structured diagnostics, not vague prose.</li>
+<li>You have <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a> (max iterations + wall-clock budget).</li>
 </ul>
 <h4 id="milestone-6-slice-the-graph-do-not-dump-it-chapter-6">Milestone
 6: Slice the graph, do not dump it (Chapter 6)</h4>
@@ -353,7 +278,7 @@ intentional waiver.</li>
 </ul>
 <h3 id="part-v-reflections-limit-cases">Part V: Reflections (limit
 cases)</h3>
-<p>Chapter 13 is a useful limit case. Treat it as a tool for thinking,
+<p><a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a> is a useful limit case. Treat it as a tool for thinking,
 not a build requirement.</p>
 <h3 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h3>
@@ -365,6 +290,89 @@ loop working.</p></li>
 <li><p>Put one protected path in place (tests/validators/CI) and require
 human review for it.</p></li>
 </ol>
+<h2 id="concept-map-where-terms-live">Concept map (where terms
+live)</h2>
+<p>You don’t need to memorize the canon up front. The terms arrive in
+the order you need them.</p>
+<p>Use this section like an index:</p>
+<ul>
+<li>If you’re impatient, ignore it and start with Part I.</li>
+<li>If you’re skimming, it tells you where to look when a term shows
+up.</li>
+</ul>
+<h3 id="guided-ascent-high-level">Guided ascent (high level)</h3>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Where you are</th>
+<th style="text-align: left;">What you do</th>
+<th style="text-align: left;">Canon terms that matter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Introduction</td>
+<td style="text-align: left;">Adopt the mental model</td>
+<td style="text-align: left;">Map/Terrain, <a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a>, Context
+Architecture</td>
+</tr>
+<tr>
+<td style="text-align: left;">Part I</td>
+<td style="text-align: left;">Build a working loop</td>
+<td style="text-align: left;">Map/Terrain/Ledger, Effector, Validator,
+<a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>, <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Part II</td>
+<td style="text-align: left;">Understand why it works</td>
+<td style="text-align: left;">Stochastic Drift, <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a>,
+Circuit Breakers, <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Part III–IV</td>
+<td style="text-align: left;">Scale and govern safely</td>
+<td style="text-align: left;">Mission Object, Judge, Adaptation State
+Machine, Map-Updaters, <a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Part V</td>
+<td style="text-align: left;">Limit cases + stakes</td>
+<td style="text-align: left;"><a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a>, Race to Reliable
+Autonomy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="where-key-concepts-are-introduced-chapter-level">Where key
+concepts are introduced (chapter-level)</h3>
+<ul>
+<li><strong><a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a>:</strong> Map, Terrain, Ledger, Effector,
+Validator (MVF v0: a loop you can run).</li>
+<li><strong>Chapter 2:</strong> The Deterministic Sandwich (Prep → Model
+→ Validation).</li>
+<li><strong><a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>:</strong> Validators → Immune System (Physics you
+can enforce).</li>
+<li><strong><a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a>:</strong> Stochastic Drift (measure it, budget it,
+reduce it).</li>
+<li><strong><a class="chapter-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge#chapter-5-the-ouroboros-protocol-why-loops-converge" title="Go to: Chapter 5">Chapter 5</a>:</strong> The Ouroboros Protocol + Attractors +
+circuit breakers (debug convergence).</li>
+<li><strong><a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a>:</strong> <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a> + Context Graph +
+<a class="concept-link" href="concepts#branching-factor-rule-of-seven" title="See concept: Branching Factor (Rule of
+Seven)">Branching Factor</a> + Skeleton-First Rule (slice deterministically).</li>
+<li><strong>Chapters 7–9:</strong> Mission Objects, Map-Updaters, Dream
+(scale the loop into a system).</li>
+<li><strong>Chapters 10–12:</strong> Immutable Infrastructure +
+governance at machine speed (protect graders and blast radius).</li>
+<li><strong>Chapter 13:</strong> Hofstadter Bridge (limit case: when the
+Map becomes enforceable).</li>
+<li><strong>Chapter 14:</strong> The Race to Reliable Autonomy (stakes:
+why the bar is rising).</li>
+<li><strong><a class="chapter-link" href="chapter-18-appendix-d-glossary-and-translation-guide#chapter-18-appendix-d-glossary-translation-guide" title="Go to: Appendix D">Appendix D</a>:</strong> glossary + translation guide.</li>
+</ul>
 </main>
 <section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 15 – Appendix A: Setup and Implementation Checklist" data-share-title="Chapter 15 – Appendix A: Setup and Implementation Checklist | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist" role="region">
 <div class="share-panel__label">Share</div>
@@ -386,7 +394,7 @@ human review for it.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0bb5bbb7f271</code>
+      Version: <code>9c5767a89819</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
 </p>
