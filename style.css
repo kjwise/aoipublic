@@ -199,6 +199,15 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 .content h3 { font-size: 1.25rem; }
 .content h2 { padding-bottom: 0.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.10); }
 
+.content .landing-subtitle {
+  margin-top: -0.25rem;
+  margin-bottom: 1.25rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  font-style: italic;
+}
+
 .content p { margin: 1rem 0; }
 .content > :first-child { margin-top: 0; }
 .content > :last-child { margin-bottom: 0; }
