@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architects of Intent: The Limit Case</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Plotly.js (For 3D Terrain) -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0b0c10',
+                            surface: 'rgba(17, 19, 26, 0.92)',
+                            light: 'rgba(255, 255, 255, 0.03)',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            text: '#e7e7ea',
+                            strong: '#f2f3f8',
+                            muted: '#b5b6bf',
+                            primary: '#7aa2f7',
+                            accent: '#bb9af7',
+                            vibrant: '#2ac3de',
+                            danger: '#f7768e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Chart Container Strict Sizing */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 300px; /* Base height for mobile */
+            margin: 0 auto;
+        }
+
+        .plotly-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px; /* Taller on desktop */
+            }
+            .plotly-container {
+                height: 500px;
+            }
+        }
+
+        body {
+            background: radial-gradient(1200px 800px at 20% 0%, rgba(122, 162, 247, 0.18), transparent 55%),
+                        radial-gradient(900px 700px at 100% 30%, rgba(36, 204, 142, 0.10), transparent 55%),
+                        #0b0c10;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #11131a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.16);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.24);
+        }
+
+        /* Flow Chart CSS Elements (NO SVG) */
+        .flow-node {
+            position: relative;
+            transition: transform 0.2s;
+        }
+        .flow-node:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* CSS Arrows */
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid rgba(255, 255, 255, 0.22);
+        }
+        
+        /* Pyramid CSS (NO SVG) */
+        .pyramid-shell {
+            position: relative;
+            width: min(100%, 56rem);
+            margin-inline: auto;
+            clip-path: polygon(18% 0, 82% 0, 96% 100%, 4% 100%);
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .pyramid-shell::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            clip-path: polygon(18% 0, 82% 0, 96% 100%, 4% 100%);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+        .pyramid-level {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 92px;
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.2s ease;
+        }
+        .pyramid-level + .pyramid-level {
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+        .pyramid-level:hover {
+            opacity: 0.94;
+        }
+
+        .shape-scale-btn {
+            border-left: 3px solid transparent;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+        }
+        .shape-scale-btn.is-active {
+            border-left-color: rgba(187, 154, 247, 0.95);
+            background: rgba(255, 255, 255, 0.05);
+            color: #f2f3f8;
+        }
+        .shape-tab-btn {
+            position: relative;
+            color: #b5b6bf;
+            transition: color 0.15s ease;
+        }
+        .shape-tab-btn:hover {
+            color: #e7e7ea;
+        }
+        .shape-tab-btn.is-active {
+            color: #f2f3f8;
+        }
+        .shape-tab-btn.is-active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -0.45rem;
+            height: 2px;
+            background: rgba(187, 154, 247, 0.95);
+        }
+        .shape-visualizer-grid {
+            background-image: radial-gradient(rgba(181, 182, 191, 0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .shape-particle {
+            transition: transform 0.1s linear, opacity 0.1s linear;
+            will-change: transform, opacity;
+        }
+
+        .sandwich-select {
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+        }
+        .sandwich-select[aria-pressed="true"] {
+            border-color: rgba(122, 162, 247, 0.65);
+            background: rgba(122, 162, 247, 0.14);
+        }
+        
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-brand-dark text-white py-12 px-6 shadow-xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-vibrant via-brand-primary to-transparent"></div>
+        <div class="max-w-6xl mx-auto relative z-10 text-center">
+            <div class="mb-5 inline-flex items-center rounded-lg border border-brand-border bg-brand-light p-1 text-sm">
+                <a href="infographic.html" class="px-3 py-1.5 rounded-md bg-[rgba(122,162,247,0.16)] text-brand-strong border border-[rgba(122,162,247,0.35)]">Infographic 1</a>
+                <a href="infographic-2.html" class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors">Infographic 2</a>
+            </div>
+            <h4 class="text-brand-vibrant font-semibold tracking-wider uppercase mb-2">Presentation Notes: The Limit Case</h4>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Architects of Intent</h1>
+            <p class="text-xl md:text-2xl text-brand-muted max-w-3xl mx-auto">
+                Designing the terrain for infinite intelligence to traverse.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-12 gap-8">
+
+        <section class="col-span-1 md:col-span-12 mt-2 mb-12">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-strong mb-3">1. The Shape of All Work</h2>
+                <p class="text-brand-muted max-w-4xl leading-relaxed">
+                    Every productive process follows the same loop at every scale:
+                    <span class="font-mono text-brand-strong">P(Zn) = Z(n+1)</span>.
+                    The state changes; the process itself can also evolve.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
+                    <div class="lg:col-span-4 space-y-4">
+                        <div class="border border-brand-border rounded-xl bg-brand-light p-4">
+                            <div class="text-xs font-mono text-brand-muted uppercase tracking-wide mb-3">Scale of Iteration</div>
+                            <div class="space-y-1">
+                                <button type="button" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="0" aria-pressed="false">
+                                    <span class="font-semibold">Keystroke</span>
+                                    <span class="float-right text-xs font-mono opacity-70">~100ms</span>
+                                </button>
+                                <button type="button" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="1" aria-pressed="false">
+                                    <span class="font-semibold">Function</span>
+                                    <span class="float-right text-xs font-mono opacity-70">~minutes</span>
+                                </button>
+                                <button type="button" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="2" aria-pressed="true">
+                                    <span class="font-semibold">Feature</span>
+                                    <span class="float-right text-xs font-mono opacity-70">~days</span>
+                                </button>
+                                <button type="button" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="3" aria-pressed="false">
+                                    <span class="font-semibold">Product</span>
+                                    <span class="float-right text-xs font-mono opacity-70">~months</span>
+                                </button>
+                                <button type="button" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="4" aria-pressed="false">
+                                    <span class="font-semibold">Company</span>
+                                    <span class="float-right text-xs font-mono opacity-70">~years</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="shapeSdacCard" class="border border-brand-border rounded-xl bg-brand-light p-4 transition-colors duration-200">
+                            <div class="flex items-center justify-between gap-3">
+                                <div class="text-xs font-mono text-brand-muted uppercase tracking-wide">SDaC Protocol</div>
+                                <button id="shapeSdacToggle" type="button" aria-pressed="false" class="relative inline-flex w-12 h-6 rounded-full border border-brand-border bg-brand-surface transition-colors duration-200">
+                                    <span id="shapeSdacKnob" class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200"></span>
+                                </button>
+                            </div>
+                            <p id="shapeSdacDescription" class="mt-3 text-sm text-brand-muted leading-relaxed">
+                                Standard mode: acceleration without structure. Faster loops can also accelerate drift.
+                            </p>
+                            <div id="shapeSdacBadges" class="mt-3 hidden flex-wrap gap-2">
+                                <span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Validation</span>
+                                <span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Bounded Effectors</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="border border-brand-border rounded-xl bg-brand-light p-4">
+                            <div class="font-mono text-sm md:text-base">
+                                <div class="flex flex-wrap items-center justify-center gap-3 text-brand-muted">
+                                    <span>Iteration:</span>
+                                    <span class="text-brand-strong"><span class="text-brand-accent">P</span>(Zn) = <span class="text-brand-vibrant">Z(n+1)</span></span>
+                                </div>
+                                <div class="flex flex-wrap items-center justify-center gap-3 mt-2 text-xs md:text-sm text-brand-muted">
+                                    <span>Evolution:</span>
+                                    <span><span class="text-brand-accent">Pk</span> → <span class="text-brand-accent">P(k+1)</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="shapeVisualizer" class="relative h-80 md:h-96 rounded-2xl border border-brand-border bg-[rgba(6,7,12,0.75)] overflow-hidden">
+                            <div class="absolute inset-0 opacity-25 shape-visualizer-grid"></div>
+                            <div id="shapeOrbitRing" class="absolute left-1/2 top-1/2 w-64 h-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand-border"></div>
+                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[132px] w-5 h-5 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.55)]"></div>
+                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[158px] text-[10px] font-mono text-brand-muted">Z(n) Input</div>
+                            <div id="shapeGuardRing" class="hidden absolute left-1/2 top-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[rgba(187,154,247,0.35)]"></div>
+                            <div id="shapeParticles" class="absolute inset-0 pointer-events-none"></div>
+
+                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full border-2 border-brand-border bg-brand-surface flex flex-col items-center justify-center text-center px-4">
+                                <div class="text-xs uppercase tracking-wider text-brand-muted">Process</div>
+                                <div id="shapeProcessLabel" class="mt-1 text-sm font-bold text-brand-accent">Team + Practices</div>
+                            </div>
+
+                            <div class="absolute top-4 right-4">
+                                <div id="shapeLoopModeBadge" class="px-3 py-1 rounded-full text-xs font-bold border border-brand-border bg-brand-surface text-brand-muted">STANDARD LOOP</div>
+                            </div>
+                            <div id="shapeGuardStatus" class="hidden absolute top-1/2 right-4 md:right-8 -translate-y-1/2 flex-col items-center gap-1">
+                                <div class="text-brand-vibrant text-base">🛡</div>
+                                <div class="text-[10px] font-mono uppercase text-brand-vibrant">Validated</div>
+                            </div>
+                            <div class="absolute bottom-4 left-4 text-xs font-mono text-brand-muted">
+                                <span>⏱ </span><span id="shapeTimeLabel">~days</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-4 rounded-xl border border-brand-border bg-brand-light">
+                                <div class="text-xs uppercase tracking-wide text-brand-muted">Current State (Zn)</div>
+                                <div id="shapeStateLabel" class="mt-1 text-lg text-brand-strong font-semibold">Codebase</div>
+                            </div>
+                            <div class="p-4 rounded-xl border border-brand-border bg-brand-light">
+                                <div class="text-xs uppercase tracking-wide text-brand-muted">The Process (P)</div>
+                                <div id="shapeProcessCardLabel" class="mt-1 text-lg text-brand-accent font-semibold">Team + Practices</div>
+                            </div>
+                        </div>
+                        <p id="shapeScaleDescription" class="text-sm text-brand-muted leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <div class="mt-8 border border-brand-border rounded-xl bg-brand-light p-4">
+                    <div class="flex flex-wrap gap-4 border-b border-brand-border pb-3">
+                        <button type="button" class="shape-tab-btn is-active text-sm font-semibold pb-1" data-shape-tab="concept" aria-selected="true">The Fractal Shape</button>
+                        <button type="button" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="recursive" aria-selected="false">Recursive Improvement</button>
+                        <button type="button" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="sdac" aria-selected="false">Why SDaC?</button>
+                    </div>
+
+                    <div class="mt-4">
+                        <div data-shape-panel="concept">
+                            <p class="text-brand-strong text-lg font-semibold mb-2">The structure is identical at every scale.</p>
+                            <p class="text-brand-muted leading-relaxed">
+                                Whether you type one character or steer a company, you still transform a current state into a next state through a process. What changes is the time constant and impact radius.
+                            </p>
+                        </div>
+                        <div data-shape-panel="recursive" class="hidden">
+                            <p class="text-brand-strong text-lg font-semibold mb-2">The process itself is part of the loop.</p>
+                            <div class="rounded-xl border border-brand-border bg-brand-surface p-3 font-mono text-sm text-brand-muted">
+                                <div><span class="text-brand-accent">next_state</span> = process(current_state)</div>
+                                <div class="mt-1"><span class="text-brand-vibrant">process</span> = improve(process, evidence)</div>
+                            </div>
+                            <p class="text-brand-muted leading-relaxed mt-3">
+                                Real systems are recursive: execution generates evidence, and evidence upgrades the process that executes.
+                            </p>
+                        </div>
+                        <div data-shape-panel="sdac" class="hidden">
+                            <p class="text-brand-strong text-lg font-semibold mb-2">Acceleration without structure is chaos.</p>
+                            <p class="text-brand-muted leading-relaxed">
+                                AI raises loop speed. SDaC adds deterministic validation, bounded effectors, and explicit intent so higher velocity converges instead of drifting.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                                <div class="p-3 rounded-xl border border-[rgba(247,118,142,0.35)] bg-[rgba(247,118,142,0.08)]">
+                                    <div class="text-sm font-semibold text-brand-danger">Standard loop</div>
+                                    <div class="text-xs text-brand-muted mt-1">Trust the model; mistakes scale with speed.</div>
+                                </div>
+                                <div class="p-3 rounded-xl border border-[rgba(42,195,222,0.35)] bg-[rgba(42,195,222,0.10)]">
+                                    <div class="text-sm font-semibold text-brand-vibrant">SDaC loop</div>
+                                    <div class="text-xs text-brand-muted mt-1">Trust the loop; validators enforce convergence.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOUNDATIONS: Substrate + Sandwich + Slicing -->
+        <section class="col-span-1 md:col-span-12">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border flex flex-col gap-6">
+
+                <!-- Featured Sandwich Diagram -->
+                <div>
+                    <h3 class="text-xl font-bold text-brand-strong mb-3">Mission Object & The Loop</h3>
+                    <div class="bg-brand-light border border-brand-border rounded-xl p-5">
+                        <figure class="rounded-xl overflow-hidden border border-brand-border bg-brand-surface">
+                            <img
+                                src="diagrams/2026-02-12-deterministic-sandwich-dark.png"
+                                alt="The Loop as a Quality Refinery: Generation → Validation → Refinement around a deterministic Mission Object, with failed attempts fed back and trusted output exiting the loop."
+                                class="w-full h-auto block select-none"
+                            />
+                        </figure>
+                        <p class="mt-3 text-sm text-brand-muted leading-relaxed">
+                            This panel shows the Mission Object loop: probabilistic generation enters, validation filters, refinement feeds failures back with error context, and only trusted output exits.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Deterministic Sandwich -->
+                <div>
+                    <h3 class="text-xl font-bold text-brand-strong mb-3">Deterministic Sandwich</h3>
+                    <div class="bg-brand-light border border-brand-border rounded-xl p-5">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+                            <div class="lg:col-span-7">
+                                <div class="relative rounded-xl overflow-hidden border border-brand-border bg-brand-surface">
+                                    <img
+                                        src="diagrams/deterministic-sandwich.png"
+                                        alt="The Deterministic Sandwich: Prep/Mission Object → Model/GenAI → Validation/Gate"
+                                        class="w-full h-auto block select-none"
+                                    />
+                                    <div
+                                        id="sandwichHighlight"
+                                        class="absolute rounded-xl border-2 border-brand-vibrant pointer-events-none transition-all duration-150"
+                                        style="left: 24%; top: 42%; width: 52%; height: 14%;"
+                                    ></div>
+
+                                    <button
+                                        type="button"
+                                        data-sandwich="prep"
+                                        aria-label="Prep / Mission Object"
+                                        class="absolute rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/60 hover:ring-2 hover:ring-brand-primary/40"
+                                        style="left: 16%; top: 18%; width: 68%; height: 16%;"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        data-sandwich="model"
+                                        aria-label="Model / GenAI"
+                                        class="absolute rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/60 hover:ring-2 hover:ring-brand-primary/40"
+                                        style="left: 24%; top: 42%; width: 52%; height: 14%;"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        data-sandwich="validation"
+                                        aria-label="Validation / Gate"
+                                        class="absolute rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/60 hover:ring-2 hover:ring-brand-primary/40"
+                                        style="left: 20%; top: 62%; width: 60%; height: 22%;"
+                                    ></button>
+                                </div>
+
+                                <div class="mt-3 flex flex-wrap gap-2">
+                                    <button
+                                        type="button"
+                                        class="sandwich-select inline-flex items-center px-3 py-2 rounded-lg border border-brand-border bg-brand-surface text-brand-strong text-sm font-semibold hover:border-[rgba(122,162,247,0.6)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60"
+                                        data-sandwich="prep"
+                                        aria-pressed="false"
+                                    >
+                                        Prep
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="sandwich-select inline-flex items-center px-3 py-2 rounded-lg border border-brand-border bg-brand-surface text-brand-strong text-sm font-semibold hover:border-[rgba(122,162,247,0.6)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60"
+                                        data-sandwich="model"
+                                        aria-pressed="true"
+                                    >
+                                        Model
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="sandwich-select inline-flex items-center px-3 py-2 rounded-lg border border-brand-border bg-brand-surface text-brand-strong text-sm font-semibold hover:border-[rgba(122,162,247,0.6)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60"
+                                        data-sandwich="validation"
+                                        aria-pressed="false"
+                                    >
+                                        Validation
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-5">
+                                <div class="border border-brand-border rounded-xl bg-brand-surface p-4">
+                                    <div id="sandwichTitle" class="text-sm font-bold text-brand-strong">Model / GenAI</div>
+                                    <p id="sandwichBody" class="mt-2 text-sm text-brand-muted leading-relaxed">
+                                        One bounded stochastic step. Output is untrusted until it passes Validation.
+                                    </p>
+                                    <div class="mt-3 pt-3 border-t border-brand-border">
+                                        <div class="text-[11px] font-mono text-brand-muted uppercase tracking-wide">Operational Notes</div>
+                                        <p id="sandwichDetail" class="mt-2 text-xs text-brand-muted leading-relaxed">
+                                            The model explores candidates inside a bounded mission packet; no side effects happen at this layer.
+                                        </p>
+                                        <ul class="mt-2 space-y-1 text-xs text-brand-muted list-disc list-inside">
+                                            <li id="sandwichPoint1">Draft outputs are proposals, not accepted state.</li>
+                                            <li id="sandwichPoint2">Cost scales by candidate count, while acceptance is controlled by the gate.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-sm text-brand-muted">
+                                    Only the middle is stochastic. The bread is deterministic, so drift becomes safe to integrate.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Substrate Surfaces -->
+                <div>
+                    <h3 class="text-xl font-bold text-brand-strong mb-3">Substrate - Safe autonomy starts when intent and reality are explicit, and every change is traceable.</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-brand-light border border-brand-border border-l-4 border-l-brand-primary rounded-xl p-5">
+                            <div class="flex items-baseline justify-between gap-3 mb-2">
+                                <h3 class="text-lg font-bold text-brand-strong">Map</h3>
+                                <div class="text-xs font-mono text-brand-muted">Intent surface</div>
+                            </div>
+                            <p class="text-sm text-brand-muted leading-relaxed">
+                                A structured, machine-readable representation of reality: docs, contracts, inventories, derived views.
+                            </p>
+                        </div>
+                        <div class="bg-brand-light border border-brand-border border-l-4 border-l-brand-vibrant rounded-xl p-5">
+                            <div class="flex items-baseline justify-between gap-3 mb-2">
+                                <h3 class="text-lg font-bold text-brand-strong">Terrain</h3>
+                                <div class="text-xs font-mono text-brand-muted">Runnable reality</div>
+                            </div>
+                            <p class="text-sm text-brand-muted leading-relaxed">
+                                Reality-as-code: source, configs, schemas, and the behavior your systems actually execute.
+                            </p>
+                        </div>
+                        <div class="bg-brand-light border border-brand-border border-l-4 border-l-brand-accent rounded-xl p-5">
+                            <div class="flex items-baseline justify-between gap-3 mb-2">
+                                <h3 class="text-lg font-bold text-brand-strong">Ledger</h3>
+                                <div class="text-xs font-mono text-brand-muted">Evidence trail</div>
+                            </div>
+                            <p class="text-sm text-brand-muted leading-relaxed">
+                                Append-only history of diffs and receipts: validator output, decision traces, and provenance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rule of Seven -->
+                <div>
+                    <h3 class="text-xl font-bold text-brand-strong mb-3">Rule of Seven</h3>
+                    <div class="bg-brand-light border border-brand-border rounded-xl p-5">
+                        <div class="border border-brand-border rounded-xl p-4 bg-brand-surface">
+                            <div class="flex flex-col gap-4">
+                                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                                    <div>
+                                        <div class="text-xs font-mono text-brand-muted mb-2">Layering Heuristic</div>
+                                        <div class="text-sm text-brand-muted leading-relaxed">
+                                            Aim for ~7 (±2) siblings per layer. Too many becomes a junk drawer; too few becomes a rabbit hole.
+                                        </div>
+                                    </div>
+                                    <div class="sm:text-right">
+                                        <div class="text-xs font-mono text-brand-muted">Siblings per layer</div>
+                                        <div class="text-2xl font-bold text-brand-strong"><span id="ruleSevenValue">5</span>/9</div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <input
+                                        id="ruleSevenSlider"
+                                        type="range"
+                                        min="1"
+                                        max="9"
+                                        step="1"
+                                        value="5"
+                                        class="w-full"
+                                        aria-label="Rule of Seven sibling slider"
+                                    />
+                                    <div class="mt-2 grid grid-cols-9 items-center text-[11px] font-mono text-brand-muted">
+                                        <span class="col-start-1 justify-self-start">1</span>
+                                        <span class="col-start-5 justify-self-center text-brand-strong">5 (Target)</span>
+                                        <span class="col-start-7 justify-self-center">7</span>
+                                        <span class="col-start-9 justify-self-end">9</span>
+                                    </div>
+                                    <div class="mt-1 flex justify-between text-[11px] text-brand-muted">
+                                        <span>Rabbit-hole edge</span>
+                                        <span>Junk-drawer edge</span>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
+                                    <div class="lg:col-span-4 border border-brand-border rounded-lg p-3 bg-brand-light">
+                                        <div class="text-xs font-mono text-brand-muted">Tree Profile</div>
+                                        <div id="ruleSevenModeTitle" class="mt-1 text-sm font-bold text-brand-strong">Balanced spread</div>
+                                        <p id="ruleSevenModeBody" class="mt-2 text-xs text-brand-muted leading-relaxed"></p>
+                                        <div id="ruleSevenStats" class="mt-3 text-xs text-brand-muted font-mono"></div>
+                                    </div>
+                                    <div class="lg:col-span-8 border border-brand-border rounded-lg p-3 bg-[rgba(6,7,12,0.72)]">
+                                        <div class="text-xs font-mono text-brand-muted mb-2">Example project tree</div>
+                                        <pre id="ruleSevenTree" class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono"></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTRO: The Cost Paradox -->
+        <section class="col-span-1 md:col-span-12 mb-8">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl font-bold text-brand-strong mb-4">2. The Inference Cost Paradox (Looped Systems)</h2>
+                        <p class="text-lg text-brand-muted mb-6 leading-relaxed">
+                            We often assume AI costs trend to zero. Per-call prices for <em>commodity</em> inference can fall.
+                            <br><br>
+                            But reliable outcomes rarely come from a single call. They come from <strong>loops</strong>: context assembly, retries, evaluations, tests, and governance—often with a mix of commodity and frontier models.
+                            <br><br>
+                            <span class="bg-brand-light p-3 rounded text-brand-strong font-semibold border-l-4 border-l-brand-accent">
+                                The Strategy: Measure cost per <em>outcome</em>. Reduce calls per outcome with deterministic context + validators, and reserve frontier calls for irreducible steps.
+                            </span>
+                        </p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="costChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-brand-muted mt-2">Cost composition of a reliable loop (not a single-call demo)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIMIT CASE: Entropy at Infinite Velocity -->
+        <section class="col-span-1 md:col-span-12 mb-8">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl font-bold text-brand-strong mb-4">3. The Limit Case: Entropy at Infinite Velocity</h2>
+                        <p class="text-lg text-brand-muted mb-6 leading-relaxed">
+                            When generation velocity rises without hard constraints, small errors compound into systemic risk.
+                            Stewarded loops keep entropy bounded by forcing every attempt through deterministic Physics.
+                        </p>
+
+                        <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="flex items-center justify-between gap-3">
+                                <div class="text-sm font-semibold text-brand-strong">AI generation velocity</div>
+                                <div class="text-sm text-brand-muted font-mono"><span id="limitVelocityValue">75</span>/100</div>
+                            </div>
+                            <input id="limitVelocitySlider" type="range" min="1" max="100" value="75" class="mt-3 w-full" />
+
+                            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                    <div class="text-xs font-mono text-brand-muted">Unguarded AI</div>
+                                    <div class="text-lg font-bold text-brand-strong mt-1"><span id="limitUnguardedValue">—</span></div>
+                                    <div class="text-xs text-brand-muted mt-1">Entropy / risk index</div>
+                                </div>
+                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                    <div class="text-xs font-mono text-brand-muted">Stewarded loops</div>
+                                    <div class="text-lg font-bold text-brand-strong mt-1"><span id="limitStewardedValue">—</span></div>
+                                    <div class="text-xs text-brand-muted mt-1">Entropy / risk index</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="limitCaseChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-brand-muted mt-2">
+                            Hover for values. The dashed marker indicates the “limit case” region.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCEPT: The Value Shift -->
+        <section class="col-span-1 md:col-span-6">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-6 h-full flex flex-col border border-brand-border">
+                <h2 class="text-2xl font-bold text-brand-strong mb-3">4. The Value Migration</h2>
+                <p class="text-brand-muted mb-4 flex-grow">
+                    As execution becomes instant, value migrates up the stack. 
+                    <br><br>
+                    We are no longer bricklayers; we are the architects designing the blueprints. The "Work" is now defining the shape of the outcome, not producing it.
+                </p>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="valueShiftChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIAGRAM: The Loop (New Unit of Work) -->
+        <section class="col-span-1 md:col-span-6">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-6 h-full flex flex-col border border-brand-border">
+                <h2 class="text-2xl font-bold text-brand-strong mb-3">5. Anatomy of a Steward Loop</h2>
+                <p class="text-brand-muted mb-6">
+                    In the limit case, we steward persistent loops. The loop traverses the terrain we define.
+                </p>
+                
+                <!-- CSS Flow Chart -->
+                <div class="flex flex-col items-center justify-center space-y-4 w-full flex-grow py-4 bg-brand-light rounded-lg border border-brand-border">
+                    
+                    <!-- Step 1: Human Intent -->
+                    <div class="flow-node w-3/4 p-4 bg-brand-dark text-white rounded-lg shadow-md text-center border-l-4 border-brand-vibrant relative">
+                        <div class="font-bold text-lg">1. The Architect</div>
+                        <div class="text-xs text-brand-muted mt-1">Shapes the Terrain (Intent & Constraints)</div>
+                        <!-- Arrow Down -->
+                        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-brand-dark"></div>
+                    </div>
+
+                    <!-- Spacer -->
+                    <div class="h-4"></div>
+
+                    <!-- Step 2: The Engine -->
+                    <div class="flow-node w-3/4 p-4 bg-brand-surface border-2 border-brand-primary text-brand-strong rounded-lg shadow-sm text-center relative">
+                        <div class="font-bold text-lg">2. The Loop</div>
+                        <div class="text-xs text-brand-muted mt-1">Traverses to Local Optima</div>
+                        <!-- Loop Indicators -->
+                        <div class="absolute top-1/2 -right-3 w-6 h-6 border-t-2 border-r-2 border-brand-primary rounded-full animate-spin"></div>
+                         <!-- Arrow Down -->
+                         <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-brand-primary"></div>
+                    </div>
+
+                    <!-- Spacer -->
+                    <div class="h-4"></div>
+
+                    <!-- Step 3: The Steward -->
+                    <div class="flow-node w-3/4 p-4 bg-brand-accent text-white rounded-lg shadow-md text-center relative">
+                        <div class="font-bold text-lg">3. The Optima Check</div>
+                        <div class="text-xs text-white/90 mt-1">Is this the right peak? Reshape if no.</div>
+                        <!-- Arrow Up (Loop back) -->
+                        <div class="absolute top-1/2 -left-8 text-brand-muted text-xs font-mono transform -rotate-90">Reshape Terrain</div>
+                        <div class="absolute top-0 bottom-0 -left-4 w-4 border-l-2 border-dashed border-brand-border rounded-l-xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D TERRAIN: Shaping the Landscape -->
+        <section class="col-span-1 md:col-span-12 mt-8 mb-8">
+            <div class="bg-brand-dark rounded-xl shadow-2xl p-8 text-white overflow-hidden relative">
+                <div class="absolute top-0 right-0 p-4 opacity-20">
+                    <div class="text-9xl font-bold text-brand-vibrant">6</div>
+                </div>
+                
+                <h2 class="text-3xl font-bold mb-2">6. Shaping the Optimization Terrain</h2>
+                <p class="text-brand-muted mb-6 max-w-3xl text-lg">
+                    This is the new game. You do not push the boulder up the hill. You <strong>reshape the hill</strong> so the boulder falls into the hole you want.
+                    <br><br>
+                    <span class="text-brand-vibrant">Intent = Gravity.</span> Changing your intent warps the geometry of the solution space. 
+                    The "Loop" simply calculates the shortest path to the mathematical optima you have defined. Who defines the sharpest peaks wins.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+                    <div class="text-sm text-brand-muted">
+                        Intent preset:
+                        <span id="terrainPresetLabel" class="text-brand-strong font-semibold">Central Optima</span>
+                    </div>
+                    <button
+                        id="terrainReshapeButton"
+                        type="button"
+                        class="inline-flex items-center justify-center px-4 py-2 rounded-xl border border-brand-border bg-brand-light text-brand-strong font-semibold hover:bg-[rgba(122,162,247,0.16)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60"
+                        aria-controls="terrainPlot"
+                    >
+                        Reshape Terrain
+                    </button>
+                </div>
+
+                <!-- Plotly Container -->
+                <div id="terrainPlot" class="plotly-container bg-[rgba(6,7,12,0.70)] rounded-lg shadow-inner border border-brand-border"></div>
+                <div class="text-center mt-2 text-sm text-brand-muted">
+                    Interactive 3D Terrain: The "Peaks" are the Optima (High Value Outcomes). The "Valleys" are Failure States.
+                </div>
+            </div>
+        </section>
+
+        <!-- HIERARCHY: The Pyramid of Intent -->
+        <section class="col-span-1 md:col-span-12 mt-4 mb-12">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-t-4 border-t-brand-accent">
+                <h2 class="text-center text-3xl font-bold text-brand-strong mb-2">7. The Hierarchy of Stewardship</h2>
+                <p class="text-center text-brand-muted mb-8 max-w-2xl mx-auto">
+                    When the foundation is infinite, the structure above it must be precise.
+                </p>
+
+                <div class="max-w-6xl mx-auto flex flex-col items-center">
+                    <div class="pyramid-shell">
+                        <!-- Level 1: Purpose (Top) -->
+                        <div class="pyramid-level bg-brand-dark text-white">
+                            <div class="text-center">
+                                <div class="text-base md:text-lg">Terrain Designer</div>
+                                <div class="text-xs font-normal opacity-75">Defines Geometry of Success</div>
+                            </div>
+                        </div>
+
+                        <!-- Level 2: Architecture -->
+                        <div class="pyramid-level bg-brand-accent text-white">
+                            <div class="text-center">
+                                <div class="text-base md:text-lg">Loop Architect</div>
+                                <div class="text-xs font-normal opacity-75">Missions + Context + Workflows</div>
+                            </div>
+                        </div>
+
+                        <!-- Level 3: Agents -->
+                        <div class="pyramid-level bg-brand-primary text-white">
+                            <div class="text-center">
+                                <div class="text-base md:text-lg">Execution Loops</div>
+                                <div class="text-xs font-normal opacity-75">Write → Judge → Refine</div>
+                            </div>
+                        </div>
+
+                        <!-- Level 4: Physics + Governance -->
+                        <div class="pyramid-level bg-brand-vibrant text-white">
+                            <div class="text-center">
+                                <div class="text-base md:text-lg">Physics + Guardrails</div>
+                                <div class="text-xs font-normal opacity-90">Validators, budgets, protected graders</div>
+                            </div>
+                        </div>
+
+                        <!-- Level 5: Substrate -->
+                        <div class="pyramid-level bg-[rgba(255,255,255,0.06)] text-brand-strong">
+                            <div class="text-center">
+                                <div class="text-base md:text-lg">Substrate Surfaces</div>
+                                <div class="text-xs font-normal text-brand-muted">Map / Terrain / Ledger (+ Context Graph)</div>
+                            </div>
+                        </div>
+
+                        <!-- Level 6: Compute (Base) -->
+                        <div class="pyramid-level bg-[rgba(255,255,255,0.10)] text-brand-strong">
+                            <div class="text-center">
+                                <div class="text-base md:text-lg">Compute + Models</div>
+                                <div class="text-xs font-normal text-brand-muted">Commodity ↔ frontier (spot or fixed; rented or owned)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-light py-8 text-center border-t border-brand-border">
+        <p class="text-brand-muted text-sm">Generated for <strong>Architects of Intent</strong> Presentation</p>
+        <p class="text-brand-muted text-xs mt-1">Stewardship in the Age of Infinite AI</p>
+    </footer>
+
+    <!-- LOGIC SCRIPT -->
+    <script>
+    // Wrapped in IIFE to prevent global scope pollution and "Identifier already declared" errors
+    (function() {
+        const theme = {
+            text: '#e7e7ea',
+            strong: '#f2f3f8',
+            muted: '#b5b6bf',
+            grid: 'rgba(255, 255, 255, 0.08)',
+            primary: '#7aa2f7',
+            accent: '#bb9af7',
+            vibrant: '#2ac3de',
+            danger: '#f7768e'
+        };
+
+        // --- UTILITY: Label Wrapping for Chart.js ---
+        const wrapLabel = function(label, maxLen = 16) {
+            if (label.length <= maxLen) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxLen) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- GLOBAL: Common Chart Options ---
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            color: theme.muted,
+            plugins: {
+                tooltip: {
+                    backgroundColor: 'rgba(17, 19, 26, 0.98)',
+                    padding: 12,
+                    titleColor: theme.strong,
+                    bodyColor: theme.text,
+                    titleFont: { size: 14, family: 'Inter' },
+                    bodyFont: { size: 13, family: 'Inter' },
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            const labels = item.chart.data && item.chart.data.labels;
+                            if (labels && labels[item.dataIndex] !== undefined) {
+                                const label = labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : String(label);
+                            }
+                            const parsedX = item.parsed && typeof item.parsed.x === 'number' ? item.parsed.x : undefined;
+                            if (parsedX !== undefined) return `x=${parsedX}`;
+                            return item.label ? String(item.label) : '';
+                        }
+                    }
+                },
+                legend: {
+                    labels: {
+                        color: theme.muted,
+                        font: { family: 'Inter', size: 12 },
+                        usePointStyle: true,
+                        boxWidth: 8
+                    }
+                }
+            }
+        };
+
+        const setupSandwichDiagram = function() {
+            const highlight = document.getElementById('sandwichHighlight');
+            const title = document.getElementById('sandwichTitle');
+            const body = document.getElementById('sandwichBody');
+            const detail = document.getElementById('sandwichDetail');
+            const point1 = document.getElementById('sandwichPoint1');
+            const point2 = document.getElementById('sandwichPoint2');
+            const triggers = Array.from(document.querySelectorAll('[data-sandwich]'));
+            const toggles = Array.from(document.querySelectorAll('.sandwich-select'));
+
+            if (!highlight || !title || !body || !detail || !point1 || !point2 || triggers.length === 0 || toggles.length === 0) return;
+
+            const parts = {
+                prep: {
+                    label: 'Prep / Mission Object',
+                    color: theme.primary,
+                    box: { left: 16, top: 18, width: 68, height: 16 },
+                    description:
+                        'Deterministically compile authority (Mission) and assemble a bounded context slice. Treat untrusted Terrain text as evidence with provenance.',
+                    detail:
+                        'Prep converts intent into a typed mission packet the model can safely consume without improvising scope.',
+                    point1:
+                        'Authority is compiled up front: objective, scope, constraints, budgets, and allowed effectors.',
+                    point2:
+                        'Context is sliced with provenance so downstream reasoning can cite evidence instead of guessing.',
+                },
+                model: {
+                    label: 'Model / GenAI',
+                    color: theme.accent,
+                    box: { left: 24, top: 42, width: 52, height: 14 },
+                    description:
+                        'One bounded stochastic step. Output is untrusted until it passes Validation. The goal is not “trust the model,” but “trust the loop.”',
+                    detail:
+                        'The middle layer explores candidate patches or decisions inside the mission boundary; it does not commit.',
+                    point1:
+                        'Candidate generation can use cheaper models for breadth and reserve frontier models for irreducible ambiguity.',
+                    point2:
+                        'Outputs remain proposals until validators approve structure, semantics, policy, and budget compliance.',
+                },
+                validation: {
+                    label: 'Validation / Gate',
+                    color: theme.vibrant,
+                    box: { left: 20, top: 62, width: 60, height: 22 },
+                    description:
+                        'Parse strictly and run validators. Enforce scope + budgets. If it fails Physics, the change does not exist.',
+                    detail:
+                        'Validation is fail-closed: parse, tests, and policy checks decide acceptance, not model confidence.',
+                    point1:
+                        'Rejected outputs are discarded with receipts; no partial apply and no side-channel execution.',
+                    point2:
+                        'Accepted outputs produce ledger evidence for replay, audit, rollback, and continuous process improvement.',
+                },
+            };
+
+            const apply = function(key) {
+                const part = parts[key] || parts.model;
+                highlight.style.left = `${part.box.left}%`;
+                highlight.style.top = `${part.box.top}%`;
+                highlight.style.width = `${part.box.width}%`;
+                highlight.style.height = `${part.box.height}%`;
+                highlight.style.borderColor = part.color;
+                title.textContent = part.label;
+                body.textContent = part.description;
+                detail.textContent = part.detail;
+                point1.textContent = part.point1;
+                point2.textContent = part.point2;
+
+                toggles.forEach((btn) => {
+                    const isActive = btn.dataset.sandwich === key;
+                    btn.setAttribute('aria-pressed', String(isActive));
+                });
+            };
+
+            triggers.forEach((btn) => {
+                btn.addEventListener('click', () => apply(btn.dataset.sandwich));
+            });
+
+            apply('model');
+        };
+
+        const setupLimitCaseChart = function() {
+            const canvas = document.getElementById('limitCaseChart');
+            const slider = document.getElementById('limitVelocitySlider');
+            const velocityValue = document.getElementById('limitVelocityValue');
+            const unguardedValue = document.getElementById('limitUnguardedValue');
+            const stewardedValue = document.getElementById('limitStewardedValue');
+
+            if (!canvas || !slider || !velocityValue || !unguardedValue || !stewardedValue) return;
+
+            const toInt = (value, fallback) => {
+                const n = Number.parseInt(String(value), 10);
+                return Number.isFinite(n) ? n : fallback;
+            };
+            const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+            const maxVelocity = 100;
+            const velocities = new Array(maxVelocity).fill(0).map((_, i) => i + 1);
+
+            const unguardedRaw = velocities.map((v) => Math.exp((v - 30) / 12));
+            const rawMin = Math.min(...unguardedRaw);
+            const rawMax = Math.max(...unguardedRaw);
+            const unguardedY = unguardedRaw.map((v) => ((v - rawMin) / (rawMax - rawMin)) * 100);
+
+            const stewardedY = velocities.map((v) => 3 + v * 0.02);
+
+            const unguardedData = velocities.map((v, i) => ({ x: v, y: unguardedY[i] }));
+            const stewardedData = velocities.map((v, i) => ({ x: v, y: stewardedY[i] }));
+
+            const state = {
+                currentX: clamp(toInt(slider.value, 75), 1, maxVelocity),
+                limitX: 95,
+            };
+
+            const markerPlugin = {
+                id: 'aoi_vertical_markers',
+                afterDatasetsDraw(chart) {
+                    const { ctx, chartArea, scales } = chart;
+                    if (!chartArea || !scales || !scales.x || !scales.y) return;
+
+                    const { top, bottom, left, right } = chartArea;
+                    const xScale = scales.x;
+                    const yScale = scales.y;
+
+                    const drawLine = (xValue, color, dash) => {
+                        const xPixel = xScale.getPixelForValue(xValue);
+                        if (!Number.isFinite(xPixel)) return;
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.setLineDash(dash || []);
+                        ctx.strokeStyle = color;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(xPixel, top);
+                        ctx.lineTo(xPixel, bottom);
+                        ctx.stroke();
+                        ctx.restore();
+                    };
+
+                    drawLine(state.limitX, 'rgba(255, 255, 255, 0.28)', [6, 6]);
+                    drawLine(state.currentX, 'rgba(122, 162, 247, 0.55)', [2, 6]);
+
+                    const label = 'The Limit Case';
+                    const limitXPixel = xScale.getPixelForValue(state.limitX);
+                    if (Number.isFinite(limitXPixel)) {
+                        ctx.save();
+                        ctx.font = '600 12px Inter, sans-serif';
+                        ctx.fillStyle = 'rgba(181, 182, 191, 0.9)';
+                        const textWidth = ctx.measureText(label).width;
+                        const x = Math.min(Math.max(limitXPixel + 8, left + 4), right - textWidth - 4);
+                        ctx.fillText(label, x, bottom - 10);
+                        ctx.restore();
+                    }
+
+                    const idx = clamp(state.currentX, 1, maxVelocity) - 1;
+                    const xPixel = xScale.getPixelForValue(state.currentX);
+                    const uPixel = yScale.getPixelForValue(unguardedY[idx]);
+                    const sPixel = yScale.getPixelForValue(stewardedY[idx]);
+                    if (!Number.isFinite(xPixel) || !Number.isFinite(uPixel) || !Number.isFinite(sPixel)) return;
+
+                    const drawDot = (yPixel, color) => {
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.fillStyle = color;
+                        ctx.arc(xPixel, yPixel, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                    };
+
+                    drawDot(uPixel, theme.danger);
+                    drawDot(sPixel, theme.primary);
+                },
+            };
+
+            const ctx = canvas.getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Unguarded AI (Exponential Risk)',
+                            data: unguardedData,
+                            borderColor: theme.danger,
+                            backgroundColor: 'transparent',
+                            borderWidth: 3,
+                            pointRadius: 0,
+                            tension: 0.35,
+                        },
+                        {
+                            label: 'Stewarded Loops (Deterministic)',
+                            data: stewardedData,
+                            borderColor: theme.primary,
+                            backgroundColor: 'transparent',
+                            borderWidth: 3,
+                            pointRadius: 0,
+                            tension: 0.2,
+                        },
+                    ],
+                },
+                options: {
+                    ...commonOptions,
+                    parsing: false,
+                    interaction: { mode: 'index', intersect: false },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            min: 1,
+                            max: maxVelocity,
+                            title: { display: true, text: 'AI Generation Velocity (approaching Infinity)', color: theme.muted },
+                            ticks: {
+                                color: theme.muted,
+                                callback: (value) => (value % 10 === 0 ? value : ''),
+                            },
+                            grid: { color: theme.grid },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: 105,
+                            title: { display: true, text: 'System Entropy / Risk', color: theme.muted },
+                            ticks: { color: theme.muted },
+                            grid: { color: theme.grid },
+                        },
+                    },
+                    plugins: {
+                        ...commonOptions.plugins,
+                        tooltip: {
+                            ...commonOptions.plugins.tooltip,
+                            callbacks: {
+                                ...commonOptions.plugins.tooltip.callbacks,
+                                label: function(context) {
+                                    const y = context.parsed && typeof context.parsed.y === 'number' ? context.parsed.y : null;
+                                    if (y === null) return context.dataset.label || '';
+                                    return `${context.dataset.label}: ${y.toFixed(1)}`;
+                                },
+                            },
+                        },
+                    },
+                },
+                plugins: [markerPlugin],
+            });
+
+            const updateReadout = function(nextX) {
+                const x = clamp(nextX, 1, maxVelocity);
+                state.currentX = x;
+                velocityValue.textContent = String(x);
+                unguardedValue.textContent = unguardedY[x - 1].toFixed(1);
+                stewardedValue.textContent = stewardedY[x - 1].toFixed(1);
+                chart.update('none');
+            };
+
+            slider.addEventListener('input', () => updateReadout(toInt(slider.value, state.currentX)));
+            updateReadout(state.currentX);
+        };
+
+        const setupRuleOfSevenExplorer = function() {
+            const slider = document.getElementById('ruleSevenSlider');
+            const valueEl = document.getElementById('ruleSevenValue');
+            const modeTitle = document.getElementById('ruleSevenModeTitle');
+            const modeBody = document.getElementById('ruleSevenModeBody');
+            const stats = document.getElementById('ruleSevenStats');
+            const tree = document.getElementById('ruleSevenTree');
+
+            if (!slider || !valueEl || !modeTitle || !modeBody || !stats || !tree) return;
+
+            const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+            const toInt = (value, fallback) => {
+                const n = Number.parseInt(String(value), 10);
+                return Number.isFinite(n) ? n : fallback;
+            };
+            const formatInt = (n) => Number(n).toLocaleString('en-US');
+
+            const dirSeeds = ['mission', 'domain', 'workflow', 'service', 'policy', 'contract', 'ledger', 'validator', 'agent'];
+            const fileSeeds = ['intent', 'budget', 'schema', 'checks', 'prompt', 'tests', 'risks', 'notes', 'history'];
+
+            const fileNameFor = (level, index) => {
+                const seed = fileSeeds[(index - 1) % fileSeeds.length];
+                const ext = level % 2 === 0 ? 'md' : 'json';
+                return `${seed}-${level}-${index}.${ext}`;
+            };
+
+            const dirNameFor = (level, index) => {
+                const seed = dirSeeds[(index - 1) % dirSeeds.length];
+                return `${seed}-${level}-${index}`;
+            };
+
+            const depthForTarget = (target) => {
+                if (target <= 2) return 6;
+                if (target <= 4) return 5;
+                if (target <= 6) return 4;
+                if (target <= 8) return 3;
+                return 2;
+            };
+
+            const makeConvergingSampler = (target) => {
+                const spread = target <= 2 ? 0.8 : (target >= 8 ? 1.35 : 2.1);
+                let total = 0;
+                let samples = 0;
+
+                return {
+                    next: () => {
+                        const runningAvg = samples > 0 ? total / samples : target;
+                        const drift = target - runningAvg;
+                        const noise = (Math.random() - Math.random()) * spread;
+                        const value = clamp(Math.round(target + noise + drift * 0.85), 1, 9);
+                        total += value;
+                        samples += 1;
+                        return value;
+                    },
+                    avg: () => (samples > 0 ? total / samples : target),
+                    samples: () => samples,
+                };
+            };
+
+            const buildTreeModel = function(rawValue) {
+                const target = clamp(rawValue, 1, 9);
+                const depth = depthForTarget(target);
+                const lines = ['workspace/'];
+                const visibleCounts = { dirs: 1, files: 0 };
+                const lineCap = 140;
+                let truncated = false;
+                const pushBranch = (prefix, isLast, label) => {
+                    if (truncated) return;
+                    if (lines.length >= lineCap) {
+                        lines.push(`${prefix}${isLast ? '└──' : '├──'} … output truncated`);
+                        truncated = true;
+                        return;
+                    }
+                    lines.push(`${prefix}${isLast ? '└──' : '├──'} ${label}`);
+                };
+
+                const dirSampler = makeConvergingSampler(target);
+                const fileSampler = makeConvergingSampler(target);
+
+                const rootDirCap = target >= 8 ? 8 : (target >= 6 ? 5 : (target >= 4 ? 3 : 1));
+                const nestedDirCap = target >= 8 ? 2 : 1;
+                const rootFileCap = target >= 8 ? 9 : (target >= 6 ? 6 : (target >= 4 ? 4 : 1));
+                const nestedFileCap = target >= 8 ? 4 : (target >= 6 ? 3 : 1);
+
+                const renderDir = function(prefix, level, isLast, label) {
+                    if (truncated) return;
+                    pushBranch(prefix, isLast, `${label}/`);
+                    visibleCounts.dirs += 1;
+                    if (truncated) return;
+
+                    const childPrefix = `${prefix}${isLast ? '    ' : '│   '}`;
+                    const childDirCount = level < depth ? dirSampler.next() : 0;
+                    const childFileCount = fileSampler.next();
+                    const dirCap = nestedDirCap;
+                    const fileCap = nestedFileCap;
+                    const shownDirCount = Math.min(childDirCount, dirCap);
+                    const shownFileCount = Math.min(childFileCount, fileCap);
+
+                    const entries = [];
+
+                    for (let i = 1; i <= shownDirCount; i += 1) {
+                        entries.push({
+                            type: 'dir',
+                            label: dirNameFor(level + 1, i),
+                            nextLevel: level + 1,
+                        });
+                    }
+                    if (childDirCount > shownDirCount) {
+                        entries.push({
+                            type: 'summary',
+                            label: `… +${childDirCount - shownDirCount} sibling dirs (same pattern)`,
+                        });
+                    }
+
+                    for (let i = 1; i <= shownFileCount; i += 1) {
+                        entries.push({
+                            type: 'file',
+                            label: fileNameFor(level, i),
+                        });
+                    }
+                    visibleCounts.files += shownFileCount;
+                    if (childFileCount > shownFileCount) {
+                        entries.push({
+                            type: 'summary',
+                            label: `… +${childFileCount - shownFileCount} sibling files`,
+                        });
+                    }
+
+                    entries.forEach((entry, index) => {
+                        if (truncated) return;
+                        const entryIsLast = index === entries.length - 1;
+                        if (entry.type === 'dir') {
+                            renderDir(childPrefix, entry.nextLevel, entryIsLast, entry.label);
+                            return;
+                        }
+                        pushBranch(childPrefix, entryIsLast, entry.label);
+                    });
+                };
+
+                const rootEntries = [];
+                const rootDirCount = dirSampler.next();
+                const rootFileCount = fileSampler.next();
+                const shownRootDirCount = Math.min(rootDirCount, rootDirCap);
+                const shownRootFileCount = Math.min(rootFileCount, rootFileCap);
+
+                for (let i = 1; i <= shownRootDirCount; i += 1) {
+                    rootEntries.push({
+                        type: 'dir',
+                        label: dirNameFor(1, i),
+                        level: 1,
+                    });
+                }
+                if (rootDirCount > shownRootDirCount) {
+                    rootEntries.push({
+                        type: 'summary',
+                        label: `… +${rootDirCount - shownRootDirCount} root dirs (same pattern)`,
+                    });
+                }
+
+                for (let i = 1; i <= shownRootFileCount; i += 1) {
+                    rootEntries.push({
+                        type: 'file',
+                        label: fileNameFor(0, i),
+                    });
+                }
+                visibleCounts.files += shownRootFileCount;
+                if (rootFileCount > shownRootFileCount) {
+                    rootEntries.push({
+                        type: 'summary',
+                        label: `… +${rootFileCount - shownRootFileCount} root files`,
+                    });
+                }
+
+                rootEntries.forEach((entry, index) => {
+                    if (truncated) return;
+                    const isLast = index === rootEntries.length - 1;
+                    if (entry.type === 'dir') {
+                        renderDir('', entry.level, isLast, entry.label);
+                        return;
+                    }
+                    pushBranch('', isLast, entry.label);
+                });
+
+                const convergenceSamples = 180;
+                for (let i = 0; i < convergenceSamples; i += 1) {
+                    dirSampler.next();
+                    fileSampler.next();
+                }
+
+                let mode = {
+                    title: 'Balanced zone',
+                    body: 'This is the workable middle band. Breadth and depth are both high enough to stay navigable.',
+                };
+
+                if (target <= 2) {
+                    mode = {
+                        title: 'Rabbit-hole edge',
+                        body: 'Very low branching forces deep drilling. Context becomes brittle and handoffs get expensive.',
+                    };
+                } else if (target <= 4) {
+                    mode = {
+                        title: 'Depth-heavy tree',
+                        body: 'Still narrow. Better than 1–2, but structure remains chain-like and retrieval costs stay higher.',
+                    };
+                } else if (target >= 8) {
+                    mode = {
+                        title: 'Junk-drawer edge',
+                        body: 'Very wide layers flatten the map. Discovery is fast, but curation pressure and naming collisions spike.',
+                    };
+                } else if (target >= 7) {
+                    mode = {
+                        title: 'Wide-but-usable',
+                        body: 'Fast top-level discovery, but you need strict naming and governance to avoid category sprawl.',
+                    };
+                }
+
+                return {
+                    target,
+                    depth,
+                    lines,
+                    visibleCounts,
+                    avgDirs: dirSampler.avg(),
+                    avgFiles: fileSampler.avg(),
+                    sampleCount: Math.min(dirSampler.samples(), fileSampler.samples()),
+                    mode,
+                };
+            };
+
+            const render = function(rawValue) {
+                const next = buildTreeModel(toInt(rawValue, 5));
+                valueEl.textContent = String(next.target);
+                modeTitle.textContent = next.mode.title;
+                modeBody.textContent = next.mode.body;
+                stats.textContent =
+                    `target=${next.target} • avg sibling dirs≈${next.avgDirs.toFixed(2)} • avg files/dir≈${next.avgFiles.toFixed(2)} • depth≈${next.depth} • sampled branches=${formatInt(next.sampleCount)} • visible sample=${next.visibleCounts.dirs} dirs / ${next.visibleCounts.files} files`;
+                tree.textContent = next.lines.join('\n');
+            };
+
+            slider.addEventListener('input', () => render(slider.value));
+            render(slider.value);
+        };
+
+        const setupShapeOfAllWork = function() {
+            const scales = [
+                { id: 'keystroke', label: 'Keystroke', state: 'Buffer Content', process: 'Editor + Habits', time: '~100ms', desc: 'A single character typed. The loop is instant.', speed: 0.5 },
+                { id: 'function', label: 'Function', state: 'Implementation', process: 'Developer + Tools', time: '~minutes', desc: 'Logic is structured. Unit tests run.', speed: 2 },
+                { id: 'feature', label: 'Feature', state: 'Codebase', process: 'Team + Practices', time: '~days', desc: 'Features merge. Integration tests pass.', speed: 4 },
+                { id: 'product', label: 'Product', state: 'System', process: 'Org + Strategy', time: '~months', desc: 'Value reaches customers. Metrics update.', speed: 6 },
+                { id: 'company', label: 'Company', state: 'Market Position', process: 'Culture + Leadership', time: '~years', desc: 'The entity evolves.', speed: 10 },
+            ];
+
+            const scaleButtons = Array.from(document.querySelectorAll('[data-shape-scale]'));
+            const toggle = document.getElementById('shapeSdacToggle');
+            const toggleKnob = document.getElementById('shapeSdacKnob');
+            const sdacCard = document.getElementById('shapeSdacCard');
+            const sdacDescription = document.getElementById('shapeSdacDescription');
+            const sdacBadges = document.getElementById('shapeSdacBadges');
+            const stateLabel = document.getElementById('shapeStateLabel');
+            const processLabel = document.getElementById('shapeProcessLabel');
+            const processCardLabel = document.getElementById('shapeProcessCardLabel');
+            const timeLabel = document.getElementById('shapeTimeLabel');
+            const scaleDescription = document.getElementById('shapeScaleDescription');
+            const modeBadge = document.getElementById('shapeLoopModeBadge');
+            const guardRing = document.getElementById('shapeGuardRing');
+            const guardStatus = document.getElementById('shapeGuardStatus');
+            const orbitRing = document.getElementById('shapeOrbitRing');
+            const particleLayer = document.getElementById('shapeParticles');
+            const tabButtons = Array.from(document.querySelectorAll('[data-shape-tab]'));
+            const tabPanels = Array.from(document.querySelectorAll('[data-shape-panel]'));
+
+            if (
+                scales.length === 0 ||
+                scaleButtons.length === 0 ||
+                !toggle ||
+                !toggleKnob ||
+                !sdacCard ||
+                !sdacDescription ||
+                !sdacBadges ||
+                !stateLabel ||
+                !processLabel ||
+                !processCardLabel ||
+                !timeLabel ||
+                !scaleDescription ||
+                !modeBadge ||
+                !guardRing ||
+                !guardStatus ||
+                !orbitRing ||
+                !particleLayer ||
+                tabButtons.length === 0 ||
+                tabPanels.length === 0
+            ) return;
+
+            let activeScale = 2;
+            let isSDaC = false;
+            let activeTab = 'concept';
+            let rotation = 0;
+            let particles = [];
+            let particleId = 0;
+            let frameHandle = null;
+
+            const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+            const renderScale = function() {
+                const scale = scales[activeScale];
+                scaleButtons.forEach((button) => {
+                    const idx = Number.parseInt(button.dataset.shapeScale || '0', 10);
+                    const isActive = idx === activeScale;
+                    button.classList.toggle('is-active', isActive);
+                    button.setAttribute('aria-pressed', String(isActive));
+                });
+                stateLabel.textContent = scale.state;
+                processLabel.textContent = scale.process;
+                processCardLabel.textContent = scale.process;
+                timeLabel.textContent = scale.time;
+                scaleDescription.textContent = scale.desc;
+            };
+
+            const renderSdac = function() {
+                toggle.setAttribute('aria-pressed', String(isSDaC));
+                toggle.style.backgroundColor = isSDaC ? 'rgba(187, 154, 247, 0.95)' : 'rgba(17, 19, 26, 0.92)';
+                toggle.style.borderColor = isSDaC ? 'rgba(187, 154, 247, 0.95)' : 'rgba(255, 255, 255, 0.08)';
+                toggleKnob.style.transform = isSDaC ? 'translateX(24px)' : 'translateX(0px)';
+
+                sdacCard.style.borderColor = isSDaC ? 'rgba(187, 154, 247, 0.55)' : 'rgba(255, 255, 255, 0.08)';
+                sdacCard.style.background = isSDaC ? 'rgba(187, 154, 247, 0.08)' : 'rgba(255, 255, 255, 0.03)';
+                sdacDescription.textContent = isSDaC
+                    ? 'Convergence mode: explicit intent surfaces, bounded effectors, and deterministic validation are active.'
+                    : 'Standard mode: acceleration without structure. Faster loops can also accelerate drift.';
+                sdacBadges.classList.toggle('hidden', !isSDaC);
+                guardRing.classList.toggle('hidden', !isSDaC);
+                guardStatus.classList.toggle('hidden', !isSDaC);
+                guardStatus.classList.toggle('flex', isSDaC);
+                modeBadge.textContent = isSDaC ? 'CONVERGING LOOP' : 'STANDARD LOOP';
+                modeBadge.style.borderColor = isSDaC ? 'rgba(79, 209, 197, 0.65)' : 'rgba(255, 255, 255, 0.10)';
+                modeBadge.style.backgroundColor = isSDaC ? 'rgba(79, 209, 197, 0.10)' : 'rgba(17, 19, 26, 0.92)';
+                modeBadge.style.color = isSDaC ? '#4FD1C5' : '#b5b6bf';
+            };
+
+            const renderTabs = function() {
+                tabButtons.forEach((button) => {
+                    const key = button.dataset.shapeTab || '';
+                    const isActive = key === activeTab;
+                    button.classList.toggle('is-active', isActive);
+                    button.setAttribute('aria-selected', String(isActive));
+                });
+                tabPanels.forEach((panel) => {
+                    const key = panel.dataset.shapePanel || '';
+                    panel.classList.toggle('hidden', key !== activeTab);
+                });
+            };
+
+            const renderParticles = function() {
+                const fragment = document.createDocumentFragment();
+                particles.forEach((particle) => {
+                    const element = document.createElement('div');
+                    element.className = 'shape-particle absolute w-3 h-3 rounded-full';
+                    const radians = (particle.angle * Math.PI) / 180;
+                    const x = Math.cos(radians) * particle.radius;
+                    const y = Math.sin(radians) * particle.radius;
+                    const fade = particle.radius > 160 ? Math.max(0, 1 - (particle.radius - 160) / 60) : 1;
+                    element.style.left = `calc(50% + ${x.toFixed(2)}px)`;
+                    element.style.top = `calc(50% + ${y.toFixed(2)}px)`;
+                    element.style.transform = 'translate(-50%, -50%)';
+                    element.style.opacity = String(fade);
+                    element.style.backgroundColor = particle.type === 'bad' ? 'rgba(246, 173, 85, 0.95)' : 'rgba(79, 209, 197, 0.95)';
+                    fragment.appendChild(element);
+                });
+                particleLayer.replaceChildren(fragment);
+            };
+
+            const tick = function() {
+                const scale = scales[activeScale];
+                const baseSpeed = 2 / scale.speed;
+                rotation = (rotation + baseSpeed) % 360;
+                orbitRing.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+
+                if (Math.random() > 0.95 && particles.length < 26) {
+                    particleId += 1;
+                    particles.push({
+                        id: particleId,
+                        angle: 0,
+                        radius: 128,
+                        type: !isSDaC && Math.random() > 0.8 ? 'bad' : 'good',
+                    });
+                }
+
+                particles = particles
+                    .map((particle) => {
+                        const nextAngle = particle.angle + baseSpeed * 2;
+                        const ejecting = isSDaC && particle.type === 'bad' && nextAngle > 200;
+                        const nextRadius = ejecting ? particle.radius + 4.5 : particle.radius;
+                        return {
+                            ...particle,
+                            angle: nextAngle,
+                            radius: nextRadius,
+                        };
+                    })
+                    .filter((particle) => particle.angle < 360 && particle.radius < 220);
+
+                renderParticles();
+                frameHandle = requestAnimationFrame(tick);
+            };
+
+            scaleButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const idx = Number.parseInt(button.dataset.shapeScale || '0', 10);
+                    activeScale = clamp(idx, 0, scales.length - 1);
+                    renderScale();
+                });
+            });
+
+            toggle.addEventListener('click', () => {
+                isSDaC = !isSDaC;
+                renderSdac();
+            });
+
+            tabButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const key = button.dataset.shapeTab || 'concept';
+                    activeTab = key;
+                    renderTabs();
+                });
+            });
+
+            renderScale();
+            renderSdac();
+            renderTabs();
+            frameHandle = requestAnimationFrame(tick);
+
+            window.addEventListener('beforeunload', () => {
+                if (frameHandle !== null) cancelAnimationFrame(frameHandle);
+            }, { once: true });
+        };
+
+        setupSandwichDiagram();
+        setupLimitCaseChart();
+        setupRuleOfSevenExplorer();
+        setupShapeOfAllWork();
+
+        // --- CHART 1: Cost Paradox (Loop Composition) ---
+        const ctxCost = document.getElementById('costChart').getContext('2d');
+        new Chart(ctxCost, {
+            type: 'bar',
+            data: {
+                labels: ['2020', '2022', '2024', '2026', '2028', '2030 (Limit)'],
+                datasets: [
+                    {
+                        label: 'Model calls (compute)',
+                        data: [50, 45, 42, 40, 38, 35],
+                        backgroundColor: theme.primary,
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Evals + validation',
+                        data: [20, 22, 25, 28, 30, 32],
+                        backgroundColor: theme.accent,
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Orchestration + governance',
+                        data: [15, 18, 20, 22, 25, 28],
+                        backgroundColor: theme.vibrant,
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                interaction: { mode: 'index', intersect: false },
+                scales: {
+                    y: {
+                        stacked: true,
+                        title: { display: true, text: 'Cost per reliable outcome (Index)', color: theme.muted },
+                        ticks: { color: theme.muted },
+                        grid: { color: theme.grid }
+                    },
+                    x: {
+                        stacked: true,
+                        ticks: { color: theme.muted },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    annotation: {
+                        // Chart.js annotation plugin not loaded
+                    }
+                }
+            }
+        });
+
+        // --- CHART 2: Value Migration (Stacked Bar) ---
+        const ctxValue = document.getElementById('valueShiftChart').getContext('2d');
+        const valueLabels = ['Pre-AI Era', 'Copilot Era', 'Agent Era', 'The Limit Case'];
+        const wrappedValueLabels = valueLabels.map(l => wrapLabel(l));
+
+        new Chart(ctxValue, {
+            type: 'bar',
+            data: {
+                labels: wrappedValueLabels,
+                datasets: [
+                    {
+                        label: 'Execution (Doing)',
+                        data: [80, 50, 20, 5],
+                        backgroundColor: 'rgba(255, 255, 255, 0.14)',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Loop Arch. (Building)',
+                        data: [10, 30, 50, 45],
+                        backgroundColor: theme.primary,
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Terrain Shaping (Intent)',
+                        data: [10, 20, 30, 50],
+                        backgroundColor: theme.accent,
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    x: { stacked: true, grid: { display: false }, ticks: { color: theme.muted } },
+                    y: { 
+                        stacked: true, 
+                        grid: { color: theme.grid },
+                        ticks: { color: theme.muted },
+                        title: { display: true, text: '% Value', color: theme.muted }
+                    }
+                }
+            }
+        });
+
+        // --- PLOTLY: 3D TERRAIN ---
+        const terrainSize = 30;
+        const terrainX = new Array(terrainSize).fill(0).map((_, i) => i);
+        const terrainY = new Array(terrainSize).fill(0).map((_, i) => i);
+
+        const terrainPresets = [
+            {
+                key: 'central',
+                label: 'Central Optima',
+                waveAmp: 5,
+                waveX: 5,
+                waveY: 5,
+                peaks: [
+                    { cx: 15, cy: 15, height: 15, spread: 50 },
+                    { cx: 5, cy: 25, height: 10, spread: 30 },
+                ],
+                valleys: [{ cx: 24, cy: 6, depth: 9, spread: 40 }],
+            },
+            {
+                key: 'shifted',
+                label: 'Shifted Intent',
+                waveAmp: 4,
+                waveX: 6,
+                waveY: 4,
+                peaks: [
+                    { cx: 20, cy: 10, height: 14, spread: 45 },
+                    { cx: 10, cy: 22, height: 12, spread: 35 },
+                ],
+                valleys: [{ cx: 14, cy: 14, depth: 8, spread: 55 }],
+            },
+            {
+                key: 'ridge',
+                label: 'Ridge + Narrow Peak',
+                waveAmp: 3,
+                waveX: 8,
+                waveY: 6,
+                ridge: { amp: 8, spread: 14 },
+                peaks: [{ cx: 24, cy: 24, height: 11, spread: 22 }],
+                valleys: [{ cx: 8, cy: 8, depth: 10, spread: 30 }],
+            },
+        ];
+
+        const gaussian = function(i, j, cx, cy, height, spread) {
+            const dx = i - cx;
+            const dy = j - cy;
+            return Math.exp(-((dx * dx) + (dy * dy)) / spread) * height;
+        };
+
+        const generateTerrainZ = function(preset) {
+            const z = [];
+            const waveAmp = preset.waveAmp ?? 0;
+            const waveX = preset.waveX ?? 6;
+            const waveY = preset.waveY ?? 6;
+            const peaks = preset.peaks ?? [];
+            const valleys = preset.valleys ?? [];
+            const ridge = preset.ridge ?? null;
+
+            for (let i = 0; i < terrainSize; i++) {
+                const row = [];
+                for (let j = 0; j < terrainSize; j++) {
+                    let value = Math.sin(i / waveX) * Math.cos(j / waveY) * waveAmp;
+
+                    if (ridge) {
+                        value += Math.exp(-(((i - j) * (i - j)) / ridge.spread)) * ridge.amp;
+                    }
+
+                    for (const peak of peaks) {
+                        value += gaussian(i, j, peak.cx, peak.cy, peak.height, peak.spread);
+                    }
+                    for (const valley of valleys) {
+                        value -= gaussian(i, j, valley.cx, valley.cy, valley.depth, valley.spread);
+                    }
+
+                    row.push(value);
+                }
+                z.push(row);
+            }
+            return z;
+        };
+
+        const makeTerrainData = function(z) {
+            return [
+                {
+                    z,
+                    x: terrainX,
+                    y: terrainY,
+                    type: 'surface',
+                    colorscale: [
+                        [0, '#0b0c10'],   // Dark valleys
+                        [0.5, '#7aa2f7'], // Mid slopes
+                        [1, '#2ac3de']    // Bright peaks
+                    ],
+                    showscale: false,
+                    contours: {
+                        z: {
+                            show: true,
+                            usecolormap: true,
+                            highlightcolor: "#9ece6a",
+                            project: { z: true }
+                        }
+                    }
+                }
+            ];
+        };
+
+        const terrainLayout = {
+            margin: { l: 0, r: 0, b: 0, t: 0 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            scene: {
+                xaxis: { title: '', showgrid: true, gridcolor: theme.grid, showticklabels: false, zeroline: false },
+                yaxis: { title: '', showgrid: true, gridcolor: theme.grid, showticklabels: false, zeroline: false },
+                zaxis: {
+                    title: 'Value',
+                    showgrid: true,
+                    gridcolor: theme.grid,
+                    tickfont: { color: theme.muted },
+                    titlefont: { color: theme.muted },
+                    zeroline: false,
+                },
+                camera: {
+                    eye: {x: 1.5, y: 1.5, z: 1.2}
+                }
+            }
+        };
+
+        const terrainConfig = { responsive: true, displayModeBar: false };
+
+        const terrainEl = document.getElementById('terrainPlot');
+        const terrainLabelEl = document.getElementById('terrainPresetLabel');
+        const terrainButtonEl = document.getElementById('terrainReshapeButton');
+
+        let terrainPresetIndex = 0;
+
+        const applyTerrainPreset = function(index) {
+            const preset = terrainPresets[index] || terrainPresets[0];
+            if (terrainLabelEl) terrainLabelEl.textContent = preset.label;
+            const z = generateTerrainZ(preset);
+            const data = makeTerrainData(z);
+            Plotly.react(terrainEl, data, terrainLayout, terrainConfig);
+        };
+
+        Plotly.newPlot(
+            terrainEl,
+            makeTerrainData(generateTerrainZ(terrainPresets[0])),
+            terrainLayout,
+            terrainConfig
+        );
+
+        if (terrainButtonEl) {
+            terrainButtonEl.addEventListener('click', function() {
+                terrainPresetIndex = (terrainPresetIndex + 1) % terrainPresets.length;
+                applyTerrainPreset(terrainPresetIndex);
+            });
+        }
+    })();
+    </script>
+</body>
+</html>
