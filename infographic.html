@@ -704,17 +704,21 @@
 	                        <div class="xl:col-span-5 border border-brand-border rounded-xl p-4 bg-brand-light flex flex-col">
 	                            <div class="text-xs font-mono text-brand-muted mb-2">Side view: the loop grows a tree</div>
 	                            <div class="flex-1 flex items-center justify-center">
-	                                <svg id="fsGrowthSvg" viewBox="0 0 220 240" class="w-full max-w-[260px] h-64" aria-hidden="true">
-	                                    <defs>
-	                                        <linearGradient id="fsTrunk" x1="0" x2="0" y1="0" y2="1">
-	                                            <stop offset="0" stop-color="rgba(242,243,248,0.75)"/>
-	                                            <stop offset="1" stop-color="rgba(181,182,191,0.35)"/>
-	                                        </linearGradient>
-	                                        <radialGradient id="fsCanopy" cx="50%" cy="40%" r="70%">
-	                                            <stop offset="0" stop-color="rgba(42,195,222,0.55)"/>
-	                                            <stop offset="1" stop-color="rgba(122,162,247,0.20)"/>
-	                                        </radialGradient>
-	                                    </defs>
+		                                <svg id="fsGrowthSvg" viewBox="0 0 220 240" class="w-full max-w-[260px] h-64" aria-hidden="true">
+		                                    <defs>
+		                                        <linearGradient id="fsTrunk" x1="0" x2="0" y1="0" y2="1">
+		                                            <stop offset="0" stop-color="rgba(242,243,248,0.75)"/>
+		                                            <stop offset="1" stop-color="rgba(181,182,191,0.35)"/>
+		                                        </linearGradient>
+		                                        <linearGradient id="fsBark" x1="0" x2="0" y1="0" y2="1">
+		                                            <stop offset="0" stop-color="rgba(242,243,248,0.55)"/>
+		                                            <stop offset="1" stop-color="rgba(97,103,129,0.55)"/>
+		                                        </linearGradient>
+		                                        <radialGradient id="fsCanopy" cx="50%" cy="40%" r="70%">
+		                                            <stop offset="0" stop-color="rgba(42,195,222,0.55)"/>
+		                                            <stop offset="1" stop-color="rgba(122,162,247,0.20)"/>
+		                                        </radialGradient>
+		                                    </defs>
 
 	                                    <!-- ground -->
 	                                    <path d="M20 214 C 70 204, 150 204, 200 214" stroke="rgba(255,255,255,0.10)" stroke-width="2" fill="none"/>
@@ -732,17 +736,21 @@
 	                                        <circle cx="140" cy="148" r="11" fill="rgba(122,162,247,0.20)"/>
 	                                    </g>
 
-	                                    <g id="fsTreeTree" style="opacity: 0;">
-	                                        <path d="M110 206 L110 122" stroke="url(#fsTrunk)" stroke-width="9" stroke-linecap="round"/>
-	                                        <path d="M110 150 C 78 144, 60 126, 52 104" stroke="rgba(187,154,247,0.45)" stroke-width="7" fill="none" stroke-linecap="round"/>
-	                                        <path d="M110 142 C 142 136, 162 118, 174 96" stroke="rgba(42,195,222,0.50)" stroke-width="7" fill="none" stroke-linecap="round"/>
-	                                        <circle cx="110" cy="92" r="46" fill="url(#fsCanopy)"/>
-	                                        <circle cx="78" cy="102" r="26" fill="rgba(187,154,247,0.18)"/>
-	                                        <circle cx="144" cy="104" r="28" fill="rgba(42,195,222,0.16)"/>
-	                                        <circle cx="110" cy="92" r="46" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none"/>
-	                                    </g>
-	                                </svg>
-	                            </div>
+		                                    <g id="fsTreeTree" style="opacity: 0;">
+		                                        <path d="M110 150 C 78 144, 60 126, 52 104" stroke="rgba(187,154,247,0.45)" stroke-width="7" fill="none" stroke-linecap="round"/>
+		                                        <path d="M110 142 C 142 136, 162 118, 174 96" stroke="rgba(42,195,222,0.50)" stroke-width="7" fill="none" stroke-linecap="round"/>
+		                                        <circle cx="110" cy="92" r="46" fill="url(#fsCanopy)"/>
+		                                        <circle cx="78" cy="102" r="26" fill="rgba(187,154,247,0.18)"/>
+		                                        <circle cx="144" cy="104" r="28" fill="rgba(42,195,222,0.16)"/>
+		                                        <circle cx="110" cy="92" r="46" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none"/>
+		                                        <!-- trunk + roots (anchor the canopy so it doesn't read as a floating orb) -->
+		                                        <path d="M102 214 L118 214 L114 138 L106 138 Z" fill="url(#fsBark)" stroke="rgba(242,243,248,0.22)" stroke-width="1"/>
+		                                        <path d="M108 214 L112 214 L111 146 L109 146 Z" fill="rgba(242,243,248,0.14)"/>
+		                                        <path d="M110 214 C 98 214, 90 210, 84 204" stroke="rgba(242,243,248,0.12)" stroke-width="3" fill="none" stroke-linecap="round"/>
+		                                        <path d="M110 214 C 122 214, 130 210, 136 204" stroke="rgba(242,243,248,0.12)" stroke-width="3" fill="none" stroke-linecap="round"/>
+		                                    </g>
+		                                </svg>
+		                            </div>
 
 	                            <div class="mt-3 text-xs text-brand-muted leading-relaxed">
 	                                <div class="text-sm font-semibold text-brand-strong" id="fsGrowthStage">Seed</div>
