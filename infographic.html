@@ -661,11 +661,19 @@
 	                                <button type="button" class="hedge-toggle sm:col-span-2" data-hedge-key="minFrontier" aria-pressed="false">Minimize irreducible frontier calls</button>
 	                            </div>
 
-	                            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+	                            <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
 	                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 	                                    <div class="text-xs font-mono text-brand-muted">Expected cost / outcome</div>
 	                                    <div class="mt-1 text-lg font-bold text-brand-strong"><span id="hedgeExpectedCost">—</span></div>
 	                                    <div class="text-xs text-brand-muted mt-1">Index (lower is better)</div>
+	                                </div>
+	                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+	                                    <div class="text-xs font-mono text-brand-muted">P95 cost / outcome</div>
+	                                    <div class="mt-1 text-lg font-bold text-brand-danger"><span id="hedgeP95Cost">—</span></div>
+	                                    <div class="text-xs text-brand-muted mt-1">
+	                                        Tail premium: +<span id="hedgeTailPremium" class="font-mono text-brand-strong">—</span>
+	                                        <span class="ml-2">(<span id="hedgeP95Delta" class="font-mono text-brand-strong">—</span> vs spot)</span>
+	                                    </div>
 	                                </div>
 	                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 	                                    <div class="text-xs font-mono text-brand-muted">Cost certainty</div>
@@ -1553,6 +1561,9 @@
 		            const slider = document.getElementById('hedgeAutonomySlider');
 		            const autonomyValue = document.getElementById('hedgeAutonomyValue');
 		            const expectedCost = document.getElementById('hedgeExpectedCost');
+		            const p95Cost = document.getElementById('hedgeP95Cost');
+		            const tailPremium = document.getElementById('hedgeTailPremium');
+		            const p95Delta = document.getElementById('hedgeP95Delta');
 		            const certainty = document.getElementById('hedgeCertainty');
 
 		            const riskPricing = document.getElementById('hedgeRiskPricing');
@@ -1573,6 +1584,9 @@
 		                !slider ||
 		                !autonomyValue ||
 		                !expectedCost ||
+		                !p95Cost ||
+		                !tailPremium ||
+		                !p95Delta ||
 		                !certainty ||
 		                !riskPricing ||
 		                !riskLockin ||
@@ -1620,7 +1634,7 @@
 		                };
 		            };
 
-		            const compute = () => {
+		            const compute = (activeSet = state.active) => {
 		                const base = baseline(state.autonomy);
 		                let cost = base.cost;
 		                let pricing = base.pricing;
@@ -1628,7 +1642,7 @@
 		                let latency = base.latency;
 		                let frontier = base.frontier;
 
-		                state.active.forEach((key) => {
+		                activeSet.forEach((key) => {
 		                    const hedge = HEDGES[key];
 		                    if (!hedge) return;
 		                    cost += hedge.cost;
@@ -1645,13 +1659,17 @@
 		                cost = clamp(cost, 25, 160);
 
 		                const certainty = clamp(100 - pricing, 0, 100);
+		                // Tail risk rises with pricing volatility and frontier exposure. Hedging buys down P95 even if expected rises.
+		                const tailFactor = 1 + pricing * 0.008 + frontier * 0.004;
+		                const p95 = clamp(cost * tailFactor, cost, 260);
+		                const tailPremium = clamp(p95 - cost, 0, 200);
 		                const riskIndex = clamp(
 		                    pricing * 0.36 + frontier * 0.30 + lockin * 0.20 + latency * 0.14,
 		                    0,
 		                    100
 		                );
 
-		                return { cost, certainty, pricing, lockin, latency, frontier, riskIndex };
+		                return { cost, p95, tailPremium, certainty, pricing, lockin, latency, frontier, riskIndex };
 		            };
 
 		            const recommendNext = (metrics) => {
@@ -1697,9 +1715,16 @@
 		                autonomyValue.textContent = `${formatInt(state.autonomy)}%`;
 		                slider.value = String(state.autonomy);
 
-		                const m = compute();
+		                const m = compute(state.active);
+		                const spot = compute(new Set());
 
 		                expectedCost.textContent = formatInt(m.cost);
+		                p95Cost.textContent = formatInt(m.p95);
+		                tailPremium.textContent = formatInt(m.tailPremium);
+		                const delta = spot.p95 - m.p95;
+		                if (Math.abs(delta) < 0.5) p95Delta.textContent = '0';
+		                else if (delta > 0) p95Delta.textContent = `-${formatInt(delta)}`;
+		                else p95Delta.textContent = `+${formatInt(-delta)}`;
 		                certainty.textContent = formatInt(m.certainty);
 
 		                riskPricing.textContent = formatInt(m.pricing);
@@ -1719,6 +1744,9 @@
 		                const hasFlexMitigation = state.active.has('multi') || state.active.has('hybrid');
 		                if (hasCommitment && !hasFlexMitigation) {
 		                    notes.push('Commitments reduce volatility, but can increase lock-in. Mitigate with multi-provider routing or hybrid capacity.');
+		                }
+		                if (hasCommitment && spot.p95 > m.p95 + 8) {
+		                    notes.push(`Hedge effect: P95 cost drops from ${formatInt(spot.p95)} → ${formatInt(m.p95)} while expected cost is ${formatInt(m.cost)}.`);
 		                }
 		                if (state.autonomy >= 75 && state.active.size === 0) {
 		                    notes.push('High autonomy on spot pricing turns price swings into downtime and rework.');
