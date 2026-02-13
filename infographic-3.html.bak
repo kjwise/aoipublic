@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic 3 — Practical SDaC Programming Patterns</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js (vendored with CDN fallback) -->
+    <script src="chart.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0b0c10',
+                            surface: 'rgba(17, 19, 26, 0.92)',
+                            light: 'rgba(255, 255, 255, 0.03)',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            text: '#e7e7ea',
+                            strong: '#f2f3f8',
+                            muted: '#b5b6bf',
+                            primary: '#7aa2f7',
+                            accent: '#bb9af7',
+                            vibrant: '#2ac3de',
+                            danger: '#f7768e'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 320px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 420px;
+            }
+        }
+
+        body {
+            background: radial-gradient(1200px 800px at 20% 0%, rgba(122, 162, 247, 0.18), transparent 55%),
+                        radial-gradient(900px 700px at 100% 30%, rgba(36, 204, 142, 0.10), transparent 55%),
+                        #0b0c10;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #11131a; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.16); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.24); }
+
+        .pill-tab {
+            padding: 0.45rem 0.75rem;
+            border-radius: 0.6rem;
+            color: rgba(181, 182, 191, 0.95);
+            transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+            border: 1px solid transparent;
+            font-weight: 700;
+        }
+        .pill-tab[aria-pressed="true"] {
+            background: rgba(122, 162, 247, 0.16);
+            border-color: rgba(122, 162, 247, 0.35);
+            color: rgba(242, 243, 248, 0.98);
+        }
+        .pill-tab:hover { transform: translateY(-1px); }
+
+        .trace-line {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.08rem 0.35rem;
+            border-radius: 0.4rem;
+        }
+        .trace-read { background: rgba(122, 162, 247, 0.14); }
+        .trace-write { background: rgba(187, 154, 247, 0.14); }
+        .trace-exec { background: rgba(42, 195, 222, 0.12); }
+        .trace-swatch {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .trace-swatch.read { background: rgba(122, 162, 247, 0.85); }
+        .trace-swatch.write { background: rgba(187, 154, 247, 0.85); }
+        .trace-swatch.exec { background: rgba(42, 195, 222, 0.75); }
+
+        .soft-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(6, 7, 12, 0.72);
+            color: rgba(181, 182, 191, 0.96);
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+            user-select: none;
+        }
+        .soft-toggle[aria-pressed="true"] {
+            border-color: rgba(187, 154, 247, 0.78);
+            background: rgba(187, 154, 247, 0.14);
+            color: rgba(242, 243, 248, 0.96);
+            box-shadow: 0 0 0 1px rgba(187, 154, 247, 0.25), 0 0 18px rgba(187, 154, 247, 0.12);
+        }
+        .soft-toggle:active { transform: translateY(1px); }
+
+        .attempt-pill {
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+        }
+        .attempt-pill.is-fail { background: rgba(247, 118, 142, 0.26); border-color: rgba(247, 118, 142, 0.30); }
+        .attempt-pill.is-pass { background: rgba(42, 195, 222, 0.22); border-color: rgba(42, 195, 222, 0.28); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pill-tab, .soft-toggle, .attempt-pill { transition: none; }
+            .pill-tab:hover { transform: none; }
+        }
+    </style>
+</head>
+
+<body class="bg-brand-dark text-brand-text font-sans antialiased">
+    <header class="bg-brand-dark text-white py-12 px-6 shadow-xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-vibrant via-brand-primary to-transparent"></div>
+        <div class="max-w-6xl mx-auto relative z-10 text-center">
+            <div class="mb-5 inline-flex items-center rounded-lg border border-brand-border bg-brand-light p-1 text-sm">
+                <a href="infographic.html" class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors">Infographic 1</a>
+                <a href="infographic-2.html" class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors">Infographic 2</a>
+                <a href="infographic-3.html" class="px-3 py-1.5 rounded-md bg-[rgba(122,162,247,0.16)] text-brand-strong border border-[rgba(122,162,247,0.35)]">Infographic 3</a>
+            </div>
+            <h4 class="text-brand-vibrant font-semibold tracking-wider uppercase mb-2">Presentation Notes: Practical Programming</h4>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Architects of Intent</h1>
+            <p class="text-xl md:text-2xl text-brand-muted max-w-3xl mx-auto">
+                Programming patterns that make loops safe, fast, and self-improving.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-12 gap-8">
+        <!-- SECTION 1 -->
+        <section class="col-span-1 md:col-span-12">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-5/12">
+                        <h2 class="text-3xl font-bold text-brand-strong mb-3">1. The Substrate (Map · Terrain · Ledger)</h2>
+                        <p class="text-brand-muted leading-relaxed">
+                            SDaC is practical when the system has three explicit surfaces:
+                            <span class="text-brand-strong font-semibold">intent</span>,
+                            <span class="text-brand-strong font-semibold">runnable reality</span>,
+                            and a deterministic <span class="text-brand-strong font-semibold">evidence trail</span>.
+                        </p>
+
+                        <div class="mt-5 grid grid-cols-1 gap-3">
+                            <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                                <div class="text-xs font-mono text-brand-muted">MAP</div>
+                                <div class="mt-1 text-sm font-semibold text-brand-strong">Intent surface</div>
+                                <div class="mt-1 text-xs text-brand-muted leading-relaxed">Mission objects, constraints, and acceptance criteria.</div>
+                            </div>
+                            <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                                <div class="text-xs font-mono text-brand-muted">TERRAIN</div>
+                                <div class="mt-1 text-sm font-semibold text-brand-strong">Runnable reality</div>
+                                <div class="mt-1 text-xs text-brand-muted leading-relaxed">Code, configs, schemas, and policies your system actually runs.</div>
+                            </div>
+                            <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                                <div class="text-xs font-mono text-brand-muted">LEDGER</div>
+                                <div class="mt-1 text-sm font-semibold text-brand-strong">Evidence trail</div>
+                                <div class="mt-1 text-xs text-brand-muted leading-relaxed">Append-only records of diffs, validator output, and decisions.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-7/12">
+                        <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                <div class="inline-flex items-center rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
+                                    <button type="button" class="pill-tab font-mono" data-substrate-tab="map" aria-pressed="true">Map</button>
+                                    <button type="button" class="pill-tab font-mono" data-substrate-tab="terrain" aria-pressed="false">Terrain</button>
+                                    <button type="button" class="pill-tab font-mono" data-substrate-tab="ledger" aria-pressed="false">Ledger</button>
+                                </div>
+                                <button id="substrateTraceToggle" type="button" class="soft-toggle font-mono" aria-pressed="false">Trace: Off</button>
+                            </div>
+
+                            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+                                    <div class="text-xs font-mono text-brand-muted mb-2">Example project tree</div>
+                                    <pre id="substrateTree" class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono"></pre>
+                                </div>
+                                <div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="text-xs font-mono text-brand-muted">File</div>
+                                        <div id="substrateFileLabel" class="text-xs font-mono text-brand-muted">—</div>
+                                    </div>
+                                    <pre id="substrateFile" class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono"></pre>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 flex flex-wrap items-center gap-4 text-xs text-brand-muted">
+                                <span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch read"></span>read</span>
+                                <span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch write"></span>write</span>
+                                <span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch exec"></span>execute</span>
+                                <span class="text-xs text-brand-muted">Toggle trace to see which artifacts the loop touches.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section class="col-span-1 md:col-span-12">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-accent">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-5/12">
+                        <h2 class="text-3xl font-bold text-brand-strong mb-3">2. Mission Objects (Intent As Code)</h2>
+                        <p class="text-brand-muted leading-relaxed">
+                            A mission object is a programmable unit of work: goals, constraints, budgets, and acceptance criteria.
+                            It turns a vague request into a deterministic interface.
+                        </p>
+                        <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="text-xs font-mono text-brand-muted mb-2">Why it matters</div>
+                            <div class="text-sm text-brand-muted leading-relaxed">
+                                The tighter the mission boundary, the smaller the search space.
+                                That is how you get faster convergence without “trusting the model.”
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-7/12">
+                        <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                                <div class="inline-flex items-center rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
+                                    <button type="button" class="pill-tab font-mono" data-mission-preset="bugfix" aria-pressed="true">Bugfix</button>
+                                    <button type="button" class="pill-tab font-mono" data-mission-preset="feature" aria-pressed="false">Feature</button>
+                                    <button type="button" class="pill-tab font-mono" data-mission-preset="refactor" aria-pressed="false">Refactor</button>
+                                    <button type="button" class="pill-tab font-mono" data-mission-preset="compliance" aria-pressed="false">Compliance</button>
+                                </div>
+                                <div class="text-xs font-mono text-brand-muted">
+                                    Constraint tightness <span id="missionTightnessValue" class="text-brand-strong">55%</span>
+                                </div>
+                            </div>
+
+                            <label class="sr-only" for="missionTightnessSlider">Constraint tightness slider</label>
+                            <input id="missionTightnessSlider" type="range" min="0" max="100" value="55" class="mt-3 w-full" />
+
+                            <div class="mt-4 grid grid-cols-1 xl:grid-cols-12 gap-4">
+                                <div class="xl:col-span-7 border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="text-xs font-mono text-brand-muted">mission.yaml</div>
+                                        <div id="missionIdLabel" class="text-xs font-mono text-brand-muted">—</div>
+                                    </div>
+                                    <pre id="missionYaml" class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono"></pre>
+                                </div>
+
+                                <div class="xl:col-span-5 space-y-3">
+                                    <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                        <div class="text-xs font-mono text-brand-muted">Derived interface</div>
+                                        <div class="mt-2 text-sm text-brand-muted leading-relaxed">
+                                            <div class="flex items-center justify-between">
+                                                <span>Expected retries</span>
+                                                <span class="font-mono text-brand-strong"><span id="missionRetries">—</span>x</span>
+                                            </div>
+                                            <div class="mt-2 flex items-center justify-between">
+                                                <span>Convergence rate</span>
+                                                <span class="font-mono text-brand-strong"><span id="missionConvergence">—</span>/100</span>
+                                            </div>
+                                            <div class="mt-2 flex items-center justify-between">
+                                                <span>Drift risk</span>
+                                                <span class="font-mono text-brand-strong"><span id="missionDrift">—</span>/100</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                        <div class="text-xs font-mono text-brand-muted">Budgets (bounded exits)</div>
+                                        <div class="mt-2 text-sm text-brand-muted leading-relaxed">
+                                            <div class="flex items-center justify-between">
+                                                <span>Max calls</span>
+                                                <span class="font-mono text-brand-strong"><span id="missionMaxCalls">—</span></span>
+                                            </div>
+                                            <div class="mt-2 flex items-center justify-between">
+                                                <span>Max latency</span>
+                                                <span class="font-mono text-brand-strong"><span id="missionMaxLatency">—</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 text-xs text-brand-muted">If the budget is exceeded, the loop exits with a deterministic failure you can reason about.</div>
+                                    </div>
+
+                                    <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                        <div class="text-xs font-mono text-brand-muted">Trade-off</div>
+                                        <div class="mt-2">
+                                            <div class="flex items-center justify-between text-xs text-brand-muted">
+                                                <span>Flexibility</span>
+                                                <span class="font-mono text-brand-strong"><span id="missionFlex">—</span>%</span>
+                                            </div>
+                                            <div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+                                                <div id="missionFlexBar" class="h-2 rounded" style="width: 0%; background: rgba(42, 195, 222, 0.78);"></div>
+                                            </div>
+                                            <div class="mt-3 flex items-center justify-between text-xs text-brand-muted">
+                                                <span>Constraint strength</span>
+                                                <span class="font-mono text-brand-strong"><span id="missionTight">—</span>%</span>
+                                            </div>
+                                            <div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+                                                <div id="missionTightBar" class="h-2 rounded" style="width: 0%; background: rgba(187, 154, 247, 0.82);"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="col-span-1 md:col-span-12">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-5/12">
+                        <h2 class="text-3xl font-bold text-brand-strong mb-3">3. The Deterministic Sandwich (Contain Stochasticity)</h2>
+                        <p class="text-brand-muted leading-relaxed">
+                            Put probabilistic generation in the middle. Wrap it in deterministic prep and deterministic validation.
+                            The goal is not “trust the model.” It is “trust the loop.”
+                        </p>
+                        <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
+                            <div class="text-sm text-brand-muted leading-relaxed">
+                                Increase entropy and you get more retries. Strengthen the gate and you trade acceptance for quality.
+                                Either way, the sandwich keeps outcomes bounded.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-7/12">
+                        <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
+                                <div class="xl:col-span-7 space-y-4">
+                                    <div class="border border-brand-border rounded-xl p-4 bg-[rgba(6,7,12,0.72)]">
+                                        <div class="text-xs font-mono text-brand-muted mb-3">Pipeline</div>
+                                        <div class="flex items-center justify-between gap-3 text-center">
+                                            <div class="flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+                                                <div class="text-xs font-mono text-brand-muted">Prep</div>
+                                                <div class="mt-1 text-sm font-semibold text-brand-strong">Context + constraints</div>
+                                            </div>
+                                            <div class="text-brand-muted font-mono text-xl">→</div>
+                                            <div class="flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+                                                <div class="text-xs font-mono text-brand-muted">Model</div>
+                                                <div class="mt-1 text-sm font-semibold text-brand-strong">Stochastic search</div>
+                                            </div>
+                                            <div class="text-brand-muted font-mono text-xl">→</div>
+                                            <div class="flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+                                                <div class="text-xs font-mono text-brand-muted">Validation</div>
+                                                <div class="mt-1 text-sm font-semibold text-brand-strong">Deterministic gates</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="border border-brand-border rounded-xl p-4 bg-[rgba(6,7,12,0.72)]">
+                                        <div class="flex items-center justify-between gap-3">
+                                            <div class="text-xs font-mono text-brand-muted">Candidate attempts</div>
+                                            <button id="sandwichRunBtn" type="button" class="soft-toggle font-mono" aria-pressed="false">Run</button>
+                                        </div>
+                                        <div id="sandwichAttempts" class="mt-3 grid grid-cols-12 gap-1"></div>
+                                        <div class="mt-3 text-xs text-brand-muted">
+                                            Red = rejected candidate. Cyan = accepted output after the gate.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="xl:col-span-5 space-y-3">
+                                    <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                        <div class="flex items-center justify-between text-xs text-brand-muted">
+                                            <span class="font-mono">Model entropy</span>
+                                            <span class="font-mono text-brand-strong"><span id="sandwichEntropyValue">60</span>/100</span>
+                                        </div>
+                                        <label class="sr-only" for="sandwichEntropySlider">Model entropy slider</label>
+                                        <input id="sandwichEntropySlider" type="range" min="0" max="100" value="60" class="mt-2 w-full" />
+                                    </div>
+
+                                    <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                        <div class="flex items-center justify-between text-xs text-brand-muted">
+                                            <span class="font-mono">Validator strength</span>
+                                            <span class="font-mono text-brand-strong"><span id="sandwichGateValue">70</span>/100</span>
+                                        </div>
+                                        <label class="sr-only" for="sandwichGateSlider">Validator strength slider</label>
+                                        <input id="sandwichGateSlider" type="range" min="0" max="100" value="70" class="mt-2 w-full" />
+                                    </div>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                            <div class="text-xs font-mono text-brand-muted">Retries</div>
+                                            <div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichRetries">—</span>x</div>
+                                        </div>
+                                        <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                            <div class="text-xs font-mono text-brand-muted">Quality</div>
+                                            <div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichQuality">—</span>/100</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                            <div class="text-xs font-mono text-brand-muted">Expected cost</div>
+                                            <div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichExpectedCost">—</span></div>
+                                            <div class="text-xs text-brand-muted mt-1">Index (calls + evals)</div>
+                                        </div>
+                                        <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                            <div class="text-xs font-mono text-brand-muted">Bounded exit</div>
+                                            <div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichExit">PASS</span></div>
+                                            <div class="text-xs text-brand-muted mt-1">Deterministic gate decides.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section class="col-span-1 md:col-span-12">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-danger">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-5/12">
+                        <h2 class="text-3xl font-bold text-brand-strong mb-3">4. Validator Bundles (Define Good + Budgets)</h2>
+                        <p class="text-brand-muted leading-relaxed">
+                            Validators are “physics.” Budgets are “governors.” Together they turn open-ended iteration into a bounded system.
+                            The loop can fail, but it fails deterministically.
+                        </p>
+                        <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
+                            <div class="text-sm text-brand-muted leading-relaxed">
+                                Toggle validators and adjust the retry budget. Run the bundle and watch what becomes provable.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-7/12">
+                        <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
+                                <div class="xl:col-span-5 space-y-3">
+                                    <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                        <div class="text-xs font-mono text-brand-muted mb-2">Validator bundle</div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                            <button type="button" class="soft-toggle font-mono" data-validator="schema" aria-pressed="true">Schema</button>
+                                            <button type="button" class="soft-toggle font-mono" data-validator="tests" aria-pressed="true">Unit tests</button>
+                                            <button type="button" class="soft-toggle font-mono" data-validator="integration" aria-pressed="false">Integration</button>
+                                            <button type="button" class="soft-toggle font-mono" data-validator="security" aria-pressed="true">Security</button>
+                                            <button type="button" class="soft-toggle font-mono" data-validator="policy" aria-pressed="true">Policy</button>
+                                            <button type="button" class="soft-toggle font-mono" data-validator="style" aria-pressed="false">Style</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                        <div class="flex items-center justify-between text-xs text-brand-muted">
+                                            <span class="font-mono">Retry budget</span>
+                                            <span class="font-mono text-brand-strong"><span id="validatorBudgetValue">4</span> attempts</span>
+                                        </div>
+                                        <label class="sr-only" for="validatorBudgetSlider">Retry budget slider</label>
+                                        <input id="validatorBudgetSlider" type="range" min="1" max="10" value="4" class="mt-2 w-full" />
+                                        <button id="validatorRunBtn" type="button" class="mt-3 soft-toggle w-full font-mono" aria-pressed="false">Run Validators</button>
+                                    </div>
+
+                                    <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                        <div class="text-xs font-mono text-brand-muted mb-2">Results</div>
+                                        <div id="validatorResults" class="space-y-2 text-xs text-brand-muted"></div>
+                                    </div>
+                                </div>
+
+                                <div class="xl:col-span-7 space-y-3">
+                                    <div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+                                        <div class="text-xs font-mono text-brand-muted mb-2">Sample diff (incoming patch)</div>
+                                        <pre id="validatorDiff" class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-56 font-mono"></pre>
+                                    </div>
+                                    <div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="text-xs font-mono text-brand-muted">Ledger entry (evidence)</div>
+                                            <div id="validatorRunId" class="text-xs font-mono text-brand-muted">run_000</div>
+                                        </div>
+                                        <pre id="validatorLedger" class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-56 font-mono"></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section class="col-span-1 md:col-span-12">
+            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="lg:w-5/12">
+                        <h2 class="text-3xl font-bold text-brand-strong mb-3">5. Always-On Loops (Maintenance That Compounds)</h2>
+                        <p class="text-brand-muted leading-relaxed">
+                            Practical SDaC is not a one-off workflow. It is an always-on system: map updaters, background refactors, and governance at machine speed.
+                            The goal is to keep entropy debt bounded while autonomy rises.
+                        </p>
+
+                        <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="flex items-center justify-between text-xs text-brand-muted">
+                                <span class="font-mono">Timeline</span>
+                                <span class="font-mono text-brand-strong">Week <span id="maintWeekValue">8</span>/26</span>
+                            </div>
+                            <label class="sr-only" for="maintWeekSlider">Week slider</label>
+                            <input id="maintWeekSlider" type="range" min="0" max="26" value="8" class="mt-2 w-full" />
+
+                            <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <button type="button" class="soft-toggle font-mono" data-maint-loop="map" aria-pressed="true">Map updater</button>
+                                <button type="button" class="soft-toggle font-mono" data-maint-loop="dream" aria-pressed="false">Dream daemon</button>
+                                <button type="button" class="soft-toggle font-mono" data-maint-loop="refactor" aria-pressed="true">Refactor under guards</button>
+                                <button type="button" class="soft-toggle font-mono" data-maint-loop="governance" aria-pressed="true">Governance</button>
+                                <button type="button" class="soft-toggle font-mono sm:col-span-2" data-maint-loop="hedged" aria-pressed="false">Hedged compute</button>
+                            </div>
+
+                            <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                    <div class="text-xs font-mono text-brand-muted">Entropy debt</div>
+                                    <div class="mt-1 text-lg font-bold text-brand-strong"><span id="maintDebt">—</span>/100</div>
+                                </div>
+                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                    <div class="text-xs font-mono text-brand-muted">Incidents</div>
+                                    <div class="mt-1 text-lg font-bold text-brand-strong"><span id="maintIncidents">—</span>/wk</div>
+                                </div>
+                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+                                    <div class="text-xs font-mono text-brand-muted">P95 cost/outcome</div>
+                                    <div class="mt-1 text-lg font-bold text-brand-danger"><span id="maintP95">—</span></div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 text-xs text-brand-muted leading-relaxed">
+                                The chart shows how debt and tail-cost behave as autonomy ramps. Hedging mostly buys down the tail (P95), not the mean.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-7/12">
+                        <div class="bg-brand-light border border-brand-border rounded-xl p-4">
+                            <div class="chart-container">
+                                <canvas id="maintenanceChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center text-brand-muted mt-2">
+                                Debt (left axis) vs P95 cost/outcome (right axis). The dashed marker tracks the selected week.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-brand-light py-8 text-center border-t border-brand-border">
+        <p class="text-brand-muted text-sm">Generated for <strong>Architects of Intent</strong> Presentation</p>
+        <p class="text-brand-muted text-xs mt-1">Practical SDaC Programming</p>
+    </footer>
+
+    <script>
+    (function() {
+        const theme = {
+            text: '#e7e7ea',
+            strong: '#f2f3f8',
+            muted: '#b5b6bf',
+            grid: 'rgba(255, 255, 255, 0.08)',
+            primary: '#7aa2f7',
+            accent: '#bb9af7',
+            vibrant: '#2ac3de',
+            danger: '#f7768e'
+        };
+
+        const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+        const toInt = (value, fallback) => {
+            const n = Number.parseInt(String(value), 10);
+            return Number.isFinite(n) ? n : fallback;
+        };
+
+        const escapeHtml = (s) =>
+            String(s || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+
+        const setPressed = (btn, pressed) => btn && btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: { duration: 350 },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: theme.muted,
+                        font: { family: 'Inter', size: 12 }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(17, 19, 26, 0.98)',
+                    padding: 12,
+                    titleColor: theme.strong,
+                    bodyColor: theme.text,
+                    titleFont: { size: 14, family: 'Inter' },
+                    bodyFont: { size: 13, family: 'Inter' },
+                },
+            },
+            scales: {
+                x: { ticks: { color: theme.muted }, grid: { color: theme.grid } },
+                y: { ticks: { color: theme.muted }, grid: { color: theme.grid } }
+            }
+        };
+
+        // Section 1: Substrate explorer
+        const setupSubstrateExplorer = () => {
+            const buttons = Array.from(document.querySelectorAll('[data-substrate-tab]'));
+            const traceBtn = document.getElementById('substrateTraceToggle');
+            const treeEl = document.getElementById('substrateTree');
+            const fileEl = document.getElementById('substrateFile');
+            const fileLabel = document.getElementById('substrateFileLabel');
+            if (!buttons.length || !traceBtn || !treeEl || !fileEl || !fileLabel) return;
+
+            const state = { tab: 'map', trace: false };
+
+            const data = {
+                map: {
+                    fileLabel: 'map/mission.yaml',
+                    file: `id: mission_bugfix_auth\nowner: platform\nobjective: Fix auth redirect loop\nconstraints:\n  - do not change public API\n  - keep p95 login < 250ms\nacceptance:\n  - unit tests pass\n  - integration: login flow green\nbudgets:\n  max_calls: 120\n  max_latency_s: 45`,
+                    tree: [
+                        { text: 'workspace/', kind: null },
+                        { text: '├── map/', kind: null },
+                        { text: '│   ├── mission.yaml', kind: 'read' },
+                        { text: '│   ├── contracts/', kind: null },
+                        { text: '│   │   └── login-flow.json', kind: 'read' },
+                        { text: '│   └── budgets.yaml', kind: 'read' },
+                        { text: '├── terrain/', kind: null },
+                        { text: '└── ledger/', kind: null },
+                    ],
+                },
+                terrain: {
+                    fileLabel: 'terrain/policies/auth.policy',
+                    file: `package auth\n\ndef allow_redirect(uri):\n  not startswith(uri, \"http\")\n  not contains(uri, \"//\")\n\n# deterministic policy gate\n`,
+                    tree: [
+                        { text: 'workspace/', kind: null },
+                        { text: '├── map/', kind: null },
+                        { text: '├── terrain/', kind: null },
+                        { text: '│   ├── src/', kind: 'exec' },
+                        { text: '│   │   └── auth/', kind: 'exec' },
+                        { text: '│   │       └── redirect.ts', kind: 'exec' },
+                        { text: '│   ├── schemas/', kind: 'read' },
+                        { text: '│   │   └── login.json', kind: 'read' },
+                        { text: '│   ├── tests/', kind: 'exec' },
+                        { text: '│   │   ├── test_login.ts', kind: 'exec' },
+                        { text: '│   │   └── test_redirect.ts', kind: 'exec' },
+                        { text: '│   └── policies/', kind: null },
+                        { text: '│       └── auth.policy', kind: 'read' },
+                        { text: '└── ledger/', kind: null },
+                    ],
+                },
+                ledger: {
+                    fileLabel: 'ledger/runs/run_1042.json',
+                    file: `{\n  \"run_id\": \"run_1042\",\n  \"mission_id\": \"mission_bugfix_auth\",\n  \"inputs\": { \"git_ref\": \"a1b2c3d\" },\n  \"validators\": {\n    \"tests\": \"pass\",\n    \"policy\": \"pass\",\n    \"security\": \"pass\"\n  },\n  \"diff\": { \"hash\": \"sha256:...\", \"files\": 3 },\n  \"decision\": \"merge\",\n  \"timestamp\": \"2026-02-13T21:18:00Z\"\n}`,
+                    tree: [
+                        { text: 'workspace/', kind: null },
+                        { text: '├── map/', kind: null },
+                        { text: '├── terrain/', kind: null },
+                        { text: '└── ledger/', kind: null },
+                        { text: '    ├── runs/', kind: null },
+                        { text: '    │   └── run_1042.json', kind: 'write' },
+                        { text: '    ├── evidence/', kind: null },
+                        { text: '    │   └── validators_1042.txt', kind: 'write' },
+                        { text: '    └── decisions.log', kind: 'write' },
+                    ],
+                },
+            };
+
+            const render = () => {
+                buttons.forEach((b) => setPressed(b, b.dataset.substrateTab === state.tab));
+                traceBtn.textContent = state.trace ? 'Trace: On' : 'Trace: Off';
+                traceBtn.setAttribute('aria-pressed', state.trace ? 'true' : 'false');
+
+                const d = data[state.tab] || data.map;
+                fileLabel.textContent = d.fileLabel;
+                fileEl.textContent = d.file;
+
+                const lines = d.tree.map((line) => {
+                    const safe = escapeHtml(line.text);
+                    if (!state.trace || !line.kind) return safe;
+                    const cls = line.kind === 'read' ? 'trace-line trace-read' : (line.kind === 'write' ? 'trace-line trace-write' : 'trace-line trace-exec');
+                    return `<span class=\"${cls}\">${safe}</span>`;
+                });
+                treeEl.innerHTML = lines.join('\n');
+            };
+
+            traceBtn.addEventListener('click', () => {
+                state.trace = !state.trace;
+                render();
+            });
+
+            buttons.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const next = btn.dataset.substrateTab || 'map';
+                    state.tab = next;
+                    render();
+                });
+            });
+
+            render();
+        };
+
+        // Section 2: Mission object builder
+        const setupMissionObjectBuilder = () => {
+            const presetButtons = Array.from(document.querySelectorAll('[data-mission-preset]'));
+            const slider = document.getElementById('missionTightnessSlider');
+            const tightValue = document.getElementById('missionTightnessValue');
+            const missionYaml = document.getElementById('missionYaml');
+            const missionIdLabel = document.getElementById('missionIdLabel');
+            const retriesEl = document.getElementById('missionRetries');
+            const convEl = document.getElementById('missionConvergence');
+            const driftEl = document.getElementById('missionDrift');
+            const callsEl = document.getElementById('missionMaxCalls');
+            const latencyEl = document.getElementById('missionMaxLatency');
+            const flexEl = document.getElementById('missionFlex');
+            const flexBar = document.getElementById('missionFlexBar');
+            const tightEl = document.getElementById('missionTight');
+            const tightBar = document.getElementById('missionTightBar');
+
+            if (
+                !presetButtons.length ||
+                !slider ||
+                !tightValue ||
+                !missionYaml ||
+                !missionIdLabel ||
+                !retriesEl ||
+                !convEl ||
+                !driftEl ||
+                !callsEl ||
+                !latencyEl ||
+                !flexEl ||
+                !flexBar ||
+                !tightEl ||
+                !tightBar
+            ) return;
+
+            const presets = {
+                bugfix: {
+                    id: 'mission_bugfix_auth',
+                    objective: 'Fix auth redirect loop',
+                    budgets: { calls: 120, latency: '45s' },
+                    accepts: ['unit tests', 'integration: login flow'],
+                    constraints: ['do not change public API', 'keep p95 login < 250ms'],
+                },
+                feature: {
+                    id: 'mission_feature_billing',
+                    objective: 'Add usage-based billing endpoint',
+                    budgets: { calls: 180, latency: '70s' },
+                    accepts: ['contract tests', 'docs updated'],
+                    constraints: ['idempotent endpoint', 'no PII in logs'],
+                },
+                refactor: {
+                    id: 'mission_refactor_queue',
+                    objective: 'Refactor queue worker for determinism',
+                    budgets: { calls: 150, latency: '55s' },
+                    accepts: ['load test passes', 'no behavior regression'],
+                    constraints: ['keep schema stable', 'preserve retry semantics'],
+                },
+                compliance: {
+                    id: 'mission_compliance_policy',
+                    objective: 'Enforce retention policy in storage layer',
+                    budgets: { calls: 200, latency: '90s' },
+                    accepts: ['policy gate green', 'audit log entries'],
+                    constraints: ['append-only ledger', 'no bypass path'],
+                },
+            };
+
+            const state = { preset: 'bugfix', tight: clamp(toInt(slider.value, 55), 0, 100) };
+
+            const render = () => {
+                presetButtons.forEach((b) => setPressed(b, b.dataset.missionPreset === state.preset));
+                tightValue.textContent = `${state.tight}%`;
+                slider.value = String(state.tight);
+
+                const p = presets[state.preset] || presets.bugfix;
+                missionIdLabel.textContent = p.id;
+
+                const retries = clamp(1 + Math.round((100 - state.tight) / 18), 1, 7);
+                const convergence = clamp(Math.round(25 + 75 * Math.pow(state.tight / 100, 0.65)), 0, 100);
+                const drift = clamp(Math.round(85 - state.tight * 0.7), 5, 95);
+                const flex = clamp(100 - state.tight, 0, 100);
+
+                retriesEl.textContent = String(retries);
+                convEl.textContent = String(convergence);
+                driftEl.textContent = String(drift);
+                callsEl.textContent = String(p.budgets.calls);
+                latencyEl.textContent = p.budgets.latency;
+
+                flexEl.textContent = String(flex);
+                flexBar.style.width = `${flex}%`;
+                tightEl.textContent = String(state.tight);
+                tightBar.style.width = `${state.tight}%`;
+
+                const yaml = [
+                    `id: ${p.id}`,
+                    `objective: ${p.objective}`,
+                    `constraints:`,
+                    ...p.constraints.map((c) => `  - ${c}`),
+                    `acceptance:`,
+                    ...p.accepts.map((a) => `  - ${a}`),
+                    `budgets:`,
+                    `  max_calls: ${p.budgets.calls}`,
+                    `  max_latency: ${p.budgets.latency}`,
+                    `  constraint_tightness: ${state.tight}%`,
+                    `derived:`,
+                    `  expected_retries: ${retries}x`,
+                    `  convergence_rate: ${convergence}/100`,
+                    `  drift_risk: ${drift}/100`,
+                ].join('\n');
+
+                missionYaml.textContent = yaml;
+            };
+
+            slider.addEventListener('input', () => {
+                state.tight = clamp(toInt(slider.value, state.tight), 0, 100);
+                render();
+            });
+
+            presetButtons.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    state.preset = btn.dataset.missionPreset || 'bugfix';
+                    render();
+                });
+            });
+
+            render();
+        };
+
+        // Section 3: Sandwich simulator
+        const setupSandwichSimulator = () => {
+            const entropySlider = document.getElementById('sandwichEntropySlider');
+            const gateSlider = document.getElementById('sandwichGateSlider');
+            const entropyValue = document.getElementById('sandwichEntropyValue');
+            const gateValue = document.getElementById('sandwichGateValue');
+            const runBtn = document.getElementById('sandwichRunBtn');
+            const attempts = document.getElementById('sandwichAttempts');
+            const retriesEl = document.getElementById('sandwichRetries');
+            const qualityEl = document.getElementById('sandwichQuality');
+            const costEl = document.getElementById('sandwichExpectedCost');
+            const exitEl = document.getElementById('sandwichExit');
+            if (!entropySlider || !gateSlider || !entropyValue || !gateValue || !runBtn || !attempts || !retriesEl || !qualityEl || !costEl || !exitEl) return;
+
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            const state = {
+                entropy: clamp(toInt(entropySlider.value, 60), 0, 100),
+                gate: clamp(toInt(gateSlider.value, 70), 0, 100),
+                running: false,
+                timer: null,
+            };
+
+            const ensurePills = () => {
+                if (attempts.childElementCount >= 12) return;
+                attempts.innerHTML = '';
+                for (let i = 0; i < 12; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'attempt-pill';
+                    attempts.appendChild(el);
+                }
+            };
+
+            const metrics = () => {
+                const entropy = state.entropy;
+                const gate = state.gate;
+                const retries = clamp(1 + Math.round(entropy / 18 + gate / 34), 1, 12);
+                const quality = clamp(Math.round(40 + gate * 0.55 - entropy * 0.18), 10, 95);
+                const expectedCost = clamp(Math.round(55 + retries * 8 + entropy * 0.12 + gate * 0.08), 40, 220);
+                const exit = gate >= 30 ? 'PASS' : 'PASS';
+                return { retries, quality, expectedCost, exit };
+            };
+
+            const render = () => {
+                entropySlider.value = String(state.entropy);
+                gateSlider.value = String(state.gate);
+                entropyValue.textContent = String(state.entropy);
+                gateValue.textContent = String(state.gate);
+
+                const m = metrics();
+                retriesEl.textContent = String(m.retries);
+                qualityEl.textContent = String(m.quality);
+                costEl.textContent = String(m.expectedCost);
+                exitEl.textContent = m.exit;
+            };
+
+            const clearRun = () => {
+                if (state.timer) window.clearInterval(state.timer);
+                state.timer = null;
+                state.running = false;
+                runBtn.textContent = 'Run';
+            };
+
+            const run = () => {
+                ensurePills();
+                clearRun();
+                state.running = true;
+                runBtn.textContent = 'Running…';
+
+                const pills = Array.from(attempts.children);
+                pills.forEach((p) => p.classList.remove('is-fail', 'is-pass'));
+
+                const m = metrics();
+                let idx = 0;
+                const total = m.retries;
+
+                const tick = () => {
+                    if (idx >= total) {
+                        clearRun();
+                        render();
+                        return;
+                    }
+                    const isLast = idx === total - 1;
+                    const el = pills[idx];
+                    if (el) {
+                        el.classList.add(isLast ? 'is-pass' : 'is-fail');
+                        if (!prefersReducedMotion) el.style.transform = 'translateY(-1px)';
+                        window.setTimeout(() => { if (el) el.style.transform = ''; }, 90);
+                    }
+                    idx += 1;
+                };
+
+                if (prefersReducedMotion) {
+                    // no animation, just final state
+                    for (let i = 0; i < total; i++) {
+                        const el = pills[i];
+                        if (el) el.classList.add(i === total - 1 ? 'is-pass' : 'is-fail');
+                    }
+                    clearRun();
+                    render();
+                    return;
+                }
+
+                tick();
+                state.timer = window.setInterval(tick, 140);
+            };
+
+            entropySlider.addEventListener('input', () => {
+                state.entropy = clamp(toInt(entropySlider.value, state.entropy), 0, 100);
+                render();
+            });
+            gateSlider.addEventListener('input', () => {
+                state.gate = clamp(toInt(gateSlider.value, state.gate), 0, 100);
+                render();
+            });
+            runBtn.addEventListener('click', () => {
+                if (state.running) clearRun();
+                else run();
+            });
+
+            window.addEventListener('beforeunload', clearRun, { once: true });
+            ensurePills();
+            render();
+        };
+
+        // Section 4: Validator bundle
+        const setupValidatorBundle = () => {
+            const diffEl = document.getElementById('validatorDiff');
+            const ledgerEl = document.getElementById('validatorLedger');
+            const resultsEl = document.getElementById('validatorResults');
+            const runIdEl = document.getElementById('validatorRunId');
+            const budgetSlider = document.getElementById('validatorBudgetSlider');
+            const budgetValue = document.getElementById('validatorBudgetValue');
+            const runBtn = document.getElementById('validatorRunBtn');
+            const toggleButtons = Array.from(document.querySelectorAll('[data-validator]'));
+            if (!diffEl || !ledgerEl || !resultsEl || !runIdEl || !budgetSlider || !budgetValue || !runBtn || !toggleButtons.length) return;
+
+            const issues = [
+                { key: 'schema', label: 'Schema mismatch: login.redirectUri missing', caughtBy: 'schema' },
+                { key: 'tests', label: 'Unit regression: redirect loop not covered', caughtBy: 'tests' },
+                { key: 'security', label: 'Security: open redirect possible', caughtBy: 'security' },
+                { key: 'policy', label: 'Policy: external URL disallowed', caughtBy: 'policy' },
+                { key: 'style', label: 'Style: lint + formatting', caughtBy: 'style' },
+                { key: 'integration', label: 'Integration: login flow end-to-end', caughtBy: 'integration' },
+            ];
+
+            const sampleDiff = [
+                'diff --git a/src/auth/redirect.ts b/src/auth/redirect.ts',
+                'index 11aa22..33bb44 100644',
+                '--- a/src/auth/redirect.ts',
+                '+++ b/src/auth/redirect.ts',
+                '@@',
+                '-export function redirect(uri: string) {',
+                '-  return uri;',
+                '-}',
+                '+export function redirect(uri: string) {',
+                '+  // TODO: validate uri',
+                '+  return decodeURIComponent(uri);',
+                '+}',
+                '',
+                'diff --git a/schemas/login.json b/schemas/login.json',
+                '@@',
+                '-  \"redirectUri\": { \"type\": \"string\" }',
+                '+  \"redirect\": { \"type\": \"string\" }',
+            ].join('\n');
+
+            diffEl.textContent = sampleDiff;
+
+            const state = {
+                active: new Set(toggleButtons.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.validator)),
+                budget: clamp(toInt(budgetSlider.value, 4), 1, 10),
+                runId: 0,
+            };
+
+            const render = () => {
+                budgetValue.textContent = String(state.budget);
+                budgetSlider.value = String(state.budget);
+
+                const activeValidators = Array.from(state.active).sort();
+                const caught = issues.filter((i) => state.active.has(i.caughtBy));
+                const neededAttempts = 1 + caught.length;
+                const attemptsUsed = Math.min(state.budget, neededAttempts);
+                const boundedFail = state.budget < neededAttempts;
+                const outcome = boundedFail ? 'bounded-fail' : (caught.length === 0 ? 'pass' : 'pass');
+
+                resultsEl.innerHTML = '';
+                issues.forEach((issue) => {
+                    const isEnabled = state.active.has(issue.caughtBy);
+                    const isCaught = isEnabled;
+                    const status = isEnabled ? (isCaught ? 'FAIL' : 'PASS') : 'SKIP';
+                    const color = status === 'FAIL' ? 'text-brand-danger' : (status === 'PASS' ? 'text-brand-vibrant' : 'text-brand-muted');
+                    const line = document.createElement('div');
+                    line.className = 'flex items-start justify-between gap-3';
+                    line.innerHTML = `<span class="text-brand-muted">${escapeHtml(issue.label)}</span><span class="font-mono ${color}">${status}</span>`;
+                    resultsEl.appendChild(line);
+                });
+
+                runIdEl.textContent = `run_${String(state.runId).padStart(3, '0')}`;
+                const ledger = {
+                    run_id: runIdEl.textContent,
+                    mission_id: 'mission_bugfix_auth',
+                    budget: { max_attempts: state.budget },
+                    validators: activeValidators,
+                    attempts_used: attemptsUsed,
+                    outcome,
+                    notes: boundedFail
+                        ? 'Budget exhausted: deterministic exit with partial evidence.'
+                        : 'Bundle executed: evidence recorded; deterministic decision available.',
+                };
+                ledgerEl.textContent = JSON.stringify(ledger, null, 2);
+            };
+
+            const bumpRun = () => {
+                state.runId += 1;
+                render();
+            };
+
+            budgetSlider.addEventListener('input', () => {
+                state.budget = clamp(toInt(budgetSlider.value, state.budget), 1, 10);
+                render();
+            });
+
+            runBtn.addEventListener('click', () => bumpRun());
+
+            toggleButtons.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const key = btn.dataset.validator || '';
+                    if (!key) return;
+                    if (state.active.has(key)) state.active.delete(key);
+                    else state.active.add(key);
+                    btn.setAttribute('aria-pressed', state.active.has(key) ? 'true' : 'false');
+                    render();
+                });
+            });
+
+            render();
+        };
+
+        // Section 5: Always-on loops chart
+        const setupAlwaysOnLoops = () => {
+            const weekSlider = document.getElementById('maintWeekSlider');
+            const weekValue = document.getElementById('maintWeekValue');
+            const debtEl = document.getElementById('maintDebt');
+            const incidentsEl = document.getElementById('maintIncidents');
+            const p95El = document.getElementById('maintP95');
+            const chartEl = document.getElementById('maintenanceChart');
+            const loopButtons = Array.from(document.querySelectorAll('[data-maint-loop]'));
+            if (!weekSlider || !weekValue || !debtEl || !incidentsEl || !p95El || !chartEl || !loopButtons.length) return;
+
+            const MAX_WEEK = 26;
+            const state = {
+                week: clamp(toInt(weekSlider.value, 8), 0, MAX_WEEK),
+                loops: new Set(loopButtons.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.maintLoop)),
+            };
+
+            const simulate = (loops) => {
+                const weeks = [];
+                const debt = [];
+                const p95 = [];
+                const incidents = [];
+
+                for (let w = 0; w <= MAX_WEEK; w++) {
+                    const autonomy = clamp(20 + w * 3.2, 0, 100);
+                    let d = 38 + w * 2.7;
+                    if (loops.has('map')) d -= w * 0.9;
+                    if (loops.has('dream')) d -= Math.max(0, w - 4) * 1.0;
+                    if (loops.has('refactor')) d -= Math.max(0, w - 2) * 1.25;
+                    if (loops.has('governance')) d -= w * 0.55;
+                    d = clamp(d, 0, 100);
+
+                    let expected = 62 + autonomy * 0.55 + d * 0.38;
+                    // maintenance overhead (small) for always-on loops
+                    expected += loops.has('map') ? 2.0 : 0;
+                    expected += loops.has('dream') ? 2.5 : 0;
+                    expected += loops.has('refactor') ? 2.5 : 0;
+                    expected += loops.has('governance') ? 2.0 : 0;
+
+                    let pricing = 25 + Math.pow(autonomy / 100, 1.25) * 75;
+                    let frontier = 18 + Math.pow(autonomy / 100, 1.55) * 65;
+                    // governance buys down tail-risk by constraining failure modes
+                    if (loops.has('governance')) frontier = clamp(frontier * 0.92, 0, 100);
+
+                    if (loops.has('hedged')) {
+                        // hedging mostly caps volatility / tail exposure while adding some fixed overhead
+                        expected += 6;
+                        pricing = Math.min(pricing * 0.35, 18);
+                    }
+
+                    const tailFactor = 1 + pricing * 0.008 + frontier * 0.004;
+                    const p95Cost = clamp(expected * tailFactor, expected, 260);
+
+                    const incBase = Math.pow(d / 100, 2) * 8;
+                    const inc = clamp(Math.round(incBase * (loops.has('governance') ? 0.55 : 1.0)), 0, 10);
+
+                    weeks.push(`W${w}`);
+                    debt.push(d);
+                    p95.push(p95Cost);
+                    incidents.push(inc);
+                }
+
+                return { weeks, debt, p95, incidents };
+            };
+
+            const markerPlugin = {
+                id: 'weekMarker',
+                afterDraw(chart) {
+                    const w = state.week;
+                    const xScale = chart.scales.x;
+                    const area = chart.chartArea;
+                    if (!xScale || !area) return;
+                    const x = xScale.getPixelForValue(w);
+                    const ctx = chart.ctx;
+                    ctx.save();
+                    ctx.strokeStyle = 'rgba(242, 243, 248, 0.22)';
+                    ctx.setLineDash([4, 4]);
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(x, area.top);
+                    ctx.lineTo(x, area.bottom);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+            };
+
+            const ctx = chartEl.getContext('2d');
+            const chartState = { chart: null };
+
+            const render = () => {
+                weekValue.textContent = String(state.week);
+                weekSlider.value = String(state.week);
+
+                const series = simulate(state.loops);
+                const d = series.debt[state.week] ?? series.debt[0];
+                const p = series.p95[state.week] ?? series.p95[0];
+                const inc = series.incidents[state.week] ?? series.incidents[0];
+                debtEl.textContent = String(Math.round(d));
+                incidentsEl.textContent = String(inc);
+                p95El.textContent = String(Math.round(p));
+
+                if (!chartState.chart) {
+                    chartState.chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: series.weeks,
+                            datasets: [
+                                {
+                                    label: 'Entropy debt',
+                                    data: series.debt,
+                                    borderColor: theme.danger,
+                                    backgroundColor: 'rgba(247, 118, 142, 0.12)',
+                                    borderWidth: 2,
+                                    tension: 0.28,
+                                    pointRadius: 0,
+                                    yAxisID: 'yDebt',
+                                },
+                                {
+                                    label: 'P95 cost/outcome',
+                                    data: series.p95,
+                                    borderColor: theme.accent,
+                                    backgroundColor: 'rgba(187, 154, 247, 0.10)',
+                                    borderWidth: 2,
+                                    tension: 0.28,
+                                    pointRadius: 0,
+                                    yAxisID: 'yCost',
+                                },
+                            ],
+                        },
+                        options: {
+                            ...commonChartOptions,
+                            interaction: { mode: 'index', intersect: false },
+                            scales: {
+                                x: { ticks: { color: theme.muted }, grid: { color: theme.grid } },
+                                yDebt: {
+                                    position: 'left',
+                                    min: 0,
+                                    max: 100,
+                                    title: { display: true, text: 'Debt', color: theme.muted },
+                                    ticks: { color: theme.muted },
+                                    grid: { color: theme.grid },
+                                },
+                                yCost: {
+                                    position: 'right',
+                                    min: 40,
+                                    max: 260,
+                                    title: { display: true, text: 'P95 cost', color: theme.muted },
+                                    ticks: { color: theme.muted },
+                                    grid: { display: false },
+                                },
+                            },
+                        },
+                        plugins: [markerPlugin],
+                    });
+                } else {
+                    chartState.chart.data.labels = series.weeks;
+                    chartState.chart.data.datasets[0].data = series.debt;
+                    chartState.chart.data.datasets[1].data = series.p95;
+                    chartState.chart.update('none');
+                }
+            };
+
+            weekSlider.addEventListener('input', () => {
+                state.week = clamp(toInt(weekSlider.value, state.week), 0, MAX_WEEK);
+                render();
+            });
+
+            loopButtons.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const key = btn.dataset.maintLoop || '';
+                    if (!key) return;
+                    if (state.loops.has(key)) state.loops.delete(key);
+                    else state.loops.add(key);
+                    btn.setAttribute('aria-pressed', state.loops.has(key) ? 'true' : 'false');
+                    render();
+                });
+            });
+
+            render();
+        };
+
+        // Boot
+        setupSubstrateExplorer();
+        setupMissionObjectBuilder();
+        setupSandwichSimulator();
+        setupValidatorBundle();
+        setupAlwaysOnLoops();
+    })();
+    </script>
+</body>
+</html>
+
