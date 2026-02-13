@@ -1611,11 +1611,13 @@
 		            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 		            const HEDGES = {
-		                fixed: { cost: 6, pricing: -28, lockin: +6, latency: 0, frontier: 0, label: 'Fixed-cost contracts' },
-		                reserve: { cost: 8, pricing: -22, lockin: +8, latency: -12, frontier: 0, label: 'Capacity reservations' },
-		                multi: { cost: 4, pricing: -8, lockin: -34, latency: -6, frontier: 0, label: 'Multi-provider routing' },
-		                hybrid: { cost: 10, pricing: -10, lockin: -18, latency: -4, frontier: -8, label: 'Hybrid / owned compute' },
-		                minFrontier: { cost: -8, pricing: -6, lockin: 0, latency: -10, frontier: -34, label: 'Minimize irreducible frontier calls' },
+		                // Pricing volatility is treated as "spot price exposure". Some hedges cap it (fixed/owned),
+		                // while others dampen it multiplicatively (routing / frontier minimization).
+		                fixed: { cost: 6, pricingMult: 0.25, pricingCap: 12, lockin: +10, latency: 0, frontier: 0, label: 'Fixed-cost contracts' },
+		                reserve: { cost: 8, pricingMult: 0.80, pricingCap: 30, lockin: +10, latency: -12, frontier: 0, label: 'Capacity reservations' },
+		                multi: { cost: 4, pricingMult: 0.92, lockin: -34, latency: -6, frontier: 0, label: 'Multi-provider routing' },
+		                hybrid: { cost: 12, pricingMult: 0.45, pricingCap: 18, lockin: -18, latency: -4, frontier: -10, label: 'Hybrid / owned compute' },
+		                minFrontier: { cost: -8, pricingMult: 0.95, lockin: 0, latency: -10, frontier: -34, label: 'Minimize irreducible frontier calls' },
 		            };
 
 		            const state = {
@@ -1638,6 +1640,9 @@
 		                const base = baseline(state.autonomy);
 		                let cost = base.cost;
 		                let pricing = base.pricing;
+		                let pricingMult = 1;
+		                let pricingAdd = 0;
+		                let pricingCap = 100;
 		                let lockin = base.lockin;
 		                let latency = base.latency;
 		                let frontier = base.frontier;
@@ -1646,12 +1651,15 @@
 		                    const hedge = HEDGES[key];
 		                    if (!hedge) return;
 		                    cost += hedge.cost;
-		                    pricing += hedge.pricing;
+		                    if (typeof hedge.pricingMult === 'number') pricingMult *= hedge.pricingMult;
+		                    if (typeof hedge.pricingAdd === 'number') pricingAdd += hedge.pricingAdd;
+		                    if (typeof hedge.pricingCap === 'number') pricingCap = Math.min(pricingCap, hedge.pricingCap);
 		                    lockin += hedge.lockin;
 		                    latency += hedge.latency;
 		                    frontier += hedge.frontier;
 		                });
 
+		                pricing = Math.min(pricing * pricingMult + pricingAdd, pricingCap);
 		                pricing = clamp(pricing, 0, 100);
 		                lockin = clamp(lockin, 0, 100);
 		                latency = clamp(latency, 0, 100);
