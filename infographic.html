@@ -577,27 +577,81 @@
         <section class="col-span-1 md:col-span-12 mb-8">
             <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
                 <div class="flex flex-col md:flex-row gap-8">
-                    <div class="md:w-1/2">
-                        <h2 class="text-3xl font-bold text-brand-strong mb-4">2. The Inference Cost Paradox (Looped Systems)</h2>
-                        <p class="text-lg text-brand-muted mb-6 leading-relaxed">
-                            We often assume AI costs trend to zero. Per-call prices for <em>commodity</em> inference can fall.
-                            <br><br>
-                            But reliable outcomes rarely come from a single call. They come from <strong>loops</strong>: context assembly, retries, evaluations, tests, and governance—often with a mix of commodity and frontier models.
-                            <br><br>
-                            <span class="bg-brand-light p-3 rounded text-brand-strong font-semibold border-l-4 border-l-brand-accent">
-                                The Strategy: Measure cost per <em>outcome</em>. Reduce calls per outcome with deterministic context + validators, and reserve frontier calls for irreducible steps.
-                            </span>
-                        </p>
-                    </div>
-                    <div class="md:w-1/2">
-                        <div class="chart-container">
-                            <canvas id="costChart"></canvas>
-                        </div>
-                        <p class="text-xs text-center text-brand-muted mt-2">Cost composition of a reliable loop (not a single-call demo)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+	                    <div class="md:w-1/2">
+	                        <h2 class="text-3xl font-bold text-brand-strong mb-4">2. The Inference Cost Paradox (Looped Systems)</h2>
+	                        <p class="text-lg text-brand-muted leading-relaxed">
+	                            Per-call inference cost may fall.
+	                            <br><br>
+	                            <span class="text-brand-strong font-semibold">Production systems do not run on calls. They run on loops.</span>
+	                        </p>
+
+	                        <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+	                            <div class="text-xs font-mono text-brand-muted mb-2">Each validated outcome requires</div>
+	                            <ul class="text-sm text-brand-muted leading-relaxed space-y-1 list-disc list-inside">
+	                                <li>Context assembly</li>
+	                                <li>Multi-model retries</li>
+	                                <li>Evaluation passes</li>
+	                                <li>Deterministic validation</li>
+	                                <li>Test execution</li>
+	                                <li>Governance enforcement</li>
+	                            </ul>
+	                        </div>
+
+	                        <div class="mt-4 bg-brand-light p-4 rounded text-brand-strong font-semibold border-l-4 border-l-brand-accent">
+	                            The unit of cost is not a call. The unit of cost is a validated outcome.
+	                        </div>
+
+	                        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+	                            <div class="bg-brand-light border border-brand-border rounded-xl p-3">
+	                                <div class="text-[11px] font-mono text-brand-muted">As velocity ↑</div>
+	                                <div class="mt-2 text-xs font-mono text-brand-strong leading-relaxed">
+	                                    Loop frequency ↑<br/>
+	                                    Inference volume compounds
+	                                </div>
+	                            </div>
+	                            <div class="bg-brand-light border border-brand-border rounded-xl p-3">
+	                                <div class="text-[11px] font-mono text-brand-muted">Per-call vs per-outcome</div>
+	                                <div class="mt-2 text-xs font-mono text-brand-strong leading-relaxed">
+	                                    Per-call cost ↓<br/>
+	                                    Per-outcome cost ≠ necessarily ↓
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="mt-4 text-sm text-brand-muted leading-relaxed">
+	                            As inference becomes embedded in production loops, compute exposure scales with autonomy.
+	                        </div>
+
+	                        <div class="mt-4 bg-brand-light border border-brand-border rounded-xl p-4">
+	                            <div class="text-sm font-semibold text-brand-strong mb-2">Strategic implication</div>
+	                            <ul class="text-sm text-brand-muted leading-relaxed space-y-1 list-disc list-inside">
+	                                <li>Pricing volatility → operational risk</li>
+	                                <li>Provider lock-in → systemic dependency</li>
+	                                <li>Latency → architectural friction</li>
+	                            </ul>
+	                            <div class="mt-3 text-sm font-semibold text-brand-strong">Inference is no longer a utility. It is infrastructure.</div>
+	                            <div class="mt-3 text-xs font-mono text-brand-muted">Infrastructure is hedged</div>
+	                            <ul class="mt-2 text-sm text-brand-muted leading-relaxed space-y-1 list-disc list-inside">
+	                                <li>Fixed-cost contracts</li>
+	                                <li>Capacity reservations</li>
+	                                <li>Multi-provider strategy</li>
+	                                <li>Hybrid / owned compute</li>
+	                                <li>Minimize irreducible frontier calls</li>
+	                            </ul>
+	                            <div class="mt-3 text-sm text-brand-muted leading-relaxed">
+	                                When recursion drives production, compute becomes the power grid.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="md:w-1/2">
+	                        <div class="chart-container">
+	                            <canvas id="costChart"></canvas>
+	                        </div>
+	                        <p class="text-xs text-center text-brand-muted mt-2">Cost composition of a validated outcome loop (not a single call)</p>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
 
 	        <!-- LIMIT CASE: Entropy at Infinite Velocity -->
 	        <section class="col-span-1 md:col-span-12 mb-8">
@@ -1860,43 +1914,43 @@
 	        setupRuleOfSevenExplorer();
 	        setupShapeOfAllWork();
 
-        // --- CHART 1: Cost Paradox (Loop Composition) ---
-        const ctxCost = document.getElementById('costChart').getContext('2d');
-        new Chart(ctxCost, {
-            type: 'bar',
-            data: {
-                labels: ['2020', '2022', '2024', '2026', '2028', '2030 (Limit)'],
-                datasets: [
-                    {
-                        label: 'Model calls (compute)',
-                        data: [50, 45, 42, 40, 38, 35],
-                        backgroundColor: theme.primary,
-                        borderRadius: 6
-                    },
-                    {
-                        label: 'Evals + validation',
-                        data: [20, 22, 25, 28, 30, 32],
-                        backgroundColor: theme.accent,
-                        borderRadius: 6
-                    },
-                    {
-                        label: 'Orchestration + governance',
-                        data: [15, 18, 20, 22, 25, 28],
-                        backgroundColor: theme.vibrant,
-                        borderRadius: 6
-                    }
-                ]
-            },
+	        // --- CHART 1: Cost Paradox (Outcome Loop Composition) ---
+	        const ctxCost = document.getElementById('costChart').getContext('2d');
+	        new Chart(ctxCost, {
+	            type: 'bar',
+	            data: {
+	                labels: ['2020', '2022', '2024', '2026', '2028', '2030 (Limit)'],
+	                datasets: [
+	                    {
+	                        label: 'Model calls (compute)',
+	                        data: [50, 45, 42, 40, 38, 35],
+	                        backgroundColor: theme.primary,
+	                        borderRadius: 6
+	                    },
+	                    {
+	                        label: 'Evals + validation + tests',
+	                        data: [20, 22, 25, 28, 30, 32],
+	                        backgroundColor: theme.accent,
+	                        borderRadius: 6
+	                    },
+	                    {
+	                        label: 'Context + orchestration + governance',
+	                        data: [15, 18, 20, 22, 25, 28],
+	                        backgroundColor: theme.vibrant,
+	                        borderRadius: 6
+	                    }
+	                ]
+	            },
             options: {
                 ...commonOptions,
                 interaction: { mode: 'index', intersect: false },
-                scales: {
-                    y: {
-                        stacked: true,
-                        title: { display: true, text: 'Cost per reliable outcome (Index)', color: theme.muted },
-                        ticks: { color: theme.muted },
-                        grid: { color: theme.grid }
-                    },
+	                scales: {
+	                    y: {
+	                        stacked: true,
+	                        title: { display: true, text: 'Cost per validated outcome (Index)', color: theme.muted },
+	                        ticks: { color: theme.muted },
+	                        grid: { color: theme.grid }
+	                    },
                     x: {
                         stacked: true,
                         ticks: { color: theme.muted },
