@@ -144,7 +144,7 @@
     <header class="bg-brand-dark text-white py-12 px-6 shadow-xl relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-vibrant via-brand-primary to-transparent"></div>
         <div class="max-w-6xl mx-auto relative z-10 text-center">
-            <div class="mb-5 inline-flex items-center rounded-lg border border-brand-border bg-brand-light p-1 text-sm">
+            <div class="mb-5 inline-flex flex-wrap items-center justify-center gap-1 rounded-lg border border-brand-border bg-brand-light p-1 text-sm">
                 <a href="infographic.html" class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors">Infographic 1</a>
                 <a href="infographic-2.html" class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors">Infographic 2</a>
                 <a href="infographic-3.html" class="px-3 py-1.5 rounded-md bg-[rgba(122,162,247,0.16)] text-brand-strong border border-[rgba(122,162,247,0.35)]">Infographic 3</a>
@@ -249,7 +249,7 @@
                     <div class="lg:w-7/12">
                         <div class="bg-brand-light border border-brand-border rounded-xl p-4">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                                <div class="inline-flex items-center rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
+                                <div class="inline-flex flex-wrap items-center gap-1 rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
                                     <button type="button" class="pill-tab font-mono" data-mission-preset="bugfix" aria-pressed="true">Bugfix</button>
                                     <button type="button" class="pill-tab font-mono" data-mission-preset="feature" aria-pressed="false">Feature</button>
                                     <button type="button" class="pill-tab font-mono" data-mission-preset="refactor" aria-pressed="false">Refactor</button>
@@ -358,18 +358,20 @@
                                 <div class="xl:col-span-7 space-y-4">
                                     <div class="border border-brand-border rounded-xl p-4 bg-[rgba(6,7,12,0.72)]">
                                         <div class="text-xs font-mono text-brand-muted mb-3">Pipeline</div>
-                                        <div class="flex items-center justify-between gap-3 text-center">
-                                            <div class="flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+                                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-center">
+                                            <div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
                                                 <div class="text-xs font-mono text-brand-muted">Prep</div>
                                                 <div class="mt-1 text-sm font-semibold text-brand-strong">Context + constraints</div>
                                             </div>
-                                            <div class="text-brand-muted font-mono text-xl">→</div>
-                                            <div class="flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+                                            <div class="text-brand-muted font-mono text-xl sm:hidden">↓</div>
+                                            <div class="text-brand-muted font-mono text-xl hidden sm:block">→</div>
+                                            <div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
                                                 <div class="text-xs font-mono text-brand-muted">Model</div>
                                                 <div class="mt-1 text-sm font-semibold text-brand-strong">Stochastic search</div>
                                             </div>
-                                            <div class="text-brand-muted font-mono text-xl">→</div>
-                                            <div class="flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+                                            <div class="text-brand-muted font-mono text-xl sm:hidden">↓</div>
+                                            <div class="text-brand-muted font-mono text-xl hidden sm:block">→</div>
+                                            <div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
                                                 <div class="text-xs font-mono text-brand-muted">Validation</div>
                                                 <div class="mt-1 text-sm font-semibold text-brand-strong">Deterministic gates</div>
                                             </div>
@@ -1281,4 +1283,3 @@
     </script>
 </body>
 </html>
-
