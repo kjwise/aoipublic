@@ -599,12 +599,12 @@
             </div>
         </section>
 
-        <!-- LIMIT CASE: Entropy at Infinite Velocity -->
-        <section class="col-span-1 md:col-span-12 mb-8">
-            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border">
-                <div class="flex flex-col md:flex-row gap-8">
-                    <div class="md:w-1/2">
-                        <h2 class="text-3xl font-bold text-brand-strong mb-4">3. The Limit Case: Entropy at Infinite Velocity</h2>
+	        <!-- LIMIT CASE: Entropy at Infinite Velocity -->
+	        <section class="col-span-1 md:col-span-12 mb-8">
+	            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border">
+	                <div class="flex flex-col md:flex-row gap-8">
+	                    <div class="md:w-1/2">
+	                        <h2 class="text-3xl font-bold text-brand-strong mb-4">3. The Limit Case: Entropy at Infinite Velocity</h2>
                         <p class="text-lg text-brand-muted mb-6 leading-relaxed">
                             When generation velocity rises without hard constraints, small errors compound into systemic risk.
                             Stewarded loops keep entropy bounded by forcing every attempt through deterministic Physics.
@@ -641,17 +641,127 @@
                         </p>
                     </div>
                 </div>
-            </div>
-        </section>
+	            </div>
+	        </section>
 
-        <!-- CONCEPT: The Value Shift -->
-        <section class="col-span-1 md:col-span-6">
-            <div class="bg-brand-surface rounded-xl shadow-lg p-6 h-full flex flex-col border border-brand-border">
-                <h2 class="text-2xl font-bold text-brand-strong mb-3">4. The Value Migration</h2>
-                <p class="text-brand-muted mb-4 flex-grow">
-                    As execution becomes instant, value migrates up the stack. 
-                    <br><br>
-                    We are no longer bricklayers; we are the architects designing the blueprints. The "Work" is now defining the shape of the outcome, not producing it.
+	        <!-- RECURSION: The Loop Walks the Whole Tree -->
+	        <section class="col-span-1 md:col-span-12 mb-8">
+	            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-accent">
+	                <div class="flex flex-col lg:flex-row gap-8">
+	                    <div class="lg:w-5/12">
+	                        <h2 class="text-3xl font-bold text-brand-strong mb-4">4. Recursion Compounds (The Project Tree)</h2>
+	                        <p class="text-lg text-brand-muted mb-6 leading-relaxed">
+	                            A loop is not just a retry. It is recursion through a structured state.
+	                            Each cycle revisits every folder and file, growing the system while tightening interfaces and constraints.
+	                        </p>
+
+	                        <div class="bg-brand-light border border-brand-border rounded-xl p-4 space-y-4">
+	                            <div class="flex items-center justify-between gap-3">
+	                                <div class="text-sm font-semibold text-brand-strong">Iteration cycle</div>
+	                                <div class="text-sm text-brand-muted font-mono"><span id="fsCycleValue">0</span>/12</div>
+	                            </div>
+	                            <div class="flex items-center gap-3">
+	                                <button
+	                                    id="fsPlayBtn"
+	                                    type="button"
+	                                    class="shrink-0 inline-flex items-center justify-center px-3 py-2 rounded-xl border border-brand-border bg-brand-surface text-brand-strong text-sm font-semibold hover:bg-[rgba(122,162,247,0.16)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60"
+	                                >
+	                                    Play
+	                                </button>
+	                                <input id="fsCycleSlider" type="range" min="0" max="12" step="1" value="0" class="w-full" aria-label="Project recursion cycle slider" />
+	                            </div>
+
+	                            <div class="grid grid-cols-3 gap-3">
+	                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+	                                    <div class="text-xs font-mono text-brand-muted">Folders</div>
+	                                    <div class="text-lg font-bold text-brand-strong mt-1"><span id="fsFoldersCount">—</span></div>
+	                                </div>
+	                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+	                                    <div class="text-xs font-mono text-brand-muted">Files</div>
+	                                    <div class="text-lg font-bold text-brand-strong mt-1"><span id="fsFilesCount">—</span></div>
+	                                </div>
+	                                <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+	                                    <div class="text-xs font-mono text-brand-muted">Touches / cycle</div>
+	                                    <div class="text-lg font-bold text-brand-strong mt-1"><span id="fsTouchesCount">—</span></div>
+	                                </div>
+	                            </div>
+
+	                            <div class="text-xs text-brand-muted leading-relaxed">
+	                                Recursion pass: read → test → refactor → extend. The loop walks the whole tree, not just a single file.
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                    <div class="lg:w-7/12 grid grid-cols-1 xl:grid-cols-12 gap-4">
+	                        <div id="fsTreeCard" class="xl:col-span-7 border border-brand-border rounded-xl p-4 bg-[rgba(6,7,12,0.72)]">
+	                            <div class="flex items-center justify-between mb-2">
+	                                <div class="text-xs font-mono text-brand-muted">Project filesystem (cycle <span id="fsCycleInline">0</span>)</div>
+	                                <div class="text-xs font-mono text-brand-muted"><span id="fsStageLabel">Seed</span></div>
+	                            </div>
+	                            <pre id="fsTree" class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono"></pre>
+	                        </div>
+
+	                        <div class="xl:col-span-5 border border-brand-border rounded-xl p-4 bg-brand-light flex flex-col">
+	                            <div class="text-xs font-mono text-brand-muted mb-2">Side view: the loop grows a tree</div>
+	                            <div class="flex-1 flex items-center justify-center">
+	                                <svg id="fsGrowthSvg" viewBox="0 0 220 240" class="w-full max-w-[260px] h-64" aria-hidden="true">
+	                                    <defs>
+	                                        <linearGradient id="fsTrunk" x1="0" x2="0" y1="0" y2="1">
+	                                            <stop offset="0" stop-color="rgba(242,243,248,0.75)"/>
+	                                            <stop offset="1" stop-color="rgba(181,182,191,0.35)"/>
+	                                        </linearGradient>
+	                                        <radialGradient id="fsCanopy" cx="50%" cy="40%" r="70%">
+	                                            <stop offset="0" stop-color="rgba(42,195,222,0.55)"/>
+	                                            <stop offset="1" stop-color="rgba(122,162,247,0.20)"/>
+	                                        </radialGradient>
+	                                    </defs>
+
+	                                    <!-- ground -->
+	                                    <path d="M20 214 C 70 204, 150 204, 200 214" stroke="rgba(255,255,255,0.10)" stroke-width="2" fill="none"/>
+
+	                                    <g id="fsTreeSeed" style="opacity: 1;">
+	                                        <circle cx="110" cy="206" r="8" fill="rgba(187,154,247,0.55)"/>
+	                                        <circle cx="110" cy="206" r="4" fill="rgba(242,243,248,0.75)"/>
+	                                    </g>
+
+	                                    <g id="fsTreeSapling" style="opacity: 0;">
+	                                        <path d="M110 206 L110 160" stroke="url(#fsTrunk)" stroke-width="5" stroke-linecap="round"/>
+	                                        <path d="M110 176 C 98 172, 90 164, 86 154" stroke="rgba(42,195,222,0.60)" stroke-width="4" fill="none" stroke-linecap="round"/>
+	                                        <path d="M110 170 C 122 166, 132 158, 140 148" stroke="rgba(122,162,247,0.55)" stroke-width="4" fill="none" stroke-linecap="round"/>
+	                                        <circle cx="86" cy="154" r="10" fill="rgba(42,195,222,0.22)"/>
+	                                        <circle cx="140" cy="148" r="11" fill="rgba(122,162,247,0.20)"/>
+	                                    </g>
+
+	                                    <g id="fsTreeTree" style="opacity: 0;">
+	                                        <path d="M110 206 L110 122" stroke="url(#fsTrunk)" stroke-width="9" stroke-linecap="round"/>
+	                                        <path d="M110 150 C 78 144, 60 126, 52 104" stroke="rgba(187,154,247,0.45)" stroke-width="7" fill="none" stroke-linecap="round"/>
+	                                        <path d="M110 142 C 142 136, 162 118, 174 96" stroke="rgba(42,195,222,0.50)" stroke-width="7" fill="none" stroke-linecap="round"/>
+	                                        <circle cx="110" cy="92" r="46" fill="url(#fsCanopy)"/>
+	                                        <circle cx="78" cy="102" r="26" fill="rgba(187,154,247,0.18)"/>
+	                                        <circle cx="144" cy="104" r="28" fill="rgba(42,195,222,0.16)"/>
+	                                        <circle cx="110" cy="92" r="46" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none"/>
+	                                    </g>
+	                                </svg>
+	                            </div>
+
+	                            <div class="mt-3 text-xs text-brand-muted leading-relaxed">
+	                                <div class="text-sm font-semibold text-brand-strong" id="fsGrowthStage">Seed</div>
+	                                <div id="fsGrowthCaption">A few files. One executable path. Minimal structure.</div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </section>
+
+	        <!-- CONCEPT: The Value Shift -->
+	        <section class="col-span-1 md:col-span-6">
+	            <div class="bg-brand-surface rounded-xl shadow-lg p-6 h-full flex flex-col border border-brand-border">
+	                <h2 class="text-2xl font-bold text-brand-strong mb-3">5. The Value Migration</h2>
+	                <p class="text-brand-muted mb-4 flex-grow">
+	                    As execution becomes instant, value migrates up the stack. 
+	                    <br><br>
+	                    We are no longer bricklayers; we are the architects designing the blueprints. The "Work" is now defining the shape of the outcome, not producing it.
                 </p>
                 <div class="chart-container" style="height: 300px;">
                     <canvas id="valueShiftChart"></canvas>
@@ -659,13 +769,13 @@
             </div>
         </section>
 
-        <!-- DIAGRAM: The Loop (New Unit of Work) -->
-        <section class="col-span-1 md:col-span-6">
-            <div class="bg-brand-surface rounded-xl shadow-lg p-6 h-full flex flex-col border border-brand-border">
-                <h2 class="text-2xl font-bold text-brand-strong mb-3">5. Anatomy of a Steward Loop</h2>
-                <p class="text-brand-muted mb-6">
-                    In the limit case, we steward persistent loops. The loop traverses the terrain we define.
-                </p>
+	        <!-- DIAGRAM: The Loop (New Unit of Work) -->
+	        <section class="col-span-1 md:col-span-6">
+	            <div class="bg-brand-surface rounded-xl shadow-lg p-6 h-full flex flex-col border border-brand-border">
+	                <h2 class="text-2xl font-bold text-brand-strong mb-3">6. Anatomy of a Steward Loop</h2>
+	                <p class="text-brand-muted mb-6">
+	                    In the limit case, we steward persistent loops. The loop traverses the terrain we define.
+	                </p>
                 
                 <!-- CSS Flow Chart -->
                 <div class="flex flex-col items-center justify-center space-y-4 w-full flex-grow py-4 bg-brand-light rounded-lg border border-brand-border">
@@ -707,17 +817,17 @@
         </section>
 
         <!-- 3D TERRAIN: Shaping the Landscape -->
-        <section class="col-span-1 md:col-span-12 mt-8 mb-8">
-            <div class="bg-brand-dark rounded-xl shadow-2xl p-8 text-white overflow-hidden relative">
-                <div class="absolute top-0 right-0 p-4 opacity-20">
-                    <div class="text-9xl font-bold text-brand-vibrant">6</div>
-                </div>
-                
-                <h2 class="text-3xl font-bold mb-2">6. Shaping the Optimization Terrain</h2>
-                <p class="text-brand-muted mb-6 max-w-3xl text-lg">
-                    This is the new game. You do not push the boulder up the hill. You <strong>reshape the hill</strong> so the boulder falls into the hole you want.
-                    <br><br>
-                    <span class="text-brand-vibrant">Intent = Gravity.</span> Changing your intent warps the geometry of the solution space. 
+	        <section class="col-span-1 md:col-span-12 mt-8 mb-8">
+	            <div class="bg-brand-dark rounded-xl shadow-2xl p-8 text-white overflow-hidden relative">
+	                <div class="absolute top-0 right-0 p-4 opacity-20">
+	                    <div class="text-9xl font-bold text-brand-vibrant">7</div>
+	                </div>
+	                
+	                <h2 class="text-3xl font-bold mb-2">7. Shaping the Optimization Terrain</h2>
+	                <p class="text-brand-muted mb-6 max-w-3xl text-lg">
+	                    This is the new game. You do not push the boulder up the hill. You <strong>reshape the hill</strong> so the boulder falls into the hole you want.
+	                    <br><br>
+	                    <span class="text-brand-vibrant">Intent = Gravity.</span> Changing your intent warps the geometry of the solution space. 
                     The "Loop" simply calculates the shortest path to the mathematical optima you have defined. Who defines the sharpest peaks wins.
                 </p>
 
@@ -745,12 +855,12 @@
         </section>
 
         <!-- HIERARCHY: The Pyramid of Intent -->
-        <section class="col-span-1 md:col-span-12 mt-4 mb-12">
-            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-t-4 border-t-brand-accent">
-                <h2 class="text-center text-3xl font-bold text-brand-strong mb-2">7. The Hierarchy of Stewardship</h2>
-                <p class="text-center text-brand-muted mb-8 max-w-2xl mx-auto">
-                    When the foundation is infinite, the structure above it must be precise.
-                </p>
+	        <section class="col-span-1 md:col-span-12 mt-4 mb-12">
+	            <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-t-4 border-t-brand-accent">
+	                <h2 class="text-center text-3xl font-bold text-brand-strong mb-2">8. The Hierarchy of Stewardship</h2>
+	                <p class="text-center text-brand-muted mb-8 max-w-2xl mx-auto">
+	                    When the foundation is infinite, the structure above it must be precise.
+	                </p>
 
                 <div class="max-w-6xl mx-auto flex flex-col items-center">
                     <div class="pyramid-shell">
@@ -966,12 +1076,12 @@
             apply('model');
         };
 
-        const setupLimitCaseChart = function() {
-            const canvas = document.getElementById('limitCaseChart');
-            const slider = document.getElementById('limitVelocitySlider');
-            const velocityValue = document.getElementById('limitVelocityValue');
-            const unguardedValue = document.getElementById('limitUnguardedValue');
-            const stewardedValue = document.getElementById('limitStewardedValue');
+	        const setupLimitCaseChart = function() {
+	            const canvas = document.getElementById('limitCaseChart');
+	            const slider = document.getElementById('limitVelocitySlider');
+	            const velocityValue = document.getElementById('limitVelocityValue');
+	            const unguardedValue = document.getElementById('limitUnguardedValue');
+	            const stewardedValue = document.getElementById('limitStewardedValue');
 
             if (!canvas || !slider || !velocityValue || !unguardedValue || !stewardedValue) return;
 
@@ -1134,15 +1244,179 @@
                 chart.update('none');
             };
 
-            slider.addEventListener('input', () => updateReadout(toInt(slider.value, state.currentX)));
-            updateReadout(state.currentX);
-        };
+	            slider.addEventListener('input', () => updateReadout(toInt(slider.value, state.currentX)));
+	            updateReadout(state.currentX);
+	        };
 
-        const setupRuleOfSevenExplorer = function() {
-            const slider = document.getElementById('ruleSevenSlider');
-            const valueEl = document.getElementById('ruleSevenValue');
-            const modeTitle = document.getElementById('ruleSevenModeTitle');
-            const modeBody = document.getElementById('ruleSevenModeBody');
+	        const setupRecursiveProjectTree = function() {
+	            const slider = document.getElementById('fsCycleSlider');
+	            const cycleValue = document.getElementById('fsCycleValue');
+	            const cycleInline = document.getElementById('fsCycleInline');
+	            const treePre = document.getElementById('fsTree');
+	            const stageLabel = document.getElementById('fsStageLabel');
+	            const foldersCount = document.getElementById('fsFoldersCount');
+	            const filesCount = document.getElementById('fsFilesCount');
+	            const touchesCount = document.getElementById('fsTouchesCount');
+	            const treeCard = document.getElementById('fsTreeCard');
+	            const playBtn = document.getElementById('fsPlayBtn');
+
+	            const growthStage = document.getElementById('fsGrowthStage');
+	            const growthCaption = document.getElementById('fsGrowthCaption');
+	            const seedGroup = document.getElementById('fsTreeSeed');
+	            const saplingGroup = document.getElementById('fsTreeSapling');
+	            const treeGroup = document.getElementById('fsTreeTree');
+
+	            if (
+	                !slider ||
+	                !cycleValue ||
+	                !cycleInline ||
+	                !treePre ||
+	                !stageLabel ||
+	                !foldersCount ||
+	                !filesCount ||
+	                !touchesCount ||
+	                !treeCard ||
+	                !playBtn ||
+	                !growthStage ||
+	                !growthCaption ||
+	                !seedGroup ||
+	                !saplingGroup ||
+	                !treeGroup
+	            ) return;
+
+	            const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+	            const toInt = (value, fallback) => {
+	                const n = Number.parseInt(String(value), 10);
+	                return Number.isFinite(n) ? n : fallback;
+	            };
+
+	            const MAX_CYCLE = 12;
+	            const trees = [
+	                `project/\n├── README.md\n└── main.py`,
+	                `project/\n├── README.md\n├── pyproject.toml\n└── src/\n    └── main.py`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   └── cli.py\n│   └── main.py\n└── tests/\n    └── test_cli.py`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   └── io.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   └── test_core.py\n└── docs/\n    └── overview.md`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   └── validators/\n│   │       ├── schema.py\n│   │       └── policy.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   └── test_validators.py\n└── docs/\n    └── overview.md`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   ├── validators/\n│   │   │   ├── schema.py\n│   │   │   └── policy.py\n│   │   └── workflows/\n│   │       ├── plan.py\n│   │       └── execute.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   ├── test_validators.py\n│   └── test_workflows.py\n├── docs/\n│   └── overview.md\n└── .github/\n    └── workflows/\n        └── ci.yml`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   ├── validators/\n│   │   │   ├── schema.py\n│   │   │   └── policy.py\n│   │   ├── workflows/\n│   │   │   ├── plan.py\n│   │   │   └── execute.py\n│   │   └── ledger/\n│   │       ├── events.py\n│   │       └── store.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   ├── test_validators.py\n│   ├── test_workflows.py\n│   └── test_ledger.py\n├── docs/\n│   ├── overview.md\n│   └── loop-notes.md\n└── .github/\n    └── workflows/\n        └── ci.yml`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   ├── validators/\n│   │   │   ├── schema.py\n│   │   │   └── policy.py\n│   │   ├── workflows/\n│   │   │   ├── plan.py\n│   │   │   └── execute.py\n│   │   ├── ledger/\n│   │   │   ├── events.py\n│   │   │   └── store.py\n│   │   └── contracts/\n│   │       ├── types.py\n│   │       └── serde.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   ├── test_validators.py\n│   ├── test_workflows.py\n│   ├── test_ledger.py\n│   └── test_contracts.py\n├── docs/\n│   ├── overview.md\n│   └── loop-notes.md\n└── .github/\n    └── workflows/\n        └── ci.yml`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   ├── validators/\n│   │   │   ├── schema.py\n│   │   │   └── policy.py\n│   │   ├── workflows/\n│   │   │   ├── plan.py\n│   │   │   └── execute.py\n│   │   ├── ledger/\n│   │   │   ├── events.py\n│   │   │   └── store.py\n│   │   ├── contracts/\n│   │   │   ├── types.py\n│   │   │   └── serde.py\n│   │   └── agents/\n│   │       ├── writer.py\n│   │       ├── judge.py\n│   │       └── refiner.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   ├── test_validators.py\n│   ├── test_workflows.py\n│   ├── test_ledger.py\n│   ├── test_contracts.py\n│   └── test_agents.py\n├── docs/\n│   ├── overview.md\n│   └── loop-notes.md\n└── .github/\n    └── workflows/\n        └── ci.yml`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   ├── validators/\n│   │   │   ├── schema.py\n│   │   │   └── policy.py\n│   │   ├── workflows/\n│   │   │   ├── plan.py\n│   │   │   └── execute.py\n│   │   ├── ledger/\n│   │   │   ├── events.py\n│   │   │   └── store.py\n│   │   ├── contracts/\n│   │   │   ├── types.py\n│   │   │   └── serde.py\n│   │   ├── agents/\n│   │   │   ├── writer.py\n│   │   │   ├── judge.py\n│   │   │   └── refiner.py\n│   │   └── context/\n│   │       ├── graph.py\n│   │       └── retrieval.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   ├── test_validators.py\n│   ├── test_workflows.py\n│   ├── test_ledger.py\n│   ├── test_contracts.py\n│   ├── test_agents.py\n│   └── test_context.py\n├── docs/\n│   ├── overview.md\n│   ├── loop-notes.md\n│   └── contracts.md\n└── .github/\n    └── workflows/\n        └── ci.yml`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── scripts/\n│   └── bootstrap.sh\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   ├── validators/\n│   │   │   ├── schema.py\n│   │   │   └── policy.py\n│   │   ├── workflows/\n│   │   │   ├── plan.py\n│   │   │   └── execute.py\n│   │   ├── ledger/\n│   │   │   ├── events.py\n│   │   │   └── store.py\n│   │   ├── contracts/\n│   │   │   ├── types.py\n│   │   │   └── serde.py\n│   │   ├── agents/\n│   │   │   ├── writer.py\n│   │   │   ├── judge.py\n│   │   │   └── refiner.py\n│   │   └── context/\n│   │       ├── graph.py\n│   │       └── retrieval.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   ├── test_validators.py\n│   ├── test_workflows.py\n│   ├── test_ledger.py\n│   ├── test_contracts.py\n│   ├── test_agents.py\n│   └── test_context.py\n├── docs/\n│   ├── overview.md\n│   ├── loop-notes.md\n│   ├── contracts.md\n│   └── runbook.md\n└── .github/\n    └── workflows/\n        └── ci.yml`,
+	                `project/\n├── README.md\n├── pyproject.toml\n├── scripts/\n│   └── bootstrap.sh\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   ├── validators/\n│   │   │   ├── schema.py\n│   │   │   └── policy.py\n│   │   ├── workflows/\n│   │   │   ├── plan.py\n│   │   │   └── execute.py\n│   │   ├── ledger/\n│   │   │   ├── events.py\n│   │   │   └── store.py\n│   │   ├── contracts/\n│   │   │   ├── types.py\n│   │   │   └── serde.py\n│   │   ├── agents/\n│   │   │   ├── writer.py\n│   │   │   ├── judge.py\n│   │   │   └── refiner.py\n│   │   ├── context/\n│   │   │   ├── graph.py\n│   │   │   └── retrieval.py\n│   │   └── observability/\n│   │       ├── metrics.py\n│   │       └── tracing.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   ├── test_validators.py\n│   ├── test_workflows.py\n│   ├── test_ledger.py\n│   ├── test_contracts.py\n│   ├── test_agents.py\n│   ├── test_context.py\n│   └── test_observability.py\n├── docs/\n│   ├── overview.md\n│   ├── loop-notes.md\n│   ├── contracts.md\n│   ├── runbook.md\n│   └── architecture.md\n└── .github/\n    └── workflows/\n        └── ci.yml`,
+	                `project/\n├── README.md\n├── LICENSE\n├── pyproject.toml\n├── scripts/\n│   └── bootstrap.sh\n├── docker/\n│   ├── Dockerfile\n│   └── compose.yml\n├── src/\n│   ├── app/\n│   │   ├── __init__.py\n│   │   ├── cli.py\n│   │   ├── core.py\n│   │   ├── io.py\n│   │   ├── validators/\n│   │   │   ├── schema.py\n│   │   │   └── policy.py\n│   │   ├── workflows/\n│   │   │   ├── plan.py\n│   │   │   └── execute.py\n│   │   ├── ledger/\n│   │   │   ├── events.py\n│   │   │   └── store.py\n│   │   ├── contracts/\n│   │   │   ├── types.py\n│   │   │   └── serde.py\n│   │   ├── agents/\n│   │   │   ├── writer.py\n│   │   │   ├── judge.py\n│   │   │   └── refiner.py\n│   │   ├── context/\n│   │   │   ├── graph.py\n│   │   │   └── retrieval.py\n│   │   ├── observability/\n│   │   │   ├── metrics.py\n│   │   │   └── tracing.py\n│   │   └── api/\n│   │       ├── server.py\n│   │       └── routes.py\n│   └── main.py\n├── tests/\n│   ├── test_cli.py\n│   ├── test_core.py\n│   ├── test_validators.py\n│   ├── test_workflows.py\n│   ├── test_ledger.py\n│   ├── test_contracts.py\n│   ├── test_agents.py\n│   ├── test_context.py\n│   ├── test_observability.py\n│   └── test_api.py\n├── docs/\n│   ├── overview.md\n│   ├── loop-notes.md\n│   ├── contracts.md\n│   ├── runbook.md\n│   └── architecture.md\n└── .github/\n    └── workflows/\n        └── ci.yml`,
+	            ];
+
+	            const stageForCycle = (cycle) => {
+	                if (cycle <= 3) return { label: 'Seed', caption: 'A few files. One executable path. Minimal structure.' };
+	                if (cycle <= 7) return { label: 'Sapling', caption: 'Modules + tests + validators. The loop starts to converge.' };
+	                return { label: 'Tree', caption: 'Stable interfaces, evidence, and deployment. The system compounds.' };
+	            };
+
+	            const countStats = (treeText) => {
+	                const lines = String(treeText || '').split('\n');
+	                let dirs = 0;
+	                let files = 0;
+	                for (const raw of lines) {
+	                    const stripped = raw.replace(/^[\s│├└─]+/g, '').trim();
+	                    if (!stripped) continue;
+	                    if (stripped.endsWith('/')) {
+	                        dirs += 1;
+	                        continue;
+	                    }
+	                    // Avoid counting "project/" and other non-file lines without extensions.
+	                    if (/\.[a-z0-9]{1,6}$/i.test(stripped)) files += 1;
+	                }
+	                return { dirs, files, touches: dirs + files };
+	            };
+
+	            let playTimer = null;
+	            const stopPlay = () => {
+	                if (playTimer) window.clearInterval(playTimer);
+	                playTimer = null;
+	                playBtn.textContent = 'Play';
+	            };
+
+	            const startPlay = () => {
+	                stopPlay();
+	                playBtn.textContent = 'Pause';
+	                playTimer = window.setInterval(() => {
+	                    const current = toInt(slider.value, 0);
+	                    if (current >= MAX_CYCLE) {
+	                        stopPlay();
+	                        return;
+	                    }
+	                    const next = current + 1;
+	                    slider.value = String(next);
+	                    setCycle(next);
+	                }, 420);
+	            };
+
+	            const setGroup = (el, opacity, scale) => {
+	                el.style.opacity = String(clamp(opacity, 0, 1));
+	                if (typeof scale === 'number') {
+	                    el.style.transformBox = 'fill-box';
+	                    el.style.transformOrigin = 'center';
+	                    el.style.transform = `scale(${scale.toFixed(3)})`;
+	                }
+	            };
+
+	            const pulseTree = () => {
+	                treeCard.style.boxShadow = '0 0 0 1px rgba(122, 162, 247, 0.35), 0 0 28px rgba(122, 162, 247, 0.12)';
+	                window.setTimeout(() => {
+	                    treeCard.style.boxShadow = '';
+	                }, 160);
+	            };
+
+	            const setCycle = (cycle) => {
+	                const next = clamp(cycle, 0, MAX_CYCLE);
+	                const stage = stageForCycle(next);
+	                const treeText = trees[next] || trees[0];
+	                const stats = countStats(treeText);
+
+	                cycleValue.textContent = String(next);
+	                cycleInline.textContent = String(next);
+	                stageLabel.textContent = stage.label;
+	                treePre.textContent = treeText;
+	                foldersCount.textContent = String(stats.dirs);
+	                filesCount.textContent = String(stats.files);
+	                touchesCount.textContent = String(stats.touches);
+
+	                growthStage.textContent = stage.label;
+	                growthCaption.textContent = stage.caption;
+
+	                const seedOpacity = clamp(1 - next / 3, 0, 1);
+	                const saplingIn = clamp((next - 2) / 2, 0, 1);
+	                const saplingOut = clamp((10 - next) / 2, 0, 1);
+	                const saplingOpacity = Math.min(saplingIn, saplingOut);
+	                const treeOpacity = clamp((next - 7) / 3, 0, 1);
+
+	                setGroup(seedGroup, seedOpacity, 1);
+	                setGroup(saplingGroup, saplingOpacity, 0.98 + (next / MAX_CYCLE) * 0.08);
+	                setGroup(treeGroup, treeOpacity, 0.92 + (next / MAX_CYCLE) * 0.12);
+
+	                pulseTree();
+	            };
+
+	            slider.addEventListener('input', () => {
+	                stopPlay();
+	                setCycle(toInt(slider.value, 0));
+	            });
+
+	            playBtn.addEventListener('click', () => {
+	                if (playTimer) stopPlay();
+	                else startPlay();
+	            });
+
+	            window.addEventListener('beforeunload', stopPlay, { once: true });
+	            setCycle(toInt(slider.value, 0));
+	        };
+
+	        const setupRuleOfSevenExplorer = function() {
+	            const slider = document.getElementById('ruleSevenSlider');
+	            const valueEl = document.getElementById('ruleSevenValue');
+	            const modeTitle = document.getElementById('ruleSevenModeTitle');
+	            const modeBody = document.getElementById('ruleSevenModeBody');
             const stats = document.getElementById('ruleSevenStats');
             const tree = document.getElementById('ruleSevenTree');
 
@@ -1572,10 +1846,11 @@
             }, { once: true });
         };
 
-        setupSandwichDiagram();
-        setupLimitCaseChart();
-        setupRuleOfSevenExplorer();
-        setupShapeOfAllWork();
+	        setupSandwichDiagram();
+	        setupLimitCaseChart();
+	        setupRecursiveProjectTree();
+	        setupRuleOfSevenExplorer();
+	        setupShapeOfAllWork();
 
         // --- CHART 1: Cost Paradox (Loop Composition) ---
         const ctxCost = document.getElementById('costChart').getContext('2d');
