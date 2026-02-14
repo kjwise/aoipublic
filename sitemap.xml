@@ -1,6 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://architectsofintent.com/appendix-a-setup-and-implementation-checklist</loc>
+    <lastmod>2026-02-14</lastmod>
+  </url>
+  <url>
+    <loc>https://architectsofintent.com/appendix-b-failure-mode-gallery</loc>
+    <lastmod>2026-02-14</lastmod>
+  </url>
+  <url>
+    <loc>https://architectsofintent.com/appendix-c-pattern-library</loc>
+    <lastmod>2026-02-14</lastmod>
+  </url>
+  <url>
+    <loc>https://architectsofintent.com/appendix-d-glossary-and-translation-guide</loc>
+    <lastmod>2026-02-14</lastmod>
+  </url>
+  <url>
     <loc>https://architectsofintent.com/chapter-0-introduction</loc>
     <lastmod>2026-02-14</lastmod>
   </url>
@@ -26,22 +42,6 @@
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy</loc>
-    <lastmod>2026-02-14</lastmod>
-  </url>
-  <url>
-    <loc>https://architectsofintent.com/chapter-15-appendix-a-setup-and-implementation-checklist</loc>
-    <lastmod>2026-02-14</lastmod>
-  </url>
-  <url>
-    <loc>https://architectsofintent.com/chapter-16-appendix-b-failure-mode-gallery</loc>
-    <lastmod>2026-02-14</lastmod>
-  </url>
-  <url>
-    <loc>https://architectsofintent.com/chapter-17-appendix-c-pattern-library</loc>
-    <lastmod>2026-02-14</lastmod>
-  </url>
-  <url>
-    <loc>https://architectsofintent.com/chapter-18-appendix-d-glossary-and-translation-guide</loc>
     <lastmod>2026-02-14</lastmod>
   </url>
   <url>
