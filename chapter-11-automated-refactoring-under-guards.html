@@ -40,7 +40,7 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">12 min read</span></div>
+<div class="chapter-meta"><span class="read-time">13 min read</span></div>
 <h1 id="chapter-11-automated-refactoring-under-guards">Chapter 11 –
 Automated Refactoring Under Guards</h1>
 <p>In <a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a>, we established <a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a>: the
@@ -424,6 +424,13 @@ whether tests pass.</p>
 <span id="cb2-17"><a aria-hidden="true" href="#cb2-17" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
 <p>The baseline files are updated only when a commit passes all
 ratchets. They become the new floor.</p>
+<p>To enforce this in CI, the ratchet is typically a short shell
+gate:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="va">OLD_COV</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> .pct .metrics/coverage.json<span class="va">)</span></span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="va">NEW_COV</span><span class="op">=</span><span class="va">$(</span><span class="ex">pytest</span> <span class="at">--cov</span> <span class="at">--cov-report</span><span class="op">=</span>json <span class="kw">|</span> <span class="ex">jq</span> .pct<span class="va">)</span></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="cf">if</span> <span class="kw">((</span> <span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$NEW_COV</span><span class="st"> &lt; </span><span class="va">$OLD_COV</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">bc</span> <span class="at">-l</span><span class="va">)</span> <span class="kw">));</span> <span class="cf">then</span></span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Ratchet failed: coverage dropped."</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span> 1</span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
 <p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
 <code>ratchet-check</code> and <code>ratchet-baseline</code> targets
 that demonstrate this. <code>ratchet_check.py</code> compares current
@@ -658,7 +665,7 @@ into the Measure → Mutate → Measure loop.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>42f97d7c7f6f</code>
+      Version: <code>cd468702c2e6</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

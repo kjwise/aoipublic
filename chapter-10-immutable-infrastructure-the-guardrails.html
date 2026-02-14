@@ -201,6 +201,10 @@ loop runs with the same OS privileges as a human developer, then
 open the file for write. Run your loop as a dedicated user (for example
 <code>sdac-bot</code>) and use file access bits / ACLs so protected
 directories are writable only by a human-owned group.</p>
+<p>This matters because CI runners configured as restricted Unix users
+physically neuter self-rewrite: even a very capable LLM cannot edit
+<code>.github/workflows/*.yml</code> or other immutable paths from which
+it could weaken its own controls.</p>
 <p><strong>Example (illustrative):</strong></p>
 <pre class="text"><code># Protected surfaces owned by platform/security; agent user has read-only access.
 chgrp -R platform .github policies validators .sdac
@@ -519,7 +523,7 @@ auditability and post-mortem requirements.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>42f97d7c7f6f</code>
+      Version: <code>cd468702c2e6</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
