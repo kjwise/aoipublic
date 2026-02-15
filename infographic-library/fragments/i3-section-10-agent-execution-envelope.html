@@ -1,0 +1,305 @@
+<section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-10-agent-execution-envelope" data-infographic-selector="main &gt; section:nth-of-type(10)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<style>
+  [data-role="agent-sim"] .gate-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.55);
+    color: #b5b6bf;
+    border-radius: 0.65rem;
+    padding: 0.45rem 0.55rem;
+    font-size: 0.72rem;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  [data-role="agent-sim"] .gate-pill.is-pass {
+    border-color: rgba(42, 195, 222, 0.42);
+    background: rgba(42, 195, 222, 0.12);
+    color: #f2f3f8;
+  }
+  [data-role="agent-sim"] .gate-pill.is-fail {
+    border-color: rgba(247, 118, 142, 0.4);
+    background: rgba(247, 118, 142, 0.13);
+    color: #f2f3f8;
+  }
+  [data-role="agent-sim"] .attempt-pill.is-escalate {
+    background: rgba(187, 154, 247, 0.24);
+    border-color: rgba(187, 154, 247, 0.34);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-role="agent-sim"] .soft-toggle {
+      transition: none;
+    }
+  }
+</style>
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Agent (Constrained Execution Envelope)</h2>
+<p class="text-brand-muted leading-relaxed">
+        An <a class="concept-link" href="../../concepts#agent" title="See concept: Agent">Agent</a> is not “the model.” It is mission context + tools + deterministic gates + a ledger.
+        The model is only the stochastic center; capability is granted by boundaries, not by vibes.
+      </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Execution path</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">Mission → Agent → Tool Runner → Gates → Ledger</span>
+<span class="block mt-2">Context lives in the <a class="concept-link" href="../../concepts#mission-object" title="See concept: Mission Object">Mission object</a> and Tool Runner (deterministic prep).</span>
+<span class="block mt-2">Gates + Ledger are deterministic validation. This is the <a class="concept-link" href="../../concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a> in motion.</span>
+<span class="block mt-2">If any gate fails, action is blocked or escalated.</span>
+<span class="block mt-2">This is why the system remains governable as autonomy rises.</span>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="agent-sim">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Autonomy level</span>
+<span class="font-mono text-brand-strong"><span data-role="autonomy-value">58</span>/100</span>
+</div>
+<label class="sr-only" for="agentAutonomySlider">Autonomy slider</label>
+<input class="mt-2 w-full" data-role="autonomy-slider" id="agentAutonomySlider" max="100" min="0" step="1" type="range" value="58"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Policy strictness</span>
+<span class="font-mono text-brand-strong"><span data-role="strict-value">72</span>/100</span>
+</div>
+<label class="sr-only" for="agentStrictSlider">Strictness slider</label>
+<input class="mt-2 w-full" data-role="strict-slider" id="agentStrictSlider" max="100" min="15" step="1" type="range" value="72"/>
+</div>
+<div class="md:col-span-12">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+<button class="soft-toggle font-mono text-left" data-action="read_map" data-role="action" type="button">Read Map Files</button>
+<button class="soft-toggle font-mono text-left" data-action="write_patch" data-role="action" type="button">Write Patch To Terrain</button>
+<button class="soft-toggle font-mono text-left" data-action="modify_ci" data-role="action" type="button">Modify CI Policy</button>
+<button class="soft-toggle font-mono text-left" data-action="exfiltrate_secret" data-role="action" type="button">Exfiltrate Secret</button>
+</div>
+</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<button class="soft-toggle font-mono" data-role="evaluate" type="button">Evaluate Request</button>
+<button class="soft-toggle font-mono" data-role="override" type="button">Human Override</button>
+<button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Selected action</div>
+<div class="mt-1 text-sm font-bold text-brand-strong" data-role="selected-label">Read Map Files</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Verdict</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="verdict">READY</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Policy risk</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="risk">0</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Ledger run</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="run">0</span></div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Gate decisions</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+<div class="gate-pill" data-role="gate-tool">tool_gate: —</div>
+<div class="gate-pill" data-role="gate-os">os_gate: —</div>
+<div class="gate-pill" data-role="gate-policy">policy_gate: —</div>
+</div>
+<div class="mt-3 text-xs font-mono text-brand-muted mb-2">Ledger event</div>
+<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap" data-role="ledger-json"></pre>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Choose an action and evaluate the envelope.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">History</div>
+<div class="text-xs text-brand-muted">Cyan = allow, red = block, violet = escalate</div>
+</div>
+<div class="mt-3 grid grid-cols-12 gap-1" data-role="history"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-10-agent-execution-envelope"]') : null;
+  if (!root || root.dataset.agentEnvelopeReady === "1") return;
+  root.dataset.agentEnvelopeReady = "1";
+
+  const sim = root.querySelector('[data-role="agent-sim"]');
+  if (!sim) return;
+
+  const autonomySlider = sim.querySelector('[data-role="autonomy-slider"]');
+  const strictSlider = sim.querySelector('[data-role="strict-slider"]');
+  const autonomyValue = sim.querySelector('[data-role="autonomy-value"]');
+  const strictValue = sim.querySelector('[data-role="strict-value"]');
+  const actionButtons = Array.from(sim.querySelectorAll('[data-role="action"]'));
+  const evaluateBtn = sim.querySelector('[data-role="evaluate"]');
+  const overrideBtn = sim.querySelector('[data-role="override"]');
+  const resetBtn = sim.querySelector('[data-role="reset"]');
+  const selectedLabel = sim.querySelector('[data-role="selected-label"]');
+  const verdictEl = sim.querySelector('[data-role="verdict"]');
+  const riskEl = sim.querySelector('[data-role="risk"]');
+  const runEl = sim.querySelector('[data-role="run"]');
+  const gateTool = sim.querySelector('[data-role="gate-tool"]');
+  const gateOs = sim.querySelector('[data-role="gate-os"]');
+  const gatePolicy = sim.querySelector('[data-role="gate-policy"]');
+  const ledgerJsonEl = sim.querySelector('[data-role="ledger-json"]');
+  const outcomeEl = sim.querySelector('[data-role="outcome"]');
+  const historyEl = sim.querySelector('[data-role="history"]');
+
+  if (!autonomySlider || !strictSlider || !autonomyValue || !strictValue || !actionButtons.length ||
+      !evaluateBtn || !overrideBtn || !resetBtn || !selectedLabel || !verdictEl || !riskEl || !runEl ||
+      !gateTool || !gateOs || !gatePolicy || !ledgerJsonEl || !outcomeEl || !historyEl) return;
+
+  const ACTIONS = {
+    read_map: { label: "Read Map Files", sensitivity: 10, requires: "read" },
+    write_patch: { label: "Write Patch To Terrain", sensitivity: 45, requires: "write" },
+    modify_ci: { label: "Modify CI Policy", sensitivity: 92, requires: "policy_write" },
+    exfiltrate_secret: { label: "Exfiltrate Secret", sensitivity: 100, requires: "secret_access" }
+  };
+
+  const toInt = (v, fallback) => {
+    const n = Number.parseInt(String(v), 10);
+    return Number.isFinite(n) ? n : fallback;
+  };
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const passFail = (v) => v ? "PASS" : "FAIL";
+
+  const state = {
+    run: 0,
+    autonomy: toInt(autonomySlider.value, 58),
+    strict: toInt(strictSlider.value, 72),
+    selected: "read_map",
+    ledger: { run: 0, action: "idle" },
+    last: null
+  };
+
+  const setActionState = () => {
+    for (const btn of actionButtons) {
+      const action = btn.dataset.action || "";
+      const active = action === state.selected;
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+      btn.style.borderColor = active ? "rgba(42, 195, 222, 0.45)" : "";
+      btn.style.background = active ? "rgba(42, 195, 222, 0.13)" : "";
+    }
+    selectedLabel.textContent = ACTIONS[state.selected]?.label || "Unknown";
+  };
+
+  const applyGatePill = (el, label, pass) => {
+    el.textContent = `${label}: ${passFail(pass)}`;
+    el.classList.remove("is-pass", "is-fail");
+    el.classList.add(pass ? "is-pass" : "is-fail");
+  };
+
+  const appendHistory = (kind) => {
+    const pill = document.createElement("span");
+    const suffix = kind === "allow" ? "is-pass" : kind === "escalate" ? "is-escalate" : "is-fail";
+    pill.className = `attempt-pill ${suffix}`;
+    historyEl.appendChild(pill);
+    while (historyEl.children.length > 36) {
+      historyEl.removeChild(historyEl.firstChild);
+    }
+  };
+
+  const evaluate = (override) => {
+    const action = ACTIONS[state.selected] || ACTIONS.read_map;
+    const risk = clamp(Math.round(action.sensitivity + (state.autonomy * 0.22) - ((100 - state.strict) * 0.18)), 0, 100);
+
+    const toolGate = action.requires !== "secret_access";
+    const osGate = action.requires !== "secret_access" && !(action.requires === "policy_write");
+    const policyThreshold = override ? 94 : 66;
+    const policyGate = risk <= policyThreshold && action.sensitivity < 96;
+
+    let verdict = "BLOCK";
+    let outcome = "Blocked by deterministic envelope.";
+    if (toolGate && osGate && policyGate) {
+      verdict = "ALLOW";
+      outcome = "Allowed: request fits current boundaries.";
+    } else if (override && toolGate && osGate) {
+      verdict = "ESCALATE";
+      outcome = "Escalated with human override. Ledger must retain reason.";
+    }
+
+    state.run += 1;
+    state.last = { toolGate, osGate, policyGate, verdict, risk };
+    state.ledger = {
+      run: state.run,
+      agent_id: "sdac-agent-01",
+      action: state.selected,
+      action_label: action.label,
+      autonomy: state.autonomy,
+      policy_strictness: state.strict,
+      tool_gate: passFail(toolGate),
+      os_gate: passFail(osGate),
+      policy_gate: passFail(policyGate),
+      override: Boolean(override),
+      verdict: verdict
+    };
+
+    verdictEl.textContent = verdict;
+    verdictEl.style.color = verdict === "ALLOW" ? "#2ac3de" : verdict === "ESCALATE" ? "#bb9af7" : "#f7768e";
+    riskEl.textContent = String(risk);
+    runEl.textContent = String(state.run);
+    applyGatePill(gateTool, "tool_gate", toolGate);
+    applyGatePill(gateOs, "os_gate", osGate);
+    applyGatePill(gatePolicy, "policy_gate", policyGate);
+    ledgerJsonEl.textContent = JSON.stringify(state.ledger, null, 2);
+    outcomeEl.textContent = outcome;
+    appendHistory(verdict === "ALLOW" ? "allow" : verdict === "ESCALATE" ? "escalate" : "block");
+  };
+
+  const render = () => {
+    autonomyValue.textContent = String(state.autonomy);
+    strictValue.textContent = String(state.strict);
+    setActionState();
+    if (!state.last) {
+      verdictEl.textContent = "READY";
+      verdictEl.style.color = "#b5b6bf";
+      riskEl.textContent = "0";
+      runEl.textContent = String(state.run);
+      gateTool.textContent = "tool_gate: —";
+      gateTool.classList.remove("is-pass", "is-fail");
+      gateOs.textContent = "os_gate: —";
+      gateOs.classList.remove("is-pass", "is-fail");
+      gatePolicy.textContent = "policy_gate: —";
+      gatePolicy.classList.remove("is-pass", "is-fail");
+      ledgerJsonEl.textContent = JSON.stringify(state.ledger, null, 2);
+      outcomeEl.textContent = "Choose an action and evaluate the envelope.";
+    }
+  };
+
+  autonomySlider.addEventListener("input", () => {
+    state.autonomy = toInt(autonomySlider.value, state.autonomy);
+    render();
+  });
+  strictSlider.addEventListener("input", () => {
+    state.strict = toInt(strictSlider.value, state.strict);
+    render();
+  });
+  for (const btn of actionButtons) {
+    btn.addEventListener("click", () => {
+      state.selected = btn.dataset.action || "read_map";
+      render();
+    });
+  }
+  evaluateBtn.addEventListener("click", () => evaluate(false));
+  overrideBtn.addEventListener("click", () => evaluate(true));
+  resetBtn.addEventListener("click", () => {
+    state.run = 0;
+    state.autonomy = toInt(autonomySlider.value, 58);
+    state.strict = toInt(strictSlider.value, 72);
+    state.selected = "read_map";
+    state.last = null;
+    state.ledger = { run: 0, action: "idle" };
+    historyEl.innerHTML = "";
+    render();
+  });
+
+  render();
+})();
+</script>
+</section>

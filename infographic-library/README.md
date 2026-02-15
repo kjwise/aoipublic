@@ -114,6 +114,7 @@ Use this helper in markdown (and infographic source HTML) to inline a section fr
 {{infographic-section "i3-section-03-deterministic-sandwich"}}
 ```
 `number` is optional. If you want a sequence rendered, pass `number=<N>` (or `index=<N>`); otherwise the section is unnumbered.
+By default, every rendered fragment shows its `section_id` as a small shell badge (for example `i1-section-01-shape-of-all-work`) so reuse/edit targets are always visible.
 
 The website build step resolves this marker and injects the matching fragment HTML
 into rendered pages, including the source infographic HTML files (`infographic*.html`).

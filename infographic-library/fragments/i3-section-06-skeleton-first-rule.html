@@ -1,0 +1,228 @@
+<section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Skeleton-First Rule (Prevent Map Contamination)</h2>
+<p class="text-brand-muted leading-relaxed">
+              Structure must be extracted deterministically from Terrain first. The model can add flesh, but cannot invent skeleton.
+              The gate enforces exact skeleton match before merge.
+            </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+                Raise pressure and disable deterministic extraction to watch contamination risk rise.
+                Re-enable extractor and see the skeleton gate converge back to PASS.
+              </div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="skeleton-sim">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Pipeline</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
+<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="../../concepts#sensor" title="See concept: Sensor">Sensor</a></div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Extract skeleton</div>
+</div>
+<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted">Model</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Generate flesh</div>
+</div>
+<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="../../concepts#ci-gate-mapterrain-sync" title="See concept: CI Gate (Map–Terrain Sync)">CI Gate</a></div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Skeleton match</div>
+</div>
+<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted">Ledger</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">PASS / FAIL receipt</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Contamination pressure</span>
+<span class="font-mono text-brand-strong"><span data-role="pressure-value">40</span>/100</span>
+</div>
+<label class="sr-only" for="skeletonPressureSlider">Contamination pressure</label>
+<input class="mt-2 w-full" data-role="pressure-slider" id="skeletonPressureSlider" max="100" min="0" type="range" value="40"/>
+</div>
+<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Extractor</span>
+<button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="extractor-toggle" type="button">ON</button>
+</div>
+<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Run cycle</span>
+<button class="soft-toggle font-mono text-xs" data-role="run-button" type="button">Run</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Canonical skeleton (Sensor)</div>
+<ul class="space-y-1 text-xs text-brand-strong font-mono" data-role="canonical-list"></ul>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Proposed skeleton (Map)</div>
+<ul class="space-y-1 text-xs font-mono" data-role="proposed-list"></ul>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Mismatch count</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="mismatch-count">0</span></div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Contamination risk</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="risk-score">0</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Skeleton gate</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="gate-badge">PASS</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Latest outcome</div>
+<div class="mt-1 text-sm text-brand-muted" data-role="outcome-text">Ready to run.</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Loop attempts</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, red = FAIL</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-1" data-role="attempts"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-06-skeleton-first-rule"]') : null;
+  if (!root || root.dataset.skeletonFirstReady === "1") return;
+  root.dataset.skeletonFirstReady = "1";
+
+  const sim = root.querySelector('[data-role="skeleton-sim"]');
+  if (!sim) return;
+
+  const pressureSlider = sim.querySelector('[data-role="pressure-slider"]');
+  const pressureValue = sim.querySelector('[data-role="pressure-value"]');
+  const extractorToggle = sim.querySelector('[data-role="extractor-toggle"]');
+  const runButton = sim.querySelector('[data-role="run-button"]');
+  const canonicalList = sim.querySelector('[data-role="canonical-list"]');
+  const proposedList = sim.querySelector('[data-role="proposed-list"]');
+  const mismatchCount = sim.querySelector('[data-role="mismatch-count"]');
+  const riskScore = sim.querySelector('[data-role="risk-score"]');
+  const gateBadge = sim.querySelector('[data-role="gate-badge"]');
+  const outcomeText = sim.querySelector('[data-role="outcome-text"]');
+  const attempts = sim.querySelector('[data-role="attempts"]');
+  if (!pressureSlider || !pressureValue || !extractorToggle || !runButton || !canonicalList || !proposedList || !mismatchCount || !riskScore || !gateBadge || !outcomeText || !attempts) return;
+
+  const canonical = [
+    "routes.py",
+    "schemas/order.json",
+    "contracts/public_api.yaml",
+    "validators/policy.py",
+    "tests/immune_system_cases.py"
+  ];
+  const noisePool = [
+    "routes_v2_guess.py",
+    "schemas/legacy_mode.json",
+    "contracts/experimental.yaml",
+    "validators/soft_policy.py",
+    "notes/todo-skeleton.md",
+    "tests/speculative_case.py"
+  ];
+
+  const state = {
+    pressure: Number.parseInt(pressureSlider.value, 10) || 40,
+    extractorOn: true,
+    run: 0
+  };
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  const renderList = (el, items, mode) => {
+    el.innerHTML = "";
+    for (const item of items) {
+      const li = document.createElement("li");
+      li.textContent = item;
+      if (mode === "extra") li.className = "text-brand-danger";
+      if (mode === "missing") li.className = "text-amber-300";
+      el.appendChild(li);
+    }
+  };
+
+  const computeProposed = () => {
+    if (state.extractorOn) return canonical.slice();
+
+    const missingCount = state.pressure >= 80 ? 2 : state.pressure >= 55 ? 1 : 0;
+    const proposed = canonical.slice(missingCount);
+
+    const extraCount = clamp(Math.floor(state.pressure / 25) + 1, 1, 4);
+    for (let i = 0; i < extraCount; i += 1) {
+      const candidate = noisePool[(state.run + i) % noisePool.length];
+      if (!proposed.includes(candidate)) proposed.push(candidate);
+    }
+    return proposed;
+  };
+
+  const render = (recordAttempt) => {
+    state.pressure = clamp(Number.parseInt(pressureSlider.value, 10) || state.pressure, 0, 100);
+    pressureValue.textContent = String(state.pressure);
+
+    const proposed = computeProposed();
+    const missing = canonical.filter((item) => !proposed.includes(item));
+    const extras = proposed.filter((item) => !canonical.includes(item));
+    const mismatch = missing.length + extras.length;
+    const pass = mismatch === 0;
+
+    const risk = state.extractorOn
+      ? Math.round(state.pressure * 0.08)
+      : clamp(Math.round(state.pressure * 0.55 + mismatch * 12), 0, 100);
+
+    renderList(canonicalList, canonical, "");
+    proposedList.innerHTML = "";
+    renderList(proposedList, proposed.filter((x) => canonical.includes(x)), "");
+    renderList(proposedList, extras, "extra");
+    renderList(proposedList, missing.map((m) => `MISSING: ${m}`), "missing");
+
+    mismatchCount.textContent = String(mismatch);
+    riskScore.textContent = String(risk);
+    gateBadge.textContent = pass ? "PASS" : "FAIL";
+    gateBadge.style.color = pass ? "#2ac3de" : "#f7768e";
+
+    if (pass) {
+      outcomeText.textContent = state.extractorOn
+        ? "Exact skeleton match. Safe to merge generated flesh."
+        : "Converged by chance. Guardrails still required.";
+    } else {
+      outcomeText.textContent = "Skeleton mismatch detected. Reject and refine context or extraction.";
+    }
+
+    if (recordAttempt) {
+      const dot = document.createElement("span");
+      dot.className = "inline-block w-2.5 h-2.5 rounded-full";
+      dot.style.backgroundColor = pass ? "rgba(42,195,222,0.95)" : "rgba(247,118,142,0.95)";
+      attempts.appendChild(dot);
+      while (attempts.children.length > 28) {
+        attempts.removeChild(attempts.firstChild);
+      }
+    }
+  };
+
+  extractorToggle.addEventListener("click", () => {
+    state.extractorOn = !state.extractorOn;
+    extractorToggle.setAttribute("aria-pressed", state.extractorOn ? "true" : "false");
+    extractorToggle.textContent = state.extractorOn ? "ON" : "OFF";
+    render(false);
+  });
+
+  pressureSlider.addEventListener("input", () => render(false));
+  runButton.addEventListener("click", () => {
+    state.run += 1;
+    render(true);
+  });
+
+  render(false);
+})();
+</script>
+</section>

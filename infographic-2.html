@@ -211,62 +211,163 @@
 
     <main class="max-w-[1500px] mx-auto px-6 py-12 space-y-24">
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-12" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
-<div class="lg:col-span-5">
-<h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature</h2>
-<div class="h-1 w-20 bg-cyber-accent mb-6"></div>
-<p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-                    Zoom in: a single function evolves through edits. Zoom out: a company evolves through quarters.
-                    <br/><br/>
-                    It is the same shape at every scale. Each level's "state" is the cumulative output of the faster iterations beneath it. Dysfunction at the bottom bubbles up.
-                </p>
-<div class="bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
-<p class="font-mono text-sm text-cyber-neon">
-                        next_state = process(current_state)<br/>
-                        process = improve(process, evidence)
-                    </p>
-</div>
-</div>
-<div class="lg:col-span-7">
-<div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl">
-<h3 class="text-sm font-mono text-gray-400 mb-4 uppercase">System Hierarchy (Hover to Inspect)</h3>
-<div class="fractal-layer border-l-cyber-primary group" onclick="void(0)">
-<div class="flex justify-between items-center mb-2">
-<span class="font-bold text-lg text-cyber-primary">Company Scale</span>
-<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
-</div>
-<p class="text-sm text-gray-400 hidden group-hover:block transition-all">
-<strong>State:</strong> Market Position | <strong>Process:</strong> Culture &amp; Leadership
-                        </p>
-<div class="fractal-layer border-l-cyber-neon ml-4 group">
-<div class="flex justify-between items-center mb-2">
-<span class="font-bold text-md text-cyber-neon">Product Scale</span>
-<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
-</div>
-<p class="text-sm text-gray-400 hidden group-hover:block">
-<strong>State:</strong> System Architecture | <strong>Process:</strong> Org &amp; Strategy
-                            </p>
-<div class="fractal-layer border-l-cyber-accent ml-4 group">
-<div class="flex justify-between items-center mb-2">
-<span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
-<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
-</div>
-<p class="text-sm text-gray-400 hidden group-hover:block">
-<strong>State:</strong> Codebase | <strong>Process:</strong> Team Practices
-                                </p>
-<div class="fractal-layer border-l-cyber-success ml-4 group">
-<div class="flex justify-between items-center mb-1">
-<span class="font-bold text-xs text-cyber-success">Function Scale</span>
-<span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
-</div>
-<p class="text-xs text-gray-400 hidden group-hover:block">
-<strong>State:</strong> Implementation | <strong>Process:</strong> Dev Tools
-                                    </p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <style>
+    [data-role="fractal-sim"] .scale-button {
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.7rem;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: #cbd5f5;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.6);
+    }
+    [data-role="fractal-sim"] .scale-button.is-active {
+      border-color: rgba(6, 182, 212, 0.7);
+      background: rgba(6, 182, 212, 0.18);
+      color: #fff;
+    }
+    [data-role="fractal-sim"] .fractal-layer.is-active {
+      border-color: rgba(6, 182, 212, 0.8) !important;
+      background: rgba(6, 182, 212, 0.08);
+      transform: translateX(4px);
+    }
+  </style>
+
+  <div class="lg:col-span-5">
+    <h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature of Work</h2>
+    <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
+    <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
+      Same loop, different cadence. A function evolves in minutes; a company evolves in years.
+      Each level’s state is the accumulated output of the faster loops beneath it.
+    </p>
+    <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
+      <li>Bottom-layer drift multiplies upward.</li>
+      <li>Bottom-layer improvements compound upward.</li>
+      <li>Intent and validation at every scale keep the loop coherent.</li>
+    </ul>
+    <div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
+      <p class="font-mono text-sm text-cyber-neon">
+        Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)<br/>
+        P<sub>k+1</sub> = improve(P<sub>k</sub>, evidence)
+      </p>
+    </div>
+  </div>
+
+  <div class="lg:col-span-7">
+    <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="text-xs font-mono text-gray-500 uppercase">Scale lens</span>
+        <button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
+        <button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
+        <button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
+        <button class="scale-button" data-role="scale-button" data-scale="function" type="button">Function</button>
+      </div>
+
+      <div class="space-y-3">
+        <div class="fractal-layer border-l-cyber-primary is-active" data-role="scale-card" data-scale="company" data-state="Market position" data-process="Culture + leadership" data-cadence="Years" data-example="Strategic bets">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-lg text-cyber-primary">Company Scale</span>
+            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
+          </div>
+          <div class="text-xs text-gray-400">State: Market position · Process: Culture + leadership</div>
+        </div>
+        <div class="fractal-layer border-l-cyber-neon ml-4" data-role="scale-card" data-scale="product" data-state="System architecture" data-process="Org + strategy" data-cadence="Months" data-example="Portfolio bets">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-md text-cyber-neon">Product Scale</span>
+            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
+          </div>
+          <div class="text-xs text-gray-400">State: System architecture · Process: Org + strategy</div>
+        </div>
+        <div class="fractal-layer border-l-cyber-accent ml-8" data-role="scale-card" data-scale="feature" data-state="Capabilities" data-process="Team practices" data-cadence="Days" data-example="Release scope">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
+            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
+          </div>
+          <div class="text-xs text-gray-400">State: Capabilities · Process: Team practices</div>
+        </div>
+        <div class="fractal-layer border-l-cyber-success ml-12" data-role="scale-card" data-scale="function" data-state="Implementation" data-process="Dev tools" data-cadence="Minutes" data-example="Code edits">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-xs text-cyber-success">Function Scale</span>
+            <span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
+          </div>
+          <div class="text-xs text-gray-400">State: Implementation · Process: Dev tools</div>
+        </div>
+      </div>
+
+      <div class="mt-4 bg-gray-900/70 p-4 rounded-lg border border-gray-700">
+        <div class="text-xs font-mono text-gray-500">Selected scale</div>
+        <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div>
+            <div class="text-xs text-gray-500">State</div>
+            <div class="text-white font-semibold" data-role="fractal-state">Market position</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500">Process</div>
+            <div class="text-white font-semibold" data-role="fractal-process">Culture + leadership</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500">Cadence</div>
+            <div class="text-white font-semibold" data-role="fractal-cadence">Years</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500">Example</div>
+            <div class="text-white font-semibold" data-role="fractal-example">Strategic bets</div>
+          </div>
+        </div>
+        <div class="mt-3 text-xs text-gray-500" data-role="fractal-insight">
+          Improve the fastest loops first; the rest of the stack inherits the gain.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    const script = document.currentScript;
+    const root = script ? script.closest('[data-infographic-section-id="i2-section-01-fractal-nature"]') : null;
+    if (!root || root.dataset.fractalReady === "1") return;
+    root.dataset.fractalReady = "1";
+
+    const buttons = Array.from(root.querySelectorAll('[data-role="scale-button"]'));
+    const cards = Array.from(root.querySelectorAll('[data-role="scale-card"]'));
+    const stateEl = root.querySelector('[data-role="fractal-state"]');
+    const processEl = root.querySelector('[data-role="fractal-process"]');
+    const cadenceEl = root.querySelector('[data-role="fractal-cadence"]');
+    const exampleEl = root.querySelector('[data-role="fractal-example"]');
+    const insightEl = root.querySelector('[data-role="fractal-insight"]');
+
+    if (!buttons.length || !cards.length || !stateEl || !processEl || !cadenceEl || !exampleEl || !insightEl) return;
+
+    const selectScale = (scale) => {
+      cards.forEach((card) => {
+        const active = card.dataset.scale === scale;
+        card.classList.toggle('is-active', active);
+      });
+      buttons.forEach((btn) => {
+        const active = btn.dataset.scale === scale;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      const selected = cards.find((card) => card.dataset.scale === scale) || cards[0];
+      stateEl.textContent = selected.dataset.state || '—';
+      processEl.textContent = selected.dataset.process || '—';
+      cadenceEl.textContent = selected.dataset.cadence || '—';
+      exampleEl.textContent = selected.dataset.example || '—';
+      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the loop state is "${selected.dataset.state || 'state'}" and the process is "${selected.dataset.process || 'process'}".`;
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => selectScale(btn.dataset.scale || 'company'));
+    });
+    cards.forEach((card) => {
+      card.addEventListener('click', () => selectScale(card.dataset.scale || 'company'));
+    });
+
+    selectScale('company');
+  })();
+  </script>
 </section>
 
 <section data-infographic-section-id="i2-section-02-clock-speed" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
@@ -532,6 +633,10 @@
 	                        If the loop is validated, the full function is:
 	                        <span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
 <span class="block font-mono text-cyber-accent mt-1">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
+<span class="block mt-3 text-base md:text-lg">
+	                            This only compounds with ratchets:
+	                            <span class="font-mono text-cyber-vibrant">as long as q<sub>now</sub> &gt;= q<sub>prev</sub> generally holds</span>.
+	                        </span>
 <span class="block mt-4">
 	                            SDaC doesn't just give you a better way to build your business. It gives you the tooling for the business to self-improve: each loop upgrades capability, compounds speed, and hardens against ever-evolving competitors.
 	                        </span>
@@ -541,6 +646,328 @@
 	                    </button>
 </div>
 </div>
+</section>
+
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-06-executive-loop" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <h2 class="text-3xl font-bold mb-4 text-white">Executive View: The Business Loop</h2>
+      <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
+      <p class="text-cyber-muted text-lg leading-relaxed">
+        Executives win on validated outcomes, not raw model calls. A faster loop with strong gates
+        delivers more outcomes per quarter, reduces rework, and compounds moat strength.
+      </p>
+      <ul class="mt-6 text-sm text-gray-400 list-disc list-inside space-y-2">
+        <li>Cadence sets how fast you learn and ship.</li>
+        <li>Deterministic gates reduce costly drift.</li>
+        <li>Validated outcomes compound advantage.</li>
+      </ul>
+    </div>
+
+    <div class="lg:col-span-7 space-y-4">
+      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
+        <div class="text-xs font-mono text-gray-500 mb-3">Execution flywheel</div>
+        <div class="flex items-center justify-between gap-3">
+          <div class="w-20 h-20 rounded-full border border-cyber-accent/40 bg-gray-900 flex flex-col items-center justify-center">
+            <span class="text-[10px] text-gray-400 font-mono">DECIDE</span>
+            <span class="text-xs text-cyber-accent font-mono">Mission</span>
+          </div>
+          <div class="text-cyber-muted text-2xl font-mono">→</div>
+          <div class="w-20 h-20 rounded-full border border-cyber-primary/40 bg-gray-900 flex flex-col items-center justify-center">
+            <span class="text-[10px] text-gray-400 font-mono">EXECUTE</span>
+            <span class="text-xs text-cyber-primary font-mono">Run</span>
+          </div>
+          <div class="text-cyber-muted text-2xl font-mono">→</div>
+          <div class="w-20 h-20 rounded-full border border-cyber-success/40 bg-gray-900 flex flex-col items-center justify-center">
+            <span class="text-[10px] text-gray-400 font-mono">VALIDATE</span>
+            <span class="text-xs text-cyber-success font-mono">Gates</span>
+          </div>
+        </div>
+        <div class="mt-3 text-xs text-gray-500">
+          The outcome feeds the next mission. This is the business loop that compounds.
+        </div>
+      </div>
+
+      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span class="font-mono uppercase">Loop cadence</span>
+              <span class="font-mono text-cyber-accent" data-role="exec-cadence-value">2 wk</span>
+            </div>
+            <label class="sr-only" for="execCadence">Cadence slider</label>
+            <input class="mt-2 w-full accent-cyber-accent" data-role="exec-cadence" id="execCadence" max="6" min="1" step="1" type="range" value="2" />
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span class="font-mono uppercase">Gate strength</span>
+              <span class="font-mono text-cyber-success" data-role="exec-gate-value">78%</span>
+            </div>
+            <label class="sr-only" for="execGate">Gate slider</label>
+            <input class="mt-2 w-full accent-cyber-success" data-role="exec-gate" id="execGate" max="95" min="40" step="1" type="range" value="78" />
+          </div>
+          <div class="md:col-span-2">
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span class="font-mono uppercase">AI acceleration depth</span>
+              <span class="font-mono text-cyber-neon" data-role="exec-accel-value">52%</span>
+            </div>
+            <label class="sr-only" for="execAccel">Acceleration slider</label>
+            <input class="mt-2 w-full accent-cyber-neon" data-role="exec-accel" id="execAccel" max="100" min="0" step="1" type="range" value="52" />
+            <p class="mt-2 text-[11px] text-gray-500">More AI inside the loop creates sub-loops that compress cadence.</p>
+          </div>
+        </div>
+
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Outcomes / quarter</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-success" data-role="exec-outcomes">6</div>
+            <div class="text-[11px] text-gray-500">Validated releases shipped</div>
+          </div>
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Rework risk</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-danger" data-role="exec-risk">22%</div>
+            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div class="h-2 bg-cyber-danger transition-all duration-300" data-role="exec-risk-bar" style="width: 22%;"></div>
+            </div>
+          </div>
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Reputation risk</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-neon" data-role="exec-rep-risk">18%</div>
+            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div class="h-2 bg-cyber-neon transition-all duration-300" data-role="exec-rep-risk-bar" style="width: 18%;"></div>
+            </div>
+            <div class="text-[11px] text-gray-500 mt-2">External exposure from gate escapes at scale.</div>
+          </div>
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Moat strength</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-accent" data-role="exec-moat">78/100</div>
+            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div class="h-2 bg-cyber-accent transition-all duration-300" data-role="exec-moat-bar" style="width: 78%;"></div>
+            </div>
+          </div>
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3 sm:col-span-2 xl:col-span-4">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Loop multiplier</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-neon" data-role="exec-multiplier">1.8x</div>
+            <div class="text-[11px] text-gray-500">Nested automation increases effective loop throughput.</div>
+          </div>
+        </div>
+        <div class="mt-4 text-xs text-gray-500" data-role="exec-insight"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const script = document.currentScript;
+    const root = script ? script.closest('[data-infographic-section-id="i2-section-06-executive-loop"]') : null;
+    if (!root || root.dataset.execLoopReady === "1") return;
+    root.dataset.execLoopReady = "1";
+
+  const cadence = root.querySelector('[data-role="exec-cadence"]');
+  const gate = root.querySelector('[data-role="exec-gate"]');
+    const cadenceValue = root.querySelector('[data-role="exec-cadence-value"]');
+    const gateValue = root.querySelector('[data-role="exec-gate-value"]');
+    const accel = root.querySelector('[data-role="exec-accel"]');
+    const accelValue = root.querySelector('[data-role="exec-accel-value"]');
+    const outcomesEl = root.querySelector('[data-role="exec-outcomes"]');
+    const riskEl = root.querySelector('[data-role="exec-risk"]');
+    const riskBar = root.querySelector('[data-role="exec-risk-bar"]');
+    const repRiskEl = root.querySelector('[data-role="exec-rep-risk"]');
+    const repRiskBar = root.querySelector('[data-role="exec-rep-risk-bar"]');
+    const moatEl = root.querySelector('[data-role="exec-moat"]');
+    const moatBar = root.querySelector('[data-role="exec-moat-bar"]');
+    const multiplierEl = root.querySelector('[data-role="exec-multiplier"]');
+    const insight = root.querySelector('[data-role="exec-insight"]');
+
+    if (!cadence || !gate || !accel || !cadenceValue || !gateValue || !accelValue || !outcomesEl || !riskEl || !riskBar || !repRiskEl || !repRiskBar || !moatEl || !moatBar || !multiplierEl || !insight) {
+      return;
+    }
+
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+    const readInt = (value, fallback) => {
+      const parsed = Number.parseInt(String(value), 10);
+      return Number.isFinite(parsed) ? parsed : fallback;
+    };
+
+  const update = () => {
+    const weeks = clamp(readInt(cadence.value, 2), 1, 6);
+    const gateStrength = clamp(readInt(gate.value, 78), 40, 95);
+    const accelDepth = clamp(readInt(accel.value, 52), 0, 100);
+    const multiplier = 1 + Math.pow(accelDepth / 100, 1.4) * 3.2;
+    const effectiveWeeks = clamp(weeks / multiplier, 0.6, 6);
+    const outcomes = clamp(Math.round(13 / effectiveWeeks), 1, 30);
+    const rework = clamp(100 - gateStrength + Math.round(effectiveWeeks * 6), 5, 95);
+    const moat = clamp(Math.round((100 - effectiveWeeks * 9) * 0.45 + gateStrength * 0.45 + accelDepth * 0.2), 10, 100);
+    const gateWeakness = (100 - gateStrength);
+    const exposure = (gateWeakness / 100);
+    const reputation = clamp(
+      Math.round(
+        Math.pow(gateWeakness, 1.15) * 0.8 +
+        accelDepth * 0.3 * exposure +
+        outcomes * 0.6 * exposure
+      ),
+      2,
+      95
+    );
+
+    cadenceValue.textContent = `${weeks} wk`;
+    gateValue.textContent = `${gateStrength}%`;
+    accelValue.textContent = `${accelDepth}%`;
+    outcomesEl.textContent = String(outcomes);
+    riskEl.textContent = `${rework}%`;
+    riskBar.style.width = `${rework}%`;
+    repRiskEl.textContent = `${reputation}%`;
+    repRiskBar.style.width = `${reputation}%`;
+    moatEl.textContent = `${moat}/100`;
+    moatBar.style.width = `${moat}%`;
+    multiplierEl.textContent = `${multiplier.toFixed(1)}x`;
+    insight.textContent = `At ${weeks} weeks/loop, ${gateStrength}% gates, and ${accelDepth}% AI depth, you deliver ~${outcomes} validated outcomes/quarter with ${rework}% rework risk and ${reputation}% reputation exposure.`;
+  };
+
+  cadence.addEventListener("input", update);
+  gate.addEventListener("input", update);
+  accel.addEventListener("input", update);
+  update();
+  })();
+  </script>
+</section>
+
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <h2 class="text-3xl font-bold mb-4 text-white">Intent Architecture Wins the Output War</h2>
+      <div class="h-1 w-20 bg-cyber-neon mb-6"></div>
+      <p class="text-cyber-muted text-lg leading-relaxed">
+        AI output volume rises faster than humans can consume it. Competition shifts to
+        intention architecture: converting volume into high-signal, coherent outcomes.
+      </p>
+      <ul class="mt-6 text-sm text-gray-400 list-disc list-inside space-y-2">
+        <li>More output without intent raises review and integration load.</li>
+        <li>Stronger intent boosts signal density and coherence.</li>
+        <li>High-signal loops compound; low-signal loops stall.</li>
+      </ul>
+      <div class="mt-6 bg-cyber-panel border border-gray-700 rounded-xl p-4 text-xs text-gray-400">
+        <strong class="text-white">Executive takeaway:</strong> The bottleneck isn’t output. It’s
+        the ability to consume, validate, and integrate the right output.
+      </div>
+    </div>
+
+    <div class="lg:col-span-7 space-y-4" data-role="intent-sim">
+      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
+        <div class="text-xs font-mono text-gray-500 mb-3">Interactive model</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span class="font-mono uppercase">AI output intensity</span>
+              <span class="font-mono text-cyber-success" data-role="intent-volume-value">55</span>
+            </div>
+            <label class="sr-only" for="intentVolume">Output intensity slider</label>
+            <input class="mt-2 w-full accent-cyber-success" data-role="intent-volume" id="intentVolume" max="100" min="0" step="1" type="range" value="55" />
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span class="font-mono uppercase">Intent architecture strength</span>
+              <span class="font-mono text-cyber-neon" data-role="intent-strength-value">62%</span>
+            </div>
+            <label class="sr-only" for="intentStrength">Intent strength slider</label>
+            <input class="mt-2 w-full accent-cyber-neon" data-role="intent-strength" id="intentStrength" max="100" min="0" step="1" type="range" value="62" />
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <div class="text-xs font-mono text-gray-500 mb-2">Signal vs. Noise</div>
+          <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-3 bg-cyber-success transition-all duration-300" data-role="intent-signal-bar" style="width: 50%;"></div>
+            <div class="h-3 bg-cyber-danger transition-all duration-300" data-role="intent-noise-bar" style="width: 50%;"></div>
+          </div>
+          <div class="mt-2 flex justify-between text-xs text-gray-400">
+            <span>Signal density</span>
+            <span class="font-mono text-cyber-success" data-role="intent-signal-value">50%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+          <div class="text-xs uppercase tracking-wide text-gray-400">Consumption load</div>
+          <div class="mt-1 text-2xl font-bold text-cyber-danger" data-role="intent-load">52</div>
+          <div class="text-[11px] text-gray-500">Review + integration index</div>
+        </div>
+        <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+          <div class="text-xs uppercase tracking-wide text-gray-400">Coherence</div>
+          <div class="mt-1 text-2xl font-bold text-cyber-accent" data-role="intent-coherence">68</div>
+          <div class="text-[11px] text-gray-500">Fidelity to mission</div>
+        </div>
+        <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+          <div class="text-xs uppercase tracking-wide text-gray-400">Competitive edge</div>
+          <div class="mt-1 text-2xl font-bold text-cyber-success" data-role="intent-edge">72/100</div>
+          <div class="text-[11px] text-gray-500">Signal advantage</div>
+        </div>
+      </div>
+
+      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-4 text-xs text-gray-400" data-role="intent-insight"></div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    const script = document.currentScript;
+    const root = script ? script.closest('[data-infographic-section-id="i2-section-07-intention-architecture"]') : null;
+    if (!root || root.dataset.intentArchitectureReady === "1") return;
+    root.dataset.intentArchitectureReady = "1";
+
+    const volume = root.querySelector('[data-role="intent-volume"]');
+    const strength = root.querySelector('[data-role="intent-strength"]');
+    const volumeValue = root.querySelector('[data-role="intent-volume-value"]');
+    const strengthValue = root.querySelector('[data-role="intent-strength-value"]');
+    const signalBar = root.querySelector('[data-role="intent-signal-bar"]');
+    const noiseBar = root.querySelector('[data-role="intent-noise-bar"]');
+    const signalValue = root.querySelector('[data-role="intent-signal-value"]');
+    const loadEl = root.querySelector('[data-role="intent-load"]');
+    const coherenceEl = root.querySelector('[data-role="intent-coherence"]');
+    const edgeEl = root.querySelector('[data-role="intent-edge"]');
+    const insight = root.querySelector('[data-role="intent-insight"]');
+
+    if (!volume || !strength || !volumeValue || !strengthValue || !signalBar || !noiseBar || !signalValue || !loadEl || !coherenceEl || !edgeEl || !insight) {
+      return;
+    }
+
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+    const readInt = (value, fallback) => {
+      const parsed = Number.parseInt(String(value), 10);
+      return Number.isFinite(parsed) ? parsed : fallback;
+    };
+
+    const update = () => {
+      const volumeRaw = clamp(readInt(volume.value, 55), 0, 100);
+      const strengthRaw = clamp(readInt(strength.value, 62), 0, 100);
+
+      const volumeIndex = Math.round(10 + volumeRaw * 1.9);
+      const signal = volumeRaw * (0.2 + 0.8 * (strengthRaw / 100));
+      const noise = volumeRaw * (1 - strengthRaw / 100);
+      const total = Math.max(signal + noise, 1);
+      const signalRatio = clamp(Math.round((signal / total) * 100), 5, 95);
+
+      const load = clamp(Math.round(20 + volumeRaw * 0.85 - strengthRaw * 0.5), 5, 95);
+      const coherence = clamp(Math.round(30 + strengthRaw * 0.6 - volumeRaw * 0.15), 5, 100);
+      const edge = clamp(Math.round(signalRatio * 0.5 + coherence * 0.5), 5, 100);
+
+      volumeValue.textContent = String(volumeIndex);
+      strengthValue.textContent = `${strengthRaw}%`;
+      signalValue.textContent = `${signalRatio}%`;
+      signalBar.style.width = `${signalRatio}%`;
+      noiseBar.style.width = `${100 - signalRatio}%`;
+      loadEl.textContent = String(load);
+      coherenceEl.textContent = String(coherence);
+      edgeEl.textContent = `${edge}/100`;
+
+      insight.textContent = `At intensity ${volumeIndex} with ${strengthRaw}% intent architecture, signal density is ${signalRatio}%. Consumption load is ${load}, and coherent advantage is ${edge}/100.`;
+    };
+
+    volume.addEventListener("input", update);
+    strength.addEventListener("input", update);
+    update();
+  })();
+  </script>
 </section>
 
 

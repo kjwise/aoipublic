@@ -28,6 +28,25 @@
   z-index: 0;
 }
 
+[data-infographic-fragment-shell][data-infographic-section-id]::after {
+  content: attr(data-infographic-section-id);
+  position: absolute;
+  top: 0.42rem;
+  right: 0.6rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(11, 12, 16, 0.72);
+  color: rgba(229, 231, 235, 0.86);
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+}
+
 [data-infographic-fragment-shell] > * {
   position: relative;
   z-index: 1;
@@ -53,9 +72,20 @@ body.bg-cyber-dark [data-infographic-fragment-shell] {
   padding: clamp(0.25rem, 0.6vw, 0.5rem);
 }
 
+.infographic-deck [data-infographic-fragment-shell][data-infographic-section-id]::after {
+  display: none;
+}
+
 @media (max-width: 768px) {
   [data-infographic-fragment-shell] {
     border-radius: 0.85rem;
     padding: 0.32rem;
+  }
+
+  [data-infographic-fragment-shell][data-infographic-section-id]::after {
+    font-size: 0.58rem;
+    top: 0.36rem;
+    right: 0.42rem;
+    padding: 0.08rem 0.34rem;
   }
 }

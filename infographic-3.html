@@ -423,7 +423,235 @@
 </div>
 </div>
 </section>
-<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Skeleton-First Rule (Prevent Map Contamination)</h2>
+<p class="text-brand-muted leading-relaxed">
+              Structure must be extracted deterministically from Terrain first. The model can add flesh, but cannot invent skeleton.
+              The gate enforces exact skeleton match before merge.
+            </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+                Raise pressure and disable deterministic extraction to watch contamination risk rise.
+                Re-enable extractor and see the skeleton gate converge back to PASS.
+              </div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="skeleton-sim">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Pipeline</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
+<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Extract skeleton</div>
+</div>
+<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted">Model</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Generate flesh</div>
+</div>
+<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="concepts#ci-gate-mapterrain-sync" title="See concept: CI Gate (Map–Terrain Sync)">CI Gate</a></div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Skeleton match</div>
+</div>
+<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted">Ledger</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">PASS / FAIL receipt</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Contamination pressure</span>
+<span class="font-mono text-brand-strong"><span data-role="pressure-value">40</span>/100</span>
+</div>
+<label class="sr-only" for="skeletonPressureSlider">Contamination pressure</label>
+<input class="mt-2 w-full" data-role="pressure-slider" id="skeletonPressureSlider" max="100" min="0" type="range" value="40"/>
+</div>
+<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Extractor</span>
+<button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="extractor-toggle" type="button">ON</button>
+</div>
+<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Run cycle</span>
+<button class="soft-toggle font-mono text-xs" data-role="run-button" type="button">Run</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Canonical skeleton (Sensor)</div>
+<ul class="space-y-1 text-xs text-brand-strong font-mono" data-role="canonical-list"></ul>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Proposed skeleton (Map)</div>
+<ul class="space-y-1 text-xs font-mono" data-role="proposed-list"></ul>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Mismatch count</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="mismatch-count">0</span></div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Contamination risk</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="risk-score">0</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Skeleton gate</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="gate-badge">PASS</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Latest outcome</div>
+<div class="mt-1 text-sm text-brand-muted" data-role="outcome-text">Ready to run.</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Loop attempts</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, red = FAIL</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-1" data-role="attempts"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-06-skeleton-first-rule"]') : null;
+  if (!root || root.dataset.skeletonFirstReady === "1") return;
+  root.dataset.skeletonFirstReady = "1";
+
+  const sim = root.querySelector('[data-role="skeleton-sim"]');
+  if (!sim) return;
+
+  const pressureSlider = sim.querySelector('[data-role="pressure-slider"]');
+  const pressureValue = sim.querySelector('[data-role="pressure-value"]');
+  const extractorToggle = sim.querySelector('[data-role="extractor-toggle"]');
+  const runButton = sim.querySelector('[data-role="run-button"]');
+  const canonicalList = sim.querySelector('[data-role="canonical-list"]');
+  const proposedList = sim.querySelector('[data-role="proposed-list"]');
+  const mismatchCount = sim.querySelector('[data-role="mismatch-count"]');
+  const riskScore = sim.querySelector('[data-role="risk-score"]');
+  const gateBadge = sim.querySelector('[data-role="gate-badge"]');
+  const outcomeText = sim.querySelector('[data-role="outcome-text"]');
+  const attempts = sim.querySelector('[data-role="attempts"]');
+  if (!pressureSlider || !pressureValue || !extractorToggle || !runButton || !canonicalList || !proposedList || !mismatchCount || !riskScore || !gateBadge || !outcomeText || !attempts) return;
+
+  const canonical = [
+    "routes.py",
+    "schemas/order.json",
+    "contracts/public_api.yaml",
+    "validators/policy.py",
+    "tests/immune_system_cases.py"
+  ];
+  const noisePool = [
+    "routes_v2_guess.py",
+    "schemas/legacy_mode.json",
+    "contracts/experimental.yaml",
+    "validators/soft_policy.py",
+    "notes/todo-skeleton.md",
+    "tests/speculative_case.py"
+  ];
+
+  const state = {
+    pressure: Number.parseInt(pressureSlider.value, 10) || 40,
+    extractorOn: true,
+    run: 0
+  };
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  const renderList = (el, items, mode) => {
+    el.innerHTML = "";
+    for (const item of items) {
+      const li = document.createElement("li");
+      li.textContent = item;
+      if (mode === "extra") li.className = "text-brand-danger";
+      if (mode === "missing") li.className = "text-amber-300";
+      el.appendChild(li);
+    }
+  };
+
+  const computeProposed = () => {
+    if (state.extractorOn) return canonical.slice();
+
+    const missingCount = state.pressure >= 80 ? 2 : state.pressure >= 55 ? 1 : 0;
+    const proposed = canonical.slice(missingCount);
+
+    const extraCount = clamp(Math.floor(state.pressure / 25) + 1, 1, 4);
+    for (let i = 0; i < extraCount; i += 1) {
+      const candidate = noisePool[(state.run + i) % noisePool.length];
+      if (!proposed.includes(candidate)) proposed.push(candidate);
+    }
+    return proposed;
+  };
+
+  const render = (recordAttempt) => {
+    state.pressure = clamp(Number.parseInt(pressureSlider.value, 10) || state.pressure, 0, 100);
+    pressureValue.textContent = String(state.pressure);
+
+    const proposed = computeProposed();
+    const missing = canonical.filter((item) => !proposed.includes(item));
+    const extras = proposed.filter((item) => !canonical.includes(item));
+    const mismatch = missing.length + extras.length;
+    const pass = mismatch === 0;
+
+    const risk = state.extractorOn
+      ? Math.round(state.pressure * 0.08)
+      : clamp(Math.round(state.pressure * 0.55 + mismatch * 12), 0, 100);
+
+    renderList(canonicalList, canonical, "");
+    proposedList.innerHTML = "";
+    renderList(proposedList, proposed.filter((x) => canonical.includes(x)), "");
+    renderList(proposedList, extras, "extra");
+    renderList(proposedList, missing.map((m) => `MISSING: ${m}`), "missing");
+
+    mismatchCount.textContent = String(mismatch);
+    riskScore.textContent = String(risk);
+    gateBadge.textContent = pass ? "PASS" : "FAIL";
+    gateBadge.style.color = pass ? "#2ac3de" : "#f7768e";
+
+    if (pass) {
+      outcomeText.textContent = state.extractorOn
+        ? "Exact skeleton match. Safe to merge generated flesh."
+        : "Converged by chance. Guardrails still required.";
+    } else {
+      outcomeText.textContent = "Skeleton mismatch detected. Reject and refine context or extraction.";
+    }
+
+    if (recordAttempt) {
+      const dot = document.createElement("span");
+      dot.className = "inline-block w-2.5 h-2.5 rounded-full";
+      dot.style.backgroundColor = pass ? "rgba(42,195,222,0.95)" : "rgba(247,118,142,0.95)";
+      attempts.appendChild(dot);
+      while (attempts.children.length > 28) {
+        attempts.removeChild(attempts.firstChild);
+      }
+    }
+  };
+
+  extractorToggle.addEventListener("click", () => {
+    state.extractorOn = !state.extractorOn;
+    extractorToggle.setAttribute("aria-pressed", state.extractorOn ? "true" : "false");
+    extractorToggle.textContent = state.extractorOn ? "ON" : "OFF";
+    render(false);
+  });
+
+  pressureSlider.addEventListener("input", () => render(false));
+  runButton.addEventListener("click", () => {
+    state.run += 1;
+    render(true);
+  });
+
+  render(false);
+})();
+</script>
+</section>
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-danger">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -487,7 +715,833 @@
 </div>
 </div>
 </section>
-<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-05-always-on-loops" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-08-ouroboros-protocol" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<style>
+  [data-role="ouroboros-sim"] .ouro-phase {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.5);
+    color: #b5b6bf;
+    transition: all 180ms ease;
+  }
+  [data-role="ouroboros-sim"] .ouro-phase[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+    color: #f2f3f8;
+    box-shadow: 0 0 0 1px rgba(42, 195, 222, 0.2) inset;
+  }
+  [data-role="ouroboros-sim"] .attempt-pill.is-trip {
+    background: rgba(187, 154, 247, 0.24);
+    border-color: rgba(187, 154, 247, 0.34);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-role="ouroboros-sim"] .ouro-phase {
+      transition: none;
+    }
+  }
+</style>
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Ouroboros Protocol (Write → Judge → Refine)</h2>
+<p class="text-brand-muted leading-relaxed">
+        This is the control loop for iterative delivery: write a bounded candidate, judge it with deterministic gates,
+        then refine only against the failure signal. Repeat until convergence or circuit-break.
+      </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Deterministic stop conditions</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">Write → <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> → Refine</span>
+<span class="block mt-2">Stop on <span class="font-mono text-brand-strong">PASS</span> (converged) or on
+          <span class="font-mono text-brand-strong">budget exhausted</span> (escalate).</span>
+<span class="block mt-2">Judge can route to refine, rewrite, or re-scope before the next loop.</span>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="ouroboros-sim">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Target quality</span>
+<span class="font-mono text-brand-strong"><span data-role="target-value">86</span>/100</span>
+</div>
+<label class="sr-only" for="ouroTargetSlider">Target quality slider</label>
+<input class="mt-2 w-full" data-role="target-slider" id="ouroTargetSlider" max="95" min="65" step="1" type="range" value="86"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Circuit breaker</span>
+<span class="font-mono text-brand-strong"><span data-role="budget-value">8</span> loops</span>
+</div>
+<label class="sr-only" for="ouroBudgetSlider">Circuit breaker slider</label>
+<input class="mt-2 w-full" data-role="budget-slider" id="ouroBudgetSlider" max="16" min="3" step="1" type="range" value="8"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Refinement strength</span>
+<span class="font-mono text-brand-strong"><span data-role="refine-value">55</span>/100</span>
+</div>
+<label class="sr-only" for="ouroRefineSlider">Refinement strength slider</label>
+<input class="mt-2 w-full" data-role="refine-slider" id="ouroRefineSlider" max="100" min="25" step="1" type="range" value="55"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Stochasticity</span>
+<span class="font-mono text-brand-strong"><span data-role="noise-value">45</span>/100</span>
+</div>
+<label class="sr-only" for="ouroNoiseSlider">Stochasticity slider</label>
+<input class="mt-2 w-full" data-role="noise-slider" id="ouroNoiseSlider" max="100" min="0" step="1" type="range" value="45"/>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-3 gap-2 text-xs font-mono">
+<div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="write" data-role="phase-pill">WRITE</div>
+<div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="judge" data-role="phase-pill">JUDGE</div>
+<div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="refine" data-role="phase-pill">REFINE</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<button class="soft-toggle font-mono" data-role="step" type="button">Step Once</button>
+<button class="soft-toggle font-mono" data-role="run" type="button">Run Loop</button>
+<button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Loop count</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="loop-count">0</span></div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Current quality</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="quality">52</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Open errors</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="errors">6</span></div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Status</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">READY</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Structured error object</div>
+<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap" data-role="error-json"></pre>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Ready. Run one bounded cycle.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Loop outcomes</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, red = refine, violet = circuit-break</div>
+</div>
+<div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-08-ouroboros-protocol"]') : null;
+  if (!root || root.dataset.ouroborosReady === "1") return;
+  root.dataset.ouroborosReady = "1";
+
+  const sim = root.querySelector('[data-role="ouroboros-sim"]');
+  if (!sim) return;
+
+  const targetSlider = sim.querySelector('[data-role="target-slider"]');
+  const budgetSlider = sim.querySelector('[data-role="budget-slider"]');
+  const refineSlider = sim.querySelector('[data-role="refine-slider"]');
+  const noiseSlider = sim.querySelector('[data-role="noise-slider"]');
+  const targetValue = sim.querySelector('[data-role="target-value"]');
+  const budgetValue = sim.querySelector('[data-role="budget-value"]');
+  const refineValue = sim.querySelector('[data-role="refine-value"]');
+  const noiseValue = sim.querySelector('[data-role="noise-value"]');
+  const loopCountEl = sim.querySelector('[data-role="loop-count"]');
+  const qualityEl = sim.querySelector('[data-role="quality"]');
+  const errorsEl = sim.querySelector('[data-role="errors"]');
+  const statusEl = sim.querySelector('[data-role="status"]');
+  const errorJsonEl = sim.querySelector('[data-role="error-json"]');
+  const outcomeEl = sim.querySelector('[data-role="outcome"]');
+  const attemptsEl = sim.querySelector('[data-role="attempts"]');
+  const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
+  const stepBtn = sim.querySelector('[data-role="step"]');
+  const runBtn = sim.querySelector('[data-role="run"]');
+  const resetBtn = sim.querySelector('[data-role="reset"]');
+
+  if (!targetSlider || !budgetSlider || !refineSlider || !noiseSlider || !targetValue || !budgetValue || !refineValue || !noiseValue ||
+      !loopCountEl || !qualityEl || !errorsEl || !statusEl || !errorJsonEl || !outcomeEl || !attemptsEl ||
+      !stepBtn || !runBtn || !resetBtn || phasePills.length === 0) return;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const toInt = (v, fallback) => {
+    const n = Number.parseInt(String(v), 10);
+    return Number.isFinite(n) ? n : fallback;
+  };
+  const randSigned = () => (Math.random() * 2) - 1;
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const phaseDelay = reducedMotion ? 0 : 140;
+  const loopDelay = reducedMotion ? 0 : 220;
+
+  const state = {
+    target: toInt(targetSlider.value, 86),
+    budget: toInt(budgetSlider.value, 8),
+    refine: toInt(refineSlider.value, 55),
+    noise: toInt(noiseSlider.value, 45),
+    loop: 0,
+    quality: 52,
+    errors: 6,
+    status: "READY",
+    running: false,
+    animating: false,
+    failStreak: 0,
+    lastSignal: {
+      run: 0,
+      code: "ready",
+      gate: "quality_floor",
+      expected: "score >= 86 and errors <= 1",
+      actual: "score=34, errors=6",
+      deficit: 52,
+      next_action: "write"
+    }
+  };
+
+  const setPhase = (name) => {
+    for (const pill of phasePills) {
+      pill.dataset.active = pill.dataset.phase === name ? "1" : "0";
+    }
+  };
+
+  const clearPhases = () => setPhase("");
+
+  const appendAttempt = (kind) => {
+    const pill = document.createElement("span");
+    const suffix = kind === "pass" ? "is-pass" : kind === "trip" ? "is-trip" : "is-fail";
+    pill.className = `attempt-pill ${suffix}`;
+    attemptsEl.appendChild(pill);
+    while (attemptsEl.children.length > 36) {
+      attemptsEl.removeChild(attemptsEl.firstChild);
+    }
+  };
+
+  const render = () => {
+    targetValue.textContent = String(state.target);
+    budgetValue.textContent = String(state.budget);
+    refineValue.textContent = String(state.refine);
+    noiseValue.textContent = String(state.noise);
+    loopCountEl.textContent = String(state.loop);
+    qualityEl.textContent = String(state.quality);
+    errorsEl.textContent = String(state.errors);
+
+    let statusColor = "#b5b6bf";
+    if (state.status === "PASS") statusColor = "#2ac3de";
+    if (state.status === "TRIP") statusColor = "#bb9af7";
+    if (state.status === "ITERATING") statusColor = "#f2f3f8";
+    statusEl.textContent = state.status;
+    statusEl.style.color = statusColor;
+
+    errorJsonEl.textContent = JSON.stringify(state.lastSignal, null, 2);
+
+    if (state.status === "PASS") {
+      outcomeEl.textContent = "PASS: converged under deterministic gates.";
+    } else if (state.status === "TRIP") {
+      outcomeEl.textContent = `CIRCUIT BREAK: loop budget (${state.budget}) exhausted. Escalate with evidence.`;
+    } else if (state.status === "ITERATING") {
+      const nextAction = state.lastSignal.next_action || "refine";
+      if (nextAction === "rewrite") {
+        outcomeEl.textContent = "Judge selected rewrite: regenerate candidate with adjusted context.";
+      } else if (nextAction === "re-scope") {
+        outcomeEl.textContent = "Judge selected re-scope: tighten mission boundaries before next write.";
+      } else {
+        outcomeEl.textContent = "Judge selected refine: targeted mutation from the failure signal.";
+      }
+    } else {
+      outcomeEl.textContent = "Ready. Run one bounded cycle.";
+    }
+
+    runBtn.textContent = state.running ? "Stop" : "Run Loop";
+  };
+
+  const pickDecision = (choices) => {
+    const stochastic = state.noise / 100;
+    if (stochastic < 0.08) {
+      return choices.reduce((best, item) => (item.weight > best.weight ? item : best), choices[0]).action;
+    }
+    const total = choices.reduce((sum, item) => sum + Math.max(0, item.weight), 0);
+    const r = Math.random() * (total || 1);
+    let cursor = 0;
+    for (const item of choices) {
+      cursor += Math.max(0, item.weight);
+      if (r <= cursor) return item.action;
+    }
+    return choices[choices.length - 1].action;
+  };
+
+  const evaluateCycle = () => {
+    const cycle = state.loop + 1;
+    const deficit = Math.max(0, state.target - state.quality);
+    const noiseScale = state.noise / 100;
+    const writeGain = clamp(
+      Math.round(deficit * (0.10 + state.refine / 250) + (randSigned() * 6 * noiseScale)),
+      -2,
+      18
+    );
+    const candidateQuality = clamp(state.quality + writeGain, 0, 100);
+    const errorNoise = Math.random() < (0.14 + (noiseScale * 0.18)) ? 1 : 0;
+    const candidateErrors = clamp(
+      state.errors - Math.max(0, Math.floor((writeGain + 1) / 4)) + errorNoise,
+      0,
+      12
+    );
+    const gateScore = candidateQuality - (candidateErrors * 3) + (randSigned() * 7 * noiseScale);
+    const pass = gateScore >= state.target && candidateErrors <= 1;
+    const budgetHit = cycle >= state.budget;
+
+    let nextQuality = candidateQuality;
+    let nextErrors = candidateErrors;
+    let nextStatus = pass ? "PASS" : (budgetHit ? "TRIP" : "ITERATING");
+    let nextAction = pass ? "accept" : (budgetHit ? "escalate" : "refine");
+    let showRefinePhase = false;
+
+    if (pass) {
+      state.failStreak = 0;
+    } else {
+      state.failStreak += 1;
+    }
+
+    if (!pass && !budgetHit) {
+      const refineBoost = Math.max(1, Math.round((state.refine - 35) / 18));
+      const deficitNow = Math.max(0, state.target - gateScore);
+      const decision = pickDecision([
+        { action: "refine", weight: clamp(0.38 + (state.refine / 240) + (deficitNow / 280), 0.2, 0.8) },
+        { action: "rewrite", weight: clamp(0.26 + (state.noise / 260) + (state.failStreak / 35), 0.12, 0.65) },
+        { action: "re-scope", weight: clamp(0.20 + ((100 - state.refine) / 420), 0.06, 0.42) }
+      ]);
+
+      nextAction = decision;
+      if (decision === "refine") {
+        nextQuality = clamp(candidateQuality + refineBoost + (randSigned() * 3 * noiseScale), 0, 100);
+        nextErrors = Math.max(0, candidateErrors - 1);
+        showRefinePhase = true;
+      } else if (decision === "rewrite") {
+        nextQuality = clamp(candidateQuality - 1 + (randSigned() * 4 * noiseScale), 0, 100);
+        nextErrors = clamp(candidateErrors + (Math.random() < (0.20 + 0.25 * noiseScale) ? 1 : 0), 0, 12);
+      } else {
+        nextQuality = clamp(state.quality + Math.max(0, Math.round(deficit * 0.05 + (randSigned() * 2 * noiseScale))), 0, 100);
+        nextErrors = Math.max(0, state.errors - (Math.random() < 0.35 ? 1 : 0));
+      }
+    }
+
+    state.loop = cycle;
+    state.quality = nextQuality;
+    state.errors = nextErrors;
+    state.status = nextStatus;
+    state.lastSignal = {
+      run: state.loop,
+      code: pass ? "pass" : "validator_fail",
+      gate: "quality_floor",
+      expected: `score >= ${state.target} and errors <= 1`,
+      actual: `score=${Math.round(gateScore)}, errors=${candidateErrors}`,
+      deficit: Math.max(0, state.target - Math.round(gateScore)),
+      next_action: nextAction
+    };
+
+    appendAttempt(pass ? "pass" : (nextStatus === "TRIP" ? "trip" : "fail"));
+    render();
+    return { action: nextAction, showRefinePhase };
+  };
+
+  const runAnimatedCycle = (done) => {
+    if (state.animating) {
+      if (done) done();
+      return;
+    }
+    if (state.status === "PASS" || state.status === "TRIP") {
+      if (done) done();
+      return;
+    }
+    state.animating = true;
+    setPhase("write");
+    window.setTimeout(() => {
+      setPhase("judge");
+      window.setTimeout(() => {
+        const result = evaluateCycle() || {};
+        if (result.showRefinePhase) {
+          setPhase("refine");
+          window.setTimeout(() => {
+            clearPhases();
+            state.animating = false;
+            if (done) done();
+          }, phaseDelay);
+          return;
+        }
+        clearPhases();
+        state.animating = false;
+        if (done) done();
+      }, phaseDelay);
+    }, phaseDelay);
+  };
+
+  const stopRun = () => {
+    state.running = false;
+    render();
+  };
+
+  const runLoop = () => {
+    if (state.running) {
+      stopRun();
+      return;
+    }
+    if (state.status === "PASS" || state.status === "TRIP") return;
+    state.running = true;
+    render();
+
+    const tick = () => {
+      if (!state.running) return;
+      runAnimatedCycle(() => {
+        if (state.status === "PASS" || state.status === "TRIP") {
+          stopRun();
+          return;
+        }
+        window.setTimeout(tick, loopDelay);
+      });
+    };
+    tick();
+  };
+
+  targetSlider.addEventListener("input", () => {
+    state.target = toInt(targetSlider.value, state.target);
+    state.lastSignal.expected = `score >= ${state.target} and errors <= 1`;
+    render();
+  });
+  budgetSlider.addEventListener("input", () => {
+    state.budget = toInt(budgetSlider.value, state.budget);
+    render();
+  });
+  refineSlider.addEventListener("input", () => {
+    state.refine = toInt(refineSlider.value, state.refine);
+    render();
+  });
+  noiseSlider.addEventListener("input", () => {
+    state.noise = toInt(noiseSlider.value, state.noise);
+    render();
+  });
+
+  stepBtn.addEventListener("click", () => {
+    if (state.running || state.animating) return;
+    runAnimatedCycle();
+  });
+  runBtn.addEventListener("click", runLoop);
+  resetBtn.addEventListener("click", () => {
+    stopRun();
+    state.loop = 0;
+    state.quality = 52;
+    state.errors = 6;
+    state.status = "READY";
+    state.noise = toInt(noiseSlider.value, 45);
+    state.failStreak = 0;
+    state.lastSignal = {
+      run: 0,
+      code: "ready",
+      gate: "quality_floor",
+      expected: `score >= ${state.target} and errors <= 1`,
+      actual: "score=34, errors=6",
+      deficit: 52,
+      next_action: "write"
+    };
+    attemptsEl.innerHTML = "";
+    clearPhases();
+    render();
+  });
+
+  render();
+})();
+</script>
+</section>
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-07-ratchet-gates" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Ratchets (Quality Floors That Only Move Up)</h2>
+<p class="text-brand-muted leading-relaxed">
+              Ratchets convert progress into non-regression law. A candidate may fail, but the floor does not move down.
+              When a candidate passes the gate, the floor is raised and future loops compound from a better baseline.
+            </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2"><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> conditions</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">quality(Z<sub>n</sub>) &gt;= quality(Z<sub>n-1</sub>)</span>
+<span class="block font-mono text-brand-vibrant mt-1">m<sub>new</sub> &gt;= m<sub>old</sub></span>
+<span class="block mt-2">Here <span class="font-mono">m</span> is any tracked metric (for example reliability, velocity, defensibility, compliance).</span>
+<span class="block font-mono text-brand-vibrant mt-2">q(Z) = Σ w<sub>i</sub> · m<sub>i</sub>(Z), with Σ w<sub>i</sub> = 1</span>
+<span class="block mt-2">FAIL does not lower the floor. PASS can raise it.</span>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="ratchet-sim">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Candidate delta</span>
+<span class="font-mono text-brand-strong"><span data-role="delta-value">3</span> pts</span>
+</div>
+<input class="mt-2 w-full" data-role="delta-slider" max="20" min="-20" step="1" type="range" value="3"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Gate strength</span>
+<span class="font-mono text-brand-strong"><span data-role="gate-value">66</span>/100</span>
+</div>
+<input class="mt-2 w-full" data-role="gate-slider" max="95" min="40" step="1" type="range" value="66"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Stochasticity</span>
+<span class="font-mono text-brand-strong"><span data-role="noise-value">50</span>/100</span>
+</div>
+<input class="mt-2 w-full" data-role="noise-slider" max="100" min="0" step="1" type="range" value="50"/>
+</div>
+</div>
+<div class="mt-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Loop complexity (changes quality weights)</div>
+<div class="flex flex-wrap gap-2" data-role="complexity-controls">
+<button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="local" type="button">Local Loop</button>
+<button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="component" type="button">Component Loop</button>
+<button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="system" type="button">System Loop</button>
+</div>
+<div class="mt-2 text-xs text-brand-muted">
+<span class="font-mono">q weights</span>:
+<span data-role="weights-label">R 30% · V 25% · D 25% · C 20%</span>
+</div>
+<div class="mt-1 text-xs text-brand-muted">
+<span class="font-mono">stochastic variance</span>:
+<span data-role="variance-label">±2.0</span>
+</div>
+<div class="mt-1 text-xs text-brand-muted">
+<span class="font-mono">shock chance</span>:
+<span data-role="shock-label">3%</span>
+</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<button class="soft-toggle font-mono" data-role="run" type="button">Run Candidate</button>
+<button class="soft-toggle font-mono" data-role="reset" type="button">Reset Floor</button>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Reliability</div>
+<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-r">—</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Velocity</div>
+<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-v">—</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Defensibility</div>
+<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-d">—</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Compliance</div>
+<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-c">—</span>/100</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Current floor</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="floor">72</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Candidate quality</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="candidate">76</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Evidence score</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="evidence">74</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Ratchet gate</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">PASS</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Floor vs candidate</div>
+<div class="space-y-2">
+<div>
+<div class="text-xs text-brand-muted mb-1">Floor</div>
+<div class="h-2 rounded-full bg-brand-dark/70 border border-brand-border overflow-hidden">
+<div class="h-full bg-brand-primary" data-role="floor-bar" style="width: 72%;"></div>
+</div>
+</div>
+<div>
+<div class="text-xs text-brand-muted mb-1">Candidate</div>
+<div class="h-2 rounded-full bg-brand-dark/70 border border-brand-border overflow-hidden">
+<div class="h-full bg-brand-accent" data-role="candidate-bar" style="width: 76%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-3 text-xs text-brand-muted" data-role="outcome">Ready. Run a candidate through the ratchet gate.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Attempts</div>
+<div class="text-xs text-brand-muted">Cyan = raised floor, red = rejected</div>
+</div>
+<div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-07-ratchet-gates"]') : null;
+  if (!root || root.dataset.ratchetReady === "1") return;
+  root.dataset.ratchetReady = "1";
+
+  const sim = root.querySelector('[data-role="ratchet-sim"]');
+  if (!sim) return;
+
+  const deltaSlider = sim.querySelector('[data-role="delta-slider"]');
+  const gateSlider = sim.querySelector('[data-role="gate-slider"]');
+  const noiseSlider = sim.querySelector('[data-role="noise-slider"]');
+  const runBtn = sim.querySelector('[data-role="run"]');
+  const resetBtn = sim.querySelector('[data-role="reset"]');
+  const deltaValue = sim.querySelector('[data-role="delta-value"]');
+  const gateValue = sim.querySelector('[data-role="gate-value"]');
+  const noiseValue = sim.querySelector('[data-role="noise-value"]');
+  const floorEl = sim.querySelector('[data-role="floor"]');
+  const candidateEl = sim.querySelector('[data-role="candidate"]');
+  const evidenceEl = sim.querySelector('[data-role="evidence"]');
+  const statusEl = sim.querySelector('[data-role="status"]');
+  const floorBar = sim.querySelector('[data-role="floor-bar"]');
+  const candidateBar = sim.querySelector('[data-role="candidate-bar"]');
+  const complexityButtons = Array.from(sim.querySelectorAll('[data-role="complexity"]'));
+  const weightsLabel = sim.querySelector('[data-role="weights-label"]');
+  const varianceLabel = sim.querySelector('[data-role="variance-label"]');
+  const shockLabel = sim.querySelector('[data-role="shock-label"]');
+  const metricR = sim.querySelector('[data-role="metric-r"]');
+  const metricV = sim.querySelector('[data-role="metric-v"]');
+  const metricD = sim.querySelector('[data-role="metric-d"]');
+  const metricC = sim.querySelector('[data-role="metric-c"]');
+  const outcomeEl = sim.querySelector('[data-role="outcome"]');
+  const attemptsEl = sim.querySelector('[data-role="attempts"]');
+  if (!deltaSlider || !gateSlider || !noiseSlider || !runBtn || !resetBtn || !deltaValue || !gateValue || !noiseValue || !floorEl || !candidateEl || !evidenceEl || !statusEl || !floorBar || !candidateBar || !weightsLabel || !varianceLabel || !shockLabel || !metricR || !metricV || !metricD || !metricC || !outcomeEl || !attemptsEl) return;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const toInt = (v, fallback) => {
+    const n = Number.parseInt(String(v), 10);
+    return Number.isFinite(n) ? n : fallback;
+  };
+  const round = (n) => Math.round(n);
+
+  const WEIGHTS = {
+    local: { r: 0.35, v: 0.45, d: 0.1, c: 0.1 },
+    component: { r: 0.30, v: 0.25, d: 0.25, c: 0.20 },
+    system: { r: 0.20, v: 0.15, d: 0.35, c: 0.30 },
+  };
+
+  const state = {
+    baseline: 72,
+    delta: toInt(deltaSlider.value, 3),
+    gate: toInt(gateSlider.value, 66),
+    noise: toInt(noiseSlider.value, 50),
+    complexity: "component",
+    run: 0,
+  };
+
+  const render = (metrics, candidate, evidence, passed) => {
+    deltaValue.textContent = String(state.delta);
+    gateValue.textContent = String(state.gate);
+    noiseValue.textContent = String(state.noise);
+    metricR.textContent = String(round(metrics.r));
+    metricV.textContent = String(round(metrics.v));
+    metricD.textContent = String(round(metrics.d));
+    metricC.textContent = String(round(metrics.c));
+    floorEl.textContent = String(state.baseline);
+    candidateEl.textContent = String(round(candidate));
+    evidenceEl.textContent = String(round(evidence));
+    if (passed === null) {
+      statusEl.textContent = "READY";
+      statusEl.style.color = "#b5b6bf";
+    } else {
+      statusEl.textContent = passed ? "PASS" : "FAIL";
+      statusEl.style.color = passed ? "#2ac3de" : "#f7768e";
+    }
+    floorBar.style.width = `${state.baseline}%`;
+    candidateBar.style.width = `${round(candidate)}%`;
+    if (passed === null) {
+      candidateBar.style.backgroundColor = "rgba(187,154,247,0.9)";
+    } else {
+      candidateBar.style.backgroundColor = passed ? "rgba(42,195,222,0.9)" : "rgba(247,118,142,0.9)";
+    }
+  };
+
+  const randSigned = () => (Math.random() * 2) - 1;
+
+  const varianceScale = () => {
+    const complexityBase = state.complexity === "local" ? 1.2 : state.complexity === "component" ? 2.0 : 3.1;
+    const aggression = Math.max(0, Math.abs(state.delta) - 4) * 0.35;
+    const stochasticFactor = state.noise / 60;
+    return (complexityBase + aggression) * stochasticFactor;
+  };
+
+  const shockChance = () => {
+    const complexityBias = state.complexity === "local" ? 0.008 : state.complexity === "component" ? 0.018 : 0.03;
+    const noiseBias = (state.noise / 100) * 0.05;
+    const aggressionBias = Math.max(0, Math.abs(state.delta) - 10) * 0.003;
+    return clamp(complexityBias + noiseBias + aggressionBias, 0, 0.2);
+  };
+
+  const sampleNoise = () => {
+    const s = varianceScale();
+    const shock = Math.random() < shockChance();
+    const shockPenalty = shock ? (4 + Math.random() * 8) * (0.7 + (state.noise / 100)) : 0;
+    return {
+      r: randSigned() * s * 0.7,
+      v: randSigned() * s * 0.8,
+      d: randSigned() * s * 0.6,
+      c: randSigned() * s * 0.6,
+      evidence: randSigned() * s * 1.1 - shockPenalty,
+      shock,
+    };
+  };
+
+  const zeroNoise = () => ({ r: 0, v: 0, d: 0, c: 0, evidence: 0, shock: false });
+
+  const computeMetrics = (noise) => {
+    const n = noise || zeroNoise();
+    const baseline = state.baseline;
+    const improvement = state.delta * 0.75;
+    return {
+      r: clamp(baseline + improvement * 0.9 + n.r, 0, 100),
+      v: clamp(baseline + improvement * 1.2 + n.v, 0, 100),
+      d: clamp(baseline + improvement * 0.7 + n.d, 0, 100),
+      c: clamp(baseline + improvement * 0.8 + n.c, 0, 100),
+    };
+  };
+
+  const computeCandidate = (metrics) => {
+    const w = WEIGHTS[state.complexity] || WEIGHTS.component;
+    return clamp(
+      metrics.r * w.r + metrics.v * w.v + metrics.d * w.d + metrics.c * w.c,
+      0,
+      100
+    );
+  };
+
+  const computeEvidence = (candidate, noise) => {
+    const n = noise || zeroNoise();
+    const driftPenalty = Math.max(0, Math.abs(state.delta) - 6) * 2;
+    const complexityPenalty = state.complexity === "system" ? 2 : 0;
+    const baseEvidencePenalty = 2;
+    return clamp(candidate - baseEvidencePenalty - driftPenalty - complexityPenalty + n.evidence, 0, 100);
+  };
+
+  const renderWeightLabel = () => {
+    const w = WEIGHTS[state.complexity] || WEIGHTS.component;
+    const pct = (x) => `${Math.round(x * 100)}%`;
+    weightsLabel.textContent = `R ${pct(w.r)} · V ${pct(w.v)} · D ${pct(w.d)} · C ${pct(w.c)}`;
+    varianceLabel.textContent = `±${varianceScale().toFixed(1)}`;
+    shockLabel.textContent = `${Math.round(shockChance() * 100)}%`;
+    for (const btn of complexityButtons) {
+      const active = btn.dataset.value === state.complexity;
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    }
+  };
+
+  const appendAttempt = (passed) => {
+    const pill = document.createElement("span");
+    pill.className = `attempt-pill ${passed ? "is-pass" : "is-fail"}`;
+    attemptsEl.appendChild(pill);
+    while (attemptsEl.children.length > 36) {
+      attemptsEl.removeChild(attemptsEl.firstChild);
+    }
+  };
+
+  const run = () => {
+    state.run += 1;
+    const oldBaseline = state.baseline;
+    const noise = sampleNoise();
+    const metrics = computeMetrics(noise);
+    const candidate = computeCandidate(metrics);
+    const evidence = computeEvidence(candidate, noise);
+    const effectiveGate = Math.max(state.gate, oldBaseline - 1);
+
+    const ratchetPass = candidate >= oldBaseline;
+    const gatePass = evidence >= effectiveGate;
+    const pass = ratchetPass && gatePass;
+
+    if (pass) {
+      state.baseline = round(candidate);
+      outcomeEl.textContent = `PASS: floor raised from ${oldBaseline} to ${state.baseline}.`;
+    } else if (!ratchetPass) {
+      outcomeEl.textContent = `FAIL: non-regression violated (${round(candidate)} < ${oldBaseline}). Floor stays ${oldBaseline}.`;
+    } else if (noise.shock) {
+      outcomeEl.textContent = `FAIL: random shock lowered evidence to ${round(evidence)} below effective gate ${round(effectiveGate)}. Floor stays ${oldBaseline}.`;
+    } else {
+      outcomeEl.textContent = `FAIL: evidence ${round(evidence)} below effective gate ${round(effectiveGate)}. Floor stays ${oldBaseline}.`;
+    }
+
+    render(metrics, candidate, evidence, pass);
+    appendAttempt(pass);
+  };
+
+  deltaSlider.addEventListener("input", () => {
+    state.delta = toInt(deltaSlider.value, state.delta);
+    const metrics = computeMetrics(zeroNoise());
+    const candidate = computeCandidate(metrics);
+    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  });
+
+  gateSlider.addEventListener("input", () => {
+    state.gate = toInt(gateSlider.value, state.gate);
+    renderWeightLabel();
+    const metrics = computeMetrics(zeroNoise());
+    const candidate = computeCandidate(metrics);
+    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  });
+
+  noiseSlider.addEventListener("input", () => {
+    state.noise = toInt(noiseSlider.value, state.noise);
+    renderWeightLabel();
+    const metrics = computeMetrics(zeroNoise());
+    const candidate = computeCandidate(metrics);
+    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  });
+
+  for (const btn of complexityButtons) {
+    btn.addEventListener("click", () => {
+      state.complexity = btn.dataset.value || "component";
+      renderWeightLabel();
+      const metrics = computeMetrics(zeroNoise());
+      const candidate = computeCandidate(metrics);
+      render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+    });
+  }
+
+  runBtn.addEventListener("click", run);
+  resetBtn.addEventListener("click", () => {
+    state.baseline = 72;
+    state.complexity = "component";
+    state.noise = toInt(noiseSlider.value, 50);
+    state.run = 0;
+    attemptsEl.innerHTML = "";
+    outcomeEl.textContent = "Reset. Floor returned to 72.";
+    renderWeightLabel();
+    const metrics = computeMetrics(zeroNoise());
+    const candidate = computeCandidate(metrics);
+    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  });
+
+  renderWeightLabel();
+  const metrics = computeMetrics(zeroNoise());
+  const candidate = computeCandidate(metrics);
+  render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+})();
+</script>
+</section>
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-05-always-on-loops" data-infographic-selector="main &gt; section:nth-of-type(8)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -541,6 +1595,677 @@
 </div>
 </div>
 </div>
+</section>
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-09-sensor-measurement" data-infographic-selector="main &gt; section:nth-of-type(9)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<style>
+  [data-role="sensor-uml"] .uml-card {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.55);
+    border-radius: 0.75rem;
+    padding: 0.7rem;
+    transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+  }
+  [data-role="sensor-uml"] .uml-card[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.12);
+    box-shadow: 0 0 0 1px rgba(42, 195, 222, 0.18) inset;
+  }
+  [data-role="sensor-uml"] .uml-inherit {
+    width: 2px;
+    height: 18px;
+    margin: 0.2rem auto;
+    background: linear-gradient(180deg, rgba(122, 162, 247, 0.55), rgba(42, 195, 222, 0.55));
+  }
+  [data-role="sensor-uml"] .uml-arrow {
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid rgba(42, 195, 222, 0.75);
+  }
+  [data-role="sensor-uml"] .sensor-event.is-emit {
+    background: rgba(122, 162, 247, 0.24);
+    border-color: rgba(122, 162, 247, 0.34);
+  }
+  [data-role="sensor-uml"] .sensor-event.is-blocked {
+    background: rgba(247, 118, 142, 0.22);
+    border-color: rgba(247, 118, 142, 0.34);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-role="sensor-uml"] .uml-card {
+      transition: none;
+    }
+  }
+</style>
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Sensor Hierarchy (UML-Style)</h2>
+<p class="text-brand-muted leading-relaxed">
+        Treat Sensor as a base interface, then specialize by terrain surface. Different sensors emit
+        different signal shapes, cadences, and confidence profiles.
+      </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Base contract</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">class Sensor</span>
+<span class="block mt-1 font-mono">+ read(): Signal</span>
+<span class="block font-mono">+ descriptor(): SensorDescriptor</span>
+<span class="block font-mono">+ mode: READ_ONLY</span>
+<span class="block mt-2">Judge consumes the emitted signal; Effectors own mutation.</span>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="sensor-uml">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="uml-card" data-active="1" data-role="base-class">
+<div class="text-xs font-mono text-brand-muted">Base Class</div>
+<div class="mt-1 text-sm font-bold text-brand-strong">Sensor</div>
+<div class="mt-2 text-[11px] font-mono text-brand-muted">read() | descriptor() | mode=READ_ONLY</div>
+</div>
+<div class="uml-inherit"></div>
+<div class="uml-arrow"></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3" data-role="sensor-class-grid">
+<button aria-pressed="true" class="uml-card text-left" data-active="1" data-role="sensor-class" data-sensor-id="ast" type="button">
+<div class="text-xs font-mono text-brand-muted">Derived</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">ASTSensor</div>
+<div class="mt-1 text-[11px] font-mono text-brand-muted">Source structure</div>
+</button>
+<button aria-pressed="false" class="uml-card text-left" data-active="0" data-role="sensor-class" data-sensor-id="contract" type="button">
+<div class="text-xs font-mono text-brand-muted">Derived</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">ContractSensor</div>
+<div class="mt-1 text-[11px] font-mono text-brand-muted">APIs + schemas</div>
+</button>
+<button aria-pressed="false" class="uml-card text-left" data-active="0" data-role="sensor-class" data-sensor-id="runtime" type="button">
+<div class="text-xs font-mono text-brand-muted">Derived</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">RuntimeSensor</div>
+<div class="mt-1 text-[11px] font-mono text-brand-muted">Latency + faults</div>
+</button>
+<button aria-pressed="false" class="uml-card text-left" data-active="0" data-role="sensor-class" data-sensor-id="economic" type="button">
+<div class="text-xs font-mono text-brand-muted">Derived</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">EconomicSensor</div>
+<div class="mt-1 text-[11px] font-mono text-brand-muted">Cost + utilization</div>
+</button>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Environment volatility</span>
+<span class="font-mono text-brand-strong"><span data-role="volatility-value">34</span>/100</span>
+</div>
+<label class="sr-only" for="sensorVolatilitySlider">Volatility slider</label>
+<input class="mt-2 w-full" data-role="volatility-slider" id="sensorVolatilitySlider" max="95" min="0" step="1" type="range" value="34"/>
+</div>
+<div class="md:col-span-6">
+<div class="text-xs font-mono text-brand-muted mb-2">Sensor bundle</div>
+<div class="grid grid-cols-2 gap-2 text-xs text-brand-muted" data-role="bundle-boxes">
+<label class="inline-flex items-center gap-2"><input checked="" data-role="bundle-item" data-sensor-id="ast" type="checkbox"/>AST</label>
+<label class="inline-flex items-center gap-2"><input checked="" data-role="bundle-item" data-sensor-id="contract" type="checkbox"/>Contract</label>
+<label class="inline-flex items-center gap-2"><input data-role="bundle-item" data-sensor-id="runtime" type="checkbox"/>Runtime</label>
+<label class="inline-flex items-center gap-2"><input data-role="bundle-item" data-sensor-id="economic" type="checkbox"/>Economic</label>
+</div>
+</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<button class="soft-toggle font-mono" data-role="emit" type="button">Emit Bundle Signal</button>
+<button class="soft-toggle font-mono" data-role="write-attempt" type="button">Attempt Write</button>
+<button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Active sensors</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="active-count">2</span></div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Coverage</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="coverage">0</span>%</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Blind spots</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="blind">0</span></div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Signal confidence</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="confidence">0</span>/100</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Selected sensor descriptor</div>
+<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap" data-role="descriptor-json"></pre>
+<div class="mt-3 text-xs font-mono text-brand-muted mb-2">Emitted bundle signal</div>
+<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap" data-role="signal-json"></pre>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Select a class and emit a bundle signal.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Event stream</div>
+<div class="text-xs text-brand-muted">Blue = emit, red = blocked write</div>
+</div>
+<div class="mt-3 grid grid-cols-12 gap-1" data-role="events"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-09-sensor-measurement"]') : null;
+  if (!root || root.dataset.sensorUmlReady === "1") return;
+  root.dataset.sensorUmlReady = "1";
+
+  const sim = root.querySelector('[data-role="sensor-uml"]');
+  if (!sim) return;
+
+  const classButtons = Array.from(sim.querySelectorAll('[data-role="sensor-class"]'));
+  const bundleItems = Array.from(sim.querySelectorAll('[data-role="bundle-item"]'));
+  const volatilitySlider = sim.querySelector('[data-role="volatility-slider"]');
+  const volatilityValue = sim.querySelector('[data-role="volatility-value"]');
+  const emitBtn = sim.querySelector('[data-role="emit"]');
+  const writeBtn = sim.querySelector('[data-role="write-attempt"]');
+  const resetBtn = sim.querySelector('[data-role="reset"]');
+  const activeCountEl = sim.querySelector('[data-role="active-count"]');
+  const coverageEl = sim.querySelector('[data-role="coverage"]');
+  const blindEl = sim.querySelector('[data-role="blind"]');
+  const confidenceEl = sim.querySelector('[data-role="confidence"]');
+  const descriptorJsonEl = sim.querySelector('[data-role="descriptor-json"]');
+  const signalJsonEl = sim.querySelector('[data-role="signal-json"]');
+  const outcomeEl = sim.querySelector('[data-role="outcome"]');
+  const eventsEl = sim.querySelector('[data-role="events"]');
+
+  if (!classButtons.length || !bundleItems.length || !volatilitySlider || !volatilityValue ||
+      !emitBtn || !writeBtn || !resetBtn || !activeCountEl || !coverageEl || !blindEl ||
+      !confidenceEl || !descriptorJsonEl || !signalJsonEl || !outcomeEl || !eventsEl) return;
+
+  const SENSOR_TYPES = {
+    ast: {
+      class_name: "ASTSensor",
+      surface: "source tree + syntax graph",
+      cadence: "per commit",
+      emits: ["symbol_delta", "route_delta", "schema_refs"],
+      base_quality: 82,
+      coverage_weight: 26
+    },
+    contract: {
+      class_name: "ContractSensor",
+      surface: "openapi + schema contracts",
+      cadence: "per pull request",
+      emits: ["breaking_change_risk", "contract_mismatch", "boundary_drift"],
+      base_quality: 84,
+      coverage_weight: 30
+    },
+    runtime: {
+      class_name: "RuntimeSensor",
+      surface: "latency, errors, saturation",
+      cadence: "continuous windows",
+      emits: ["p95_shift", "incident_rate", "hot_path_regression"],
+      base_quality: 76,
+      coverage_weight: 24
+    },
+    economic: {
+      class_name: "EconomicSensor",
+      surface: "cost, retries, compute mix",
+      cadence: "hourly batch",
+      emits: ["cost_per_outcome", "retry_amplification", "capacity_pressure"],
+      base_quality: 72,
+      coverage_weight: 20
+    }
+  };
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const toInt = (v, fallback) => {
+    const n = Number.parseInt(String(v), 10);
+    return Number.isFinite(n) ? n : fallback;
+  };
+  const randSigned = () => (Math.random() * 2) - 1;
+
+  const state = {
+    run: 0,
+    selected: "ast",
+    volatility: toInt(volatilitySlider.value, 34),
+    signal: { run: 0, action: "idle" }
+  };
+
+  const selectedBundle = () =>
+    bundleItems
+      .filter((item) => item.checked)
+      .map((item) => item.dataset.sensorId || "")
+      .filter((id) => Boolean(SENSOR_TYPES[id]));
+
+  const appendEvent = (kind) => {
+    const pill = document.createElement("span");
+    pill.className = `attempt-pill sensor-event ${kind === "emit" ? "is-emit" : "is-blocked"}`;
+    eventsEl.appendChild(pill);
+    while (eventsEl.children.length > 36) {
+      eventsEl.removeChild(eventsEl.firstChild);
+    }
+  };
+
+  const renderSelection = () => {
+    for (const btn of classButtons) {
+      const active = (btn.dataset.sensorId || "") === state.selected;
+      btn.dataset.active = active ? "1" : "0";
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    }
+    const d = SENSOR_TYPES[state.selected] || SENSOR_TYPES.ast;
+    descriptorJsonEl.textContent = JSON.stringify({
+      base_class: "Sensor",
+      class_name: d.class_name,
+      mode: "READ_ONLY",
+      surface: d.surface,
+      cadence: d.cadence,
+      emits: d.emits
+    }, null, 2);
+  };
+
+  const renderMetrics = (bundle, emitted) => {
+    const sensors = bundle.length ? bundle : [state.selected];
+    const overlapPenalty = Math.max(0, sensors.length - 2) * 4;
+    const coverageBase = sensors.reduce((sum, id) => sum + (SENSOR_TYPES[id]?.coverage_weight || 0), 0);
+    const coverage = clamp(Math.round(coverageBase - overlapPenalty - (state.volatility * 0.08)), 8, 100);
+    const blind = clamp(Math.round(18 - sensors.length * 3 + (state.volatility * 0.09)), 0, 28);
+    const qualityBase = sensors.reduce((sum, id) => sum + (SENSOR_TYPES[id]?.base_quality || 0), 0) / sensors.length;
+    const noise = emitted ? randSigned() * 8 : 0;
+    const confidence = clamp(Math.round(qualityBase - (state.volatility * 0.35) - (blind * 0.6) + noise), 5, 99);
+
+    activeCountEl.textContent = String(sensors.length);
+    coverageEl.textContent = String(coverage);
+    blindEl.textContent = String(blind);
+    confidenceEl.textContent = String(confidence);
+
+    return { sensors, coverage, blind, confidence };
+  };
+
+  const render = () => {
+    volatilityValue.textContent = String(state.volatility);
+    renderSelection();
+    renderMetrics(selectedBundle(), false);
+    signalJsonEl.textContent = JSON.stringify(state.signal, null, 2);
+  };
+
+  const emitSignal = () => {
+    state.run += 1;
+    const bundle = selectedBundle();
+    const metrics = renderMetrics(bundle, true);
+    const quality = metrics.confidence;
+    const next = quality >= 70 && metrics.blind <= 8 ? "judge-ready" : "add-sensor-or-tighten-physics";
+
+    state.signal = {
+      run: state.run,
+      base_class: "Sensor",
+      mode: "READ_ONLY",
+      bundle: metrics.sensors.map((id) => SENSOR_TYPES[id].class_name),
+      volatility: state.volatility,
+      coverage: metrics.coverage,
+      blind_spots: metrics.blind,
+      confidence: quality,
+      next_action: next
+    };
+
+    appendEvent("emit");
+    outcomeEl.textContent = `Signal emitted from ${metrics.sensors.length} sensors. Next: ${next.replace(/-/g, " ")}.`;
+    render();
+  };
+
+  const attemptWrite = () => {
+    state.run += 1;
+    state.signal = {
+      run: state.run,
+      base_class: "Sensor",
+      mode: "READ_ONLY",
+      action: "write_attempt",
+      result: "blocked",
+      reason: "sensor boundary violation",
+      next_action: "route mutation to effector"
+    };
+    appendEvent("blocked");
+    outcomeEl.textContent = "WRITE BLOCKED: only Effectors mutate Terrain.";
+    render();
+  };
+
+  for (const btn of classButtons) {
+    btn.addEventListener("click", () => {
+      state.selected = btn.dataset.sensorId || "ast";
+      render();
+    });
+  }
+  for (const box of bundleItems) {
+    box.addEventListener("change", () => {
+      render();
+    });
+  }
+  volatilitySlider.addEventListener("input", () => {
+    state.volatility = toInt(volatilitySlider.value, state.volatility);
+    render();
+  });
+  emitBtn.addEventListener("click", emitSignal);
+  writeBtn.addEventListener("click", attemptWrite);
+  resetBtn.addEventListener("click", () => {
+    state.run = 0;
+    state.selected = "ast";
+    state.volatility = toInt(volatilitySlider.value, 34);
+    for (const box of bundleItems) {
+      const id = box.dataset.sensorId || "";
+      box.checked = id === "ast" || id === "contract";
+    }
+    eventsEl.innerHTML = "";
+    state.signal = { run: 0, action: "idle" };
+    outcomeEl.textContent = "Select a class and emit a bundle signal.";
+    render();
+  });
+
+  render();
+})();
+</script>
+</section>
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-10-agent-execution-envelope" data-infographic-selector="main &gt; section:nth-of-type(10)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<style>
+  [data-role="agent-sim"] .gate-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.55);
+    color: #b5b6bf;
+    border-radius: 0.65rem;
+    padding: 0.45rem 0.55rem;
+    font-size: 0.72rem;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  [data-role="agent-sim"] .gate-pill.is-pass {
+    border-color: rgba(42, 195, 222, 0.42);
+    background: rgba(42, 195, 222, 0.12);
+    color: #f2f3f8;
+  }
+  [data-role="agent-sim"] .gate-pill.is-fail {
+    border-color: rgba(247, 118, 142, 0.4);
+    background: rgba(247, 118, 142, 0.13);
+    color: #f2f3f8;
+  }
+  [data-role="agent-sim"] .attempt-pill.is-escalate {
+    background: rgba(187, 154, 247, 0.24);
+    border-color: rgba(187, 154, 247, 0.34);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-role="agent-sim"] .soft-toggle {
+      transition: none;
+    }
+  }
+</style>
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Agent (Constrained Execution Envelope)</h2>
+<p class="text-brand-muted leading-relaxed">
+        An <a class="concept-link" href="concepts#agent" title="See concept: Agent">Agent</a> is not “the model.” It is mission context + tools + deterministic gates + a ledger.
+        The model is only the stochastic center; capability is granted by boundaries, not by vibes.
+      </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Execution path</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">Mission → Agent → Tool Runner → Gates → Ledger</span>
+<span class="block mt-2">Context lives in the Mission object and Tool Runner (deterministic prep).</span>
+<span class="block mt-2">Gates + Ledger are deterministic validation. This is the <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a> in motion.</span>
+<span class="block mt-2">If any gate fails, action is blocked or escalated.</span>
+<span class="block mt-2">This is why the system remains governable as autonomy rises.</span>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="agent-sim">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Autonomy level</span>
+<span class="font-mono text-brand-strong"><span data-role="autonomy-value">58</span>/100</span>
+</div>
+<label class="sr-only" for="agentAutonomySlider">Autonomy slider</label>
+<input class="mt-2 w-full" data-role="autonomy-slider" id="agentAutonomySlider" max="100" min="0" step="1" type="range" value="58"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Policy strictness</span>
+<span class="font-mono text-brand-strong"><span data-role="strict-value">72</span>/100</span>
+</div>
+<label class="sr-only" for="agentStrictSlider">Strictness slider</label>
+<input class="mt-2 w-full" data-role="strict-slider" id="agentStrictSlider" max="100" min="15" step="1" type="range" value="72"/>
+</div>
+<div class="md:col-span-12">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+<button class="soft-toggle font-mono text-left" data-action="read_map" data-role="action" type="button">Read Map Files</button>
+<button class="soft-toggle font-mono text-left" data-action="write_patch" data-role="action" type="button">Write Patch To Terrain</button>
+<button class="soft-toggle font-mono text-left" data-action="modify_ci" data-role="action" type="button">Modify CI Policy</button>
+<button class="soft-toggle font-mono text-left" data-action="exfiltrate_secret" data-role="action" type="button">Exfiltrate Secret</button>
+</div>
+</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<button class="soft-toggle font-mono" data-role="evaluate" type="button">Evaluate Request</button>
+<button class="soft-toggle font-mono" data-role="override" type="button">Human Override</button>
+<button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Selected action</div>
+<div class="mt-1 text-sm font-bold text-brand-strong" data-role="selected-label">Read Map Files</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Verdict</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="verdict">READY</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Policy risk</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="risk">0</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Ledger run</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="run">0</span></div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Gate decisions</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+<div class="gate-pill" data-role="gate-tool">tool_gate: —</div>
+<div class="gate-pill" data-role="gate-os">os_gate: —</div>
+<div class="gate-pill" data-role="gate-policy">policy_gate: —</div>
+</div>
+<div class="mt-3 text-xs font-mono text-brand-muted mb-2">Ledger event</div>
+<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap" data-role="ledger-json"></pre>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Choose an action and evaluate the envelope.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">History</div>
+<div class="text-xs text-brand-muted">Cyan = allow, red = block, violet = escalate</div>
+</div>
+<div class="mt-3 grid grid-cols-12 gap-1" data-role="history"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-10-agent-execution-envelope"]') : null;
+  if (!root || root.dataset.agentEnvelopeReady === "1") return;
+  root.dataset.agentEnvelopeReady = "1";
+
+  const sim = root.querySelector('[data-role="agent-sim"]');
+  if (!sim) return;
+
+  const autonomySlider = sim.querySelector('[data-role="autonomy-slider"]');
+  const strictSlider = sim.querySelector('[data-role="strict-slider"]');
+  const autonomyValue = sim.querySelector('[data-role="autonomy-value"]');
+  const strictValue = sim.querySelector('[data-role="strict-value"]');
+  const actionButtons = Array.from(sim.querySelectorAll('[data-role="action"]'));
+  const evaluateBtn = sim.querySelector('[data-role="evaluate"]');
+  const overrideBtn = sim.querySelector('[data-role="override"]');
+  const resetBtn = sim.querySelector('[data-role="reset"]');
+  const selectedLabel = sim.querySelector('[data-role="selected-label"]');
+  const verdictEl = sim.querySelector('[data-role="verdict"]');
+  const riskEl = sim.querySelector('[data-role="risk"]');
+  const runEl = sim.querySelector('[data-role="run"]');
+  const gateTool = sim.querySelector('[data-role="gate-tool"]');
+  const gateOs = sim.querySelector('[data-role="gate-os"]');
+  const gatePolicy = sim.querySelector('[data-role="gate-policy"]');
+  const ledgerJsonEl = sim.querySelector('[data-role="ledger-json"]');
+  const outcomeEl = sim.querySelector('[data-role="outcome"]');
+  const historyEl = sim.querySelector('[data-role="history"]');
+
+  if (!autonomySlider || !strictSlider || !autonomyValue || !strictValue || !actionButtons.length ||
+      !evaluateBtn || !overrideBtn || !resetBtn || !selectedLabel || !verdictEl || !riskEl || !runEl ||
+      !gateTool || !gateOs || !gatePolicy || !ledgerJsonEl || !outcomeEl || !historyEl) return;
+
+  const ACTIONS = {
+    read_map: { label: "Read Map Files", sensitivity: 10, requires: "read" },
+    write_patch: { label: "Write Patch To Terrain", sensitivity: 45, requires: "write" },
+    modify_ci: { label: "Modify CI Policy", sensitivity: 92, requires: "policy_write" },
+    exfiltrate_secret: { label: "Exfiltrate Secret", sensitivity: 100, requires: "secret_access" }
+  };
+
+  const toInt = (v, fallback) => {
+    const n = Number.parseInt(String(v), 10);
+    return Number.isFinite(n) ? n : fallback;
+  };
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const passFail = (v) => v ? "PASS" : "FAIL";
+
+  const state = {
+    run: 0,
+    autonomy: toInt(autonomySlider.value, 58),
+    strict: toInt(strictSlider.value, 72),
+    selected: "read_map",
+    ledger: { run: 0, action: "idle" },
+    last: null
+  };
+
+  const setActionState = () => {
+    for (const btn of actionButtons) {
+      const action = btn.dataset.action || "";
+      const active = action === state.selected;
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+      btn.style.borderColor = active ? "rgba(42, 195, 222, 0.45)" : "";
+      btn.style.background = active ? "rgba(42, 195, 222, 0.13)" : "";
+    }
+    selectedLabel.textContent = ACTIONS[state.selected]?.label || "Unknown";
+  };
+
+  const applyGatePill = (el, label, pass) => {
+    el.textContent = `${label}: ${passFail(pass)}`;
+    el.classList.remove("is-pass", "is-fail");
+    el.classList.add(pass ? "is-pass" : "is-fail");
+  };
+
+  const appendHistory = (kind) => {
+    const pill = document.createElement("span");
+    const suffix = kind === "allow" ? "is-pass" : kind === "escalate" ? "is-escalate" : "is-fail";
+    pill.className = `attempt-pill ${suffix}`;
+    historyEl.appendChild(pill);
+    while (historyEl.children.length > 36) {
+      historyEl.removeChild(historyEl.firstChild);
+    }
+  };
+
+  const evaluate = (override) => {
+    const action = ACTIONS[state.selected] || ACTIONS.read_map;
+    const risk = clamp(Math.round(action.sensitivity + (state.autonomy * 0.22) - ((100 - state.strict) * 0.18)), 0, 100);
+
+    const toolGate = action.requires !== "secret_access";
+    const osGate = action.requires !== "secret_access" && !(action.requires === "policy_write");
+    const policyThreshold = override ? 94 : 66;
+    const policyGate = risk <= policyThreshold && action.sensitivity < 96;
+
+    let verdict = "BLOCK";
+    let outcome = "Blocked by deterministic envelope.";
+    if (toolGate && osGate && policyGate) {
+      verdict = "ALLOW";
+      outcome = "Allowed: request fits current boundaries.";
+    } else if (override && toolGate && osGate) {
+      verdict = "ESCALATE";
+      outcome = "Escalated with human override. Ledger must retain reason.";
+    }
+
+    state.run += 1;
+    state.last = { toolGate, osGate, policyGate, verdict, risk };
+    state.ledger = {
+      run: state.run,
+      agent_id: "sdac-agent-01",
+      action: state.selected,
+      action_label: action.label,
+      autonomy: state.autonomy,
+      policy_strictness: state.strict,
+      tool_gate: passFail(toolGate),
+      os_gate: passFail(osGate),
+      policy_gate: passFail(policyGate),
+      override: Boolean(override),
+      verdict: verdict
+    };
+
+    verdictEl.textContent = verdict;
+    verdictEl.style.color = verdict === "ALLOW" ? "#2ac3de" : verdict === "ESCALATE" ? "#bb9af7" : "#f7768e";
+    riskEl.textContent = String(risk);
+    runEl.textContent = String(state.run);
+    applyGatePill(gateTool, "tool_gate", toolGate);
+    applyGatePill(gateOs, "os_gate", osGate);
+    applyGatePill(gatePolicy, "policy_gate", policyGate);
+    ledgerJsonEl.textContent = JSON.stringify(state.ledger, null, 2);
+    outcomeEl.textContent = outcome;
+    appendHistory(verdict === "ALLOW" ? "allow" : verdict === "ESCALATE" ? "escalate" : "block");
+  };
+
+  const render = () => {
+    autonomyValue.textContent = String(state.autonomy);
+    strictValue.textContent = String(state.strict);
+    setActionState();
+    if (!state.last) {
+      verdictEl.textContent = "READY";
+      verdictEl.style.color = "#b5b6bf";
+      riskEl.textContent = "0";
+      runEl.textContent = String(state.run);
+      gateTool.textContent = "tool_gate: —";
+      gateTool.classList.remove("is-pass", "is-fail");
+      gateOs.textContent = "os_gate: —";
+      gateOs.classList.remove("is-pass", "is-fail");
+      gatePolicy.textContent = "policy_gate: —";
+      gatePolicy.classList.remove("is-pass", "is-fail");
+      ledgerJsonEl.textContent = JSON.stringify(state.ledger, null, 2);
+      outcomeEl.textContent = "Choose an action and evaluate the envelope.";
+    }
+  };
+
+  autonomySlider.addEventListener("input", () => {
+    state.autonomy = toInt(autonomySlider.value, state.autonomy);
+    render();
+  });
+  strictSlider.addEventListener("input", () => {
+    state.strict = toInt(strictSlider.value, state.strict);
+    render();
+  });
+  for (const btn of actionButtons) {
+    btn.addEventListener("click", () => {
+      state.selected = btn.dataset.action || "read_map";
+      render();
+    });
+  }
+  evaluateBtn.addEventListener("click", () => evaluate(false));
+  overrideBtn.addEventListener("click", () => evaluate(true));
+  resetBtn.addEventListener("click", () => {
+    state.run = 0;
+    state.autonomy = toInt(autonomySlider.value, 58);
+    state.strict = toInt(strictSlider.value, 72);
+    state.selected = "read_map";
+    state.last = null;
+    state.ledger = { run: 0, action: "idle" };
+    historyEl.innerHTML = "";
+    render();
+  });
+
+  render();
+})();
+</script>
 </section>
 </main>
 <footer class="bg-brand-light py-8 text-center border-t border-brand-border">

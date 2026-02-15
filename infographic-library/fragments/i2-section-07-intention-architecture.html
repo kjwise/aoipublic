@@ -1,0 +1,133 @@
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<div class="lg:col-span-5">
+<h2 class="text-3xl font-bold mb-4 text-white">Intent Architecture Wins the Output War</h2>
+<div class="h-1 w-20 bg-cyber-neon mb-6"></div>
+<p class="text-cyber-muted text-lg leading-relaxed">
+        AI output volume rises faster than humans can consume it. Competition shifts to
+        intention architecture: converting volume into high-signal, coherent outcomes.
+      </p>
+<ul class="mt-6 text-sm text-gray-400 list-disc list-inside space-y-2">
+<li>More output without intent raises review and integration load.</li>
+<li>Stronger intent boosts signal density and coherence.</li>
+<li>High-signal loops compound; low-signal loops stall.</li>
+</ul>
+<div class="mt-6 bg-cyber-panel border border-gray-700 rounded-xl p-4 text-xs text-gray-400">
+<strong class="text-white">Executive takeaway:</strong> The bottleneck isn’t output. It’s
+        the ability to consume, validate, and integrate the right output.
+      </div>
+</div>
+<div class="lg:col-span-7 space-y-4" data-role="intent-sim">
+<div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
+<div class="text-xs font-mono text-gray-500 mb-3">Interactive model</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<div class="flex items-center justify-between text-xs text-gray-400">
+<span class="font-mono uppercase">AI output intensity</span>
+<span class="font-mono text-cyber-success" data-role="intent-volume-value">55</span>
+</div>
+<label class="sr-only" for="intentVolume">Output intensity slider</label>
+<input class="mt-2 w-full accent-cyber-success" data-role="intent-volume" id="intentVolume" max="100" min="0" step="1" type="range" value="55"/>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-gray-400">
+<span class="font-mono uppercase"><a class="concept-link" href="../../concepts#intent-architecture" title="See concept: Intent Architecture">Intent architecture</a> strength</span>
+<span class="font-mono text-cyber-neon" data-role="intent-strength-value">62%</span>
+</div>
+<label class="sr-only" for="intentStrength">Intent strength slider</label>
+<input class="mt-2 w-full accent-cyber-neon" data-role="intent-strength" id="intentStrength" max="100" min="0" step="1" type="range" value="62"/>
+</div>
+</div>
+<div class="mt-5">
+<div class="text-xs font-mono text-gray-500 mb-2">Signal vs. Noise</div>
+<div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+<div class="h-3 bg-cyber-success transition-all duration-300" data-role="intent-signal-bar" style="width: 50%;"></div>
+<div class="h-3 bg-cyber-danger transition-all duration-300" data-role="intent-noise-bar" style="width: 50%;"></div>
+</div>
+<div class="mt-2 flex justify-between text-xs text-gray-400">
+<span>Signal density</span>
+<span class="font-mono text-cyber-success" data-role="intent-signal-value">50%</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+<div class="text-xs uppercase tracking-wide text-gray-400">Consumption load</div>
+<div class="mt-1 text-2xl font-bold text-cyber-danger" data-role="intent-load">52</div>
+<div class="text-[11px] text-gray-500">Review + integration index</div>
+</div>
+<div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+<div class="text-xs uppercase tracking-wide text-gray-400">Coherence</div>
+<div class="mt-1 text-2xl font-bold text-cyber-accent" data-role="intent-coherence">68</div>
+<div class="text-[11px] text-gray-500">Fidelity to mission</div>
+</div>
+<div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+<div class="text-xs uppercase tracking-wide text-gray-400">Competitive edge</div>
+<div class="mt-1 text-2xl font-bold text-cyber-success" data-role="intent-edge">72/100</div>
+<div class="text-[11px] text-gray-500">Signal advantage</div>
+</div>
+</div>
+<div class="bg-cyber-panel border border-gray-700 rounded-xl p-4 text-xs text-gray-400" data-role="intent-insight"></div>
+</div>
+</div>
+<script>
+  (function () {
+    const script = document.currentScript;
+    const root = script ? script.closest('[data-infographic-section-id="i2-section-07-intention-architecture"]') : null;
+    if (!root || root.dataset.intentArchitectureReady === "1") return;
+    root.dataset.intentArchitectureReady = "1";
+
+    const volume = root.querySelector('[data-role="intent-volume"]');
+    const strength = root.querySelector('[data-role="intent-strength"]');
+    const volumeValue = root.querySelector('[data-role="intent-volume-value"]');
+    const strengthValue = root.querySelector('[data-role="intent-strength-value"]');
+    const signalBar = root.querySelector('[data-role="intent-signal-bar"]');
+    const noiseBar = root.querySelector('[data-role="intent-noise-bar"]');
+    const signalValue = root.querySelector('[data-role="intent-signal-value"]');
+    const loadEl = root.querySelector('[data-role="intent-load"]');
+    const coherenceEl = root.querySelector('[data-role="intent-coherence"]');
+    const edgeEl = root.querySelector('[data-role="intent-edge"]');
+    const insight = root.querySelector('[data-role="intent-insight"]');
+
+    if (!volume || !strength || !volumeValue || !strengthValue || !signalBar || !noiseBar || !signalValue || !loadEl || !coherenceEl || !edgeEl || !insight) {
+      return;
+    }
+
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+    const readInt = (value, fallback) => {
+      const parsed = Number.parseInt(String(value), 10);
+      return Number.isFinite(parsed) ? parsed : fallback;
+    };
+
+    const update = () => {
+      const volumeRaw = clamp(readInt(volume.value, 55), 0, 100);
+      const strengthRaw = clamp(readInt(strength.value, 62), 0, 100);
+
+      const volumeIndex = Math.round(10 + volumeRaw * 1.9);
+      const signal = volumeRaw * (0.2 + 0.8 * (strengthRaw / 100));
+      const noise = volumeRaw * (1 - strengthRaw / 100);
+      const total = Math.max(signal + noise, 1);
+      const signalRatio = clamp(Math.round((signal / total) * 100), 5, 95);
+
+      const load = clamp(Math.round(20 + volumeRaw * 0.85 - strengthRaw * 0.5), 5, 95);
+      const coherence = clamp(Math.round(30 + strengthRaw * 0.6 - volumeRaw * 0.15), 5, 100);
+      const edge = clamp(Math.round(signalRatio * 0.5 + coherence * 0.5), 5, 100);
+
+      volumeValue.textContent = String(volumeIndex);
+      strengthValue.textContent = `${strengthRaw}%`;
+      signalValue.textContent = `${signalRatio}%`;
+      signalBar.style.width = `${signalRatio}%`;
+      noiseBar.style.width = `${100 - signalRatio}%`;
+      loadEl.textContent = String(load);
+      coherenceEl.textContent = String(coherence);
+      edgeEl.textContent = `${edge}/100`;
+
+      insight.textContent = `At intensity ${volumeIndex} with ${strengthRaw}% intent architecture, signal density is ${signalRatio}%. Consumption load is ${load}, and coherent advantage is ${edge}/100.`;
+    };
+
+    volume.addEventListener("input", update);
+    strength.addEventListener("input", update);
+    update();
+  })();
+  </script>
+</section>

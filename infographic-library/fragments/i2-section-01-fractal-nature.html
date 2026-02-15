@@ -1,58 +1,159 @@
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-12" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published">
-<div class="lg:col-span-5">
-<h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature</h2>
-<div class="h-1 w-20 bg-cyber-accent mb-6"></div>
-<p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-                    Zoom in: a single function evolves through edits. Zoom out: a company evolves through quarters.
-                    <br/><br/>
-                    It is the same shape at every scale. Each level's "state" is the cumulative output of the faster iterations beneath it. Dysfunction at the bottom bubbles up.
-                </p>
-<div class="bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
-<p class="font-mono text-sm text-cyber-neon">
-                        next_state = process(current_state)<br/>
-                        process = improve(process, evidence)
-                    </p>
-</div>
-</div>
-<div class="lg:col-span-7">
-<div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl">
-<h3 class="text-sm font-mono text-gray-400 mb-4 uppercase">System Hierarchy (Hover to Inspect)</h3>
-<div class="fractal-layer border-l-cyber-primary group" onclick="void(0)">
-<div class="flex justify-between items-center mb-2">
-<span class="font-bold text-lg text-cyber-primary">Company Scale</span>
-<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
-</div>
-<p class="text-sm text-gray-400 hidden group-hover:block transition-all">
-<strong>State:</strong> Market Position | <strong>Process:</strong> Culture &amp; Leadership
-                        </p>
-<div class="fractal-layer border-l-cyber-neon ml-4 group">
-<div class="flex justify-between items-center mb-2">
-<span class="font-bold text-md text-cyber-neon">Product Scale</span>
-<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
-</div>
-<p class="text-sm text-gray-400 hidden group-hover:block">
-<strong>State:</strong> System Architecture | <strong>Process:</strong> Org &amp; Strategy
-                            </p>
-<div class="fractal-layer border-l-cyber-accent ml-4 group">
-<div class="flex justify-between items-center mb-2">
-<span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
-<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
-</div>
-<p class="text-sm text-gray-400 hidden group-hover:block">
-<strong>State:</strong> Codebase | <strong>Process:</strong> Team Practices
-                                </p>
-<div class="fractal-layer border-l-cyber-success ml-4 group">
-<div class="flex justify-between items-center mb-1">
-<span class="font-bold text-xs text-cyber-success">Function Scale</span>
-<span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
-</div>
-<p class="text-xs text-gray-400 hidden group-hover:block">
-<strong>State:</strong> Implementation | <strong>Process:</strong> Dev Tools
-                                    </p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <style>
+    [data-role="fractal-sim"] .scale-button {
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.7rem;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: #cbd5f5;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.6);
+    }
+    [data-role="fractal-sim"] .scale-button.is-active {
+      border-color: rgba(6, 182, 212, 0.7);
+      background: rgba(6, 182, 212, 0.18);
+      color: #fff;
+    }
+    [data-role="fractal-sim"] .fractal-layer.is-active {
+      border-color: rgba(6, 182, 212, 0.8) !important;
+      background: rgba(6, 182, 212, 0.08);
+      transform: translateX(4px);
+    }
+  </style>
+
+  <div class="lg:col-span-5">
+    <h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature of Work</h2>
+    <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
+    <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
+      Same loop, different cadence. A function evolves in minutes; a company evolves in years.
+      Each level’s state is the accumulated output of the faster loops beneath it.
+    </p>
+    <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
+      <li>Bottom-layer drift multiplies upward.</li>
+      <li>Bottom-layer improvements compound upward.</li>
+      <li>Intent and validation at every scale keep the loop coherent.</li>
+    </ul>
+    <div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
+      <p class="font-mono text-sm text-cyber-neon">
+        Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)<br/>
+        P<sub>k+1</sub> = improve(P<sub>k</sub>, evidence)
+      </p>
+    </div>
+  </div>
+
+  <div class="lg:col-span-7">
+    <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="text-xs font-mono text-gray-500 uppercase">Scale lens</span>
+        <button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
+        <button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
+        <button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
+        <button class="scale-button" data-role="scale-button" data-scale="function" type="button">Function</button>
+      </div>
+
+      <div class="space-y-3">
+        <div class="fractal-layer border-l-cyber-primary is-active" data-role="scale-card" data-scale="company" data-state="Market position" data-process="Culture + leadership" data-cadence="Years" data-example="Strategic bets">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-lg text-cyber-primary">Company Scale</span>
+            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
+          </div>
+          <div class="text-xs text-gray-400">State: Market position · Process: Culture + leadership</div>
+        </div>
+        <div class="fractal-layer border-l-cyber-neon ml-4" data-role="scale-card" data-scale="product" data-state="System architecture" data-process="Org + strategy" data-cadence="Months" data-example="Portfolio bets">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-md text-cyber-neon">Product Scale</span>
+            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
+          </div>
+          <div class="text-xs text-gray-400">State: System architecture · Process: Org + strategy</div>
+        </div>
+        <div class="fractal-layer border-l-cyber-accent ml-8" data-role="scale-card" data-scale="feature" data-state="Capabilities" data-process="Team practices" data-cadence="Days" data-example="Release scope">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
+            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
+          </div>
+          <div class="text-xs text-gray-400">State: Capabilities · Process: Team practices</div>
+        </div>
+        <div class="fractal-layer border-l-cyber-success ml-12" data-role="scale-card" data-scale="function" data-state="Implementation" data-process="Dev tools" data-cadence="Minutes" data-example="Code edits">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-xs text-cyber-success">Function Scale</span>
+            <span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
+          </div>
+          <div class="text-xs text-gray-400">State: Implementation · Process: Dev tools</div>
+        </div>
+      </div>
+
+      <div class="mt-4 bg-gray-900/70 p-4 rounded-lg border border-gray-700">
+        <div class="text-xs font-mono text-gray-500">Selected scale</div>
+        <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div>
+            <div class="text-xs text-gray-500">State</div>
+            <div class="text-white font-semibold" data-role="fractal-state">Market position</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500">Process</div>
+            <div class="text-white font-semibold" data-role="fractal-process">Culture + leadership</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500">Cadence</div>
+            <div class="text-white font-semibold" data-role="fractal-cadence">Years</div>
+          </div>
+          <div>
+            <div class="text-xs text-gray-500">Example</div>
+            <div class="text-white font-semibold" data-role="fractal-example">Strategic bets</div>
+          </div>
+        </div>
+        <div class="mt-3 text-xs text-gray-500" data-role="fractal-insight">
+          Improve the fastest loops first; the rest of the stack inherits the gain.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    const script = document.currentScript;
+    const root = script ? script.closest('[data-infographic-section-id="i2-section-01-fractal-nature"]') : null;
+    if (!root || root.dataset.fractalReady === "1") return;
+    root.dataset.fractalReady = "1";
+
+    const buttons = Array.from(root.querySelectorAll('[data-role="scale-button"]'));
+    const cards = Array.from(root.querySelectorAll('[data-role="scale-card"]'));
+    const stateEl = root.querySelector('[data-role="fractal-state"]');
+    const processEl = root.querySelector('[data-role="fractal-process"]');
+    const cadenceEl = root.querySelector('[data-role="fractal-cadence"]');
+    const exampleEl = root.querySelector('[data-role="fractal-example"]');
+    const insightEl = root.querySelector('[data-role="fractal-insight"]');
+
+    if (!buttons.length || !cards.length || !stateEl || !processEl || !cadenceEl || !exampleEl || !insightEl) return;
+
+    const selectScale = (scale) => {
+      cards.forEach((card) => {
+        const active = card.dataset.scale === scale;
+        card.classList.toggle('is-active', active);
+      });
+      buttons.forEach((btn) => {
+        const active = btn.dataset.scale === scale;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      const selected = cards.find((card) => card.dataset.scale === scale) || cards[0];
+      stateEl.textContent = selected.dataset.state || '—';
+      processEl.textContent = selected.dataset.process || '—';
+      cadenceEl.textContent = selected.dataset.cadence || '—';
+      exampleEl.textContent = selected.dataset.example || '—';
+      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the loop state is "${selected.dataset.state || 'state'}" and the process is "${selected.dataset.process || 'process'}".`;
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => selectScale(btn.dataset.scale || 'company'));
+    });
+    cards.forEach((card) => {
+      card.addEventListener('click', () => selectScale(card.dataset.scale || 'company'));
+    });
+
+    selectScale('company');
+  })();
+  </script>
 </section>

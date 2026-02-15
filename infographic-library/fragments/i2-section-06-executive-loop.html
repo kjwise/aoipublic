@@ -1,0 +1,182 @@
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-06-executive-loop" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-2.html" data-infographic-status="published">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <h2 class="text-3xl font-bold mb-4 text-white">Executive View: The Business Loop</h2>
+      <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
+      <p class="text-cyber-muted text-lg leading-relaxed">
+        Executives win on validated outcomes, not raw model calls. A faster loop with strong gates
+        delivers more outcomes per quarter, reduces rework, and compounds moat strength.
+      </p>
+      <ul class="mt-6 text-sm text-gray-400 list-disc list-inside space-y-2">
+        <li>Cadence sets how fast you learn and ship.</li>
+        <li>Deterministic gates reduce costly drift.</li>
+        <li>Validated outcomes compound advantage.</li>
+      </ul>
+    </div>
+
+    <div class="lg:col-span-7 space-y-4">
+      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
+        <div class="text-xs font-mono text-gray-500 mb-3">Execution flywheel</div>
+        <div class="flex items-center justify-between gap-3">
+          <div class="w-20 h-20 rounded-full border border-cyber-accent/40 bg-gray-900 flex flex-col items-center justify-center">
+            <span class="text-[10px] text-gray-400 font-mono">DECIDE</span>
+            <span class="text-xs text-cyber-accent font-mono">Mission</span>
+          </div>
+          <div class="text-cyber-muted text-2xl font-mono">→</div>
+          <div class="w-20 h-20 rounded-full border border-cyber-primary/40 bg-gray-900 flex flex-col items-center justify-center">
+            <span class="text-[10px] text-gray-400 font-mono">EXECUTE</span>
+            <span class="text-xs text-cyber-primary font-mono">Run</span>
+          </div>
+          <div class="text-cyber-muted text-2xl font-mono">→</div>
+          <div class="w-20 h-20 rounded-full border border-cyber-success/40 bg-gray-900 flex flex-col items-center justify-center">
+            <span class="text-[10px] text-gray-400 font-mono">VALIDATE</span>
+            <span class="text-xs text-cyber-success font-mono">Gates</span>
+          </div>
+        </div>
+        <div class="mt-3 text-xs text-gray-500">
+          The outcome feeds the next mission. This is the business loop that compounds.
+        </div>
+      </div>
+
+      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span class="font-mono uppercase">Loop cadence</span>
+              <span class="font-mono text-cyber-accent" data-role="exec-cadence-value">2 wk</span>
+            </div>
+            <label class="sr-only" for="execCadence">Cadence slider</label>
+            <input class="mt-2 w-full accent-cyber-accent" data-role="exec-cadence" id="execCadence" max="6" min="1" step="1" type="range" value="2" />
+          </div>
+          <div>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span class="font-mono uppercase">Gate strength</span>
+              <span class="font-mono text-cyber-success" data-role="exec-gate-value">78%</span>
+            </div>
+            <label class="sr-only" for="execGate">Gate slider</label>
+            <input class="mt-2 w-full accent-cyber-success" data-role="exec-gate" id="execGate" max="95" min="40" step="1" type="range" value="78" />
+          </div>
+          <div class="md:col-span-2">
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span class="font-mono uppercase">AI acceleration depth</span>
+              <span class="font-mono text-cyber-neon" data-role="exec-accel-value">52%</span>
+            </div>
+            <label class="sr-only" for="execAccel">Acceleration slider</label>
+            <input class="mt-2 w-full accent-cyber-neon" data-role="exec-accel" id="execAccel" max="100" min="0" step="1" type="range" value="52" />
+            <p class="mt-2 text-[11px] text-gray-500">More AI inside the loop creates sub-loops that compress cadence.</p>
+          </div>
+        </div>
+
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Outcomes / quarter</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-success" data-role="exec-outcomes">6</div>
+            <div class="text-[11px] text-gray-500">Validated releases shipped</div>
+          </div>
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Rework risk</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-danger" data-role="exec-risk">22%</div>
+            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div class="h-2 bg-cyber-danger transition-all duration-300" data-role="exec-risk-bar" style="width: 22%;"></div>
+            </div>
+          </div>
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Reputation risk</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-neon" data-role="exec-rep-risk">18%</div>
+            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div class="h-2 bg-cyber-neon transition-all duration-300" data-role="exec-rep-risk-bar" style="width: 18%;"></div>
+            </div>
+            <div class="text-[11px] text-gray-500 mt-2">External exposure from gate escapes at scale.</div>
+          </div>
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Moat strength</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-accent" data-role="exec-moat">78/100</div>
+            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div class="h-2 bg-cyber-accent transition-all duration-300" data-role="exec-moat-bar" style="width: 78%;"></div>
+            </div>
+          </div>
+          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3 sm:col-span-2 xl:col-span-4">
+            <div class="text-xs uppercase tracking-wide text-gray-400">Loop multiplier</div>
+            <div class="mt-1 text-2xl font-bold text-cyber-neon" data-role="exec-multiplier">1.8x</div>
+            <div class="text-[11px] text-gray-500">Nested automation increases effective loop throughput.</div>
+          </div>
+        </div>
+        <div class="mt-4 text-xs text-gray-500" data-role="exec-insight"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const script = document.currentScript;
+    const root = script ? script.closest('[data-infographic-section-id="i2-section-06-executive-loop"]') : null;
+    if (!root || root.dataset.execLoopReady === "1") return;
+    root.dataset.execLoopReady = "1";
+
+  const cadence = root.querySelector('[data-role="exec-cadence"]');
+  const gate = root.querySelector('[data-role="exec-gate"]');
+    const cadenceValue = root.querySelector('[data-role="exec-cadence-value"]');
+    const gateValue = root.querySelector('[data-role="exec-gate-value"]');
+    const accel = root.querySelector('[data-role="exec-accel"]');
+    const accelValue = root.querySelector('[data-role="exec-accel-value"]');
+    const outcomesEl = root.querySelector('[data-role="exec-outcomes"]');
+    const riskEl = root.querySelector('[data-role="exec-risk"]');
+    const riskBar = root.querySelector('[data-role="exec-risk-bar"]');
+    const repRiskEl = root.querySelector('[data-role="exec-rep-risk"]');
+    const repRiskBar = root.querySelector('[data-role="exec-rep-risk-bar"]');
+    const moatEl = root.querySelector('[data-role="exec-moat"]');
+    const moatBar = root.querySelector('[data-role="exec-moat-bar"]');
+    const multiplierEl = root.querySelector('[data-role="exec-multiplier"]');
+    const insight = root.querySelector('[data-role="exec-insight"]');
+
+    if (!cadence || !gate || !accel || !cadenceValue || !gateValue || !accelValue || !outcomesEl || !riskEl || !riskBar || !repRiskEl || !repRiskBar || !moatEl || !moatBar || !multiplierEl || !insight) {
+      return;
+    }
+
+    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+    const readInt = (value, fallback) => {
+      const parsed = Number.parseInt(String(value), 10);
+      return Number.isFinite(parsed) ? parsed : fallback;
+    };
+
+  const update = () => {
+    const weeks = clamp(readInt(cadence.value, 2), 1, 6);
+    const gateStrength = clamp(readInt(gate.value, 78), 40, 95);
+    const accelDepth = clamp(readInt(accel.value, 52), 0, 100);
+    const multiplier = 1 + Math.pow(accelDepth / 100, 1.4) * 3.2;
+    const effectiveWeeks = clamp(weeks / multiplier, 0.6, 6);
+    const outcomes = clamp(Math.round(13 / effectiveWeeks), 1, 30);
+    const rework = clamp(100 - gateStrength + Math.round(effectiveWeeks * 6), 5, 95);
+    const moat = clamp(Math.round((100 - effectiveWeeks * 9) * 0.45 + gateStrength * 0.45 + accelDepth * 0.2), 10, 100);
+    const gateWeakness = (100 - gateStrength);
+    const exposure = (gateWeakness / 100);
+    const reputation = clamp(
+      Math.round(
+        Math.pow(gateWeakness, 1.15) * 0.8 +
+        accelDepth * 0.3 * exposure +
+        outcomes * 0.6 * exposure
+      ),
+      2,
+      95
+    );
+
+    cadenceValue.textContent = `${weeks} wk`;
+    gateValue.textContent = `${gateStrength}%`;
+    accelValue.textContent = `${accelDepth}%`;
+    outcomesEl.textContent = String(outcomes);
+    riskEl.textContent = `${rework}%`;
+    riskBar.style.width = `${rework}%`;
+    repRiskEl.textContent = `${reputation}%`;
+    repRiskBar.style.width = `${reputation}%`;
+    moatEl.textContent = `${moat}/100`;
+    moatBar.style.width = `${moat}%`;
+    multiplierEl.textContent = `${multiplier.toFixed(1)}x`;
+    insight.textContent = `At ${weeks} weeks/loop, ${gateStrength}% gates, and ${accelDepth}% AI depth, you deliver ~${outcomes} validated outcomes/quarter with ${rework}% rework risk and ${reputation}% reputation exposure.`;
+  };
+
+  cadence.addEventListener("input", update);
+  gate.addEventListener("input", update);
+  accel.addEventListener("input", update);
+  update();
+  })();
+  </script>
+</section>

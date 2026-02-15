@@ -192,7 +192,8 @@
       "concepts": [
         "Meta-Pattern: Physics is Law",
         "Immune System case",
-        "Convergence"
+        "Convergence",
+        "Ratchet"
       ]
     },
     {
@@ -235,11 +236,24 @@
       ]
     },
     {
+      "id": "i3-section-06-skeleton-first-rule",
+      "title": "Skeleton-First Rule (Prevent Map Contamination)",
+      "status": "published",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(4)",
+      "fragment": "i3-section-06-skeleton-first-rule.html",
+      "concepts": [
+        "Meta-Pattern: Skeleton-First Rule",
+        "Map Contamination",
+        "CI Gate (Map–Terrain Sync)"
+      ]
+    },
+    {
       "id": "i3-section-04-validator-bundles",
       "title": "Validator Bundles (Define Good + Budgets)",
       "status": "published",
       "infographic": "infographic-3.html",
-      "source_selector": "main > section:nth-of-type(4)",
+      "source_selector": "main > section:nth-of-type(5)",
       "fragment": "i3-section-04-validator-bundles.html",
       "concepts": [
         "Validator",
@@ -248,23 +262,75 @@
       ]
     },
     {
+      "id": "i3-section-08-ouroboros-protocol",
+      "title": "Ouroboros Protocol (Write → Judge → Refine)",
+      "status": "published",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(6)",
+      "fragment": "i3-section-08-ouroboros-protocol.html",
+      "concepts": [
+        "Ouroboros Protocol",
+        "Structured Error Objects (Signal-Rich Failure)",
+        "Judge"
+      ]
+    },
+    {
+      "id": "i3-section-07-ratchet-gates",
+      "title": "Ratchets (Quality Floors That Only Move Up)",
+      "status": "published",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(7)",
+      "fragment": "i3-section-07-ratchet-gates.html",
+      "concepts": [
+        "Ratchet",
+        "Convergence",
+        "Physics"
+      ]
+    },
+    {
       "id": "i3-section-05-always-on-loops",
       "title": "Always-On Loops (Maintenance That Compounds)",
       "status": "published",
       "infographic": "infographic-3.html",
-      "source_selector": "main > section:nth-of-type(5)",
+      "source_selector": "main > section:nth-of-type(8)",
       "fragment": "i3-section-05-always-on-loops.html",
       "concepts": [
         "Meta-Pattern: Recursion",
         "Adaptation State Machine (ASM)",
         "Ratchet"
       ]
+    },
+    {
+      "id": "i3-section-09-sensor-measurement",
+      "title": "Sensor Hierarchy (UML-Style)",
+      "status": "published",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(9)",
+      "fragment": "i3-section-09-sensor-measurement.html",
+      "concepts": [
+        "Sensor",
+        "Mechanism",
+        "Judge"
+      ]
+    },
+    {
+      "id": "i3-section-10-agent-execution-envelope",
+      "title": "Agent (Constrained Execution Envelope)",
+      "status": "published",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(10)",
+      "fragment": "i3-section-10-agent-execution-envelope.html",
+      "concepts": [
+        "Agent",
+        "Physics",
+        "Map / Terrain / Ledger"
+      ]
     }
   ],
   "counts": {
-    "published": 20,
+    "published": 25,
     "draft": 0,
     "deferred": 0
   },
-  "generated_at": "2026-02-15T02:14:35.428220"
+  "generated_at": "2026-02-15T04:16:45.722075"
 }

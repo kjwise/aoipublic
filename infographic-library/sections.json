@@ -192,9 +192,36 @@
       "concepts": [
         "Meta-Pattern: Physics is Law",
         "Immune System case",
-        "Convergence"
+        "Convergence",
+        "Ratchet"
       ],
       "notes": "Final reinforcement: state and process are jointly self-improving."
+    },
+    {
+      "id": "i2-section-06-executive-loop",
+      "title": "Executive View: The Business Loop",
+      "infographic": "infographic-2.html",
+      "source_selector": "main > section:nth-of-type(6)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Recursion",
+        "Mechanism",
+        "Convergence"
+      ],
+      "notes": "Executive-friendly summary of cadence, gates, and moat compounding."
+    },
+    {
+      "id": "i2-section-07-intention-architecture",
+      "title": "Intent Architecture Wins the Output War",
+      "infographic": "infographic-2.html",
+      "source_selector": "main > section:nth-of-type(7)",
+      "status": "published",
+      "concepts": [
+        "Intent Architecture",
+        "Signal / Noise",
+        "Coherence"
+      ],
+      "notes": "Shows output intensity vs signal density and consumption load."
     },
     {
       "id": "i3-section-01-substrate",
@@ -236,10 +263,23 @@
       "notes": "Prep/model/validation pattern as reusable module."
     },
     {
+      "id": "i3-section-06-skeleton-first-rule",
+      "title": "Skeleton-First Rule (Prevent Map Contamination)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(4)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Skeleton-First Rule",
+        "Map Contamination",
+        "CI Gate (Map–Terrain Sync)"
+      ],
+      "notes": "Shows deterministic skeleton extraction and hard mismatch gating."
+    },
+    {
       "id": "i3-section-04-validator-bundles",
       "title": "Validator Bundles (Define Good + Budgets)",
       "infographic": "infographic-3.html",
-      "source_selector": "main > section:nth-of-type(4)",
+      "source_selector": "main > section:nth-of-type(5)",
       "status": "published",
       "concepts": [
         "Validator",
@@ -249,10 +289,36 @@
       "notes": "Bundles deterministic gates into explicit admissibility policies."
     },
     {
+      "id": "i3-section-08-ouroboros-protocol",
+      "title": "Ouroboros Protocol (Write → Judge → Refine)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(6)",
+      "status": "published",
+      "concepts": [
+        "Ouroboros Protocol",
+        "Structured Error Objects (Signal-Rich Failure)",
+        "Judge"
+      ],
+      "notes": "Interactive bounded loop: iterate on explicit failure signals until PASS or circuit-break."
+    },
+    {
+      "id": "i3-section-07-ratchet-gates",
+      "title": "Ratchets (Quality Floors That Only Move Up)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(7)",
+      "status": "published",
+      "concepts": [
+        "Ratchet",
+        "Convergence",
+        "Physics"
+      ],
+      "notes": "Interactive gate showing non-regression floors and monotonic quality progression."
+    },
+    {
       "id": "i3-section-05-always-on-loops",
       "title": "Always-On Loops (Maintenance That Compounds)",
       "infographic": "infographic-3.html",
-      "source_selector": "main > section:nth-of-type(5)",
+      "source_selector": "main > section:nth-of-type(8)",
       "status": "published",
       "concepts": [
         "Meta-Pattern: Recursion",
@@ -260,6 +326,32 @@
         "Ratchet"
       ],
       "notes": "Maintenance as a loop that compounds quality after the initial build."
+    },
+    {
+      "id": "i3-section-09-sensor-measurement",
+      "title": "Sensor Hierarchy (UML-Style)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(9)",
+      "status": "published",
+      "concepts": [
+        "Sensor",
+        "Mechanism",
+        "Judge"
+      ],
+      "notes": "UML-style base Sensor + derived sensor classes with interactive bundle signal emission."
+    },
+    {
+      "id": "i3-section-10-agent-execution-envelope",
+      "title": "Agent (Constrained Execution Envelope)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(10)",
+      "status": "published",
+      "concepts": [
+        "Agent",
+        "Physics",
+        "Map / Terrain / Ledger"
+      ],
+      "notes": "Interactive gate model showing agent requests through tool, OS, and policy boundaries with ledger outcomes."
     }
   ]
 }

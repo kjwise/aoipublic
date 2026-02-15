@@ -1,0 +1,384 @@
+<section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-07-ratchet-gates" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Ratchets (Quality Floors That Only Move Up)</h2>
+<p class="text-brand-muted leading-relaxed">
+              Ratchets convert progress into non-regression law. A candidate may fail, but the floor does not move down.
+              When a candidate passes the gate, the floor is raised and future loops compound from a better baseline.
+            </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2"><a class="concept-link" href="../../concepts#ratchet" title="See concept: Ratchet">Ratchet</a> conditions</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">quality(Z<sub>n</sub>) &gt;= quality(Z<sub>n-1</sub>)</span>
+<span class="block font-mono text-brand-vibrant mt-1">m<sub>new</sub> &gt;= m<sub>old</sub></span>
+<span class="block mt-2">Here <span class="font-mono">m</span> is any tracked metric (for example reliability, velocity, defensibility, compliance).</span>
+<span class="block font-mono text-brand-vibrant mt-2">q(Z) = Σ w<sub>i</sub> · m<sub>i</sub>(Z), with Σ w<sub>i</sub> = 1</span>
+<span class="block mt-2">FAIL does not lower the floor. PASS can raise it.</span>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="ratchet-sim">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Candidate delta</span>
+<span class="font-mono text-brand-strong"><span data-role="delta-value">3</span> pts</span>
+</div>
+<input class="mt-2 w-full" data-role="delta-slider" max="20" min="-20" step="1" type="range" value="3"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Gate strength</span>
+<span class="font-mono text-brand-strong"><span data-role="gate-value">66</span>/100</span>
+</div>
+<input class="mt-2 w-full" data-role="gate-slider" max="95" min="40" step="1" type="range" value="66"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Stochasticity</span>
+<span class="font-mono text-brand-strong"><span data-role="noise-value">50</span>/100</span>
+</div>
+<input class="mt-2 w-full" data-role="noise-slider" max="100" min="0" step="1" type="range" value="50"/>
+</div>
+</div>
+<div class="mt-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Loop complexity (changes quality weights)</div>
+<div class="flex flex-wrap gap-2" data-role="complexity-controls">
+<button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="local" type="button">Local Loop</button>
+<button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="component" type="button">Component Loop</button>
+<button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="system" type="button">System Loop</button>
+</div>
+<div class="mt-2 text-xs text-brand-muted">
+<span class="font-mono">q weights</span>:
+<span data-role="weights-label">R 30% · V 25% · D 25% · C 20%</span>
+</div>
+<div class="mt-1 text-xs text-brand-muted">
+<span class="font-mono">stochastic variance</span>:
+<span data-role="variance-label">±2.0</span>
+</div>
+<div class="mt-1 text-xs text-brand-muted">
+<span class="font-mono">shock chance</span>:
+<span data-role="shock-label">3%</span>
+</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<button class="soft-toggle font-mono" data-role="run" type="button">Run Candidate</button>
+<button class="soft-toggle font-mono" data-role="reset" type="button">Reset Floor</button>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Reliability</div>
+<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-r">—</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Velocity</div>
+<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-v">—</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Defensibility</div>
+<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-d">—</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Compliance</div>
+<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-c">—</span>/100</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Current floor</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="floor">72</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Candidate quality</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="candidate">76</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Evidence score</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="evidence">74</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Ratchet gate</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">PASS</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Floor vs candidate</div>
+<div class="space-y-2">
+<div>
+<div class="text-xs text-brand-muted mb-1">Floor</div>
+<div class="h-2 rounded-full bg-brand-dark/70 border border-brand-border overflow-hidden">
+<div class="h-full bg-brand-primary" data-role="floor-bar" style="width: 72%;"></div>
+</div>
+</div>
+<div>
+<div class="text-xs text-brand-muted mb-1">Candidate</div>
+<div class="h-2 rounded-full bg-brand-dark/70 border border-brand-border overflow-hidden">
+<div class="h-full bg-brand-accent" data-role="candidate-bar" style="width: 76%;"></div>
+</div>
+</div>
+</div>
+<div class="mt-3 text-xs text-brand-muted" data-role="outcome">Ready. Run a candidate through the ratchet gate.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Attempts</div>
+<div class="text-xs text-brand-muted">Cyan = raised floor, red = rejected</div>
+</div>
+<div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-07-ratchet-gates"]') : null;
+  if (!root || root.dataset.ratchetReady === "1") return;
+  root.dataset.ratchetReady = "1";
+
+  const sim = root.querySelector('[data-role="ratchet-sim"]');
+  if (!sim) return;
+
+  const deltaSlider = sim.querySelector('[data-role="delta-slider"]');
+  const gateSlider = sim.querySelector('[data-role="gate-slider"]');
+  const noiseSlider = sim.querySelector('[data-role="noise-slider"]');
+  const runBtn = sim.querySelector('[data-role="run"]');
+  const resetBtn = sim.querySelector('[data-role="reset"]');
+  const deltaValue = sim.querySelector('[data-role="delta-value"]');
+  const gateValue = sim.querySelector('[data-role="gate-value"]');
+  const noiseValue = sim.querySelector('[data-role="noise-value"]');
+  const floorEl = sim.querySelector('[data-role="floor"]');
+  const candidateEl = sim.querySelector('[data-role="candidate"]');
+  const evidenceEl = sim.querySelector('[data-role="evidence"]');
+  const statusEl = sim.querySelector('[data-role="status"]');
+  const floorBar = sim.querySelector('[data-role="floor-bar"]');
+  const candidateBar = sim.querySelector('[data-role="candidate-bar"]');
+  const complexityButtons = Array.from(sim.querySelectorAll('[data-role="complexity"]'));
+  const weightsLabel = sim.querySelector('[data-role="weights-label"]');
+  const varianceLabel = sim.querySelector('[data-role="variance-label"]');
+  const shockLabel = sim.querySelector('[data-role="shock-label"]');
+  const metricR = sim.querySelector('[data-role="metric-r"]');
+  const metricV = sim.querySelector('[data-role="metric-v"]');
+  const metricD = sim.querySelector('[data-role="metric-d"]');
+  const metricC = sim.querySelector('[data-role="metric-c"]');
+  const outcomeEl = sim.querySelector('[data-role="outcome"]');
+  const attemptsEl = sim.querySelector('[data-role="attempts"]');
+  if (!deltaSlider || !gateSlider || !noiseSlider || !runBtn || !resetBtn || !deltaValue || !gateValue || !noiseValue || !floorEl || !candidateEl || !evidenceEl || !statusEl || !floorBar || !candidateBar || !weightsLabel || !varianceLabel || !shockLabel || !metricR || !metricV || !metricD || !metricC || !outcomeEl || !attemptsEl) return;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const toInt = (v, fallback) => {
+    const n = Number.parseInt(String(v), 10);
+    return Number.isFinite(n) ? n : fallback;
+  };
+  const round = (n) => Math.round(n);
+
+  const WEIGHTS = {
+    local: { r: 0.35, v: 0.45, d: 0.1, c: 0.1 },
+    component: { r: 0.30, v: 0.25, d: 0.25, c: 0.20 },
+    system: { r: 0.20, v: 0.15, d: 0.35, c: 0.30 },
+  };
+
+  const state = {
+    baseline: 72,
+    delta: toInt(deltaSlider.value, 3),
+    gate: toInt(gateSlider.value, 66),
+    noise: toInt(noiseSlider.value, 50),
+    complexity: "component",
+    run: 0,
+  };
+
+  const render = (metrics, candidate, evidence, passed) => {
+    deltaValue.textContent = String(state.delta);
+    gateValue.textContent = String(state.gate);
+    noiseValue.textContent = String(state.noise);
+    metricR.textContent = String(round(metrics.r));
+    metricV.textContent = String(round(metrics.v));
+    metricD.textContent = String(round(metrics.d));
+    metricC.textContent = String(round(metrics.c));
+    floorEl.textContent = String(state.baseline);
+    candidateEl.textContent = String(round(candidate));
+    evidenceEl.textContent = String(round(evidence));
+    if (passed === null) {
+      statusEl.textContent = "READY";
+      statusEl.style.color = "#b5b6bf";
+    } else {
+      statusEl.textContent = passed ? "PASS" : "FAIL";
+      statusEl.style.color = passed ? "#2ac3de" : "#f7768e";
+    }
+    floorBar.style.width = `${state.baseline}%`;
+    candidateBar.style.width = `${round(candidate)}%`;
+    if (passed === null) {
+      candidateBar.style.backgroundColor = "rgba(187,154,247,0.9)";
+    } else {
+      candidateBar.style.backgroundColor = passed ? "rgba(42,195,222,0.9)" : "rgba(247,118,142,0.9)";
+    }
+  };
+
+  const randSigned = () => (Math.random() * 2) - 1;
+
+  const varianceScale = () => {
+    const complexityBase = state.complexity === "local" ? 1.2 : state.complexity === "component" ? 2.0 : 3.1;
+    const aggression = Math.max(0, Math.abs(state.delta) - 4) * 0.35;
+    const stochasticFactor = state.noise / 60;
+    return (complexityBase + aggression) * stochasticFactor;
+  };
+
+  const shockChance = () => {
+    const complexityBias = state.complexity === "local" ? 0.008 : state.complexity === "component" ? 0.018 : 0.03;
+    const noiseBias = (state.noise / 100) * 0.05;
+    const aggressionBias = Math.max(0, Math.abs(state.delta) - 10) * 0.003;
+    return clamp(complexityBias + noiseBias + aggressionBias, 0, 0.2);
+  };
+
+  const sampleNoise = () => {
+    const s = varianceScale();
+    const shock = Math.random() < shockChance();
+    const shockPenalty = shock ? (4 + Math.random() * 8) * (0.7 + (state.noise / 100)) : 0;
+    return {
+      r: randSigned() * s * 0.7,
+      v: randSigned() * s * 0.8,
+      d: randSigned() * s * 0.6,
+      c: randSigned() * s * 0.6,
+      evidence: randSigned() * s * 1.1 - shockPenalty,
+      shock,
+    };
+  };
+
+  const zeroNoise = () => ({ r: 0, v: 0, d: 0, c: 0, evidence: 0, shock: false });
+
+  const computeMetrics = (noise) => {
+    const n = noise || zeroNoise();
+    const baseline = state.baseline;
+    const improvement = state.delta * 0.75;
+    return {
+      r: clamp(baseline + improvement * 0.9 + n.r, 0, 100),
+      v: clamp(baseline + improvement * 1.2 + n.v, 0, 100),
+      d: clamp(baseline + improvement * 0.7 + n.d, 0, 100),
+      c: clamp(baseline + improvement * 0.8 + n.c, 0, 100),
+    };
+  };
+
+  const computeCandidate = (metrics) => {
+    const w = WEIGHTS[state.complexity] || WEIGHTS.component;
+    return clamp(
+      metrics.r * w.r + metrics.v * w.v + metrics.d * w.d + metrics.c * w.c,
+      0,
+      100
+    );
+  };
+
+  const computeEvidence = (candidate, noise) => {
+    const n = noise || zeroNoise();
+    const driftPenalty = Math.max(0, Math.abs(state.delta) - 6) * 2;
+    const complexityPenalty = state.complexity === "system" ? 2 : 0;
+    const baseEvidencePenalty = 2;
+    return clamp(candidate - baseEvidencePenalty - driftPenalty - complexityPenalty + n.evidence, 0, 100);
+  };
+
+  const renderWeightLabel = () => {
+    const w = WEIGHTS[state.complexity] || WEIGHTS.component;
+    const pct = (x) => `${Math.round(x * 100)}%`;
+    weightsLabel.textContent = `R ${pct(w.r)} · V ${pct(w.v)} · D ${pct(w.d)} · C ${pct(w.c)}`;
+    varianceLabel.textContent = `±${varianceScale().toFixed(1)}`;
+    shockLabel.textContent = `${Math.round(shockChance() * 100)}%`;
+    for (const btn of complexityButtons) {
+      const active = btn.dataset.value === state.complexity;
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    }
+  };
+
+  const appendAttempt = (passed) => {
+    const pill = document.createElement("span");
+    pill.className = `attempt-pill ${passed ? "is-pass" : "is-fail"}`;
+    attemptsEl.appendChild(pill);
+    while (attemptsEl.children.length > 36) {
+      attemptsEl.removeChild(attemptsEl.firstChild);
+    }
+  };
+
+  const run = () => {
+    state.run += 1;
+    const oldBaseline = state.baseline;
+    const noise = sampleNoise();
+    const metrics = computeMetrics(noise);
+    const candidate = computeCandidate(metrics);
+    const evidence = computeEvidence(candidate, noise);
+    const effectiveGate = Math.max(state.gate, oldBaseline - 1);
+
+    const ratchetPass = candidate >= oldBaseline;
+    const gatePass = evidence >= effectiveGate;
+    const pass = ratchetPass && gatePass;
+
+    if (pass) {
+      state.baseline = round(candidate);
+      outcomeEl.textContent = `PASS: floor raised from ${oldBaseline} to ${state.baseline}.`;
+    } else if (!ratchetPass) {
+      outcomeEl.textContent = `FAIL: non-regression violated (${round(candidate)} < ${oldBaseline}). Floor stays ${oldBaseline}.`;
+    } else if (noise.shock) {
+      outcomeEl.textContent = `FAIL: random shock lowered evidence to ${round(evidence)} below effective gate ${round(effectiveGate)}. Floor stays ${oldBaseline}.`;
+    } else {
+      outcomeEl.textContent = `FAIL: evidence ${round(evidence)} below effective gate ${round(effectiveGate)}. Floor stays ${oldBaseline}.`;
+    }
+
+    render(metrics, candidate, evidence, pass);
+    appendAttempt(pass);
+  };
+
+  deltaSlider.addEventListener("input", () => {
+    state.delta = toInt(deltaSlider.value, state.delta);
+    const metrics = computeMetrics(zeroNoise());
+    const candidate = computeCandidate(metrics);
+    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  });
+
+  gateSlider.addEventListener("input", () => {
+    state.gate = toInt(gateSlider.value, state.gate);
+    renderWeightLabel();
+    const metrics = computeMetrics(zeroNoise());
+    const candidate = computeCandidate(metrics);
+    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  });
+
+  noiseSlider.addEventListener("input", () => {
+    state.noise = toInt(noiseSlider.value, state.noise);
+    renderWeightLabel();
+    const metrics = computeMetrics(zeroNoise());
+    const candidate = computeCandidate(metrics);
+    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  });
+
+  for (const btn of complexityButtons) {
+    btn.addEventListener("click", () => {
+      state.complexity = btn.dataset.value || "component";
+      renderWeightLabel();
+      const metrics = computeMetrics(zeroNoise());
+      const candidate = computeCandidate(metrics);
+      render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+    });
+  }
+
+  runBtn.addEventListener("click", run);
+  resetBtn.addEventListener("click", () => {
+    state.baseline = 72;
+    state.complexity = "component";
+    state.noise = toInt(noiseSlider.value, 50);
+    state.run = 0;
+    attemptsEl.innerHTML = "";
+    outcomeEl.textContent = "Reset. Floor returned to 72.";
+    renderWeightLabel();
+    const metrics = computeMetrics(zeroNoise());
+    const candidate = computeCandidate(metrics);
+    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  });
+
+  renderWeightLabel();
+  const metrics = computeMetrics(zeroNoise());
+  const candidate = computeCandidate(metrics);
+  render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+})();
+</script>
+</section>
