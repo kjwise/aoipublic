@@ -1,0 +1,117 @@
+<section class="col-span-1 md:col-span-12 mb-8" data-infographic-section-id="i1-section-03-inference-cost-paradox" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic.html" data-infographic-status="published">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col md:flex-row gap-8">
+<div class="md:w-1/2">
+<h2 class="text-3xl font-bold text-brand-strong mb-4">The Inference Cost Paradox (Looped Systems)</h2>
+<p class="text-lg text-brand-muted leading-relaxed">
+	                            Per-call inference cost may fall. But in production, inference becomes structural: it is embedded inside autonomous loops.
+	                            <br/><br/>
+<span class="text-brand-strong font-semibold">Inference is no longer a utility. It is infrastructure.</span>
+	                            Infrastructure is hedged.
+	                        </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-sm font-semibold text-brand-strong mb-2">When inference becomes structural</div>
+<ul class="text-sm text-brand-muted leading-relaxed space-y-1 list-disc list-inside">
+<li>Pricing volatility → operational risk</li>
+<li>Provider lock-in → systemic dependency</li>
+<li>Latency → architectural friction</li>
+</ul>
+</div>
+<div class="mt-4 bg-brand-light p-4 rounded text-brand-strong font-semibold border-l-4 border-l-brand-accent">
+	                            When <a class="concept-link" href="../../concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a> drives production, compute becomes the power grid.
+	                        </div>
+<div class="mt-4 text-sm text-brand-muted leading-relaxed">
+	                            Use the Hedge Builder to see how cost and risk change as autonomy rises, and how different hedges trade flexibility for certainty.
+	                        </div>
+</div>
+<div class="md:w-1/2">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4" id="hedgeBuilderCard">
+<div class="flex items-start justify-between gap-3">
+<div>
+<div class="text-xs font-mono text-brand-muted">Hedge Builder</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Compute exposure scales with autonomy</div>
+</div>
+<div class="text-xs font-mono text-brand-muted">
+	                                    Autonomy <span class="text-brand-strong" id="hedgeAutonomyValue">60%</span>
+</div>
+</div>
+<label class="sr-only" for="hedgeAutonomySlider">Autonomy slider</label>
+<input class="mt-3 w-full" id="hedgeAutonomySlider" max="100" min="0" type="range" value="60"/>
+<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+<button aria-pressed="false" class="hedge-toggle" data-hedge-key="fixed" type="button">Fixed-cost contracts</button>
+<button aria-pressed="false" class="hedge-toggle" data-hedge-key="reserve" type="button">Capacity reservations</button>
+<button aria-pressed="false" class="hedge-toggle" data-hedge-key="multi" type="button">Multi-provider routing</button>
+<button aria-pressed="false" class="hedge-toggle" data-hedge-key="hybrid" type="button">Hybrid / owned compute</button>
+<button aria-pressed="false" class="hedge-toggle sm:col-span-2" data-hedge-key="minFrontier" type="button">Minimize irreducible frontier calls</button>
+</div>
+<div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Expected cost / outcome</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="hedgeExpectedCost">—</span></div>
+<div class="text-xs text-brand-muted mt-1">Index (lower is better)</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">P95 cost / outcome</div>
+<div class="mt-1 text-lg font-bold text-brand-danger"><span id="hedgeP95Cost">—</span></div>
+<div class="text-xs text-brand-muted mt-1">
+	                                        Tail premium: +<span class="font-mono text-brand-strong" id="hedgeTailPremium">—</span>
+<span class="ml-2">(<span class="font-mono text-brand-strong" id="hedgeP95Delta">—</span> vs spot)</span>
+</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Cost certainty</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="hedgeCertainty">—</span>%</div>
+<div class="text-xs text-brand-muted mt-1">Inverse of pricing volatility</div>
+</div>
+</div>
+<div class="mt-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Risk profile</div>
+<div class="space-y-3">
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Pricing volatility</span>
+<span class="font-mono text-brand-strong"><span id="hedgeRiskPricing">—</span>/100</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="hedgeRiskPricingBar" style="width: 0%; background: rgba(247, 118, 142, 0.88);"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Provider lock-in</span>
+<span class="font-mono text-brand-strong"><span id="hedgeRiskLockin">—</span>/100</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="hedgeRiskLockinBar" style="width: 0%; background: rgba(187, 154, 247, 0.82);"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Latency friction</span>
+<span class="font-mono text-brand-strong"><span id="hedgeRiskLatency">—</span>/100</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="hedgeRiskLatencyBar" style="width: 0%; background: rgba(122, 162, 247, 0.82);"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Frontier exposure</span>
+<span class="font-mono text-brand-strong"><span id="hedgeRiskFrontier">—</span>/100</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="hedgeRiskFrontierBar" style="width: 0%; background: rgba(42, 195, 222, 0.78);"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 border-t border-brand-border pt-3">
+<div class="text-xs font-mono text-brand-muted">Recommendation</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong" id="hedgeRecommendation">—</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed" id="hedgeNote">—</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

@@ -11,6 +11,7 @@
 <script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
 <script>
         tailwind.config = {
             theme: {
@@ -147,7 +148,7 @@
 <body class="bg-brand-dark text-brand-text font-sans antialiased">
 <header class="bg-brand-dark text-white py-12 px-6 shadow-xl relative overflow-hidden">
 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-vibrant via-brand-primary to-transparent"></div>
-<div class="max-w-6xl mx-auto relative z-10 text-center">
+<div class="max-w-[1500px] mx-auto relative z-10 text-center">
 <div class="mb-5 inline-flex flex-wrap items-center justify-center gap-1 rounded-lg border border-brand-border bg-brand-light p-1 text-sm">
 <a class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors" href="infographic.html">Infographic 1</a>
 <a class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors" href="infographic-2.html">Infographic 2</a>
@@ -160,13 +161,12 @@
             </p>
 </div>
 </header>
-<main class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-12 gap-8">
-<!-- SECTION 1 -->
-<section class="col-span-1 md:col-span-12">
+<main class="max-w-[1500px] mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-12 gap-8">
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-01-substrate" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
-<h1 class="text-3xl font-bold text-brand-strong mb-3">1. The Substrate (Map · Terrain · Ledger)</h1>
+<h1 class="text-3xl font-bold text-brand-strong mb-3">The Substrate (Map · Terrain · Ledger)</h1>
 <p class="text-brand-muted leading-relaxed">
                             SDaC is practical when the system has three explicit surfaces:
                             <span class="text-brand-strong font-semibold">intent</span>,
@@ -225,12 +225,11 @@
 </div>
 </div>
 </section>
-<!-- SECTION 2 -->
-<section class="col-span-1 md:col-span-12">
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-02-mission-objects" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-accent">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">2. Mission Objects (Intent As Code)</h2>
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Mission Objects (Intent As Code)</h2>
 <p class="text-brand-muted leading-relaxed">
                             A <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">mission object</a> is a programmable unit of work: goals, constraints, budgets, and acceptance criteria.
                             It turns a vague request into a deterministic interface.
@@ -325,12 +324,11 @@
 </div>
 </div>
 </section>
-<!-- SECTION 3 -->
-<section class="col-span-1 md:col-span-12">
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-03-deterministic-sandwich" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">3. The Deterministic Sandwich (Contain Stochasticity)</h2>
+<h2 class="text-3xl font-bold text-brand-strong mb-3">The Deterministic Sandwich (Contain Stochasticity)</h2>
 <p class="text-brand-muted leading-relaxed">
                             Put probabilistic generation in the middle. Wrap it in deterministic prep and deterministic validation.
                             The goal is not “trust the model.” It is “trust the loop.”
@@ -425,12 +423,11 @@
 </div>
 </div>
 </section>
-<!-- SECTION 4 -->
-<section class="col-span-1 md:col-span-12">
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-danger">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">4. Validator Bundles (Define Good + Budgets)</h2>
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Validator Bundles (Define Good + Budgets)</h2>
 <p class="text-brand-muted leading-relaxed">
                             Validators are “physics.” Budgets are “governors.” Together they turn open-ended iteration into a bounded system.
                             The loop can fail, but it fails deterministically.
@@ -490,12 +487,11 @@
 </div>
 </div>
 </section>
-<!-- SECTION 5 -->
-<section class="col-span-1 md:col-span-12">
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-05-always-on-loops" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">5. Always-On Loops (Maintenance That Compounds)</h2>
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Always-On Loops (Maintenance That Compounds)</h2>
 <p class="text-brand-muted leading-relaxed">
                             Practical SDaC is not a one-off workflow. It is an always-on system: map updaters, background refactors, and governance at machine speed.
                             The goal is to keep entropy debt bounded while autonomy rises.

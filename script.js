@@ -720,8 +720,135 @@ function setupSearchPage() {
   void runSearch(initial);
 }
 
-// Ensure external links open in a new tab.
-document.addEventListener("DOMContentLoaded", () => {
+function initInfographicDecks() {
+  const decks = document.querySelectorAll('[data-infographic-deck]');
+  if (!decks.length) return;
+
+  for (const deck of decks) {
+    const slides = Array.from(deck.querySelectorAll(".infographic-slide"));
+    const prevButton = deck.querySelector('[data-slide-nav="prev"]');
+    const nextButton = deck.querySelector('[data-slide-nav="next"]');
+    const dots = Array.from(deck.querySelectorAll(".infographic-deck__dot"));
+    const currentEl = deck.querySelector(".infographic-deck__current");
+    const totalEl = deck.querySelector(".infographic-deck__total");
+    const total = slides.length;
+
+    if (!total) continue;
+
+    let index = 0;
+
+    const resizeChartsInSlide = (slide) => {
+      if (!slide || !slide.querySelectorAll) return;
+
+      const resizeChartForCanvas = (canvas) => {
+        if (!canvas || typeof window.Chart === "undefined") return;
+        if (typeof window.Chart.getChart === "function") {
+          const chart = window.Chart.getChart(canvas);
+          if (chart && typeof chart.resize === "function") {
+            chart.resize();
+            if (typeof chart.update === "function") {
+              chart.update("none");
+            }
+          }
+        }
+      };
+
+      const resizePlotlyForElement = (element) => {
+        if (!element || typeof window.Plotly === "undefined") return;
+        if (!window.Plotly.Plots || typeof window.Plotly.Plots.resize !== "function") return;
+        try {
+          window.Plotly.Plots.resize(element);
+        } catch (_err) {
+          // Ignore resize race conditions when plot is not fully initialized yet.
+        }
+      };
+
+      const runResizePass = () => {
+        const canvases = Array.from(slide.querySelectorAll("canvas"));
+        for (const canvas of canvases) {
+          resizeChartForCanvas(canvas);
+        }
+
+        const plotCandidates = new Set([
+          ...Array.from(slide.querySelectorAll(".js-plotly-plot")),
+          ...Array.from(slide.querySelectorAll(".plotly-container")),
+        ]);
+        for (const candidate of plotCandidates) {
+          resizePlotlyForElement(candidate);
+        }
+      };
+
+      if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(() => {
+          runResizePass();
+          window.setTimeout(runResizePass, 120);
+        });
+      } else {
+        runResizePass();
+      }
+    };
+
+    const showSlide = (nextIndex) => {
+      const clamped = ((nextIndex % total) + total) % total;
+      index = clamped;
+
+      for (const slide of slides) {
+        const active = Number(slide.dataset.slideIndex) === index;
+        slide.classList.toggle("is-active", active);
+        slide.hidden = !active;
+      }
+
+      for (const dot of dots) {
+        const isActive = Number(dot.dataset.slide) === index;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-pressed", isActive ? "true" : "false");
+      }
+
+      if (currentEl) currentEl.textContent = String(index + 1);
+      const activeSlide = slides[index];
+      resizeChartsInSlide(activeSlide);
+    };
+
+    for (const dot of dots) {
+      dot.addEventListener("click", () => {
+        const target = Number(dot.dataset.slide);
+        if (!Number.isFinite(target)) return;
+        showSlide(target);
+      });
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", () => showSlide(index - 1));
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", () => showSlide(index + 1));
+    }
+
+    deck.setAttribute("tabindex", "0");
+    deck.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+        if ((event.target && (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement))) {
+          return;
+        }
+        event.preventDefault();
+        showSlide(index + 1);
+      }
+      if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        if ((event.target && (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement))) {
+          return;
+        }
+        event.preventDefault();
+        showSlide(index - 1);
+      }
+    });
+
+    if (totalEl) totalEl.textContent = String(total);
+    showSlide(0);
+  }
+}
+
+const bootstrapPage = () => {
   for (const link of document.querySelectorAll("a[href^='http']")) {
     link.target = "_blank";
     link.rel = "noopener noreferrer";
@@ -730,5 +857,12 @@ document.addEventListener("DOMContentLoaded", () => {
   setupSearchPage();
   setupSharePanels();
   enhanceCodeBlocks();
+  initInfographicDecks();
   void renderMermaidIfPresent();
-});
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bootstrapPage, { once: true });
+} else {
+  bootstrapPage();
+}

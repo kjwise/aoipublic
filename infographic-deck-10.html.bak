@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architects of Intent | 10-Slide Deck</title>
+  <meta name="description" content="Curated 10-slide presentation deck built from reusable infographic sections.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="chart.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'"></script>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              dark: '#0b0c10',
+              surface: 'rgba(17, 19, 26, 0.92)',
+              panel: 'rgba(17, 19, 26, 0.92)',
+              light: 'rgba(255, 255, 255, 0.03)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              text: '#e7e7ea',
+              muted: '#b5b6bf',
+              primary: '#7aa2f7',
+              accent: '#bb9af7',
+              vibrant: '#2ac3de',
+              danger: '#f7768e',
+              success: '#10b981',
+            },
+            cyber: {
+              dark: '#0B0F19',
+              panel: '#151B2B',
+              primary: '#6366f1',
+              accent: '#06b6d4',
+              neon: '#d946ef',
+              success: '#10b981',
+              danger: '#ef4444',
+              text: '#f8fafc',
+              muted: '#94a3b8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="infographic-deck-runtime.css">
+  <link rel="stylesheet" href="infographic-fragment-shell.css">
+  <script src="infographic-deck-runtime.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary">
+      <a class="brand" href="./">Architects of Intent</a>
+      <a class="site-nav__toc" href="toc">Table of Contents</a>
+      <div class="site-nav__links">
+        <a href="infographic">Infographic 1</a>
+        <a href="infographic-2">Infographic 2</a>
+        <a href="infographic-3">Infographic 3</a>
+        <a href="infographic-deck">Full Deck</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="content infographic-presentation">
+    <h1>Architects of Intent 10-Slide Deck</h1>
+    <p>
+      Curated sequence for a shorter presentation. This flow starts with loop fundamentals,
+      moves through speed, drift, and control mechanisms, and closes on strategic moat.
+    </p>
+
+<div class="infographic-deck" data-infographic-deck>
+  <div class="infographic-deck__toolbar">
+    <button class="infographic-deck__nav infographic-deck__nav--prev" type="button" data-slide-nav="prev" aria-label="Previous slide">◀</button>
+    <div class="infographic-deck__counter" aria-live="polite">
+      <span class="infographic-deck__current">1</span> / <span class="infographic-deck__total">10</span>
+    </div>
+    <button class="infographic-deck__nav infographic-deck__nav--next" type="button" data-slide-nav="next" aria-label="Next slide">▶</button>
+  </div>
+  <div class="infographic-deck__canvas"><section class="infographic-slide" data-infographic-section-id="i1-section-01-shape-of-all-work" aria-label="The Shape of All Work" data-slide-index="0" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">The Shape of All Work</span>
+                <span class="infographic-slide__meta">i1-section-01-shape-of-all-work</span>
+              </div>
+              <section class="col-span-1 md:col-span-12 mt-2 mb-12" data-infographic-section-id="i1-section-01-shape-of-all-work" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+<h2 class="text-3xl md:text-4xl font-bold text-brand-strong mb-3">The Shape of All Work</h2>
+<p class="text-brand-muted max-w-4xl leading-relaxed">
+                    Every productive process follows the same loop at every scale:
+                    <span class="font-mono text-brand-strong">P(Zn) = Z(n+1)</span>.
+                    The state changes; the process itself can also evolve.
+                </p>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
+<div class="lg:col-span-4 space-y-4">
+<div class="border border-brand-border rounded-xl bg-brand-light p-4">
+<div class="text-xs font-mono text-brand-muted uppercase tracking-wide mb-3">Scale of Iteration</div>
+<div class="space-y-1">
+<button aria-pressed="false" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="0" type="button">
+<span class="font-semibold">Keystroke</span>
+<span class="float-right text-xs font-mono opacity-70">~100ms</span>
+</button>
+<button aria-pressed="false" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="1" type="button">
+<span class="font-semibold">Function</span>
+<span class="float-right text-xs font-mono opacity-70">~minutes</span>
+</button>
+<button aria-pressed="true" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="2" type="button">
+<span class="font-semibold">Feature</span>
+<span class="float-right text-xs font-mono opacity-70">~days</span>
+</button>
+<button aria-pressed="false" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="3" type="button">
+<span class="font-semibold">Product</span>
+<span class="float-right text-xs font-mono opacity-70">~months</span>
+</button>
+<button aria-pressed="false" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="4" type="button">
+<span class="font-semibold">Company</span>
+<span class="float-right text-xs font-mono opacity-70">~years</span>
+</button>
+</div>
+</div>
+<div class="border border-brand-border rounded-xl bg-brand-light p-4 transition-colors duration-200" id="shapeSdacCard">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted uppercase tracking-wide">SDaC Protocol</div>
+<button aria-pressed="false" class="relative inline-flex w-12 h-6 rounded-full border border-brand-border bg-brand-surface transition-colors duration-200" id="shapeSdacToggle" type="button">
+<span class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200" id="shapeSdacKnob"></span>
+</button>
+</div>
+<p class="mt-3 text-sm text-brand-muted leading-relaxed" id="shapeSdacDescription">
+                                Standard mode: acceleration without structure. Faster loops can also accelerate drift.
+                            </p>
+<div class="mt-3 hidden flex-wrap gap-2" id="shapeSdacBadges">
+<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Validation</span>
+<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Bounded Effectors</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-4">
+<div class="border border-brand-border rounded-xl bg-brand-light p-4">
+<div class="font-mono text-sm md:text-base">
+<div class="flex flex-wrap items-center justify-center gap-3 text-brand-muted">
+<span>Iteration:</span>
+<span class="text-brand-strong"><span class="text-brand-accent">P</span>(Zn) = <span class="text-brand-vibrant">Z(n+1)</span></span>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-3 mt-2 text-xs md:text-sm text-brand-muted">
+<span>Evolution:</span>
+<span><span class="text-brand-accent">Pk</span> → <span class="text-brand-accent">P(k+1)</span></span>
+</div>
+</div>
+</div>
+<div class="relative h-80 md:h-96 rounded-2xl border border-brand-border bg-[rgba(6,7,12,0.75)] overflow-hidden" id="shapeVisualizer">
+<div class="absolute inset-0 opacity-25 shape-visualizer-grid"></div>
+<div class="absolute left-1/2 top-1/2 w-64 h-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand-border" id="shapeOrbitRing"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[132px] w-5 h-5 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.55)]"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[158px] text-[10px] font-mono text-brand-muted">Z(n) Input</div>
+<div class="hidden absolute left-1/2 top-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[rgba(187,154,247,0.35)]" id="shapeGuardRing"></div>
+<div class="absolute inset-0 pointer-events-none" id="shapeParticles"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full border-2 border-brand-border bg-brand-surface flex flex-col items-center justify-center text-center px-4">
+<div class="text-xs uppercase tracking-wider text-brand-muted">Process</div>
+<div class="mt-1 text-sm font-bold text-brand-accent" id="shapeProcessLabel">Team + Practices</div>
+</div>
+<div class="absolute top-4 right-4">
+<div class="px-3 py-1 rounded-full text-xs font-bold border border-brand-border bg-brand-surface text-brand-muted" id="shapeLoopModeBadge">STANDARD LOOP</div>
+</div>
+<div class="hidden absolute top-1/2 right-4 md:right-8 -translate-y-1/2 flex-col items-center gap-1" id="shapeGuardStatus">
+<div class="text-brand-vibrant text-base">🛡</div>
+<div class="text-[10px] font-mono uppercase text-brand-vibrant">Validated</div>
+</div>
+<div class="absolute bottom-4 left-4 text-xs font-mono text-brand-muted">
+<span>⏱ </span><span id="shapeTimeLabel">~days</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="p-4 rounded-xl border border-brand-border bg-brand-light">
+<div class="text-xs uppercase tracking-wide text-brand-muted">Current State (Zn)</div>
+<div class="mt-1 text-lg text-brand-strong font-semibold" id="shapeStateLabel">Codebase</div>
+</div>
+<div class="p-4 rounded-xl border border-brand-border bg-brand-light">
+<div class="text-xs uppercase tracking-wide text-brand-muted">The Process (P)</div>
+<div class="mt-1 text-lg text-brand-accent font-semibold" id="shapeProcessCardLabel">Team + Practices</div>
+</div>
+</div>
+<p class="text-sm text-brand-muted leading-relaxed" id="shapeScaleDescription"></p>
+</div>
+</div>
+<div class="mt-8 border border-brand-border rounded-xl bg-brand-light p-4">
+<div class="flex flex-wrap gap-4 border-b border-brand-border pb-3">
+<button aria-selected="true" class="shape-tab-btn is-active text-sm font-semibold pb-1" data-shape-tab="concept" type="button">The Fractal Shape</button>
+<button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="recursive" type="button">Recursive Improvement</button>
+<button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="sdac" type="button">Why SDaC?</button>
+</div>
+<div class="mt-4">
+<div data-shape-panel="concept">
+<p class="text-brand-strong text-lg font-semibold mb-2">The structure is identical at every scale.</p>
+<p class="text-brand-muted leading-relaxed">
+                                Whether you type one character or steer a company, you still transform a current state into a next state through a process. What changes is the time constant and impact radius.
+                            </p>
+</div>
+<div class="hidden" data-shape-panel="recursive">
+<p class="text-brand-strong text-lg font-semibold mb-2">The process itself is part of the loop.</p>
+<div class="rounded-xl border border-brand-border bg-brand-surface p-3 font-mono text-sm text-brand-muted">
+<div><span class="text-brand-accent">next_state</span> = process(current_state)</div>
+<div class="mt-1"><span class="text-brand-vibrant">process</span> = improve(process, evidence)</div>
+</div>
+<p class="text-brand-muted leading-relaxed mt-3">
+                                Real systems are recursive: execution generates evidence, and evidence upgrades the process that executes.
+                            </p>
+</div>
+<div class="hidden" data-shape-panel="sdac">
+<p class="text-brand-strong text-lg font-semibold mb-2">Acceleration without structure is chaos.</p>
+<p class="text-brand-muted leading-relaxed">
+                                AI raises loop speed. SDaC adds deterministic validation, bounded effectors, and explicit intent so higher velocity converges instead of drifting.
+                            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+<div class="p-3 rounded-xl border border-[rgba(247,118,142,0.35)] bg-[rgba(247,118,142,0.08)]">
+<div class="text-sm font-semibold text-brand-danger">Standard loop</div>
+<div class="text-xs text-brand-muted mt-1">Trust the model; mistakes scale with speed.</div>
+</div>
+<div class="p-3 rounded-xl border border-[rgba(42,195,222,0.35)] bg-[rgba(42,195,222,0.10)]">
+<div class="text-sm font-semibold text-brand-vibrant">SDaC loop</div>
+<div class="text-xs text-brand-muted mt-1">Trust the loop; validators enforce convergence.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i2-section-00-state-run-new-state" aria-label="State → Run P( ) → New State" data-slide-index="1" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">State → Run P( ) → New State</span>
+                <span class="infographic-slide__meta">i2-section-00-state-run-new-state</span>
+              </div>
+              <div class="max-w-[1500px] mx-auto px-6 py-16 relative z-10" data-infographic-section-id="i2-section-00-state-run-new-state" data-infographic-selector="header &gt; div:nth-of-type(3)" data-infographic-source="infographic-2.html" data-infographic-status="published">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div>
+<h4 class="text-cyber-accent font-mono text-sm tracking-widest uppercase mb-4">Software Development as Code (SDaC)</h4>
+<h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
+                        The Shape of <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent">All Work</span>
+</h1>
+<p class="text-xl text-cyber-muted max-w-xl leading-relaxed">
+                        Every productive process follows the same recursive shape. The "Product" isn't the code.
+                        <strong class="text-white">The Loop is the Product.</strong>
+</p>
+</div>
+<div class="bg-cyber-panel border border-gray-700 rounded-xl p-8 shadow-2xl relative">
+<div class="absolute top-4 right-4 text-xs font-mono text-gray-500">INTERACTIVE MODEL</div>
+<div class="text-center font-mono text-3xl md:text-4xl mb-8 text-cyber-success">
+                        P(Z<span class="text-sm align-sub">n</span>) = Z<span class="text-sm align-sub">n+1</span>
+</div>
+<div class="flex justify-between items-center text-center">
+<div class="loop-node w-24 h-24 rounded-full border-2 border-cyber-muted flex flex-col items-center justify-center bg-gray-900" id="state-prev">
+<span class="text-gray-400 font-mono text-xs mb-1">STATE</span>
+<span class="text-2xl font-bold">Z<span class="text-sm">n</span></span>
+</div>
+<div class="flex flex-col items-center mx-4">
+<div class="arrow-right mb-2"></div>
+<button class="bg-cyber-primary hover:bg-cyber-neon text-white font-bold py-2 px-6 rounded shadow-lg transition-all transform hover:scale-105 active:scale-95 animate-glow" id="run-loop-btn">
+                                RUN P( )
+                            </button>
+<div class="text-xs text-cyber-accent mt-2 font-mono">Process Iteration</div>
+</div>
+<div class="loop-node w-24 h-24 rounded-full border-2 border-cyber-success flex flex-col items-center justify-center bg-gray-900 shadow-[0_0_15px_rgba(16,185,129,0.3)]" id="state-next">
+<span class="text-gray-400 font-mono text-xs mb-1">NEW STATE</span>
+<span class="text-2xl font-bold text-white">Z<span class="text-sm">n+1</span></span>
+</div>
+</div>
+<div class="mt-6 font-mono text-xs text-center text-cyber-muted h-6" id="loop-log">
+                        Click 'RUN P()' to iterate the system state.
+                    </div>
+</div>
+</div>
+</div>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i2-section-02-clock-speed" aria-label="AI Changes the Clock Speed" data-slide-index="2" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">AI Changes the Clock Speed</span>
+                <span class="infographic-slide__meta">i2-section-02-clock-speed</span>
+              </div>
+              <section data-infographic-section-id="i2-section-02-clock-speed" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-white mb-2">AI Changes the Clock Speed</h2>
+<p class="text-cyber-muted max-w-2xl mx-auto">
+                    The iteration that took a day now takes minutes. This is pure acceleration.
+                </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+<div class="chart-container">
+<canvas id="clockSpeedChart"></canvas>
+</div>
+<div class="bg-cyber-panel p-8 rounded-xl border border-gray-700">
+<h3 class="text-xl font-bold text-cyber-accent mb-4">From "Sprint" to "Loop"</h3>
+<ul class="space-y-4 text-gray-300 text-sm">
+<li class="flex items-start">
+<span class="text-cyber-neon mr-2">➜</span>
+<div>
+<strong class="text-white">Feature Dev:</strong> Reduced from weeks to days. The constraint is no longer typing speed, but verification speed.
+                            </div>
+</li>
+<li class="flex items-start">
+<span class="text-cyber-neon mr-2">➜</span>
+<div>
+<strong class="text-white">Refactoring:</strong> Reduced from days to minutes. Entire codebases can be fluidly reshaped.
+                            </div>
+</li>
+<li class="flex items-start">
+<span class="text-cyber-neon mr-2">➜</span>
+<div>
+<strong class="text-white">The Danger:</strong> A faster loop that drifts is just faster drift. Speed amplifies whatever is already there.
+                            </div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i2-section-03-drift-vs-convergence" aria-label="Drift vs. Convergence" data-slide-index="3" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">Drift vs. Convergence</span>
+                <span class="infographic-slide__meta">i2-section-03-drift-vs-convergence</span>
+              </div>
+              <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-03-drift-vs-convergence" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<div class="lg:col-span-4 flex flex-col justify-center">
+<h2 class="text-3xl font-bold mb-4 text-white">Drift vs. Convergence</h2>
+<div class="h-1 w-20 bg-cyber-danger mb-6"></div>
+<p class="text-cyber-muted mb-6">
+                        Acceleration without structure is chaos.
+                        <br/><br/>
+<strong>Red Band:</strong> Vibe coding. It starts fast, but variance expands and rework dominates as the foundations crack.
+                        <br/><br/>
+<strong>Green Band:</strong> SDaC. It starts slower while tooling is built, then compounds into higher throughput with tighter variance.
+                    </p>
+<div class="p-4 bg-cyber-panel rounded border border-gray-700 space-y-4">
+<div class="flex items-center justify-between gap-4">
+<label class="text-xs uppercase tracking-wide text-gray-500" for="drift-week-slider">Timeline</label>
+<div class="flex items-center gap-3">
+<button class="text-xs font-mono px-3 py-1.5 rounded border border-gray-600 text-gray-200 hover:text-white hover:border-gray-400 transition-colors" id="drift-play-btn">
+                                    Play
+                                </button>
+<span class="font-mono text-xs text-gray-300" id="drift-week-value">8 / 26</span>
+</div>
+</div>
+<input class="w-full accent-cyber-success" id="drift-week-slider" max="26" min="1" type="range" value="8"/>
+<p class="text-xs text-gray-500">
+                            Early: Vibe coding wins on speed. By week 8 SDaC overtakes. After that, vibe collapses under rising foundation debt.
+                        </p>
+<div class="grid grid-cols-2 gap-4">
+<div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
+<div class="text-xs uppercase tracking-wide text-cyber-danger mb-2">Vibe Coding</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span id="vibe-output-label">Net Output</span>
+<span class="font-mono text-gray-200" id="vibe-output">-</span>
+</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span>Variance</span>
+<span class="font-mono text-gray-200" id="vibe-variance">-</span>
+</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span>Foundation Debt</span>
+<span class="font-mono text-gray-200" id="vibe-debt">-</span>
+</div>
+<div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-danger transition-all duration-300" id="vibe-debt-bar" style="width: 0%;"></div>
+</div>
+</div>
+<div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
+<div class="text-xs uppercase tracking-wide text-cyber-success mb-2">SDaC</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span id="sdac-output-label">Net Output</span>
+<span class="font-mono text-gray-200" id="sdac-output">-</span>
+</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span>Variance</span>
+<span class="font-mono text-gray-200" id="sdac-variance">-</span>
+</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span>Tooling Maturity</span>
+<span class="font-mono text-gray-200" id="sdac-maturity">-</span>
+</div>
+<div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-success transition-all duration-300" id="sdac-maturity-bar" style="width: 0%;"></div>
+</div>
+</div>
+</div>
+<div class="flex justify-between text-xs text-gray-500">
+<span>Velocity (iterations / time)</span>
+<span class="font-mono text-gray-300" id="drift-velocity-readout">-</span>
+</div>
+<div class="flex items-center justify-between gap-4 pt-1">
+<span class="text-xs uppercase tracking-wide text-gray-500">View</span>
+<div class="inline-flex items-center rounded-lg border border-gray-700 bg-gray-900/40 p-1 text-xs font-mono">
+<button class="px-3 py-1.5 rounded-md bg-cyber-success/20 text-white border border-cyber-success/40" id="drift-view-weekly">
+                                    Weekly
+                                </button>
+<button class="px-3 py-1.5 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors" id="drift-view-cumulative">
+                                    Cumulative
+                                </button>
+</div>
+</div>
+</div>
+<div class="p-4 bg-cyber-panel rounded border border-gray-700">
+<strong class="text-white block mb-2">The SDaC Bundle:</strong>
+<ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+<li>Explicit Intent Surfaces</li>
+<li>Bounded Effectors</li>
+<li>Deterministic Validators</li>
+<li>Loops that Converge</li>
+</ul>
+</div>
+</div>
+<div class="lg:col-span-8">
+<div class="chart-container">
+<canvas id="driftChart"></canvas>
+</div>
+</div>
+</div>
+</section>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i1-section-03-inference-cost-paradox" aria-label="The Inference Cost Paradox" data-slide-index="4" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">The Inference Cost Paradox</span>
+                <span class="infographic-slide__meta">i1-section-03-inference-cost-paradox</span>
+              </div>
+              <section class="col-span-1 md:col-span-12 mb-8" data-infographic-section-id="i1-section-03-inference-cost-paradox" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col md:flex-row gap-8">
+<div class="md:w-1/2">
+<h2 class="text-3xl font-bold text-brand-strong mb-4">The Inference Cost Paradox (Looped Systems)</h2>
+<p class="text-lg text-brand-muted leading-relaxed">
+	                            Per-call inference cost may fall. But in production, inference becomes structural: it is embedded inside autonomous loops.
+	                            <br/><br/>
+<span class="text-brand-strong font-semibold">Inference is no longer a utility. It is infrastructure.</span>
+	                            Infrastructure is hedged.
+	                        </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-sm font-semibold text-brand-strong mb-2">When inference becomes structural</div>
+<ul class="text-sm text-brand-muted leading-relaxed space-y-1 list-disc list-inside">
+<li>Pricing volatility → operational risk</li>
+<li>Provider lock-in → systemic dependency</li>
+<li>Latency → architectural friction</li>
+</ul>
+</div>
+<div class="mt-4 bg-brand-light p-4 rounded text-brand-strong font-semibold border-l-4 border-l-brand-accent">
+	                            When recursion drives production, compute becomes the power grid.
+	                        </div>
+<div class="mt-4 text-sm text-brand-muted leading-relaxed">
+	                            Use the Hedge Builder to see how cost and risk change as autonomy rises, and how different hedges trade flexibility for certainty.
+	                        </div>
+</div>
+<div class="md:w-1/2">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4" id="hedgeBuilderCard">
+<div class="flex items-start justify-between gap-3">
+<div>
+<div class="text-xs font-mono text-brand-muted">Hedge Builder</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Compute exposure scales with autonomy</div>
+</div>
+<div class="text-xs font-mono text-brand-muted">
+	                                    Autonomy <span class="text-brand-strong" id="hedgeAutonomyValue">60%</span>
+</div>
+</div>
+<label class="sr-only" for="hedgeAutonomySlider">Autonomy slider</label>
+<input class="mt-3 w-full" id="hedgeAutonomySlider" max="100" min="0" type="range" value="60"/>
+<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+<button aria-pressed="false" class="hedge-toggle" data-hedge-key="fixed" type="button">Fixed-cost contracts</button>
+<button aria-pressed="false" class="hedge-toggle" data-hedge-key="reserve" type="button">Capacity reservations</button>
+<button aria-pressed="false" class="hedge-toggle" data-hedge-key="multi" type="button">Multi-provider routing</button>
+<button aria-pressed="false" class="hedge-toggle" data-hedge-key="hybrid" type="button">Hybrid / owned compute</button>
+<button aria-pressed="false" class="hedge-toggle sm:col-span-2" data-hedge-key="minFrontier" type="button">Minimize irreducible frontier calls</button>
+</div>
+<div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Expected cost / outcome</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="hedgeExpectedCost">—</span></div>
+<div class="text-xs text-brand-muted mt-1">Index (lower is better)</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">P95 cost / outcome</div>
+<div class="mt-1 text-lg font-bold text-brand-danger"><span id="hedgeP95Cost">—</span></div>
+<div class="text-xs text-brand-muted mt-1">
+	                                        Tail premium: +<span class="font-mono text-brand-strong" id="hedgeTailPremium">—</span>
+<span class="ml-2">(<span class="font-mono text-brand-strong" id="hedgeP95Delta">—</span> vs spot)</span>
+</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Cost certainty</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="hedgeCertainty">—</span>%</div>
+<div class="text-xs text-brand-muted mt-1">Inverse of pricing volatility</div>
+</div>
+</div>
+<div class="mt-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Risk profile</div>
+<div class="space-y-3">
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Pricing volatility</span>
+<span class="font-mono text-brand-strong"><span id="hedgeRiskPricing">—</span>/100</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="hedgeRiskPricingBar" style="width: 0%; background: rgba(247, 118, 142, 0.88);"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Provider lock-in</span>
+<span class="font-mono text-brand-strong"><span id="hedgeRiskLockin">—</span>/100</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="hedgeRiskLockinBar" style="width: 0%; background: rgba(187, 154, 247, 0.82);"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Latency friction</span>
+<span class="font-mono text-brand-strong"><span id="hedgeRiskLatency">—</span>/100</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="hedgeRiskLatencyBar" style="width: 0%; background: rgba(122, 162, 247, 0.82);"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Frontier exposure</span>
+<span class="font-mono text-brand-strong"><span id="hedgeRiskFrontier">—</span>/100</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="hedgeRiskFrontierBar" style="width: 0%; background: rgba(42, 195, 222, 0.78);"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 border-t border-brand-border pt-3">
+<div class="text-xs font-mono text-brand-muted">Recommendation</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong" id="hedgeRecommendation">—</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed" id="hedgeNote">—</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i3-section-01-substrate" aria-label="The Substrate (Map · Terrain · Ledger)" data-slide-index="5" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">The Substrate (Map · Terrain · Ledger)</span>
+                <span class="infographic-slide__meta">i3-section-01-substrate</span>
+              </div>
+              <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-01-substrate" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">The Substrate (Map · Terrain · Ledger)</h2>
+<p class="text-brand-muted leading-relaxed">
+                            SDaC is practical when the system has three explicit surfaces:
+                            <span class="text-brand-strong font-semibold">intent</span>,
+                            <span class="text-brand-strong font-semibold">runnable reality</span>,
+                            and a deterministic <span class="text-brand-strong font-semibold">evidence trail</span>.
+                        </p>
+<div class="mt-5 grid grid-cols-1 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted">MAP</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Intent surface</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">Mission objects, constraints, and acceptance criteria.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted">TERRAIN</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Runnable reality</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">Code, configs, schemas, and policies your system actually runs.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted">LEDGER</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Evidence trail</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">Append-only records of diffs, validator output, and decisions.</div>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+<div class="inline-flex items-center rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
+<button aria-pressed="true" class="pill-tab font-mono" data-substrate-tab="map" type="button">Map</button>
+<button aria-pressed="false" class="pill-tab font-mono" data-substrate-tab="terrain" type="button">Terrain</button>
+<button aria-pressed="false" class="pill-tab font-mono" data-substrate-tab="ledger" type="button">Ledger</button>
+</div>
+<button aria-pressed="false" class="soft-toggle font-mono" id="substrateTraceToggle" type="button">Trace: Off</button>
+</div>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+<div class="text-xs font-mono text-brand-muted mb-2">Example project tree</div>
+<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="substrateTree"></pre>
+</div>
+<div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+<div class="flex items-center justify-between mb-2">
+<div class="text-xs font-mono text-brand-muted">File</div>
+<div class="text-xs font-mono text-brand-muted" id="substrateFileLabel">—</div>
+</div>
+<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="substrateFile"></pre>
+</div>
+</div>
+<div class="mt-3 flex flex-wrap items-center gap-4 text-xs text-brand-muted">
+<span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch read"></span>read</span>
+<span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch write"></span>write</span>
+<span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch exec"></span>execute</span>
+<span class="text-xs text-brand-muted">Toggle trace to see which artifacts the loop touches.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i3-section-02-mission-objects" aria-label="Mission Objects (Intent As Code)" data-slide-index="6" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">Mission Objects (Intent As Code)</span>
+                <span class="infographic-slide__meta">i3-section-02-mission-objects</span>
+              </div>
+              <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-02-mission-objects" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-accent">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Mission Objects (Intent As Code)</h2>
+<p class="text-brand-muted leading-relaxed">
+                            A mission object is a programmable unit of work: goals, constraints, budgets, and acceptance criteria.
+                            It turns a vague request into a deterministic interface.
+                        </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Why it matters</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+                                The tighter the mission boundary, the smaller the search space.
+                                That is how you get faster convergence without “trusting the model.”
+                            </div>
+</div>
+</div>
+<div class="lg:w-7/12">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="space-y-3">
+<div class="inline-flex flex-wrap items-center gap-1 rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
+<button aria-pressed="true" class="pill-tab font-mono" data-mission-preset="bugfix" type="button">Bugfix</button>
+<button aria-pressed="false" class="pill-tab font-mono" data-mission-preset="feature" type="button">Feature</button>
+<button aria-pressed="false" class="pill-tab font-mono" data-mission-preset="refactor" type="button">Refactor</button>
+<button aria-pressed="false" class="pill-tab font-mono" data-mission-preset="compliance" type="button">Compliance</button>
+</div>
+<div class="flex items-center justify-between text-xs font-mono text-brand-muted">
+<span>Constraint tightness</span>
+<span class="text-brand-strong" id="missionTightnessValue">55%</span>
+</div>
+</div>
+<label class="sr-only" for="missionTightnessSlider">Constraint tightness slider</label>
+<input class="mt-3 w-full" id="missionTightnessSlider" max="100" min="0" type="range" value="55"/>
+<div class="mt-4 grid grid-cols-1 xl:grid-cols-12 gap-4">
+<div class="xl:col-span-7 border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+<div class="flex items-center justify-between mb-2">
+<div class="text-xs font-mono text-brand-muted">mission.yaml</div>
+<div class="text-xs font-mono text-brand-muted" id="missionIdLabel">—</div>
+</div>
+<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="missionYaml"></pre>
+</div>
+<div class="xl:col-span-5 space-y-3">
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Derived interface</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between">
+<span>Expected retries</span>
+<span class="font-mono text-brand-strong"><span id="missionRetries">—</span>x</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Convergence rate</span>
+<span class="font-mono text-brand-strong"><span id="missionConvergence">—</span>/100</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Drift risk</span>
+<span class="font-mono text-brand-strong"><span id="missionDrift">—</span>/100</span>
+</div>
+</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Budgets (bounded exits)</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between">
+<span>Max calls</span>
+<span class="font-mono text-brand-strong"><span id="missionMaxCalls">—</span></span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Max latency</span>
+<span class="font-mono text-brand-strong"><span id="missionMaxLatency">—</span></span>
+</div>
+</div>
+<div class="mt-3 text-xs text-brand-muted">If the budget is exceeded, the loop exits with a deterministic failure you can reason about.</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Trade-off</div>
+<div class="mt-2">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span>Flexibility</span>
+<span class="font-mono text-brand-strong"><span id="missionFlex">—</span>%</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="missionFlexBar" style="width: 0%; background: rgba(42, 195, 222, 0.78);"></div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs text-brand-muted">
+<span>Constraint strength</span>
+<span class="font-mono text-brand-strong"><span id="missionTight">—</span>%</span>
+</div>
+<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
+<div class="h-2 rounded" id="missionTightBar" style="width: 0%; background: rgba(187, 154, 247, 0.82);"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i3-section-03-deterministic-sandwich" aria-label="Deterministic Sandwich" data-slide-index="7" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">Deterministic Sandwich</span>
+                <span class="infographic-slide__meta">i3-section-03-deterministic-sandwich</span>
+              </div>
+              <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-03-deterministic-sandwich" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">The Deterministic Sandwich (Contain Stochasticity)</h2>
+<p class="text-brand-muted leading-relaxed">
+                            Put probabilistic generation in the middle. Wrap it in deterministic prep and deterministic validation.
+                            The goal is not “trust the model.” It is “trust the loop.”
+                        </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+                                Increase entropy and you get more retries. Strengthen the gate and you trade acceptance for quality.
+                                Either way, the sandwich keeps outcomes bounded.
+                            </div>
+</div>
+</div>
+<div class="lg:w-7/12">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
+<div class="xl:col-span-12 min-w-0">
+<div class="border border-brand-border rounded-xl p-4 bg-[rgba(6,7,12,0.72)]">
+<div class="text-xs font-mono text-brand-muted mb-3">Pipeline</div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-center">
+<div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted">Prep</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Context + constraints</div>
+</div>
+<div class="text-brand-muted font-mono text-xl sm:hidden">↓</div>
+<div class="text-brand-muted font-mono text-xl hidden sm:block">→</div>
+<div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted">Model</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Stochastic search</div>
+</div>
+<div class="text-brand-muted font-mono text-xl sm:hidden">↓</div>
+<div class="text-brand-muted font-mono text-xl hidden sm:block">→</div>
+<div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
+<div class="text-xs font-mono text-brand-muted">Validation</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Deterministic gates</div>
+</div>
+</div>
+</div>
+</div>
+<div class="xl:col-span-12 min-w-0 space-y-3">
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Model entropy</span>
+<span class="font-mono text-brand-strong"><span id="sandwichEntropyValue">60</span>/100</span>
+</div>
+<label class="sr-only" for="sandwichEntropySlider">Model entropy slider</label>
+<input class="mt-2 w-full" id="sandwichEntropySlider" max="100" min="0" type="range" value="60"/>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Validator strength</span>
+<span class="font-mono text-brand-strong"><span id="sandwichGateValue">70</span>/100</span>
+</div>
+<label class="sr-only" for="sandwichGateSlider">Validator strength slider</label>
+<input class="mt-2 w-full" id="sandwichGateSlider" max="100" min="0" type="range" value="70"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Retries</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichRetries">—</span>x</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Quality</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichQuality">—</span>/100</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Expected cost</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichExpectedCost">—</span></div>
+<div class="text-xs text-brand-muted mt-1">Index (calls + evals)</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Bounded exit</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichExit">PASS</span></div>
+<div class="text-xs text-brand-muted mt-1">Deterministic gate decides.</div>
+</div>
+</div>
+</div>
+<div class="xl:col-span-12 min-w-0">
+<div class="border border-brand-border rounded-xl p-4 bg-[rgba(6,7,12,0.72)]">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Candidate attempts</div>
+<button aria-pressed="false" class="soft-toggle font-mono" id="sandwichRunBtn" type="button">Run</button>
+</div>
+<div class="mt-3 grid grid-cols-12 gap-1" id="sandwichAttempts"></div>
+<div class="mt-3 text-xs text-brand-muted">
+                                            Red = rejected candidate. Cyan = accepted output after the gate.
+                                        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i3-section-04-validator-bundles" aria-label="Validator Bundles (Define Good + Budgets)" data-slide-index="8" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">Validator Bundles (Define Good + Budgets)</span>
+                <span class="infographic-slide__meta">i3-section-04-validator-bundles</span>
+              </div>
+              <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-danger">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Validator Bundles (Define Good + Budgets)</h2>
+<p class="text-brand-muted leading-relaxed">
+                            Validators are “physics.” Budgets are “governors.” Together they turn open-ended iteration into a bounded system.
+                            The loop can fail, but it fails deterministically.
+                        </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+                                Toggle validators and adjust the retry budget. Run the bundle and watch what becomes provable.
+                            </div>
+</div>
+</div>
+<div class="lg:w-7/12">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
+<div class="xl:col-span-5 space-y-3">
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Validator bundle</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+<button aria-pressed="true" class="soft-toggle font-mono" data-validator="schema" type="button">Schema</button>
+<button aria-pressed="true" class="soft-toggle font-mono" data-validator="tests" type="button">Unit tests</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-validator="integration" type="button">Integration</button>
+<button aria-pressed="true" class="soft-toggle font-mono" data-validator="security" type="button">Security</button>
+<button aria-pressed="true" class="soft-toggle font-mono" data-validator="policy" type="button">Policy</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-validator="style" type="button">Style</button>
+</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Retry budget</span>
+<span class="font-mono text-brand-strong"><span id="validatorBudgetValue">4</span> attempts</span>
+</div>
+<label class="sr-only" for="validatorBudgetSlider">Retry budget slider</label>
+<input class="mt-2 w-full" id="validatorBudgetSlider" max="10" min="1" type="range" value="4"/>
+<button aria-pressed="false" class="mt-3 soft-toggle w-full font-mono" id="validatorRunBtn" type="button">Run Validators</button>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Results</div>
+<div class="space-y-2 text-xs text-brand-muted" id="validatorResults"></div>
+</div>
+</div>
+<div class="xl:col-span-7 space-y-3">
+<div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+<div class="text-xs font-mono text-brand-muted mb-2">Sample diff (incoming patch)</div>
+<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-56 font-mono" id="validatorDiff"></pre>
+</div>
+<div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+<div class="flex items-center justify-between mb-2">
+<div class="text-xs font-mono text-brand-muted">Ledger entry (evidence)</div>
+<div class="text-xs font-mono text-brand-muted" id="validatorRunId">run_000</div>
+</div>
+<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-56 font-mono" id="validatorLedger"></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+            </section><section class="infographic-slide" data-infographic-section-id="i2-section-05-loop-is-the-moat" aria-label="The Loop is the Moat" data-slide-index="9" role="group">
+              <div class="infographic-slide__header">
+                <span class="infographic-slide__title">The Loop is the Moat</span>
+                <span class="infographic-slide__meta">i2-section-05-loop-is-the-moat</span>
+              </div>
+              <section class="text-center py-12" data-infographic-section-id="i2-section-05-loop-is-the-moat" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="moat-loop inline-block p-1 bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent rounded-2xl">
+<svg aria-hidden="true" class="moat-loop-svg" preserveaspectratio="none" viewbox="0 0 100 100">
+<rect class="moat-loop-track" height="96" rx="16" width="96" x="2" y="2"></rect>
+<rect class="moat-loop-runner" height="96" pathlength="100" rx="16" width="96" x="2" y="2"></rect>
+</svg>
+<div class="bg-cyber-dark rounded-xl p-10 md:p-16">
+<h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Loop is the Moat</h2>
+<p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
+	                        If the loop is validated, the full function is:
+	                        <span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
+<span class="block font-mono text-cyber-accent mt-1">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
+<span class="block mt-4">
+	                            SDaC doesn't just give you a better way to build your business. It gives you the tooling for the business to self-improve: each loop upgrades capability, compounds speed, and hardens against ever-evolving competitors.
+	                        </span>
+</p>
+<button class="text-cyber-accent hover:text-white underline decoration-cyber-neon decoration-2 underline-offset-4 transition-colors" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+	                        Restart the Loop
+	                    </button>
+</div>
+</div>
+</section>
+
+            </section></div>
+  <div class="infographic-deck__dots" aria-label="Slide navigation"><button type="button" class="infographic-deck__dot" data-slide="0" aria-label="Go to slide 1"></button><button type="button" class="infographic-deck__dot" data-slide="1" aria-label="Go to slide 2"></button><button type="button" class="infographic-deck__dot" data-slide="2" aria-label="Go to slide 3"></button><button type="button" class="infographic-deck__dot" data-slide="3" aria-label="Go to slide 4"></button><button type="button" class="infographic-deck__dot" data-slide="4" aria-label="Go to slide 5"></button><button type="button" class="infographic-deck__dot" data-slide="5" aria-label="Go to slide 6"></button><button type="button" class="infographic-deck__dot" data-slide="6" aria-label="Go to slide 7"></button><button type="button" class="infographic-deck__dot" data-slide="7" aria-label="Go to slide 8"></button><button type="button" class="infographic-deck__dot" data-slide="8" aria-label="Go to slide 9"></button><button type="button" class="infographic-deck__dot" data-slide="9" aria-label="Go to slide 10"></button></div>
+</div>
+
+    <p>
+      Need the full sequence? Open <a href="infographic-deck">the 20-slide deck</a>.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Architects of Intent</p>
+  </footer>
+</body>
+</html>

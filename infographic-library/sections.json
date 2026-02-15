@@ -1,0 +1,265 @@
+{
+  "version": 2,
+  "sections": [
+    {
+      "id": "i1-section-01-shape-of-all-work",
+      "title": "The Shape of All Work",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(1)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Recursion",
+        "The Three-Tier Frame (Substrate → Loop → Governance)",
+        "Map / Terrain / Ledger"
+      ],
+      "notes": "Core loop model with recursive state/process framing."
+    },
+    {
+      "id": "i1-section-02-mission-object-loop",
+      "title": "Mission Object & The Loop",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(2)",
+      "status": "published",
+      "concepts": [
+        "Mission Object",
+        "Mechanism",
+        "Engine"
+      ],
+      "notes": "Connects process iteration to mission discipline."
+    },
+    {
+      "id": "i1-section-03-inference-cost-paradox",
+      "title": "The Inference Cost Paradox",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(3)",
+      "status": "published",
+      "concepts": [
+        "Physics",
+        "Review Budget",
+        "Immutable Infrastructure"
+      ],
+      "notes": "Moves pricing risk from call-level assumptions to loop outcomes."
+    },
+    {
+      "id": "i1-section-04-limit-case-entropy",
+      "title": "The Limit Case: Entropy at Infinite Velocity",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(4)",
+      "status": "published",
+      "concepts": [
+        "Stochastic Drift",
+        "Physics",
+        "Drift Coefficient"
+      ],
+      "notes": "Demonstrates drift growth under unconstrained velocity."
+    },
+    {
+      "id": "i1-section-05-recursion-compounds",
+      "title": "Recursion Compounds (The Project Tree)",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(5)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Recursion",
+        "Adaptation State Machine (ASM)",
+        "Engine"
+      ],
+      "notes": "Shows recursive project scale-up and compounding loop depth."
+    },
+    {
+      "id": "i1-section-06-value-migration",
+      "title": "The Value Migration",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(6)",
+      "status": "published",
+      "concepts": [
+        "Convergence",
+        "Circuit Breakers",
+        "Mechanism"
+      ],
+      "notes": "Transitions from raw generation to compound value at scale."
+    },
+    {
+      "id": "i1-section-07-steward-loop",
+      "title": "Anatomy of a Steward Loop",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(7)",
+      "status": "published",
+      "concepts": [
+        "Adaptation State Machine (ASM)",
+        "Judge",
+        "Effector"
+      ],
+      "notes": "Explicit control moves for safe autonomous loops."
+    },
+    {
+      "id": "i1-section-08-optimization-terrain",
+      "title": "Shaping the Optimization Terrain",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(8)",
+      "status": "published",
+      "concepts": [
+        "Map / Terrain / Ledger",
+        "Context Architecture",
+        "Context Graph"
+      ],
+      "notes": "Maps context geometry to loop quality."
+    },
+    {
+      "id": "i1-section-09-hierarchy-of-stewardship",
+      "title": "The Hierarchy of Stewardship",
+      "infographic": "infographic.html",
+      "source_selector": "main > section:nth-of-type(9)",
+      "status": "published",
+      "concepts": [
+        "Scope Guard",
+        "Immutable Infrastructure",
+        "Immune System"
+      ],
+      "notes": "Shows where governance hardening sits in recursive systems."
+    },
+    {
+      "id": "i2-section-00-state-run-new-state",
+      "title": "State → Run P( ) → New State",
+      "infographic": "infographic-2.html",
+      "source_selector": "header > div:nth-of-type(3)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Recursion",
+        "Mechanism",
+        "Engine"
+      ],
+      "notes": "Interactive primer: state transition loop and process iteration."
+    },
+    {
+      "id": "i2-section-01-fractal-nature",
+      "title": "The Fractal Nature",
+      "infographic": "infographic-2.html",
+      "source_selector": "main > section:nth-of-type(1)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Recursion",
+        "Mechanism",
+        "Map / Terrain / Ledger"
+      ],
+      "notes": "Reinforces self-similarity from function to company scale."
+    },
+    {
+      "id": "i2-section-02-clock-speed",
+      "title": "AI Changes the Clock Speed",
+      "infographic": "infographic-2.html",
+      "source_selector": "main > section:nth-of-type(2)",
+      "status": "published",
+      "concepts": [
+        "Convergence",
+        "Review Budget",
+        "Drift Coefficient"
+      ],
+      "notes": "Shows speed as a first-class state transition variable."
+    },
+    {
+      "id": "i2-section-03-drift-vs-convergence",
+      "title": "Drift vs. Convergence",
+      "infographic": "infographic-2.html",
+      "source_selector": "main > section:nth-of-type(3)",
+      "status": "published",
+      "concepts": [
+        "Stochastic Drift",
+        "Convergence",
+        "Physics"
+      ],
+      "notes": "Comparative behavior of vibe coding and SDaC trajectories."
+    },
+    {
+      "id": "i2-section-04-moat-also-loop",
+      "title": "The Moat Is Also the Loop",
+      "infographic": "infographic-2.html",
+      "source_selector": "main > section:nth-of-type(4)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Physics is Law",
+        "Engine",
+        "Immune System"
+      ],
+      "notes": "Core competitive moat narrative: improving loop quality compounds."
+    },
+    {
+      "id": "i2-section-05-loop-is-the-moat",
+      "title": "The Loop is the Moat",
+      "infographic": "infographic-2.html",
+      "source_selector": "main > section:nth-of-type(5)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Physics is Law",
+        "Immune System case",
+        "Convergence"
+      ],
+      "notes": "Final reinforcement: state and process are jointly self-improving."
+    },
+    {
+      "id": "i3-section-01-substrate",
+      "title": "The Substrate (Map · Terrain · Ledger)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(1)",
+      "status": "published",
+      "concepts": [
+        "Map / Terrain / Ledger",
+        "Mechanism",
+        "Context Packet"
+      ],
+      "notes": "Explicit three-surface model for SDaC execution."
+    },
+    {
+      "id": "i3-section-02-mission-objects",
+      "title": "Mission Objects (Intent As Code)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(2)",
+      "status": "published",
+      "concepts": [
+        "Mission Object",
+        "Intent Architecture",
+        "Driver Pattern"
+      ],
+      "notes": "Mission as interface for deterministic AI execution."
+    },
+    {
+      "id": "i3-section-03-deterministic-sandwich",
+      "title": "Deterministic Sandwich",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(3)",
+      "status": "published",
+      "concepts": [
+        "Deterministic Sandwich",
+        "Validator",
+        "Mission Object"
+      ],
+      "notes": "Prep/model/validation pattern as reusable module."
+    },
+    {
+      "id": "i3-section-04-validator-bundles",
+      "title": "Validator Bundles (Define Good + Budgets)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(4)",
+      "status": "published",
+      "concepts": [
+        "Validator",
+        "Immune System",
+        "Immune System case"
+      ],
+      "notes": "Bundles deterministic gates into explicit admissibility policies."
+    },
+    {
+      "id": "i3-section-05-always-on-loops",
+      "title": "Always-On Loops (Maintenance That Compounds)",
+      "infographic": "infographic-3.html",
+      "source_selector": "main > section:nth-of-type(5)",
+      "status": "published",
+      "concepts": [
+        "Meta-Pattern: Recursion",
+        "Adaptation State Machine (ASM)",
+        "Ratchet"
+      ],
+      "notes": "Maintenance as a loop that compounds quality after the initial build."
+    }
+  ]
+}

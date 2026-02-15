@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="chart.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="infographic-fragment-shell.css">
 
     <script>
         tailwind.config = {
@@ -151,7 +152,7 @@
     <header class="relative overflow-hidden border-b border-gray-800">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyber-panel via-cyber-dark to-cyber-dark opacity-80"></div>
 
-	        <div class="max-w-6xl mx-auto px-6 pt-6 relative z-10">
+	        <div class="max-w-[1500px] mx-auto px-6 pt-6 relative z-10">
 	            <div class="inline-flex items-center rounded-lg border border-gray-700 bg-gray-900/70 p-1 text-sm">
 	                <a href="infographic.html" class="px-3 py-1.5 rounded-md text-cyber-muted hover:text-white hover:bg-gray-800 transition-colors">Infographic 1</a>
 	                <a href="infographic-2.html" class="px-3 py-1.5 rounded-md bg-cyber-primary/20 text-white border border-cyber-primary/40">Infographic 2</a>
@@ -159,7 +160,7 @@
 	            </div>
 	        </div>
 
-        <div class="max-w-6xl mx-auto px-6 py-16 relative z-10">
+        <div class="max-w-[1500px] mx-auto px-6 py-16 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
                     <h4 class="text-cyber-accent font-mono text-sm tracking-widest uppercase mb-4">Software Development as Code (SDaC)</h4>
@@ -208,362 +209,341 @@
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-12 space-y-24">
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div class="lg:col-span-5">
-                <h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature</h2>
-                <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
-                <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
+    <main class="max-w-[1500px] mx-auto px-6 py-12 space-y-24">
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="lg:col-span-5">
+<h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature</h2>
+<div class="h-1 w-20 bg-cyber-accent mb-6"></div>
+<p class="text-cyber-muted mb-6 text-lg leading-relaxed">
                     Zoom in: a single function evolves through edits. Zoom out: a company evolves through quarters.
-                    <br><br>
+                    <br/><br/>
                     It is the same shape at every scale. Each level's "state" is the cumulative output of the faster iterations beneath it. Dysfunction at the bottom bubbles up.
                 </p>
-                <div class="bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
-                    <p class="font-mono text-sm text-cyber-neon">
-                        next_state = process(current_state)<br>
+<div class="bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
+<p class="font-mono text-sm text-cyber-neon">
+                        next_state = process(current_state)<br/>
                         process = improve(process, evidence)
                     </p>
-                </div>
-            </div>
-
-            <div class="lg:col-span-7">
-                <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl">
-                    <h3 class="text-sm font-mono text-gray-400 mb-4 uppercase">System Hierarchy (Hover to Inspect)</h3>
-
-                    <div class="fractal-layer border-l-cyber-primary group" onclick="void(0)">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-bold text-lg text-cyber-primary">Company Scale</span>
-                            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
-                        </div>
-                        <p class="text-sm text-gray-400 hidden group-hover:block transition-all">
-                            <strong>State:</strong> Market Position | <strong>Process:</strong> Culture & Leadership
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl">
+<h3 class="text-sm font-mono text-gray-400 mb-4 uppercase">System Hierarchy (Hover to Inspect)</h3>
+<div class="fractal-layer border-l-cyber-primary group" onclick="void(0)">
+<div class="flex justify-between items-center mb-2">
+<span class="font-bold text-lg text-cyber-primary">Company Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
+</div>
+<p class="text-sm text-gray-400 hidden group-hover:block transition-all">
+<strong>State:</strong> Market Position | <strong>Process:</strong> Culture &amp; Leadership
                         </p>
-
-                        <div class="fractal-layer border-l-cyber-neon ml-4 group">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="font-bold text-md text-cyber-neon">Product Scale</span>
-                                <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
-                            </div>
-                            <p class="text-sm text-gray-400 hidden group-hover:block">
-                                <strong>State:</strong> System Architecture | <strong>Process:</strong> Org & Strategy
+<div class="fractal-layer border-l-cyber-neon ml-4 group">
+<div class="flex justify-between items-center mb-2">
+<span class="font-bold text-md text-cyber-neon">Product Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
+</div>
+<p class="text-sm text-gray-400 hidden group-hover:block">
+<strong>State:</strong> System Architecture | <strong>Process:</strong> Org &amp; Strategy
                             </p>
-
-                            <div class="fractal-layer border-l-cyber-accent ml-4 group">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
-                                    <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
-                                </div>
-                                <p class="text-sm text-gray-400 hidden group-hover:block">
-                                    <strong>State:</strong> Codebase | <strong>Process:</strong> Team Practices
+<div class="fractal-layer border-l-cyber-accent ml-4 group">
+<div class="flex justify-between items-center mb-2">
+<span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
+</div>
+<p class="text-sm text-gray-400 hidden group-hover:block">
+<strong>State:</strong> Codebase | <strong>Process:</strong> Team Practices
                                 </p>
-
-                                <div class="fractal-layer border-l-cyber-success ml-4 group">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-bold text-xs text-cyber-success">Function Scale</span>
-                                        <span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
-                                    </div>
-                                    <p class="text-xs text-gray-400 hidden group-hover:block">
-                                        <strong>State:</strong> Implementation | <strong>Process:</strong> Dev Tools
+<div class="fractal-layer border-l-cyber-success ml-4 group">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-xs text-cyber-success">Function Scale</span>
+<span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
+</div>
+<p class="text-xs text-gray-400 hidden group-hover:block">
+<strong>State:</strong> Implementation | <strong>Process:</strong> Dev Tools
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-        <section>
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-white mb-2">AI Changes the Clock Speed</h2>
-                <p class="text-cyber-muted max-w-2xl mx-auto">
+<section data-infographic-section-id="i2-section-02-clock-speed" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-white mb-2">AI Changes the Clock Speed</h2>
+<p class="text-cyber-muted max-w-2xl mx-auto">
                     The iteration that took a day now takes minutes. This is pure acceleration.
                 </p>
-            </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+<div class="chart-container">
+<canvas id="clockSpeedChart"></canvas>
+</div>
+<div class="bg-cyber-panel p-8 rounded-xl border border-gray-700">
+<h3 class="text-xl font-bold text-cyber-accent mb-4">From "Sprint" to "Loop"</h3>
+<ul class="space-y-4 text-gray-300 text-sm">
+<li class="flex items-start">
+<span class="text-cyber-neon mr-2">➜</span>
+<div>
+<strong class="text-white">Feature Dev:</strong> Reduced from weeks to days. The constraint is no longer typing speed, but verification speed.
+                            </div>
+</li>
+<li class="flex items-start">
+<span class="text-cyber-neon mr-2">➜</span>
+<div>
+<strong class="text-white">Refactoring:</strong> Reduced from days to minutes. Entire codebases can be fluidly reshaped.
+                            </div>
+</li>
+<li class="flex items-start">
+<span class="text-cyber-neon mr-2">➜</span>
+<div>
+<strong class="text-white">The Danger:</strong> A faster loop that drifts is just faster drift. Speed amplifies whatever is already there.
+                            </div>
+</li>
+</ul>
+</div>
+</div>
+</section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="chart-container">
-                    <canvas id="clockSpeedChart"></canvas>
-                </div>
-                <div class="bg-cyber-panel p-8 rounded-xl border border-gray-700">
-                    <h3 class="text-xl font-bold text-cyber-accent mb-4">From "Sprint" to "Loop"</h3>
-                    <ul class="space-y-4 text-gray-300 text-sm">
-                        <li class="flex items-start">
-                            <span class="text-cyber-neon mr-2">➜</span>
-                            <div>
-                                <strong class="text-white">Feature Dev:</strong> Reduced from weeks to days. The constraint is no longer typing speed, but verification speed.
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-cyber-neon mr-2">➜</span>
-                            <div>
-                                <strong class="text-white">Refactoring:</strong> Reduced from days to minutes. Entire codebases can be fluidly reshaped.
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-cyber-neon mr-2">➜</span>
-                            <div>
-                                <strong class="text-white">The Danger:</strong> A faster loop that drifts is just faster drift. Speed amplifies whatever is already there.
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <div class="lg:col-span-4 flex flex-col justify-center">
-                    <h2 class="text-3xl font-bold mb-4 text-white">Drift vs. Convergence</h2>
-                    <div class="h-1 w-20 bg-cyber-danger mb-6"></div>
-                    <p class="text-cyber-muted mb-6">
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-03-drift-vs-convergence" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<div class="lg:col-span-4 flex flex-col justify-center">
+<h2 class="text-3xl font-bold mb-4 text-white">Drift vs. Convergence</h2>
+<div class="h-1 w-20 bg-cyber-danger mb-6"></div>
+<p class="text-cyber-muted mb-6">
                         Acceleration without structure is chaos.
-                        <br><br>
-                        <strong>Red Band:</strong> Vibe coding. It starts fast, but variance expands and rework dominates as the foundations crack.
-                        <br><br>
-                        <strong>Green Band:</strong> SDaC. It starts slower while tooling is built, then compounds into higher throughput with tighter variance.
+                        <br/><br/>
+<strong>Red Band:</strong> Vibe coding. It starts fast, but variance expands and rework dominates as the foundations crack.
+                        <br/><br/>
+<strong>Green Band:</strong> SDaC. It starts slower while tooling is built, then compounds into higher throughput with tighter variance.
                     </p>
-                    <div class="p-4 bg-cyber-panel rounded border border-gray-700 space-y-4">
-                        <div class="flex items-center justify-between gap-4">
-                            <label for="drift-week-slider" class="text-xs uppercase tracking-wide text-gray-500">Timeline</label>
-                            <div class="flex items-center gap-3">
-                                <button id="drift-play-btn" class="text-xs font-mono px-3 py-1.5 rounded border border-gray-600 text-gray-200 hover:text-white hover:border-gray-400 transition-colors">
+<div class="p-4 bg-cyber-panel rounded border border-gray-700 space-y-4">
+<div class="flex items-center justify-between gap-4">
+<label class="text-xs uppercase tracking-wide text-gray-500" for="drift-week-slider">Timeline</label>
+<div class="flex items-center gap-3">
+<button class="text-xs font-mono px-3 py-1.5 rounded border border-gray-600 text-gray-200 hover:text-white hover:border-gray-400 transition-colors" id="drift-play-btn">
                                     Play
                                 </button>
-                                <span id="drift-week-value" class="font-mono text-xs text-gray-300">8 / 26</span>
-                            </div>
-                        </div>
-                        <input
-                            id="drift-week-slider"
-                            type="range"
-                            min="1"
-                            max="26"
-                            value="8"
-                            class="w-full accent-cyber-success"
-                        />
-                        <p class="text-xs text-gray-500">
+<span class="font-mono text-xs text-gray-300" id="drift-week-value">8 / 26</span>
+</div>
+</div>
+<input class="w-full accent-cyber-success" id="drift-week-slider" max="26" min="1" type="range" value="8"/>
+<p class="text-xs text-gray-500">
                             Early: Vibe coding wins on speed. By week 8 SDaC overtakes. After that, vibe collapses under rising foundation debt.
                         </p>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
-                                <div class="text-xs uppercase tracking-wide text-cyber-danger mb-2">Vibe Coding</div>
-                                <div class="flex justify-between text-xs text-gray-400">
-                                    <span id="vibe-output-label">Net Output</span>
-                                    <span id="vibe-output" class="font-mono text-gray-200">-</span>
-                                </div>
-                                <div class="flex justify-between text-xs text-gray-400">
-                                    <span>Variance</span>
-                                    <span id="vibe-variance" class="font-mono text-gray-200">-</span>
-                                </div>
-                                <div class="flex justify-between text-xs text-gray-400">
-                                    <span>Foundation Debt</span>
-                                    <span id="vibe-debt" class="font-mono text-gray-200">-</span>
-                                </div>
-                                <div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
-                                    <div id="vibe-debt-bar" class="h-2 bg-cyber-danger transition-all duration-300" style="width: 0%;"></div>
-                                </div>
-                            </div>
-
-                            <div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
-                                <div class="text-xs uppercase tracking-wide text-cyber-success mb-2">SDaC</div>
-                                <div class="flex justify-between text-xs text-gray-400">
-                                    <span id="sdac-output-label">Net Output</span>
-                                    <span id="sdac-output" class="font-mono text-gray-200">-</span>
-                                </div>
-                                <div class="flex justify-between text-xs text-gray-400">
-                                    <span>Variance</span>
-                                    <span id="sdac-variance" class="font-mono text-gray-200">-</span>
-                                </div>
-                                <div class="flex justify-between text-xs text-gray-400">
-                                    <span>Tooling Maturity</span>
-                                    <span id="sdac-maturity" class="font-mono text-gray-200">-</span>
-                                </div>
-                                <div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
-                                    <div id="sdac-maturity-bar" class="h-2 bg-cyber-success transition-all duration-300" style="width: 0%;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between text-xs text-gray-500">
-                            <span>Velocity (iterations / time)</span>
-                            <span id="drift-velocity-readout" class="font-mono text-gray-300">-</span>
-                        </div>
-
-                        <div class="flex items-center justify-between gap-4 pt-1">
-                            <span class="text-xs uppercase tracking-wide text-gray-500">View</span>
-                            <div class="inline-flex items-center rounded-lg border border-gray-700 bg-gray-900/40 p-1 text-xs font-mono">
-                                <button id="drift-view-weekly" class="px-3 py-1.5 rounded-md bg-cyber-success/20 text-white border border-cyber-success/40">
+<div class="grid grid-cols-2 gap-4">
+<div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
+<div class="text-xs uppercase tracking-wide text-cyber-danger mb-2">Vibe Coding</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span id="vibe-output-label">Net Output</span>
+<span class="font-mono text-gray-200" id="vibe-output">-</span>
+</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span>Variance</span>
+<span class="font-mono text-gray-200" id="vibe-variance">-</span>
+</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span>Foundation Debt</span>
+<span class="font-mono text-gray-200" id="vibe-debt">-</span>
+</div>
+<div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-danger transition-all duration-300" id="vibe-debt-bar" style="width: 0%;"></div>
+</div>
+</div>
+<div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
+<div class="text-xs uppercase tracking-wide text-cyber-success mb-2">SDaC</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span id="sdac-output-label">Net Output</span>
+<span class="font-mono text-gray-200" id="sdac-output">-</span>
+</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span>Variance</span>
+<span class="font-mono text-gray-200" id="sdac-variance">-</span>
+</div>
+<div class="flex justify-between text-xs text-gray-400">
+<span>Tooling Maturity</span>
+<span class="font-mono text-gray-200" id="sdac-maturity">-</span>
+</div>
+<div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-success transition-all duration-300" id="sdac-maturity-bar" style="width: 0%;"></div>
+</div>
+</div>
+</div>
+<div class="flex justify-between text-xs text-gray-500">
+<span>Velocity (iterations / time)</span>
+<span class="font-mono text-gray-300" id="drift-velocity-readout">-</span>
+</div>
+<div class="flex items-center justify-between gap-4 pt-1">
+<span class="text-xs uppercase tracking-wide text-gray-500">View</span>
+<div class="inline-flex items-center rounded-lg border border-gray-700 bg-gray-900/40 p-1 text-xs font-mono">
+<button class="px-3 py-1.5 rounded-md bg-cyber-success/20 text-white border border-cyber-success/40" id="drift-view-weekly">
                                     Weekly
                                 </button>
-                                <button id="drift-view-cumulative" class="px-3 py-1.5 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors">
+<button class="px-3 py-1.5 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors" id="drift-view-cumulative">
                                     Cumulative
                                 </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-cyber-panel rounded border border-gray-700">
-                        <strong class="text-white block mb-2">The SDaC Bundle:</strong>
-                        <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
-                            <li>Explicit Intent Surfaces</li>
-                            <li>Bounded Effectors</li>
-                            <li>Deterministic Validators</li>
-                            <li>Loops that Converge</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="lg:col-span-8">
-                    <div class="chart-container">
-                        <canvas id="driftChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </section>
+</div>
+</div>
+</div>
+<div class="p-4 bg-cyber-panel rounded border border-gray-700">
+<strong class="text-white block mb-2">The SDaC Bundle:</strong>
+<ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+<li>Explicit Intent Surfaces</li>
+<li>Bounded Effectors</li>
+<li>Deterministic Validators</li>
+<li>Loops that Converge</li>
+</ul>
+</div>
+</div>
+<div class="lg:col-span-8">
+<div class="chart-container">
+<canvas id="driftChart"></canvas>
+</div>
+</div>
+</div>
+</section>
 
-        <section class="bg-cyber-panel rounded-2xl p-8 border border-gray-700">
-	            <div class="text-center mb-8">
-	                <h2 class="text-3xl font-bold mb-2 text-white">The Moat Is Also the Loop</h2>
-	                <p class="text-cyber-muted max-w-3xl mx-auto">
-	                    Iteration can improve the state and improve the process that creates it.
-	                    <br><br>
-	                    State: <span class="font-mono text-cyber-success">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
-	                    <br>
-	                    Process: <span class="font-mono text-cyber-accent">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
-	                    <br><br>
-	                    That self-upgrading loop is the moat: it upgrades itself, sets the clock speed of your business, and becomes an immune system against ever-evolving competition.
-	                </p>
-	            </div>
-
-	            <div class="bg-cyber-dark border border-gray-700 rounded-xl p-8">
-	                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
-	                    <div>
-	                        <div class="text-center font-mono mb-8">
-	                            <div class="text-2xl md:text-3xl text-cyber-success">
+<section class="bg-cyber-panel rounded-2xl p-8 border border-gray-700" data-infographic-section-id="i2-section-04-moat-also-loop" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="text-center mb-8 space-y-4">
+<h2 class="text-3xl font-bold mb-2 text-white">The Moat Is Also the Loop</h2>
+<p class="text-cyber-muted w-full leading-relaxed">
+                    Iteration can improve the state and improve the process that creates it.
+                </p>
+<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-mono">
+<div class="rounded-lg border border-cyber-success/30 bg-cyber-success/10 px-4 py-2 text-cyber-success">
+                        State: Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)
+                    </div>
+<div class="rounded-lg border border-cyber-accent/30 bg-cyber-accent/10 px-4 py-2 text-cyber-accent">
+                        Process: P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)
+                    </div>
+</div>
+<p class="text-cyber-muted w-full leading-relaxed">
+                    That self-upgrading loop is the moat: it upgrades itself, sets the clock speed of your business, and becomes an immune system against ever-evolving competition.
+                </p>
+</div>
+<div class="bg-cyber-dark border border-gray-700 rounded-xl p-8">
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-8 items-start">
+<div>
+<div class="text-center font-mono mb-8">
+<div class="text-2xl md:text-3xl text-cyber-success">
 	                                Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)
 	                            </div>
-	                            <div class="text-lg md:text-2xl text-cyber-accent mt-2">
+<div class="text-lg md:text-2xl text-cyber-accent mt-2">
 	                                P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)
 	                            </div>
-	                        </div>
-	                        <div class="flex justify-between items-center text-center mb-6">
-	                            <div id="state-prev-process" class="loop-node w-24 h-24 rounded-full border-2 border-cyber-muted flex flex-col items-center justify-center bg-gray-900">
-	                                <span class="text-gray-400 font-mono text-xs mb-1">STATE</span>
-	                                <span class="text-2xl font-bold">Z<sub>n</sub></span>
-                            </div>
-
-                            <div class="flex flex-col items-center mx-4">
-                                <div class="arrow-right mb-2"></div>
-                                <button id="run-process-btn" class="bg-cyber-neon hover:bg-cyber-primary text-white font-bold py-2 px-6 rounded shadow-lg transition-all transform hover:scale-105 active:scale-95">
+</div>
+<div class="flex justify-between items-center text-center mb-6">
+<div class="loop-node w-24 h-24 rounded-full border-2 border-cyber-muted flex flex-col items-center justify-center bg-gray-900" id="state-prev-process">
+<span class="text-gray-400 font-mono text-xs mb-1">STATE</span>
+<span class="text-2xl font-bold">Z<sub>n</sub></span>
+</div>
+<div class="flex flex-col items-center mx-4">
+<div class="arrow-right mb-2"></div>
+<button class="bg-cyber-neon hover:bg-cyber-primary text-white font-bold py-2 px-6 rounded shadow-lg transition-all transform hover:scale-105 active:scale-95" id="run-process-btn">
                                     RUN P_k( )
                                 </button>
-                                <div class="text-xs text-cyber-accent mt-2 font-mono">Process Iteration</div>
-                            </div>
-
-                            <div id="state-next-process" class="loop-node w-24 h-24 rounded-full border-2 border-cyber-success flex flex-col items-center justify-center bg-gray-900 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                                <span class="text-gray-400 font-mono text-xs mb-1">NEW STATE</span>
-                                <span class="text-2xl font-bold text-white">Z<sub>n+1</sub></span>
-	                            </div>
-	                        </div>
-	                        <div id="loop-log-process" class="font-mono text-xs text-center text-cyber-muted h-6">
+<div class="text-xs text-cyber-accent mt-2 font-mono">Process Iteration</div>
+</div>
+<div class="loop-node w-24 h-24 rounded-full border-2 border-cyber-success flex flex-col items-center justify-center bg-gray-900 shadow-[0_0_15px_rgba(16,185,129,0.3)]" id="state-next-process">
+<span class="text-gray-400 font-mono text-xs mb-1">NEW STATE</span>
+<span class="text-2xl font-bold text-white">Z<sub>n+1</sub></span>
+</div>
+</div>
+<div class="font-mono text-xs text-center text-cyber-muted h-6" id="loop-log-process">
 	                            Click 'RUN P_k( )' to advance the state; evidence upgrades the process right after.
 	                        </div>
-	                    </div>
-
-                    <div class="bg-gray-800/60 rounded-lg border border-gray-700 p-6">
-                        <h3 class="text-sm font-mono text-gray-400 mb-4 uppercase">Process Improvement Path</h3>
-                            <div class="space-y-4">
-                                <div class="grid grid-cols-3 items-center gap-4">
-                                    <div id="process-prev" class="text-center">
-                                        <p class="text-xs text-gray-500 mb-2">Current Process</p>
-                                        <div id="process-prev-value" class="loop-node w-24 h-24 rounded-full border-2 border-cyber-neon bg-gray-900 flex flex-col items-center justify-center mx-auto">
-                                            <p class="font-mono text-2xl font-bold text-cyber-neon">P<sub>k</sub></p>
-                                        </div>
-                                    </div>
-                                    <div class="arrow-right"></div>
-                                    <div id="process-next" class="text-center">
-                                        <p class="text-xs text-gray-500 mb-2">Improved Process</p>
-                                        <div id="process-next-value" class="loop-node w-24 h-24 rounded-full border-2 border-cyber-accent bg-gray-900 flex flex-col items-center justify-center mx-auto">
-                                            <p class="font-mono text-2xl font-bold text-cyber-accent">P<sub>k+1</sub></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="font-mono text-sm text-gray-300">
+</div>
+<div class="bg-gray-800/60 rounded-lg border border-gray-700 p-6">
+<h3 class="text-sm font-mono text-gray-400 mb-4 uppercase">Process Improvement Path</h3>
+<div class="space-y-4">
+<div class="grid grid-cols-3 items-center gap-4">
+<div class="text-center" id="process-prev">
+<p class="text-xs text-gray-500 mb-2">Current Process</p>
+<div class="loop-node w-24 h-24 rounded-full border-2 border-cyber-neon bg-gray-900 flex flex-col items-center justify-center mx-auto" id="process-prev-value">
+<p class="font-mono text-2xl font-bold text-cyber-neon">P<sub>k</sub></p>
+</div>
+</div>
+<div class="arrow-right"></div>
+<div class="text-center" id="process-next">
+<p class="text-xs text-gray-500 mb-2">Improved Process</p>
+<div class="loop-node w-24 h-24 rounded-full border-2 border-cyber-accent bg-gray-900 flex flex-col items-center justify-center mx-auto" id="process-next-value">
+<p class="font-mono text-2xl font-bold text-cyber-accent">P<sub>k+1</sub></p>
+</div>
+</div>
+</div>
+<div class="font-mono text-sm text-gray-300">
                                     P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)
                                 </div>
-                                <div>
-                                    <label for="evidence-slider" class="text-xs uppercase tracking-wide text-gray-500">Evidence Strength</label>
-                                    <div class="mt-2 flex items-center gap-3">
-                                        <input
-                                            id="evidence-slider"
-                                            type="range"
-                                            min="1"
-                                            max="5"
-                                            value="2"
-                                            class="w-full accent-cyber-neon"
-                                        />
-                                        <span id="evidence-value" class="font-mono text-xs text-cyber-accent w-8 text-right">2</span>
-                                    </div>
-                                </div>
-                                <div class="space-y-3">
-                                    <div>
-                                        <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                            <span>Velocity</span>
-                                            <span id="velocity-value">50%</span>
-                                        </div>
-                                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                            <div id="velocity-bar" class="h-2 bg-cyber-neon rounded-full transition-all duration-300" style="width: 50%;"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                            <span>Reliability</span>
-                                            <span id="reliability-value">50%</span>
-                                        </div>
-                                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                            <div id="reliability-bar" class="h-2 bg-cyber-accent rounded-full transition-all duration-300" style="width: 50%;"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                            <span>Defensibility</span>
-                                            <span id="defensibility-value">50%</span>
-                                        </div>
-                                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                            <div id="defensibility-bar" class="h-2 bg-cyber-success rounded-full transition-all duration-300" style="width: 50%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="process-note" class="text-xs text-cyber-muted">
+<div>
+<label class="text-xs uppercase tracking-wide text-gray-500" for="evidence-slider">Evidence Strength</label>
+<div class="mt-2 flex items-center gap-3">
+<input class="w-full accent-cyber-neon" id="evidence-slider" max="5" min="1" type="range" value="2"/>
+<span class="font-mono text-xs text-cyber-accent w-8 text-right" id="evidence-value">2</span>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<div class="flex justify-between text-xs text-gray-400 mb-1">
+<span>Velocity</span>
+<span id="velocity-value">50%</span>
+</div>
+<div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-neon rounded-full transition-all duration-300" id="velocity-bar" style="width: 50%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs text-gray-400 mb-1">
+<span>Reliability</span>
+<span id="reliability-value">50%</span>
+</div>
+<div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-accent rounded-full transition-all duration-300" id="reliability-bar" style="width: 50%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs text-gray-400 mb-1">
+<span>Defensibility</span>
+<span id="defensibility-value">50%</span>
+</div>
+<div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-success rounded-full transition-all duration-300" id="defensibility-bar" style="width: 50%;"></div>
+</div>
+</div>
+</div>
+<div class="text-xs text-cyber-muted" id="process-note">
                                     Better process means the next loop compounds. Same recurrence, stronger operator, stronger moat.
                                 </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-	        <section class="text-center py-12">
-	            <div class="moat-loop inline-block p-1 bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent rounded-2xl">
-	                <svg class="moat-loop-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-	                    <rect class="moat-loop-track" x="2" y="2" width="96" height="96" rx="16"></rect>
-	                    <rect class="moat-loop-runner" x="2" y="2" width="96" height="96" rx="16" pathLength="100"></rect>
-	                </svg>
-	                <div class="bg-cyber-dark rounded-xl p-10 md:p-16">
-	                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Loop is the Moat</h2>
-	                    <p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
+<section class="text-center py-12" data-infographic-section-id="i2-section-05-loop-is-the-moat" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<div class="moat-loop inline-block p-1 bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent rounded-2xl">
+<svg aria-hidden="true" class="moat-loop-svg" preserveaspectratio="none" viewbox="0 0 100 100">
+<rect class="moat-loop-track" height="96" rx="16" width="96" x="2" y="2"></rect>
+<rect class="moat-loop-runner" height="96" pathlength="100" rx="16" width="96" x="2" y="2"></rect>
+</svg>
+<div class="bg-cyber-dark rounded-xl p-10 md:p-16">
+<h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Loop is the Moat</h2>
+<p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
 	                        If the loop is validated, the full function is:
 	                        <span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
-	                        <span class="block font-mono text-cyber-accent mt-1">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
-	                        <span class="block mt-4">
+<span class="block font-mono text-cyber-accent mt-1">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
+<span class="block mt-4">
 	                            SDaC doesn't just give you a better way to build your business. It gives you the tooling for the business to self-improve: each loop upgrades capability, compounds speed, and hardens against ever-evolving competitors.
 	                        </span>
-	                    </p>
-	                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-cyber-accent hover:text-white underline decoration-cyber-neon decoration-2 underline-offset-4 transition-colors">
+</p>
+<button class="text-cyber-accent hover:text-white underline decoration-cyber-neon decoration-2 underline-offset-4 transition-colors" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
 	                        Restart the Loop
 	                    </button>
-	                </div>
-            </div>
-        </section>
+</div>
+</div>
+</section>
+
+
     </main>
 
     <footer class="bg-cyber-panel border-t border-gray-800 py-8 text-center text-xs text-gray-600 font-mono">

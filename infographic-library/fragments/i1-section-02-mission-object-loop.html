@@ -1,0 +1,145 @@
+<section class="col-span-1 md:col-span-12" data-infographic-section-id="i1-section-02-mission-object-loop" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic.html" data-infographic-status="published">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border flex flex-col gap-6">
+<!-- Featured Sandwich Diagram -->
+<div>
+<h3 class="text-xl font-bold text-brand-strong mb-3">Mission Object &amp; The Loop</h3>
+<div class="bg-brand-light border border-brand-border rounded-xl p-5">
+<figure class="rounded-xl overflow-hidden border border-brand-border bg-brand-surface">
+<img alt="The Loop as a Quality Refinery: Generation → Validation → Refinement around a deterministic Mission Object, with failed attempts fed back and trusted output exiting the loop." class="w-full h-auto block select-none" src="diagrams/2026-02-12-deterministic-sandwich-dark.png"/>
+</figure>
+<p class="mt-3 text-sm text-brand-muted leading-relaxed">
+                            This panel shows the <a class="concept-link" href="../../concepts#mission-object" title="See concept: Mission Object">Mission Object</a> loop: probabilistic generation enters, validation filters, refinement feeds failures back with error context, and only trusted output exits.
+                        </p>
+</div>
+</div>
+ <a class="concept-link" href="../../concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a> 
+<div>
+<h3 class="text-xl font-bold text-brand-strong mb-3">Deterministic Sandwich</h3>
+<div class="bg-brand-light border border-brand-border rounded-xl p-5">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+<div class="lg:col-span-7">
+<div class="relative rounded-xl overflow-hidden border border-brand-border bg-brand-surface">
+<img alt="The Deterministic Sandwich: Prep/Mission Object → Model/GenAI → Validation/Gate" class="w-full h-auto block select-none" src="diagrams/deterministic-sandwich.png"/>
+<div class="absolute rounded-xl border-2 border-brand-vibrant pointer-events-none transition-all duration-150" id="sandwichHighlight" style="left: 24%; top: 42%; width: 52%; height: 14%;"></div>
+<button aria-label="Prep / Mission Object" class="absolute rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/60 hover:ring-2 hover:ring-brand-primary/40" data-sandwich="prep" style="left: 16%; top: 18%; width: 68%; height: 16%;" type="button"></button>
+<button aria-label="Model / GenAI" class="absolute rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/60 hover:ring-2 hover:ring-brand-primary/40" data-sandwich="model" style="left: 24%; top: 42%; width: 52%; height: 14%;" type="button"></button>
+<button aria-label="Validation / Gate" class="absolute rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-primary/60 hover:ring-2 hover:ring-brand-primary/40" data-sandwich="validation" style="left: 20%; top: 62%; width: 60%; height: 22%;" type="button"></button>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<button aria-pressed="false" class="sandwich-select inline-flex items-center px-3 py-2 rounded-lg border border-brand-border bg-brand-surface text-brand-strong text-sm font-semibold hover:border-[rgba(122,162,247,0.6)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60" data-sandwich="prep" type="button">
+                                        Prep
+                                    </button>
+<button aria-pressed="true" class="sandwich-select inline-flex items-center px-3 py-2 rounded-lg border border-brand-border bg-brand-surface text-brand-strong text-sm font-semibold hover:border-[rgba(122,162,247,0.6)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60" data-sandwich="model" type="button">
+                                        Model
+                                    </button>
+<button aria-pressed="false" class="sandwich-select inline-flex items-center px-3 py-2 rounded-lg border border-brand-border bg-brand-surface text-brand-strong text-sm font-semibold hover:border-[rgba(122,162,247,0.6)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60" data-sandwich="validation" type="button">
+                                        Validation
+                                    </button>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="border border-brand-border rounded-xl bg-brand-surface p-4">
+<div class="text-sm font-bold text-brand-strong" id="sandwichTitle">Model / GenAI</div>
+<p class="mt-2 text-sm text-brand-muted leading-relaxed" id="sandwichBody">
+                                        One bounded stochastic step. Output is untrusted until it passes Validation.
+                                    </p>
+<div class="mt-3 pt-3 border-t border-brand-border">
+<div class="text-[11px] font-mono text-brand-muted uppercase tracking-wide">Operational Notes</div>
+<p class="mt-2 text-xs text-brand-muted leading-relaxed" id="sandwichDetail">
+                                            The model explores candidates inside a bounded mission packet; no side effects happen at this layer.
+                                        </p>
+<ul class="mt-2 space-y-1 text-xs text-brand-muted list-disc list-inside">
+<li id="sandwichPoint1">Draft outputs are proposals, not accepted state.</li>
+<li id="sandwichPoint2">Cost scales by candidate count, while acceptance is controlled by the gate.</li>
+</ul>
+</div>
+</div>
+<div class="mt-3 text-sm text-brand-muted">
+                                    Only the middle is stochastic. The bread is deterministic, so drift becomes safe to integrate.
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Substrate Surfaces -->
+<div>
+<h3 class="text-xl font-bold text-brand-strong mb-3">Substrate - Safe autonomy starts when intent and reality are explicit, and every change is traceable.</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-brand-light border border-brand-border border-l-4 border-l-brand-primary rounded-xl p-5">
+<div class="flex items-baseline justify-between gap-3 mb-2">
+<h3 class="text-lg font-bold text-brand-strong">Map</h3>
+<div class="text-xs font-mono text-brand-muted">Intent surface</div>
+</div>
+<p class="text-sm text-brand-muted leading-relaxed">
+                                A structured, machine-readable representation of reality: docs, contracts, inventories, derived views.
+                            </p>
+</div>
+<div class="bg-brand-light border border-brand-border border-l-4 border-l-brand-vibrant rounded-xl p-5">
+<div class="flex items-baseline justify-between gap-3 mb-2">
+<h3 class="text-lg font-bold text-brand-strong">Terrain</h3>
+<div class="text-xs font-mono text-brand-muted">Runnable reality</div>
+</div>
+<p class="text-sm text-brand-muted leading-relaxed">
+                                Reality-as-code: source, configs, schemas, and the behavior your systems actually execute.
+                            </p>
+</div>
+<div class="bg-brand-light border border-brand-border border-l-4 border-l-brand-accent rounded-xl p-5">
+<div class="flex items-baseline justify-between gap-3 mb-2">
+<h3 class="text-lg font-bold text-brand-strong">Ledger</h3>
+<div class="text-xs font-mono text-brand-muted">Evidence trail</div>
+</div>
+<p class="text-sm text-brand-muted leading-relaxed">
+                                Append-only history of diffs and receipts: validator output, decision traces, and provenance.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Rule of Seven -->
+<div>
+<h3 class="text-xl font-bold text-brand-strong mb-3">Rule of Seven</h3>
+<div class="bg-brand-light border border-brand-border rounded-xl p-5">
+<div class="border border-brand-border rounded-xl p-4 bg-brand-surface">
+<div class="flex flex-col gap-4">
+<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+<div>
+<div class="text-xs font-mono text-brand-muted mb-2">Layering Heuristic</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+                                            Aim for ~7 (±2) siblings per layer. Too many becomes a junk drawer; too few becomes a rabbit hole.
+                                        </div>
+</div>
+<div class="sm:text-right">
+<div class="text-xs font-mono text-brand-muted">Siblings per layer</div>
+<div class="text-2xl font-bold text-brand-strong"><span id="ruleSevenValue">5</span>/9</div>
+</div>
+</div>
+<div>
+<input aria-label="Rule of Seven sibling slider" class="w-full" id="ruleSevenSlider" max="9" min="1" step="1" type="range" value="5"/>
+<div class="mt-2 grid grid-cols-9 items-center text-[11px] font-mono text-brand-muted">
+<span class="col-start-1 justify-self-start">1</span>
+<span class="col-start-5 justify-self-center text-brand-strong">5 (Target)</span>
+<span class="col-start-7 justify-self-center">7</span>
+<span class="col-start-9 justify-self-end">9</span>
+</div>
+<div class="mt-1 flex justify-between text-[11px] text-brand-muted">
+<span>Rabbit-hole edge</span>
+<span>Junk-drawer edge</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
+<div class="lg:col-span-4 border border-brand-border rounded-lg p-3 bg-brand-light">
+<div class="text-xs font-mono text-brand-muted">Tree Profile</div>
+<div class="mt-1 text-sm font-bold text-brand-strong" id="ruleSevenModeTitle">Balanced spread</div>
+<p class="mt-2 text-xs text-brand-muted leading-relaxed" id="ruleSevenModeBody"></p>
+<div class="mt-3 text-xs text-brand-muted font-mono" id="ruleSevenStats"></div>
+</div>
+<div class="lg:col-span-8 border border-brand-border rounded-lg p-3 bg-[rgba(6,7,12,0.72)]">
+<div class="text-xs font-mono text-brand-muted mb-2">Example project tree</div>
+<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="ruleSevenTree"></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

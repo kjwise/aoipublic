@@ -1,0 +1,61 @@
+/* Shared visual shell for reusable infographic fragments.
+   This gives each section a consistent frame while preserving each fragment's own inner styling. */
+[data-infographic-fragment-shell] {
+  --ifg-shell-border: rgba(122, 162, 247, 0.26);
+  --ifg-shell-top: rgba(122, 162, 247, 0.14);
+  --ifg-shell-mid: rgba(6, 182, 212, 0.08);
+  --ifg-shell-base: rgba(11, 15, 25, 0.46);
+  --ifg-shell-highlight: rgba(217, 70, 239, 0.36);
+  position: relative;
+  border-radius: 1rem;
+  padding: clamp(0.35rem, 0.8vw, 0.65rem);
+  border: 1px solid var(--ifg-shell-border);
+  background: linear-gradient(180deg, var(--ifg-shell-top) 0%, var(--ifg-shell-mid) 42%, var(--ifg-shell-base) 100%);
+  box-shadow: 0 20px 38px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  overflow: clip;
+  isolation: isolate;
+}
+
+[data-infographic-fragment-shell]::before {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ifg-shell-highlight), transparent);
+  opacity: 0.8;
+  z-index: 0;
+}
+
+[data-infographic-fragment-shell] > * {
+  position: relative;
+  z-index: 1;
+}
+
+body.bg-brand-dark [data-infographic-fragment-shell] {
+  --ifg-shell-border: rgba(122, 162, 247, 0.24);
+  --ifg-shell-top: rgba(122, 162, 247, 0.13);
+  --ifg-shell-mid: rgba(187, 154, 247, 0.08);
+  --ifg-shell-base: rgba(11, 12, 16, 0.50);
+  --ifg-shell-highlight: rgba(42, 195, 222, 0.40);
+}
+
+body.bg-cyber-dark [data-infographic-fragment-shell] {
+  --ifg-shell-border: rgba(99, 102, 241, 0.28);
+  --ifg-shell-top: rgba(99, 102, 241, 0.16);
+  --ifg-shell-mid: rgba(6, 182, 212, 0.09);
+  --ifg-shell-base: rgba(11, 15, 25, 0.54);
+  --ifg-shell-highlight: rgba(217, 70, 239, 0.48);
+}
+
+.infographic-deck [data-infographic-fragment-shell] {
+  padding: clamp(0.25rem, 0.6vw, 0.5rem);
+}
+
+@media (max-width: 768px) {
+  [data-infographic-fragment-shell] {
+    border-radius: 0.85rem;
+    padding: 0.32rem;
+  }
+}

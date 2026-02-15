@@ -1,0 +1,55 @@
+<section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-05-always-on-loops" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Always-On Loops (Maintenance That Compounds)</h2>
+<p class="text-brand-muted leading-relaxed">
+                            Practical SDaC is not a one-off workflow. It is an always-on system: map updaters, background refactors, and governance at machine speed.
+                            The goal is to keep entropy debt bounded while autonomy rises.
+                        </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Timeline</span>
+<span class="font-mono text-brand-strong">Week <span id="maintWeekValue">8</span>/26</span>
+</div>
+<label class="sr-only" for="maintWeekSlider">Week slider</label>
+<input class="mt-2 w-full" id="maintWeekSlider" max="26" min="0" type="range" value="8"/>
+<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+<button aria-pressed="true" class="soft-toggle font-mono" data-maint-loop="map" type="button">Map updater</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-maint-loop="dream" type="button"><a class="concept-link" href="../../concepts#dream-daemon" title="See concept: Dream Daemon">Dream daemon</a></button>
+<button aria-pressed="true" class="soft-toggle font-mono" data-maint-loop="refactor" type="button">Refactor under guards</button>
+<button aria-pressed="true" class="soft-toggle font-mono" data-maint-loop="governance" type="button">Governance</button>
+<button aria-pressed="false" class="soft-toggle font-mono sm:col-span-2" data-maint-loop="hedged" type="button">Hedged compute</button>
+</div>
+<div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Entropy debt</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="maintDebt">—</span>/100</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Incidents</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="maintIncidents">—</span>/wk</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">P95 cost/outcome</div>
+<div class="mt-1 text-lg font-bold text-brand-danger"><span id="maintP95">—</span></div>
+</div>
+</div>
+<div class="mt-4 text-xs text-brand-muted leading-relaxed">
+                                The chart shows how debt and tail-cost behave as autonomy ramps. Hedging mostly buys down the tail (P95), not the mean.
+                            </div>
+</div>
+</div>
+<div class="lg:w-7/12">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="chart-container">
+<canvas id="maintenanceChart"></canvas>
+</div>
+<p class="text-xs text-center text-brand-muted mt-2">
+                                Debt (left axis) vs P95 cost/outcome (right axis). The dashed marker tracks the selected week.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
