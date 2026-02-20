@@ -1625,6 +1625,10 @@
             const maturity = computeSdacMaturity(week);
             return clamp(7 + (6 * maturity), -8, 16);
         };
+        const computeSdacVariance = (week) => {
+            const progress = clamp((week - 1) / (CROSSOVER_WEEK - 1), 0, 1);
+            return clamp(0.50 - (0.40 * progress), 0.10, 0.50);
+        };
 
         const timeline = Array.from({ length: DRIFT_WEEKS }, (_, i) => {
             const week = i + 1;
@@ -1633,7 +1637,7 @@
             const sdacMean = computeSdacOutput(week);
 
             const vibeVarPct = clamp(0.30 + ((velocity - 1) * 0.04), 0.30, 0.80);
-            const sdacVarPct = 0.05;
+            const sdacVarPct = computeSdacVariance(week);
 
             const vibeAmp = Math.max(2, Math.abs(vibeMean));
             const sdacAmp = Math.max(2, Math.abs(sdacMean));
@@ -1678,6 +1682,19 @@
         const sdacUpperCumFull = cumulative(sdacUpperFull);
         const sdacLowerCumFull = cumulative(sdacLowerFull);
         const sdacMeanCumFull = cumulative(sdacMeanFull);
+        const findClosestCrossoverWeek = (leftSeries, rightSeries) => {
+            let closestWeek = 1;
+            let minAbsGap = Number.POSITIVE_INFINITY;
+            for (let i = 0; i < Math.min(leftSeries.length, rightSeries.length); i++) {
+                const gap = Math.abs(leftSeries[i] - rightSeries[i]);
+                if (gap < minAbsGap) {
+                    minAbsGap = gap;
+                    closestWeek = i + 1;
+                }
+            }
+            return clamp(closestWeek, 1, DRIFT_WEEKS);
+        };
+        const CUMULATIVE_CROSSOVER_WEEK = findClosestCrossoverWeek(vibeMeanCumFull, sdacMeanCumFull);
 
         const initialWeek = Number(driftWeekSlider ? driftWeekSlider.value : CROSSOVER_WEEK);
         const slice = (arr, n) => arr.slice(0, n);
@@ -1706,7 +1723,7 @@
                 ctx.setLineDash([]);
                 ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
                 ctx.font = "12px 'JetBrains Mono', monospace";
-                ctx.fillText(`wk ${week}`, x + 6, chartArea.top + 14);
+                ctx.fillText(`week ${week}`, x + 6, chartArea.top + 14);
                 ctx.restore();
             }
         };
@@ -1839,7 +1856,7 @@
             const row = timeline[week - 1];
             if (!row) return;
 
-            if (driftWeekValue) driftWeekValue.innerText = `${week} / ${DRIFT_WEEKS}`;
+            if (driftWeekValue) driftWeekValue.innerText = `Iteration ${week}/${DRIFT_WEEKS} (simulated week)`;
             if (driftVelocityReadout) driftVelocityReadout.innerText = row.velocity.toFixed(1);
 
             const vibeValue = driftView === 'weekly' ? row.vibeMean : vibeMeanCumFull[week - 1];
@@ -1920,6 +1937,9 @@
                 driftChart.data.datasets[5].data = slice(sdacMeanCumFull, w);
             }
             applyYAxisForView(w);
+            if (driftChart.options && driftChart.options.plugins && driftChart.options.plugins.crossoverLine) {
+                driftChart.options.plugins.crossoverLine.week = driftView === 'cumulative' ? CUMULATIVE_CROSSOVER_WEEK : CROSSOVER_WEEK;
+            }
             driftChart.update();
             renderDriftReadout(w);
         };
@@ -1934,6 +1954,11 @@
         const startDriftPlay = () => {
             if (!driftWeekSlider) return;
             stopDriftPlay();
+            let current = Number(driftWeekSlider.value);
+            if (current >= DRIFT_WEEKS) {
+                driftWeekSlider.value = '1';
+                setDriftWeek(1);
+            }
             if (driftPlayBtn) driftPlayBtn.innerText = 'Pause';
             driftPlayTimer = window.setInterval(() => {
                 const current = Number(driftWeekSlider.value);
@@ -2762,11 +2787,277 @@
             render();
         };
 
+        // Landing fragment: Illusion vs Reality of Results
+        const setupIllusionVsResults = () => {
+            const roots = Array.from(
+                document.querySelectorAll('[data-infographic-section-id="i4-section-01-illusion-vs-results"]')
+            );
+            if (!roots.length) return;
+
+            const setHidden = (el, isHidden) => {
+                if (!el) return;
+                if (isHidden) el.setAttribute('hidden', '');
+                else el.removeAttribute('hidden');
+            };
+
+            const showEl = (el, show) => setHidden(el, !show);
+
+            const setPressed = (btn, pressed) => {
+                if (!btn) return;
+                btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+            };
+
+            const TAB_ACTIVE_CLASSES = [
+                'bg-[rgba(42,195,222,0.20)]',
+                'text-brand-strong',
+                'shadow-[0_0_16px_rgba(42,195,222,0.22)]',
+                'border-[rgba(42,195,222,0.35)]',
+            ];
+            const TAB_INACTIVE_CLASSES = [
+                'bg-brand-light',
+                'text-brand-muted',
+                'border-brand-border',
+                'hover:bg-brand-surface',
+                'hover:text-brand-strong',
+            ];
+
+            const cardClassReset = (card) => {
+                if (!card) return;
+                card.classList.remove(
+                    'opacity-60',
+                    'border-brand-border',
+                    'bg-brand-light',
+                    'border-[rgba(42,195,222,0.35)]',
+                    'bg-[rgba(42,195,222,0.08)]',
+                    'shadow-[0_0_20px_rgba(42,195,222,0.12)]',
+                    'border-[rgba(187,154,247,0.35)]',
+                    'bg-[rgba(187,154,247,0.08)]',
+                    'shadow-[0_0_20px_rgba(187,154,247,0.12)]',
+                    'border-[rgba(96,165,250,0.35)]',
+                    'bg-[rgba(96,165,250,0.08)]',
+                    'shadow-[0_0_20px_rgba(96,165,250,0.12)]',
+                    'border-[rgba(255,158,100,0.40)]',
+                    'bg-[rgba(255,158,100,0.08)]',
+                    'shadow-[0_0_20px_rgba(255,158,100,0.10)]',
+                    'border-[rgba(16,185,129,0.35)]',
+                    'bg-[rgba(16,185,129,0.08)]',
+                    'shadow-[0_0_20px_rgba(16,185,129,0.12)]'
+                );
+            };
+
+            const setCard = (card, { active, borderClass, bgClass, shadowClass }) => {
+                if (!card) return;
+                cardClassReset(card);
+                if (!active) {
+                    card.classList.add('border-brand-border', 'bg-brand-light', 'opacity-60');
+                    return;
+                }
+                card.classList.remove('opacity-60');
+                if (borderClass) card.classList.add(borderClass);
+                if (bgClass) card.classList.add(bgClass);
+                if (shadowClass) card.classList.add(shadowClass);
+            };
+
+            roots.forEach((root) => {
+                if (!root || root.dataset.i4Bound === '1') return;
+                root.dataset.i4Bound = '1';
+
+                const tabButtons = Array.from(root.querySelectorAll('[data-i4-tab]'));
+                const panels = Array.from(root.querySelectorAll('[data-i4-panel]'));
+
+                const startBtn = root.querySelector('[data-i4-action="start"]');
+                const resetBtn = root.querySelector('[data-i4-action="reset"]');
+                const runningBtn = root.querySelector('[data-i4-action="running"]');
+                const attemptEl = root.querySelector('[data-i4-attempt]');
+                const loopsEl = root.querySelector('[data-i4-loops]');
+                const resultEl = root.querySelector('[data-i4-result]');
+                const feedbackEl = root.querySelector('[data-i4-feedback]');
+                const missionStatusEl = root.querySelector('[data-i4-status="mission"]');
+                const generatorStatusEl = root.querySelector('[data-i4-status="generator"]');
+                const validatorStatusEl = root.querySelector('[data-i4-status="validator"]');
+                const cardMission = root.querySelector('[data-i4-step-card="mission"]');
+                const cardGenerator = root.querySelector('[data-i4-step-card="generator"]');
+                const cardValidator = root.querySelector('[data-i4-step-card="validator"]');
+
+                const state = { step: 0, attempt: 1, isRunning: false };
+                let timers = [];
+
+                const clearTimers = () => {
+                    timers.forEach((t) => clearTimeout(t));
+                    timers = [];
+                };
+                const schedule = (fn, ms) => {
+                    const t = setTimeout(fn, ms);
+                    timers.push(t);
+                    return t;
+                };
+
+                const setActionButtons = () => {
+                    if (!startBtn || !resetBtn || !runningBtn) return;
+
+                    if (state.isRunning) {
+                        startBtn.classList.add('hidden');
+                        resetBtn.classList.add('hidden');
+                        runningBtn.classList.remove('hidden');
+                    } else if (state.step === 5) {
+                        startBtn.classList.add('hidden');
+                        runningBtn.classList.add('hidden');
+                        resetBtn.classList.remove('hidden');
+                    } else {
+                        resetBtn.classList.add('hidden');
+                        runningBtn.classList.add('hidden');
+                        startBtn.classList.remove('hidden');
+                    }
+                };
+
+                const renderSim = () => {
+                    if (attemptEl) attemptEl.textContent = String(state.attempt);
+                    if (loopsEl) loopsEl.textContent = String(Math.max(0, state.attempt - 1));
+
+                    showEl(missionStatusEl, state.step === 1);
+                    showEl(generatorStatusEl, state.step === 2);
+                    showEl(feedbackEl, state.step === 4);
+
+                    if (validatorStatusEl) {
+                        showEl(validatorStatusEl, state.step >= 3);
+                        validatorStatusEl.classList.remove('text-brand-muted', 'text-[rgba(96,165,250,0.95)]', 'text-[rgba(255,158,100,0.95)]', 'text-[rgba(16,185,129,0.95)]');
+                        if (state.step === 3) {
+                            validatorStatusEl.textContent = 'Running physics check…';
+                            validatorStatusEl.classList.add('text-[rgba(96,165,250,0.95)]');
+                        } else if (state.step === 4) {
+                            validatorStatusEl.textContent = 'Failed! Try again.';
+                            validatorStatusEl.classList.add('text-[rgba(255,158,100,0.95)]');
+                        } else if (state.step === 5) {
+                            validatorStatusEl.textContent = 'Passed & trusted!';
+                            validatorStatusEl.classList.add('text-[rgba(16,185,129,0.95)]');
+                        } else {
+                            validatorStatusEl.textContent = '';
+                            validatorStatusEl.classList.add('text-brand-muted');
+                        }
+                    }
+
+                    setCard(cardMission, {
+                        active: state.step >= 1,
+                        borderClass: 'border-[rgba(42,195,222,0.35)]',
+                        bgClass: 'bg-[rgba(42,195,222,0.08)]',
+                        shadowClass: 'shadow-[0_0_20px_rgba(42,195,222,0.12)]',
+                    });
+                    setCard(cardGenerator, {
+                        active: state.step >= 2 && state.step !== 5,
+                        borderClass: 'border-[rgba(187,154,247,0.35)]',
+                        bgClass: 'bg-[rgba(187,154,247,0.08)]',
+                        shadowClass: 'shadow-[0_0_20px_rgba(187,154,247,0.12)]',
+                    });
+
+                    let validatorTheme = {
+                        active: state.step >= 3,
+                        borderClass: 'border-[rgba(96,165,250,0.35)]',
+                        bgClass: 'bg-[rgba(96,165,250,0.08)]',
+                        shadowClass: 'shadow-[0_0_20px_rgba(96,165,250,0.12)]',
+                    };
+                    if (state.step === 4) {
+                        validatorTheme = {
+                            active: true,
+                            borderClass: 'border-[rgba(255,158,100,0.40)]',
+                            bgClass: 'bg-[rgba(255,158,100,0.08)]',
+                            shadowClass: 'shadow-[0_0_20px_rgba(255,158,100,0.10)]',
+                        };
+                    } else if (state.step === 5) {
+                        validatorTheme = {
+                            active: true,
+                            borderClass: 'border-[rgba(16,185,129,0.35)]',
+                            bgClass: 'bg-[rgba(16,185,129,0.08)]',
+                            shadowClass: 'shadow-[0_0_20px_rgba(16,185,129,0.12)]',
+                        };
+                    }
+                    setCard(cardValidator, validatorTheme);
+
+                    showEl(resultEl, state.step === 5);
+                    setActionButtons();
+                };
+
+                const resetSim = () => {
+                    clearTimers();
+                    state.step = 0;
+                    state.attempt = 1;
+                    state.isRunning = false;
+                    renderSim();
+                };
+
+                const runLoop = (attempt) => {
+                    state.attempt = attempt;
+                    state.step = 2;
+                    renderSim();
+
+                    schedule(() => {
+                        state.step = 3;
+                        renderSim();
+
+                        schedule(() => {
+                            if (attempt < 3) {
+                                state.step = 4;
+                                renderSim();
+                                schedule(() => runLoop(attempt + 1), 1500);
+                            } else {
+                                state.step = 5;
+                                state.isRunning = false;
+                                renderSim();
+                            }
+                        }, 1500);
+                    }, 1500);
+                };
+
+                const startSim = () => {
+                    if (state.isRunning) return;
+                    clearTimers();
+                    state.isRunning = true;
+                    state.step = 1;
+                    state.attempt = 1;
+                    renderSim();
+                    schedule(() => runLoop(1), 1500);
+                };
+
+                if (startBtn) startBtn.addEventListener('click', () => startSim());
+                if (resetBtn) resetBtn.addEventListener('click', () => resetSim());
+
+                const showTab = (tabKey) => {
+                    const key = (tabKey || '').trim() || 'concept';
+                    if (panels.length) {
+                        panels.forEach((panel) => {
+                            const p = panel.dataset.i4Panel || '';
+                            setHidden(panel, p !== key);
+                        });
+                    }
+                    if (tabButtons.length) {
+                        tabButtons.forEach((btn) => {
+                            const isActive = (btn.dataset.i4Tab || '') === key;
+                            setPressed(btn, isActive);
+                            btn.classList.remove(...TAB_ACTIVE_CLASSES, ...TAB_INACTIVE_CLASSES);
+                            if (isActive) btn.classList.add(...TAB_ACTIVE_CLASSES);
+                            else btn.classList.add(...TAB_INACTIVE_CLASSES);
+                        });
+                    }
+                    if (key !== 'simulator') resetSim();
+                };
+
+                if (tabButtons.length) {
+                    tabButtons.forEach((btn) => {
+                        btn.addEventListener('click', () => showTab(btn.dataset.i4Tab || 'concept'));
+                    });
+                    const initial = tabButtons.find((b) => b.getAttribute('aria-pressed') === 'true')?.dataset.i4Tab || 'concept';
+                    showTab(initial);
+                } else {
+                    renderSim();
+                }
+            });
+        };
+
         // Boot
         setupSubstrateExplorer();
         setupMissionObjectBuilder();
         setupSandwichSimulator();
         setupValidatorBundle();
         setupAlwaysOnLoops();
+        setupIllusionVsResults();
     })();
     

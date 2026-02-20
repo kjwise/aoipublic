@@ -8,6 +8,25 @@
             margin: 0 auto;
         }
 
+        .i2-section-03-drift-chart-column {
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            align-self: stretch;
+        }
+
+        .i2-section-03-drift-chart-area {
+            flex: 1 1 auto;
+            min-height: 320px;
+            max-height: 500px;
+            height: 100%;
+        }
+
+        .i2-section-03-drift-chart-area canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
         .plotly-container {
             position: relative;
             width: 100%;
@@ -18,31 +37,42 @@
             .chart-container {
                 height: 400px; /* Taller on desktop */
             }
+
+            .i2-section-03-drift-chart-area {
+                min-height: 360px;
+                max-height: 620px;
+            }
             .plotly-container {
                 height: 500px;
             }
         }
 
-        body {
+        @media (min-width: 1024px) {
+            .i2-section-03-drift-chart-area {
+                height: min(100%, 620px);
+            }
+        }
+
+        body.bg-brand-dark {
             background: radial-gradient(1200px 800px at 20% 0%, rgba(122, 162, 247, 0.18), transparent 55%),
                         radial-gradient(900px 700px at 100% 30%, rgba(36, 204, 142, 0.10), transparent 55%),
                         #0b0c10;
         }
 
-	        /* Custom Scrollbar */
-	        ::-webkit-scrollbar {
-	            width: 8px;
-	        }
-        ::-webkit-scrollbar-track {
+		        /* Custom Scrollbar */
+		        body.bg-brand-dark::-webkit-scrollbar {
+		            width: 8px;
+		        }
+        body.bg-brand-dark::-webkit-scrollbar-track {
             background: #11131a;
         }
-        ::-webkit-scrollbar-thumb {
+        body.bg-brand-dark::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.16);
             border-radius: 4px;
         }
-	        ::-webkit-scrollbar-thumb:hover {
-	            background: rgba(255, 255, 255, 0.24);
-	        }
+		        body.bg-brand-dark::-webkit-scrollbar-thumb:hover {
+		            background: rgba(255, 255, 255, 0.24);
+		        }
 
 	        /* Hedge Builder */
 	        .hedge-toggle {
@@ -268,19 +298,19 @@
             }
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0B0F19;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
+	        body.bg-cyber-dark::-webkit-scrollbar {
+	            width: 8px;
+	        }
+	        body.bg-cyber-dark::-webkit-scrollbar-track {
+	            background: #0B0F19;
+	        }
+	        body.bg-cyber-dark::-webkit-scrollbar-thumb {
+	            background: #334155;
+	            border-radius: 4px;
+	        }
+	        body.bg-cyber-dark::-webkit-scrollbar-thumb:hover {
+	            background: #475569;
+	        }
     
         .chart-container {
             position: relative;
@@ -296,16 +326,16 @@
             }
         }
 
-        body {
+        body.bg-brand-dark {
             background: radial-gradient(1200px 800px at 20% 0%, rgba(122, 162, 247, 0.18), transparent 55%),
                         radial-gradient(900px 700px at 100% 30%, rgba(36, 204, 142, 0.10), transparent 55%),
                         #0b0c10;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #11131a; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.16); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.24); }
+	        body.bg-brand-dark::-webkit-scrollbar { width: 8px; }
+	        body.bg-brand-dark::-webkit-scrollbar-track { background: #11131a; }
+	        body.bg-brand-dark::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.16); border-radius: 4px; }
+	        body.bg-brand-dark::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.24); }
 
         .pill-tab {
             padding: 0.45rem 0.75rem;

@@ -12,7 +12,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="chart.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="infographic-deck-runtime.css">
     <link rel="stylesheet" href="infographic-fragment-shell.css">
+    <script src="infographic-deck-runtime.js" defer></script>
 
     <script>
         tailwind.config = {
@@ -49,121 +51,19 @@
             }
         };
     </script>
-
-    <style>
-        .chart-container {
-            position: relative;
-            width: 100%;
-            height: 350px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
-
-        .fractal-layer {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid;
-            padding: 16px;
-            margin: 8px 0;
-            background: rgba(21, 27, 43, 0.5);
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .fractal-layer:hover {
-            transform: translateX(5px);
-            background: rgba(99, 102, 241, 0.1);
-            border-color: rgba(99, 102, 241, 0.5);
-        }
-
-        .loop-node {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .arrow-right::after {
-            content: "→";
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 34px;
-            color: #94a3b8;
-        }
-
-        .moat-loop {
-            position: relative;
-        }
-
-        .moat-loop-svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .moat-loop-track {
-            stroke: rgba(148, 163, 184, 0.18);
-            stroke-width: 2;
-            fill: none;
-        }
-
-        .moat-loop-runner {
-            stroke: rgba(217, 70, 239, 0.95);
-            stroke-width: 3;
-            fill: none;
-            stroke-linecap: round;
-            stroke-dasharray: 18 82;
-            animation-name: moat-run;
-            animation-duration: var(--moat-loop-duration, 3.2s);
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            will-change: stroke-dashoffset;
-            filter: drop-shadow(0 0 10px rgba(217, 70, 239, 0.35)) drop-shadow(0 0 14px rgba(6, 182, 212, 0.2));
-        }
-
-        .moat-loop:hover .moat-loop-runner {
-            animation-duration: var(--moat-loop-duration-hover, 2.2s);
-        }
-
-        @keyframes moat-run {
-            to { stroke-dashoffset: -100; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .moat-loop-runner {
-                animation: none;
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0B0F19;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
-    </style>
 </head>
 <body class="bg-cyber-dark text-cyber-text font-sans antialiased selection:bg-cyber-neon selection:text-white">
 
     <header class="relative overflow-hidden border-b border-gray-800">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyber-panel via-cyber-dark to-cyber-dark opacity-80"></div>
 
-	        <div class="max-w-[1500px] mx-auto px-6 pt-6 relative z-10">
-	            <div class="inline-flex items-center rounded-lg border border-gray-700 bg-gray-900/70 p-1 text-sm">
-	                <a href="infographic.html" class="px-3 py-1.5 rounded-md text-cyber-muted hover:text-white hover:bg-gray-800 transition-colors">Infographic 1</a>
-	                <a href="infographic-2.html" class="px-3 py-1.5 rounded-md bg-cyber-primary/20 text-white border border-cyber-primary/40">Infographic 2</a>
-	                <a href="infographic-3.html" class="px-3 py-1.5 rounded-md text-cyber-muted hover:text-white hover:bg-gray-800 transition-colors">Infographic 3</a>
-	            </div>
-	        </div>
+        <div class="max-w-[1500px] mx-auto px-6 pt-6 relative z-10">
+            <div class="inline-flex items-center rounded-lg border border-gray-700 bg-gray-900/70 p-1 text-sm">
+                <a href="infographic.html" class="px-3 py-1.5 rounded-md text-cyber-muted hover:text-white hover:bg-gray-800 transition-colors">Infographic 1</a>
+                <a href="infographic-2.html" class="px-3 py-1.5 rounded-md bg-cyber-primary/20 text-white border border-cyber-primary/40">Infographic 2</a>
+                <a href="infographic-3.html" class="px-3 py-1.5 rounded-md text-cyber-muted hover:text-white hover:bg-gray-800 transition-colors">Infographic 3</a>
+            </div>
+        </div>
 
         <div class="max-w-[1500px] mx-auto px-6 py-16 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -216,6 +116,7 @@
 
     <main class="max-w-[1500px] mx-auto px-6 py-12 space-y-24">
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-12" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-01-fractal-nature</span>
   <style>
     [data-role="fractal-sim"] .scale-button {
       border: 1px solid rgba(148, 163, 184, 0.4);
@@ -376,6 +277,7 @@
 </section>
 
 <section data-infographic-section-id="i2-section-02-clock-speed" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-02-clock-speed</span>
 <div class="text-center mb-12">
 <h2 class="text-3xl font-bold text-white mb-2">AI Changes the Clock Speed</h2>
 <p class="text-cyber-muted max-w-2xl mx-auto">
@@ -413,6 +315,7 @@
 </section>
 
 <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-03-drift-vs-convergence" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-03-drift-vs-convergence</span>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 <div class="lg:col-span-4 flex flex-col justify-center">
 <h2 class="text-3xl font-bold mb-4 text-white">Drift vs. Convergence</h2>
@@ -511,6 +414,7 @@
 </section>
 
 <section class="bg-cyber-panel rounded-2xl p-8 border border-gray-700" data-infographic-section-id="i2-section-04-moat-also-loop" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-04-moat-also-loop</span>
 <div class="text-center mb-8 space-y-4">
 <h2 class="text-3xl font-bold mb-2 text-white">The Moat Is Also the Loop</h2>
 <p class="text-cyber-muted w-full leading-relaxed">
@@ -627,6 +531,7 @@
 </section>
 
 <section class="text-center py-12" data-infographic-section-id="i2-section-05-loop-is-the-moat" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-05-loop-is-the-moat</span>
 <div class="moat-loop inline-block p-1 bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent rounded-2xl">
 <svg aria-hidden="true" class="moat-loop-svg" preserveaspectratio="none" viewbox="0 0 100 100">
 <rect class="moat-loop-track" height="96" rx="16" width="96" x="2" y="2"></rect>
@@ -654,6 +559,7 @@
 </section>
 
 <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-06-executive-loop" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-06-executive-loop</span>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
     <div class="lg:col-span-5">
       <h2 class="text-3xl font-bold mb-4 text-white">Executive View: The Business Loop</h2>
@@ -837,6 +743,7 @@
 </section>
 
 <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-07-intention-architecture</span>
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
     <div class="lg:col-span-5">
       <h2 class="text-3xl font-bold mb-4 text-white">Intent Architecture Wins the Output War</h2>
@@ -979,653 +886,8 @@
     </main>
 
     <footer class="bg-cyber-panel border-t border-gray-800 py-8 text-center text-xs text-gray-600 font-mono">
-        <p>GENERATED INFOGRAPHIC // THE SHAPE OF ALL WORK // SDaC</p>
+        <p>SDAC INTENT ARCHITECTURE // THE SHAPE OF ALL WORK</p>
     </footer>
 
-    <script>
-    (function() {
-        const wrapLabel = (str, max) => {
-            const words = str.split(' ');
-            let lines = [];
-            let current = words[0];
-            for (let i = 1; i < words.length; i++) {
-                if (current.length + 1 + words[i].length <= max) {
-                    current += ' ' + words[i];
-                } else {
-                    lines.push(current);
-                    current = words[i];
-                }
-            }
-            lines.push(current);
-            return lines;
-        };
-
-        let iterationCount = 0;
-        const btn = document.getElementById('run-loop-btn');
-        const statePrev = document.getElementById('state-prev');
-        const stateNext = document.getElementById('state-next');
-        const log = document.getElementById('loop-log');
-
-        btn.addEventListener('click', () => {
-            iterationCount += 1;
-
-            statePrev.classList.add('scale-90', 'opacity-50');
-            stateNext.classList.add('scale-110', 'border-cyber-neon');
-
-            const messages = [
-                'Compiling intent...',
-                'Running deterministic validators...',
-                'Bounded effector active...',
-                'Integration successful.'
-            ];
-            log.innerText = `Iteration #${iterationCount}: ${messages[iterationCount % messages.length]}`;
-            log.classList.add('text-cyber-neon');
-
-            setTimeout(() => {
-                statePrev.classList.remove('scale-90', 'opacity-50');
-                stateNext.classList.remove('scale-110', 'border-cyber-neon');
-                log.classList.remove('text-cyber-neon');
-            }, 300);
-
-            statePrev.querySelector('span.text-2xl').innerHTML = `Z<span class="text-sm">${iterationCount}</span>`;
-            stateNext.querySelector('span.text-2xl').innerHTML = `Z<span class="text-sm">${iterationCount + 1}</span>`;
-        });
-
-        const processBtn = document.getElementById('run-process-btn');
-        const processStatePrev = document.getElementById('state-prev-process');
-        const processStateNext = document.getElementById('state-next-process');
-        const processLog = document.getElementById('loop-log-process');
-        const processPrev = document.getElementById('process-prev');
-        const processNext = document.getElementById('process-next');
-        const processPrevBubble = document.getElementById('process-prev-value');
-        const processNextBubble = document.getElementById('process-next-value');
-        const processFormula = document.getElementById('process-note');
-        const evidenceSlider = document.getElementById('evidence-slider');
-        const evidenceValue = document.getElementById('evidence-value');
-        const velocityBar = document.getElementById('velocity-bar');
-        const velocityValue = document.getElementById('velocity-value');
-        const reliabilityBar = document.getElementById('reliability-bar');
-        const reliabilityValue = document.getElementById('reliability-value');
-        const defensibilityBar = document.getElementById('defensibility-bar');
-        const defensibilityValue = document.getElementById('defensibility-value');
-        const processCapacity = {
-            velocity: 50,
-            reliability: 50,
-            defensibility: 50
-        };
-        let processIteration = 0;
-
-        const clampPercent = (value) => Math.min(100, Math.max(0, value));
-        const renderProcessCapacity = () => {
-            velocityBar.style.width = `${processCapacity.velocity}%`;
-            velocityValue.innerText = `${Math.round(processCapacity.velocity)}%`;
-
-            reliabilityBar.style.width = `${processCapacity.reliability}%`;
-            reliabilityValue.innerText = `${Math.round(processCapacity.reliability)}%`;
-
-            defensibilityBar.style.width = `${processCapacity.defensibility}%`;
-            defensibilityValue.innerText = `${Math.round(processCapacity.defensibility)}%`;
-        };
-
-        if (evidenceSlider && evidenceValue) {
-            evidenceSlider.addEventListener('input', () => {
-                evidenceValue.innerText = evidenceSlider.value;
-            });
-        }
-
-        renderProcessCapacity();
-
-        if (processBtn) {
-            processBtn.addEventListener('click', () => {
-                processIteration += 1;
-                const evidenceLevel = Number(evidenceSlider ? evidenceSlider.value : 1);
-
-                processStatePrev.classList.add('scale-90', 'opacity-50');
-                processStateNext.classList.add('scale-110', 'border-cyber-neon');
-
-                const messages = [
-                    'Capturing process deltas...',
-                    'Updating Pk from evidence...',
-                    'Strengthening the loop operator...',
-                    'Producing both stronger state and process.'
-                ];
-                processLog.innerText = `Iteration #${processIteration}: ${messages[processIteration % messages.length]}`;
-                processLog.classList.add('text-cyber-neon');
-
-                processCapacity.velocity = clampPercent(processCapacity.velocity + (3 * evidenceLevel));
-                processCapacity.reliability = clampPercent(processCapacity.reliability + (4 * evidenceLevel));
-                processCapacity.defensibility = clampPercent(processCapacity.defensibility + (2 * evidenceLevel));
-                renderProcessCapacity();
-
-                setTimeout(() => {
-                    processPrevBubble.classList.add('scale-90', 'opacity-50');
-                    processNextBubble.classList.add('scale-110', 'border-cyber-neon');
-                }, 100);
-
-                setTimeout(() => {
-                    processStatePrev.classList.remove('scale-90', 'opacity-50');
-                    processStateNext.classList.remove('scale-110', 'border-cyber-neon');
-                    processLog.classList.remove('text-cyber-neon');
-                    processPrevBubble.classList.remove('scale-90', 'opacity-50');
-                    processNextBubble.classList.remove('scale-110', 'border-cyber-neon');
-                }, 400);
-
-	                processStatePrev.querySelector('span.text-2xl').innerHTML = `Z<sub>${processIteration}</sub>`;
-	                processStateNext.querySelector('span.text-2xl').innerHTML = `Z<sub>${processIteration + 1}</sub>`;
-	                const processPrevValue = document.getElementById('process-prev-value').querySelector('p');
-	                const processNextValue = document.getElementById('process-next-value').querySelector('p');
-	                const prevProcessIndex = Math.max(0, processIteration - 1);
-	                const prevProcessLabel = prevProcessIndex === 0 ? 'k' : `k+${prevProcessIndex}`;
-	                const nextProcessLabel = `k+${processIteration}`;
-
-	                processPrevValue.innerHTML = `P<sub>${prevProcessLabel}</sub>`;
-	                processNextValue.innerHTML = `P<sub>${nextProcessLabel}</sub>`;
-	                processFormula.innerText = `Evidence ${evidenceLevel}: P_{${prevProcessLabel}} → P_{${nextProcessLabel}}. Next: Z_{n+1}=P_{${nextProcessLabel}}(Z_n).`;
-	            });
-	        }
-
-        Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.color = '#94a3b8';
-        Chart.defaults.borderColor = '#1e293b';
-
-        const ctxClock = document.getElementById('clockSpeedChart').getContext('2d');
-        new Chart(ctxClock, {
-            type: 'bar',
-            data: {
-                labels: ['Function Edit', 'Feature Cycle', 'System Refactor'],
-                datasets: [
-                    {
-                        label: 'Traditional (Human Only)',
-                        data: [60, 14400, 43200],
-                        backgroundColor: '#334155',
-                        barPercentage: 0.6,
-                    },
-                    {
-                        label: 'AI Accelerated (Human + Agent)',
-                        data: [2, 480, 120],
-                        backgroundColor: '#06b6d4',
-                        barPercentage: 0.6,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        type: 'logarithmic',
-                        title: { display: true, text: 'Time Cost (Minutes) - Log Scale' },
-                        grid: { color: '#1e293b' }
-                    },
-                    x: { grid: { display: false } }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) label += ': ';
-                                if (context.parsed.y !== null) label += `${context.parsed.y} mins`;
-                                return label;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        const ctxDrift = document.getElementById('driftChart').getContext('2d');
-        const driftWeekSlider = document.getElementById('drift-week-slider');
-        const driftWeekValue = document.getElementById('drift-week-value');
-        const driftPlayBtn = document.getElementById('drift-play-btn');
-        const driftVelocityReadout = document.getElementById('drift-velocity-readout');
-        const driftViewWeekly = document.getElementById('drift-view-weekly');
-        const driftViewCumulative = document.getElementById('drift-view-cumulative');
-        const vibeOutputLabel = document.getElementById('vibe-output-label');
-        const sdacOutputLabel = document.getElementById('sdac-output-label');
-
-        const vibeOutput = document.getElementById('vibe-output');
-        const vibeVariance = document.getElementById('vibe-variance');
-        const vibeDebt = document.getElementById('vibe-debt');
-        const vibeDebtBar = document.getElementById('vibe-debt-bar');
-        const sdacOutput = document.getElementById('sdac-output');
-        const sdacVariance = document.getElementById('sdac-variance');
-        const sdacMaturity = document.getElementById('sdac-maturity');
-        const sdacMaturityBar = document.getElementById('sdac-maturity-bar');
-
-        const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-        const sigmoid = (x) => 1 / (1 + Math.exp(-x));
-        const DRIFT_WEEKS = 26;
-        const CROSSOVER_WEEK = 8;
-
-        const computeVelocity = (week) => 1 + (9 * (week - 1)) / (DRIFT_WEEKS - 1); // 1..10
-        const computeVibeDebt = (week) => sigmoid((week - 10) / 2.2);
-        const computeSdacMaturity = (week) => sigmoid((week - CROSSOVER_WEEK) / 2.0);
-
-        const computeVibeOutput = (week) => {
-            const baseline = 13.5 - (0.5 * (week - 1));
-            const debtPenalty = week <= CROSSOVER_WEEK ? 0 : (0.45 * Math.pow(week - CROSSOVER_WEEK, 1.2));
-            return clamp(baseline - debtPenalty, -8, 16);
-        };
-
-        const computeSdacOutput = (week) => {
-            const maturity = computeSdacMaturity(week);
-            return clamp(7 + (6 * maturity), -8, 16);
-        };
-
-        const timeline = Array.from({ length: DRIFT_WEEKS }, (_, i) => {
-            const week = i + 1;
-            const velocity = computeVelocity(week);
-            const vibeMean = computeVibeOutput(week);
-            const sdacMean = computeSdacOutput(week);
-
-            const vibeVarPct = clamp(0.30 + ((velocity - 1) * 0.04), 0.30, 0.80);
-            const sdacVarPct = 0.05;
-
-            const vibeAmp = Math.max(2, Math.abs(vibeMean));
-            const sdacAmp = Math.max(2, Math.abs(sdacMean));
-            const yMin = -10;
-            const yMax = 18;
-
-            return {
-                week,
-                velocity,
-                vibeMean,
-                vibeUpper: clamp(vibeMean + (vibeAmp * vibeVarPct), yMin, yMax),
-                vibeLower: clamp(vibeMean - (vibeAmp * vibeVarPct), yMin, yMax),
-                vibeVarPct,
-                vibeDebt: computeVibeDebt(week),
-                sdacMean,
-                sdacUpper: clamp(sdacMean + (sdacAmp * sdacVarPct), yMin, yMax),
-                sdacLower: clamp(sdacMean - (sdacAmp * sdacVarPct), yMin, yMax),
-                sdacVarPct,
-                sdacMaturity: computeSdacMaturity(week)
-            };
-        });
-
-        const labels = timeline.map((row) => `W${row.week}`);
-        const vibeUpperFull = timeline.map((row) => row.vibeUpper);
-        const vibeLowerFull = timeline.map((row) => row.vibeLower);
-        const vibeMeanFull = timeline.map((row) => row.vibeMean);
-        const sdacUpperFull = timeline.map((row) => row.sdacUpper);
-        const sdacLowerFull = timeline.map((row) => row.sdacLower);
-        const sdacMeanFull = timeline.map((row) => row.sdacMean);
-
-        const cumulative = (values) => {
-            let sum = 0;
-            return values.map((value) => {
-                sum += value;
-                return sum;
-            });
-        };
-
-        const vibeUpperCumFull = cumulative(vibeUpperFull);
-        const vibeLowerCumFull = cumulative(vibeLowerFull);
-        const vibeMeanCumFull = cumulative(vibeMeanFull);
-        const sdacUpperCumFull = cumulative(sdacUpperFull);
-        const sdacLowerCumFull = cumulative(sdacLowerFull);
-        const sdacMeanCumFull = cumulative(sdacMeanFull);
-
-        const initialWeek = Number(driftWeekSlider ? driftWeekSlider.value : CROSSOVER_WEEK);
-        const slice = (arr, n) => arr.slice(0, n);
-        let driftView = 'weekly';
-
-        const crossoverLinePlugin = {
-            id: 'crossoverLine',
-            afterDraw(chart, args, opts) {
-                const week = (opts && opts.week) ? opts.week : CROSSOVER_WEEK;
-                const xScale = chart.scales.x;
-                if (!xScale) return;
-                const index = week - 1;
-                if (index < 0 || index >= xScale.ticks.length) return;
-
-                const x = xScale.getPixelForTick(index);
-                const { ctx, chartArea } = chart;
-
-                ctx.save();
-                ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
-                ctx.setLineDash([4, 4]);
-                ctx.beginPath();
-                ctx.moveTo(x, chartArea.top);
-                ctx.lineTo(x, chartArea.bottom);
-                ctx.stroke();
-
-                ctx.setLineDash([]);
-                ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
-                ctx.font = "12px 'JetBrains Mono', monospace";
-                ctx.fillText(`wk ${week}`, x + 6, chartArea.top + 14);
-                ctx.restore();
-            }
-        };
-
-        const driftChart = new Chart(ctxDrift, {
-            type: 'line',
-            data: {
-                labels: labels.slice(0, initialWeek),
-	                datasets: [
-	                    {
-	                        label: 'Vibe band (upper)',
-	                        data: slice(vibeUpperFull, initialWeek),
-	                        borderColor: 'rgba(239, 68, 68, 0)',
-	                        backgroundColor: 'rgba(239, 68, 68, 0.14)',
-	                        pointRadius: 0,
-	                        borderWidth: 0,
-	                        fill: false,
-	                        isBand: true
-	                    },
-	                    {
-	                        label: 'Vibe band (lower)',
-	                        data: slice(vibeLowerFull, initialWeek),
-	                        borderColor: 'rgba(239, 68, 68, 0)',
-	                        backgroundColor: 'rgba(239, 68, 68, 0.14)',
-	                        pointRadius: 0,
-	                        borderWidth: 0,
-	                        fill: 0,
-	                        isBand: true
-	                    },
-	                    {
-	                        label: 'SDaC band (upper)',
-	                        data: slice(sdacUpperFull, initialWeek),
-	                        borderColor: 'rgba(16, 185, 129, 0)',
-	                        backgroundColor: 'rgba(16, 185, 129, 0.12)',
-	                        pointRadius: 0,
-	                        borderWidth: 0,
-	                        fill: false,
-	                        isBand: true
-	                    },
-	                    {
-	                        label: 'SDaC band (lower)',
-	                        data: slice(sdacLowerFull, initialWeek),
-	                        borderColor: 'rgba(16, 185, 129, 0)',
-	                        backgroundColor: 'rgba(16, 185, 129, 0.12)',
-	                        pointRadius: 0,
-	                        borderWidth: 0,
-	                        fill: 2,
-	                        isBand: true
-	                    },
-                    {
-                        label: 'Vibe coding',
-                        data: slice(vibeMeanFull, initialWeek),
-                        borderColor: '#ef4444',
-                        backgroundColor: '#ef4444',
-                        pointRadius: 0,
-                        borderWidth: 2,
-                        tension: 0.25,
-                        fill: false
-                    },
-                    {
-                        label: 'SDaC',
-                        data: slice(sdacMeanFull, initialWeek),
-                        borderColor: '#10b981',
-                        backgroundColor: '#10b981',
-                        pointRadius: 0,
-                        borderWidth: 2,
-                        tension: 0.25,
-                        fill: false
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                scales: {
-                    x: {
-                        title: { display: true, text: 'Weeks' },
-                        grid: { color: '#1e293b' }
-                    },
-                    y: {
-                        title: { display: true, text: 'Net Output / Week' },
-                        grid: { color: '#1e293b' },
-                        suggestedMin: -10,
-                        suggestedMax: 16
-                    }
-                },
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#f8fafc',
-                            filter: (item, data) => !data.datasets[item.datasetIndex].isBand
-                        }
-                    },
-                    tooltip: {
-                        filter: (ctx) => !ctx.dataset.isBand
-                    },
-                    crossoverLine: { week: CROSSOVER_WEEK }
-                }
-            },
-            plugins: [crossoverLinePlugin]
-        });
-
-        const renderDriftReadout = (week) => {
-            const row = timeline[week - 1];
-            if (!row) return;
-
-            if (driftWeekValue) driftWeekValue.innerText = `${week} / ${DRIFT_WEEKS}`;
-            if (driftVelocityReadout) driftVelocityReadout.innerText = row.velocity.toFixed(1);
-
-            const vibeValue = driftView === 'weekly' ? row.vibeMean : vibeMeanCumFull[week - 1];
-            const sdacValue = driftView === 'weekly' ? row.sdacMean : sdacMeanCumFull[week - 1];
-
-            if (vibeOutputLabel) vibeOutputLabel.innerText = driftView === 'weekly' ? 'Net Output' : 'Cumulative Value';
-            if (sdacOutputLabel) sdacOutputLabel.innerText = driftView === 'weekly' ? 'Net Output' : 'Cumulative Value';
-
-            if (vibeOutput) vibeOutput.innerText = vibeValue.toFixed(1);
-            if (vibeVariance) vibeVariance.innerText = `${Math.round(row.vibeVarPct * 100)}%`;
-            if (vibeDebt) vibeDebt.innerText = `${Math.round(row.vibeDebt * 100)}%`;
-            if (vibeDebtBar) vibeDebtBar.style.width = `${Math.round(row.vibeDebt * 100)}%`;
-
-            if (sdacOutput) sdacOutput.innerText = sdacValue.toFixed(1);
-            if (sdacVariance) sdacVariance.innerText = `${Math.round(row.sdacVarPct * 100)}%`;
-            if (sdacMaturity) sdacMaturity.innerText = `${Math.round(row.sdacMaturity * 100)}%`;
-            if (sdacMaturityBar) sdacMaturityBar.style.width = `${Math.round(row.sdacMaturity * 100)}%`;
-        };
-
-        const updateDriftViewButtons = () => {
-            if (!driftViewWeekly || !driftViewCumulative) return;
-
-            if (driftView === 'weekly') {
-                driftViewWeekly.className = 'px-3 py-1.5 rounded-md bg-cyber-success/20 text-white border border-cyber-success/40';
-                driftViewCumulative.className = 'px-3 py-1.5 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors';
-            } else {
-                driftViewWeekly.className = 'px-3 py-1.5 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors';
-                driftViewCumulative.className = 'px-3 py-1.5 rounded-md bg-cyber-success/20 text-white border border-cyber-success/40';
-            }
-        };
-
-        const applyYAxisForView = (week) => {
-            if (!driftChart || !driftChart.options || !driftChart.options.scales || !driftChart.options.scales.y) return;
-            if (driftView === 'weekly') {
-                driftChart.options.scales.y.title.text = 'Net Output / Week';
-                driftChart.options.scales.y.suggestedMin = -10;
-                driftChart.options.scales.y.suggestedMax = 16;
-            } else {
-                driftChart.options.scales.y.title.text = 'Cumulative Value';
-                const w = clamp(week, 1, DRIFT_WEEKS);
-                const candidates = [
-                    vibeLowerCumFull.slice(0, w),
-                    vibeUpperCumFull.slice(0, w),
-                    sdacLowerCumFull.slice(0, w),
-                    sdacUpperCumFull.slice(0, w)
-                ];
-                let min = Infinity;
-                let max = -Infinity;
-                for (const arr of candidates) {
-                    for (const value of arr) {
-                        if (value < min) min = value;
-                        if (value > max) max = value;
-                    }
-                }
-                const pad = Math.max(4, (max - min) * 0.08);
-                driftChart.options.scales.y.suggestedMin = min - pad;
-                driftChart.options.scales.y.suggestedMax = max + pad;
-            }
-        };
-
-        const setDriftWeek = (week) => {
-            const w = clamp(week, 1, DRIFT_WEEKS);
-            driftChart.data.labels = labels.slice(0, w);
-            if (driftView === 'weekly') {
-                driftChart.data.datasets[0].data = slice(vibeUpperFull, w);
-                driftChart.data.datasets[1].data = slice(vibeLowerFull, w);
-                driftChart.data.datasets[2].data = slice(sdacUpperFull, w);
-                driftChart.data.datasets[3].data = slice(sdacLowerFull, w);
-                driftChart.data.datasets[4].data = slice(vibeMeanFull, w);
-                driftChart.data.datasets[5].data = slice(sdacMeanFull, w);
-            } else {
-                driftChart.data.datasets[0].data = slice(vibeUpperCumFull, w);
-                driftChart.data.datasets[1].data = slice(vibeLowerCumFull, w);
-                driftChart.data.datasets[2].data = slice(sdacUpperCumFull, w);
-                driftChart.data.datasets[3].data = slice(sdacLowerCumFull, w);
-                driftChart.data.datasets[4].data = slice(vibeMeanCumFull, w);
-                driftChart.data.datasets[5].data = slice(sdacMeanCumFull, w);
-            }
-            applyYAxisForView(w);
-            driftChart.update();
-            renderDriftReadout(w);
-        };
-
-        let driftPlayTimer = null;
-        const stopDriftPlay = () => {
-            if (driftPlayTimer) window.clearInterval(driftPlayTimer);
-            driftPlayTimer = null;
-            if (driftPlayBtn) driftPlayBtn.innerText = 'Play';
-        };
-
-        const startDriftPlay = () => {
-            if (!driftWeekSlider) return;
-            stopDriftPlay();
-            if (driftPlayBtn) driftPlayBtn.innerText = 'Pause';
-            driftPlayTimer = window.setInterval(() => {
-                const current = Number(driftWeekSlider.value);
-                if (current >= DRIFT_WEEKS) {
-                    stopDriftPlay();
-                    return;
-                }
-                const next = current + 1;
-                driftWeekSlider.value = String(next);
-                setDriftWeek(next);
-            }, 250);
-        };
-
-        if (driftWeekSlider) {
-            driftWeekSlider.addEventListener('input', () => {
-                stopDriftPlay();
-                setDriftWeek(Number(driftWeekSlider.value));
-            });
-        }
-
-        if (driftPlayBtn) {
-            driftPlayBtn.addEventListener('click', () => {
-                if (driftPlayTimer) {
-                    stopDriftPlay();
-                } else {
-                    startDriftPlay();
-                }
-            });
-        }
-
-        if (driftWeekSlider) driftWeekSlider.value = String(initialWeek);
-        updateDriftViewButtons();
-        setDriftWeek(initialWeek);
-
-        if (driftViewWeekly) {
-            driftViewWeekly.addEventListener('click', () => {
-                stopDriftPlay();
-                driftView = 'weekly';
-                updateDriftViewButtons();
-                setDriftWeek(Number(driftWeekSlider ? driftWeekSlider.value : initialWeek));
-            });
-        }
-
-	        if (driftViewCumulative) {
-	            driftViewCumulative.addEventListener('click', () => {
-	                stopDriftPlay();
-	                driftView = 'cumulative';
-	                updateDriftViewButtons();
-	                setDriftWeek(Number(driftWeekSlider ? driftWeekSlider.value : initialWeek));
-	            });
-	        }
-
-	        const moatLoop = document.querySelector('.moat-loop');
-	        if (moatLoop && typeof window !== 'undefined') {
-	            const reduceMotionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-	            const reduceMotion = Boolean(reduceMotionQuery && reduceMotionQuery.matches);
-
-	            if (!reduceMotion) {
-	                const START_SECONDS = 3.2; // slow start
-	                const MIN_SECONDS = 1.35;  // max speed (lower = faster)
-	                const TAU_MS = 14000;      // acceleration curve (higher = slower ramp)
-
-	                let raf = null;
-	                let tStart = null;
-	                let elapsed = 0;
-	                let lastNow = null;
-	                let isIntersecting = false;
-
-	                const updateDurations = (tMs) => {
-	                    const p = 1 - Math.exp(-tMs / TAU_MS); // 0..1
-	                    const duration = START_SECONDS - ((START_SECONDS - MIN_SECONDS) * p);
-	                    const hoverDuration = Math.max(0.9, duration * 0.72);
-	                    moatLoop.style.setProperty('--moat-loop-duration', `${duration.toFixed(3)}s`);
-	                    moatLoop.style.setProperty('--moat-loop-duration-hover', `${hoverDuration.toFixed(3)}s`);
-	                };
-
-	                const tick = (now) => {
-	                    lastNow = now;
-	                    if (tStart === null) tStart = now;
-	                    const tMs = elapsed + (now - tStart);
-	                    updateDurations(tMs);
-	                    raf = window.requestAnimationFrame(tick);
-	                };
-
-	                const start = () => {
-	                    if (raf) return;
-	                    tStart = null;
-	                    raf = window.requestAnimationFrame(tick);
-	                };
-
-	                const stop = () => {
-	                    if (!raf) return;
-	                    window.cancelAnimationFrame(raf);
-	                    raf = null;
-	                    if (tStart !== null && lastNow !== null) {
-	                        elapsed += lastNow - tStart;
-	                    }
-	                    tStart = null;
-	                    lastNow = null;
-	                };
-
-	                const reconcileRunState = () => {
-	                    if (document.hidden) {
-	                        stop();
-	                        return;
-	                    }
-	                    if (isIntersecting) start();
-	                    else stop();
-	                };
-
-	                updateDurations(0);
-
-	                if ('IntersectionObserver' in window) {
-	                    const observer = new IntersectionObserver((entries) => {
-	                        const entry = entries && entries[0];
-	                        isIntersecting = Boolean(entry && entry.isIntersecting);
-	                        reconcileRunState();
-	                    }, { threshold: 0.35 });
-	                    observer.observe(moatLoop);
-	                } else {
-	                    isIntersecting = true;
-	                    reconcileRunState();
-	                }
-
-	                document.addEventListener('visibilitychange', reconcileRunState, { passive: true });
-	            }
-	        }
-
-	        const chartLabels = ['Function Edit', 'Feature Cycle', 'System Refactor'];
-	        wrapLabel(chartLabels.join(' '), 16);
-	    })();
-	    </script>
-	</body>
+</body>
 </html>

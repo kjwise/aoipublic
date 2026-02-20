@@ -96,6 +96,7 @@
                 <span class="infographic-slide__meta">i1-section-01-shape-of-all-work</span>
               </div>
               <section class="col-span-1 md:col-span-12 mt-2 mb-12" data-infographic-section-id="i1-section-01-shape-of-all-work" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i1-section-01-shape-of-all-work</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <h2 class="text-3xl md:text-4xl font-bold text-brand-strong mb-3">The Shape of All Work</h2>
 <p class="text-brand-muted max-w-4xl leading-relaxed">
@@ -244,6 +245,7 @@
                 <span class="infographic-slide__meta">i2-section-00-state-run-new-state</span>
               </div>
               <div class="max-w-[1500px] mx-auto px-6 py-16 relative z-10" data-infographic-section-id="i2-section-00-state-run-new-state" data-infographic-selector="header &gt; div:nth-of-type(3)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-00-state-run-new-state</span>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 <div>
 <h4 class="text-cyber-accent font-mono text-sm tracking-widest uppercase mb-4">Software Development as Code (SDaC)</h4>
@@ -291,6 +293,7 @@
                 <span class="infographic-slide__meta">i2-section-02-clock-speed</span>
               </div>
               <section data-infographic-section-id="i2-section-02-clock-speed" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-02-clock-speed</span>
 <div class="text-center mb-12">
 <h2 class="text-3xl font-bold text-white mb-2">AI Changes the Clock Speed</h2>
 <p class="text-cyber-muted max-w-2xl mx-auto">
@@ -333,6 +336,7 @@
                 <span class="infographic-slide__meta">i2-section-03-drift-vs-convergence</span>
               </div>
               <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-03-drift-vs-convergence" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-03-drift-vs-convergence</span>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 <div class="lg:col-span-4 flex flex-col justify-center">
 <h2 class="text-3xl font-bold mb-4 text-white">Drift vs. Convergence</h2>
@@ -436,6 +440,7 @@
                 <span class="infographic-slide__meta">i1-section-03-inference-cost-paradox</span>
               </div>
               <section class="col-span-1 md:col-span-12 mb-8" data-infographic-section-id="i1-section-03-inference-cost-paradox" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i1-section-03-inference-cost-paradox</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
 <div class="flex flex-col md:flex-row gap-8">
 <div class="md:w-1/2">
@@ -559,6 +564,7 @@
                 <span class="infographic-slide__meta">i3-section-01-substrate</span>
               </div>
               <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-01-substrate" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i3-section-01-substrate</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -628,6 +634,7 @@
                 <span class="infographic-slide__meta">i3-section-02-mission-objects</span>
               </div>
               <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-02-mission-objects" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i3-section-02-mission-objects</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-accent">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -733,6 +740,7 @@
                 <span class="infographic-slide__meta">i3-section-03-deterministic-sandwich</span>
               </div>
               <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-03-deterministic-sandwich" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i3-section-03-deterministic-sandwich</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -838,6 +846,7 @@
                 <span class="infographic-slide__meta">i3-section-04-validator-bundles</span>
               </div>
               <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i3-section-04-validator-bundles</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-danger">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -908,6 +917,7 @@
                 <span class="infographic-slide__meta">i2-section-05-loop-is-the-moat</span>
               </div>
               <section class="text-center py-12" data-infographic-section-id="i2-section-05-loop-is-the-moat" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<span data-infographic-fragment-label="1" aria-hidden="true">i2-section-05-loop-is-the-moat</span>
 <div class="moat-loop inline-block p-1 bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent rounded-2xl">
 <svg aria-hidden="true" class="moat-loop-svg" preserveaspectratio="none" viewbox="0 0 100 100">
 <rect class="moat-loop-track" height="96" rx="16" width="96" x="2" y="2"></rect>

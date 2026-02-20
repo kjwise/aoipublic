@@ -2,222 +2,230 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://architectsofintent.com/appendix-a-setup-and-implementation-checklist</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/appendix-b-failure-mode-gallery</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/appendix-c-pattern-library</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/appendix-d-glossary-and-translation-guide</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-0-introduction</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-11-automated-refactoring-under-guards</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-12-governance-at-machine-speed</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-13-the-hofstadter-bridge</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-3-define-good-your-first-validators</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-7-intent-as-code-mission-objects</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/concepts</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-2</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-3</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
+  </url>
+  <url>
+    <loc>https://architectsofintent.com/infographic-4</loc>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-deck-10</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-deck</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-01-shape-of-all-work</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-02-mission-object-loop</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-03-inference-cost-paradox</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-04-limit-case-entropy</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-05-recursion-compounds</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-06-value-migration</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-07-steward-loop</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-08-optimization-terrain</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i1-section-09-hierarchy-of-stewardship</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i2-section-00-state-run-new-state</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i2-section-01-fractal-nature</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i2-section-02-clock-speed</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i2-section-03-drift-vs-convergence</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i2-section-04-moat-also-loop</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i2-section-05-loop-is-the-moat</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i2-section-06-executive-loop</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i2-section-07-intention-architecture</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-01-substrate</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-02-mission-objects</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-03-deterministic-sandwich</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-04-validator-bundles</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-05-always-on-loops</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-06-skeleton-first-rule</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-07-ratchet-gates</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-08-ouroboros-protocol</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-09-sensor-measurement</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic-library/fragments/i3-section-10-agent-execution-envelope</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
+  </url>
+  <url>
+    <loc>https://architectsofintent.com/infographic-library/fragments/i4-section-01-illusion-vs-results</loc>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/infographic</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/search</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://architectsofintent.com/toc</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
 </urlset>

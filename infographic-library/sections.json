@@ -352,6 +352,19 @@
         "Map / Terrain / Ledger"
       ],
       "notes": "Interactive gate model showing agent requests through tool, OS, and policy boundaries with ledger outcomes."
+    },
+    {
+      "id": "i4-section-01-illusion-vs-results",
+      "title": "The Illusion of AI vs. The Reality of Results",
+      "infographic": "infographic-4.html",
+      "source_selector": "main > section:nth-of-type(1)",
+      "status": "published",
+      "concepts": [
+        "Deterministic Sandwich",
+        "Mission Object",
+        "Physics"
+      ],
+      "notes": "Landing-page infographic with tabbed concept + deterministic sandwich simulator."
     }
   ]
 }

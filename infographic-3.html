@@ -16,7 +16,9 @@
 <script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
+<script defer="" src="infographic-deck-runtime.js"></script>
 <script>
         tailwind.config = {
             theme: {
@@ -44,111 +46,6 @@
             }
         };
     </script>
-<style>
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            height: 320px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 420px;
-            }
-        }
-
-        body {
-            background: radial-gradient(1200px 800px at 20% 0%, rgba(122, 162, 247, 0.18), transparent 55%),
-                        radial-gradient(900px 700px at 100% 30%, rgba(36, 204, 142, 0.10), transparent 55%),
-                        #0b0c10;
-        }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #11131a; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.16); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.24); }
-
-        .pill-tab {
-            padding: 0.45rem 0.75rem;
-            border-radius: 0.6rem;
-            color: rgba(181, 182, 191, 0.95);
-            transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
-            border: 1px solid transparent;
-            font-weight: 700;
-        }
-        .pill-tab[aria-pressed="true"] {
-            background: rgba(122, 162, 247, 0.16);
-            border-color: rgba(122, 162, 247, 0.35);
-            color: rgba(242, 243, 248, 0.98);
-        }
-        .pill-tab:hover { transform: translateY(-1px); }
-
-        .trace-line {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.08rem 0.35rem;
-            border-radius: 0.4rem;
-        }
-        .trace-read { background: rgba(122, 162, 247, 0.14); }
-        .trace-write { background: rgba(187, 154, 247, 0.14); }
-        .trace-exec { background: rgba(42, 195, 222, 0.12); }
-        .trace-swatch {
-            width: 10px;
-            height: 10px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        .trace-swatch.read { background: rgba(122, 162, 247, 0.85); }
-        .trace-swatch.write { background: rgba(187, 154, 247, 0.85); }
-        .trace-swatch.exec { background: rgba(42, 195, 222, 0.75); }
-
-        .soft-toggle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.75rem;
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            background: rgba(6, 7, 12, 0.72);
-            color: rgba(181, 182, 191, 0.96);
-            font-size: 0.85rem;
-            font-weight: 700;
-            transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
-            user-select: none;
-        }
-        .soft-toggle[aria-pressed="true"] {
-            border-color: rgba(187, 154, 247, 0.78);
-            background: rgba(187, 154, 247, 0.14);
-            color: rgba(242, 243, 248, 0.96);
-            box-shadow: 0 0 0 1px rgba(187, 154, 247, 0.25), 0 0 18px rgba(187, 154, 247, 0.12);
-        }
-        .soft-toggle:active { transform: translateY(1px); }
-
-        .attempt-pill {
-            height: 10px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.10);
-            transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
-        }
-        .attempt-pill.is-fail { background: rgba(247, 118, 142, 0.26); border-color: rgba(247, 118, 142, 0.30); }
-        .attempt-pill.is-pass { background: rgba(42, 195, 222, 0.22); border-color: rgba(42, 195, 222, 0.28); }
-
-        /* Prevent Safari/iOS range inputs from overflowing grid cells and visually overlapping neighbors. */
-        input[type="range"] {
-            display: block;
-            min-width: 0;
-            max-width: 100%;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .pill-tab, .soft-toggle, .attempt-pill { transition: none; }
-            .pill-tab:hover { transform: none; }
-        }
-    </style>
 </head>
 <body class="bg-brand-dark text-brand-text font-sans antialiased">
 <header class="bg-brand-dark text-white py-12 px-6 shadow-xl relative overflow-hidden">
@@ -168,6 +65,7 @@
 </header>
 <main class="max-w-[1500px] mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-12 gap-8">
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-01-substrate" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-01-substrate</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -231,6 +129,7 @@
 </div>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-02-mission-objects" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-02-mission-objects</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-accent">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -330,6 +229,7 @@
 </div>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-03-deterministic-sandwich" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-03-deterministic-sandwich</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -429,6 +329,7 @@
 </div>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-06-skeleton-first-rule</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -657,6 +558,7 @@
 </script>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-04-validator-bundles</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-danger">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -721,6 +623,7 @@
 </div>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-08-ouroboros-protocol" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-08-ouroboros-protocol</span>
 <style>
   [data-role="ouroboros-sim"] .ouro-phase {
     border: 1px solid rgba(255, 255, 255, 0.14);
@@ -1163,6 +1066,7 @@
 </script>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-07-ratchet-gates" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-07-ratchet-gates</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -1547,6 +1451,7 @@
 </script>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-05-always-on-loops" data-infographic-selector="main &gt; section:nth-of-type(8)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-05-always-on-loops</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
@@ -1602,6 +1507,7 @@
 </div>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-09-sensor-measurement" data-infographic-selector="main &gt; section:nth-of-type(9)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-09-sensor-measurement</span>
 <style>
   [data-role="sensor-uml"] .uml-card {
     border: 1px solid rgba(255, 255, 255, 0.14);
@@ -1968,6 +1874,7 @@
 </script>
 </section>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-10-agent-execution-envelope" data-infographic-selector="main &gt; section:nth-of-type(10)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-10-agent-execution-envelope</span>
 <style>
   [data-role="agent-sim"] .gate-pill {
     border: 1px solid rgba(255, 255, 255, 0.14);
@@ -2277,708 +2184,5 @@
 <p class="text-brand-muted text-sm">Generated for <strong>Architects of Intent</strong> Presentation</p>
 <p class="text-brand-muted text-xs mt-1">Practical SDaC Programming</p>
 </footer>
-<script>
-    (function() {
-        const theme = {
-            text: '#e7e7ea',
-            strong: '#f2f3f8',
-            muted: '#b5b6bf',
-            grid: 'rgba(255, 255, 255, 0.08)',
-            primary: '#7aa2f7',
-            accent: '#bb9af7',
-            vibrant: '#2ac3de',
-            danger: '#f7768e'
-        };
-
-        const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-        const toInt = (value, fallback) => {
-            const n = Number.parseInt(String(value), 10);
-            return Number.isFinite(n) ? n : fallback;
-        };
-
-        const escapeHtml = (s) =>
-            String(s || '')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
-
-        const setPressed = (btn, pressed) => btn && btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
-
-        const commonChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: { duration: 350 },
-            plugins: {
-                legend: {
-                    labels: {
-                        color: theme.muted,
-                        font: { family: 'Inter', size: 12 }
-                    }
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(17, 19, 26, 0.98)',
-                    padding: 12,
-                    titleColor: theme.strong,
-                    bodyColor: theme.text,
-                    titleFont: { size: 14, family: 'Inter' },
-                    bodyFont: { size: 13, family: 'Inter' },
-                },
-            },
-            scales: {
-                x: { ticks: { color: theme.muted }, grid: { color: theme.grid } },
-                y: { ticks: { color: theme.muted }, grid: { color: theme.grid } }
-            }
-        };
-
-        // Section 1: Substrate explorer
-        const setupSubstrateExplorer = () => {
-            const buttons = Array.from(document.querySelectorAll('[data-substrate-tab]'));
-            const traceBtn = document.getElementById('substrateTraceToggle');
-            const treeEl = document.getElementById('substrateTree');
-            const fileEl = document.getElementById('substrateFile');
-            const fileLabel = document.getElementById('substrateFileLabel');
-            if (!buttons.length || !traceBtn || !treeEl || !fileEl || !fileLabel) return;
-
-            const state = { tab: 'map', trace: false };
-
-            const data = {
-                map: {
-                    fileLabel: 'map/mission.yaml',
-                    file: `id: mission_bugfix_auth\nowner: platform\nobjective: Fix auth redirect loop\nconstraints:\n  - do not change public API\n  - keep p95 login < 250ms\nacceptance:\n  - unit tests pass\n  - integration: login flow green\nbudgets:\n  max_calls: 120\n  max_latency_s: 45`,
-                    tree: [
-                        { text: 'workspace/', kind: null },
-                        { text: '├── map/', kind: null },
-                        { text: '│   ├── mission.yaml', kind: 'read' },
-                        { text: '│   ├── contracts/', kind: null },
-                        { text: '│   │   └── login-flow.json', kind: 'read' },
-                        { text: '│   └── budgets.yaml', kind: 'read' },
-                        { text: '├── terrain/', kind: null },
-                        { text: '└── ledger/', kind: null },
-                    ],
-                },
-                terrain: {
-                    fileLabel: 'terrain/policies/auth.policy',
-                    file: `package auth\n\ndef allow_redirect(uri):\n  not startswith(uri, \"http\")\n  not contains(uri, \"//\")\n\n# deterministic policy gate\n`,
-                    tree: [
-                        { text: 'workspace/', kind: null },
-                        { text: '├── map/', kind: null },
-                        { text: '├── terrain/', kind: null },
-                        { text: '│   ├── src/', kind: 'exec' },
-                        { text: '│   │   └── auth/', kind: 'exec' },
-                        { text: '│   │       └── redirect.ts', kind: 'exec' },
-                        { text: '│   ├── schemas/', kind: 'read' },
-                        { text: '│   │   └── login.json', kind: 'read' },
-                        { text: '│   ├── tests/', kind: 'exec' },
-                        { text: '│   │   ├── test_login.ts', kind: 'exec' },
-                        { text: '│   │   └── test_redirect.ts', kind: 'exec' },
-                        { text: '│   └── policies/', kind: null },
-                        { text: '│       └── auth.policy', kind: 'read' },
-                        { text: '└── ledger/', kind: null },
-                    ],
-                },
-                ledger: {
-                    fileLabel: 'ledger/runs/run_1042.json',
-                    file: `{\n  \"run_id\": \"run_1042\",\n  \"mission_id\": \"mission_bugfix_auth\",\n  \"inputs\": { \"git_ref\": \"a1b2c3d\" },\n  \"validators\": {\n    \"tests\": \"pass\",\n    \"policy\": \"pass\",\n    \"security\": \"pass\"\n  },\n  \"diff\": { \"hash\": \"sha256:...\", \"files\": 3 },\n  \"decision\": \"merge\",\n  \"timestamp\": \"2026-02-13T21:18:00Z\"\n}`,
-                    tree: [
-                        { text: 'workspace/', kind: null },
-                        { text: '├── map/', kind: null },
-                        { text: '├── terrain/', kind: null },
-                        { text: '└── ledger/', kind: null },
-                        { text: '    ├── runs/', kind: null },
-                        { text: '    │   └── run_1042.json', kind: 'write' },
-                        { text: '    ├── evidence/', kind: null },
-                        { text: '    │   └── validators_1042.txt', kind: 'write' },
-                        { text: '    └── decisions.log', kind: 'write' },
-                    ],
-                },
-            };
-
-            const render = () => {
-                buttons.forEach((b) => setPressed(b, b.dataset.substrateTab === state.tab));
-                traceBtn.textContent = state.trace ? 'Trace: On' : 'Trace: Off';
-                traceBtn.setAttribute('aria-pressed', state.trace ? 'true' : 'false');
-
-                const d = data[state.tab] || data.map;
-                fileLabel.textContent = d.fileLabel;
-                fileEl.textContent = d.file;
-
-                const lines = d.tree.map((line) => {
-                    const safe = escapeHtml(line.text);
-                    if (!state.trace || !line.kind) return safe;
-                    const cls = line.kind === 'read' ? 'trace-line trace-read' : (line.kind === 'write' ? 'trace-line trace-write' : 'trace-line trace-exec');
-                    return `<span class=\"${cls}\">${safe}</span>`;
-                });
-                treeEl.innerHTML = lines.join('\n');
-            };
-
-            traceBtn.addEventListener('click', () => {
-                state.trace = !state.trace;
-                render();
-            });
-
-            buttons.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    const next = btn.dataset.substrateTab || 'map';
-                    state.tab = next;
-                    render();
-                });
-            });
-
-            render();
-        };
-
-        // Section 2: Mission object builder
-        const setupMissionObjectBuilder = () => {
-            const presetButtons = Array.from(document.querySelectorAll('[data-mission-preset]'));
-            const slider = document.getElementById('missionTightnessSlider');
-            const tightValue = document.getElementById('missionTightnessValue');
-            const missionYaml = document.getElementById('missionYaml');
-            const missionIdLabel = document.getElementById('missionIdLabel');
-            const retriesEl = document.getElementById('missionRetries');
-            const convEl = document.getElementById('missionConvergence');
-            const driftEl = document.getElementById('missionDrift');
-            const callsEl = document.getElementById('missionMaxCalls');
-            const latencyEl = document.getElementById('missionMaxLatency');
-            const flexEl = document.getElementById('missionFlex');
-            const flexBar = document.getElementById('missionFlexBar');
-            const tightEl = document.getElementById('missionTight');
-            const tightBar = document.getElementById('missionTightBar');
-
-            if (
-                !presetButtons.length ||
-                !slider ||
-                !tightValue ||
-                !missionYaml ||
-                !missionIdLabel ||
-                !retriesEl ||
-                !convEl ||
-                !driftEl ||
-                !callsEl ||
-                !latencyEl ||
-                !flexEl ||
-                !flexBar ||
-                !tightEl ||
-                !tightBar
-            ) return;
-
-            const presets = {
-                bugfix: {
-                    id: 'mission_bugfix_auth',
-                    objective: 'Fix auth redirect loop',
-                    budgets: { calls: 120, latency: '45s' },
-                    accepts: ['unit tests', 'integration: login flow'],
-                    constraints: ['do not change public API', 'keep p95 login < 250ms'],
-                },
-                feature: {
-                    id: 'mission_feature_billing',
-                    objective: 'Add usage-based billing endpoint',
-                    budgets: { calls: 180, latency: '70s' },
-                    accepts: ['contract tests', 'docs updated'],
-                    constraints: ['idempotent endpoint', 'no PII in logs'],
-                },
-                refactor: {
-                    id: 'mission_refactor_queue',
-                    objective: 'Refactor queue worker for determinism',
-                    budgets: { calls: 150, latency: '55s' },
-                    accepts: ['load test passes', 'no behavior regression'],
-                    constraints: ['keep schema stable', 'preserve retry semantics'],
-                },
-                compliance: {
-                    id: 'mission_compliance_policy',
-                    objective: 'Enforce retention policy in storage layer',
-                    budgets: { calls: 200, latency: '90s' },
-                    accepts: ['policy gate green', 'audit log entries'],
-                    constraints: ['append-only ledger', 'no bypass path'],
-                },
-            };
-
-            const state = { preset: 'bugfix', tight: clamp(toInt(slider.value, 55), 0, 100) };
-
-            const render = () => {
-                presetButtons.forEach((b) => setPressed(b, b.dataset.missionPreset === state.preset));
-                tightValue.textContent = `${state.tight}%`;
-                slider.value = String(state.tight);
-
-                const p = presets[state.preset] || presets.bugfix;
-                missionIdLabel.textContent = p.id;
-
-                const retries = clamp(1 + Math.round((100 - state.tight) / 18), 1, 7);
-                const convergence = clamp(Math.round(25 + 75 * Math.pow(state.tight / 100, 0.65)), 0, 100);
-                const drift = clamp(Math.round(85 - state.tight * 0.7), 5, 95);
-                const flex = clamp(100 - state.tight, 0, 100);
-
-                retriesEl.textContent = String(retries);
-                convEl.textContent = String(convergence);
-                driftEl.textContent = String(drift);
-                callsEl.textContent = String(p.budgets.calls);
-                latencyEl.textContent = p.budgets.latency;
-
-                flexEl.textContent = String(flex);
-                flexBar.style.width = `${flex}%`;
-                tightEl.textContent = String(state.tight);
-                tightBar.style.width = `${state.tight}%`;
-
-                const yaml = [
-                    `id: ${p.id}`,
-                    `objective: ${p.objective}`,
-                    `constraints:`,
-                    ...p.constraints.map((c) => `  - ${c}`),
-                    `acceptance:`,
-                    ...p.accepts.map((a) => `  - ${a}`),
-                    `budgets:`,
-                    `  max_calls: ${p.budgets.calls}`,
-                    `  max_latency: ${p.budgets.latency}`,
-                    `  constraint_tightness: ${state.tight}%`,
-                    `derived:`,
-                    `  expected_retries: ${retries}x`,
-                    `  convergence_rate: ${convergence}/100`,
-                    `  drift_risk: ${drift}/100`,
-                ].join('\n');
-
-                missionYaml.textContent = yaml;
-            };
-
-            slider.addEventListener('input', () => {
-                state.tight = clamp(toInt(slider.value, state.tight), 0, 100);
-                render();
-            });
-
-            presetButtons.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    state.preset = btn.dataset.missionPreset || 'bugfix';
-                    render();
-                });
-            });
-
-            render();
-        };
-
-        // Section 3: Sandwich simulator
-        const setupSandwichSimulator = () => {
-            const entropySlider = document.getElementById('sandwichEntropySlider');
-            const gateSlider = document.getElementById('sandwichGateSlider');
-            const entropyValue = document.getElementById('sandwichEntropyValue');
-            const gateValue = document.getElementById('sandwichGateValue');
-            const runBtn = document.getElementById('sandwichRunBtn');
-            const attempts = document.getElementById('sandwichAttempts');
-            const retriesEl = document.getElementById('sandwichRetries');
-            const qualityEl = document.getElementById('sandwichQuality');
-            const costEl = document.getElementById('sandwichExpectedCost');
-            const exitEl = document.getElementById('sandwichExit');
-            if (!entropySlider || !gateSlider || !entropyValue || !gateValue || !runBtn || !attempts || !retriesEl || !qualityEl || !costEl || !exitEl) return;
-
-            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            const state = {
-                entropy: clamp(toInt(entropySlider.value, 60), 0, 100),
-                gate: clamp(toInt(gateSlider.value, 70), 0, 100),
-                running: false,
-                timer: null,
-            };
-
-            const ensurePills = () => {
-                if (attempts.childElementCount >= 12) return;
-                attempts.innerHTML = '';
-                for (let i = 0; i < 12; i++) {
-                    const el = document.createElement('div');
-                    el.className = 'attempt-pill';
-                    attempts.appendChild(el);
-                }
-            };
-
-            const metrics = () => {
-                const entropy = state.entropy;
-                const gate = state.gate;
-                const retries = clamp(1 + Math.round(entropy / 18 + gate / 34), 1, 12);
-                const quality = clamp(Math.round(40 + gate * 0.55 - entropy * 0.18), 10, 95);
-                const expectedCost = clamp(Math.round(55 + retries * 8 + entropy * 0.12 + gate * 0.08), 40, 220);
-                const exit = gate >= 30 ? 'PASS' : 'PASS';
-                return { retries, quality, expectedCost, exit };
-            };
-
-            const render = () => {
-                entropySlider.value = String(state.entropy);
-                gateSlider.value = String(state.gate);
-                entropyValue.textContent = String(state.entropy);
-                gateValue.textContent = String(state.gate);
-
-                const m = metrics();
-                retriesEl.textContent = String(m.retries);
-                qualityEl.textContent = String(m.quality);
-                costEl.textContent = String(m.expectedCost);
-                exitEl.textContent = m.exit;
-            };
-
-            const clearRun = () => {
-                if (state.timer) window.clearInterval(state.timer);
-                state.timer = null;
-                state.running = false;
-                runBtn.textContent = 'Run';
-            };
-
-            const run = () => {
-                ensurePills();
-                clearRun();
-                state.running = true;
-                runBtn.textContent = 'Running…';
-
-                const pills = Array.from(attempts.children);
-                pills.forEach((p) => p.classList.remove('is-fail', 'is-pass'));
-
-                const m = metrics();
-                let idx = 0;
-                const total = m.retries;
-
-                const tick = () => {
-                    if (idx >= total) {
-                        clearRun();
-                        render();
-                        return;
-                    }
-                    const isLast = idx === total - 1;
-                    const el = pills[idx];
-                    if (el) {
-                        el.classList.add(isLast ? 'is-pass' : 'is-fail');
-                        if (!prefersReducedMotion) el.style.transform = 'translateY(-1px)';
-                        window.setTimeout(() => { if (el) el.style.transform = ''; }, 90);
-                    }
-                    idx += 1;
-                };
-
-                if (prefersReducedMotion) {
-                    // no animation, just final state
-                    for (let i = 0; i < total; i++) {
-                        const el = pills[i];
-                        if (el) el.classList.add(i === total - 1 ? 'is-pass' : 'is-fail');
-                    }
-                    clearRun();
-                    render();
-                    return;
-                }
-
-                tick();
-                state.timer = window.setInterval(tick, 140);
-            };
-
-            entropySlider.addEventListener('input', () => {
-                state.entropy = clamp(toInt(entropySlider.value, state.entropy), 0, 100);
-                render();
-            });
-            gateSlider.addEventListener('input', () => {
-                state.gate = clamp(toInt(gateSlider.value, state.gate), 0, 100);
-                render();
-            });
-            runBtn.addEventListener('click', () => {
-                if (state.running) clearRun();
-                else run();
-            });
-
-            window.addEventListener('beforeunload', clearRun, { once: true });
-            ensurePills();
-            render();
-        };
-
-        // Section 4: Validator bundle
-        const setupValidatorBundle = () => {
-            const diffEl = document.getElementById('validatorDiff');
-            const ledgerEl = document.getElementById('validatorLedger');
-            const resultsEl = document.getElementById('validatorResults');
-            const runIdEl = document.getElementById('validatorRunId');
-            const budgetSlider = document.getElementById('validatorBudgetSlider');
-            const budgetValue = document.getElementById('validatorBudgetValue');
-            const runBtn = document.getElementById('validatorRunBtn');
-            const toggleButtons = Array.from(document.querySelectorAll('[data-validator]'));
-            if (!diffEl || !ledgerEl || !resultsEl || !runIdEl || !budgetSlider || !budgetValue || !runBtn || !toggleButtons.length) return;
-
-            const issues = [
-                { key: 'schema', label: 'Schema mismatch: login.redirectUri missing', caughtBy: 'schema' },
-                { key: 'tests', label: 'Unit regression: redirect loop not covered', caughtBy: 'tests' },
-                { key: 'security', label: 'Security: open redirect possible', caughtBy: 'security' },
-                { key: 'policy', label: 'Policy: external URL disallowed', caughtBy: 'policy' },
-                { key: 'style', label: 'Style: lint + formatting', caughtBy: 'style' },
-                { key: 'integration', label: 'Integration: login flow end-to-end', caughtBy: 'integration' },
-            ];
-
-            const sampleDiff = [
-                'diff --git a/src/auth/redirect.ts b/src/auth/redirect.ts',
-                'index 11aa22..33bb44 100644',
-                '--- a/src/auth/redirect.ts',
-                '+++ b/src/auth/redirect.ts',
-                '@@',
-                '-export function redirect(uri: string) {',
-                '-  return uri;',
-                '-}',
-                '+export function redirect(uri: string) {',
-                '+  // TODO: validate uri',
-                '+  return decodeURIComponent(uri);',
-                '+}',
-                '',
-                'diff --git a/schemas/login.json b/schemas/login.json',
-                '@@',
-                '-  \"redirectUri\": { \"type\": \"string\" }',
-                '+  \"redirect\": { \"type\": \"string\" }',
-            ].join('\n');
-
-            diffEl.textContent = sampleDiff;
-
-            const state = {
-                active: new Set(toggleButtons.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.validator)),
-                budget: clamp(toInt(budgetSlider.value, 4), 1, 10),
-                runId: 0,
-            };
-
-            const render = () => {
-                budgetValue.textContent = String(state.budget);
-                budgetSlider.value = String(state.budget);
-
-                const activeValidators = Array.from(state.active).sort();
-                const caught = issues.filter((i) => state.active.has(i.caughtBy));
-                const neededAttempts = 1 + caught.length;
-                const attemptsUsed = Math.min(state.budget, neededAttempts);
-                const boundedFail = state.budget < neededAttempts;
-                const outcome = boundedFail ? 'bounded-fail' : (caught.length === 0 ? 'pass' : 'pass');
-
-                resultsEl.innerHTML = '';
-                issues.forEach((issue) => {
-                    const isEnabled = state.active.has(issue.caughtBy);
-                    const isCaught = isEnabled;
-                    const status = isEnabled ? (isCaught ? 'FAIL' : 'PASS') : 'SKIP';
-                    const color = status === 'FAIL' ? 'text-brand-danger' : (status === 'PASS' ? 'text-brand-vibrant' : 'text-brand-muted');
-                    const line = document.createElement('div');
-                    line.className = 'flex items-start justify-between gap-3';
-                    line.innerHTML = `<span class="text-brand-muted">${escapeHtml(issue.label)}</span><span class="font-mono ${color}">${status}</span>`;
-                    resultsEl.appendChild(line);
-                });
-
-                runIdEl.textContent = `run_${String(state.runId).padStart(3, '0')}`;
-                const ledger = {
-                    run_id: runIdEl.textContent,
-                    mission_id: 'mission_bugfix_auth',
-                    budget: { max_attempts: state.budget },
-                    validators: activeValidators,
-                    attempts_used: attemptsUsed,
-                    outcome,
-                    notes: boundedFail
-                        ? 'Budget exhausted: deterministic exit with partial evidence.'
-                        : 'Bundle executed: evidence recorded; deterministic decision available.',
-                };
-                ledgerEl.textContent = JSON.stringify(ledger, null, 2);
-            };
-
-            const bumpRun = () => {
-                state.runId += 1;
-                render();
-            };
-
-            budgetSlider.addEventListener('input', () => {
-                state.budget = clamp(toInt(budgetSlider.value, state.budget), 1, 10);
-                render();
-            });
-
-            runBtn.addEventListener('click', () => bumpRun());
-
-            toggleButtons.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    const key = btn.dataset.validator || '';
-                    if (!key) return;
-                    if (state.active.has(key)) state.active.delete(key);
-                    else state.active.add(key);
-                    btn.setAttribute('aria-pressed', state.active.has(key) ? 'true' : 'false');
-                    render();
-                });
-            });
-
-            render();
-        };
-
-        // Section 5: Always-on loops chart
-        const setupAlwaysOnLoops = () => {
-            const weekSlider = document.getElementById('maintWeekSlider');
-            const weekValue = document.getElementById('maintWeekValue');
-            const debtEl = document.getElementById('maintDebt');
-            const incidentsEl = document.getElementById('maintIncidents');
-            const p95El = document.getElementById('maintP95');
-            const chartEl = document.getElementById('maintenanceChart');
-            const loopButtons = Array.from(document.querySelectorAll('[data-maint-loop]'));
-            if (!weekSlider || !weekValue || !debtEl || !incidentsEl || !p95El || !chartEl || !loopButtons.length) return;
-
-            const MAX_WEEK = 26;
-            const state = {
-                week: clamp(toInt(weekSlider.value, 8), 0, MAX_WEEK),
-                loops: new Set(loopButtons.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.maintLoop)),
-            };
-
-            const simulate = (loops) => {
-                const weeks = [];
-                const debt = [];
-                const p95 = [];
-                const incidents = [];
-
-                for (let w = 0; w <= MAX_WEEK; w++) {
-                    const autonomy = clamp(20 + w * 3.2, 0, 100);
-                    let d = 38 + w * 2.7;
-                    if (loops.has('map')) d -= w * 0.9;
-                    if (loops.has('dream')) d -= Math.max(0, w - 4) * 1.0;
-                    if (loops.has('refactor')) d -= Math.max(0, w - 2) * 1.25;
-                    if (loops.has('governance')) d -= w * 0.55;
-                    d = clamp(d, 0, 100);
-
-                    let expected = 62 + autonomy * 0.55 + d * 0.38;
-                    // maintenance overhead (small) for always-on loops
-                    expected += loops.has('map') ? 2.0 : 0;
-                    expected += loops.has('dream') ? 2.5 : 0;
-                    expected += loops.has('refactor') ? 2.5 : 0;
-                    expected += loops.has('governance') ? 2.0 : 0;
-
-                    let pricing = 25 + Math.pow(autonomy / 100, 1.25) * 75;
-                    let frontier = 18 + Math.pow(autonomy / 100, 1.55) * 65;
-                    // governance buys down tail-risk by constraining failure modes
-                    if (loops.has('governance')) frontier = clamp(frontier * 0.92, 0, 100);
-
-                    if (loops.has('hedged')) {
-                        // hedging mostly caps volatility / tail exposure while adding some fixed overhead
-                        expected += 6;
-                        pricing = Math.min(pricing * 0.35, 18);
-                    }
-
-                    const tailFactor = 1 + pricing * 0.008 + frontier * 0.004;
-                    const p95Cost = clamp(expected * tailFactor, expected, 260);
-
-                    const incBase = Math.pow(d / 100, 2) * 8;
-                    const inc = clamp(Math.round(incBase * (loops.has('governance') ? 0.55 : 1.0)), 0, 10);
-
-                    weeks.push(`W${w}`);
-                    debt.push(d);
-                    p95.push(p95Cost);
-                    incidents.push(inc);
-                }
-
-                return { weeks, debt, p95, incidents };
-            };
-
-            const markerPlugin = {
-                id: 'weekMarker',
-                afterDraw(chart) {
-                    const w = state.week;
-                    const xScale = chart.scales.x;
-                    const area = chart.chartArea;
-                    if (!xScale || !area) return;
-                    const x = xScale.getPixelForValue(w);
-                    const ctx = chart.ctx;
-                    ctx.save();
-                    ctx.strokeStyle = 'rgba(242, 243, 248, 0.22)';
-                    ctx.setLineDash([4, 4]);
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(x, area.top);
-                    ctx.lineTo(x, area.bottom);
-                    ctx.stroke();
-                    ctx.restore();
-                }
-            };
-
-            const ctx = chartEl.getContext('2d');
-            const chartState = { chart: null };
-
-            const render = () => {
-                weekValue.textContent = String(state.week);
-                weekSlider.value = String(state.week);
-
-                const series = simulate(state.loops);
-                const d = series.debt[state.week] ?? series.debt[0];
-                const p = series.p95[state.week] ?? series.p95[0];
-                const inc = series.incidents[state.week] ?? series.incidents[0];
-                debtEl.textContent = String(Math.round(d));
-                incidentsEl.textContent = String(inc);
-                p95El.textContent = String(Math.round(p));
-
-                if (!chartState.chart) {
-                    chartState.chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: series.weeks,
-                            datasets: [
-                                {
-                                    label: 'Entropy debt',
-                                    data: series.debt,
-                                    borderColor: theme.danger,
-                                    backgroundColor: 'rgba(247, 118, 142, 0.12)',
-                                    borderWidth: 2,
-                                    tension: 0.28,
-                                    pointRadius: 0,
-                                    yAxisID: 'yDebt',
-                                },
-                                {
-                                    label: 'P95 cost/outcome',
-                                    data: series.p95,
-                                    borderColor: theme.accent,
-                                    backgroundColor: 'rgba(187, 154, 247, 0.10)',
-                                    borderWidth: 2,
-                                    tension: 0.28,
-                                    pointRadius: 0,
-                                    yAxisID: 'yCost',
-                                },
-                            ],
-                        },
-                        options: {
-                            ...commonChartOptions,
-                            interaction: { mode: 'index', intersect: false },
-                            scales: {
-                                x: { ticks: { color: theme.muted }, grid: { color: theme.grid } },
-                                yDebt: {
-                                    position: 'left',
-                                    min: 0,
-                                    max: 100,
-                                    title: { display: true, text: 'Debt', color: theme.muted },
-                                    ticks: { color: theme.muted },
-                                    grid: { color: theme.grid },
-                                },
-                                yCost: {
-                                    position: 'right',
-                                    min: 40,
-                                    max: 260,
-                                    title: { display: true, text: 'P95 cost', color: theme.muted },
-                                    ticks: { color: theme.muted },
-                                    grid: { display: false },
-                                },
-                            },
-                        },
-                        plugins: [markerPlugin],
-                    });
-                } else {
-                    chartState.chart.data.labels = series.weeks;
-                    chartState.chart.data.datasets[0].data = series.debt;
-                    chartState.chart.data.datasets[1].data = series.p95;
-                    chartState.chart.update('none');
-                }
-            };
-
-            weekSlider.addEventListener('input', () => {
-                state.week = clamp(toInt(weekSlider.value, state.week), 0, MAX_WEEK);
-                render();
-            });
-
-            loopButtons.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    const key = btn.dataset.maintLoop || '';
-                    if (!key) return;
-                    if (state.loops.has(key)) state.loops.delete(key);
-                    else state.loops.add(key);
-                    btn.setAttribute('aria-pressed', state.loops.has(key) ? 'true' : 'false');
-                    render();
-                });
-            });
-
-            render();
-        };
-
-        // Boot
-        setupSubstrateExplorer();
-        setupMissionObjectBuilder();
-        setupSandwichSimulator();
-        setupValidatorBundle();
-        setupAlwaysOnLoops();
-    })();
-    </script>
 </body>
 </html>
