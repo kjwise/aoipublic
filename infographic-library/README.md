@@ -54,7 +54,7 @@ rg "\\{\\{infographic-section\\s+\"...\"\\}\\}" build/web/infographic*.html
 
 For a longer implementation walkthrough, use:
 
-`skills/markdown-driven-infographic-fragments.md`
+`~/.codex/skills/markdown-driven-infographic-fragments/SKILL.md`
 
 ## Required fields
 
