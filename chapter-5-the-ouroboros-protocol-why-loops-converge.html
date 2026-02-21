@@ -30,6 +30,52 @@
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="script.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              dark: '#0b0c10',
+              surface: 'rgba(17, 19, 26, 0.92)',
+              panel: 'rgba(17, 19, 26, 0.92)',
+              light: 'rgba(255, 255, 255, 0.03)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              text: '#e7e7ea',
+              strong: '#f2f3f8',
+              muted: '#b5b6bf',
+              primary: '#7aa2f7',
+              accent: '#bb9af7',
+              vibrant: '#2ac3de',
+              danger: '#f7768e',
+              success: '#10b981',
+            },
+            cyber: {
+              dark: '#0B0F19',
+              panel: '#151B2B',
+              primary: '#6366f1',
+              accent: '#06b6d4',
+              neon: '#d946ef',
+              success: '#10b981',
+              danger: '#ef4444',
+              text: '#f8fafc',
+              muted: '#94a3b8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -60,6 +106,449 @@ own artifacts as input: the last diff and the deterministic failure
 signal. But this is not an endless cycle. It is <a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a> with an exit
 strategy: converge to a stable passing state, or abort via circuit
 breakers and leave the Terrain unchanged.</p>
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-08-ouroboros-protocol" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-08-ouroboros-protocol</span>
+<style>
+  [data-role="ouroboros-sim"] .ouro-phase {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.5);
+    color: #b5b6bf;
+    transition: all 180ms ease;
+  }
+  [data-role="ouroboros-sim"] .ouro-phase[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+    color: #f2f3f8;
+    box-shadow: 0 0 0 1px rgba(42, 195, 222, 0.2) inset;
+  }
+  [data-role="ouroboros-sim"] .attempt-pill.is-trip {
+    background: rgba(187, 154, 247, 0.24);
+    border-color: rgba(187, 154, 247, 0.34);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-role="ouroboros-sim"] .ouro-phase {
+      transition: none;
+    }
+  }
+</style>
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Ouroboros Protocol (Write → Judge → Refine)</h2>
+<p class="text-brand-muted leading-relaxed">
+        This is the control loop for iterative delivery: write a bounded candidate, judge it with deterministic gates,
+        then refine only against the failure signal. Repeat until convergence or circuit-break.
+      </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Deterministic stop conditions</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">Write → <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> → Refine</span>
+<span class="block mt-2">Stop on <span class="font-mono text-brand-strong">PASS</span> (converged) or on
+          <span class="font-mono text-brand-strong">budget exhausted</span> (escalate).</span>
+<span class="block mt-2">Judge can route to refine, rewrite, or re-scope before the next loop.</span>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12 space-y-4" data-role="ouroboros-sim">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Target quality</span>
+<span class="font-mono text-brand-strong"><span data-role="target-value">86</span>/100</span>
+</div>
+<label class="sr-only" for="ouroTargetSlider">Target quality slider</label>
+<input class="mt-2 w-full" data-role="target-slider" id="ouroTargetSlider" max="95" min="65" step="1" type="range" value="86"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Circuit breaker</span>
+<span class="font-mono text-brand-strong"><span data-role="budget-value">8</span> loops</span>
+</div>
+<label class="sr-only" for="ouroBudgetSlider">Circuit breaker slider</label>
+<input class="mt-2 w-full" data-role="budget-slider" id="ouroBudgetSlider" max="16" min="3" step="1" type="range" value="8"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Refinement strength</span>
+<span class="font-mono text-brand-strong"><span data-role="refine-value">55</span>/100</span>
+</div>
+<label class="sr-only" for="ouroRefineSlider">Refinement strength slider</label>
+<input class="mt-2 w-full" data-role="refine-slider" id="ouroRefineSlider" max="100" min="25" step="1" type="range" value="55"/>
+</div>
+<div class="md:col-span-6">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Stochasticity</span>
+<span class="font-mono text-brand-strong"><span data-role="noise-value">45</span>/100</span>
+</div>
+<label class="sr-only" for="ouroNoiseSlider">Stochasticity slider</label>
+<input class="mt-2 w-full" data-role="noise-slider" id="ouroNoiseSlider" max="100" min="0" step="1" type="range" value="45"/>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-3 gap-2 text-xs font-mono">
+<div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="write" data-role="phase-pill">WRITE</div>
+<div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="judge" data-role="phase-pill">JUDGE</div>
+<div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="refine" data-role="phase-pill">REFINE</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-2">
+<button class="soft-toggle font-mono" data-role="step" type="button">Step Once</button>
+<button class="soft-toggle font-mono" data-role="run" type="button">Run Loop</button>
+<button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Loop count</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="loop-count">0</span></div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Current quality</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="quality">52</span>/100</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Open errors</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="errors">6</span></div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Status</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">READY</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Structured error object</div>
+<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap" data-role="error-json"></pre>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Ready. Run one bounded cycle.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Loop outcomes</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, red = refine, violet = circuit-break</div>
+</div>
+<div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+(function () {
+  const script = document.currentScript;
+  const root = script ? script.closest('[data-infographic-section-id="i3-section-08-ouroboros-protocol"]') : null;
+  if (!root || root.dataset.ouroborosReady === "1") return;
+  root.dataset.ouroborosReady = "1";
+
+  const sim = root.querySelector('[data-role="ouroboros-sim"]');
+  if (!sim) return;
+
+  const targetSlider = sim.querySelector('[data-role="target-slider"]');
+  const budgetSlider = sim.querySelector('[data-role="budget-slider"]');
+  const refineSlider = sim.querySelector('[data-role="refine-slider"]');
+  const noiseSlider = sim.querySelector('[data-role="noise-slider"]');
+  const targetValue = sim.querySelector('[data-role="target-value"]');
+  const budgetValue = sim.querySelector('[data-role="budget-value"]');
+  const refineValue = sim.querySelector('[data-role="refine-value"]');
+  const noiseValue = sim.querySelector('[data-role="noise-value"]');
+  const loopCountEl = sim.querySelector('[data-role="loop-count"]');
+  const qualityEl = sim.querySelector('[data-role="quality"]');
+  const errorsEl = sim.querySelector('[data-role="errors"]');
+  const statusEl = sim.querySelector('[data-role="status"]');
+  const errorJsonEl = sim.querySelector('[data-role="error-json"]');
+  const outcomeEl = sim.querySelector('[data-role="outcome"]');
+  const attemptsEl = sim.querySelector('[data-role="attempts"]');
+  const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
+  const stepBtn = sim.querySelector('[data-role="step"]');
+  const runBtn = sim.querySelector('[data-role="run"]');
+  const resetBtn = sim.querySelector('[data-role="reset"]');
+
+  if (!targetSlider || !budgetSlider || !refineSlider || !noiseSlider || !targetValue || !budgetValue || !refineValue || !noiseValue ||
+      !loopCountEl || !qualityEl || !errorsEl || !statusEl || !errorJsonEl || !outcomeEl || !attemptsEl ||
+      !stepBtn || !runBtn || !resetBtn || phasePills.length === 0) return;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const toInt = (v, fallback) => {
+    const n = Number.parseInt(String(v), 10);
+    return Number.isFinite(n) ? n : fallback;
+  };
+  const randSigned = () => (Math.random() * 2) - 1;
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const phaseDelay = reducedMotion ? 0 : 140;
+  const loopDelay = reducedMotion ? 0 : 220;
+
+  const state = {
+    target: toInt(targetSlider.value, 86),
+    budget: toInt(budgetSlider.value, 8),
+    refine: toInt(refineSlider.value, 55),
+    noise: toInt(noiseSlider.value, 45),
+    loop: 0,
+    quality: 52,
+    errors: 6,
+    status: "READY",
+    running: false,
+    animating: false,
+    failStreak: 0,
+    lastSignal: {
+      run: 0,
+      code: "ready",
+      gate: "quality_floor",
+      expected: "score >= 86 and errors <= 1",
+      actual: "score=34, errors=6",
+      deficit: 52,
+      next_action: "write"
+    }
+  };
+
+  const setPhase = (name) => {
+    for (const pill of phasePills) {
+      pill.dataset.active = pill.dataset.phase === name ? "1" : "0";
+    }
+  };
+
+  const clearPhases = () => setPhase("");
+
+  const appendAttempt = (kind) => {
+    const pill = document.createElement("span");
+    const suffix = kind === "pass" ? "is-pass" : kind === "trip" ? "is-trip" : "is-fail";
+    pill.className = `attempt-pill ${suffix}`;
+    attemptsEl.appendChild(pill);
+    while (attemptsEl.children.length > 36) {
+      attemptsEl.removeChild(attemptsEl.firstChild);
+    }
+  };
+
+  const render = () => {
+    targetValue.textContent = String(state.target);
+    budgetValue.textContent = String(state.budget);
+    refineValue.textContent = String(state.refine);
+    noiseValue.textContent = String(state.noise);
+    loopCountEl.textContent = String(state.loop);
+    qualityEl.textContent = String(state.quality);
+    errorsEl.textContent = String(state.errors);
+
+    let statusColor = "#b5b6bf";
+    if (state.status === "PASS") statusColor = "#2ac3de";
+    if (state.status === "TRIP") statusColor = "#bb9af7";
+    if (state.status === "ITERATING") statusColor = "#f2f3f8";
+    statusEl.textContent = state.status;
+    statusEl.style.color = statusColor;
+
+    errorJsonEl.textContent = JSON.stringify(state.lastSignal, null, 2);
+
+    if (state.status === "PASS") {
+      outcomeEl.textContent = "PASS: converged under deterministic gates.";
+    } else if (state.status === "TRIP") {
+      outcomeEl.textContent = `CIRCUIT BREAK: loop budget (${state.budget}) exhausted. Escalate with evidence.`;
+    } else if (state.status === "ITERATING") {
+      const nextAction = state.lastSignal.next_action || "refine";
+      if (nextAction === "rewrite") {
+        outcomeEl.textContent = "Judge selected rewrite: regenerate candidate with adjusted context.";
+      } else if (nextAction === "re-scope") {
+        outcomeEl.textContent = "Judge selected re-scope: tighten mission boundaries before next write.";
+      } else {
+        outcomeEl.textContent = "Judge selected refine: targeted mutation from the failure signal.";
+      }
+    } else {
+      outcomeEl.textContent = "Ready. Run one bounded cycle.";
+    }
+
+    runBtn.textContent = state.running ? "Stop" : "Run Loop";
+  };
+
+  const pickDecision = (choices) => {
+    const stochastic = state.noise / 100;
+    if (stochastic < 0.08) {
+      return choices.reduce((best, item) => (item.weight > best.weight ? item : best), choices[0]).action;
+    }
+    const total = choices.reduce((sum, item) => sum + Math.max(0, item.weight), 0);
+    const r = Math.random() * (total || 1);
+    let cursor = 0;
+    for (const item of choices) {
+      cursor += Math.max(0, item.weight);
+      if (r <= cursor) return item.action;
+    }
+    return choices[choices.length - 1].action;
+  };
+
+  const evaluateCycle = () => {
+    const cycle = state.loop + 1;
+    const deficit = Math.max(0, state.target - state.quality);
+    const noiseScale = state.noise / 100;
+    const writeGain = clamp(
+      Math.round(deficit * (0.10 + state.refine / 250) + (randSigned() * 6 * noiseScale)),
+      -2,
+      18
+    );
+    const candidateQuality = clamp(state.quality + writeGain, 0, 100);
+    const errorNoise = Math.random() < (0.14 + (noiseScale * 0.18)) ? 1 : 0;
+    const candidateErrors = clamp(
+      state.errors - Math.max(0, Math.floor((writeGain + 1) / 4)) + errorNoise,
+      0,
+      12
+    );
+    const gateScore = candidateQuality - (candidateErrors * 3) + (randSigned() * 7 * noiseScale);
+    const pass = gateScore >= state.target && candidateErrors <= 1;
+    const budgetHit = cycle >= state.budget;
+
+    let nextQuality = candidateQuality;
+    let nextErrors = candidateErrors;
+    let nextStatus = pass ? "PASS" : (budgetHit ? "TRIP" : "ITERATING");
+    let nextAction = pass ? "accept" : (budgetHit ? "escalate" : "refine");
+    let showRefinePhase = false;
+
+    if (pass) {
+      state.failStreak = 0;
+    } else {
+      state.failStreak += 1;
+    }
+
+    if (!pass && !budgetHit) {
+      const refineBoost = Math.max(1, Math.round((state.refine - 35) / 18));
+      const deficitNow = Math.max(0, state.target - gateScore);
+      const decision = pickDecision([
+        { action: "refine", weight: clamp(0.38 + (state.refine / 240) + (deficitNow / 280), 0.2, 0.8) },
+        { action: "rewrite", weight: clamp(0.26 + (state.noise / 260) + (state.failStreak / 35), 0.12, 0.65) },
+        { action: "re-scope", weight: clamp(0.20 + ((100 - state.refine) / 420), 0.06, 0.42) }
+      ]);
+
+      nextAction = decision;
+      if (decision === "refine") {
+        nextQuality = clamp(candidateQuality + refineBoost + (randSigned() * 3 * noiseScale), 0, 100);
+        nextErrors = Math.max(0, candidateErrors - 1);
+        showRefinePhase = true;
+      } else if (decision === "rewrite") {
+        nextQuality = clamp(candidateQuality - 1 + (randSigned() * 4 * noiseScale), 0, 100);
+        nextErrors = clamp(candidateErrors + (Math.random() < (0.20 + 0.25 * noiseScale) ? 1 : 0), 0, 12);
+      } else {
+        nextQuality = clamp(state.quality + Math.max(0, Math.round(deficit * 0.05 + (randSigned() * 2 * noiseScale))), 0, 100);
+        nextErrors = Math.max(0, state.errors - (Math.random() < 0.35 ? 1 : 0));
+      }
+    }
+
+    state.loop = cycle;
+    state.quality = nextQuality;
+    state.errors = nextErrors;
+    state.status = nextStatus;
+    state.lastSignal = {
+      run: state.loop,
+      code: pass ? "pass" : "validator_fail",
+      gate: "quality_floor",
+      expected: `score >= ${state.target} and errors <= 1`,
+      actual: `score=${Math.round(gateScore)}, errors=${candidateErrors}`,
+      deficit: Math.max(0, state.target - Math.round(gateScore)),
+      next_action: nextAction
+    };
+
+    appendAttempt(pass ? "pass" : (nextStatus === "TRIP" ? "trip" : "fail"));
+    render();
+    return { action: nextAction, showRefinePhase };
+  };
+
+  const runAnimatedCycle = (done) => {
+    if (state.animating) {
+      if (done) done();
+      return;
+    }
+    if (state.status === "PASS" || state.status === "TRIP") {
+      if (done) done();
+      return;
+    }
+    state.animating = true;
+    setPhase("write");
+    window.setTimeout(() => {
+      setPhase("judge");
+      window.setTimeout(() => {
+        const result = evaluateCycle() || {};
+        if (result.showRefinePhase) {
+          setPhase("refine");
+          window.setTimeout(() => {
+            clearPhases();
+            state.animating = false;
+            if (done) done();
+          }, phaseDelay);
+          return;
+        }
+        clearPhases();
+        state.animating = false;
+        if (done) done();
+      }, phaseDelay);
+    }, phaseDelay);
+  };
+
+  const stopRun = () => {
+    state.running = false;
+    render();
+  };
+
+  const runLoop = () => {
+    if (state.running) {
+      stopRun();
+      return;
+    }
+    if (state.status === "PASS" || state.status === "TRIP") return;
+    state.running = true;
+    render();
+
+    const tick = () => {
+      if (!state.running) return;
+      runAnimatedCycle(() => {
+        if (state.status === "PASS" || state.status === "TRIP") {
+          stopRun();
+          return;
+        }
+        window.setTimeout(tick, loopDelay);
+      });
+    };
+    tick();
+  };
+
+  targetSlider.addEventListener("input", () => {
+    state.target = toInt(targetSlider.value, state.target);
+    state.lastSignal.expected = `score >= ${state.target} and errors <= 1`;
+    render();
+  });
+  budgetSlider.addEventListener("input", () => {
+    state.budget = toInt(budgetSlider.value, state.budget);
+    render();
+  });
+  refineSlider.addEventListener("input", () => {
+    state.refine = toInt(refineSlider.value, state.refine);
+    render();
+  });
+  noiseSlider.addEventListener("input", () => {
+    state.noise = toInt(noiseSlider.value, state.noise);
+    render();
+  });
+
+  stepBtn.addEventListener("click", () => {
+    if (state.running || state.animating) return;
+    runAnimatedCycle();
+  });
+  runBtn.addEventListener("click", runLoop);
+  resetBtn.addEventListener("click", () => {
+    stopRun();
+    state.loop = 0;
+    state.quality = 52;
+    state.errors = 6;
+    state.status = "READY";
+    state.noise = toInt(noiseSlider.value, 45);
+    state.failStreak = 0;
+    state.lastSignal = {
+      run: 0,
+      code: "ready",
+      gate: "quality_floor",
+      expected: `score >= ${state.target} and errors <= 1`,
+      actual: "score=34, errors=6",
+      deficit: 52,
+      next_action: "write"
+    };
+    attemptsEl.innerHTML = "";
+    clearPhases();
+    render();
+  });
+
+  render();
+})();
+</script>
+</section>
 <p>Two properties make this loop more than “retry until it passes”:</p>
 <ol type="1">
 <li><p><strong>Self-reference is a feature.</strong> The loop treats its
@@ -91,7 +580,7 @@ This output is the LLM’s best attempt to fulfill the current task. Since
 LLMs are stochastic engines (<a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a>), this step is inherently
 probabilistic. Even with identical inputs, the output might vary
 slightly between runs.</p></li>
-<li><p><strong><a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a></strong>: Run deterministic Validators (Physics) to
+<li><p><strong>Judge</strong>: Run deterministic Validators (Physics) to
 produce structured findings. In the simplest loops, the Judge is just
 the validator suite. In richer loops, it also selects the next move
 (commit, refine, revert/defer) from explicit policy.</p></li>
@@ -636,12 +1125,13 @@ deterministic <code>Judge</code> drives the stochastic LLM.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>4d1edf226b42</code>
+      Version: <code>07d8025693ab</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
       <a href="infographic">Infographic</a>
 </p>
 </footer>
+<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>

@@ -30,6 +30,52 @@
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="script.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              dark: '#0b0c10',
+              surface: 'rgba(17, 19, 26, 0.92)',
+              panel: 'rgba(17, 19, 26, 0.92)',
+              light: 'rgba(255, 255, 255, 0.03)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              text: '#e7e7ea',
+              strong: '#f2f3f8',
+              muted: '#b5b6bf',
+              primary: '#7aa2f7',
+              accent: '#bb9af7',
+              vibrant: '#2ac3de',
+              danger: '#f7768e',
+              success: '#10b981',
+            },
+            cyber: {
+              dark: '#0B0F19',
+              panel: '#151B2B',
+              primary: '#6366f1',
+              accent: '#06b6d4',
+              neon: '#d946ef',
+              success: '#10b981',
+              danger: '#ef4444',
+              text: '#f8fafc',
+              muted: '#94a3b8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -66,6 +112,32 @@ everything relevant (and often irrelevant) into it and hope the model
 figures it out. This approach might work for quick demos, but it’s a
 recipe for non-determinism, <a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a>, and unreliable systems in
 production. It’s why “better Mission Objects” alone stops scaling.</p>
+<section class="col-span-1 md:col-span-12 mt-8 mb-8" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-08-optimization-terrain" data-infographic-selector="main &gt; section:nth-of-type(8)" data-infographic-source="infographic.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i1-section-08-optimization-terrain</span>
+<div class="bg-brand-dark rounded-xl shadow-2xl p-8 text-white overflow-hidden relative">
+<h2 class="text-3xl font-bold mb-2">Shaping the Optimization Terrain</h2>
+<p class="text-brand-muted mb-6 max-w-3xl text-lg">
+                        This is the new game. You do not push the boulder up the hill. You <strong>reshape the hill</strong> so the boulder falls into the hole you want.
+                        <br/><br/>
+<span class="text-brand-vibrant">Intent = Gravity.</span> Changing your intent warps the geometry of the solution space. 
+                    The "Loop" simply calculates the shortest path to the mathematical optima you have defined. Who defines the sharpest peaks wins.
+                </p>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+<div class="text-sm text-brand-muted">
+                        Intent preset:
+                        <span class="text-brand-strong font-semibold" id="terrainPresetLabel">Central Optima</span>
+</div>
+<button aria-controls="terrainPlot" class="inline-flex items-center justify-center px-4 py-2 rounded-xl border border-brand-border bg-brand-light text-brand-strong font-semibold hover:bg-[rgba(122,162,247,0.16)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60" id="terrainReshapeButton" type="button">
+                        Reshape Terrain
+                    </button>
+</div>
+<!-- Plotly Container -->
+<div class="plotly-container mx-auto bg-[rgba(6,7,12,0.70)] rounded-lg shadow-inner border border-brand-border" id="terrainPlot"></div>
+<div class="text-center mt-2 text-sm text-brand-muted">
+                    Interactive 3D Terrain: The "Peaks" are the Optima (High Value Outcomes). The "Valleys" are Failure States.
+                </div>
+</div>
+</section>
 <p>Even when a model accepts enormous contexts, attention is not
 uniform. A huge context window is not a huge attention budget:
 information buried in the middle of long contexts is easy to underuse
@@ -612,12 +684,13 @@ strays from the core task.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>4d1edf226b42</code>
+      Version: <code>07d8025693ab</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
       <a href="infographic">Infographic</a>
 </p>
 </footer>
+<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>

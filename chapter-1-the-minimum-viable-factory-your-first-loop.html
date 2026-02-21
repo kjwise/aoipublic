@@ -30,6 +30,52 @@
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="script.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              dark: '#0b0c10',
+              surface: 'rgba(17, 19, 26, 0.92)',
+              panel: 'rgba(17, 19, 26, 0.92)',
+              light: 'rgba(255, 255, 255, 0.03)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              text: '#e7e7ea',
+              strong: '#f2f3f8',
+              muted: '#b5b6bf',
+              primary: '#7aa2f7',
+              accent: '#bb9af7',
+              vibrant: '#2ac3de',
+              danger: '#f7768e',
+              success: '#10b981',
+            },
+            cyber: {
+              dark: '#0B0F19',
+              panel: '#151B2B',
+              primary: '#6366f1',
+              accent: '#06b6d4',
+              neon: '#d946ef',
+              success: '#10b981',
+              danger: '#ef4444',
+              text: '#f8fafc',
+              muted: '#94a3b8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -57,6 +103,70 @@ plain until you’ve seen it run, then we’ll name the parts so we can
 reuse them precisely.</p>
 <h2 id="quick-bootstrap-mvf-v0-map-terrain-sync">Quick Bootstrap: MVF v0
 (Map-Terrain sync)</h2>
+<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-01-substrate" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-01-substrate</span>
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="lg:w-5/12">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">The Substrate (Map · Terrain · Ledger)</h2>
+<p class="text-brand-muted leading-relaxed">
+                            SDaC is practical when the system has three explicit surfaces:
+                            <span class="text-brand-strong font-semibold">intent</span>,
+                            <span class="text-brand-strong font-semibold">runnable reality</span>,
+                            and a deterministic <span class="text-brand-strong font-semibold">evidence trail</span>.
+                        </p>
+<div class="mt-5 grid grid-cols-1 gap-3">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted">MAP</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Intent surface</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">Mission objects, constraints, and acceptance criteria.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted">TERRAIN</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Runnable reality</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">Code, configs, schemas, and policies your system actually runs.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted">LEDGER</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Evidence trail</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">Append-only records of diffs, validator output, and decisions.</div>
+</div>
+</div>
+</div>
+<div class="lg:w-7/12">
+<div class="bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+<div class="inline-flex items-center rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
+<button aria-pressed="true" class="pill-tab font-mono" data-substrate-tab="map" type="button">Map</button>
+<button aria-pressed="false" class="pill-tab font-mono" data-substrate-tab="terrain" type="button">Terrain</button>
+<button aria-pressed="false" class="pill-tab font-mono" data-substrate-tab="ledger" type="button">Ledger</button>
+</div>
+<button aria-pressed="false" class="soft-toggle font-mono" id="substrateTraceToggle" type="button">Trace: Off</button>
+</div>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+<div class="text-xs font-mono text-brand-muted mb-2">Example project tree</div>
+<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="substrateTree"></pre>
+</div>
+<div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
+<div class="flex items-center justify-between mb-2">
+<div class="text-xs font-mono text-brand-muted">File</div>
+<div class="text-xs font-mono text-brand-muted" id="substrateFileLabel">—</div>
+</div>
+<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="substrateFile"></pre>
+</div>
+</div>
+<div class="mt-3 flex flex-wrap items-center gap-4 text-xs text-brand-muted">
+<span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch read"></span>read</span>
+<span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch write"></span>write</span>
+<span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch exec"></span>execute</span>
+<span class="text-xs text-brand-muted">Toggle trace to see which artifacts the loop touches.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <p>We’re going to build a weekend-grade factory that proves the
 substrate:</p>
 <ul>
@@ -345,12 +455,13 @@ concrete diffs, and <code>pass/fail</code> gates.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>4d1edf226b42</code>
+      Version: <code>07d8025693ab</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
       <a href="infographic">Infographic</a>
 </p>
 </footer>
+<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>

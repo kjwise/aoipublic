@@ -16,6 +16,12 @@
   isolation: isolate;
 }
 
+/* Keep chapter pacing consistent when fragments are embedded in prose. */
+.content:not(.infographic-presentation) [data-infographic-fragment-shell] {
+  margin-top: clamp(0.9rem, 2vw, 1.4rem);
+  margin-bottom: clamp(1.4rem, 2.8vw, 2rem);
+}
+
 [data-infographic-fragment-shell]::before {
   content: "";
   position: absolute;

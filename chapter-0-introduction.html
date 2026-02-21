@@ -30,6 +30,52 @@
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="script.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              dark: '#0b0c10',
+              surface: 'rgba(17, 19, 26, 0.92)',
+              panel: 'rgba(17, 19, 26, 0.92)',
+              light: 'rgba(255, 255, 255, 0.03)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              text: '#e7e7ea',
+              strong: '#f2f3f8',
+              muted: '#b5b6bf',
+              primary: '#7aa2f7',
+              accent: '#bb9af7',
+              vibrant: '#2ac3de',
+              danger: '#f7768e',
+              success: '#10b981',
+            },
+            cyber: {
+              dark: '#0B0F19',
+              panel: '#151B2B',
+              primary: '#6366f1',
+              accent: '#06b6d4',
+              neon: '#d946ef',
+              success: '#10b981',
+              danger: '#ef4444',
+              text: '#f8fafc',
+              muted: '#94a3b8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -51,6 +97,149 @@
 <div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-0-introduction">Chapter 0 – Introduction</h1>
 <h2 id="the-shape-of-all-work">The Shape of All Work</h2>
+<section class="col-span-1 md:col-span-12 mt-2 mb-12" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-01-shape-of-all-work" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i1-section-01-shape-of-all-work</span>
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
+<h2 class="text-3xl md:text-4xl font-bold text-brand-strong mb-3">The Shape of All Work</h2>
+<p class="text-brand-muted max-w-4xl leading-relaxed">
+                    Every productive process follows the same loop at every scale:
+                    <span class="font-mono text-brand-strong">P(Zn) = Z(n+1)</span>.
+                    The state changes; the process itself can also evolve.
+                </p>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
+<div class="lg:col-span-4 space-y-4">
+<div class="border border-brand-border rounded-xl bg-brand-light p-4">
+<div class="text-xs font-mono text-brand-muted uppercase tracking-wide mb-3">Scale of Iteration</div>
+<div class="space-y-1">
+<button aria-pressed="false" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="0" type="button">
+<span class="font-semibold">Keystroke</span>
+<span class="float-right text-xs font-mono opacity-70">~100ms</span>
+</button>
+<button aria-pressed="false" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="1" type="button">
+<span class="font-semibold">Function</span>
+<span class="float-right text-xs font-mono opacity-70">~minutes</span>
+</button>
+<button aria-pressed="true" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="2" type="button">
+<span class="font-semibold">Feature</span>
+<span class="float-right text-xs font-mono opacity-70">~days</span>
+</button>
+<button aria-pressed="false" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="3" type="button">
+<span class="font-semibold">Product</span>
+<span class="float-right text-xs font-mono opacity-70">~months</span>
+</button>
+<button aria-pressed="false" class="shape-scale-btn w-full text-left px-3 py-2 rounded-lg text-brand-muted" data-shape-scale="4" type="button">
+<span class="font-semibold">Company</span>
+<span class="float-right text-xs font-mono opacity-70">~years</span>
+</button>
+</div>
+</div>
+<div class="border border-brand-border rounded-xl bg-brand-light p-4 transition-colors duration-200" id="shapeSdacCard">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted uppercase tracking-wide">SDaC Protocol</div>
+<button aria-pressed="false" class="relative inline-flex w-12 h-6 rounded-full border border-brand-border bg-brand-surface transition-colors duration-200" id="shapeSdacToggle" type="button">
+<span class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200" id="shapeSdacKnob"></span>
+</button>
+</div>
+<p class="mt-3 text-sm text-brand-muted leading-relaxed" id="shapeSdacDescription">
+                                Standard mode: acceleration without structure. Faster loops can also accelerate drift.
+                            </p>
+<div class="mt-3 hidden flex-wrap gap-2" id="shapeSdacBadges">
+<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Validation</span>
+<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Bounded Effectors</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-4">
+<div class="border border-brand-border rounded-xl bg-brand-light p-4">
+<div class="font-mono text-sm md:text-base">
+<div class="flex flex-wrap items-center justify-center gap-3 text-brand-muted">
+<span>Iteration:</span>
+<span class="text-brand-strong"><span class="text-brand-accent">P</span>(Zn) = <span class="text-brand-vibrant">Z(n+1)</span></span>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-3 mt-2 text-xs md:text-sm text-brand-muted">
+<span>Evolution:</span>
+<span><span class="text-brand-accent">Pk</span> → <span class="text-brand-accent">P(k+1)</span></span>
+</div>
+</div>
+</div>
+<div class="relative h-80 md:h-96 rounded-2xl border border-brand-border bg-[rgba(6,7,12,0.75)] overflow-hidden" id="shapeVisualizer">
+<div class="absolute inset-0 opacity-25 shape-visualizer-grid"></div>
+<div class="absolute left-1/2 top-1/2 w-64 h-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand-border" id="shapeOrbitRing"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[132px] w-5 h-5 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.55)]"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[158px] text-[10px] font-mono text-brand-muted">Z(n) Input</div>
+<div class="hidden absolute left-1/2 top-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[rgba(187,154,247,0.35)]" id="shapeGuardRing"></div>
+<div class="absolute inset-0 pointer-events-none" id="shapeParticles"></div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full border-2 border-brand-border bg-brand-surface flex flex-col items-center justify-center text-center px-4">
+<div class="text-xs uppercase tracking-wider text-brand-muted">Process</div>
+<div class="mt-1 text-sm font-bold text-brand-accent" id="shapeProcessLabel">Team + Practices</div>
+</div>
+<div class="absolute top-4 right-4">
+<div class="px-3 py-1 rounded-full text-xs font-bold border border-brand-border bg-brand-surface text-brand-muted" id="shapeLoopModeBadge">STANDARD LOOP</div>
+</div>
+<div class="hidden absolute top-1/2 right-4 md:right-8 -translate-y-1/2 flex-col items-center gap-1" id="shapeGuardStatus">
+<div class="text-brand-vibrant text-base">🛡</div>
+<div class="text-[10px] font-mono uppercase text-brand-vibrant">Validated</div>
+</div>
+<div class="absolute bottom-4 left-4 text-xs font-mono text-brand-muted">
+<span>⏱ </span><span id="shapeTimeLabel">~days</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="p-4 rounded-xl border border-brand-border bg-brand-light">
+<div class="text-xs uppercase tracking-wide text-brand-muted">Current State (Zn)</div>
+<div class="mt-1 text-lg text-brand-strong font-semibold" id="shapeStateLabel">Codebase</div>
+</div>
+<div class="p-4 rounded-xl border border-brand-border bg-brand-light">
+<div class="text-xs uppercase tracking-wide text-brand-muted">The Process (P)</div>
+<div class="mt-1 text-lg text-brand-accent font-semibold" id="shapeProcessCardLabel">Team + Practices</div>
+</div>
+</div>
+<p class="text-sm text-brand-muted leading-relaxed" id="shapeScaleDescription"></p>
+</div>
+</div>
+<div class="mt-8 border border-brand-border rounded-xl bg-brand-light p-4">
+<div class="flex flex-wrap gap-4 border-b border-brand-border pb-3">
+<button aria-selected="true" class="shape-tab-btn is-active text-sm font-semibold pb-1" data-shape-tab="concept" type="button">The Fractal Shape</button>
+<button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="recursive" type="button">Recursive Improvement</button>
+<button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="sdac" type="button">Why SDaC?</button>
+</div>
+<div class="mt-4">
+<div data-shape-panel="concept">
+<p class="text-brand-strong text-lg font-semibold mb-2">The structure is identical at every scale.</p>
+<p class="text-brand-muted leading-relaxed">
+                                Whether you type one character or steer a company, you still transform a current state into a next state through a process. What changes is the time constant and impact radius.
+                            </p>
+</div>
+<div class="hidden" data-shape-panel="recursive">
+<p class="text-brand-strong text-lg font-semibold mb-2">The process itself is part of the loop.</p>
+<div class="rounded-xl border border-brand-border bg-brand-surface p-3 font-mono text-sm text-brand-muted">
+<div><span class="text-brand-accent">next_state</span> = process(current_state)</div>
+<div class="mt-1"><span class="text-brand-vibrant">process</span> = improve(process, evidence)</div>
+</div>
+<p class="text-brand-muted leading-relaxed mt-3">
+                                Real systems are recursive: execution generates evidence, and evidence upgrades the process that executes.
+                            </p>
+</div>
+<div class="hidden" data-shape-panel="sdac">
+<p class="text-brand-strong text-lg font-semibold mb-2">Acceleration without structure is chaos.</p>
+<p class="text-brand-muted leading-relaxed">
+                                AI raises loop speed. SDaC adds deterministic validation, bounded effectors, and explicit intent so higher velocity converges instead of drifting.
+                            </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+<div class="p-3 rounded-xl border border-[rgba(247,118,142,0.35)] bg-[rgba(247,118,142,0.08)]">
+<div class="text-sm font-semibold text-brand-danger">Standard loop</div>
+<div class="text-xs text-brand-muted mt-1">Trust the model; mistakes scale with speed.</div>
+</div>
+<div class="p-3 rounded-xl border border-[rgba(42,195,222,0.35)] bg-[rgba(42,195,222,0.10)]">
+<div class="text-sm font-semibold text-brand-vibrant">SDaC loop</div>
+<div class="text-xs text-brand-muted mt-1">Trust the loop; validators enforce convergence.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <p>Every productive process has the same shape:</p>
 <p><span class="math display"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span></p>
 <p>Start with a state (<span class="math inline"><em>Z</em><sub><em>n</em></sub></span>). Run a
@@ -391,12 +580,13 @@ trails matter.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>4d1edf226b42</code>
+      Version: <code>07d8025693ab</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
       <a href="infographic">Infographic</a>
 </p>
 </footer>
+<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>

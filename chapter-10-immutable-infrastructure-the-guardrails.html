@@ -30,6 +30,52 @@
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <link href="style.css" rel="stylesheet"/>
 <script defer="" src="script.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              dark: '#0b0c10',
+              surface: 'rgba(17, 19, 26, 0.92)',
+              panel: 'rgba(17, 19, 26, 0.92)',
+              light: 'rgba(255, 255, 255, 0.03)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              text: '#e7e7ea',
+              strong: '#f2f3f8',
+              muted: '#b5b6bf',
+              primary: '#7aa2f7',
+              accent: '#bb9af7',
+              vibrant: '#2ac3de',
+              danger: '#f7768e',
+              success: '#10b981',
+            },
+            cyber: {
+              dark: '#0B0F19',
+              panel: '#151B2B',
+              primary: '#6366f1',
+              accent: '#06b6d4',
+              neon: '#d946ef',
+              success: '#10b981',
+              danger: '#ef4444',
+              text: '#f8fafc',
+              muted: '#94a3b8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -74,6 +120,61 @@ are rigorously vetted against non-negotiable, human-defined policy
 before they become reality.</p>
 <h2 id="the-canon-of-truth-what-can-override-what">The Canon of Truth
 (what can override what)</h2>
+<section class="col-span-1 md:col-span-12 mt-4 mb-12" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-09-hierarchy-of-stewardship" data-infographic-selector="main &gt; section:nth-of-type(9)" data-infographic-source="infographic.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i1-section-09-hierarchy-of-stewardship</span>
+<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-t-4 border-t-brand-accent">
+<h2 class="text-center text-3xl font-bold text-brand-strong mb-2">The Hierarchy of Stewardship</h2>
+<p class="text-center text-brand-muted mb-8 max-w-2xl mx-auto">
+                        When the foundation is infinite, the structure above it must be precise.
+                    </p>
+<div class="max-w-6xl mx-auto flex flex-col items-center">
+<div class="pyramid-shell">
+<!-- Level 1: Purpose (Top) -->
+<div class="pyramid-level bg-brand-dark text-white">
+<div class="text-center">
+<div class="text-base md:text-lg">Terrain Designer</div>
+<div class="text-xs font-normal opacity-75">Defines Geometry of Success</div>
+</div>
+</div>
+<!-- Level 2: Architecture -->
+<div class="pyramid-level bg-brand-accent text-white">
+<div class="text-center">
+<div class="text-base md:text-lg">Loop Architect</div>
+<div class="text-xs font-normal opacity-75">Missions + Context + Workflows</div>
+</div>
+</div>
+<!-- Level 3: Agents -->
+<div class="pyramid-level bg-brand-primary text-white">
+<div class="text-center">
+<div class="text-base md:text-lg">Execution Loops</div>
+<div class="text-xs font-normal opacity-75">Write → <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> → Refine</div>
+</div>
+</div>
+ Level 4: <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> + Governance 
+<div class="pyramid-level bg-brand-vibrant text-white">
+<div class="text-center">
+<div class="text-base md:text-lg">Physics + Guardrails</div>
+<div class="text-xs font-normal opacity-90">Validators, budgets, protected graders</div>
+</div>
+</div>
+<!-- Level 5: Substrate -->
+<div class="pyramid-level bg-[rgba(255,255,255,0.06)] text-brand-strong">
+<div class="text-center">
+<div class="text-base md:text-lg">Substrate Surfaces</div>
+<div class="text-xs font-normal text-brand-muted"><a class="concept-link" href="concepts#map-terrain-ledger" title="See concept: Map / Terrain / Ledger">Map / Terrain / Ledger</a> (+ <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a>)</div>
+</div>
+</div>
+<!-- Level 6: Compute (Base) -->
+<div class="pyramid-level bg-[rgba(255,255,255,0.10)] text-brand-strong">
+<div class="text-center">
+<div class="text-base md:text-lg">Compute + Models</div>
+<div class="text-xs font-normal text-brand-muted">Commodity ↔ frontier (spot or fixed; rented or owned)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <p>In any automated system that modifies itself, disagreements between
 sources aren’t a documentation problem. They’re a governance bypass.</p>
 <p>So we define a canon: a practical hierarchy of truth. Higher tiers
@@ -351,7 +452,7 @@ allowed paths.</p></li>
 radius, and the system enforces it mechanically.</p>
 <h3 id="mission-gate-validation-without-the-agent">Mission Gate:
 Validation Without the Agent</h3>
-<p>To keep <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> impartial, decouple validation from generation. A
+<p>To keep Physics impartial, decouple validation from generation. A
 <strong><a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">Mission Gate</a></strong> runs a Mission’s acceptance criteria
 without running the model.</p>
 <p>In practice:</p>
@@ -531,12 +632,13 @@ auditability and post-mortem requirements.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>4d1edf226b42</code>
+      Version: <code>07d8025693ab</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
       <a href="infographic">Infographic</a>
 </p>
 </footer>
+<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>
