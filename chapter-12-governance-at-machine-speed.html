@@ -94,7 +94,7 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">14 min read</span></div>
+<div class="chapter-meta"><span class="read-time">13 min read</span></div>
 <h1 id="chapter-12-governance-at-machine-speed">Chapter 12 – Governance
 at Machine Speed</h1>
 <p>The promise of Software Development as Code (SDaC) is rapid,
@@ -112,11 +112,9 @@ branch protection, and guardrails the system cannot rewrite). This
 chapter assumes that boundary exists. Here we focus on what runs
 <em>inside</em> it: policy validators, input hygiene, and audit evidence
 that keeps autonomy reversible.</p>
-<p>Governance in the SDaC world isn’t about slowing down progress with
-bureaucratic layers. It’s about encoding safety nets and guardrails
-directly into the system, enabling high velocity by taming the inherent
-risks of self-modifying systems. We need reliable, auditable GenAI
-systems that don’t just work, but survive production.</p>
+<p>Governance in SDaC is not bureaucracy. It is how you keep high
+velocity while preserving deterministic safety properties, reversible
+decisions, and an audit trail that survives production reality.</p>
 <h2 id="policies-for-autonomous-changes">Policies for Autonomous
 Changes</h2>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-10-agent-execution-envelope" data-infographic-selector="main &gt; section:nth-of-type(10)" data-infographic-source="infographic-3.html" data-infographic-status="published">
@@ -141,82 +139,110 @@ Changes</h2>
     background: rgba(247, 118, 142, 0.13);
     color: #f2f3f8;
   }
+  [data-role="agent-sim"] .phase-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.5);
+    color: #b5b6bf;
+    transition: all 180ms ease;
+  }
+  [data-role="agent-sim"] .phase-pill[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+    color: #f2f3f8;
+  }
+  [data-role="agent-sim"] .soft-toggle[data-role="case"][aria-pressed="true"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.16);
+    color: #f2f3f8;
+  }
   [data-role="agent-sim"] .attempt-pill.is-escalate {
     background: rgba(187, 154, 247, 0.24);
     border-color: rgba(187, 154, 247, 0.34);
   }
+  [data-role="agent-sim"] .attempt-pill.is-warn {
+    background: rgba(250, 204, 21, 0.24);
+    border-color: rgba(250, 204, 21, 0.34);
+  }
   @media (prefers-reduced-motion: reduce) {
-    [data-role="agent-sim"] .soft-toggle {
+    [data-role="agent-sim"] .soft-toggle,
+    [data-role="agent-sim"] .phase-pill {
       transition: none;
     }
   }
 </style>
-<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
-<div class="flex flex-col lg:flex-row gap-8">
-<div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">Agent (Constrained Execution Envelope)</h2>
+<div class="bg-brand-surface rounded-xl shadow-lg p-6 md:p-7 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-6">
+<div class="lg:w-5/12 min-w-0">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Governance Envelope (Policy + Evidence)</h2>
 <p class="text-brand-muted leading-relaxed">
-        An <a class="concept-link" href="concepts#agent" title="See concept: Agent">Agent</a> is not “the model.” It is mission context + tools + deterministic gates + a ledger.
-        The model is only the stochastic center; capability is granted by boundaries, not by vibes.
-      </p>
+      Governance at machine speed means deterministic policy outcomes for every candidate diff.
+      The model proposes; policy decides; the ledger records why.
+    </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Execution path</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-<span class="block font-mono text-brand-vibrant">Mission → Agent → Tool Runner → Gates → Ledger</span>
-<span class="block mt-2">Context lives in the <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission object</a> and Tool Runner (deterministic prep).</span>
-<span class="block mt-2">Gates + Ledger are deterministic validation. This is the <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a> in motion.</span>
-<span class="block mt-2">If any gate fails, action is blocked or escalated.</span>
-<span class="block mt-2">This is why the system remains governable as autonomy rises.</span>
+<span class="block font-mono text-brand-vibrant">Mission -&gt; Policy Validators -&gt; Decision -&gt; Ledger Event</span>
+<span class="block mt-2">Outcomes are explicit: <span class="font-mono">allow</span>, <span class="font-mono">block</span>, <span class="font-mono">escalate</span>, or <span class="font-mono">warn (time-bounded exception)</span>.</span>
+<span class="block mt-2">Policy precedence resolves conflicts: <span class="font-mono">security &gt; scope &gt; architecture &gt; style</span>.</span>
+</div>
+</div>
+<div class="mt-4 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Core deterministic checks</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">scope_guard(paths) = PASS|FAIL</span>
+<span class="block font-mono text-brand-vibrant mt-1">secrets_scan(diff) = PASS|FAIL</span>
+<span class="block font-mono text-brand-vibrant mt-1">dynamic_exec_scan(diff) = PASS|FAIL</span>
+<span class="block font-mono text-brand-vibrant mt-1">architecture_guard(diff) = PASS|ESCALATE</span>
 </div>
 </div>
 </div>
-<div class="lg:w-7/12 space-y-4" data-role="agent-sim">
+<div class="lg:w-7/12 min-w-0 space-y-4" data-role="agent-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="text-xs font-mono text-brand-muted mb-3">Deterministic scenario runner</div>
+<div class="flex flex-wrap gap-2" data-role="case-controls">
+<button aria-pressed="true" class="soft-toggle font-mono" data-case="allowlisted_refactor" data-role="case" type="button">Allowlisted Refactor</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-case="protected_path_touch" data-role="case" type="button">Protected Path Touch</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-case="hardcoded_secret" data-role="case" type="button">Hardcoded Secret</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-case="architecture_change" data-role="case" type="button">Architecture Change</button>
+</div>
+<div class="mt-2 text-xs text-brand-muted" data-role="case-note">Low-risk refactor inside allowlisted scope.</div>
+<div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+<div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-phase="compile" data-role="phase-pill">1 Compile</div>
+<div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-phase="evaluate" data-role="phase-pill">2 Evaluate</div>
+<div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-phase="decide" data-role="phase-pill">3 Decide</div>
+<div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-phase="record" data-role="phase-pill">4 Record</div>
+</div>
+<div class="mt-3 grid grid-cols-1 md:grid-cols-12 gap-3">
 <div class="md:col-span-6">
 <div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Autonomy level</span>
-<span class="font-mono text-brand-strong"><span data-role="autonomy-value">58</span>/100</span>
+<span class="font-mono">Exception TTL</span>
+<span class="font-mono text-brand-strong"><span data-role="ttl-value">7</span> days</span>
 </div>
-<label class="sr-only" for="agentAutonomySlider">Autonomy slider</label>
-<input class="mt-2 w-full" data-role="autonomy-slider" id="agentAutonomySlider" max="100" min="0" step="1" type="range" value="58"/>
+<label class="sr-only" for="agentExceptionTtl">Exception time-to-live in days</label>
+<input class="mt-2 w-full" data-role="ttl-slider" id="agentExceptionTtl" max="30" min="1" step="1" type="range" value="7"/>
 </div>
-<div class="md:col-span-6">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Policy strictness</span>
-<span class="font-mono text-brand-strong"><span data-role="strict-value">72</span>/100</span>
-</div>
-<label class="sr-only" for="agentStrictSlider">Strictness slider</label>
-<input class="mt-2 w-full" data-role="strict-slider" id="agentStrictSlider" max="100" min="15" step="1" type="range" value="72"/>
-</div>
-<div class="md:col-span-12">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-<button class="soft-toggle font-mono text-left" data-action="read_map" data-role="action" type="button">Read Map Files</button>
-<button class="soft-toggle font-mono text-left" data-action="write_patch" data-role="action" type="button">Write Patch To Terrain</button>
-<button class="soft-toggle font-mono text-left" data-action="modify_ci" data-role="action" type="button">Modify CI Policy</button>
-<button class="soft-toggle font-mono text-left" data-action="exfiltrate_secret" data-role="action" type="button">Exfiltrate Secret</button>
-</div>
+<div class="md:col-span-6 text-xs text-brand-muted flex items-end">
+<div><span class="font-mono">Exception state:</span> <span data-role="exception-state">none</span></div>
 </div>
 </div>
 <div class="mt-3 flex flex-wrap gap-2">
 <button class="soft-toggle font-mono" data-role="evaluate" type="button">Evaluate Request</button>
-<button class="soft-toggle font-mono" data-role="override" type="button">Human Override</button>
+<button class="soft-toggle font-mono" data-role="exception" type="button">Request Exception</button>
 <button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
 </div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Selected action</div>
-<div class="mt-1 text-sm font-bold text-brand-strong" data-role="selected-label">Read Map Files</div>
+<div class="text-xs font-mono text-brand-muted">Selected case</div>
+<div class="mt-1 text-sm font-bold text-brand-strong" data-role="selected-label">Allowlisted Refactor</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Verdict</div>
 <div class="mt-1 text-lg font-bold text-brand-strong" data-role="verdict">READY</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Policy risk</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="risk">0</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Policy action</div>
+<div class="mt-1 text-sm font-bold text-brand-strong" data-role="action">Predicted: execute</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Ledger run</div>
@@ -224,20 +250,24 @@ Changes</h2>
 </div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Gate decisions</div>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-<div class="gate-pill" data-role="gate-tool">tool_gate: —</div>
-<div class="gate-pill" data-role="gate-os">os_gate: —</div>
-<div class="gate-pill" data-role="gate-policy">policy_gate: —</div>
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Gate decisions</div>
+<div class="text-xs text-brand-muted">precedence hit: <span data-role="precedence">none</span></div>
+</div>
+<div class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+<div class="gate-pill" data-role="gate-scope">scope_guard: -</div>
+<div class="gate-pill" data-role="gate-secrets">secrets_scan: -</div>
+<div class="gate-pill" data-role="gate-dynexec">dynamic_exec: -</div>
+<div class="gate-pill" data-role="gate-arch">architecture_guard: -</div>
 </div>
 <div class="mt-3 text-xs font-mono text-brand-muted mb-2">Ledger event</div>
-<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap" data-role="ledger-json"></pre>
-<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Choose an action and evaluate the envelope.</div>
+<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap break-words" data-role="ledger-json"></pre>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Select a case and evaluate policy outcomes.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">History</div>
-<div class="text-xs text-brand-muted">Cyan = allow, red = block, violet = escalate</div>
+<div class="text-xs text-brand-muted">Cyan = allow, red = block, violet = escalate, amber = warn</div>
 </div>
 <div class="mt-3 grid grid-cols-12 gap-1" data-role="history"></div>
 </div>
@@ -248,78 +278,123 @@ Changes</h2>
 (function () {
   const script = document.currentScript;
   const root = script ? script.closest('[data-infographic-section-id="i3-section-10-agent-execution-envelope"]') : null;
-  if (!root || root.dataset.agentEnvelopeReady === "1") return;
-  root.dataset.agentEnvelopeReady = "1";
+  if (!root || root.dataset.agentEnvelopeReady === '1') return;
+  root.dataset.agentEnvelopeReady = '1';
 
   const sim = root.querySelector('[data-role="agent-sim"]');
   if (!sim) return;
 
-  const autonomySlider = sim.querySelector('[data-role="autonomy-slider"]');
-  const strictSlider = sim.querySelector('[data-role="strict-slider"]');
-  const autonomyValue = sim.querySelector('[data-role="autonomy-value"]');
-  const strictValue = sim.querySelector('[data-role="strict-value"]');
-  const actionButtons = Array.from(sim.querySelectorAll('[data-role="action"]'));
+  const caseButtons = Array.from(sim.querySelectorAll('[data-role="case"]'));
+  const caseNoteEl = sim.querySelector('[data-role="case-note"]');
+  const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
+  const ttlSlider = sim.querySelector('[data-role="ttl-slider"]');
+  const ttlValueEl = sim.querySelector('[data-role="ttl-value"]');
+  const exceptionStateEl = sim.querySelector('[data-role="exception-state"]');
+
   const evaluateBtn = sim.querySelector('[data-role="evaluate"]');
-  const overrideBtn = sim.querySelector('[data-role="override"]');
+  const exceptionBtn = sim.querySelector('[data-role="exception"]');
   const resetBtn = sim.querySelector('[data-role="reset"]');
-  const selectedLabel = sim.querySelector('[data-role="selected-label"]');
+
+  const selectedLabelEl = sim.querySelector('[data-role="selected-label"]');
   const verdictEl = sim.querySelector('[data-role="verdict"]');
-  const riskEl = sim.querySelector('[data-role="risk"]');
+  const actionEl = sim.querySelector('[data-role="action"]');
   const runEl = sim.querySelector('[data-role="run"]');
-  const gateTool = sim.querySelector('[data-role="gate-tool"]');
-  const gateOs = sim.querySelector('[data-role="gate-os"]');
-  const gatePolicy = sim.querySelector('[data-role="gate-policy"]');
+
+  const precedenceEl = sim.querySelector('[data-role="precedence"]');
+  const gateScopeEl = sim.querySelector('[data-role="gate-scope"]');
+  const gateSecretsEl = sim.querySelector('[data-role="gate-secrets"]');
+  const gateDynexecEl = sim.querySelector('[data-role="gate-dynexec"]');
+  const gateArchEl = sim.querySelector('[data-role="gate-arch"]');
   const ledgerJsonEl = sim.querySelector('[data-role="ledger-json"]');
   const outcomeEl = sim.querySelector('[data-role="outcome"]');
   const historyEl = sim.querySelector('[data-role="history"]');
 
-  if (!autonomySlider || !strictSlider || !autonomyValue || !strictValue || !actionButtons.length ||
-      !evaluateBtn || !overrideBtn || !resetBtn || !selectedLabel || !verdictEl || !riskEl || !runEl ||
-      !gateTool || !gateOs || !gatePolicy || !ledgerJsonEl || !outcomeEl || !historyEl) return;
-
-  const ACTIONS = {
-    read_map: { label: "Read Map Files", sensitivity: 10, requires: "read" },
-    write_patch: { label: "Write Patch To Terrain", sensitivity: 45, requires: "write" },
-    modify_ci: { label: "Modify CI Policy", sensitivity: 92, requires: "policy_write" },
-    exfiltrate_secret: { label: "Exfiltrate Secret", sensitivity: 100, requires: "secret_access" }
-  };
+  if (!caseButtons.length || !caseNoteEl || phasePills.length === 0 || !ttlSlider || !ttlValueEl || !exceptionStateEl ||
+      !evaluateBtn || !exceptionBtn || !resetBtn || !selectedLabelEl || !verdictEl || !actionEl || !runEl ||
+      !precedenceEl || !gateScopeEl || !gateSecretsEl || !gateDynexecEl || !gateArchEl || !ledgerJsonEl || !outcomeEl || !historyEl) return;
 
   const toInt = (v, fallback) => {
     const n = Number.parseInt(String(v), 10);
     return Number.isFinite(n) ? n : fallback;
   };
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-  const passFail = (v) => v ? "PASS" : "FAIL";
+  const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const phaseDelay = reducedMotion ? 0 : 130;
+
+  const CASES = {
+    allowlisted_refactor: {
+      label: 'Allowlisted Refactor',
+      note: 'Low-risk refactor inside allowlisted scope.',
+      missionId: 'mission/refactor/formatter-v3',
+      paths: ['services/orders/src/formatter.ts'],
+      findings: { scope: false, secrets: false, dynexec: false, architecture: false },
+      policyVersion: '2.3.1'
+    },
+    protected_path_touch: {
+      label: 'Protected Path Touch',
+      note: 'Candidate touches immutable governance surfaces.',
+      missionId: 'mission/refactor/ci-fastlane',
+      paths: ['.github/workflows/main.yml'],
+      findings: { scope: true, secrets: false, dynexec: false, architecture: false },
+      policyVersion: '2.3.1'
+    },
+    hardcoded_secret: {
+      label: 'Hardcoded Secret',
+      note: 'Diff contains credential-like assignment pattern.',
+      missionId: 'mission/refactor/auth-helper',
+      paths: ['services/auth/src/token.ts'],
+      findings: { scope: false, secrets: true, dynexec: false, architecture: false },
+      policyVersion: '2.3.1'
+    },
+    architecture_change: {
+      label: 'Architecture Change',
+      note: 'Cross-module contract shift requires explicit human review.',
+      missionId: 'mission/refactor/service-split',
+      paths: ['services/orders/src/adapter.ts', 'services/payments/src/bridge.ts'],
+      findings: { scope: false, secrets: false, dynexec: false, architecture: true },
+      policyVersion: '2.3.1'
+    }
+  };
 
   const state = {
+    selected: 'allowlisted_refactor',
     run: 0,
-    autonomy: toInt(autonomySlider.value, 58),
-    strict: toInt(strictSlider.value, 72),
-    selected: "read_map",
-    ledger: { run: 0, action: "idle" },
-    last: null
+    exceptionDays: toInt(ttlSlider.value, 7),
+    exceptionActiveUntil: null,
+    last: null,
   };
 
-  const setActionState = () => {
-    for (const btn of actionButtons) {
-      const action = btn.dataset.action || "";
-      const active = action === state.selected;
-      btn.setAttribute("aria-pressed", active ? "true" : "false");
-      btn.style.borderColor = active ? "rgba(42, 195, 222, 0.45)" : "";
-      btn.style.background = active ? "rgba(42, 195, 222, 0.13)" : "";
-    }
-    selectedLabel.textContent = ACTIONS[state.selected]?.label || "Unknown";
-  };
+  const passFail = (ok) => ok ? 'PASS' : 'FAIL';
 
   const applyGatePill = (el, label, pass) => {
     el.textContent = `${label}: ${passFail(pass)}`;
-    el.classList.remove("is-pass", "is-fail");
-    el.classList.add(pass ? "is-pass" : "is-fail");
+    el.classList.remove('is-pass', 'is-fail');
+    el.classList.add(pass ? 'is-pass' : 'is-fail');
+  };
+
+  const setPhase = (phase) => {
+    for (const pill of phasePills) {
+      const active = pill.dataset.phase === phase;
+      pill.dataset.active = active ? '1' : '0';
+    }
+  };
+
+  const clearPhase = () => {
+    for (const pill of phasePills) {
+      pill.dataset.active = '0';
+    }
+  };
+
+  const setCaseButtons = () => {
+    for (const button of caseButtons) {
+      const active = button.dataset.case === state.selected;
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
   };
 
   const appendHistory = (kind) => {
-    const pill = document.createElement("span");
-    const suffix = kind === "allow" ? "is-pass" : kind === "escalate" ? "is-escalate" : "is-fail";
+    const pill = document.createElement('span');
+    const suffix = kind === 'allow' ? 'is-pass' : kind === 'warn' ? 'is-warn' : kind === 'escalate' ? 'is-escalate' : 'is-fail';
     pill.className = `attempt-pill ${suffix}`;
     historyEl.appendChild(pill);
     while (historyEl.children.length > 36) {
@@ -327,101 +402,202 @@ Changes</h2>
     }
   };
 
-  const evaluate = (override) => {
-    const action = ACTIONS[state.selected] || ACTIONS.read_map;
-    const risk = clamp(Math.round(action.sensitivity + (state.autonomy * 0.22) - ((100 - state.strict) * 0.18)), 0, 100);
-
-    const toolGate = action.requires !== "secret_access";
-    const osGate = action.requires !== "secret_access" && !(action.requires === "policy_write");
-    const policyThreshold = override ? 94 : 66;
-    const policyGate = risk <= policyThreshold && action.sensitivity < 96;
-
-    let verdict = "BLOCK";
-    let outcome = "Blocked by deterministic envelope.";
-    if (toolGate && osGate && policyGate) {
-      verdict = "ALLOW";
-      outcome = "Allowed: request fits current boundaries.";
-    } else if (override && toolGate && osGate) {
-      verdict = "ESCALATE";
-      outcome = "Escalated with human override. Ledger must retain reason.";
-    }
-
-    state.run += 1;
-    state.last = { toolGate, osGate, policyGate, verdict, risk };
-    state.ledger = {
-      run: state.run,
-      agent_id: "sdac-agent-01",
-      action: state.selected,
-      action_label: action.label,
-      autonomy: state.autonomy,
-      policy_strictness: state.strict,
-      tool_gate: passFail(toolGate),
-      os_gate: passFail(osGate),
-      policy_gate: passFail(policyGate),
-      override: Boolean(override),
-      verdict: verdict
+  const computeEvaluation = (selectedCase, withException) => {
+    const gates = {
+      scope: !selectedCase.findings.scope,
+      secrets: !selectedCase.findings.secrets,
+      dynexec: !selectedCase.findings.dynexec,
+      architecture: !selectedCase.findings.architecture,
     };
 
-    verdictEl.textContent = verdict;
-    verdictEl.style.color = verdict === "ALLOW" ? "#2ac3de" : verdict === "ESCALATE" ? "#bb9af7" : "#f7768e";
-    riskEl.textContent = String(risk);
-    runEl.textContent = String(state.run);
-    applyGatePill(gateTool, "tool_gate", toolGate);
-    applyGatePill(gateOs, "os_gate", osGate);
-    applyGatePill(gatePolicy, "policy_gate", policyGate);
-    ledgerJsonEl.textContent = JSON.stringify(state.ledger, null, 2);
-    outcomeEl.textContent = outcome;
-    appendHistory(verdict === "ALLOW" ? "allow" : verdict === "ESCALATE" ? "escalate" : "block");
+    let verdict = 'ALLOW';
+    let action = 'execute';
+    let precedence = 'none';
+    let historyKind = 'allow';
+
+    if (!gates.secrets || !gates.dynexec) {
+      verdict = 'BLOCK';
+      action = 'block';
+      precedence = 'security';
+      historyKind = 'block';
+    } else if (!gates.scope) {
+      verdict = 'BLOCK';
+      action = 'block';
+      precedence = 'scope';
+      historyKind = 'block';
+    } else if (!gates.architecture) {
+      precedence = 'architecture';
+      if (withException) {
+        verdict = 'WARN';
+        action = 'time_bounded_exception';
+        historyKind = 'warn';
+      } else {
+        verdict = 'ESCALATE';
+        action = 'escalate_human_review';
+        historyKind = 'escalate';
+      }
+    }
+
+    const expiresAt = withException
+      ? new Date(Date.now() + (state.exceptionDays * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10)
+      : null;
+
+    return {
+      gates,
+      verdict,
+      action,
+      precedence,
+      historyKind,
+      withException,
+      selectedCase,
+      expiresAt,
+    };
+
   };
 
-  const render = () => {
-    autonomyValue.textContent = String(state.autonomy);
-    strictValue.textContent = String(state.strict);
-    setActionState();
-    if (!state.last) {
-      verdictEl.textContent = "READY";
-      verdictEl.style.color = "#b5b6bf";
-      riskEl.textContent = "0";
+  const renderFromState = (mode) => {
+    const selectedCase = CASES[state.selected] || CASES.allowlisted_refactor;
+    const preview = computeEvaluation(selectedCase, false);
+
+    selectedLabelEl.textContent = selectedCase.label;
+    caseNoteEl.textContent = selectedCase.note;
+    ttlValueEl.textContent = String(state.exceptionDays);
+    exceptionStateEl.textContent = state.exceptionActiveUntil ? `active until ${state.exceptionActiveUntil}` : 'none';
+
+    if (mode === 'preview') {
+      verdictEl.textContent = 'READY';
+      verdictEl.style.color = '#b5b6bf';
+      actionEl.textContent = `Predicted: ${preview.action}`;
+      actionEl.style.color = '#b5b6bf';
+      precedenceEl.textContent = preview.precedence;
+      precedenceEl.style.color = '#b5b6bf';
+
+      applyGatePill(gateScopeEl, 'scope_guard', preview.gates.scope);
+      applyGatePill(gateSecretsEl, 'secrets_scan', preview.gates.secrets);
+      applyGatePill(gateDynexecEl, 'dynamic_exec', preview.gates.dynexec);
+      applyGatePill(gateArchEl, 'architecture_guard', preview.gates.architecture || preview.verdict !== 'ESCALATE');
+
+      ledgerJsonEl.textContent = JSON.stringify({
+        run: state.run,
+        case_id: state.selected,
+        mission_id: selectedCase.missionId,
+        policy_version: selectedCase.policyVersion,
+        status: 'ready'
+      }, null, 2);
+      outcomeEl.textContent = 'Select a case and evaluate policy outcomes.';
       runEl.textContent = String(state.run);
-      gateTool.textContent = "tool_gate: —";
-      gateTool.classList.remove("is-pass", "is-fail");
-      gateOs.textContent = "os_gate: —";
-      gateOs.classList.remove("is-pass", "is-fail");
-      gatePolicy.textContent = "policy_gate: —";
-      gatePolicy.classList.remove("is-pass", "is-fail");
-      ledgerJsonEl.textContent = JSON.stringify(state.ledger, null, 2);
-      outcomeEl.textContent = "Choose an action and evaluate the envelope.";
+      clearPhase();
+      return;
+    }
+
+    const result = state.last;
+    if (!result) return;
+
+    verdictEl.textContent = result.verdict;
+    verdictEl.style.color = result.verdict === 'ALLOW' ? '#2ac3de' : result.verdict === 'WARN' ? '#facc15' : result.verdict === 'ESCALATE' ? '#bb9af7' : '#f7768e';
+    actionEl.textContent = result.action;
+    actionEl.style.color = verdictEl.style.color;
+    precedenceEl.textContent = result.precedence;
+    precedenceEl.style.color = result.precedence === 'none' ? '#b5b6bf' : verdictEl.style.color;
+
+    applyGatePill(gateScopeEl, 'scope_guard', result.gates.scope);
+    applyGatePill(gateSecretsEl, 'secrets_scan', result.gates.secrets);
+    applyGatePill(gateDynexecEl, 'dynamic_exec', result.gates.dynexec);
+    applyGatePill(gateArchEl, 'architecture_guard', result.gates.architecture || result.verdict !== 'ESCALATE');
+
+    const ledger = {
+      run: state.run,
+      case_id: state.selected,
+      mission_id: result.selectedCase.missionId,
+      policy_version: result.selectedCase.policyVersion,
+      changed_paths: result.selectedCase.paths,
+      gates: {
+        scope_guard: passFail(result.gates.scope),
+        secrets_scan: passFail(result.gates.secrets),
+        dynamic_exec_scan: passFail(result.gates.dynexec),
+        architecture_guard: result.gates.architecture ? 'PASS' : (result.verdict === 'WARN' ? 'EXCEPTION' : 'ESCALATE')
+      },
+      precedence_hit: result.precedence,
+      action: result.action,
+      verdict: result.verdict,
+      exception: result.withException ? {
+        approved_by: 'human:platform-lead',
+        expires_on: result.expiresAt
+      } : null
+    };
+
+    ledgerJsonEl.textContent = JSON.stringify(ledger, null, 2);
+    runEl.textContent = String(state.run);
+
+    if (result.verdict === 'ALLOW') {
+      outcomeEl.textContent = 'ALLOW: request satisfies all policy gates.';
+    } else if (result.verdict === 'WARN') {
+      outcomeEl.textContent = `WARN: exception granted; expires on ${result.expiresAt}.`;
+    } else if (result.verdict === 'ESCALATE') {
+      outcomeEl.textContent = 'ESCALATE: architecture policy requires explicit human review.';
+    } else {
+      outcomeEl.textContent = `BLOCK: ${result.precedence} policy failed at highest precedence.`;
     }
   };
 
-  autonomySlider.addEventListener("input", () => {
-    state.autonomy = toInt(autonomySlider.value, state.autonomy);
-    render();
-  });
-  strictSlider.addEventListener("input", () => {
-    state.strict = toInt(strictSlider.value, state.strict);
-    render();
-  });
-  for (const btn of actionButtons) {
-    btn.addEventListener("click", () => {
-      state.selected = btn.dataset.action || "read_map";
-      render();
+  const runEvaluation = async (withException) => {
+    const phases = ['compile', 'evaluate', 'decide', 'record'];
+    for (const phase of phases) {
+      setPhase(phase);
+      if (phaseDelay > 0) await wait(phaseDelay);
+    }
+    const selectedCase = CASES[state.selected] || CASES.allowlisted_refactor;
+    const result = computeEvaluation(selectedCase, withException);
+    state.run += 1;
+    state.last = result;
+    if (withException) {
+      state.exceptionActiveUntil = result.expiresAt;
+    }
+    appendHistory(result.historyKind);
+    renderFromState('result');
+  };
+
+  for (const button of caseButtons) {
+    button.addEventListener('click', () => {
+      const key = button.dataset.case;
+      if (!key || !CASES[key]) return;
+      state.selected = key;
+      setCaseButtons();
+      renderFromState('preview');
     });
   }
-  evaluateBtn.addEventListener("click", () => evaluate(false));
-  overrideBtn.addEventListener("click", () => evaluate(true));
-  resetBtn.addEventListener("click", () => {
-    state.run = 0;
-    state.autonomy = toInt(autonomySlider.value, 58);
-    state.strict = toInt(strictSlider.value, 72);
-    state.selected = "read_map";
-    state.last = null;
-    state.ledger = { run: 0, action: "idle" };
-    historyEl.innerHTML = "";
-    render();
+
+  ttlSlider.addEventListener('input', () => {
+    state.exceptionDays = toInt(ttlSlider.value, state.exceptionDays);
+    renderFromState('preview');
   });
 
-  render();
+  evaluateBtn.addEventListener('click', () => {
+    runEvaluation(false);
+  });
+
+  exceptionBtn.addEventListener('click', () => {
+    const selectedCase = CASES[state.selected] || CASES.allowlisted_refactor;
+    if (!selectedCase.findings.architecture || selectedCase.findings.scope || selectedCase.findings.secrets || selectedCase.findings.dynexec) {
+      outcomeEl.textContent = 'Exception is only valid for architecture-review scenarios after lower-precedence gates pass.';
+      return;
+    }
+    runEvaluation(true);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    state.selected = 'allowlisted_refactor';
+    state.run = 0;
+    state.exceptionDays = toInt(ttlSlider.value, 7);
+    state.exceptionActiveUntil = null;
+    state.last = null;
+    historyEl.innerHTML = '';
+    setCaseButtons();
+    renderFromState('preview');
+  });
+
+  setCaseButtons();
+  renderFromState('preview');
 })();
 </script>
 </section>
@@ -440,7 +616,7 @@ which Maps are authoritative, which Terrains are writable, and which
 Validators are hard gates versus advisory Sensors.</p>
 <p><strong><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">Mechanism</a>: Policy as Code</strong></p>
 <p>Just as infrastructure is code and configuration is code, policy is
-code. Frameworks like Open Policy Agent (OPA) or custom scripts written
+code. Frameworks like Open Policy <a class="concept-link" href="concepts#agent" title="See concept: Agent">Agent</a> (OPA) or custom scripts written
 in Python or Go allow you to define rules that can be evaluated against
 any incoming change.</p>
 <p>A policy might dictate:</p>
@@ -450,9 +626,8 @@ within <code>/services/my-optimizable-service/src/**</code> and cannot
 touch <code>/shared-libs/**</code> or
 <code>/database-migrations/**</code>.</p></li>
 <li><p><strong>Quality Gates:</strong> An agent-generated change must
-maintain 100% test coverage for modified files, cannot introduce new
-linting errors, and must pass a security static analysis scan with a
-score no lower than the baseline.</p></li>
+respect ratchets (no coverage drop beyond tolerance, no new lint errors,
+no increase in security findings).</p></li>
 <li><p><strong>Resource Usage:</strong> An agent cannot propose changes
 that increase cloud resource consumption by more than <code>X%</code>
 without human approval.</p></li>
@@ -465,12 +640,10 @@ the proposed diff and the resulting state against the codified rules. If
 a policy is violated, the change is automatically rejected, providing
 immediate feedback to the agent and preventing unsafe modifications from
 progressing.</p>
-<p>This approach builds on the concepts of <code>CODEOWNERS</code> and
-branch protection we discussed in Chapter 10. Policies extend these by
-providing fine-grained, dynamic checks that go beyond simple ownership
-or merge conditions. They’re the automated “reviewers” that ensure
-compliance before a human even needs to glance at a PR, or to prevent
-unauthorized direct pushes entirely.</p>
+<p>This approach builds on the <code>CODEOWNERS</code> and
+branch-protection controls from Chapter 10. Policies add fine-grained,
+deterministic checks that run before merge and before human judgment is
+asked to arbitrate edge cases.</p>
 <h3 id="concrete-policy-as-code-three-minimal-examples">Concrete
 policy-as-code (three minimal examples)</h3>
 <p>Policy-as-code is not a slogan. It is a <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> chain with
@@ -552,10 +725,12 @@ situations, and legitimate exceptions.</li>
 <p>Machine-speed governance is valuable not only because it is fast, but
 because it is consistent, comprehensive (applies to every change), and
 legible (policies are versioned artifacts, not oral tradition).</p>
-<h3 id="escalation-workflows-block-warn-defer-time-bounded-exceptions">Escalation
-workflows (block, warn, defer, time-bounded exceptions)</h3>
+<h3 id="escalation-workflows-block-warn-escalate-time-bounded-exceptions">Escalation
+workflows (block, warn, escalate, time-bounded exceptions)</h3>
 <p>Policies need outcomes, not just booleans. A common pattern is to map
-each policy to a default action on failure.</p>
+each policy to a default action on failure. The useful default set is
+<code>allow</code>, <code>block</code>, <code>escalate</code>, and
+<code>warn</code> (time-bounded exception path).</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">policies</span><span class="kw">:</span></span>
 <span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> secrets.hardcoded</span></span>
 <span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="at">    </span><span class="fu">on_failure</span><span class="kw">:</span></span>
@@ -586,10 +761,10 @@ security gate might forbid it. Don’t pretend this won’t happen—design
 for it.</p>
 <p>Practical rules:</p>
 <ul>
-<li>Order policies by precedence (security &gt; scope &gt; correctness
+<li>Order policies by precedence (security &gt; scope &gt; architecture
 &gt; style).</li>
 <li>Make the outcome explicit when a higher-precedence policy fires: it
-blocks; no downstream negotiation.</li>
+blocks or escalates; no downstream negotiation.</li>
 <li>When two equal-precedence policies conflict, escalate to human
 review with the evidence attached.</li>
 </ul>
@@ -730,8 +905,6 @@ file/line/time).</li>
 </ul>
 <p>That bundle is the Ledger entry: enough to reconstruct what the
 system saw and why it acted (or refused to act).</p>
-<p>This keeps post-incident analysis tractable: you can reconstruct what
-the system saw and why it acted (or refused to act).</p>
 <h3 id="the-90-defense-dont-execute-suspicious-work">The 90% defense:
 don’t execute suspicious work</h3>
 <p>Most injection attempts are obvious in hindsight. So optimize for a
@@ -750,37 +923,18 @@ Infrastructure protects your graders and policies.</p>
 <h2 id="continuous-audit-loop-policy-evidence">Continuous Audit Loop
 (Policy + Evidence)</h2>
 <p>How do you know your autonomous agents are actually adhering to
-policy? You need an auditable trail of their decisions and actions,
-continuously checked against your defined governance rules. This is the
-continuous audit loop.</p>
-<p><strong>Policy + Evidence:</strong></p>
-<p>Every action an autonomous agent takes—from proposing a code change
-to deploying it—must generate verifiable evidence.</p>
+policy? You run a continuous audit loop over append-only governance
+events and verify that observed behavior still matches declared
+policy.</p>
+<p>The event schema above defines what to log. Operationally, the loop
+does three things:</p>
 <ol type="1">
-<li><p><strong>Detailed Activity Logs:</strong></p>
-<ul>
-<li><p><strong>Agent Identity:</strong> Which agent initiated the
-action?</p></li>
-<li><p><strong>Proposed Change:</strong> The full diff or description of
-the intended modification.</p></li>
-<li><p><strong>Decision Rationale:</strong> Why was this change
-proposed? (e.g., “to improve <code>X</code> metric based on
-<code>Y</code> analysis”).</p></li>
-<li><p><strong>Policy Evaluation:</strong> Which policies were applied?
-What was the outcome (approved, rejected, human override)?</p></li>
-<li><p><strong>Execution Outcome:</strong> Was the change successfully
-merged, deployed, or rolled back?</p></li>
-<li><p><strong>Timestamps:</strong> When did each step occur?</p></li>
-</ul></li>
-<li><p><strong>Immutable Storage:</strong> Store these logs in a secure,
-tamper-proof system. Your <code>git</code> history provides a strong
-baseline for code changes, but dedicated logging infrastructure (e.g.,
-SIEM, immutable object storage) is crucial for agent decision logs and
-broader activity.</p></li>
-<li><p><strong>Metrics and Tracing:</strong> Collect metrics on agent
-performance (e.g., number of PRs submitted, success rate, rollback rate)
-and traces of their execution paths to understand their internal
-reasoning.</p></li>
+<li><strong>Ingest every governance event:</strong> policy results,
+decisions, exceptions, and outcomes.</li>
+<li><strong>Check policy health continuously:</strong> violation rates,
+override rates, blocked merges, and exception expiry.</li>
+<li><strong>Alert on drift:</strong> trigger escalation when observed
+behavior diverges from policy intent.</li>
 </ol>
 <h3 id="audit-record-shape-what-to-log-in-what-format">Audit record
 shape (what to log, in what format)</h3>
@@ -824,8 +978,7 @@ reconstruct what the system saw and why it acted.</p>
 was attached?”</li>
 </ul>
 <p><strong>Automated Auditing:</strong></p>
-<p>With evidence collected, the next step is to continuously audit it
-against your policies.</p>
+<p>With evidence collected, continuously evaluate it against policy.</p>
 <ul>
 <li><p><strong>Real-time Policy Compliance Checks:</strong> Integrate
 automated tools that scan agent activity logs and deployments for
@@ -948,7 +1101,7 @@ This starts building your audit trail.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>07d8025693ab</code>
+      Version: <code>0258dd885574</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

@@ -1,39 +1,83 @@
 <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<style>
+  [data-role="skeleton-sim"] .trend-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.6rem;
+    background: rgba(11, 12, 16, 0.48);
+    padding: 0.45rem;
+    min-width: 0;
+  }
+
+  [data-role="skeleton-sim"] .trend-pill[data-state="pass"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.15);
+  }
+
+  [data-role="skeleton-sim"] .trend-pill[data-state="fail"] {
+    border-color: rgba(247, 118, 142, 0.45);
+    background: rgba(247, 118, 142, 0.16);
+  }
+
+  [data-role="skeleton-sim"] .trend-pill[data-state="empty"] {
+    opacity: 0.56;
+    border-style: dashed;
+  }
+
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="converged"],
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="improving"] {
+    color: #2ac3de;
+  }
+
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="stalled"] {
+    color: #bb9af7;
+  }
+
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="diverging"],
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="unreachable"] {
+    color: #f7768e;
+  }
+
+  [data-role="skeleton-sim"] [data-role="ledger-path"] {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+</style>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Skeleton-First Rule (Prevent Map Contamination)</h2>
 <p class="text-brand-muted leading-relaxed">
-              Structure must be extracted deterministically from Terrain first. The model can add flesh, but cannot invent skeleton.
-              The gate enforces exact skeleton match before merge.
+              Deterministically extract skeleton from Terrain, then let the model fill prose around it.
+              If skeleton mismatch appears, hard-fail the update and record a receipt.
             </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-                Raise pressure and disable deterministic extraction to watch contamination risk rise.
-                Re-enable extractor and see the skeleton gate converge back to PASS.
+                Toggle extraction and run bounded attempts. You should see either deterministic convergence
+                (<span class="font-mono text-brand-strong">PASS</span>) or a deterministic exit
+                (<span class="font-mono text-brand-strong">ESCALATE</span>) when budget is exhausted.
               </div>
 </div>
 </div>
 <div class="lg:w-7/12 space-y-4" data-role="skeleton-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Pipeline</div>
+<div class="text-xs font-mono text-brand-muted mb-3"><a class="concept-link" href="../../concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> pipeline</div>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="../../concepts#sensor" title="See concept: Sensor">Sensor</a></div>
+<div class="text-xs font-mono text-brand-muted">Sense/Normalize</div>
 <div class="mt-1 text-sm font-semibold text-brand-strong">Extract skeleton</div>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Model</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Generate flesh</div>
+<div class="text-xs font-mono text-brand-muted">Propose</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Generate flesh patch</div>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="../../concepts#ci-gate-mapterrain-sync" title="See concept: CI Gate (Map–Terrain Sync)">CI Gate</a></div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Skeleton match</div>
+<div class="text-xs font-mono text-brand-muted">Validate</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Hard skeleton gate</div>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Ledger</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">PASS / FAIL receipt</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">State of record</div>
 </div>
 </div>
 </div>
@@ -46,18 +90,34 @@
 <label class="sr-only" for="skeletonPressureSlider">Contamination pressure</label>
 <input class="mt-2 w-full" data-role="pressure-slider" id="skeletonPressureSlider" max="100" min="0" type="range" value="40"/>
 </div>
+<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Retry budget</span>
+<span class="font-mono text-brand-strong"><span data-role="budget-value">5</span>x</span>
+</div>
+<label class="sr-only" for="skeletonBudgetSlider">Retry budget</label>
+<input class="mt-2 w-full" data-role="budget-slider" id="skeletonBudgetSlider" max="10" min="2" step="1" type="range" value="5"/>
+</div>
 <div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
 <span class="text-xs font-mono text-brand-muted">Extractor</span>
 <button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="extractor-toggle" type="button">ON</button>
 </div>
-<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Run cycle</span>
+<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Step attempt</span>
 <button class="soft-toggle font-mono text-xs" data-role="run-button" type="button">Run</button>
+</div>
+<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Bounded loop</span>
+<button class="soft-toggle font-mono text-xs" data-role="run-budget" type="button">Run to exit</button>
+</div>
+<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Reset</span>
+<button class="soft-toggle font-mono text-xs" data-role="reset-button" type="button">Reset</button>
 </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Canonical skeleton (Sensor)</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Canonical skeleton (<a class="concept-link" href="../../concepts#sensor" title="See concept: Sensor">Sensor</a>)</div>
 <ul class="space-y-1 text-xs text-brand-strong font-mono" data-role="canonical-list"></ul>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
@@ -65,7 +125,7 @@
 <ul class="space-y-1 text-xs font-mono" data-role="proposed-list"></ul>
 </div>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Mismatch count</div>
 <div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="mismatch-count">0</span></div>
@@ -79,14 +139,63 @@
 <div class="mt-1 text-lg font-bold text-brand-strong" data-role="gate-badge">PASS</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Latest outcome</div>
-<div class="mt-1 text-sm text-brand-muted" data-role="outcome-text">Ready to run.</div>
+<div class="text-xs font-mono text-brand-muted">Budget remaining</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="budget-remaining">5</span>x</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
+<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Constraint → deterministic gate</div>
+<div class="mt-2 space-y-2 text-sm text-brand-muted">
+<div class="flex items-center justify-between gap-2">
+<span>Skeleton must match exactly</span>
+<span class="font-mono text-brand-strong" data-role="gate-skeleton">PASS</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>No invented structure</span>
+<span class="font-mono text-brand-strong" data-role="gate-scope">PASS</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>Retry budget not exceeded</span>
+<span class="font-mono text-brand-strong" data-role="gate-budget">PASS</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>Receipt written to Ledger</span>
+<span class="font-mono text-brand-strong" data-role="gate-ledger">PENDING</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Updater state of record</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between gap-2">
+<span>Status</span>
+<span class="font-mono text-brand-strong" data-role="status-label">READY</span>
+</div>
+<div class="mt-2 flex items-center justify-between gap-2">
+<span>Attempt</span>
+<span class="font-mono text-brand-strong" data-role="attempt-label">0/5</span>
+</div>
+<div class="mt-2 flex items-center justify-between gap-2">
+<span>Last run</span>
+<span class="font-mono text-brand-strong" data-role="last-run">--</span>
+</div>
+</div>
+<div class="mt-3 text-xs font-mono text-brand-muted" data-role="ledger-path">ledger/map-updaters/skeleton-first/attempt-00.json</div>
 </div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Mismatch trend (W=4)</div>
+<div class="text-xs text-brand-muted" data-role="trend-status" data-state="baseline">Collecting baseline.</div>
+</div>
+<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2" data-role="trend-window"></div>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome-text">Ready to run one bounded attempt.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">Loop attempts</div>
-<div class="text-xs text-brand-muted">Cyan = PASS, red = FAIL</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, red = FAIL, violet = ESCALATE</div>
 </div>
 <div class="mt-3 flex flex-wrap gap-1" data-role="attempts"></div>
 </div>
@@ -97,7 +206,9 @@
 (function () {
   const script = document.currentScript;
   const root = script ? script.closest('[data-infographic-section-id="i3-section-06-skeleton-first-rule"]') : null;
-  if (!root || root.dataset.skeletonFirstReady === "1") return;
+  if (!root || root.dataset.skeletonFirstReady === "1") {
+    return;
+  }
   root.dataset.skeletonFirstReady = "1";
 
   const sim = root.querySelector('[data-role="skeleton-sim"]');
@@ -105,16 +216,36 @@
 
   const pressureSlider = sim.querySelector('[data-role="pressure-slider"]');
   const pressureValue = sim.querySelector('[data-role="pressure-value"]');
+  const budgetSlider = sim.querySelector('[data-role="budget-slider"]');
+  const budgetValue = sim.querySelector('[data-role="budget-value"]');
   const extractorToggle = sim.querySelector('[data-role="extractor-toggle"]');
   const runButton = sim.querySelector('[data-role="run-button"]');
+  const runBudgetButton = sim.querySelector('[data-role="run-budget"]');
+  const resetButton = sim.querySelector('[data-role="reset-button"]');
   const canonicalList = sim.querySelector('[data-role="canonical-list"]');
   const proposedList = sim.querySelector('[data-role="proposed-list"]');
   const mismatchCount = sim.querySelector('[data-role="mismatch-count"]');
   const riskScore = sim.querySelector('[data-role="risk-score"]');
   const gateBadge = sim.querySelector('[data-role="gate-badge"]');
+  const budgetRemaining = sim.querySelector('[data-role="budget-remaining"]');
+  const gateSkeleton = sim.querySelector('[data-role="gate-skeleton"]');
+  const gateScope = sim.querySelector('[data-role="gate-scope"]');
+  const gateBudget = sim.querySelector('[data-role="gate-budget"]');
+  const gateLedger = sim.querySelector('[data-role="gate-ledger"]');
+  const statusLabel = sim.querySelector('[data-role="status-label"]');
+  const attemptLabel = sim.querySelector('[data-role="attempt-label"]');
+  const lastRun = sim.querySelector('[data-role="last-run"]');
+  const ledgerPath = sim.querySelector('[data-role="ledger-path"]');
+  const trendStatus = sim.querySelector('[data-role="trend-status"]');
+  const trendWindow = sim.querySelector('[data-role="trend-window"]');
   const outcomeText = sim.querySelector('[data-role="outcome-text"]');
   const attempts = sim.querySelector('[data-role="attempts"]');
-  if (!pressureSlider || !pressureValue || !extractorToggle || !runButton || !canonicalList || !proposedList || !mismatchCount || !riskScore || !gateBadge || !outcomeText || !attempts) return;
+
+  if (!pressureSlider || !pressureValue || !budgetSlider || !budgetValue || !extractorToggle || !runButton || !runBudgetButton || !resetButton ||
+      !canonicalList || !proposedList || !mismatchCount || !riskScore || !gateBadge || !budgetRemaining || !gateSkeleton || !gateScope ||
+      !gateBudget || !gateLedger || !statusLabel || !attemptLabel || !lastRun || !ledgerPath || !trendStatus || !trendWindow || !outcomeText || !attempts) {
+    return;
+  }
 
   const canonical = [
     "routes.py",
@@ -123,6 +254,7 @@
     "validators/policy.py",
     "tests/immune_system_cases.py"
   ];
+
   const noisePool = [
     "routes_v2_guess.py",
     "schemas/legacy_mode.json",
@@ -132,16 +264,27 @@
     "tests/speculative_case.py"
   ];
 
-  const state = {
-    pressure: Number.parseInt(pressureSlider.value, 10) || 40,
-    extractorOn: true,
-    run: 0
-  };
-
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
+  const state = {
+    pressure: Number.parseInt(pressureSlider.value, 10) || 40,
+    budget: Number.parseInt(budgetSlider.value, 10) || 5,
+    extractorOn: true,
+    run: 0,
+    history: []
+  };
+
+  const setGate = (el, ok, pending) => {
+    if (pending) {
+      el.textContent = "PENDING";
+      el.style.color = "#b5b6bf";
+      return;
+    }
+    el.textContent = ok ? "PASS" : "FAIL";
+    el.style.color = ok ? "#2ac3de" : "#f7768e";
+  };
+
   const renderList = (el, items, mode) => {
-    el.innerHTML = "";
     for (const item of items) {
       const li = document.createElement("li");
       li.textContent = item;
@@ -154,59 +297,187 @@
   const computeProposed = () => {
     if (state.extractorOn) return canonical.slice();
 
-    const missingCount = state.pressure >= 80 ? 2 : state.pressure >= 55 ? 1 : 0;
+    const missingCount = clamp(Math.floor((state.pressure + state.run * 8) / 35), 0, 3);
     const proposed = canonical.slice(missingCount);
 
-    const extraCount = clamp(Math.floor(state.pressure / 25) + 1, 1, 4);
+    const extraCount = clamp(Math.floor((state.pressure + state.run * 6) / 22), 1, 5);
     for (let i = 0; i < extraCount; i += 1) {
       const candidate = noisePool[(state.run + i) % noisePool.length];
       if (!proposed.includes(candidate)) proposed.push(candidate);
     }
+
     return proposed;
+  };
+
+  const computeTrend = () => {
+    if (state.history.length === 0) {
+      return { state: "baseline", text: "Collecting baseline." };
+    }
+
+    const latest = state.history[state.history.length - 1];
+    if (latest.pass) {
+      return { state: "converged", text: "Converged: hard gate PASS." };
+    }
+
+    if (state.run >= state.budget) {
+      return { state: "unreachable", text: "Budget exhausted before convergence." };
+    }
+
+    if (state.history.length < 2) {
+      return { state: "baseline", text: "Need more runs for trend." };
+    }
+
+    const window = state.history.slice(-4).map((entry) => entry.mismatch);
+    const first = window[0];
+    const last = window[window.length - 1];
+
+    let decreasing = true;
+    let increasing = true;
+    for (let i = 1; i < window.length; i += 1) {
+      if (window[i] >= window[i - 1]) decreasing = false;
+      if (window[i] <= window[i - 1]) increasing = false;
+    }
+
+    if (decreasing) {
+      return { state: "improving", text: "Mismatch trend improving." };
+    }
+    if (increasing || last > first) {
+      return { state: "diverging", text: "Drift is diverging; extraction is too weak." };
+    }
+    return { state: "stalled", text: "Oscillating or flat; refine context or scope." };
+  };
+
+  const renderTrendWindow = () => {
+    trendWindow.innerHTML = "";
+
+    const slots = state.history.slice(-4);
+    for (let i = 0; i < 4; i += 1) {
+      const entry = slots[i];
+      const pill = document.createElement("div");
+      pill.className = "trend-pill";
+
+      if (!entry) {
+        pill.dataset.state = "empty";
+        pill.innerHTML = '<div class="text-[10px] font-mono text-brand-muted">run --</div><div class="mt-1 text-xs text-brand-muted">M: --</div>';
+        trendWindow.appendChild(pill);
+        continue;
+      }
+
+      pill.dataset.state = entry.pass ? "pass" : "fail";
+      const statusWord = entry.pass ? "PASS" : "FAIL";
+      pill.innerHTML =
+        '<div class="text-[10px] font-mono text-brand-muted">run ' + entry.run + '</div>' +
+        '<div class="mt-1 text-xs font-mono text-brand-strong">M: ' + entry.mismatch + '</div>' +
+        '<div class="mt-1 text-[10px] font-mono text-brand-muted">' + statusWord + '</div>';
+      trendWindow.appendChild(pill);
+    }
+  };
+
+  const updateAttempts = (status) => {
+    const dot = document.createElement("span");
+    dot.className = "inline-block w-2.5 h-2.5 rounded-full";
+    if (status === "PASS") {
+      dot.style.backgroundColor = "rgba(42, 195, 222, 0.95)";
+    } else if (status === "ESCALATE") {
+      dot.style.backgroundColor = "rgba(187, 154, 247, 0.95)";
+    } else {
+      dot.style.backgroundColor = "rgba(247, 118, 142, 0.95)";
+    }
+
+    attempts.appendChild(dot);
+    while (attempts.children.length > 28) {
+      attempts.removeChild(attempts.firstChild);
+    }
   };
 
   const render = (recordAttempt) => {
     state.pressure = clamp(Number.parseInt(pressureSlider.value, 10) || state.pressure, 0, 100);
+    state.budget = clamp(Number.parseInt(budgetSlider.value, 10) || state.budget, 2, 10);
+
     pressureValue.textContent = String(state.pressure);
+    budgetValue.textContent = String(state.budget);
 
     const proposed = computeProposed();
     const missing = canonical.filter((item) => !proposed.includes(item));
     const extras = proposed.filter((item) => !canonical.includes(item));
     const mismatch = missing.length + extras.length;
-    const pass = mismatch === 0;
+
+    const skeletonPass = mismatch === 0;
+    const scopePass = extras.length === 0;
+    const budgetExhausted = state.run >= state.budget && !(skeletonPass && scopePass);
+    const gatePass = skeletonPass && scopePass && !budgetExhausted;
 
     const risk = state.extractorOn
-      ? Math.round(state.pressure * 0.08)
-      : clamp(Math.round(state.pressure * 0.55 + mismatch * 12), 0, 100);
+      ? clamp(Math.round(state.pressure * 0.1 + mismatch * 3), 0, 100)
+      : clamp(Math.round(state.pressure * 0.52 + mismatch * 10 + state.run * 2), 0, 100);
 
-    renderList(canonicalList, canonical, "");
+    canonicalList.innerHTML = "";
     proposedList.innerHTML = "";
-    renderList(proposedList, proposed.filter((x) => canonical.includes(x)), "");
+    renderList(canonicalList, canonical, "");
+    renderList(proposedList, proposed.filter((item) => canonical.includes(item)), "");
     renderList(proposedList, extras, "extra");
-    renderList(proposedList, missing.map((m) => `MISSING: ${m}`), "missing");
+    renderList(proposedList, missing.map((item) => "MISSING: " + item), "missing");
 
     mismatchCount.textContent = String(mismatch);
     riskScore.textContent = String(risk);
-    gateBadge.textContent = pass ? "PASS" : "FAIL";
-    gateBadge.style.color = pass ? "#2ac3de" : "#f7768e";
+    gateBadge.textContent = gatePass ? "PASS" : "FAIL";
+    gateBadge.style.color = gatePass ? "#2ac3de" : "#f7768e";
 
-    if (pass) {
-      outcomeText.textContent = state.extractorOn
-        ? "Exact skeleton match. Safe to merge generated flesh."
-        : "Converged by chance. Guardrails still required.";
-    } else {
-      outcomeText.textContent = "Skeleton mismatch detected. Reject and refine context or extraction.";
-    }
+    const remaining = Math.max(0, state.budget - state.run);
+    budgetRemaining.textContent = String(remaining);
 
-    if (recordAttempt) {
-      const dot = document.createElement("span");
-      dot.className = "inline-block w-2.5 h-2.5 rounded-full";
-      dot.style.backgroundColor = pass ? "rgba(42,195,222,0.95)" : "rgba(247,118,142,0.95)";
-      attempts.appendChild(dot);
-      while (attempts.children.length > 28) {
-        attempts.removeChild(attempts.firstChild);
+    setGate(gateSkeleton, skeletonPass, false);
+    setGate(gateScope, scopePass, false);
+    setGate(gateBudget, !budgetExhausted, false);
+    setGate(gateLedger, state.run > 0, state.run === 0);
+
+    let status = "READY";
+    if (state.run > 0) {
+      if (budgetExhausted) {
+        status = "ESCALATE";
+      } else {
+        status = gatePass ? "PASS" : "FAIL";
       }
     }
+
+    statusLabel.textContent = status;
+    statusLabel.style.color = status === "PASS" ? "#2ac3de" : status === "ESCALATE" ? "#bb9af7" : status === "FAIL" ? "#f7768e" : "#e2e8f0";
+
+    attemptLabel.textContent = String(state.run) + "/" + String(state.budget);
+    lastRun.textContent = state.run === 0 ? "--" : "T+" + String(state.run);
+    ledgerPath.textContent = "ledger/map-updaters/skeleton-first/attempt-" + String(state.run).padStart(2, "0") + ".json";
+
+    if (recordAttempt) {
+      state.history.push({ run: state.run, mismatch, pass: gatePass });
+      while (state.history.length > 28) {
+        state.history.shift();
+      }
+      updateAttempts(status);
+    }
+
+    const trend = computeTrend();
+    trendStatus.textContent = trend.text;
+    trendStatus.dataset.state = trend.state;
+    renderTrendWindow();
+
+    if (state.run === 0) {
+      outcomeText.textContent = "Ready to run one bounded attempt.";
+    } else if (status === "PASS") {
+      outcomeText.textContent = state.extractorOn
+        ? "Exact skeleton match. Merge is admissible; record receipt and continue."
+        : "PASS occurred with extraction off. Keep guardrails: this is brittle.";
+    } else if (status === "ESCALATE") {
+      outcomeText.textContent = "Circuit break: retry budget exhausted without convergence. Escalate to human review.";
+    } else {
+      outcomeText.textContent = "Hard fail on skeleton mismatch. Refine extraction context before next attempt.";
+    }
+
+    return { gatePass, status };
+  };
+
+  const runOne = () => {
+    state.run += 1;
+    return render(true);
   };
 
   extractorToggle.addEventListener("click", () => {
@@ -216,10 +487,35 @@
     render(false);
   });
 
-  pressureSlider.addEventListener("input", () => render(false));
+  pressureSlider.addEventListener("input", () => {
+    render(false);
+  });
+
+  budgetSlider.addEventListener("input", () => {
+    render(false);
+  });
+
   runButton.addEventListener("click", () => {
-    state.run += 1;
-    render(true);
+    runOne();
+  });
+
+  runBudgetButton.addEventListener("click", () => {
+    let result = { gatePass: false, status: "READY" };
+    while (state.run < state.budget) {
+      result = runOne();
+      if (result.gatePass) break;
+    }
+
+    if (!result.gatePass && state.run >= state.budget) {
+      render(false);
+    }
+  });
+
+  resetButton.addEventListener("click", () => {
+    state.run = 0;
+    state.history = [];
+    attempts.innerHTML = "";
+    render(false);
   });
 
   render(false);

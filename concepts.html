@@ -63,6 +63,23 @@
 <li><p><strong>Tier 3</strong>: Governance (when autonomy grows and
 governance matters).</p></li>
 </ul>
+<h2 id="core-thesis-intent---map---loop---convergence">Core Thesis
+(Intent -&gt; Map -&gt; Loop -&gt; Convergence)</h2>
+<p><strong>Tier:</strong> 1</p>
+<p><strong>What it is</strong> A compact statement of SDaC
+mechanics:</p>
+<ol type="1">
+<li>Intent starts as language.</li>
+<li>Intent is formalized into Maps (Mission Objects, specs, schemas,
+policies, inventories).</li>
+<li>Loops execute Maps against Terrain under Physics.</li>
+<li>The Ledger records evidence for each state transition.</li>
+<li>Terrain updates become tomorrow’s Maps through sync/update
+loops.</li>
+<li>Governance keeps loops converging instead of drifting.</li>
+</ol>
+<p><strong>Why it matters</strong> It turns fast generation into
+bounded, auditable progress toward better states.</p>
 <h2 id="map-terrain-ledger">Map / Terrain / Ledger</h2>
 <p><strong>Tier:</strong> 1</p>
 <p><strong>What they are</strong></p>
@@ -77,7 +94,8 @@ evidence (diffs, validator output, decision traces).</p></li>
 </ul>
 <p><strong>Why they matter</strong> Autonomy is safe only when intent
 (Map) and reality (Terrain) are explicit, and every change is traceable
-(Ledger).</p>
+(Ledger). Without Map/Terrain synchronization loops, today’s Terrain
+becomes tomorrow’s stale Map.</p>
 <h2 id="physics">Physics</h2>
 <p><strong>Tier:</strong> 1</p>
 <p><strong>What it is</strong> Deterministic constraints that shape a
@@ -249,7 +267,9 @@ failure signal, producing a smaller, cleaner diff.</p>
 <p><strong>What it is</strong> The state where the loop produces an
 output that passes Physics and satisfies the Mission Object’s acceptance
 criteria. The opposite is thrashing: iteration count goes up, but errors
-do not decrease.</p>
+do not decrease. Operationally, convergence means moving toward
+near-optimal states for declared objectives, constraints, and
+budgets.</p>
 <p><strong>Why it matters</strong> It lets you distinguish productive
 loops (moving toward PASS) from waste (spinning without progress), and
 it gives you a clear stop condition.</p>
@@ -314,9 +334,9 @@ directory pattern plus the habit (and tooling) to search it and recover
 useful fragments from failed runs.</p>
 <h2 id="intent-architecture">Intent Architecture</h2>
 <p><strong>Tier:</strong> 2</p>
-<p><strong>What it is</strong> Engineering how intent is captured,
-versioned, and executed: Mission Objects + Maps + Directives compiled
-into bounded diffs under non-bypassable Physics.</p>
+<p><strong>What it is</strong> Engineering how intent moves from
+language to execution: Mission Objects + Maps + Directives compiled into
+bounded diffs under non-bypassable Physics.</p>
 <p><strong>Why it matters</strong> If intent is implicit or scattered,
 autonomy becomes unsafe and un-auditable. Intent Architecture makes the
 “what” replayable; Context Architecture makes the “evidence”
@@ -382,6 +402,8 @@ intent.</p>
 <p><strong>Tier:</strong> 2</p>
 <p><strong>What it is</strong> Sense → Normalize → Compare → Propose
 patches to keep Map surfaces synchronized with the Terrain.</p>
+<p><strong>Why it matters</strong> It closes the recursion: yesterday’s
+Terrain can become tomorrow’s trusted Map.</p>
 <h2 id="ci-gate-mapterrain-sync">CI Gate (Map–Terrain Sync)</h2>
 <p><strong>Tier:</strong> 2</p>
 <p><strong>What it is</strong> Operational enforcement: divergence
@@ -462,8 +484,9 @@ Immutable Infrastructure boundaries.</p>
 <h2 id="hofstadter-bridge">Hofstadter Bridge</h2>
 <p><strong>Tier:</strong> 3</p>
 <p><strong>What it is</strong> The boundary where documentation becomes
-executable constraints: the Map is no longer advisory; it is
-enforced.</p>
+executable constraints: the Map is no longer advisory; it is enforced.
+In practice, teams cross it one bounded surface at a time: one heading,
+one extractor, one gate.</p>
 <h2 id="mirror">Mirror</h2>
 <p><strong>Tier:</strong> 3</p>
 <p><strong>What it is</strong> A limit case: a system can treat its own
@@ -506,7 +529,7 @@ capability</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>07d8025693ab</code>
+      Version: <code>0258dd885574</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
       ·

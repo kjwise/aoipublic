@@ -2249,15 +2249,24 @@
             const tightValue = document.getElementById('missionTightnessValue');
             const missionYaml = document.getElementById('missionYaml');
             const missionIdLabel = document.getElementById('missionIdLabel');
+            const gateMapEl = document.getElementById('missionGateMap');
             const retriesEl = document.getElementById('missionRetries');
             const convEl = document.getElementById('missionConvergence');
             const driftEl = document.getElementById('missionDrift');
             const callsEl = document.getElementById('missionMaxCalls');
             const latencyEl = document.getElementById('missionMaxLatency');
+            const lifecycleEl = document.getElementById('missionLifecycleStatus');
+            const attemptEl = document.getElementById('missionAttemptLabel');
+            const runEl = document.getElementById('missionLastRun');
+            const evidenceEl = document.getElementById('missionEvidencePath');
             const flexEl = document.getElementById('missionFlex');
             const flexBar = document.getElementById('missionFlexBar');
             const tightEl = document.getElementById('missionTight');
             const tightBar = document.getElementById('missionTightBar');
+            const schemaStatusEl = document.getElementById('missionSchemaStatus');
+            const scopeStatusEl = document.getElementById('missionScopeStatus');
+            const qualityStatusEl = document.getElementById('missionQualityGateStatus');
+            const schemaNoteEl = document.getElementById('missionSchemaNote');
 
             if (
                 !presetButtons.length ||
@@ -2265,49 +2274,137 @@
                 !tightValue ||
                 !missionYaml ||
                 !missionIdLabel ||
+                !gateMapEl ||
                 !retriesEl ||
                 !convEl ||
                 !driftEl ||
                 !callsEl ||
                 !latencyEl ||
+                !lifecycleEl ||
+                !attemptEl ||
+                !runEl ||
+                !evidenceEl ||
                 !flexEl ||
                 !flexBar ||
                 !tightEl ||
-                !tightBar
+                !tightBar ||
+                !schemaStatusEl ||
+                !scopeStatusEl ||
+                !qualityStatusEl ||
+                !schemaNoteEl
             ) return;
 
             const presets = {
                 bugfix: {
                     id: 'mission_bugfix_auth',
+                    version: 1,
                     objective: 'Fix auth redirect loop',
+                    scope: {
+                        modify: ['services/auth/redirect_handler.ts'],
+                        readOnly: ['contracts/auth_flow.schema.json'],
+                        doNotTouch: ['.github/**', 'policies/**'],
+                        editRegions: {
+                            'services/auth/redirect_handler.ts': ['function handleRedirect'],
+                        },
+                    },
                     budgets: { calls: 120, latency: '45s' },
                     accepts: ['unit tests', 'integration: login flow'],
                     constraints: ['do not change public API', 'keep p95 login < 250ms'],
+                    qualityGate: './scripts/validate_auth_flow.sh',
+                    rollbackOn: ['quality_gate_fail', 'scope_violation'],
+                    fallbacks: { maxIterations: 3, onFail: 'revert' },
                 },
                 feature: {
                     id: 'mission_feature_billing',
+                    version: 1,
                     objective: 'Add usage-based billing endpoint',
+                    scope: {
+                        modify: ['services/billing/routes/v2_usage.ts', 'docs/api/reference.md'],
+                        readOnly: ['contracts/billing.openapi.json'],
+                        doNotTouch: ['infra/**', 'policies/**'],
+                        editRegions: {
+                            'services/billing/routes/v2_usage.ts': ['router.post("/v2/usage")'],
+                        },
+                    },
                     budgets: { calls: 180, latency: '70s' },
                     accepts: ['contract tests', 'docs updated'],
                     constraints: ['idempotent endpoint', 'no PII in logs'],
+                    qualityGate: './scripts/validate_billing_contracts.sh',
+                    rollbackOn: ['quality_gate_fail', 'schema_mismatch'],
+                    fallbacks: { maxIterations: 4, onFail: 'revert' },
                 },
                 refactor: {
                     id: 'mission_refactor_queue',
+                    version: 1,
                     objective: 'Refactor queue worker for determinism',
+                    scope: {
+                        modify: ['services/queue/worker.ts'],
+                        readOnly: ['contracts/queue_jobs.schema.json'],
+                        doNotTouch: ['services/public_api/**', '.github/**'],
+                        editRegions: {
+                            'services/queue/worker.ts': ['class QueueWorker'],
+                        },
+                    },
                     budgets: { calls: 150, latency: '55s' },
                     accepts: ['load test passes', 'no behavior regression'],
                     constraints: ['keep schema stable', 'preserve retry semantics'],
+                    qualityGate: './scripts/validate_queue_worker.sh',
+                    rollbackOn: ['quality_gate_fail', 'performance_regression'],
+                    fallbacks: { maxIterations: 3, onFail: 'revert' },
                 },
                 compliance: {
                     id: 'mission_compliance_policy',
+                    version: 1,
                     objective: 'Enforce retention policy in storage layer',
+                    scope: {
+                        modify: ['services/storage/retention_policy.ts', 'ledger/audit_rules.md'],
+                        readOnly: ['policy/retention_v4.yaml'],
+                        doNotTouch: ['runtime/secrets/**', '.github/**'],
+                        editRegions: {
+                            'services/storage/retention_policy.ts': ['applyRetentionPolicy'],
+                        },
+                    },
                     budgets: { calls: 200, latency: '90s' },
                     accepts: ['policy gate green', 'audit log entries'],
                     constraints: ['append-only ledger', 'no bypass path'],
+                    qualityGate: './scripts/validate_retention_policy.sh',
+                    rollbackOn: ['policy_gate_fail', 'scope_violation'],
+                    fallbacks: { maxIterations: 2, onFail: 'escalate' },
                 },
             };
 
             const state = { preset: 'bugfix', tight: clamp(toInt(slider.value, 55), 0, 100) };
+            const statusPalette = {
+                pass: { fg: 'rgba(198, 246, 232, 0.98)', border: 'rgba(16, 185, 129, 0.55)', bg: 'rgba(16, 185, 129, 0.16)' },
+                warn: { fg: 'rgba(255, 236, 179, 0.98)', border: 'rgba(245, 158, 11, 0.55)', bg: 'rgba(245, 158, 11, 0.16)' },
+                fail: { fg: 'rgba(255, 221, 225, 0.98)', border: 'rgba(247, 118, 142, 0.60)', bg: 'rgba(247, 118, 142, 0.18)' },
+                info: { fg: 'rgba(223, 235, 255, 0.98)', border: 'rgba(122, 162, 247, 0.55)', bg: 'rgba(122, 162, 247, 0.16)' },
+            };
+            const badgeStyle = (tone) => {
+                const t = statusPalette[tone] || statusPalette.info;
+                return [
+                    'display:inline-flex',
+                    'align-items:center',
+                    'justify-content:center',
+                    'padding:0.12rem 0.4rem',
+                    'border-radius:999px',
+                    `border:1px solid ${t.border}`,
+                    `background:${t.bg}`,
+                    `color:${t.fg}`,
+                    'font-family:JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace',
+                    'font-size:0.68rem',
+                    'line-height:1.15',
+                    'font-weight:700',
+                    'letter-spacing:0.01em',
+                    'white-space:nowrap',
+                ].join(';');
+            };
+            const badgeHtml = (label, tone) => `<span style="${badgeStyle(tone)}">${escapeHtml(label)}</span>`;
+            const setBadge = (el, label, tone) => {
+                if (!el) return;
+                el.textContent = label;
+                el.setAttribute('style', badgeStyle(tone));
+            };
 
             const render = () => {
                 presetButtons.forEach((b) => setPressed(b, b.dataset.missionPreset === state.preset));
@@ -2321,29 +2418,137 @@
                 const convergence = clamp(Math.round(25 + 75 * Math.pow(state.tight / 100, 0.65)), 0, 100);
                 const drift = clamp(Math.round(85 - state.tight * 0.7), 5, 95);
                 const flex = clamp(100 - state.tight, 0, 100);
+                const schemaPass = true;
+                const scopePass = state.tight >= 42;
+                const qualityPass = state.tight >= 50;
+
+                let lifecycle = 'DRAFT';
+                if (!scopePass && drift >= 65) lifecycle = 'REVERTED';
+                else if (scopePass && qualityPass && convergence >= 82) lifecycle = 'COMPLETED';
+                else if (scopePass) lifecycle = 'ACTIVE';
+
+                const lifecycleTone = lifecycle === 'COMPLETED'
+                    ? 'pass'
+                    : lifecycle === 'ACTIVE'
+                        ? 'info'
+                        : lifecycle === 'REVERTED'
+                            ? 'fail'
+                            : 'warn';
+                const attempt = lifecycle === 'COMPLETED'
+                    ? 1
+                    : clamp(Math.max(1, Math.round((100 - convergence) / 18) + 1), 1, p.fallbacks.maxIterations);
+                const runId = `run_${String(1000 + state.tight + p.budgets.calls + attempt).padStart(4, '0')}`;
+                const versionTag = `${p.id}@v${p.version}`;
 
                 retriesEl.textContent = String(retries);
                 convEl.textContent = String(convergence);
                 driftEl.textContent = String(drift);
                 callsEl.textContent = String(p.budgets.calls);
                 latencyEl.textContent = p.budgets.latency;
+                setBadge(lifecycleEl, lifecycle, lifecycleTone);
+                attemptEl.textContent = `${attempt}/${p.fallbacks.maxIterations}`;
+                runEl.textContent = runId;
+                evidenceEl.textContent = `ledger/runs/${versionTag}/${runId}.json`;
 
                 flexEl.textContent = String(flex);
                 flexBar.style.width = `${flex}%`;
                 tightEl.textContent = String(state.tight);
                 tightBar.style.width = `${state.tight}%`;
 
+                setBadge(schemaStatusEl, schemaPass ? 'PASS' : 'FAIL', schemaPass ? 'pass' : 'fail');
+                setBadge(scopeStatusEl, scopePass ? 'PASS' : 'WARN', scopePass ? 'pass' : 'warn');
+                setBadge(qualityStatusEl, qualityPass ? 'PASS' : 'WARN', qualityPass ? 'pass' : 'warn');
+                if (!scopePass) {
+                    schemaNoteEl.textContent = 'Scope boundary is too loose for safe activation. Tighten constraints before opening the write window.';
+                } else if (!qualityPass) {
+                    schemaNoteEl.textContent = `Schema is valid, but ${escapeHtml(p.qualityGate)} is under-constrained. Add stricter acceptance criteria before scale-up.`;
+                } else {
+                    schemaNoteEl.textContent = `Schema + scope + quality gate compiled. Mission can run deterministically under ${escapeHtml(p.qualityGate)}.`;
+                }
+
+                const gateRows = [
+                    {
+                        key: 'scope.do_not_touch',
+                        gate: 'protected path validator',
+                        detail: p.scope.doNotTouch[0],
+                        tone: scopePass ? 'pass' : 'warn',
+                        label: scopePass ? 'PASS' : 'WARN',
+                    },
+                    {
+                        key: 'scope.edit_regions',
+                        gate: 'edit region validator',
+                        detail: Object.values(p.scope.editRegions)[0][0],
+                        tone: state.tight >= 48 ? 'pass' : 'warn',
+                        label: state.tight >= 48 ? 'PASS' : 'WARN',
+                    },
+                    {
+                        key: 'constraints.forbidden',
+                        gate: 'policy assertion check',
+                        detail: p.constraints[0],
+                        tone: state.tight >= 45 ? 'pass' : 'warn',
+                        label: state.tight >= 45 ? 'PASS' : 'WARN',
+                    },
+                    {
+                        key: 'acceptance_criteria',
+                        gate: 'deterministic content/test checks',
+                        detail: p.accepts[0],
+                        tone: qualityPass ? 'pass' : 'warn',
+                        label: qualityPass ? 'PASS' : 'WARN',
+                    },
+                    {
+                        key: 'quality_gate.cmd',
+                        gate: p.qualityGate,
+                        detail: p.fallbacks.onFail === 'escalate' ? 'on_fail: escalate' : 'on_fail: revert',
+                        tone: qualityPass ? 'pass' : 'warn',
+                        label: qualityPass ? 'PASS' : 'WARN',
+                    },
+                ];
+                gateMapEl.innerHTML = gateRows.map((row) => (
+                    `<div class="flex items-start justify-between gap-2">
+                        <div class="min-w-0">
+                            <div class="text-brand-strong">${escapeHtml(row.key)} → ${escapeHtml(row.gate)}</div>
+                            <div class="text-brand-muted">${escapeHtml(row.detail)}</div>
+                        </div>
+                        ${badgeHtml(row.label, row.tone)}
+                    </div>`
+                )).join('');
+
+                const [editFile, editSections] = Object.entries(p.scope.editRegions)[0];
                 const yaml = [
-                    `id: ${p.id}`,
-                    `objective: ${p.objective}`,
+                    `mission_id: ${p.id}`,
+                    `mission_version: ${p.version}`,
+                    `goal: "${p.objective}"`,
+                    `scope:`,
+                    `  modify:`,
+                    ...p.scope.modify.map((f) => `    - ${f}`),
+                    `  read_only:`,
+                    ...p.scope.readOnly.map((f) => `    - ${f}`),
+                    `  do_not_touch:`,
+                    ...p.scope.doNotTouch.map((f) => `    - ${f}`),
+                    `  edit_regions:`,
+                    `    ${editFile}:`,
+                    ...editSections.map((r) => `      - "${r}"`),
                     `constraints:`,
-                    ...p.constraints.map((c) => `  - ${c}`),
-                    `acceptance:`,
-                    ...p.accepts.map((a) => `  - ${a}`),
+                    `  forbidden:`,
+                    ...p.constraints.map((c) => `    - "${c}"`),
+                    `acceptance_criteria:`,
+                    `  must_pass:`,
+                    ...p.accepts.map((a) => `    - "${a}"`),
                     `budgets:`,
                     `  max_calls: ${p.budgets.calls}`,
                     `  max_latency: ${p.budgets.latency}`,
                     `  constraint_tightness: ${state.tight}%`,
+                    `quality_gate:`,
+                    `  cmd: ${p.qualityGate}`,
+                    `rollback_on:`,
+                    ...p.rollbackOn.map((r) => `  - "${r}"`),
+                    `fallbacks:`,
+                    `  max_iterations: ${p.fallbacks.maxIterations}`,
+                    `  on_fail: ${p.fallbacks.onFail}`,
+                    `telemetry:`,
+                    `  status: ${lifecycle.toLowerCase()}`,
+                    `  attempt: ${attempt}`,
+                    `  last_run_id: ${runId}`,
                     `derived:`,
                     `  expected_retries: ${retries}x`,
                     `  convergence_rate: ${convergence}/100`,
@@ -2608,19 +2813,52 @@
 
         // Section 5: Always-on loops chart
         const setupAlwaysOnLoops = () => {
-            const weekSlider = document.getElementById('maintWeekSlider');
-            const weekValue = document.getElementById('maintWeekValue');
-            const debtEl = document.getElementById('maintDebt');
-            const incidentsEl = document.getElementById('maintIncidents');
-            const p95El = document.getElementById('maintP95');
-            const chartEl = document.getElementById('maintenanceChart');
-            const loopButtons = Array.from(document.querySelectorAll('[data-maint-loop]'));
-            if (!weekSlider || !weekValue || !debtEl || !incidentsEl || !p95El || !chartEl || !loopButtons.length) return;
+            const root = document.querySelector('[data-infographic-section-id="i3-section-05-always-on-loops"]');
+            if (!root) return;
+
+            const weekSlider = root.querySelector('#maintWeekSlider');
+            const weekValue = root.querySelector('#maintWeekValue');
+            const budgetSlider = root.querySelector('#maintCycleBudgetSlider');
+            const budgetValue = root.querySelector('#maintCycleBudgetValue');
+            const stepBtn = root.querySelector('#maintRunCycleButton');
+            const runToGateBtn = root.querySelector('#maintRunToGateButton');
+            const resetBtn = root.querySelector('#maintResetButton');
+            const debtEl = root.querySelector('#maintDebt');
+            const incidentsEl = root.querySelector('#maintIncidents');
+            const p95El = root.querySelector('#maintP95');
+            const budgetRemainingEl = root.querySelector('#maintBudgetRemaining');
+            const targetEl = root.querySelector('#maintTarget');
+            const expectedGainEl = root.querySelector('#maintExpectedGain');
+            const gateSignalEl = root.querySelector('#maintGateSignal');
+            const gateGuardrailsEl = root.querySelector('#maintGateGuardrails');
+            const gateBudgetEl = root.querySelector('#maintGateBudget');
+            const gateLedgerEl = root.querySelector('#maintGateLedger');
+            const statusEl = root.querySelector('#maintStatus');
+            const cycleEl = root.querySelector('#maintCycle');
+            const lastRunEl = root.querySelector('#maintLastRun');
+            const receiptEl = root.querySelector('#maintReceipt');
+            const trendStatusEl = root.querySelector('#maintTrendStatus');
+            const trendWindowEl = root.querySelector('#maintTrendWindow');
+            const outcomeEl = root.querySelector('#maintOutcome');
+            const attemptsEl = root.querySelector('#maintAttempts');
+            const chartEl = root.querySelector('#maintenanceChart');
+            const loopButtons = Array.from(root.querySelectorAll('[data-maint-loop]'));
+
+            if (!weekSlider || !weekValue || !budgetSlider || !budgetValue || !stepBtn || !runToGateBtn || !resetBtn ||
+                !debtEl || !incidentsEl || !p95El || !budgetRemainingEl || !targetEl || !expectedGainEl ||
+                !gateSignalEl || !gateGuardrailsEl || !gateBudgetEl || !gateLedgerEl || !statusEl || !cycleEl ||
+                !lastRunEl || !receiptEl || !trendStatusEl || !trendWindowEl || !outcomeEl || !attemptsEl ||
+                !chartEl || !loopButtons.length) {
+                return;
+            }
 
             const MAX_WEEK = 26;
             const state = {
                 week: clamp(toInt(weekSlider.value, 8), 0, MAX_WEEK),
                 loops: new Set(loopButtons.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.maintLoop)),
+                cycleBudget: clamp(toInt(budgetSlider.value, 6), 2, 12),
+                cycle: 0,
+                history: [],
             };
 
             const simulate = (loops) => {
@@ -2639,7 +2877,6 @@
                     d = clamp(d, 0, 100);
 
                     let expected = 62 + autonomy * 0.55 + d * 0.38;
-                    // maintenance overhead (small) for always-on loops
                     expected += loops.has('map') ? 2.0 : 0;
                     expected += loops.has('dream') ? 2.5 : 0;
                     expected += loops.has('refactor') ? 2.5 : 0;
@@ -2647,11 +2884,9 @@
 
                     let pricing = 25 + Math.pow(autonomy / 100, 1.25) * 75;
                     let frontier = 18 + Math.pow(autonomy / 100, 1.55) * 65;
-                    // governance buys down tail-risk by constraining failure modes
                     if (loops.has('governance')) frontier = clamp(frontier * 0.92, 0, 100);
 
                     if (loops.has('hedged')) {
-                        // hedging mostly caps volatility / tail exposure while adding some fixed overhead
                         expected += 6;
                         pricing = Math.min(pricing * 0.35, 18);
                     }
@@ -2674,11 +2909,10 @@
             const markerPlugin = {
                 id: 'weekMarker',
                 afterDraw(chart) {
-                    const w = state.week;
                     const xScale = chart.scales.x;
                     const area = chart.chartArea;
                     if (!xScale || !area) return;
-                    const x = xScale.getPixelForValue(w);
+                    const x = xScale.getPixelForValue(state.week);
                     const ctx = chart.ctx;
                     ctx.save();
                     ctx.strokeStyle = 'rgba(242, 243, 248, 0.22)';
@@ -2695,17 +2929,180 @@
             const ctx = chartEl.getContext('2d');
             const chartState = { chart: null };
 
+            const setGate = (el, ok, pending) => {
+                if (pending) {
+                    el.textContent = 'PENDING';
+                    el.style.color = '#b5b6bf';
+                    return;
+                }
+                el.textContent = ok ? 'PASS' : 'FAIL';
+                el.style.color = ok ? '#2ac3de' : '#f7768e';
+            };
+
+            const statusColor = (status) => {
+                if (status === 'PASS') return '#2ac3de';
+                if (status === 'ESCALATE') return '#bb9af7';
+                if (status === 'DEFER') return '#ff9e64';
+                return '#e2e8f0';
+            };
+
+            const targetLabel = (debt, incidents) => {
+                if (debt >= 65) return 'Map drift hotspots';
+                if (incidents >= 4) return 'Incident-prone modules';
+                if (!state.loops.has('refactor')) return 'Refactor queue (guarded)';
+                if (!state.loops.has('dream')) return 'Backlog triage candidates';
+                return 'Validation debt sweep';
+            };
+
+            const expectedDelta = (cycleIndex = state.cycle + 1) => {
+                const pattern = [0.28, -0.12, 0.18, -0.08, 0.12, -0.04][cycleIndex % 6];
+                let base = 0;
+                if (state.loops.has('map')) base += 0.65;
+                if (state.loops.has('dream')) base += 0.95;
+                if (state.loops.has('refactor')) base += 0.8;
+                if (state.loops.has('governance')) base += 0.45;
+                const pressurePenalty = clamp((state.week - 8) * 0.05, 0, 0.9);
+                const hedgeTax = state.loops.has('hedged') ? 0.08 : 0;
+                return clamp(base - pressurePenalty + pattern - hedgeTax, -0.7, 1.8);
+            };
+
+            const metricFromHistory = (baseDebt, baseP95) => {
+                const gains = state.history.reduce((sum, entry) => sum + Math.max(entry.delta, 0), 0);
+                const regressions = state.history.reduce((sum, entry) => sum + Math.max(-entry.delta, 0), 0);
+                const debt = clamp(baseDebt - gains * 2.4 + regressions * 1.5, 0, 100);
+                const p95 = clamp(baseP95 - gains * 4.2 + regressions * 3.4 - (state.loops.has('hedged') ? 4 : 0), 40, 260);
+                const inc = clamp(Math.round(Math.pow(debt / 100, 2) * 8 * (state.loops.has('governance') ? 0.55 : 1.0)), 0, 10);
+                return { debt, p95, inc };
+            };
+
+            const computeTrend = (signalPass) => {
+                if (state.history.length === 0) {
+                    return { state: 'baseline', text: 'Collecting baseline.' };
+                }
+                if (state.cycle >= state.cycleBudget && !signalPass) {
+                    return { state: 'unreachable', text: 'Budget exhausted without sufficient signal gain.' };
+                }
+
+                const window = state.history.slice(-4).map((entry) => entry.delta);
+                const avg = window.reduce((sum, value) => sum + value, 0) / window.length;
+                const improving = window.length > 1 && window[window.length - 1] > window[0];
+
+                if (signalPass && improving) {
+                    return { state: 'converged', text: 'Converging: minimum progress gate satisfied.' };
+                }
+                if (signalPass) {
+                    return { state: 'improving', text: 'Signal is acceptable; continue bounded cycles.' };
+                }
+                if (avg <= 0.05) {
+                    return { state: 'flat', text: 'Signal flat; defer writes and keep sensing.' };
+                }
+                return { state: 'defer', text: 'Partial gain only; stay in bounded defer mode.' };
+            };
+
+            const renderTrendWindow = () => {
+                trendWindowEl.innerHTML = '';
+                const slots = state.history.slice(-4);
+
+                for (let i = 0; i < 4; i += 1) {
+                    const entry = slots[i];
+                    const pill = document.createElement('div');
+                    pill.className = 'maint-trend-pill';
+
+                    if (!entry) {
+                        pill.dataset.state = 'empty';
+                        pill.innerHTML = '<div class="text-[10px] font-mono text-brand-muted">cycle --</div><div class="mt-1 text-xs text-brand-muted">Δ --</div>';
+                        trendWindowEl.appendChild(pill);
+                        continue;
+                    }
+
+                    const delta = entry.delta;
+                    const deltaLabel = `${delta >= 0 ? '+' : ''}${delta.toFixed(2)}`;
+                    const pillState = delta >= 0.45 ? 'pass' : (delta >= 0 ? 'defer' : 'fail');
+                    pill.dataset.state = pillState;
+                    pill.innerHTML =
+                        `<div class="text-[10px] font-mono text-brand-muted">cycle ${entry.cycle}</div>` +
+                        `<div class="mt-1 text-xs font-mono text-brand-strong">Δ ${deltaLabel}</div>`;
+                    trendWindowEl.appendChild(pill);
+                }
+            };
+
+            const pushAttemptDot = (status) => {
+                const dot = document.createElement('span');
+                dot.className = 'inline-block w-2.5 h-2.5 rounded-full';
+                if (status === 'PASS') dot.style.backgroundColor = 'rgba(42, 195, 222, 0.95)';
+                else if (status === 'ESCALATE') dot.style.backgroundColor = 'rgba(187, 154, 247, 0.95)';
+                else dot.style.backgroundColor = 'rgba(255, 158, 100, 0.95)';
+                attemptsEl.appendChild(dot);
+                while (attemptsEl.children.length > 28) {
+                    attemptsEl.removeChild(attemptsEl.firstChild);
+                }
+            };
+
+            const resetLoopState = () => {
+                state.cycle = 0;
+                state.history = [];
+                attemptsEl.innerHTML = '';
+            };
+
             const render = () => {
                 weekValue.textContent = String(state.week);
                 weekSlider.value = String(state.week);
+                budgetValue.textContent = String(state.cycleBudget);
+                budgetSlider.value = String(state.cycleBudget);
 
                 const series = simulate(state.loops);
-                const d = series.debt[state.week] ?? series.debt[0];
-                const p = series.p95[state.week] ?? series.p95[0];
-                const inc = series.incidents[state.week] ?? series.incidents[0];
-                debtEl.textContent = String(Math.round(d));
-                incidentsEl.textContent = String(inc);
-                p95El.textContent = String(Math.round(p));
+                const baseDebt = series.debt[state.week] ?? series.debt[0];
+                const baseP95 = series.p95[state.week] ?? series.p95[0];
+                const metrics = metricFromHistory(baseDebt, baseP95);
+
+                debtEl.textContent = String(Math.round(metrics.debt));
+                incidentsEl.textContent = String(metrics.inc);
+                p95El.textContent = String(Math.round(metrics.p95));
+                budgetRemainingEl.textContent = String(Math.max(0, state.cycleBudget - state.cycle));
+                targetEl.textContent = targetLabel(metrics.debt, metrics.inc);
+                const nextGain = expectedDelta();
+                expectedGainEl.textContent = `${nextGain >= 0 ? '+' : ''}${nextGain.toFixed(2)} debt/cycle`;
+
+                const window = state.history.slice(-4).map((entry) => entry.delta);
+                const avgDelta = window.length ? (window.reduce((sum, value) => sum + value, 0) / window.length) : 0;
+                const signalPass = state.history.length > 0 && (window.length >= 3 ? avgDelta >= 0.45 : window[window.length - 1] >= 0.75);
+                const guardrailsPass = state.loops.has('map') && state.loops.has('governance');
+                const budgetExhausted = state.cycle >= state.cycleBudget && !signalPass;
+
+                setGate(gateSignalEl, signalPass, state.cycle === 0);
+                setGate(gateGuardrailsEl, guardrailsPass, false);
+                setGate(gateBudgetEl, !budgetExhausted, false);
+                setGate(gateLedgerEl, state.cycle > 0, state.cycle === 0);
+
+                let status = 'READY';
+                if (state.cycle > 0) {
+                    if (budgetExhausted) status = 'ESCALATE';
+                    else if (signalPass && guardrailsPass) status = 'PASS';
+                    else status = 'DEFER';
+                }
+
+                statusEl.textContent = status;
+                statusEl.style.color = statusColor(status);
+                cycleEl.textContent = `${state.cycle}/${state.cycleBudget}`;
+                lastRunEl.textContent = state.cycle === 0 ? '--' : `T+${state.cycle}`;
+                receiptEl.textContent = `ledger/dream-daemon/week-${String(state.week).padStart(2, '0')}/cycle-${String(state.cycle).padStart(2, '0')}.json`;
+
+                const trend = computeTrend(signalPass);
+                trendStatusEl.textContent = trend.text;
+                trendStatusEl.dataset.state = trend.state;
+                renderTrendWindow();
+
+                if (state.cycle === 0) {
+                    outcomeEl.textContent = 'Ready to run one bounded cycle.';
+                } else if (status === 'PASS') {
+                    outcomeEl.textContent = 'Signal gain and guardrails pass. Admit one bounded maintenance diff.';
+                } else if (status === 'DEFER' && !guardrailsPass) {
+                    outcomeEl.textContent = 'Defer: guardrails incomplete. Keep sensing and route to human triage.';
+                } else if (status === 'DEFER') {
+                    outcomeEl.textContent = 'Defer: progress is below threshold. Keep bounded sensing cycles.';
+                } else {
+                    outcomeEl.textContent = 'Circuit break: budget exhausted without convergence. Escalate.';
+                }
 
                 if (!chartState.chart) {
                     chartState.chart = new Chart(ctx, {
@@ -2766,10 +3163,35 @@
                     chartState.chart.data.datasets[1].data = series.p95;
                     chartState.chart.update('none');
                 }
+
+                return { status };
+            };
+
+            const runOne = () => {
+                state.cycle += 1;
+                state.history.push({
+                    cycle: state.cycle,
+                    delta: expectedDelta(state.cycle),
+                });
+                while (state.history.length > 28) {
+                    state.history.shift();
+                }
+                const current = render();
+                pushAttemptDot(current.status);
+                return current;
             };
 
             weekSlider.addEventListener('input', () => {
                 state.week = clamp(toInt(weekSlider.value, state.week), 0, MAX_WEEK);
+                resetLoopState();
+                render();
+            });
+
+            budgetSlider.addEventListener('input', () => {
+                state.cycleBudget = clamp(toInt(budgetSlider.value, state.cycleBudget), 2, 12);
+                if (state.cycle > state.cycleBudget) {
+                    state.cycle = state.cycleBudget;
+                }
                 render();
             });
 
@@ -2780,8 +3202,29 @@
                     if (state.loops.has(key)) state.loops.delete(key);
                     else state.loops.add(key);
                     btn.setAttribute('aria-pressed', state.loops.has(key) ? 'true' : 'false');
+                    resetLoopState();
                     render();
                 });
+            });
+
+            stepBtn.addEventListener('click', () => {
+                runOne();
+            });
+
+            runToGateBtn.addEventListener('click', () => {
+                let current = { status: 'READY' };
+                while (state.cycle < state.cycleBudget) {
+                    current = runOne();
+                    if (current.status === 'PASS' || current.status === 'ESCALATE') break;
+                }
+                if (current.status !== 'PASS' && state.cycle >= state.cycleBudget) {
+                    render();
+                }
+            });
+
+            resetBtn.addEventListener('click', () => {
+                resetLoopState();
+                render();
             });
 
             render();

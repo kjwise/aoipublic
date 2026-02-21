@@ -1,90 +1,97 @@
 <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-07-ratchet-gates" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<style>
+  [data-role="ratchet-sim"] .ratchet-phase {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.48);
+    color: #b5b6bf;
+    transition: all 180ms ease;
+  }
+  [data-role="ratchet-sim"] .ratchet-phase[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+    color: #f2f3f8;
+    box-shadow: 0 0 0 1px rgba(42, 195, 222, 0.2) inset;
+  }
+  [data-role="ratchet-sim"] .soft-toggle[data-role="scenario"][aria-pressed="true"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.16);
+    color: #f2f3f8;
+  }
+  [data-role="ratchet-sim"] .attempt-pill.is-human {
+    background: rgba(187, 154, 247, 0.24);
+    border-color: rgba(187, 154, 247, 0.34);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-role="ratchet-sim"] .ratchet-phase {
+      transition: none;
+    }
+  }
+</style>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Ratchets (Quality Floors That Only Move Up)</h2>
 <p class="text-brand-muted leading-relaxed">
-              Ratchets convert progress into non-regression law. A candidate may fail, but the floor does not move down.
-              When a candidate passes the gate, the floor is raised and future loops compound from a better baseline.
-            </p>
+      Ratchets turn quality expectations into executable law. A candidate can fail, but the floor does not move down.
+      If a candidate passes deterministic guards, the floor moves up and future loops start from a stronger baseline.
+    </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2"><a class="concept-link" href="../../concepts#ratchet" title="See concept: Ratchet">Ratchet</a> conditions</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Atomic admission loop</div>
+<div class="text-sm text-brand-muted leading-relaxed space-y-2">
+<span class="block"><span class="font-mono text-brand-vibrant">1) Measure</span> baseline metrics.</span>
+<span class="block"><span class="font-mono text-brand-vibrant">2) Mutate</span> one bounded candidate.</span>
+<span class="block"><span class="font-mono text-brand-vibrant">3) Validate</span> ratchets + policy gates.</span>
+<span class="block"><span class="font-mono text-brand-vibrant">4) Decide</span> raise floor, reject, or route to human gate.</span>
+</div>
+</div>
+<div class="mt-4 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Deterministic guard rules</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-<span class="block font-mono text-brand-vibrant">quality(Z<sub>n</sub>) &gt;= quality(Z<sub>n-1</sub>)</span>
-<span class="block font-mono text-brand-vibrant mt-1">m<sub>new</sub> &gt;= m<sub>old</sub></span>
-<span class="block mt-2">Here <span class="font-mono">m</span> is any tracked metric (for example reliability, velocity, defensibility, compliance).</span>
-<span class="block font-mono text-brand-vibrant mt-2">q(Z) = Σ w<sub>i</sub> · m<sub>i</sub>(Z), with Σ w<sub>i</sub> = 1</span>
-<span class="block mt-2">FAIL does not lower the floor. PASS can raise it.</span>
+<span class="block font-mono text-brand-vibrant">test_count_new &gt;= test_count_old</span>
+<span class="block font-mono text-brand-vibrant mt-1">coverage_new &gt;= coverage_old</span>
+<span class="block font-mono text-brand-vibrant mt-1">lint_new &lt;= lint_old</span>
+<span class="block font-mono text-brand-vibrant mt-1">security_new &lt;= security_old</span>
+<span class="block mt-2">If all ratchets pass, policy decides: allowlisted auto-merge or explicit human approval.</span>
 </div>
 </div>
 </div>
 <div class="lg:w-7/12 space-y-4" data-role="ratchet-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
-<div class="md:col-span-6">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Candidate delta</span>
-<span class="font-mono text-brand-strong"><span data-role="delta-value">3</span> pts</span>
+<div class="text-xs font-mono text-brand-muted mb-3">Scenario runner (deterministic)</div>
+<div class="flex flex-wrap gap-2" data-role="scenario-controls">
+<button aria-pressed="true" class="soft-toggle font-mono" data-role="scenario" data-scenario="lint_fix" type="button">Lint Autofix</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="coverage_drop" type="button">Coverage Drop</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="security_regression" type="button">Security Regression</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="api_expansion" type="button">API Expansion</button>
 </div>
-<input class="mt-2 w-full" data-role="delta-slider" max="20" min="-20" step="1" type="range" value="3"/>
-</div>
-<div class="md:col-span-6">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Gate strength</span>
-<span class="font-mono text-brand-strong"><span data-role="gate-value">66</span>/100</span>
-</div>
-<input class="mt-2 w-full" data-role="gate-slider" max="95" min="40" step="1" type="range" value="66"/>
-</div>
-<div class="md:col-span-6">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Stochasticity</span>
-<span class="font-mono text-brand-strong"><span data-role="noise-value">50</span>/100</span>
-</div>
-<input class="mt-2 w-full" data-role="noise-slider" max="100" min="0" step="1" type="range" value="50"/>
-</div>
-</div>
-<div class="mt-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Loop complexity (changes quality weights)</div>
-<div class="flex flex-wrap gap-2" data-role="complexity-controls">
-<button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="local" type="button">Local Loop</button>
-<button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="component" type="button">Component Loop</button>
-<button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="system" type="button">System Loop</button>
-</div>
-<div class="mt-2 text-xs text-brand-muted">
-<span class="font-mono">q weights</span>:
-<span data-role="weights-label">R 30% · V 25% · D 25% · C 20%</span>
-</div>
-<div class="mt-1 text-xs text-brand-muted">
-<span class="font-mono">stochastic variance</span>:
-<span data-role="variance-label">±2.0</span>
-</div>
-<div class="mt-1 text-xs text-brand-muted">
-<span class="font-mono">shock chance</span>:
-<span data-role="shock-label">3%</span>
-</div>
+<div class="mt-2 text-xs text-brand-muted" data-role="scenario-note">Small bounded mutation that should raise quality and pass ratchets.</div>
+<div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="measure" data-role="phase-pill">1 Measure</div>
+<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="mutate" data-role="phase-pill">2 Mutate</div>
+<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="validate" data-role="phase-pill">3 Validate</div>
+<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="decide" data-role="phase-pill">4 Decide</div>
 </div>
 <div class="mt-3 flex flex-wrap gap-2">
-<button class="soft-toggle font-mono" data-role="run" type="button">Run Candidate</button>
+<button class="soft-toggle font-mono" data-role="run" type="button">Run Scenario</button>
 <button class="soft-toggle font-mono" data-role="reset" type="button">Reset Floor</button>
 </div>
 </div>
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Reliability</div>
-<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-r">—</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Test count</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="test-old">480</span> -&gt; <span data-role="test-new">481</span></div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Velocity</div>
-<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-v">—</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Coverage</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="coverage-old">88.0</span>% -&gt; <span data-role="coverage-new">88.0</span>%</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Defensibility</div>
-<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-d">—</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Lint violations</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="lint-old">6</span> -&gt; <span data-role="lint-new">4</span></div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Compliance</div>
-<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-c">—</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Security findings</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="security-old">2</span> -&gt; <span data-role="security-new">2</span></div>
 </div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -94,15 +101,26 @@
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Candidate quality</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="candidate">76</span>/100</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="candidate-quality">75</span>/100</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Evidence score</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="evidence">74</span>/100</div>
+<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="../../concepts#ratchet" title="See concept: Ratchet">Ratchet</a> gate</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">READY</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Ratchet gate</div>
-<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">PASS</div>
+<div class="text-xs font-mono text-brand-muted">Decision</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong" data-role="decision">Run scenario</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Gate trace</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs text-brand-muted">
+<div class="border border-brand-border rounded-lg p-2">test_count: <span data-role="check-test">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">coverage: <span data-role="check-coverage">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">lint: <span data-role="check-lint">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">security: <span data-role="check-security">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">quality floor: <span data-role="check-quality">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">policy gate: <span data-role="check-policy">READY</span></div>
 </div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
@@ -117,16 +135,16 @@
 <div>
 <div class="text-xs text-brand-muted mb-1">Candidate</div>
 <div class="h-2 rounded-full bg-brand-dark/70 border border-brand-border overflow-hidden">
-<div class="h-full bg-brand-accent" data-role="candidate-bar" style="width: 76%;"></div>
+<div class="h-full bg-brand-accent" data-role="candidate-bar" style="width: 75%;"></div>
 </div>
 </div>
 </div>
-<div class="mt-3 text-xs text-brand-muted" data-role="outcome">Ready. Run a candidate through the ratchet gate.</div>
+<div class="mt-3 text-xs text-brand-muted" data-role="outcome">Ready. Run a candidate through deterministic guards.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">Attempts</div>
-<div class="text-xs text-brand-muted">Cyan = raised floor, red = rejected</div>
+<div class="text-xs text-brand-muted">Cyan = floor raised, red = rejected, violet = human gate</div>
 </div>
 <div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
 </div>
@@ -143,242 +161,311 @@
   const sim = root.querySelector('[data-role="ratchet-sim"]');
   if (!sim) return;
 
-  const deltaSlider = sim.querySelector('[data-role="delta-slider"]');
-  const gateSlider = sim.querySelector('[data-role="gate-slider"]');
-  const noiseSlider = sim.querySelector('[data-role="noise-slider"]');
+  const scenarioButtons = Array.from(sim.querySelectorAll('[data-role="scenario"]'));
+  const scenarioNoteEl = sim.querySelector('[data-role="scenario-note"]');
+  const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
   const runBtn = sim.querySelector('[data-role="run"]');
   const resetBtn = sim.querySelector('[data-role="reset"]');
-  const deltaValue = sim.querySelector('[data-role="delta-value"]');
-  const gateValue = sim.querySelector('[data-role="gate-value"]');
-  const noiseValue = sim.querySelector('[data-role="noise-value"]');
+
+  const testOldEl = sim.querySelector('[data-role="test-old"]');
+  const testNewEl = sim.querySelector('[data-role="test-new"]');
+  const coverageOldEl = sim.querySelector('[data-role="coverage-old"]');
+  const coverageNewEl = sim.querySelector('[data-role="coverage-new"]');
+  const lintOldEl = sim.querySelector('[data-role="lint-old"]');
+  const lintNewEl = sim.querySelector('[data-role="lint-new"]');
+  const securityOldEl = sim.querySelector('[data-role="security-old"]');
+  const securityNewEl = sim.querySelector('[data-role="security-new"]');
+
   const floorEl = sim.querySelector('[data-role="floor"]');
-  const candidateEl = sim.querySelector('[data-role="candidate"]');
-  const evidenceEl = sim.querySelector('[data-role="evidence"]');
+  const candidateQualityEl = sim.querySelector('[data-role="candidate-quality"]');
   const statusEl = sim.querySelector('[data-role="status"]');
+  const decisionEl = sim.querySelector('[data-role="decision"]');
+
+  const checkTestEl = sim.querySelector('[data-role="check-test"]');
+  const checkCoverageEl = sim.querySelector('[data-role="check-coverage"]');
+  const checkLintEl = sim.querySelector('[data-role="check-lint"]');
+  const checkSecurityEl = sim.querySelector('[data-role="check-security"]');
+  const checkQualityEl = sim.querySelector('[data-role="check-quality"]');
+  const checkPolicyEl = sim.querySelector('[data-role="check-policy"]');
+
   const floorBar = sim.querySelector('[data-role="floor-bar"]');
   const candidateBar = sim.querySelector('[data-role="candidate-bar"]');
-  const complexityButtons = Array.from(sim.querySelectorAll('[data-role="complexity"]'));
-  const weightsLabel = sim.querySelector('[data-role="weights-label"]');
-  const varianceLabel = sim.querySelector('[data-role="variance-label"]');
-  const shockLabel = sim.querySelector('[data-role="shock-label"]');
-  const metricR = sim.querySelector('[data-role="metric-r"]');
-  const metricV = sim.querySelector('[data-role="metric-v"]');
-  const metricD = sim.querySelector('[data-role="metric-d"]');
-  const metricC = sim.querySelector('[data-role="metric-c"]');
   const outcomeEl = sim.querySelector('[data-role="outcome"]');
   const attemptsEl = sim.querySelector('[data-role="attempts"]');
-  if (!deltaSlider || !gateSlider || !noiseSlider || !runBtn || !resetBtn || !deltaValue || !gateValue || !noiseValue || !floorEl || !candidateEl || !evidenceEl || !statusEl || !floorBar || !candidateBar || !weightsLabel || !varianceLabel || !shockLabel || !metricR || !metricV || !metricD || !metricC || !outcomeEl || !attemptsEl) return;
+
+  if (!scenarioNoteEl || !runBtn || !resetBtn || phasePills.length === 0 || scenarioButtons.length === 0 ||
+      !testOldEl || !testNewEl || !coverageOldEl || !coverageNewEl || !lintOldEl || !lintNewEl ||
+      !securityOldEl || !securityNewEl || !floorEl || !candidateQualityEl || !statusEl || !decisionEl ||
+      !checkTestEl || !checkCoverageEl || !checkLintEl || !checkSecurityEl || !checkQualityEl || !checkPolicyEl ||
+      !floorBar || !candidateBar || !outcomeEl || !attemptsEl) return;
 
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-  const toInt = (v, fallback) => {
-    const n = Number.parseInt(String(v), 10);
-    return Number.isFinite(n) ? n : fallback;
-  };
   const round = (n) => Math.round(n);
+  const round1 = (n) => Math.round(n * 10) / 10;
+  const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const phaseDelay = reducedMotion ? 0 : 130;
 
-  const WEIGHTS = {
-    local: { r: 0.35, v: 0.45, d: 0.1, c: 0.1 },
-    component: { r: 0.30, v: 0.25, d: 0.25, c: 0.20 },
-    system: { r: 0.20, v: 0.15, d: 0.35, c: 0.30 },
+  const SCENARIOS = {
+    lint_fix: {
+      note: 'Small bounded mutation that should raise quality and pass ratchets.',
+      delta: { test: 1, coverage: 0.0, lint: -2, security: 0 },
+      requiresHuman: false,
+    },
+    coverage_drop: {
+      note: 'Refactor reduces measured coverage below the existing floor.',
+      delta: { test: 0, coverage: -1.8, lint: -1, security: 0 },
+      requiresHuman: false,
+    },
+    security_regression: {
+      note: 'Candidate introduces a new security finding. Deterministic reject.',
+      delta: { test: 1, coverage: 0.0, lint: 0, security: 1 },
+      requiresHuman: false,
+    },
+    api_expansion: {
+      note: 'Quality improves, but API surface expansion requires explicit human approval.',
+      delta: { test: 2, coverage: 0.2, lint: -1, security: 0 },
+      requiresHuman: true,
+    },
   };
+
+  const INITIAL_BASELINE = { test: 480, coverage: 88.0, lint: 6, security: 2 };
 
   const state = {
-    baseline: 72,
-    delta: toInt(deltaSlider.value, 3),
-    gate: toInt(gateSlider.value, 66),
-    noise: toInt(noiseSlider.value, 50),
-    complexity: "component",
-    run: 0,
+    selected: 'lint_fix',
+    baseline: { ...INITIAL_BASELINE },
+    floor: 72,
+    running: false,
   };
 
-  const render = (metrics, candidate, evidence, passed) => {
-    deltaValue.textContent = String(state.delta);
-    gateValue.textContent = String(state.gate);
-    noiseValue.textContent = String(state.noise);
-    metricR.textContent = String(round(metrics.r));
-    metricV.textContent = String(round(metrics.v));
-    metricD.textContent = String(round(metrics.d));
-    metricC.textContent = String(round(metrics.c));
-    floorEl.textContent = String(state.baseline);
-    candidateEl.textContent = String(round(candidate));
-    evidenceEl.textContent = String(round(evidence));
-    if (passed === null) {
-      statusEl.textContent = "READY";
-      statusEl.style.color = "#b5b6bf";
-    } else {
-      statusEl.textContent = passed ? "PASS" : "FAIL";
-      statusEl.style.color = passed ? "#2ac3de" : "#f7768e";
+  const qualityScore = (metrics) => {
+    const score = 72
+      + (metrics.coverage - 88) * 1.9
+      + (metrics.test - 480) * 0.2
+      - (metrics.lint - 6) * 1.4
+      - (metrics.security - 2) * 4.5;
+    return clamp(round(score), 0, 100);
+  };
+
+  const formatCoverage = (n) => round1(n).toFixed(1);
+
+  const deriveCandidate = (baseline, scenario) => ({
+    test: Math.max(0, baseline.test + scenario.delta.test),
+    coverage: clamp(round1(baseline.coverage + scenario.delta.coverage), 0, 100),
+    lint: Math.max(0, baseline.lint + scenario.delta.lint),
+    security: Math.max(0, baseline.security + scenario.delta.security),
+  });
+
+  const evaluate = (baseline, candidate, scenario) => {
+    const checks = {
+      test: candidate.test >= baseline.test,
+      coverage: (candidate.coverage + 0.1) >= baseline.coverage,
+      lint: candidate.lint <= baseline.lint,
+      security: candidate.security <= baseline.security,
+    };
+
+    const candidateQuality = qualityScore(candidate);
+    const qualityPass = candidateQuality >= state.floor;
+    const ratchetPass = checks.test && checks.coverage && checks.lint && checks.security && qualityPass;
+
+    const failures = [];
+    if (!checks.test) failures.push(`test_count ${candidate.test} < ${baseline.test}`);
+    if (!checks.coverage) failures.push(`coverage ${formatCoverage(candidate.coverage)} < ${formatCoverage(baseline.coverage)}`);
+    if (!checks.lint) failures.push(`lint ${candidate.lint} > ${baseline.lint}`);
+    if (!checks.security) failures.push(`security ${candidate.security} > ${baseline.security}`);
+    if (!qualityPass) failures.push(`quality ${candidateQuality} < floor ${state.floor}`);
+
+    let verdict = 'FAIL';
+    let decision = 'REVERT';
+    let pillClass = 'is-fail';
+    let policyGate = 'BLOCKED';
+
+    if (ratchetPass && scenario.requiresHuman) {
+      verdict = 'HUMAN GATE';
+      decision = 'WAIT FOR APPROVAL';
+      pillClass = 'is-human';
+      policyGate = 'HUMAN';
+    } else if (ratchetPass) {
+      verdict = 'PASS';
+      decision = 'RAISE FLOOR';
+      pillClass = 'is-pass';
+      policyGate = 'ALLOWLISTED';
     }
-    floorBar.style.width = `${state.baseline}%`;
-    candidateBar.style.width = `${round(candidate)}%`;
-    if (passed === null) {
-      candidateBar.style.backgroundColor = "rgba(187,154,247,0.9)";
-    } else {
-      candidateBar.style.backgroundColor = passed ? "rgba(42,195,222,0.9)" : "rgba(247,118,142,0.9)";
-    }
-  };
 
-  const randSigned = () => (Math.random() * 2) - 1;
-
-  const varianceScale = () => {
-    const complexityBase = state.complexity === "local" ? 1.2 : state.complexity === "component" ? 2.0 : 3.1;
-    const aggression = Math.max(0, Math.abs(state.delta) - 4) * 0.35;
-    const stochasticFactor = state.noise / 60;
-    return (complexityBase + aggression) * stochasticFactor;
-  };
-
-  const shockChance = () => {
-    const complexityBias = state.complexity === "local" ? 0.008 : state.complexity === "component" ? 0.018 : 0.03;
-    const noiseBias = (state.noise / 100) * 0.05;
-    const aggressionBias = Math.max(0, Math.abs(state.delta) - 10) * 0.003;
-    return clamp(complexityBias + noiseBias + aggressionBias, 0, 0.2);
-  };
-
-  const sampleNoise = () => {
-    const s = varianceScale();
-    const shock = Math.random() < shockChance();
-    const shockPenalty = shock ? (4 + Math.random() * 8) * (0.7 + (state.noise / 100)) : 0;
     return {
-      r: randSigned() * s * 0.7,
-      v: randSigned() * s * 0.8,
-      d: randSigned() * s * 0.6,
-      c: randSigned() * s * 0.6,
-      evidence: randSigned() * s * 1.1 - shockPenalty,
-      shock,
+      checks,
+      qualityPass,
+      candidateQuality,
+      ratchetPass,
+      failures,
+      verdict,
+      decision,
+      pillClass,
+      policyGate,
     };
   };
 
-  const zeroNoise = () => ({ r: 0, v: 0, d: 0, c: 0, evidence: 0, shock: false });
-
-  const computeMetrics = (noise) => {
-    const n = noise || zeroNoise();
-    const baseline = state.baseline;
-    const improvement = state.delta * 0.75;
-    return {
-      r: clamp(baseline + improvement * 0.9 + n.r, 0, 100),
-      v: clamp(baseline + improvement * 1.2 + n.v, 0, 100),
-      d: clamp(baseline + improvement * 0.7 + n.d, 0, 100),
-      c: clamp(baseline + improvement * 0.8 + n.c, 0, 100),
-    };
-  };
-
-  const computeCandidate = (metrics) => {
-    const w = WEIGHTS[state.complexity] || WEIGHTS.component;
-    return clamp(
-      metrics.r * w.r + metrics.v * w.v + metrics.d * w.d + metrics.c * w.c,
-      0,
-      100
-    );
-  };
-
-  const computeEvidence = (candidate, noise) => {
-    const n = noise || zeroNoise();
-    const driftPenalty = Math.max(0, Math.abs(state.delta) - 6) * 2;
-    const complexityPenalty = state.complexity === "system" ? 2 : 0;
-    const baseEvidencePenalty = 2;
-    return clamp(candidate - baseEvidencePenalty - driftPenalty - complexityPenalty + n.evidence, 0, 100);
-  };
-
-  const renderWeightLabel = () => {
-    const w = WEIGHTS[state.complexity] || WEIGHTS.component;
-    const pct = (x) => `${Math.round(x * 100)}%`;
-    weightsLabel.textContent = `R ${pct(w.r)} · V ${pct(w.v)} · D ${pct(w.d)} · C ${pct(w.c)}`;
-    varianceLabel.textContent = `±${varianceScale().toFixed(1)}`;
-    shockLabel.textContent = `${Math.round(shockChance() * 100)}%`;
-    for (const btn of complexityButtons) {
-      const active = btn.dataset.value === state.complexity;
-      btn.setAttribute("aria-pressed", active ? "true" : "false");
+  const setPhase = (phase) => {
+    for (const pill of phasePills) {
+      const active = pill.dataset.phase === phase;
+      pill.dataset.active = active ? '1' : '0';
     }
   };
 
-  const appendAttempt = (passed) => {
-    const pill = document.createElement("span");
-    pill.className = `attempt-pill ${passed ? "is-pass" : "is-fail"}`;
+  const clearPhase = () => {
+    for (const pill of phasePills) {
+      pill.dataset.active = '0';
+    }
+  };
+
+  const updateCheck = (el, value, tone) => {
+    el.textContent = value;
+    if (tone === 'pass') el.style.color = '#2ac3de';
+    else if (tone === 'fail') el.style.color = '#f7768e';
+    else if (tone === 'human') el.style.color = '#bb9af7';
+    else el.style.color = '#b5b6bf';
+  };
+
+  const updateScenarioButtons = () => {
+    for (const button of scenarioButtons) {
+      const active = button.dataset.scenario === state.selected;
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+  };
+
+  const appendAttempt = (pillClass) => {
+    const pill = document.createElement('span');
+    pill.className = `attempt-pill ${pillClass}`;
     attemptsEl.appendChild(pill);
     while (attemptsEl.children.length > 36) {
       attemptsEl.removeChild(attemptsEl.firstChild);
     }
   };
 
-  const run = () => {
-    state.run += 1;
-    const oldBaseline = state.baseline;
-    const noise = sampleNoise();
-    const metrics = computeMetrics(noise);
-    const candidate = computeCandidate(metrics);
-    const evidence = computeEvidence(candidate, noise);
-    const effectiveGate = Math.max(state.gate, oldBaseline - 1);
+  const render = (baseline, candidate, evaluation, mode, oldFloor) => {
+    const scenario = SCENARIOS[state.selected];
 
-    const ratchetPass = candidate >= oldBaseline;
-    const gatePass = evidence >= effectiveGate;
-    const pass = ratchetPass && gatePass;
+    scenarioNoteEl.textContent = scenario.note;
+    testOldEl.textContent = String(baseline.test);
+    testNewEl.textContent = String(candidate.test);
+    coverageOldEl.textContent = formatCoverage(baseline.coverage);
+    coverageNewEl.textContent = formatCoverage(candidate.coverage);
+    lintOldEl.textContent = String(baseline.lint);
+    lintNewEl.textContent = String(candidate.lint);
+    securityOldEl.textContent = String(baseline.security);
+    securityNewEl.textContent = String(candidate.security);
 
-    if (pass) {
-      state.baseline = round(candidate);
-      outcomeEl.textContent = `PASS: floor raised from ${oldBaseline} to ${state.baseline}.`;
-    } else if (!ratchetPass) {
-      outcomeEl.textContent = `FAIL: non-regression violated (${round(candidate)} < ${oldBaseline}). Floor stays ${oldBaseline}.`;
-    } else if (noise.shock) {
-      outcomeEl.textContent = `FAIL: random shock lowered evidence to ${round(evidence)} below effective gate ${round(effectiveGate)}. Floor stays ${oldBaseline}.`;
+    floorEl.textContent = String(state.floor);
+    candidateQualityEl.textContent = String(evaluation.candidateQuality);
+    floorBar.style.width = `${state.floor}%`;
+    candidateBar.style.width = `${evaluation.candidateQuality}%`;
+
+    if (mode === 'preview') {
+      statusEl.textContent = 'READY';
+      statusEl.style.color = '#b5b6bf';
+      decisionEl.textContent = `Predicted: ${evaluation.decision}`;
+      decisionEl.style.color = '#b5b6bf';
+      outcomeEl.textContent = 'Ready. Run a candidate through deterministic guards.';
     } else {
-      outcomeEl.textContent = `FAIL: evidence ${round(evidence)} below effective gate ${round(effectiveGate)}. Floor stays ${oldBaseline}.`;
+      statusEl.textContent = evaluation.verdict;
+      statusEl.style.color = evaluation.verdict === 'PASS' ? '#2ac3de' : (evaluation.verdict === 'HUMAN GATE' ? '#bb9af7' : '#f7768e');
+      decisionEl.textContent = evaluation.decision;
+      decisionEl.style.color = statusEl.style.color;
+
+      if (evaluation.verdict === 'PASS') {
+        outcomeEl.textContent = `PASS: floor raised from ${oldFloor} to ${state.floor}.`;
+      } else if (evaluation.verdict === 'HUMAN GATE') {
+        outcomeEl.textContent = `HUMAN GATE: ratchets pass at ${evaluation.candidateQuality}, but policy requires approval.`;
+      } else {
+        outcomeEl.textContent = `FAIL: ${evaluation.failures.join('; ')}. Floor stays ${state.floor}.`;
+      }
     }
 
-    render(metrics, candidate, evidence, pass);
-    appendAttempt(pass);
+    updateCheck(checkTestEl, evaluation.checks.test ? 'PASS' : 'FAIL', evaluation.checks.test ? 'pass' : 'fail');
+    updateCheck(checkCoverageEl, evaluation.checks.coverage ? 'PASS' : 'FAIL', evaluation.checks.coverage ? 'pass' : 'fail');
+    updateCheck(checkLintEl, evaluation.checks.lint ? 'PASS' : 'FAIL', evaluation.checks.lint ? 'pass' : 'fail');
+    updateCheck(checkSecurityEl, evaluation.checks.security ? 'PASS' : 'FAIL', evaluation.checks.security ? 'pass' : 'fail');
+    updateCheck(checkQualityEl, evaluation.qualityPass ? 'PASS' : 'FAIL', evaluation.qualityPass ? 'pass' : 'fail');
+
+    if (evaluation.policyGate === 'ALLOWLISTED') {
+      updateCheck(checkPolicyEl, 'ALLOWLISTED', 'pass');
+    } else if (evaluation.policyGate === 'HUMAN') {
+      updateCheck(checkPolicyEl, 'HUMAN REVIEW', 'human');
+    } else {
+      updateCheck(checkPolicyEl, 'BLOCKED', mode === 'preview' ? 'neutral' : 'fail');
+    }
   };
 
-  deltaSlider.addEventListener("input", () => {
-    state.delta = toInt(deltaSlider.value, state.delta);
-    const metrics = computeMetrics(zeroNoise());
-    const candidate = computeCandidate(metrics);
-    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
-  });
+  const renderPreview = () => {
+    const scenario = SCENARIOS[state.selected];
+    const baseline = { ...state.baseline };
+    const candidate = deriveCandidate(baseline, scenario);
+    const evaluation = evaluate(baseline, candidate, scenario);
+    render(baseline, candidate, evaluation, 'preview', state.floor);
+    clearPhase();
+  };
 
-  gateSlider.addEventListener("input", () => {
-    state.gate = toInt(gateSlider.value, state.gate);
-    renderWeightLabel();
-    const metrics = computeMetrics(zeroNoise());
-    const candidate = computeCandidate(metrics);
-    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
-  });
+  const runScenario = async () => {
+    if (state.running) return;
+    state.running = true;
+    runBtn.disabled = true;
+    resetBtn.disabled = true;
 
-  noiseSlider.addEventListener("input", () => {
-    state.noise = toInt(noiseSlider.value, state.noise);
-    renderWeightLabel();
-    const metrics = computeMetrics(zeroNoise());
-    const candidate = computeCandidate(metrics);
-    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
-  });
+    const phases = ['measure', 'mutate', 'validate', 'decide'];
+    for (const phase of phases) {
+      setPhase(phase);
+      if (phaseDelay > 0) await wait(phaseDelay);
+    }
 
-  for (const btn of complexityButtons) {
-    btn.addEventListener("click", () => {
-      state.complexity = btn.dataset.value || "component";
-      renderWeightLabel();
-      const metrics = computeMetrics(zeroNoise());
-      const candidate = computeCandidate(metrics);
-      render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+    const scenario = SCENARIOS[state.selected];
+    const baselineBefore = { ...state.baseline };
+    const oldFloor = state.floor;
+    const candidate = deriveCandidate(baselineBefore, scenario);
+    const evaluation = evaluate(baselineBefore, candidate, scenario);
+
+    if (evaluation.verdict === 'PASS') {
+      state.baseline = { ...candidate };
+      state.floor = evaluation.candidateQuality;
+    }
+
+    appendAttempt(evaluation.pillClass);
+    render(baselineBefore, candidate, evaluation, 'result', oldFloor);
+
+    state.running = false;
+    runBtn.disabled = false;
+    resetBtn.disabled = false;
+  };
+
+  for (const button of scenarioButtons) {
+    button.addEventListener('click', () => {
+      if (state.running) return;
+      const key = button.dataset.scenario;
+      if (!key || !SCENARIOS[key]) return;
+      state.selected = key;
+      updateScenarioButtons();
+      renderPreview();
     });
   }
 
-  runBtn.addEventListener("click", run);
-  resetBtn.addEventListener("click", () => {
-    state.baseline = 72;
-    state.complexity = "component";
-    state.noise = toInt(noiseSlider.value, 50);
-    state.run = 0;
-    attemptsEl.innerHTML = "";
-    outcomeEl.textContent = "Reset. Floor returned to 72.";
-    renderWeightLabel();
-    const metrics = computeMetrics(zeroNoise());
-    const candidate = computeCandidate(metrics);
-    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  runBtn.addEventListener('click', runScenario);
+
+  resetBtn.addEventListener('click', () => {
+    if (state.running) return;
+    state.baseline = { ...INITIAL_BASELINE };
+    state.floor = qualityScore(state.baseline);
+    attemptsEl.innerHTML = '';
+    statusEl.textContent = 'READY';
+    statusEl.style.color = '#b5b6bf';
+    decisionEl.textContent = 'Run scenario';
+    decisionEl.style.color = '#b5b6bf';
+    outcomeEl.textContent = 'Reset. Floor returned to baseline.';
+    clearPhase();
+    renderPreview();
   });
 
-  renderWeightLabel();
-  const metrics = computeMetrics(zeroNoise());
-  const candidate = computeCandidate(metrics);
-  render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  state.floor = qualityScore(state.baseline);
+  updateScenarioButtons();
+  renderPreview();
 })();
 </script>
 </section>

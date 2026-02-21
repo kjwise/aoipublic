@@ -566,8 +566,8 @@
               <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-01-substrate" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-3.html" data-infographic-status="published" data-infographic-fragment-shell="1">
 <span data-infographic-fragment-label="1" aria-hidden="true">i3-section-01-substrate</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
-<div class="flex flex-col lg:flex-row gap-8">
-<div class="lg:w-5/12">
+<div class="flex flex-col lg:flex-row gap-8 substrate-main-layout">
+<div class="lg:w-5/12 substrate-main-copy">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">The Substrate (Map · Terrain · Ledger)</h2>
 <p class="text-brand-muted leading-relaxed">
                             SDaC is practical when the system has three explicit surfaces:
@@ -593,7 +593,7 @@
 </div>
 </div>
 </div>
-<div class="lg:w-7/12">
+<div class="lg:w-7/12 substrate-main-workspace">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 <div class="inline-flex items-center rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
@@ -603,7 +603,7 @@
 </div>
 <button aria-pressed="false" class="soft-toggle font-mono" id="substrateTraceToggle" type="button">Trace: Off</button>
 </div>
-<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 substrate-dual-panel">
 <div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
 <div class="text-xs font-mono text-brand-muted mb-2">Example project tree</div>
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="substrateTree"></pre>
@@ -674,6 +674,10 @@
 <div class="text-xs font-mono text-brand-muted" id="missionIdLabel">—</div>
 </div>
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="missionYaml"></pre>
+<div class="mt-3 border border-brand-border rounded-lg bg-brand-light p-3">
+<div class="text-[10px] font-mono uppercase tracking-wide text-brand-muted">Constraint → Deterministic Gate</div>
+<div class="mt-2 space-y-1 text-[11px] leading-5 font-mono text-brand-muted" id="missionGateMap"></div>
+</div>
 </div>
 <div class="xl:col-span-5 space-y-3">
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
@@ -708,6 +712,24 @@
 <div class="mt-3 text-xs text-brand-muted">If the budget is exceeded, the loop exits with a deterministic failure you can reason about.</div>
 </div>
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Mission State of Record</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between">
+<span>Status</span>
+<span class="font-mono text-brand-strong" id="missionLifecycleStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Attempt</span>
+<span class="font-mono text-brand-strong" id="missionAttemptLabel">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Last run</span>
+<span class="font-mono text-brand-strong" id="missionLastRun">—</span>
+</div>
+</div>
+<div class="mt-3 text-xs font-mono text-brand-muted break-all" id="missionEvidencePath">—</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Trade-off</div>
 <div class="mt-2">
 <div class="flex items-center justify-between text-xs text-brand-muted">
@@ -725,6 +747,24 @@
 <div class="h-2 rounded" id="missionTightBar" style="width: 0%; background: rgba(187, 154, 247, 0.82);"></div>
 </div>
 </div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Validation Pipeline</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between">
+<span>Schema compile</span>
+<span class="font-mono text-brand-strong" id="missionSchemaStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Scope gate</span>
+<span class="font-mono text-brand-strong" id="missionScopeStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Quality gate</span>
+<span class="font-mono text-brand-strong" id="missionQualityGateStatus">—</span>
+</div>
+</div>
+<div class="mt-3 text-xs text-brand-muted" id="missionSchemaNote">—</div>
 </div>
 </div>
 </div>
@@ -926,15 +966,20 @@
 <div class="bg-cyber-dark rounded-xl p-10 md:p-16">
 <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Loop is the Moat</h2>
 <p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
-	                        If the loop is validated, the full function is:
-	                        <span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
+	                        Intent becomes operational when formalized into Maps and executed by loops:
+	                        <span class="block font-mono text-cyber-success mt-3">intent -&gt; map -&gt; loop -&gt; terrain</span>
+<span class="block font-mono text-cyber-accent mt-1">terrain -&gt; map(sync) -&gt; next loop</span>
+<span class="block mt-3 text-base md:text-lg">
+	                            If the loop is validated, a useful compact form is:
+	                        </span>
+<span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
 <span class="block font-mono text-cyber-accent mt-1">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
 <span class="block mt-3 text-base md:text-lg">
-	                            This only compounds with ratchets:
-	                            <span class="font-mono text-cyber-vibrant">as long as q<sub>now</sub> &gt;= q<sub>prev</sub> generally holds</span>.
+	                            Compounding only holds under ratchets:
+	                            <span class="font-mono text-cyber-vibrant">q<sub>now</sub> &gt;= q<sub>prev</sub></span>.
 	                        </span>
 <span class="block mt-4">
-	                            SDaC doesn't just give you a better way to build your business. It gives you the tooling for the business to self-improve: each loop upgrades capability, compounds speed, and hardens against ever-evolving competitors.
+	                            This is how AI execution becomes reliable: bounded loops convert intent to verified state and feed reality back into tomorrow’s maps.
 	                        </span>
 </p>
 <button class="text-cyber-accent hover:text-white underline decoration-cyber-neon decoration-2 underline-offset-4 transition-colors" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">

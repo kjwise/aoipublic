@@ -22,6 +22,129 @@
   margin-bottom: clamp(1.4rem, 2.8vw, 2rem);
 }
 
+/* Give chapter-embedded infographic-3 sections a little more usable canvas
+   while preserving shell border + section-id badge in book context. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-3.html"][data-infographic-fragment-shell] {
+  padding: clamp(0.24rem, 0.55vw, 0.42rem);
+}
+
+/* Apply the same shell tightening to chapter-embedded infographic-1 sections. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic.html"][data-infographic-fragment-shell] {
+  padding: clamp(0.24rem, 0.55vw, 0.42rem);
+}
+
+/* Apply the same shell tightening to chapter-embedded infographic-2 sections. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"][data-infographic-fragment-shell] {
+  padding: clamp(0.24rem, 0.55vw, 0.42rem);
+}
+
+/* Tighten inner card spacing across infographic-3 chapter embeds. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-3.html"] > .bg-brand-surface {
+  padding: clamp(0.95rem, 1.5vw, 1.2rem);
+}
+
+/* Tighten top-level cards across infographic-1 chapter embeds. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic.html"] > .bg-brand-surface,
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic.html"] > .bg-brand-dark {
+  padding: clamp(0.95rem, 1.5vw, 1.2rem);
+}
+
+/* Tighten root cards in infographic-2 chapter embeds where p-8 drives crowding. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"].p-8 {
+  padding: clamp(0.95rem, 1.5vw, 1.2rem);
+}
+
+/* In prose context, force top-level infographic-2 two-column shells to stack. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"].grid.grid-cols-1.lg\:grid-cols-12,
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"] > .grid.grid-cols-1.lg\:grid-cols-12 {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"].grid.grid-cols-1.lg\:grid-cols-12 > [class*="lg:col-span-"],
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"] > .grid.grid-cols-1.lg\:grid-cols-12 > [class*="lg:col-span-"] {
+  grid-column: span 1 / span 1;
+}
+
+/* Make infographic-2 chapter embeds feel closer to i1/i3 shell language:
+   softer panel chrome, slightly brighter copy, and tighter internal grouping. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"].grid.grid-cols-1.lg\:grid-cols-12 {
+  padding: clamp(0.95rem, 1.5vw, 1.2rem);
+  border-radius: 0.85rem;
+  border: 1px solid rgba(122, 162, 247, 0.2);
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.66) 0%, rgba(14, 20, 34, 0.56) 100%);
+}
+
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"] .bg-cyber-panel {
+  background: linear-gradient(180deg, rgba(17, 25, 41, 0.9) 0%, rgba(13, 19, 33, 0.9) 100%);
+  border-color: rgba(122, 162, 247, 0.24);
+  box-shadow: 0 14px 30px rgba(3, 8, 20, 0.45);
+}
+
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"] .text-cyber-muted,
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"] .text-gray-400,
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"] .text-gray-500 {
+  color: rgba(180, 194, 224, 0.9);
+}
+
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-2.html"] .scale-button {
+  border-color: rgba(122, 162, 247, 0.34);
+  background: rgba(18, 26, 44, 0.78);
+  color: rgba(209, 219, 241, 0.95);
+}
+
+/* Stack the primary split layout for infographic-3 sections in prose context. */
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-3.html"] > .bg-brand-surface > .flex.flex-col.lg\:flex-row {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.content:not(.infographic-presentation)
+  [data-infographic-source="infographic-3.html"] > .bg-brand-surface > .flex.flex-col.lg\:flex-row > [class*="lg:w-"] {
+  width: 100%;
+}
+
+/* In prose chapters, keep the substrate file tree + file viewer stacked.
+   The chapter container is intentionally narrow, so two columns become cramped. */
+.content:not(.infographic-presentation)
+  [data-infographic-section-id="i3-section-01-substrate"]
+  .substrate-dual-panel {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.content:not(.infographic-presentation)
+  [data-infographic-section-id="i3-section-01-substrate"]
+  .substrate-main-layout {
+  flex-direction: column;
+}
+
+.content:not(.infographic-presentation)
+  [data-infographic-section-id="i3-section-01-substrate"]
+  .substrate-main-copy,
+.content:not(.infographic-presentation)
+  [data-infographic-section-id="i3-section-01-substrate"]
+  .substrate-main-workspace {
+  width: 100%;
+}
+
 [data-infographic-fragment-shell]::before {
   content: "";
   position: absolute;
@@ -84,6 +207,21 @@ body.bg-cyber-dark [data-infographic-fragment-shell] {
 }
 
 @media (max-width: 768px) {
+  .content:not(.infographic-presentation)
+    [data-infographic-source="infographic-3.html"][data-infographic-fragment-shell] {
+    padding: 0.24rem;
+  }
+
+  .content:not(.infographic-presentation)
+    [data-infographic-source="infographic.html"][data-infographic-fragment-shell] {
+    padding: 0.24rem;
+  }
+
+  .content:not(.infographic-presentation)
+    [data-infographic-source="infographic-2.html"][data-infographic-fragment-shell] {
+    padding: 0.24rem;
+  }
+
   [data-infographic-fragment-shell] {
     border-radius: 0.85rem;
     padding: 0.32rem;

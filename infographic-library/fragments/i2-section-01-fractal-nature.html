@@ -1,4 +1,4 @@
-<section class="grid grid-cols-1 lg:grid-cols-12 gap-12" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published">
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published">
   <style>
     [data-role="fractal-sim"] .scale-button {
       border: 1px solid rgba(148, 163, 184, 0.4);
@@ -22,11 +22,13 @@
     }
   </style>
 
-  <div class="lg:col-span-5">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-5">
     <h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature of Work</h2>
     <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
     <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-      Same loop, different cadence. A function evolves in minutes; a company evolves in years.
+      Same loop, different cadence. Historically, a function evolved in minutes; a company evolved in years.
+      AI compresses the lower-loop cadences first, but organizational loops still move slower.
       Each level’s state is the accumulated output of the faster loops beneath it.
     </p>
     <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
@@ -40,10 +42,10 @@
         P<sub>k+1</sub> = improve(P<sub>k</sub>, evidence)
       </p>
     </div>
-  </div>
+    </div>
 
-  <div class="lg:col-span-7">
-    <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
+    <div class="lg:col-span-7">
+      <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
       <div class="flex flex-wrap items-center gap-2 mb-4">
         <span class="text-xs font-mono text-gray-500 uppercase">Scale lens</span>
         <button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
@@ -106,6 +108,7 @@
         <div class="mt-3 text-xs text-gray-500" data-role="fractal-insight">
           Improve the fastest loops first; the rest of the stack inherits the gain.
         </div>
+      </div>
       </div>
     </div>
   </div>

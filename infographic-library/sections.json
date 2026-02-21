@@ -190,12 +190,14 @@
       "source_selector": "main > section:nth-of-type(5)",
       "status": "published",
       "concepts": [
+        "Intent Architecture",
+        "Map / Terrain / Ledger",
         "Meta-Pattern: Physics is Law",
         "Immune System case",
         "Convergence",
         "Ratchet"
       ],
-      "notes": "Final reinforcement: state and process are jointly self-improving."
+      "notes": "Final reinforcement: intent->map->loop->terrain recursion converges only under ratcheted physics."
     },
     {
       "id": "i2-section-06-executive-loop",
@@ -212,16 +214,18 @@
     },
     {
       "id": "i2-section-07-intention-architecture",
-      "title": "Intent Architecture Wins the Output War",
+      "title": "Micro-Bridge: One Block + One Gate",
       "infographic": "infographic-2.html",
       "source_selector": "main > section:nth-of-type(7)",
       "status": "published",
       "concepts": [
-        "Intent Architecture",
-        "Signal / Noise",
-        "Coherence"
+        "Hofstadter Bridge",
+        "Map / Terrain / Ledger",
+        "Effector",
+        "Validator",
+        "Physics"
       ],
-      "notes": "Shows output intensity vs signal density and consumption load."
+      "notes": "Models one bounded Map block becoming enforceable through sync + validator + CI gate."
     },
     {
       "id": "i3-section-01-substrate",

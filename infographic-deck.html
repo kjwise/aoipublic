@@ -777,46 +777,40 @@
 	                </p>
 <div class="max-w-6xl mx-auto flex flex-col items-center">
 <div class="pyramid-shell">
-<!-- Level 1: Purpose (Top) -->
 <div class="pyramid-level bg-brand-dark text-white">
 <div class="text-center">
-<div class="text-base md:text-lg">Terrain Designer</div>
-<div class="text-xs font-normal opacity-75">Defines Geometry of Success</div>
+<div class="text-base md:text-lg">Intent</div>
+<div class="text-xs font-normal opacity-75">Why</div>
 </div>
 </div>
-<!-- Level 2: Architecture -->
 <div class="pyramid-level bg-brand-accent text-white">
 <div class="text-center">
-<div class="text-base md:text-lg">Loop Architect</div>
-<div class="text-xs font-normal opacity-75">Missions + Context + Workflows</div>
+<div class="text-base md:text-lg">Physics + Guardrails</div>
+<div class="text-xs font-normal opacity-75">What is allowed</div>
 </div>
 </div>
-<!-- Level 3: Agents -->
 <div class="pyramid-level bg-brand-primary text-white">
 <div class="text-center">
-<div class="text-base md:text-lg">Execution Loops</div>
-<div class="text-xs font-normal opacity-75">Write → <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> → Refine</div>
+<div class="text-base md:text-lg">Loop Architecture</div>
+<div class="text-xs font-normal opacity-75">How work is structured (and where missing guardrails are discovered)</div>
 </div>
 </div>
-<!-- Level 4: Physics + Governance -->
 <div class="pyramid-level bg-brand-vibrant text-white">
 <div class="text-center">
-<div class="text-base md:text-lg">Physics + Guardrails</div>
-<div class="text-xs font-normal opacity-90">Validators, budgets, protected graders</div>
+<div class="text-base md:text-lg">Execution Loops</div>
+<div class="text-xs font-normal opacity-90">Write → <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> → Refine</div>
 </div>
 </div>
-<!-- Level 5: Substrate -->
 <div class="pyramid-level bg-[rgba(255,255,255,0.06)] text-brand-strong">
 <div class="text-center">
-<div class="text-base md:text-lg">Substrate Surfaces</div>
-<div class="text-xs font-normal text-brand-muted"><a class="concept-link" href="concepts#map-terrain-ledger" title="See concept: Map / Terrain / Ledger">Map / Terrain / Ledger</a> (+ <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a>)</div>
+<div class="text-base md:text-lg">Substrate</div>
+<div class="text-xs font-normal text-brand-muted"><a class="concept-link" href="concepts#map-terrain-ledger" title="See concept: Map / Terrain / Ledger">Map / Terrain / Ledger</a></div>
 </div>
 </div>
-<!-- Level 6: Compute (Base) -->
 <div class="pyramid-level bg-[rgba(255,255,255,0.10)] text-brand-strong">
 <div class="text-center">
 <div class="text-base md:text-lg">Compute + Models</div>
-<div class="text-xs font-normal text-brand-muted">Commodity ↔ frontier (spot or fixed; rented or owned)</div>
+<div class="text-xs font-normal text-brand-muted">Runtime base</div>
 </div>
 </div>
 </div>
@@ -875,7 +869,7 @@
 <span class="infographic-slide__title">The Fractal Nature</span>
 <span class="infographic-slide__meta">i2-section-01-fractal-nature</span>
 </div>
-<section class="grid grid-cols-1 lg:grid-cols-12 gap-12" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published">
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i2-section-01-fractal-nature</span>
 <style>
     [data-role="fractal-sim"] .scale-button {
@@ -899,11 +893,13 @@
       transform: translateX(4px);
     }
   </style>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 <div class="lg:col-span-5">
 <h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature of Work</h2>
 <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
 <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-      Same loop, different cadence. A function evolves in minutes; a company evolves in years.
+      Same loop, different cadence. Historically, a function evolved in minutes; a company evolved in years.
+      AI compresses the lower-loop cadences first, but organizational loops still move slower.
       Each level’s state is the accumulated output of the faster loops beneath it.
     </p>
 <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
@@ -980,6 +976,7 @@
 <div class="mt-3 text-xs text-gray-500" data-role="fractal-insight">
           Improve the fastest loops first; the rest of the stack inherits the gain.
         </div>
+</div>
 </div>
 </div>
 </div>
@@ -1311,15 +1308,20 @@
 <div class="bg-cyber-dark rounded-xl p-10 md:p-16">
 <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Loop is the Moat</h2>
 <p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
-	                        If the loop is validated, the full function is:
-	                        <span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
+	                        Intent becomes operational when formalized into Maps and executed by loops:
+	                        <span class="block font-mono text-cyber-success mt-3">intent -&gt; map -&gt; loop -&gt; terrain</span>
+<span class="block font-mono text-cyber-accent mt-1">terrain -&gt; map(sync) -&gt; next loop</span>
+<span class="block mt-3 text-base md:text-lg">
+	                            If the loop is validated, a useful compact form is:
+	                        </span>
+<span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
 <span class="block font-mono text-cyber-accent mt-1">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
 <span class="block mt-3 text-base md:text-lg">
-	                            This only compounds with ratchets:
-	                            <span class="font-mono text-cyber-vibrant">as long as q<sub>now</sub> &gt;= q<sub>prev</sub> generally holds</span>.
+	                            Compounding only holds under ratchets:
+	                            <span class="font-mono text-cyber-vibrant">q<sub>now</sub> &gt;= q<sub>prev</sub></span>.
 	                        </span>
 <span class="block mt-4">
-	                            SDaC doesn't just give you a better way to build your business. It gives you the tooling for the business to self-improve: each loop upgrades capability, compounds speed, and hardens against ever-evolving competitors.
+	                            This is how AI execution becomes reliable: bounded loops convert intent to verified state and feed reality back into tomorrow’s maps.
 	                        </span>
 </p>
 <button class="text-cyber-accent hover:text-white underline decoration-cyber-neon decoration-2 underline-offset-4 transition-colors" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -1336,8 +1338,8 @@
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-01-substrate" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-01-substrate</span>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
-<div class="flex flex-col lg:flex-row gap-8">
-<div class="lg:w-5/12">
+<div class="flex flex-col lg:flex-row gap-8 substrate-main-layout">
+<div class="lg:w-5/12 substrate-main-copy">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">The Substrate (Map · Terrain · Ledger)</h2>
 <p class="text-brand-muted leading-relaxed">
                             SDaC is practical when the system has three explicit surfaces:
@@ -1363,7 +1365,7 @@
 </div>
 </div>
 </div>
-<div class="lg:w-7/12">
+<div class="lg:w-7/12 substrate-main-workspace">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 <div class="inline-flex items-center rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
@@ -1373,7 +1375,7 @@
 </div>
 <button aria-pressed="false" class="soft-toggle font-mono" id="substrateTraceToggle" type="button">Trace: Off</button>
 </div>
-<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 substrate-dual-panel">
 <div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
 <div class="text-xs font-mono text-brand-muted mb-2">Example project tree</div>
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="substrateTree"></pre>
@@ -1443,6 +1445,10 @@
 <div class="text-xs font-mono text-brand-muted" id="missionIdLabel">—</div>
 </div>
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="missionYaml"></pre>
+<div class="mt-3 border border-brand-border rounded-lg bg-brand-light p-3">
+<div class="text-[10px] font-mono uppercase tracking-wide text-brand-muted">Constraint → Deterministic Gate</div>
+<div class="mt-2 space-y-1 text-[11px] leading-5 font-mono text-brand-muted" id="missionGateMap"></div>
+</div>
 </div>
 <div class="xl:col-span-5 space-y-3">
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
@@ -1477,6 +1483,24 @@
 <div class="mt-3 text-xs text-brand-muted">If the budget is exceeded, the loop exits with a deterministic failure you can reason about.</div>
 </div>
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Mission State of Record</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between">
+<span>Status</span>
+<span class="font-mono text-brand-strong" id="missionLifecycleStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Attempt</span>
+<span class="font-mono text-brand-strong" id="missionAttemptLabel">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Last run</span>
+<span class="font-mono text-brand-strong" id="missionLastRun">—</span>
+</div>
+</div>
+<div class="mt-3 text-xs font-mono text-brand-muted break-all" id="missionEvidencePath">—</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Trade-off</div>
 <div class="mt-2">
 <div class="flex items-center justify-between text-xs text-brand-muted">
@@ -1494,6 +1518,24 @@
 <div class="h-2 rounded" id="missionTightBar" style="width: 0%; background: rgba(187, 154, 247, 0.82);"></div>
 </div>
 </div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Validation Pipeline</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between">
+<span>Schema compile</span>
+<span class="font-mono text-brand-strong" id="missionSchemaStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Scope gate</span>
+<span class="font-mono text-brand-strong" id="missionScopeStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Quality gate</span>
+<span class="font-mono text-brand-strong" id="missionQualityGateStatus">—</span>
+</div>
+</div>
+<div class="mt-3 text-xs text-brand-muted" id="missionSchemaNote">—</div>
 </div>
 </div>
 </div>
@@ -1614,41 +1656,85 @@
 </div>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-06-skeleton-first-rule</span>
+<style>
+  [data-role="skeleton-sim"] .trend-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.6rem;
+    background: rgba(11, 12, 16, 0.48);
+    padding: 0.45rem;
+    min-width: 0;
+  }
+
+  [data-role="skeleton-sim"] .trend-pill[data-state="pass"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.15);
+  }
+
+  [data-role="skeleton-sim"] .trend-pill[data-state="fail"] {
+    border-color: rgba(247, 118, 142, 0.45);
+    background: rgba(247, 118, 142, 0.16);
+  }
+
+  [data-role="skeleton-sim"] .trend-pill[data-state="empty"] {
+    opacity: 0.56;
+    border-style: dashed;
+  }
+
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="converged"],
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="improving"] {
+    color: #2ac3de;
+  }
+
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="stalled"] {
+    color: #bb9af7;
+  }
+
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="diverging"],
+  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="unreachable"] {
+    color: #f7768e;
+  }
+
+  [data-role="skeleton-sim"] [data-role="ledger-path"] {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+</style>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Skeleton-First Rule (Prevent Map Contamination)</h2>
 <p class="text-brand-muted leading-relaxed">
-              Structure must be extracted deterministically from Terrain first. The model can add flesh, but cannot invent skeleton.
-              The gate enforces exact skeleton match before merge.
+              Deterministically extract skeleton from Terrain, then let the model fill prose around it.
+              If skeleton mismatch appears, hard-fail the update and record a receipt.
             </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-                Raise pressure and disable deterministic extraction to watch contamination risk rise.
-                Re-enable extractor and see the skeleton gate converge back to PASS.
+                Toggle extraction and run bounded attempts. You should see either deterministic convergence
+                (<span class="font-mono text-brand-strong">PASS</span>) or a deterministic exit
+                (<span class="font-mono text-brand-strong">ESCALATE</span>) when budget is exhausted.
               </div>
 </div>
 </div>
 <div class="lg:w-7/12 space-y-4" data-role="skeleton-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Pipeline</div>
+<div class="text-xs font-mono text-brand-muted mb-3"><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> pipeline</div>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></div>
+<div class="text-xs font-mono text-brand-muted">Sense/Normalize</div>
 <div class="mt-1 text-sm font-semibold text-brand-strong">Extract skeleton</div>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Model</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Generate flesh</div>
+<div class="text-xs font-mono text-brand-muted">Propose</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Generate flesh patch</div>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="concepts#ci-gate-mapterrain-sync" title="See concept: CI Gate (Map–Terrain Sync)">CI Gate</a></div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Skeleton match</div>
+<div class="text-xs font-mono text-brand-muted">Validate</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Hard skeleton gate</div>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Ledger</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">PASS / FAIL receipt</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">State of record</div>
 </div>
 </div>
 </div>
@@ -1661,18 +1747,34 @@
 <label class="sr-only" for="skeletonPressureSlider">Contamination pressure</label>
 <input class="mt-2 w-full" data-role="pressure-slider" id="skeletonPressureSlider" max="100" min="0" type="range" value="40"/>
 </div>
+<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Retry budget</span>
+<span class="font-mono text-brand-strong"><span data-role="budget-value">5</span>x</span>
+</div>
+<label class="sr-only" for="skeletonBudgetSlider">Retry budget</label>
+<input class="mt-2 w-full" data-role="budget-slider" id="skeletonBudgetSlider" max="10" min="2" step="1" type="range" value="5"/>
+</div>
 <div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
 <span class="text-xs font-mono text-brand-muted">Extractor</span>
 <button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="extractor-toggle" type="button">ON</button>
 </div>
-<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Run cycle</span>
+<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Step attempt</span>
 <button class="soft-toggle font-mono text-xs" data-role="run-button" type="button">Run</button>
+</div>
+<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Bounded loop</span>
+<button class="soft-toggle font-mono text-xs" data-role="run-budget" type="button">Run to exit</button>
+</div>
+<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
+<span class="text-xs font-mono text-brand-muted">Reset</span>
+<button class="soft-toggle font-mono text-xs" data-role="reset-button" type="button">Reset</button>
 </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Canonical skeleton (Sensor)</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Canonical skeleton (<a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a>)</div>
 <ul class="space-y-1 text-xs text-brand-strong font-mono" data-role="canonical-list"></ul>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
@@ -1680,7 +1782,7 @@
 <ul class="space-y-1 text-xs font-mono" data-role="proposed-list"></ul>
 </div>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Mismatch count</div>
 <div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="mismatch-count">0</span></div>
@@ -1694,14 +1796,63 @@
 <div class="mt-1 text-lg font-bold text-brand-strong" data-role="gate-badge">PASS</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Latest outcome</div>
-<div class="mt-1 text-sm text-brand-muted" data-role="outcome-text">Ready to run.</div>
+<div class="text-xs font-mono text-brand-muted">Budget remaining</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="budget-remaining">5</span>x</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
+<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Constraint → deterministic gate</div>
+<div class="mt-2 space-y-2 text-sm text-brand-muted">
+<div class="flex items-center justify-between gap-2">
+<span>Skeleton must match exactly</span>
+<span class="font-mono text-brand-strong" data-role="gate-skeleton">PASS</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>No invented structure</span>
+<span class="font-mono text-brand-strong" data-role="gate-scope">PASS</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>Retry budget not exceeded</span>
+<span class="font-mono text-brand-strong" data-role="gate-budget">PASS</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>Receipt written to Ledger</span>
+<span class="font-mono text-brand-strong" data-role="gate-ledger">PENDING</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Updater state of record</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between gap-2">
+<span>Status</span>
+<span class="font-mono text-brand-strong" data-role="status-label">READY</span>
+</div>
+<div class="mt-2 flex items-center justify-between gap-2">
+<span>Attempt</span>
+<span class="font-mono text-brand-strong" data-role="attempt-label">0/5</span>
+</div>
+<div class="mt-2 flex items-center justify-between gap-2">
+<span>Last run</span>
+<span class="font-mono text-brand-strong" data-role="last-run">--</span>
+</div>
+</div>
+<div class="mt-3 text-xs font-mono text-brand-muted" data-role="ledger-path">ledger/map-updaters/skeleton-first/attempt-00.json</div>
 </div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Mismatch trend (W=4)</div>
+<div class="text-xs text-brand-muted" data-role="trend-status" data-state="baseline">Collecting baseline.</div>
+</div>
+<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2" data-role="trend-window"></div>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome-text">Ready to run one bounded attempt.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">Loop attempts</div>
-<div class="text-xs text-brand-muted">Cyan = PASS, red = FAIL</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, red = FAIL, violet = ESCALATE</div>
 </div>
 <div class="mt-3 flex flex-wrap gap-1" data-role="attempts"></div>
 </div>
@@ -1712,7 +1863,9 @@
 (function () {
   const script = document.currentScript;
   const root = script ? script.closest('[data-infographic-section-id="i3-section-06-skeleton-first-rule"]') : null;
-  if (!root || root.dataset.skeletonFirstReady === "1") return;
+  if (!root || root.dataset.skeletonFirstReady === "1") {
+    return;
+  }
   root.dataset.skeletonFirstReady = "1";
 
   const sim = root.querySelector('[data-role="skeleton-sim"]');
@@ -1720,16 +1873,36 @@
 
   const pressureSlider = sim.querySelector('[data-role="pressure-slider"]');
   const pressureValue = sim.querySelector('[data-role="pressure-value"]');
+  const budgetSlider = sim.querySelector('[data-role="budget-slider"]');
+  const budgetValue = sim.querySelector('[data-role="budget-value"]');
   const extractorToggle = sim.querySelector('[data-role="extractor-toggle"]');
   const runButton = sim.querySelector('[data-role="run-button"]');
+  const runBudgetButton = sim.querySelector('[data-role="run-budget"]');
+  const resetButton = sim.querySelector('[data-role="reset-button"]');
   const canonicalList = sim.querySelector('[data-role="canonical-list"]');
   const proposedList = sim.querySelector('[data-role="proposed-list"]');
   const mismatchCount = sim.querySelector('[data-role="mismatch-count"]');
   const riskScore = sim.querySelector('[data-role="risk-score"]');
   const gateBadge = sim.querySelector('[data-role="gate-badge"]');
+  const budgetRemaining = sim.querySelector('[data-role="budget-remaining"]');
+  const gateSkeleton = sim.querySelector('[data-role="gate-skeleton"]');
+  const gateScope = sim.querySelector('[data-role="gate-scope"]');
+  const gateBudget = sim.querySelector('[data-role="gate-budget"]');
+  const gateLedger = sim.querySelector('[data-role="gate-ledger"]');
+  const statusLabel = sim.querySelector('[data-role="status-label"]');
+  const attemptLabel = sim.querySelector('[data-role="attempt-label"]');
+  const lastRun = sim.querySelector('[data-role="last-run"]');
+  const ledgerPath = sim.querySelector('[data-role="ledger-path"]');
+  const trendStatus = sim.querySelector('[data-role="trend-status"]');
+  const trendWindow = sim.querySelector('[data-role="trend-window"]');
   const outcomeText = sim.querySelector('[data-role="outcome-text"]');
   const attempts = sim.querySelector('[data-role="attempts"]');
-  if (!pressureSlider || !pressureValue || !extractorToggle || !runButton || !canonicalList || !proposedList || !mismatchCount || !riskScore || !gateBadge || !outcomeText || !attempts) return;
+
+  if (!pressureSlider || !pressureValue || !budgetSlider || !budgetValue || !extractorToggle || !runButton || !runBudgetButton || !resetButton ||
+      !canonicalList || !proposedList || !mismatchCount || !riskScore || !gateBadge || !budgetRemaining || !gateSkeleton || !gateScope ||
+      !gateBudget || !gateLedger || !statusLabel || !attemptLabel || !lastRun || !ledgerPath || !trendStatus || !trendWindow || !outcomeText || !attempts) {
+    return;
+  }
 
   const canonical = [
     "routes.py",
@@ -1738,6 +1911,7 @@
     "validators/policy.py",
     "tests/immune_system_cases.py"
   ];
+
   const noisePool = [
     "routes_v2_guess.py",
     "schemas/legacy_mode.json",
@@ -1747,16 +1921,27 @@
     "tests/speculative_case.py"
   ];
 
-  const state = {
-    pressure: Number.parseInt(pressureSlider.value, 10) || 40,
-    extractorOn: true,
-    run: 0
-  };
-
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
+  const state = {
+    pressure: Number.parseInt(pressureSlider.value, 10) || 40,
+    budget: Number.parseInt(budgetSlider.value, 10) || 5,
+    extractorOn: true,
+    run: 0,
+    history: []
+  };
+
+  const setGate = (el, ok, pending) => {
+    if (pending) {
+      el.textContent = "PENDING";
+      el.style.color = "#b5b6bf";
+      return;
+    }
+    el.textContent = ok ? "PASS" : "FAIL";
+    el.style.color = ok ? "#2ac3de" : "#f7768e";
+  };
+
   const renderList = (el, items, mode) => {
-    el.innerHTML = "";
     for (const item of items) {
       const li = document.createElement("li");
       li.textContent = item;
@@ -1769,59 +1954,187 @@
   const computeProposed = () => {
     if (state.extractorOn) return canonical.slice();
 
-    const missingCount = state.pressure >= 80 ? 2 : state.pressure >= 55 ? 1 : 0;
+    const missingCount = clamp(Math.floor((state.pressure + state.run * 8) / 35), 0, 3);
     const proposed = canonical.slice(missingCount);
 
-    const extraCount = clamp(Math.floor(state.pressure / 25) + 1, 1, 4);
+    const extraCount = clamp(Math.floor((state.pressure + state.run * 6) / 22), 1, 5);
     for (let i = 0; i < extraCount; i += 1) {
       const candidate = noisePool[(state.run + i) % noisePool.length];
       if (!proposed.includes(candidate)) proposed.push(candidate);
     }
+
     return proposed;
+  };
+
+  const computeTrend = () => {
+    if (state.history.length === 0) {
+      return { state: "baseline", text: "Collecting baseline." };
+    }
+
+    const latest = state.history[state.history.length - 1];
+    if (latest.pass) {
+      return { state: "converged", text: "Converged: hard gate PASS." };
+    }
+
+    if (state.run >= state.budget) {
+      return { state: "unreachable", text: "Budget exhausted before convergence." };
+    }
+
+    if (state.history.length < 2) {
+      return { state: "baseline", text: "Need more runs for trend." };
+    }
+
+    const window = state.history.slice(-4).map((entry) => entry.mismatch);
+    const first = window[0];
+    const last = window[window.length - 1];
+
+    let decreasing = true;
+    let increasing = true;
+    for (let i = 1; i < window.length; i += 1) {
+      if (window[i] >= window[i - 1]) decreasing = false;
+      if (window[i] <= window[i - 1]) increasing = false;
+    }
+
+    if (decreasing) {
+      return { state: "improving", text: "Mismatch trend improving." };
+    }
+    if (increasing || last > first) {
+      return { state: "diverging", text: "Drift is diverging; extraction is too weak." };
+    }
+    return { state: "stalled", text: "Oscillating or flat; refine context or scope." };
+  };
+
+  const renderTrendWindow = () => {
+    trendWindow.innerHTML = "";
+
+    const slots = state.history.slice(-4);
+    for (let i = 0; i < 4; i += 1) {
+      const entry = slots[i];
+      const pill = document.createElement("div");
+      pill.className = "trend-pill";
+
+      if (!entry) {
+        pill.dataset.state = "empty";
+        pill.innerHTML = '<div class="text-[10px] font-mono text-brand-muted">run --</div><div class="mt-1 text-xs text-brand-muted">M: --</div>';
+        trendWindow.appendChild(pill);
+        continue;
+      }
+
+      pill.dataset.state = entry.pass ? "pass" : "fail";
+      const statusWord = entry.pass ? "PASS" : "FAIL";
+      pill.innerHTML =
+        '<div class="text-[10px] font-mono text-brand-muted">run ' + entry.run + '</div>' +
+        '<div class="mt-1 text-xs font-mono text-brand-strong">M: ' + entry.mismatch + '</div>' +
+        '<div class="mt-1 text-[10px] font-mono text-brand-muted">' + statusWord + '</div>';
+      trendWindow.appendChild(pill);
+    }
+  };
+
+  const updateAttempts = (status) => {
+    const dot = document.createElement("span");
+    dot.className = "inline-block w-2.5 h-2.5 rounded-full";
+    if (status === "PASS") {
+      dot.style.backgroundColor = "rgba(42, 195, 222, 0.95)";
+    } else if (status === "ESCALATE") {
+      dot.style.backgroundColor = "rgba(187, 154, 247, 0.95)";
+    } else {
+      dot.style.backgroundColor = "rgba(247, 118, 142, 0.95)";
+    }
+
+    attempts.appendChild(dot);
+    while (attempts.children.length > 28) {
+      attempts.removeChild(attempts.firstChild);
+    }
   };
 
   const render = (recordAttempt) => {
     state.pressure = clamp(Number.parseInt(pressureSlider.value, 10) || state.pressure, 0, 100);
+    state.budget = clamp(Number.parseInt(budgetSlider.value, 10) || state.budget, 2, 10);
+
     pressureValue.textContent = String(state.pressure);
+    budgetValue.textContent = String(state.budget);
 
     const proposed = computeProposed();
     const missing = canonical.filter((item) => !proposed.includes(item));
     const extras = proposed.filter((item) => !canonical.includes(item));
     const mismatch = missing.length + extras.length;
-    const pass = mismatch === 0;
+
+    const skeletonPass = mismatch === 0;
+    const scopePass = extras.length === 0;
+    const budgetExhausted = state.run >= state.budget && !(skeletonPass && scopePass);
+    const gatePass = skeletonPass && scopePass && !budgetExhausted;
 
     const risk = state.extractorOn
-      ? Math.round(state.pressure * 0.08)
-      : clamp(Math.round(state.pressure * 0.55 + mismatch * 12), 0, 100);
+      ? clamp(Math.round(state.pressure * 0.1 + mismatch * 3), 0, 100)
+      : clamp(Math.round(state.pressure * 0.52 + mismatch * 10 + state.run * 2), 0, 100);
 
-    renderList(canonicalList, canonical, "");
+    canonicalList.innerHTML = "";
     proposedList.innerHTML = "";
-    renderList(proposedList, proposed.filter((x) => canonical.includes(x)), "");
+    renderList(canonicalList, canonical, "");
+    renderList(proposedList, proposed.filter((item) => canonical.includes(item)), "");
     renderList(proposedList, extras, "extra");
-    renderList(proposedList, missing.map((m) => `MISSING: ${m}`), "missing");
+    renderList(proposedList, missing.map((item) => "MISSING: " + item), "missing");
 
     mismatchCount.textContent = String(mismatch);
     riskScore.textContent = String(risk);
-    gateBadge.textContent = pass ? "PASS" : "FAIL";
-    gateBadge.style.color = pass ? "#2ac3de" : "#f7768e";
+    gateBadge.textContent = gatePass ? "PASS" : "FAIL";
+    gateBadge.style.color = gatePass ? "#2ac3de" : "#f7768e";
 
-    if (pass) {
-      outcomeText.textContent = state.extractorOn
-        ? "Exact skeleton match. Safe to merge generated flesh."
-        : "Converged by chance. Guardrails still required.";
-    } else {
-      outcomeText.textContent = "Skeleton mismatch detected. Reject and refine context or extraction.";
-    }
+    const remaining = Math.max(0, state.budget - state.run);
+    budgetRemaining.textContent = String(remaining);
 
-    if (recordAttempt) {
-      const dot = document.createElement("span");
-      dot.className = "inline-block w-2.5 h-2.5 rounded-full";
-      dot.style.backgroundColor = pass ? "rgba(42,195,222,0.95)" : "rgba(247,118,142,0.95)";
-      attempts.appendChild(dot);
-      while (attempts.children.length > 28) {
-        attempts.removeChild(attempts.firstChild);
+    setGate(gateSkeleton, skeletonPass, false);
+    setGate(gateScope, scopePass, false);
+    setGate(gateBudget, !budgetExhausted, false);
+    setGate(gateLedger, state.run > 0, state.run === 0);
+
+    let status = "READY";
+    if (state.run > 0) {
+      if (budgetExhausted) {
+        status = "ESCALATE";
+      } else {
+        status = gatePass ? "PASS" : "FAIL";
       }
     }
+
+    statusLabel.textContent = status;
+    statusLabel.style.color = status === "PASS" ? "#2ac3de" : status === "ESCALATE" ? "#bb9af7" : status === "FAIL" ? "#f7768e" : "#e2e8f0";
+
+    attemptLabel.textContent = String(state.run) + "/" + String(state.budget);
+    lastRun.textContent = state.run === 0 ? "--" : "T+" + String(state.run);
+    ledgerPath.textContent = "ledger/map-updaters/skeleton-first/attempt-" + String(state.run).padStart(2, "0") + ".json";
+
+    if (recordAttempt) {
+      state.history.push({ run: state.run, mismatch, pass: gatePass });
+      while (state.history.length > 28) {
+        state.history.shift();
+      }
+      updateAttempts(status);
+    }
+
+    const trend = computeTrend();
+    trendStatus.textContent = trend.text;
+    trendStatus.dataset.state = trend.state;
+    renderTrendWindow();
+
+    if (state.run === 0) {
+      outcomeText.textContent = "Ready to run one bounded attempt.";
+    } else if (status === "PASS") {
+      outcomeText.textContent = state.extractorOn
+        ? "Exact skeleton match. Merge is admissible; record receipt and continue."
+        : "PASS occurred with extraction off. Keep guardrails: this is brittle.";
+    } else if (status === "ESCALATE") {
+      outcomeText.textContent = "Circuit break: retry budget exhausted without convergence. Escalate to human review.";
+    } else {
+      outcomeText.textContent = "Hard fail on skeleton mismatch. Refine extraction context before next attempt.";
+    }
+
+    return { gatePass, status };
+  };
+
+  const runOne = () => {
+    state.run += 1;
+    return render(true);
   };
 
   extractorToggle.addEventListener("click", () => {
@@ -1831,10 +2144,35 @@
     render(false);
   });
 
-  pressureSlider.addEventListener("input", () => render(false));
+  pressureSlider.addEventListener("input", () => {
+    render(false);
+  });
+
+  budgetSlider.addEventListener("input", () => {
+    render(false);
+  });
+
   runButton.addEventListener("click", () => {
-    state.run += 1;
-    render(true);
+    runOne();
+  });
+
+  runBudgetButton.addEventListener("click", () => {
+    let result = { gatePass: false, status: "READY" };
+    while (state.run < state.budget) {
+      result = runOne();
+      if (result.gatePass) break;
+    }
+
+    if (!result.gatePass && state.run >= state.budget) {
+      render(false);
+    }
+  });
+
+  resetButton.addEventListener("click", () => {
+    state.run = 0;
+    state.history = [];
+    attempts.innerHTML = "";
+    render(false);
   });
 
   render(false);
@@ -1919,6 +2257,10 @@
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-08-ouroboros-protocol" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-08-ouroboros-protocol</span>
 <style>
+  [data-role="ouroboros-sim"] {
+    container-type: inline-size;
+  }
+
   [data-role="ouroboros-sim"] .ouro-phase {
     border: 1px solid rgba(255, 255, 255, 0.14);
     background: rgba(11, 12, 16, 0.5);
@@ -1935,6 +2277,81 @@
     background: rgba(187, 154, 247, 0.24);
     border-color: rgba(187, 154, 247, 0.34);
   }
+  [data-role="ouroboros-sim"] .ouro-preset[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.16);
+    color: #f2f3f8;
+  }
+  [data-role="ouroboros-sim"] .progress-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.6rem;
+    background: rgba(11, 12, 16, 0.46);
+    padding: 0.4rem 0.45rem;
+    min-width: 0;
+  }
+  [data-role="ouroboros-sim"] .progress-pill[data-state="pass"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+  }
+  [data-role="ouroboros-sim"] .progress-pill[data-state="escalate"] {
+    border-color: rgba(187, 154, 247, 0.4);
+    background: rgba(187, 154, 247, 0.16);
+  }
+  [data-role="ouroboros-sim"] .progress-pill[data-state="empty"] {
+    opacity: 0.58;
+    border-style: dashed;
+  }
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="improving"],
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="converged"] {
+    color: #2ac3de;
+  }
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="stalled"],
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="unreachable"] {
+    color: #bb9af7;
+  }
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="diverging"] {
+    color: #f87171;
+  }
+
+  [data-role="ouroboros-sim"] .ouro-metric-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  [data-role="ouroboros-sim"] .ouro-metric-card {
+    min-width: 0;
+  }
+
+  [data-role="ouroboros-sim"] .ouro-metric-copy {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  @container (min-width: 32rem) {
+    [data-role="ouroboros-sim"] .ouro-metric-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @container (min-width: 56rem) {
+    [data-role="ouroboros-sim"] .ouro-metric-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .content:not(.infographic-presentation)
+    [data-infographic-section-id="i3-section-08-ouroboros-protocol"]
+    [data-role="ouroboros-sim"] .ouro-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    .content:not(.infographic-presentation)
+      [data-infographic-section-id="i3-section-08-ouroboros-protocol"]
+      [data-role="ouroboros-sim"] .ouro-metric-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     [data-role="ouroboros-sim"] .ouro-phase {
       transition: none;
@@ -1996,6 +2413,15 @@
 <input class="mt-2 w-full" data-role="noise-slider" id="ouroNoiseSlider" max="100" min="0" step="1" type="range" value="45"/>
 </div>
 </div>
+<div class="mt-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Scenario presets</div>
+<div class="flex flex-wrap gap-2">
+<button class="soft-toggle font-mono ouro-preset" data-active="0" data-preset="converging" data-role="preset" type="button">Converging</button>
+<button class="soft-toggle font-mono ouro-preset" data-active="0" data-preset="thrashing" data-role="preset" type="button">Thrashing</button>
+<button class="soft-toggle font-mono ouro-preset" data-active="0" data-preset="no-attractor" data-role="preset" type="button">No <a class="concept-link" href="concepts#attractor" title="See concept: Attractor">Attractor</a></button>
+</div>
+<div class="mt-2 text-[11px] text-brand-muted" data-role="preset-note">Manual controls. Choose a preset to model a specific loop regime.</div>
+</div>
 <div class="mt-4 grid grid-cols-3 gap-2 text-xs font-mono">
 <div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="write" data-role="phase-pill">WRITE</div>
 <div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="judge" data-role="phase-pill">JUDGE</div>
@@ -2007,23 +2433,31 @@
 <button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
 </div>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Loop count</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="loop-count">0</span></div>
+<div class="ouro-metric-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="ouro-metric-card bg-brand-light border border-brand-border rounded-xl p-3 min-w-0">
+<div class="ouro-metric-copy text-xs font-mono text-brand-muted">Loop count</div>
+<div class="ouro-metric-copy mt-1 text-base sm:text-lg leading-snug font-bold text-brand-strong"><span data-role="loop-count">0</span></div>
+</div>
+<div class="ouro-metric-card bg-brand-light border border-brand-border rounded-xl p-3 min-w-0">
+<div class="ouro-metric-copy text-xs font-mono text-brand-muted">Current quality</div>
+<div class="ouro-metric-copy mt-1 text-base sm:text-lg leading-snug font-bold text-brand-strong"><span data-role="quality">52</span>/100</div>
+</div>
+<div class="ouro-metric-card bg-brand-light border border-brand-border rounded-xl p-3 min-w-0">
+<div class="ouro-metric-copy text-xs font-mono text-brand-muted">Open errors</div>
+<div class="ouro-metric-copy mt-1 text-base sm:text-lg leading-snug font-bold text-brand-strong"><span data-role="errors">6</span></div>
+</div>
+<div class="ouro-metric-card bg-brand-light border border-brand-border rounded-xl p-3 min-w-0">
+<div class="ouro-metric-copy text-xs font-mono text-brand-muted">Status</div>
+<div class="ouro-metric-copy mt-1 text-base sm:text-lg leading-snug font-bold text-brand-strong" data-role="status">READY</div>
+</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Current quality</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="quality">52</span>/100</div>
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Minimum progress window (W=4)</div>
+<div class="text-xs text-brand-muted" data-role="progress-status" data-state="baseline">Collecting baseline.</div>
 </div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Open errors</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="errors">6</span></div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Status</div>
-<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">READY</div>
-</div>
+<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2" data-role="progress-window"></div>
+<div class="mt-2 text-[11px] text-brand-muted" data-role="signature-status">Run the loop to inspect error signatures.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Structured error object</div>
@@ -2033,7 +2467,7 @@
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">Loop outcomes</div>
-<div class="text-xs text-brand-muted">Cyan = PASS, red = refine, violet = circuit-break</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, red = refine, violet = escalate</div>
 </div>
 <div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
 </div>
@@ -2065,6 +2499,11 @@
   const errorJsonEl = sim.querySelector('[data-role="error-json"]');
   const outcomeEl = sim.querySelector('[data-role="outcome"]');
   const attemptsEl = sim.querySelector('[data-role="attempts"]');
+  const presetButtons = Array.from(sim.querySelectorAll('[data-role="preset"]'));
+  const presetNoteEl = sim.querySelector('[data-role="preset-note"]');
+  const progressStatusEl = sim.querySelector('[data-role="progress-status"]');
+  const progressWindowEl = sim.querySelector('[data-role="progress-window"]');
+  const signatureStatusEl = sim.querySelector('[data-role="signature-status"]');
   const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
   const stepBtn = sim.querySelector('[data-role="step"]');
   const runBtn = sim.querySelector('[data-role="run"]');
@@ -2072,7 +2511,8 @@
 
   if (!targetSlider || !budgetSlider || !refineSlider || !noiseSlider || !targetValue || !budgetValue || !refineValue || !noiseValue ||
       !loopCountEl || !qualityEl || !errorsEl || !statusEl || !errorJsonEl || !outcomeEl || !attemptsEl ||
-      !stepBtn || !runBtn || !resetBtn || phasePills.length === 0) return;
+      !stepBtn || !runBtn || !resetBtn || !presetNoteEl || !progressStatusEl || !progressWindowEl || !signatureStatusEl ||
+      phasePills.length === 0 || presetButtons.length === 0) return;
 
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
   const toInt = (v, fallback) => {
@@ -2083,12 +2523,48 @@
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phaseDelay = reducedMotion ? 0 : 140;
   const loopDelay = reducedMotion ? 0 : 220;
+  const PRESETS = {
+    converging: {
+      target: 80,
+      budget: 10,
+      refine: 82,
+      noise: 18,
+      quality: 58,
+      errors: 6,
+      scenario: "normal",
+      note: "Low stochasticity + strong refine. Deficit should shrink within W attempts."
+    },
+    thrashing: {
+      target: 92,
+      budget: 8,
+      refine: 36,
+      noise: 78,
+      quality: 50,
+      errors: 6,
+      scenario: "normal",
+      note: "High stochasticity + weaker refine. Expect churn and repeated signatures."
+    },
+    "no-attractor": {
+      target: 90,
+      budget: 6,
+      refine: 42,
+      noise: 55,
+      quality: 60,
+      errors: 3,
+      scenario: "no-attractor",
+      note: "Contradictory constraints. PASS is unreachable; loop should escalate."
+    }
+  };
 
   const state = {
     target: toInt(targetSlider.value, 86),
     budget: toInt(budgetSlider.value, 8),
     refine: toInt(refineSlider.value, 55),
     noise: toInt(noiseSlider.value, 45),
+    preset: "custom",
+    scenario: "normal",
+    initialQuality: 52,
+    initialErrors: 6,
     loop: 0,
     quality: 52,
     errors: 6,
@@ -2096,6 +2572,8 @@
     running: false,
     animating: false,
     failStreak: 0,
+    progressWindowSize: 4,
+    history: [],
     lastSignal: {
       run: 0,
       code: "ready",
@@ -2114,10 +2592,23 @@
   };
 
   const clearPhases = () => setPhase("");
+  const scoreFor = (quality, errors) => Math.round(quality - (errors * 3));
+  const deficitFor = (score) => Math.max(0, state.target - score);
+  const currentPreset = () => PRESETS[state.preset] || null;
+  const setCustomScenario = () => {
+    state.preset = "custom";
+    state.scenario = "normal";
+    state.initialQuality = 52;
+    state.initialErrors = 6;
+  };
+  const signatureFor = (deficit, errors, code) => {
+    const deficitBucket = Math.ceil(deficit / 4);
+    return `${code}:${deficitBucket}:${errors}`;
+  };
 
   const appendAttempt = (kind) => {
     const pill = document.createElement("span");
-    const suffix = kind === "pass" ? "is-pass" : kind === "trip" ? "is-trip" : "is-fail";
+    const suffix = kind === "pass" ? "is-pass" : kind === "escalate" ? "is-trip" : "is-fail";
     pill.className = `attempt-pill ${suffix}`;
     attemptsEl.appendChild(pill);
     while (attemptsEl.children.length > 36) {
@@ -2125,7 +2616,140 @@
     }
   };
 
+  const pushHistory = (entry) => {
+    state.history.push(entry);
+    while (state.history.length > 24) {
+      state.history.shift();
+    }
+  };
+
+  const resetRunState = () => {
+    stopRun();
+    state.loop = 0;
+    state.quality = clamp(Math.round(state.initialQuality), 0, 100);
+    state.errors = clamp(Math.round(state.initialErrors), 0, 12);
+    state.status = "READY";
+    state.failStreak = 0;
+    state.history = [];
+    const baselineScore = scoreFor(state.quality, state.errors);
+    state.lastSignal = {
+      run: 0,
+      code: "ready",
+      gate: state.scenario === "no-attractor" ? "attractor" : "quality_floor",
+      expected: state.scenario === "no-attractor" ? "admissible(candidate) is unreachable under current constraints" : `score >= ${state.target} and errors <= 1`,
+      actual: `score=${baselineScore}, errors=${state.errors}`,
+      deficit: deficitFor(baselineScore),
+      next_action: "write"
+    };
+    attemptsEl.innerHTML = "";
+    clearPhases();
+    render();
+  };
+
+  const applyPreset = (presetKey) => {
+    const preset = PRESETS[presetKey];
+    if (!preset) return;
+    state.preset = presetKey;
+    state.scenario = preset.scenario;
+    state.target = preset.target;
+    state.budget = preset.budget;
+    state.refine = preset.refine;
+    state.noise = preset.noise;
+    state.initialQuality = preset.quality;
+    state.initialErrors = preset.errors;
+    resetRunState();
+  };
+
+  const renderProgress = () => {
+    const windowItems = state.history.slice(-state.progressWindowSize);
+    progressWindowEl.innerHTML = "";
+
+    for (const item of windowItems) {
+      const pill = document.createElement("div");
+      pill.className = "progress-pill";
+      pill.dataset.state = item.status === "PASS" ? "pass" : item.status === "ESCALATE" ? "escalate" : "iterating";
+      const runLabel = document.createElement("div");
+      runLabel.className = "text-[10px] font-mono text-brand-muted";
+      runLabel.textContent = `#${item.run}`;
+      const signal = document.createElement("div");
+      signal.className = "mt-1 text-[11px] font-mono text-brand-strong";
+      signal.textContent = `d${item.deficit} · e${item.errors}`;
+      pill.appendChild(runLabel);
+      pill.appendChild(signal);
+      progressWindowEl.appendChild(pill);
+    }
+
+    for (let i = windowItems.length; i < state.progressWindowSize; i += 1) {
+      const empty = document.createElement("div");
+      empty.className = "progress-pill";
+      empty.dataset.state = "empty";
+      const emptyRun = document.createElement("div");
+      emptyRun.className = "text-[10px] font-mono text-brand-muted";
+      emptyRun.textContent = "—";
+      const emptySignal = document.createElement("div");
+      emptySignal.className = "mt-1 text-[11px] font-mono text-brand-muted";
+      emptySignal.textContent = "d? · e?";
+      empty.appendChild(emptyRun);
+      empty.appendChild(emptySignal);
+      progressWindowEl.appendChild(empty);
+    }
+
+    if (windowItems.length === 0) {
+      progressStatusEl.dataset.state = "baseline";
+      progressStatusEl.textContent = "Collecting baseline.";
+      signatureStatusEl.textContent = "Run the loop to inspect error signatures.";
+      return;
+    }
+
+    const first = windowItems[0];
+    const last = windowItems[windowItems.length - 1];
+    const deficitDelta = last.deficit - first.deficit;
+    const errorDelta = last.errors - first.errors;
+    const signatureCount = new Set(windowItems.map((item) => item.signature)).size;
+    const repeated = signatureCount < windowItems.length;
+
+    let progressState = "baseline";
+    let progressText = "Collecting baseline.";
+
+    if (last.status === "PASS") {
+      progressState = "converged";
+      progressText = "Converged: attractor reached.";
+    } else if (state.scenario === "no-attractor") {
+      progressState = "unreachable";
+      progressText = "Unreachable attractor: retries cannot produce PASS.";
+    } else if (windowItems.length < 2) {
+      progressState = "baseline";
+      progressText = "Collecting baseline.";
+    } else if (deficitDelta <= -3 || (deficitDelta <= 0 && errorDelta < 0)) {
+      progressState = "improving";
+      progressText = "Improving: deficit trend is shrinking.";
+    } else if (repeated && windowItems.length >= 3) {
+      progressState = "stalled";
+      progressText = "Stalled: failure signature is repeating.";
+    } else if (deficitDelta >= 3 || errorDelta > 1) {
+      progressState = "diverging";
+      progressText = "Diverging: distance to target is increasing.";
+    } else {
+      progressState = "baseline";
+      progressText = "Mixed signal: not yet monotonic.";
+    }
+
+    progressStatusEl.dataset.state = progressState;
+    progressStatusEl.textContent = progressText;
+    if (state.scenario === "no-attractor") {
+      signatureStatusEl.textContent = "Reachability failure: tighten conflicting constraints or re-scope mission.";
+    } else if (repeated) {
+      signatureStatusEl.textContent = "Signature repeat detected. Consider re-scope or tighter constraints.";
+    } else {
+      signatureStatusEl.textContent = "Signature variation present. Continue until monotonic progress or escalate.";
+    }
+  };
+
   const render = () => {
+    targetSlider.value = String(state.target);
+    budgetSlider.value = String(state.budget);
+    refineSlider.value = String(state.refine);
+    noiseSlider.value = String(state.noise);
     targetValue.textContent = String(state.target);
     budgetValue.textContent = String(state.budget);
     refineValue.textContent = String(state.refine);
@@ -2134,9 +2758,15 @@
     qualityEl.textContent = String(state.quality);
     errorsEl.textContent = String(state.errors);
 
+    for (const button of presetButtons) {
+      button.dataset.active = button.dataset.preset === state.preset ? "1" : "0";
+    }
+    const preset = currentPreset();
+    presetNoteEl.textContent = preset ? preset.note : "Manual controls. Choose a preset to model a specific loop regime.";
+
     let statusColor = "#b5b6bf";
     if (state.status === "PASS") statusColor = "#2ac3de";
-    if (state.status === "TRIP") statusColor = "#bb9af7";
+    if (state.status === "ESCALATE") statusColor = "#bb9af7";
     if (state.status === "ITERATING") statusColor = "#f2f3f8";
     statusEl.textContent = state.status;
     statusEl.style.color = statusColor;
@@ -2145,8 +2775,12 @@
 
     if (state.status === "PASS") {
       outcomeEl.textContent = "PASS: converged under deterministic gates.";
-    } else if (state.status === "TRIP") {
-      outcomeEl.textContent = `CIRCUIT BREAK: loop budget (${state.budget}) exhausted. Escalate with evidence.`;
+    } else if (state.status === "ESCALATE") {
+      if (state.scenario === "no-attractor") {
+        outcomeEl.textContent = `CIRCUIT BREAK: no reachable attractor under current constraints. Escalate with evidence.`;
+      } else {
+        outcomeEl.textContent = `CIRCUIT BREAK: loop budget (${state.budget}) exhausted. Escalate with evidence.`;
+      }
     } else if (state.status === "ITERATING") {
       const nextAction = state.lastSignal.next_action || "refine";
       if (nextAction === "rewrite") {
@@ -2161,6 +2795,7 @@
     }
 
     runBtn.textContent = state.running ? "Stop" : "Run Loop";
+    renderProgress();
   };
 
   const pickDecision = (choices) => {
@@ -2195,12 +2830,13 @@
       12
     );
     const gateScore = candidateQuality - (candidateErrors * 3) + (randSigned() * 7 * noiseScale);
-    const pass = gateScore >= state.target && candidateErrors <= 1;
+    const attractorReachable = state.scenario !== "no-attractor";
+    const pass = attractorReachable && gateScore >= state.target && candidateErrors <= 1;
     const budgetHit = cycle >= state.budget;
 
     let nextQuality = candidateQuality;
     let nextErrors = candidateErrors;
-    let nextStatus = pass ? "PASS" : (budgetHit ? "TRIP" : "ITERATING");
+    let nextStatus = pass ? "PASS" : (budgetHit ? "ESCALATE" : "ITERATING");
     let nextAction = pass ? "accept" : (budgetHit ? "escalate" : "refine");
     let showRefinePhase = false;
 
@@ -2211,43 +2847,59 @@
     }
 
     if (!pass && !budgetHit) {
-      const refineBoost = Math.max(1, Math.round((state.refine - 35) / 18));
-      const deficitNow = Math.max(0, state.target - gateScore);
-      const decision = pickDecision([
-        { action: "refine", weight: clamp(0.38 + (state.refine / 240) + (deficitNow / 280), 0.2, 0.8) },
-        { action: "rewrite", weight: clamp(0.26 + (state.noise / 260) + (state.failStreak / 35), 0.12, 0.65) },
-        { action: "re-scope", weight: clamp(0.20 + ((100 - state.refine) / 420), 0.06, 0.42) }
-      ]);
-
-      nextAction = decision;
-      if (decision === "refine") {
-        nextQuality = clamp(candidateQuality + refineBoost + (randSigned() * 3 * noiseScale), 0, 100);
-        nextErrors = Math.max(0, candidateErrors - 1);
-        showRefinePhase = true;
-      } else if (decision === "rewrite") {
-        nextQuality = clamp(candidateQuality - 1 + (randSigned() * 4 * noiseScale), 0, 100);
-        nextErrors = clamp(candidateErrors + (Math.random() < (0.20 + 0.25 * noiseScale) ? 1 : 0), 0, 12);
+      if (!attractorReachable) {
+        nextAction = "re-scope";
+        nextQuality = clamp(candidateQuality + Math.max(0, Math.round(deficit * 0.04)), 0, 100);
+        nextErrors = Math.max(0, candidateErrors - (Math.random() < 0.20 ? 1 : 0));
       } else {
-        nextQuality = clamp(state.quality + Math.max(0, Math.round(deficit * 0.05 + (randSigned() * 2 * noiseScale))), 0, 100);
-        nextErrors = Math.max(0, state.errors - (Math.random() < 0.35 ? 1 : 0));
+        const refineBoost = Math.max(1, Math.round((state.refine - 35) / 18));
+        const deficitNow = Math.max(0, state.target - gateScore);
+        const decision = pickDecision([
+          { action: "refine", weight: clamp(0.38 + (state.refine / 240) + (deficitNow / 280), 0.2, 0.8) },
+          { action: "rewrite", weight: clamp(0.26 + (state.noise / 260) + (state.failStreak / 35), 0.12, 0.65) },
+          { action: "re-scope", weight: clamp(0.20 + ((100 - state.refine) / 420), 0.06, 0.42) }
+        ]);
+
+        nextAction = decision;
+        if (decision === "refine") {
+          nextQuality = clamp(candidateQuality + refineBoost + (randSigned() * 3 * noiseScale), 0, 100);
+          nextErrors = Math.max(0, candidateErrors - 1);
+          showRefinePhase = true;
+        } else if (decision === "rewrite") {
+          nextQuality = clamp(candidateQuality - 1 + (randSigned() * 4 * noiseScale), 0, 100);
+          nextErrors = clamp(candidateErrors + (Math.random() < (0.20 + 0.25 * noiseScale) ? 1 : 0), 0, 12);
+        } else {
+          nextQuality = clamp(state.quality + Math.max(0, Math.round(deficit * 0.05 + (randSigned() * 2 * noiseScale))), 0, 100);
+          nextErrors = Math.max(0, state.errors - (Math.random() < 0.35 ? 1 : 0));
+        }
       }
     }
 
     state.loop = cycle;
-    state.quality = nextQuality;
-    state.errors = nextErrors;
+    state.quality = clamp(Math.round(nextQuality), 0, 100);
+    state.errors = clamp(Math.round(nextErrors), 0, 12);
     state.status = nextStatus;
+    const scored = Math.round(gateScore);
+    const runDeficit = attractorReachable ? deficitFor(scored) : Math.max(1, deficitFor(scored));
+    const failureCode = pass ? "pass" : (!attractorReachable ? "unreachable_constraints" : "validator_fail");
     state.lastSignal = {
       run: state.loop,
-      code: pass ? "pass" : "validator_fail",
-      gate: "quality_floor",
-      expected: `score >= ${state.target} and errors <= 1`,
-      actual: `score=${Math.round(gateScore)}, errors=${candidateErrors}`,
-      deficit: Math.max(0, state.target - Math.round(gateScore)),
+      code: failureCode,
+      gate: attractorReachable ? "quality_floor" : "attractor",
+      expected: attractorReachable ? `score >= ${state.target} and errors <= 1` : "admissible(candidate) is unreachable under current constraints",
+      actual: attractorReachable ? `score=${scored}, errors=${candidateErrors}` : `attractor_unreachable, score=${scored}, errors=${candidateErrors}`,
+      deficit: runDeficit,
       next_action: nextAction
     };
+    pushHistory({
+      run: state.loop,
+      deficit: runDeficit,
+      errors: state.errors,
+      status: state.status,
+      signature: signatureFor(runDeficit, state.errors, failureCode)
+    });
 
-    appendAttempt(pass ? "pass" : (nextStatus === "TRIP" ? "trip" : "fail"));
+    appendAttempt(pass ? "pass" : (nextStatus === "ESCALATE" ? "escalate" : "fail"));
     render();
     return { action: nextAction, showRefinePhase };
   };
@@ -2257,7 +2909,7 @@
       if (done) done();
       return;
     }
-    if (state.status === "PASS" || state.status === "TRIP") {
+    if (state.status === "PASS" || state.status === "ESCALATE") {
       if (done) done();
       return;
     }
@@ -2293,14 +2945,14 @@
       stopRun();
       return;
     }
-    if (state.status === "PASS" || state.status === "TRIP") return;
+    if (state.status === "PASS" || state.status === "ESCALATE") return;
     state.running = true;
     render();
 
     const tick = () => {
       if (!state.running) return;
       runAnimatedCycle(() => {
-        if (state.status === "PASS" || state.status === "TRIP") {
+        if (state.status === "PASS" || state.status === "ESCALATE") {
           stopRun();
           return;
         }
@@ -2311,22 +2963,31 @@
   };
 
   targetSlider.addEventListener("input", () => {
+    setCustomScenario();
     state.target = toInt(targetSlider.value, state.target);
     state.lastSignal.expected = `score >= ${state.target} and errors <= 1`;
     render();
   });
   budgetSlider.addEventListener("input", () => {
+    setCustomScenario();
     state.budget = toInt(budgetSlider.value, state.budget);
     render();
   });
   refineSlider.addEventListener("input", () => {
+    setCustomScenario();
     state.refine = toInt(refineSlider.value, state.refine);
     render();
   });
   noiseSlider.addEventListener("input", () => {
+    setCustomScenario();
     state.noise = toInt(noiseSlider.value, state.noise);
     render();
   });
+  for (const presetButton of presetButtons) {
+    presetButton.addEventListener("click", () => {
+      applyPreset(presetButton.dataset.preset || "");
+    });
+  }
 
   stepBtn.addEventListener("click", () => {
     if (state.running || state.animating) return;
@@ -2334,25 +2995,17 @@
   });
   runBtn.addEventListener("click", runLoop);
   resetBtn.addEventListener("click", () => {
-    stopRun();
-    state.loop = 0;
-    state.quality = 52;
-    state.errors = 6;
-    state.status = "READY";
-    state.noise = toInt(noiseSlider.value, 45);
-    state.failStreak = 0;
-    state.lastSignal = {
-      run: 0,
-      code: "ready",
-      gate: "quality_floor",
-      expected: `score >= ${state.target} and errors <= 1`,
-      actual: "score=34, errors=6",
-      deficit: 52,
-      next_action: "write"
-    };
-    attemptsEl.innerHTML = "";
-    clearPhases();
-    render();
+    const preset = currentPreset();
+    if (preset) {
+      state.target = preset.target;
+      state.budget = preset.budget;
+      state.refine = preset.refine;
+      state.noise = preset.noise;
+      state.initialQuality = preset.quality;
+      state.initialErrors = preset.errors;
+      state.scenario = preset.scenario;
+    }
+    resetRunState();
   });
 
   render();
@@ -2366,92 +3019,99 @@
 </div>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-07-ratchet-gates" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-07-ratchet-gates</span>
+<style>
+  [data-role="ratchet-sim"] .ratchet-phase {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.48);
+    color: #b5b6bf;
+    transition: all 180ms ease;
+  }
+  [data-role="ratchet-sim"] .ratchet-phase[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+    color: #f2f3f8;
+    box-shadow: 0 0 0 1px rgba(42, 195, 222, 0.2) inset;
+  }
+  [data-role="ratchet-sim"] .soft-toggle[data-role="scenario"][aria-pressed="true"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.16);
+    color: #f2f3f8;
+  }
+  [data-role="ratchet-sim"] .attempt-pill.is-human {
+    background: rgba(187, 154, 247, 0.24);
+    border-color: rgba(187, 154, 247, 0.34);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-role="ratchet-sim"] .ratchet-phase {
+      transition: none;
+    }
+  }
+</style>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Ratchets (Quality Floors That Only Move Up)</h2>
 <p class="text-brand-muted leading-relaxed">
-              Ratchets convert progress into non-regression law. A candidate may fail, but the floor does not move down.
-              When a candidate passes the gate, the floor is raised and future loops compound from a better baseline.
-            </p>
+      Ratchets turn quality expectations into executable law. A candidate can fail, but the floor does not move down.
+      If a candidate passes deterministic guards, the floor moves up and future loops start from a stronger baseline.
+    </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2"><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> conditions</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Atomic admission loop</div>
+<div class="text-sm text-brand-muted leading-relaxed space-y-2">
+<span class="block"><span class="font-mono text-brand-vibrant">1) Measure</span> baseline metrics.</span>
+<span class="block"><span class="font-mono text-brand-vibrant">2) Mutate</span> one bounded candidate.</span>
+<span class="block"><span class="font-mono text-brand-vibrant">3) Validate</span> ratchets + policy gates.</span>
+<span class="block"><span class="font-mono text-brand-vibrant">4) Decide</span> raise floor, reject, or route to human gate.</span>
+</div>
+</div>
+<div class="mt-4 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Deterministic guard rules</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-<span class="block font-mono text-brand-vibrant">quality(Z<sub>n</sub>) &gt;= quality(Z<sub>n-1</sub>)</span>
-<span class="block font-mono text-brand-vibrant mt-1">m<sub>new</sub> &gt;= m<sub>old</sub></span>
-<span class="block mt-2">Here <span class="font-mono">m</span> is any tracked metric (for example reliability, velocity, defensibility, compliance).</span>
-<span class="block font-mono text-brand-vibrant mt-2">q(Z) = Σ w<sub>i</sub> · m<sub>i</sub>(Z), with Σ w<sub>i</sub> = 1</span>
-<span class="block mt-2">FAIL does not lower the floor. PASS can raise it.</span>
+<span class="block font-mono text-brand-vibrant">test_count_new &gt;= test_count_old</span>
+<span class="block font-mono text-brand-vibrant mt-1">coverage_new &gt;= coverage_old</span>
+<span class="block font-mono text-brand-vibrant mt-1">lint_new &lt;= lint_old</span>
+<span class="block font-mono text-brand-vibrant mt-1">security_new &lt;= security_old</span>
+<span class="block mt-2">If all ratchets pass, policy decides: allowlisted auto-merge or explicit human approval.</span>
 </div>
 </div>
 </div>
 <div class="lg:w-7/12 space-y-4" data-role="ratchet-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
-<div class="md:col-span-6">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Candidate delta</span>
-<span class="font-mono text-brand-strong"><span data-role="delta-value">3</span> pts</span>
+<div class="text-xs font-mono text-brand-muted mb-3">Scenario runner (deterministic)</div>
+<div class="flex flex-wrap gap-2" data-role="scenario-controls">
+<button aria-pressed="true" class="soft-toggle font-mono" data-role="scenario" data-scenario="lint_fix" type="button">Lint Autofix</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="coverage_drop" type="button">Coverage Drop</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="security_regression" type="button">Security Regression</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="api_expansion" type="button">API Expansion</button>
 </div>
-<input class="mt-2 w-full" data-role="delta-slider" max="20" min="-20" step="1" type="range" value="3"/>
-</div>
-<div class="md:col-span-6">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Gate strength</span>
-<span class="font-mono text-brand-strong"><span data-role="gate-value">66</span>/100</span>
-</div>
-<input class="mt-2 w-full" data-role="gate-slider" max="95" min="40" step="1" type="range" value="66"/>
-</div>
-<div class="md:col-span-6">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Stochasticity</span>
-<span class="font-mono text-brand-strong"><span data-role="noise-value">50</span>/100</span>
-</div>
-<input class="mt-2 w-full" data-role="noise-slider" max="100" min="0" step="1" type="range" value="50"/>
-</div>
-</div>
-<div class="mt-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Loop complexity (changes quality weights)</div>
-<div class="flex flex-wrap gap-2" data-role="complexity-controls">
-<button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="local" type="button">Local Loop</button>
-<button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="component" type="button">Component Loop</button>
-<button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="complexity" data-value="system" type="button">System Loop</button>
-</div>
-<div class="mt-2 text-xs text-brand-muted">
-<span class="font-mono">q weights</span>:
-<span data-role="weights-label">R 30% · V 25% · D 25% · C 20%</span>
-</div>
-<div class="mt-1 text-xs text-brand-muted">
-<span class="font-mono">stochastic variance</span>:
-<span data-role="variance-label">±2.0</span>
-</div>
-<div class="mt-1 text-xs text-brand-muted">
-<span class="font-mono">shock chance</span>:
-<span data-role="shock-label">3%</span>
-</div>
+<div class="mt-2 text-xs text-brand-muted" data-role="scenario-note">Small bounded mutation that should raise quality and pass ratchets.</div>
+<div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="measure" data-role="phase-pill">1 Measure</div>
+<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="mutate" data-role="phase-pill">2 Mutate</div>
+<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="validate" data-role="phase-pill">3 Validate</div>
+<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="decide" data-role="phase-pill">4 Decide</div>
 </div>
 <div class="mt-3 flex flex-wrap gap-2">
-<button class="soft-toggle font-mono" data-role="run" type="button">Run Candidate</button>
+<button class="soft-toggle font-mono" data-role="run" type="button">Run Scenario</button>
 <button class="soft-toggle font-mono" data-role="reset" type="button">Reset Floor</button>
 </div>
 </div>
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Reliability</div>
-<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-r">—</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Test count</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="test-old">480</span> -&gt; <span data-role="test-new">481</span></div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Velocity</div>
-<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-v">—</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Coverage</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="coverage-old">88.0</span>% -&gt; <span data-role="coverage-new">88.0</span>%</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Defensibility</div>
-<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-d">—</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Lint violations</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="lint-old">6</span> -&gt; <span data-role="lint-new">4</span></div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Compliance</div>
-<div class="mt-1 text-base font-bold text-brand-strong"><span data-role="metric-c">—</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Security findings</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="security-old">2</span> -&gt; <span data-role="security-new">2</span></div>
 </div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -2461,15 +3121,26 @@
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Candidate quality</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="candidate">76</span>/100</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="candidate-quality">75</span>/100</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Evidence score</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="evidence">74</span>/100</div>
+<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> gate</div>
+<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">READY</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Ratchet gate</div>
-<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">PASS</div>
+<div class="text-xs font-mono text-brand-muted">Decision</div>
+<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong" data-role="decision">Run scenario</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted mb-2">Gate trace</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs text-brand-muted">
+<div class="border border-brand-border rounded-lg p-2">test_count: <span data-role="check-test">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">coverage: <span data-role="check-coverage">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">lint: <span data-role="check-lint">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">security: <span data-role="check-security">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">quality floor: <span data-role="check-quality">READY</span></div>
+<div class="border border-brand-border rounded-lg p-2">policy gate: <span data-role="check-policy">READY</span></div>
 </div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
@@ -2484,16 +3155,16 @@
 <div>
 <div class="text-xs text-brand-muted mb-1">Candidate</div>
 <div class="h-2 rounded-full bg-brand-dark/70 border border-brand-border overflow-hidden">
-<div class="h-full bg-brand-accent" data-role="candidate-bar" style="width: 76%;"></div>
+<div class="h-full bg-brand-accent" data-role="candidate-bar" style="width: 75%;"></div>
 </div>
 </div>
 </div>
-<div class="mt-3 text-xs text-brand-muted" data-role="outcome">Ready. Run a candidate through the ratchet gate.</div>
+<div class="mt-3 text-xs text-brand-muted" data-role="outcome">Ready. Run a candidate through deterministic guards.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">Attempts</div>
-<div class="text-xs text-brand-muted">Cyan = raised floor, red = rejected</div>
+<div class="text-xs text-brand-muted">Cyan = floor raised, red = rejected, violet = human gate</div>
 </div>
 <div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
 </div>
@@ -2510,242 +3181,311 @@
   const sim = root.querySelector('[data-role="ratchet-sim"]');
   if (!sim) return;
 
-  const deltaSlider = sim.querySelector('[data-role="delta-slider"]');
-  const gateSlider = sim.querySelector('[data-role="gate-slider"]');
-  const noiseSlider = sim.querySelector('[data-role="noise-slider"]');
+  const scenarioButtons = Array.from(sim.querySelectorAll('[data-role="scenario"]'));
+  const scenarioNoteEl = sim.querySelector('[data-role="scenario-note"]');
+  const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
   const runBtn = sim.querySelector('[data-role="run"]');
   const resetBtn = sim.querySelector('[data-role="reset"]');
-  const deltaValue = sim.querySelector('[data-role="delta-value"]');
-  const gateValue = sim.querySelector('[data-role="gate-value"]');
-  const noiseValue = sim.querySelector('[data-role="noise-value"]');
+
+  const testOldEl = sim.querySelector('[data-role="test-old"]');
+  const testNewEl = sim.querySelector('[data-role="test-new"]');
+  const coverageOldEl = sim.querySelector('[data-role="coverage-old"]');
+  const coverageNewEl = sim.querySelector('[data-role="coverage-new"]');
+  const lintOldEl = sim.querySelector('[data-role="lint-old"]');
+  const lintNewEl = sim.querySelector('[data-role="lint-new"]');
+  const securityOldEl = sim.querySelector('[data-role="security-old"]');
+  const securityNewEl = sim.querySelector('[data-role="security-new"]');
+
   const floorEl = sim.querySelector('[data-role="floor"]');
-  const candidateEl = sim.querySelector('[data-role="candidate"]');
-  const evidenceEl = sim.querySelector('[data-role="evidence"]');
+  const candidateQualityEl = sim.querySelector('[data-role="candidate-quality"]');
   const statusEl = sim.querySelector('[data-role="status"]');
+  const decisionEl = sim.querySelector('[data-role="decision"]');
+
+  const checkTestEl = sim.querySelector('[data-role="check-test"]');
+  const checkCoverageEl = sim.querySelector('[data-role="check-coverage"]');
+  const checkLintEl = sim.querySelector('[data-role="check-lint"]');
+  const checkSecurityEl = sim.querySelector('[data-role="check-security"]');
+  const checkQualityEl = sim.querySelector('[data-role="check-quality"]');
+  const checkPolicyEl = sim.querySelector('[data-role="check-policy"]');
+
   const floorBar = sim.querySelector('[data-role="floor-bar"]');
   const candidateBar = sim.querySelector('[data-role="candidate-bar"]');
-  const complexityButtons = Array.from(sim.querySelectorAll('[data-role="complexity"]'));
-  const weightsLabel = sim.querySelector('[data-role="weights-label"]');
-  const varianceLabel = sim.querySelector('[data-role="variance-label"]');
-  const shockLabel = sim.querySelector('[data-role="shock-label"]');
-  const metricR = sim.querySelector('[data-role="metric-r"]');
-  const metricV = sim.querySelector('[data-role="metric-v"]');
-  const metricD = sim.querySelector('[data-role="metric-d"]');
-  const metricC = sim.querySelector('[data-role="metric-c"]');
   const outcomeEl = sim.querySelector('[data-role="outcome"]');
   const attemptsEl = sim.querySelector('[data-role="attempts"]');
-  if (!deltaSlider || !gateSlider || !noiseSlider || !runBtn || !resetBtn || !deltaValue || !gateValue || !noiseValue || !floorEl || !candidateEl || !evidenceEl || !statusEl || !floorBar || !candidateBar || !weightsLabel || !varianceLabel || !shockLabel || !metricR || !metricV || !metricD || !metricC || !outcomeEl || !attemptsEl) return;
+
+  if (!scenarioNoteEl || !runBtn || !resetBtn || phasePills.length === 0 || scenarioButtons.length === 0 ||
+      !testOldEl || !testNewEl || !coverageOldEl || !coverageNewEl || !lintOldEl || !lintNewEl ||
+      !securityOldEl || !securityNewEl || !floorEl || !candidateQualityEl || !statusEl || !decisionEl ||
+      !checkTestEl || !checkCoverageEl || !checkLintEl || !checkSecurityEl || !checkQualityEl || !checkPolicyEl ||
+      !floorBar || !candidateBar || !outcomeEl || !attemptsEl) return;
 
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-  const toInt = (v, fallback) => {
-    const n = Number.parseInt(String(v), 10);
-    return Number.isFinite(n) ? n : fallback;
-  };
   const round = (n) => Math.round(n);
+  const round1 = (n) => Math.round(n * 10) / 10;
+  const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const phaseDelay = reducedMotion ? 0 : 130;
 
-  const WEIGHTS = {
-    local: { r: 0.35, v: 0.45, d: 0.1, c: 0.1 },
-    component: { r: 0.30, v: 0.25, d: 0.25, c: 0.20 },
-    system: { r: 0.20, v: 0.15, d: 0.35, c: 0.30 },
+  const SCENARIOS = {
+    lint_fix: {
+      note: 'Small bounded mutation that should raise quality and pass ratchets.',
+      delta: { test: 1, coverage: 0.0, lint: -2, security: 0 },
+      requiresHuman: false,
+    },
+    coverage_drop: {
+      note: 'Refactor reduces measured coverage below the existing floor.',
+      delta: { test: 0, coverage: -1.8, lint: -1, security: 0 },
+      requiresHuman: false,
+    },
+    security_regression: {
+      note: 'Candidate introduces a new security finding. Deterministic reject.',
+      delta: { test: 1, coverage: 0.0, lint: 0, security: 1 },
+      requiresHuman: false,
+    },
+    api_expansion: {
+      note: 'Quality improves, but API surface expansion requires explicit human approval.',
+      delta: { test: 2, coverage: 0.2, lint: -1, security: 0 },
+      requiresHuman: true,
+    },
   };
+
+  const INITIAL_BASELINE = { test: 480, coverage: 88.0, lint: 6, security: 2 };
 
   const state = {
-    baseline: 72,
-    delta: toInt(deltaSlider.value, 3),
-    gate: toInt(gateSlider.value, 66),
-    noise: toInt(noiseSlider.value, 50),
-    complexity: "component",
-    run: 0,
+    selected: 'lint_fix',
+    baseline: { ...INITIAL_BASELINE },
+    floor: 72,
+    running: false,
   };
 
-  const render = (metrics, candidate, evidence, passed) => {
-    deltaValue.textContent = String(state.delta);
-    gateValue.textContent = String(state.gate);
-    noiseValue.textContent = String(state.noise);
-    metricR.textContent = String(round(metrics.r));
-    metricV.textContent = String(round(metrics.v));
-    metricD.textContent = String(round(metrics.d));
-    metricC.textContent = String(round(metrics.c));
-    floorEl.textContent = String(state.baseline);
-    candidateEl.textContent = String(round(candidate));
-    evidenceEl.textContent = String(round(evidence));
-    if (passed === null) {
-      statusEl.textContent = "READY";
-      statusEl.style.color = "#b5b6bf";
-    } else {
-      statusEl.textContent = passed ? "PASS" : "FAIL";
-      statusEl.style.color = passed ? "#2ac3de" : "#f7768e";
+  const qualityScore = (metrics) => {
+    const score = 72
+      + (metrics.coverage - 88) * 1.9
+      + (metrics.test - 480) * 0.2
+      - (metrics.lint - 6) * 1.4
+      - (metrics.security - 2) * 4.5;
+    return clamp(round(score), 0, 100);
+  };
+
+  const formatCoverage = (n) => round1(n).toFixed(1);
+
+  const deriveCandidate = (baseline, scenario) => ({
+    test: Math.max(0, baseline.test + scenario.delta.test),
+    coverage: clamp(round1(baseline.coverage + scenario.delta.coverage), 0, 100),
+    lint: Math.max(0, baseline.lint + scenario.delta.lint),
+    security: Math.max(0, baseline.security + scenario.delta.security),
+  });
+
+  const evaluate = (baseline, candidate, scenario) => {
+    const checks = {
+      test: candidate.test >= baseline.test,
+      coverage: (candidate.coverage + 0.1) >= baseline.coverage,
+      lint: candidate.lint <= baseline.lint,
+      security: candidate.security <= baseline.security,
+    };
+
+    const candidateQuality = qualityScore(candidate);
+    const qualityPass = candidateQuality >= state.floor;
+    const ratchetPass = checks.test && checks.coverage && checks.lint && checks.security && qualityPass;
+
+    const failures = [];
+    if (!checks.test) failures.push(`test_count ${candidate.test} < ${baseline.test}`);
+    if (!checks.coverage) failures.push(`coverage ${formatCoverage(candidate.coverage)} < ${formatCoverage(baseline.coverage)}`);
+    if (!checks.lint) failures.push(`lint ${candidate.lint} > ${baseline.lint}`);
+    if (!checks.security) failures.push(`security ${candidate.security} > ${baseline.security}`);
+    if (!qualityPass) failures.push(`quality ${candidateQuality} < floor ${state.floor}`);
+
+    let verdict = 'FAIL';
+    let decision = 'REVERT';
+    let pillClass = 'is-fail';
+    let policyGate = 'BLOCKED';
+
+    if (ratchetPass && scenario.requiresHuman) {
+      verdict = 'HUMAN GATE';
+      decision = 'WAIT FOR APPROVAL';
+      pillClass = 'is-human';
+      policyGate = 'HUMAN';
+    } else if (ratchetPass) {
+      verdict = 'PASS';
+      decision = 'RAISE FLOOR';
+      pillClass = 'is-pass';
+      policyGate = 'ALLOWLISTED';
     }
-    floorBar.style.width = `${state.baseline}%`;
-    candidateBar.style.width = `${round(candidate)}%`;
-    if (passed === null) {
-      candidateBar.style.backgroundColor = "rgba(187,154,247,0.9)";
-    } else {
-      candidateBar.style.backgroundColor = passed ? "rgba(42,195,222,0.9)" : "rgba(247,118,142,0.9)";
-    }
-  };
 
-  const randSigned = () => (Math.random() * 2) - 1;
-
-  const varianceScale = () => {
-    const complexityBase = state.complexity === "local" ? 1.2 : state.complexity === "component" ? 2.0 : 3.1;
-    const aggression = Math.max(0, Math.abs(state.delta) - 4) * 0.35;
-    const stochasticFactor = state.noise / 60;
-    return (complexityBase + aggression) * stochasticFactor;
-  };
-
-  const shockChance = () => {
-    const complexityBias = state.complexity === "local" ? 0.008 : state.complexity === "component" ? 0.018 : 0.03;
-    const noiseBias = (state.noise / 100) * 0.05;
-    const aggressionBias = Math.max(0, Math.abs(state.delta) - 10) * 0.003;
-    return clamp(complexityBias + noiseBias + aggressionBias, 0, 0.2);
-  };
-
-  const sampleNoise = () => {
-    const s = varianceScale();
-    const shock = Math.random() < shockChance();
-    const shockPenalty = shock ? (4 + Math.random() * 8) * (0.7 + (state.noise / 100)) : 0;
     return {
-      r: randSigned() * s * 0.7,
-      v: randSigned() * s * 0.8,
-      d: randSigned() * s * 0.6,
-      c: randSigned() * s * 0.6,
-      evidence: randSigned() * s * 1.1 - shockPenalty,
-      shock,
+      checks,
+      qualityPass,
+      candidateQuality,
+      ratchetPass,
+      failures,
+      verdict,
+      decision,
+      pillClass,
+      policyGate,
     };
   };
 
-  const zeroNoise = () => ({ r: 0, v: 0, d: 0, c: 0, evidence: 0, shock: false });
-
-  const computeMetrics = (noise) => {
-    const n = noise || zeroNoise();
-    const baseline = state.baseline;
-    const improvement = state.delta * 0.75;
-    return {
-      r: clamp(baseline + improvement * 0.9 + n.r, 0, 100),
-      v: clamp(baseline + improvement * 1.2 + n.v, 0, 100),
-      d: clamp(baseline + improvement * 0.7 + n.d, 0, 100),
-      c: clamp(baseline + improvement * 0.8 + n.c, 0, 100),
-    };
-  };
-
-  const computeCandidate = (metrics) => {
-    const w = WEIGHTS[state.complexity] || WEIGHTS.component;
-    return clamp(
-      metrics.r * w.r + metrics.v * w.v + metrics.d * w.d + metrics.c * w.c,
-      0,
-      100
-    );
-  };
-
-  const computeEvidence = (candidate, noise) => {
-    const n = noise || zeroNoise();
-    const driftPenalty = Math.max(0, Math.abs(state.delta) - 6) * 2;
-    const complexityPenalty = state.complexity === "system" ? 2 : 0;
-    const baseEvidencePenalty = 2;
-    return clamp(candidate - baseEvidencePenalty - driftPenalty - complexityPenalty + n.evidence, 0, 100);
-  };
-
-  const renderWeightLabel = () => {
-    const w = WEIGHTS[state.complexity] || WEIGHTS.component;
-    const pct = (x) => `${Math.round(x * 100)}%`;
-    weightsLabel.textContent = `R ${pct(w.r)} · V ${pct(w.v)} · D ${pct(w.d)} · C ${pct(w.c)}`;
-    varianceLabel.textContent = `±${varianceScale().toFixed(1)}`;
-    shockLabel.textContent = `${Math.round(shockChance() * 100)}%`;
-    for (const btn of complexityButtons) {
-      const active = btn.dataset.value === state.complexity;
-      btn.setAttribute("aria-pressed", active ? "true" : "false");
+  const setPhase = (phase) => {
+    for (const pill of phasePills) {
+      const active = pill.dataset.phase === phase;
+      pill.dataset.active = active ? '1' : '0';
     }
   };
 
-  const appendAttempt = (passed) => {
-    const pill = document.createElement("span");
-    pill.className = `attempt-pill ${passed ? "is-pass" : "is-fail"}`;
+  const clearPhase = () => {
+    for (const pill of phasePills) {
+      pill.dataset.active = '0';
+    }
+  };
+
+  const updateCheck = (el, value, tone) => {
+    el.textContent = value;
+    if (tone === 'pass') el.style.color = '#2ac3de';
+    else if (tone === 'fail') el.style.color = '#f7768e';
+    else if (tone === 'human') el.style.color = '#bb9af7';
+    else el.style.color = '#b5b6bf';
+  };
+
+  const updateScenarioButtons = () => {
+    for (const button of scenarioButtons) {
+      const active = button.dataset.scenario === state.selected;
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+  };
+
+  const appendAttempt = (pillClass) => {
+    const pill = document.createElement('span');
+    pill.className = `attempt-pill ${pillClass}`;
     attemptsEl.appendChild(pill);
     while (attemptsEl.children.length > 36) {
       attemptsEl.removeChild(attemptsEl.firstChild);
     }
   };
 
-  const run = () => {
-    state.run += 1;
-    const oldBaseline = state.baseline;
-    const noise = sampleNoise();
-    const metrics = computeMetrics(noise);
-    const candidate = computeCandidate(metrics);
-    const evidence = computeEvidence(candidate, noise);
-    const effectiveGate = Math.max(state.gate, oldBaseline - 1);
+  const render = (baseline, candidate, evaluation, mode, oldFloor) => {
+    const scenario = SCENARIOS[state.selected];
 
-    const ratchetPass = candidate >= oldBaseline;
-    const gatePass = evidence >= effectiveGate;
-    const pass = ratchetPass && gatePass;
+    scenarioNoteEl.textContent = scenario.note;
+    testOldEl.textContent = String(baseline.test);
+    testNewEl.textContent = String(candidate.test);
+    coverageOldEl.textContent = formatCoverage(baseline.coverage);
+    coverageNewEl.textContent = formatCoverage(candidate.coverage);
+    lintOldEl.textContent = String(baseline.lint);
+    lintNewEl.textContent = String(candidate.lint);
+    securityOldEl.textContent = String(baseline.security);
+    securityNewEl.textContent = String(candidate.security);
 
-    if (pass) {
-      state.baseline = round(candidate);
-      outcomeEl.textContent = `PASS: floor raised from ${oldBaseline} to ${state.baseline}.`;
-    } else if (!ratchetPass) {
-      outcomeEl.textContent = `FAIL: non-regression violated (${round(candidate)} < ${oldBaseline}). Floor stays ${oldBaseline}.`;
-    } else if (noise.shock) {
-      outcomeEl.textContent = `FAIL: random shock lowered evidence to ${round(evidence)} below effective gate ${round(effectiveGate)}. Floor stays ${oldBaseline}.`;
+    floorEl.textContent = String(state.floor);
+    candidateQualityEl.textContent = String(evaluation.candidateQuality);
+    floorBar.style.width = `${state.floor}%`;
+    candidateBar.style.width = `${evaluation.candidateQuality}%`;
+
+    if (mode === 'preview') {
+      statusEl.textContent = 'READY';
+      statusEl.style.color = '#b5b6bf';
+      decisionEl.textContent = `Predicted: ${evaluation.decision}`;
+      decisionEl.style.color = '#b5b6bf';
+      outcomeEl.textContent = 'Ready. Run a candidate through deterministic guards.';
     } else {
-      outcomeEl.textContent = `FAIL: evidence ${round(evidence)} below effective gate ${round(effectiveGate)}. Floor stays ${oldBaseline}.`;
+      statusEl.textContent = evaluation.verdict;
+      statusEl.style.color = evaluation.verdict === 'PASS' ? '#2ac3de' : (evaluation.verdict === 'HUMAN GATE' ? '#bb9af7' : '#f7768e');
+      decisionEl.textContent = evaluation.decision;
+      decisionEl.style.color = statusEl.style.color;
+
+      if (evaluation.verdict === 'PASS') {
+        outcomeEl.textContent = `PASS: floor raised from ${oldFloor} to ${state.floor}.`;
+      } else if (evaluation.verdict === 'HUMAN GATE') {
+        outcomeEl.textContent = `HUMAN GATE: ratchets pass at ${evaluation.candidateQuality}, but policy requires approval.`;
+      } else {
+        outcomeEl.textContent = `FAIL: ${evaluation.failures.join('; ')}. Floor stays ${state.floor}.`;
+      }
     }
 
-    render(metrics, candidate, evidence, pass);
-    appendAttempt(pass);
+    updateCheck(checkTestEl, evaluation.checks.test ? 'PASS' : 'FAIL', evaluation.checks.test ? 'pass' : 'fail');
+    updateCheck(checkCoverageEl, evaluation.checks.coverage ? 'PASS' : 'FAIL', evaluation.checks.coverage ? 'pass' : 'fail');
+    updateCheck(checkLintEl, evaluation.checks.lint ? 'PASS' : 'FAIL', evaluation.checks.lint ? 'pass' : 'fail');
+    updateCheck(checkSecurityEl, evaluation.checks.security ? 'PASS' : 'FAIL', evaluation.checks.security ? 'pass' : 'fail');
+    updateCheck(checkQualityEl, evaluation.qualityPass ? 'PASS' : 'FAIL', evaluation.qualityPass ? 'pass' : 'fail');
+
+    if (evaluation.policyGate === 'ALLOWLISTED') {
+      updateCheck(checkPolicyEl, 'ALLOWLISTED', 'pass');
+    } else if (evaluation.policyGate === 'HUMAN') {
+      updateCheck(checkPolicyEl, 'HUMAN REVIEW', 'human');
+    } else {
+      updateCheck(checkPolicyEl, 'BLOCKED', mode === 'preview' ? 'neutral' : 'fail');
+    }
   };
 
-  deltaSlider.addEventListener("input", () => {
-    state.delta = toInt(deltaSlider.value, state.delta);
-    const metrics = computeMetrics(zeroNoise());
-    const candidate = computeCandidate(metrics);
-    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
-  });
+  const renderPreview = () => {
+    const scenario = SCENARIOS[state.selected];
+    const baseline = { ...state.baseline };
+    const candidate = deriveCandidate(baseline, scenario);
+    const evaluation = evaluate(baseline, candidate, scenario);
+    render(baseline, candidate, evaluation, 'preview', state.floor);
+    clearPhase();
+  };
 
-  gateSlider.addEventListener("input", () => {
-    state.gate = toInt(gateSlider.value, state.gate);
-    renderWeightLabel();
-    const metrics = computeMetrics(zeroNoise());
-    const candidate = computeCandidate(metrics);
-    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
-  });
+  const runScenario = async () => {
+    if (state.running) return;
+    state.running = true;
+    runBtn.disabled = true;
+    resetBtn.disabled = true;
 
-  noiseSlider.addEventListener("input", () => {
-    state.noise = toInt(noiseSlider.value, state.noise);
-    renderWeightLabel();
-    const metrics = computeMetrics(zeroNoise());
-    const candidate = computeCandidate(metrics);
-    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
-  });
+    const phases = ['measure', 'mutate', 'validate', 'decide'];
+    for (const phase of phases) {
+      setPhase(phase);
+      if (phaseDelay > 0) await wait(phaseDelay);
+    }
 
-  for (const btn of complexityButtons) {
-    btn.addEventListener("click", () => {
-      state.complexity = btn.dataset.value || "component";
-      renderWeightLabel();
-      const metrics = computeMetrics(zeroNoise());
-      const candidate = computeCandidate(metrics);
-      render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+    const scenario = SCENARIOS[state.selected];
+    const baselineBefore = { ...state.baseline };
+    const oldFloor = state.floor;
+    const candidate = deriveCandidate(baselineBefore, scenario);
+    const evaluation = evaluate(baselineBefore, candidate, scenario);
+
+    if (evaluation.verdict === 'PASS') {
+      state.baseline = { ...candidate };
+      state.floor = evaluation.candidateQuality;
+    }
+
+    appendAttempt(evaluation.pillClass);
+    render(baselineBefore, candidate, evaluation, 'result', oldFloor);
+
+    state.running = false;
+    runBtn.disabled = false;
+    resetBtn.disabled = false;
+  };
+
+  for (const button of scenarioButtons) {
+    button.addEventListener('click', () => {
+      if (state.running) return;
+      const key = button.dataset.scenario;
+      if (!key || !SCENARIOS[key]) return;
+      state.selected = key;
+      updateScenarioButtons();
+      renderPreview();
     });
   }
 
-  runBtn.addEventListener("click", run);
-  resetBtn.addEventListener("click", () => {
-    state.baseline = 72;
-    state.complexity = "component";
-    state.noise = toInt(noiseSlider.value, 50);
-    state.run = 0;
-    attemptsEl.innerHTML = "";
-    outcomeEl.textContent = "Reset. Floor returned to 72.";
-    renderWeightLabel();
-    const metrics = computeMetrics(zeroNoise());
-    const candidate = computeCandidate(metrics);
-    render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  runBtn.addEventListener('click', runScenario);
+
+  resetBtn.addEventListener('click', () => {
+    if (state.running) return;
+    state.baseline = { ...INITIAL_BASELINE };
+    state.floor = qualityScore(state.baseline);
+    attemptsEl.innerHTML = '';
+    statusEl.textContent = 'READY';
+    statusEl.style.color = '#b5b6bf';
+    decisionEl.textContent = 'Run scenario';
+    decisionEl.style.color = '#b5b6bf';
+    outcomeEl.textContent = 'Reset. Floor returned to baseline.';
+    clearPhase();
+    renderPreview();
   });
 
-  renderWeightLabel();
-  const metrics = computeMetrics(zeroNoise());
-  const candidate = computeCandidate(metrics);
-  render(metrics, candidate, computeEvidence(candidate, zeroNoise()), null);
+  state.floor = qualityScore(state.baseline);
+  updateScenarioButtons();
+  renderPreview();
 })();
 </script>
 </section>
@@ -2756,29 +3496,98 @@
 </div>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-05-always-on-loops" data-infographic-selector="main &gt; section:nth-of-type(8)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-05-always-on-loops</span>
+<style>
+  [data-infographic-section-id="i3-section-05-always-on-loops"] .maint-trend-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.6rem;
+    background: rgba(11, 12, 16, 0.48);
+    padding: 0.45rem;
+    min-width: 0;
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] .maint-trend-pill[data-state="pass"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] .maint-trend-pill[data-state="defer"] {
+    border-color: rgba(255, 158, 100, 0.42);
+    background: rgba(255, 158, 100, 0.14);
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] .maint-trend-pill[data-state="fail"] {
+    border-color: rgba(247, 118, 142, 0.45);
+    background: rgba(247, 118, 142, 0.16);
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] .maint-trend-pill[data-state="empty"] {
+    opacity: 0.56;
+    border-style: dashed;
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] [data-role="maint-trend-status"][data-state="converged"],
+  [data-infographic-section-id="i3-section-05-always-on-loops"] [data-role="maint-trend-status"][data-state="improving"] {
+    color: #2ac3de;
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] [data-role="maint-trend-status"][data-state="defer"] {
+    color: #ff9e64;
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] [data-role="maint-trend-status"][data-state="flat"] {
+    color: #bb9af7;
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] [data-role="maint-trend-status"][data-state="unreachable"] {
+    color: #f7768e;
+  }
+
+  [data-infographic-section-id="i3-section-05-always-on-loops"] #maintReceipt {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+</style>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Always-On Loops (Maintenance That Compounds)</h2>
 <p class="text-brand-muted leading-relaxed">
-                            Practical SDaC is not a one-off workflow. It is an always-on system: map updaters, background refactors, and governance at machine speed.
-                            The goal is to keep entropy debt bounded while autonomy rises.
-                        </p>
-<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
+              A <a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a> is not a cron job. It is a bounded control loop that senses entropy,
+              ranks one target, and exits with a deterministic decision: PASS, DEFER, or ESCALATE.
+            </p>
+<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4 space-y-4">
+<div>
 <div class="flex items-center justify-between text-xs text-brand-muted">
 <span class="font-mono">Timeline</span>
 <span class="font-mono text-brand-strong">Week <span id="maintWeekValue">8</span>/26</span>
 </div>
 <label class="sr-only" for="maintWeekSlider">Week slider</label>
 <input class="mt-2 w-full" id="maintWeekSlider" max="26" min="0" type="range" value="8"/>
-<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+</div>
+<div>
+<div class="text-xs font-mono text-brand-muted mb-2">Active loops</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
 <button aria-pressed="true" class="soft-toggle font-mono" data-maint-loop="map" type="button">Map updater</button>
-<button aria-pressed="false" class="soft-toggle font-mono" data-maint-loop="dream" type="button"><a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream daemon</a></button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-maint-loop="dream" type="button">Dream daemon</button>
 <button aria-pressed="true" class="soft-toggle font-mono" data-maint-loop="refactor" type="button">Refactor under guards</button>
 <button aria-pressed="true" class="soft-toggle font-mono" data-maint-loop="governance" type="button">Governance</button>
 <button aria-pressed="false" class="soft-toggle font-mono sm:col-span-2" data-maint-loop="hedged" type="button">Hedged compute</button>
 </div>
-<div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-brand-muted">
+<span class="font-mono">Cycle budget</span>
+<span class="font-mono text-brand-strong"><span id="maintCycleBudgetValue">6</span>x</span>
+</div>
+<label class="sr-only" for="maintCycleBudgetSlider">Cycle budget slider</label>
+<input class="mt-2 w-full" id="maintCycleBudgetSlider" max="12" min="2" step="1" type="range" value="6"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+<button class="soft-toggle font-mono" id="maintRunCycleButton" type="button">Run cycle</button>
+<button class="soft-toggle font-mono" id="maintRunToGateButton" type="button">Run to gate</button>
+<button class="soft-toggle font-mono" id="maintResetButton" type="button">Reset</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Entropy debt</div>
 <div class="mt-1 text-lg font-bold text-brand-strong"><span id="maintDebt">—</span>/100</div>
@@ -2791,20 +3600,86 @@
 <div class="text-xs font-mono text-brand-muted">P95 cost/outcome</div>
 <div class="mt-1 text-lg font-bold text-brand-danger"><span id="maintP95">—</span></div>
 </div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Budget remaining</div>
+<div class="mt-1 text-lg font-bold text-brand-strong"><span id="maintBudgetRemaining">6</span>x</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3 sm:col-span-2 xl:col-span-2">
+<div class="text-xs font-mono text-brand-muted">Selected target</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong" id="maintTarget">—</div>
+<div class="mt-1 text-xs text-brand-muted">Expected gain: <span class="font-mono text-brand-strong" id="maintExpectedGain">—</span></div>
+</div>
+</div>
 </div>
 <div class="mt-4 text-xs text-brand-muted leading-relaxed">
-                                The chart shows how debt and tail-cost behave as autonomy ramps. Hedging mostly buys down the tail (P95), not the mean.
-                            </div>
+              The chart shows long-horizon trajectory. The controls below model the bounded execution loop:
+              one target per cycle, hard budget, and deterministic admission gates.
+            </div>
 </div>
-</div>
-<div class="lg:w-7/12">
+<div class="lg:w-7/12 space-y-4">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="chart-container">
 <canvas id="maintenanceChart"></canvas>
 </div>
 <p class="text-xs text-center text-brand-muted mt-2">
-                                Debt (left axis) vs P95 cost/outcome (right axis). The dashed marker tracks the selected week.
-                            </p>
+                Debt (left axis) vs P95 cost/outcome (right axis). The dashed marker tracks the selected week.
+              </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
+<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Constraint → deterministic gate</div>
+<div class="mt-2 space-y-2 text-sm text-brand-muted">
+<div class="flex items-center justify-between gap-2">
+<span>Signal ranker improves debt trajectory</span>
+<span class="font-mono text-brand-strong" id="maintGateSignal">PENDING</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>Guardrails active (map + governance)</span>
+<span class="font-mono text-brand-strong" id="maintGateGuardrails">PASS</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>Cycle budget not exhausted</span>
+<span class="font-mono text-brand-strong" id="maintGateBudget">PASS</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<span>Receipt written to Ledger</span>
+<span class="font-mono text-brand-strong" id="maintGateLedger">PENDING</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Daemon state of record</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between gap-2">
+<span>Status</span>
+<span class="font-mono text-brand-strong" id="maintStatus">READY</span>
+</div>
+<div class="mt-2 flex items-center justify-between gap-2">
+<span>Cycle</span>
+<span class="font-mono text-brand-strong" id="maintCycle">0/6</span>
+</div>
+<div class="mt-2 flex items-center justify-between gap-2">
+<span>Last run</span>
+<span class="font-mono text-brand-strong" id="maintLastRun">--</span>
+</div>
+</div>
+<div class="mt-3 text-xs font-mono text-brand-muted" id="maintReceipt">ledger/dream-daemon/week-08/cycle-00.json</div>
+</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Minimum progress window (W=4)</div>
+<div class="text-xs text-brand-muted" data-role="maint-trend-status" data-state="baseline" id="maintTrendStatus">Collecting baseline.</div>
+</div>
+<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2" id="maintTrendWindow"></div>
+<div class="mt-2 text-xs text-brand-muted" id="maintOutcome">Ready to run one bounded cycle.</div>
+</div>
+<div class="bg-brand-light border border-brand-border rounded-xl p-3">
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Cycle outcomes</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, amber = DEFER, violet = ESCALATE</div>
+</div>
+<div class="mt-3 flex flex-wrap gap-1" id="maintAttempts"></div>
 </div>
 </div>
 </div>
@@ -3209,82 +4084,110 @@
     background: rgba(247, 118, 142, 0.13);
     color: #f2f3f8;
   }
+  [data-role="agent-sim"] .phase-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(11, 12, 16, 0.5);
+    color: #b5b6bf;
+    transition: all 180ms ease;
+  }
+  [data-role="agent-sim"] .phase-pill[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+    color: #f2f3f8;
+  }
+  [data-role="agent-sim"] .soft-toggle[data-role="case"][aria-pressed="true"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.16);
+    color: #f2f3f8;
+  }
   [data-role="agent-sim"] .attempt-pill.is-escalate {
     background: rgba(187, 154, 247, 0.24);
     border-color: rgba(187, 154, 247, 0.34);
   }
+  [data-role="agent-sim"] .attempt-pill.is-warn {
+    background: rgba(250, 204, 21, 0.24);
+    border-color: rgba(250, 204, 21, 0.34);
+  }
   @media (prefers-reduced-motion: reduce) {
-    [data-role="agent-sim"] .soft-toggle {
+    [data-role="agent-sim"] .soft-toggle,
+    [data-role="agent-sim"] .phase-pill {
       transition: none;
     }
   }
 </style>
-<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
-<div class="flex flex-col lg:flex-row gap-8">
-<div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">Agent (Constrained Execution Envelope)</h2>
+<div class="bg-brand-surface rounded-xl shadow-lg p-6 md:p-7 border border-brand-border border-l-8 border-l-brand-vibrant">
+<div class="flex flex-col lg:flex-row gap-6">
+<div class="lg:w-5/12 min-w-0">
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Governance Envelope (Policy + Evidence)</h2>
 <p class="text-brand-muted leading-relaxed">
-        An Agent is not “the model.” It is mission context + tools + deterministic gates + a ledger.
-        The model is only the stochastic center; capability is granted by boundaries, not by vibes.
-      </p>
+      Governance at machine speed means deterministic policy outcomes for every candidate diff.
+      The model proposes; policy decides; the ledger records why.
+    </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Execution path</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-<span class="block font-mono text-brand-vibrant">Mission → Agent → Tool Runner → Gates → Ledger</span>
-<span class="block mt-2">Context lives in the Mission object and Tool Runner (deterministic prep).</span>
-<span class="block mt-2">Gates + Ledger are deterministic validation. This is the Deterministic Sandwich in motion.</span>
-<span class="block mt-2">If any gate fails, action is blocked or escalated.</span>
-<span class="block mt-2">This is why the system remains governable as autonomy rises.</span>
+<span class="block font-mono text-brand-vibrant">Mission -&gt; Policy Validators -&gt; Decision -&gt; Ledger Event</span>
+<span class="block mt-2">Outcomes are explicit: <span class="font-mono">allow</span>, <span class="font-mono">block</span>, <span class="font-mono">escalate</span>, or <span class="font-mono">warn (time-bounded exception)</span>.</span>
+<span class="block mt-2">Policy precedence resolves conflicts: <span class="font-mono">security &gt; scope &gt; architecture &gt; style</span>.</span>
+</div>
+</div>
+<div class="mt-4 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Core deterministic checks</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block font-mono text-brand-vibrant">scope_guard(paths) = PASS|FAIL</span>
+<span class="block font-mono text-brand-vibrant mt-1">secrets_scan(diff) = PASS|FAIL</span>
+<span class="block font-mono text-brand-vibrant mt-1">dynamic_exec_scan(diff) = PASS|FAIL</span>
+<span class="block font-mono text-brand-vibrant mt-1">architecture_guard(diff) = PASS|ESCALATE</span>
 </div>
 </div>
 </div>
-<div class="lg:w-7/12 space-y-4" data-role="agent-sim">
+<div class="lg:w-7/12 min-w-0 space-y-4" data-role="agent-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<div class="text-xs font-mono text-brand-muted mb-3">Deterministic scenario runner</div>
+<div class="flex flex-wrap gap-2" data-role="case-controls">
+<button aria-pressed="true" class="soft-toggle font-mono" data-case="allowlisted_refactor" data-role="case" type="button">Allowlisted Refactor</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-case="protected_path_touch" data-role="case" type="button">Protected Path Touch</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-case="hardcoded_secret" data-role="case" type="button">Hardcoded Secret</button>
+<button aria-pressed="false" class="soft-toggle font-mono" data-case="architecture_change" data-role="case" type="button">Architecture Change</button>
+</div>
+<div class="mt-2 text-xs text-brand-muted" data-role="case-note">Low-risk refactor inside allowlisted scope.</div>
+<div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+<div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-phase="compile" data-role="phase-pill">1 Compile</div>
+<div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-phase="evaluate" data-role="phase-pill">2 Evaluate</div>
+<div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-phase="decide" data-role="phase-pill">3 Decide</div>
+<div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-phase="record" data-role="phase-pill">4 Record</div>
+</div>
+<div class="mt-3 grid grid-cols-1 md:grid-cols-12 gap-3">
 <div class="md:col-span-6">
 <div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Autonomy level</span>
-<span class="font-mono text-brand-strong"><span data-role="autonomy-value">58</span>/100</span>
+<span class="font-mono">Exception TTL</span>
+<span class="font-mono text-brand-strong"><span data-role="ttl-value">7</span> days</span>
 </div>
-<label class="sr-only" for="agentAutonomySlider">Autonomy slider</label>
-<input class="mt-2 w-full" data-role="autonomy-slider" id="agentAutonomySlider" max="100" min="0" step="1" type="range" value="58"/>
+<label class="sr-only" for="agentExceptionTtl">Exception time-to-live in days</label>
+<input class="mt-2 w-full" data-role="ttl-slider" id="agentExceptionTtl" max="30" min="1" step="1" type="range" value="7"/>
 </div>
-<div class="md:col-span-6">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Policy strictness</span>
-<span class="font-mono text-brand-strong"><span data-role="strict-value">72</span>/100</span>
-</div>
-<label class="sr-only" for="agentStrictSlider">Strictness slider</label>
-<input class="mt-2 w-full" data-role="strict-slider" id="agentStrictSlider" max="100" min="15" step="1" type="range" value="72"/>
-</div>
-<div class="md:col-span-12">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-<button class="soft-toggle font-mono text-left" data-action="read_map" data-role="action" type="button">Read Map Files</button>
-<button class="soft-toggle font-mono text-left" data-action="write_patch" data-role="action" type="button">Write Patch To Terrain</button>
-<button class="soft-toggle font-mono text-left" data-action="modify_ci" data-role="action" type="button">Modify CI Policy</button>
-<button class="soft-toggle font-mono text-left" data-action="exfiltrate_secret" data-role="action" type="button">Exfiltrate Secret</button>
-</div>
+<div class="md:col-span-6 text-xs text-brand-muted flex items-end">
+<div><span class="font-mono">Exception state:</span> <span data-role="exception-state">none</span></div>
 </div>
 </div>
 <div class="mt-3 flex flex-wrap gap-2">
 <button class="soft-toggle font-mono" data-role="evaluate" type="button">Evaluate Request</button>
-<button class="soft-toggle font-mono" data-role="override" type="button">Human Override</button>
+<button class="soft-toggle font-mono" data-role="exception" type="button">Request Exception</button>
 <button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
 </div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Selected action</div>
-<div class="mt-1 text-sm font-bold text-brand-strong" data-role="selected-label">Read Map Files</div>
+<div class="text-xs font-mono text-brand-muted">Selected case</div>
+<div class="mt-1 text-sm font-bold text-brand-strong" data-role="selected-label">Allowlisted Refactor</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Verdict</div>
 <div class="mt-1 text-lg font-bold text-brand-strong" data-role="verdict">READY</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Policy risk</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="risk">0</span>/100</div>
+<div class="text-xs font-mono text-brand-muted">Policy action</div>
+<div class="mt-1 text-sm font-bold text-brand-strong" data-role="action">Predicted: execute</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Ledger run</div>
@@ -3292,20 +4195,24 @@
 </div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Gate decisions</div>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-<div class="gate-pill" data-role="gate-tool">tool_gate: —</div>
-<div class="gate-pill" data-role="gate-os">os_gate: —</div>
-<div class="gate-pill" data-role="gate-policy">policy_gate: —</div>
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Gate decisions</div>
+<div class="text-xs text-brand-muted">precedence hit: <span data-role="precedence">none</span></div>
+</div>
+<div class="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+<div class="gate-pill" data-role="gate-scope">scope_guard: -</div>
+<div class="gate-pill" data-role="gate-secrets">secrets_scan: -</div>
+<div class="gate-pill" data-role="gate-dynexec">dynamic_exec: -</div>
+<div class="gate-pill" data-role="gate-arch">architecture_guard: -</div>
 </div>
 <div class="mt-3 text-xs font-mono text-brand-muted mb-2">Ledger event</div>
-<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap" data-role="ledger-json"></pre>
-<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Choose an action and evaluate the envelope.</div>
+<pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap break-words" data-role="ledger-json"></pre>
+<div class="mt-2 text-xs text-brand-muted" data-role="outcome">Select a case and evaluate policy outcomes.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">History</div>
-<div class="text-xs text-brand-muted">Cyan = allow, red = block, violet = escalate</div>
+<div class="text-xs text-brand-muted">Cyan = allow, red = block, violet = escalate, amber = warn</div>
 </div>
 <div class="mt-3 grid grid-cols-12 gap-1" data-role="history"></div>
 </div>
@@ -3316,78 +4223,123 @@
 (function () {
   const script = document.currentScript;
   const root = script ? script.closest('[data-infographic-section-id="i3-section-10-agent-execution-envelope"]') : null;
-  if (!root || root.dataset.agentEnvelopeReady === "1") return;
-  root.dataset.agentEnvelopeReady = "1";
+  if (!root || root.dataset.agentEnvelopeReady === '1') return;
+  root.dataset.agentEnvelopeReady = '1';
 
   const sim = root.querySelector('[data-role="agent-sim"]');
   if (!sim) return;
 
-  const autonomySlider = sim.querySelector('[data-role="autonomy-slider"]');
-  const strictSlider = sim.querySelector('[data-role="strict-slider"]');
-  const autonomyValue = sim.querySelector('[data-role="autonomy-value"]');
-  const strictValue = sim.querySelector('[data-role="strict-value"]');
-  const actionButtons = Array.from(sim.querySelectorAll('[data-role="action"]'));
+  const caseButtons = Array.from(sim.querySelectorAll('[data-role="case"]'));
+  const caseNoteEl = sim.querySelector('[data-role="case-note"]');
+  const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
+  const ttlSlider = sim.querySelector('[data-role="ttl-slider"]');
+  const ttlValueEl = sim.querySelector('[data-role="ttl-value"]');
+  const exceptionStateEl = sim.querySelector('[data-role="exception-state"]');
+
   const evaluateBtn = sim.querySelector('[data-role="evaluate"]');
-  const overrideBtn = sim.querySelector('[data-role="override"]');
+  const exceptionBtn = sim.querySelector('[data-role="exception"]');
   const resetBtn = sim.querySelector('[data-role="reset"]');
-  const selectedLabel = sim.querySelector('[data-role="selected-label"]');
+
+  const selectedLabelEl = sim.querySelector('[data-role="selected-label"]');
   const verdictEl = sim.querySelector('[data-role="verdict"]');
-  const riskEl = sim.querySelector('[data-role="risk"]');
+  const actionEl = sim.querySelector('[data-role="action"]');
   const runEl = sim.querySelector('[data-role="run"]');
-  const gateTool = sim.querySelector('[data-role="gate-tool"]');
-  const gateOs = sim.querySelector('[data-role="gate-os"]');
-  const gatePolicy = sim.querySelector('[data-role="gate-policy"]');
+
+  const precedenceEl = sim.querySelector('[data-role="precedence"]');
+  const gateScopeEl = sim.querySelector('[data-role="gate-scope"]');
+  const gateSecretsEl = sim.querySelector('[data-role="gate-secrets"]');
+  const gateDynexecEl = sim.querySelector('[data-role="gate-dynexec"]');
+  const gateArchEl = sim.querySelector('[data-role="gate-arch"]');
   const ledgerJsonEl = sim.querySelector('[data-role="ledger-json"]');
   const outcomeEl = sim.querySelector('[data-role="outcome"]');
   const historyEl = sim.querySelector('[data-role="history"]');
 
-  if (!autonomySlider || !strictSlider || !autonomyValue || !strictValue || !actionButtons.length ||
-      !evaluateBtn || !overrideBtn || !resetBtn || !selectedLabel || !verdictEl || !riskEl || !runEl ||
-      !gateTool || !gateOs || !gatePolicy || !ledgerJsonEl || !outcomeEl || !historyEl) return;
-
-  const ACTIONS = {
-    read_map: { label: "Read Map Files", sensitivity: 10, requires: "read" },
-    write_patch: { label: "Write Patch To Terrain", sensitivity: 45, requires: "write" },
-    modify_ci: { label: "Modify CI Policy", sensitivity: 92, requires: "policy_write" },
-    exfiltrate_secret: { label: "Exfiltrate Secret", sensitivity: 100, requires: "secret_access" }
-  };
+  if (!caseButtons.length || !caseNoteEl || phasePills.length === 0 || !ttlSlider || !ttlValueEl || !exceptionStateEl ||
+      !evaluateBtn || !exceptionBtn || !resetBtn || !selectedLabelEl || !verdictEl || !actionEl || !runEl ||
+      !precedenceEl || !gateScopeEl || !gateSecretsEl || !gateDynexecEl || !gateArchEl || !ledgerJsonEl || !outcomeEl || !historyEl) return;
 
   const toInt = (v, fallback) => {
     const n = Number.parseInt(String(v), 10);
     return Number.isFinite(n) ? n : fallback;
   };
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-  const passFail = (v) => v ? "PASS" : "FAIL";
+  const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const phaseDelay = reducedMotion ? 0 : 130;
+
+  const CASES = {
+    allowlisted_refactor: {
+      label: 'Allowlisted Refactor',
+      note: 'Low-risk refactor inside allowlisted scope.',
+      missionId: 'mission/refactor/formatter-v3',
+      paths: ['services/orders/src/formatter.ts'],
+      findings: { scope: false, secrets: false, dynexec: false, architecture: false },
+      policyVersion: '2.3.1'
+    },
+    protected_path_touch: {
+      label: 'Protected Path Touch',
+      note: 'Candidate touches immutable governance surfaces.',
+      missionId: 'mission/refactor/ci-fastlane',
+      paths: ['.github/workflows/main.yml'],
+      findings: { scope: true, secrets: false, dynexec: false, architecture: false },
+      policyVersion: '2.3.1'
+    },
+    hardcoded_secret: {
+      label: 'Hardcoded Secret',
+      note: 'Diff contains credential-like assignment pattern.',
+      missionId: 'mission/refactor/auth-helper',
+      paths: ['services/auth/src/token.ts'],
+      findings: { scope: false, secrets: true, dynexec: false, architecture: false },
+      policyVersion: '2.3.1'
+    },
+    architecture_change: {
+      label: 'Architecture Change',
+      note: 'Cross-module contract shift requires explicit human review.',
+      missionId: 'mission/refactor/service-split',
+      paths: ['services/orders/src/adapter.ts', 'services/payments/src/bridge.ts'],
+      findings: { scope: false, secrets: false, dynexec: false, architecture: true },
+      policyVersion: '2.3.1'
+    }
+  };
 
   const state = {
+    selected: 'allowlisted_refactor',
     run: 0,
-    autonomy: toInt(autonomySlider.value, 58),
-    strict: toInt(strictSlider.value, 72),
-    selected: "read_map",
-    ledger: { run: 0, action: "idle" },
-    last: null
+    exceptionDays: toInt(ttlSlider.value, 7),
+    exceptionActiveUntil: null,
+    last: null,
   };
 
-  const setActionState = () => {
-    for (const btn of actionButtons) {
-      const action = btn.dataset.action || "";
-      const active = action === state.selected;
-      btn.setAttribute("aria-pressed", active ? "true" : "false");
-      btn.style.borderColor = active ? "rgba(42, 195, 222, 0.45)" : "";
-      btn.style.background = active ? "rgba(42, 195, 222, 0.13)" : "";
-    }
-    selectedLabel.textContent = ACTIONS[state.selected]?.label || "Unknown";
-  };
+  const passFail = (ok) => ok ? 'PASS' : 'FAIL';
 
   const applyGatePill = (el, label, pass) => {
     el.textContent = `${label}: ${passFail(pass)}`;
-    el.classList.remove("is-pass", "is-fail");
-    el.classList.add(pass ? "is-pass" : "is-fail");
+    el.classList.remove('is-pass', 'is-fail');
+    el.classList.add(pass ? 'is-pass' : 'is-fail');
+  };
+
+  const setPhase = (phase) => {
+    for (const pill of phasePills) {
+      const active = pill.dataset.phase === phase;
+      pill.dataset.active = active ? '1' : '0';
+    }
+  };
+
+  const clearPhase = () => {
+    for (const pill of phasePills) {
+      pill.dataset.active = '0';
+    }
+  };
+
+  const setCaseButtons = () => {
+    for (const button of caseButtons) {
+      const active = button.dataset.case === state.selected;
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
   };
 
   const appendHistory = (kind) => {
-    const pill = document.createElement("span");
-    const suffix = kind === "allow" ? "is-pass" : kind === "escalate" ? "is-escalate" : "is-fail";
+    const pill = document.createElement('span');
+    const suffix = kind === 'allow' ? 'is-pass' : kind === 'warn' ? 'is-warn' : kind === 'escalate' ? 'is-escalate' : 'is-fail';
     pill.className = `attempt-pill ${suffix}`;
     historyEl.appendChild(pill);
     while (historyEl.children.length > 36) {
@@ -3395,101 +4347,202 @@
     }
   };
 
-  const evaluate = (override) => {
-    const action = ACTIONS[state.selected] || ACTIONS.read_map;
-    const risk = clamp(Math.round(action.sensitivity + (state.autonomy * 0.22) - ((100 - state.strict) * 0.18)), 0, 100);
-
-    const toolGate = action.requires !== "secret_access";
-    const osGate = action.requires !== "secret_access" && !(action.requires === "policy_write");
-    const policyThreshold = override ? 94 : 66;
-    const policyGate = risk <= policyThreshold && action.sensitivity < 96;
-
-    let verdict = "BLOCK";
-    let outcome = "Blocked by deterministic envelope.";
-    if (toolGate && osGate && policyGate) {
-      verdict = "ALLOW";
-      outcome = "Allowed: request fits current boundaries.";
-    } else if (override && toolGate && osGate) {
-      verdict = "ESCALATE";
-      outcome = "Escalated with human override. Ledger must retain reason.";
-    }
-
-    state.run += 1;
-    state.last = { toolGate, osGate, policyGate, verdict, risk };
-    state.ledger = {
-      run: state.run,
-      agent_id: "sdac-agent-01",
-      action: state.selected,
-      action_label: action.label,
-      autonomy: state.autonomy,
-      policy_strictness: state.strict,
-      tool_gate: passFail(toolGate),
-      os_gate: passFail(osGate),
-      policy_gate: passFail(policyGate),
-      override: Boolean(override),
-      verdict: verdict
+  const computeEvaluation = (selectedCase, withException) => {
+    const gates = {
+      scope: !selectedCase.findings.scope,
+      secrets: !selectedCase.findings.secrets,
+      dynexec: !selectedCase.findings.dynexec,
+      architecture: !selectedCase.findings.architecture,
     };
 
-    verdictEl.textContent = verdict;
-    verdictEl.style.color = verdict === "ALLOW" ? "#2ac3de" : verdict === "ESCALATE" ? "#bb9af7" : "#f7768e";
-    riskEl.textContent = String(risk);
-    runEl.textContent = String(state.run);
-    applyGatePill(gateTool, "tool_gate", toolGate);
-    applyGatePill(gateOs, "os_gate", osGate);
-    applyGatePill(gatePolicy, "policy_gate", policyGate);
-    ledgerJsonEl.textContent = JSON.stringify(state.ledger, null, 2);
-    outcomeEl.textContent = outcome;
-    appendHistory(verdict === "ALLOW" ? "allow" : verdict === "ESCALATE" ? "escalate" : "block");
+    let verdict = 'ALLOW';
+    let action = 'execute';
+    let precedence = 'none';
+    let historyKind = 'allow';
+
+    if (!gates.secrets || !gates.dynexec) {
+      verdict = 'BLOCK';
+      action = 'block';
+      precedence = 'security';
+      historyKind = 'block';
+    } else if (!gates.scope) {
+      verdict = 'BLOCK';
+      action = 'block';
+      precedence = 'scope';
+      historyKind = 'block';
+    } else if (!gates.architecture) {
+      precedence = 'architecture';
+      if (withException) {
+        verdict = 'WARN';
+        action = 'time_bounded_exception';
+        historyKind = 'warn';
+      } else {
+        verdict = 'ESCALATE';
+        action = 'escalate_human_review';
+        historyKind = 'escalate';
+      }
+    }
+
+    const expiresAt = withException
+      ? new Date(Date.now() + (state.exceptionDays * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10)
+      : null;
+
+    return {
+      gates,
+      verdict,
+      action,
+      precedence,
+      historyKind,
+      withException,
+      selectedCase,
+      expiresAt,
+    };
+
   };
 
-  const render = () => {
-    autonomyValue.textContent = String(state.autonomy);
-    strictValue.textContent = String(state.strict);
-    setActionState();
-    if (!state.last) {
-      verdictEl.textContent = "READY";
-      verdictEl.style.color = "#b5b6bf";
-      riskEl.textContent = "0";
+  const renderFromState = (mode) => {
+    const selectedCase = CASES[state.selected] || CASES.allowlisted_refactor;
+    const preview = computeEvaluation(selectedCase, false);
+
+    selectedLabelEl.textContent = selectedCase.label;
+    caseNoteEl.textContent = selectedCase.note;
+    ttlValueEl.textContent = String(state.exceptionDays);
+    exceptionStateEl.textContent = state.exceptionActiveUntil ? `active until ${state.exceptionActiveUntil}` : 'none';
+
+    if (mode === 'preview') {
+      verdictEl.textContent = 'READY';
+      verdictEl.style.color = '#b5b6bf';
+      actionEl.textContent = `Predicted: ${preview.action}`;
+      actionEl.style.color = '#b5b6bf';
+      precedenceEl.textContent = preview.precedence;
+      precedenceEl.style.color = '#b5b6bf';
+
+      applyGatePill(gateScopeEl, 'scope_guard', preview.gates.scope);
+      applyGatePill(gateSecretsEl, 'secrets_scan', preview.gates.secrets);
+      applyGatePill(gateDynexecEl, 'dynamic_exec', preview.gates.dynexec);
+      applyGatePill(gateArchEl, 'architecture_guard', preview.gates.architecture || preview.verdict !== 'ESCALATE');
+
+      ledgerJsonEl.textContent = JSON.stringify({
+        run: state.run,
+        case_id: state.selected,
+        mission_id: selectedCase.missionId,
+        policy_version: selectedCase.policyVersion,
+        status: 'ready'
+      }, null, 2);
+      outcomeEl.textContent = 'Select a case and evaluate policy outcomes.';
       runEl.textContent = String(state.run);
-      gateTool.textContent = "tool_gate: —";
-      gateTool.classList.remove("is-pass", "is-fail");
-      gateOs.textContent = "os_gate: —";
-      gateOs.classList.remove("is-pass", "is-fail");
-      gatePolicy.textContent = "policy_gate: —";
-      gatePolicy.classList.remove("is-pass", "is-fail");
-      ledgerJsonEl.textContent = JSON.stringify(state.ledger, null, 2);
-      outcomeEl.textContent = "Choose an action and evaluate the envelope.";
+      clearPhase();
+      return;
+    }
+
+    const result = state.last;
+    if (!result) return;
+
+    verdictEl.textContent = result.verdict;
+    verdictEl.style.color = result.verdict === 'ALLOW' ? '#2ac3de' : result.verdict === 'WARN' ? '#facc15' : result.verdict === 'ESCALATE' ? '#bb9af7' : '#f7768e';
+    actionEl.textContent = result.action;
+    actionEl.style.color = verdictEl.style.color;
+    precedenceEl.textContent = result.precedence;
+    precedenceEl.style.color = result.precedence === 'none' ? '#b5b6bf' : verdictEl.style.color;
+
+    applyGatePill(gateScopeEl, 'scope_guard', result.gates.scope);
+    applyGatePill(gateSecretsEl, 'secrets_scan', result.gates.secrets);
+    applyGatePill(gateDynexecEl, 'dynamic_exec', result.gates.dynexec);
+    applyGatePill(gateArchEl, 'architecture_guard', result.gates.architecture || result.verdict !== 'ESCALATE');
+
+    const ledger = {
+      run: state.run,
+      case_id: state.selected,
+      mission_id: result.selectedCase.missionId,
+      policy_version: result.selectedCase.policyVersion,
+      changed_paths: result.selectedCase.paths,
+      gates: {
+        scope_guard: passFail(result.gates.scope),
+        secrets_scan: passFail(result.gates.secrets),
+        dynamic_exec_scan: passFail(result.gates.dynexec),
+        architecture_guard: result.gates.architecture ? 'PASS' : (result.verdict === 'WARN' ? 'EXCEPTION' : 'ESCALATE')
+      },
+      precedence_hit: result.precedence,
+      action: result.action,
+      verdict: result.verdict,
+      exception: result.withException ? {
+        approved_by: 'human:platform-lead',
+        expires_on: result.expiresAt
+      } : null
+    };
+
+    ledgerJsonEl.textContent = JSON.stringify(ledger, null, 2);
+    runEl.textContent = String(state.run);
+
+    if (result.verdict === 'ALLOW') {
+      outcomeEl.textContent = 'ALLOW: request satisfies all policy gates.';
+    } else if (result.verdict === 'WARN') {
+      outcomeEl.textContent = `WARN: exception granted; expires on ${result.expiresAt}.`;
+    } else if (result.verdict === 'ESCALATE') {
+      outcomeEl.textContent = 'ESCALATE: architecture policy requires explicit human review.';
+    } else {
+      outcomeEl.textContent = `BLOCK: ${result.precedence} policy failed at highest precedence.`;
     }
   };
 
-  autonomySlider.addEventListener("input", () => {
-    state.autonomy = toInt(autonomySlider.value, state.autonomy);
-    render();
-  });
-  strictSlider.addEventListener("input", () => {
-    state.strict = toInt(strictSlider.value, state.strict);
-    render();
-  });
-  for (const btn of actionButtons) {
-    btn.addEventListener("click", () => {
-      state.selected = btn.dataset.action || "read_map";
-      render();
+  const runEvaluation = async (withException) => {
+    const phases = ['compile', 'evaluate', 'decide', 'record'];
+    for (const phase of phases) {
+      setPhase(phase);
+      if (phaseDelay > 0) await wait(phaseDelay);
+    }
+    const selectedCase = CASES[state.selected] || CASES.allowlisted_refactor;
+    const result = computeEvaluation(selectedCase, withException);
+    state.run += 1;
+    state.last = result;
+    if (withException) {
+      state.exceptionActiveUntil = result.expiresAt;
+    }
+    appendHistory(result.historyKind);
+    renderFromState('result');
+  };
+
+  for (const button of caseButtons) {
+    button.addEventListener('click', () => {
+      const key = button.dataset.case;
+      if (!key || !CASES[key]) return;
+      state.selected = key;
+      setCaseButtons();
+      renderFromState('preview');
     });
   }
-  evaluateBtn.addEventListener("click", () => evaluate(false));
-  overrideBtn.addEventListener("click", () => evaluate(true));
-  resetBtn.addEventListener("click", () => {
-    state.run = 0;
-    state.autonomy = toInt(autonomySlider.value, 58);
-    state.strict = toInt(strictSlider.value, 72);
-    state.selected = "read_map";
-    state.last = null;
-    state.ledger = { run: 0, action: "idle" };
-    historyEl.innerHTML = "";
-    render();
+
+  ttlSlider.addEventListener('input', () => {
+    state.exceptionDays = toInt(ttlSlider.value, state.exceptionDays);
+    renderFromState('preview');
   });
 
-  render();
+  evaluateBtn.addEventListener('click', () => {
+    runEvaluation(false);
+  });
+
+  exceptionBtn.addEventListener('click', () => {
+    const selectedCase = CASES[state.selected] || CASES.allowlisted_refactor;
+    if (!selectedCase.findings.architecture || selectedCase.findings.scope || selectedCase.findings.secrets || selectedCase.findings.dynexec) {
+      outcomeEl.textContent = 'Exception is only valid for architecture-review scenarios after lower-precedence gates pass.';
+      return;
+    }
+    runEvaluation(true);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    state.selected = 'allowlisted_refactor';
+    state.run = 0;
+    state.exceptionDays = toInt(ttlSlider.value, 7);
+    state.exceptionActiveUntil = null;
+    state.last = null;
+    historyEl.innerHTML = '';
+    setCaseButtons();
+    renderFromState('preview');
+  });
+
+  setCaseButtons();
+  renderFromState('preview');
 })();
 </script>
 </section>

@@ -335,6 +335,79 @@ function enableMermaidZoom() {
   }
 }
 
+const MERMAID_THEME_PRESETS = {
+  brand: {
+    bodyClass: "mermaid-theme-brand",
+    themeVariables: {
+      darkMode: true,
+      background: "#0b0c10",
+      fontFamily: "Inter, sans-serif",
+      fontSize: "16px",
+      primaryColor: "#11131a",
+      primaryTextColor: "#e7e7ea",
+      primaryBorderColor: "#7aa2f7",
+      secondaryColor: "#11131a",
+      secondaryTextColor: "#e7e7ea",
+      secondaryBorderColor: "#2ac3de",
+      tertiaryColor: "#11131a",
+      tertiaryTextColor: "#e7e7ea",
+      tertiaryBorderColor: "#bb9af7",
+      lineColor: "#7aa2f7",
+      arrowheadColor: "#7aa2f7",
+      clusterBkg: "#0b0c10",
+      clusterBorder: "#3a3d4a",
+      titleColor: "#f2f3f8",
+      textColor: "#e7e7ea",
+      nodeTextColor: "#e7e7ea",
+      edgeLabelBackground: "#11131a",
+    },
+  },
+  cyber: {
+    bodyClass: "mermaid-theme-cyber",
+    themeVariables: {
+      darkMode: true,
+      background: "#0B0F19",
+      fontFamily: "Inter, sans-serif",
+      fontSize: "16px",
+      primaryColor: "#151B2B",
+      primaryTextColor: "#f8fafc",
+      primaryBorderColor: "#06b6d4",
+      secondaryColor: "#151B2B",
+      secondaryTextColor: "#f8fafc",
+      secondaryBorderColor: "#10b981",
+      tertiaryColor: "#151B2B",
+      tertiaryTextColor: "#f8fafc",
+      tertiaryBorderColor: "#d946ef",
+      lineColor: "#6366f1",
+      arrowheadColor: "#6366f1",
+      clusterBkg: "#0B0F19",
+      clusterBorder: "#374151",
+      titleColor: "#f8fafc",
+      textColor: "#f8fafc",
+      nodeTextColor: "#f8fafc",
+      edgeLabelBackground: "#151B2B",
+    },
+  },
+};
+
+function detectMermaidThemeForPage() {
+  const sources = new Set(
+    Array.from(document.querySelectorAll("[data-infographic-source]"))
+      .map((el) => (el.getAttribute("data-infographic-source") || "").trim())
+      .filter(Boolean),
+  );
+
+  if (sources.has("infographic-2.html")) return "cyber";
+  if (sources.has("infographic.html") || sources.has("infographic-3.html")) return "brand";
+  return "brand";
+}
+
+function applyMermaidThemeBodyClass(themeName) {
+  document.body.classList.remove("mermaid-theme-brand", "mermaid-theme-cyber");
+  const preset = MERMAID_THEME_PRESETS[themeName] || MERMAID_THEME_PRESETS.brand;
+  if (preset.bodyClass) document.body.classList.add(preset.bodyClass);
+}
+
 async function renderMermaidIfPresent() {
   if (!document.querySelector(".mermaid, pre > code.language-mermaid, pre > code.mermaid")) {
     return;
@@ -350,11 +423,15 @@ async function renderMermaidIfPresent() {
 
   const mermaid = window.mermaid;
   if (!mermaid) return;
+  const themeName = detectMermaidThemeForPage();
+  const preset = MERMAID_THEME_PRESETS[themeName] || MERMAID_THEME_PRESETS.brand;
+  applyMermaidThemeBodyClass(themeName);
 
   mermaid.initialize({
     startOnLoad: false,
-    theme: "dark",
+    theme: "base",
     securityLevel: "strict",
+    themeVariables: preset.themeVariables,
     flowchart: {
       useMaxWidth: false,
       htmlLabels: true,

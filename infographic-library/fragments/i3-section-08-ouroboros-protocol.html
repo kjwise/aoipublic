@@ -1,5 +1,9 @@
 <section class="col-span-1 md:col-span-12" data-infographic-section-id="i3-section-08-ouroboros-protocol" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <style>
+  [data-role="ouroboros-sim"] {
+    container-type: inline-size;
+  }
+
   [data-role="ouroboros-sim"] .ouro-phase {
     border: 1px solid rgba(255, 255, 255, 0.14);
     background: rgba(11, 12, 16, 0.5);
@@ -16,6 +20,81 @@
     background: rgba(187, 154, 247, 0.24);
     border-color: rgba(187, 154, 247, 0.34);
   }
+  [data-role="ouroboros-sim"] .ouro-preset[data-active="1"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.16);
+    color: #f2f3f8;
+  }
+  [data-role="ouroboros-sim"] .progress-pill {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.6rem;
+    background: rgba(11, 12, 16, 0.46);
+    padding: 0.4rem 0.45rem;
+    min-width: 0;
+  }
+  [data-role="ouroboros-sim"] .progress-pill[data-state="pass"] {
+    border-color: rgba(42, 195, 222, 0.45);
+    background: rgba(42, 195, 222, 0.14);
+  }
+  [data-role="ouroboros-sim"] .progress-pill[data-state="escalate"] {
+    border-color: rgba(187, 154, 247, 0.4);
+    background: rgba(187, 154, 247, 0.16);
+  }
+  [data-role="ouroboros-sim"] .progress-pill[data-state="empty"] {
+    opacity: 0.58;
+    border-style: dashed;
+  }
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="improving"],
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="converged"] {
+    color: #2ac3de;
+  }
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="stalled"],
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="unreachable"] {
+    color: #bb9af7;
+  }
+  [data-role="ouroboros-sim"] [data-role="progress-status"][data-state="diverging"] {
+    color: #f87171;
+  }
+
+  [data-role="ouroboros-sim"] .ouro-metric-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  [data-role="ouroboros-sim"] .ouro-metric-card {
+    min-width: 0;
+  }
+
+  [data-role="ouroboros-sim"] .ouro-metric-copy {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  @container (min-width: 32rem) {
+    [data-role="ouroboros-sim"] .ouro-metric-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @container (min-width: 56rem) {
+    [data-role="ouroboros-sim"] .ouro-metric-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .content:not(.infographic-presentation)
+    [data-infographic-section-id="i3-section-08-ouroboros-protocol"]
+    [data-role="ouroboros-sim"] .ouro-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    .content:not(.infographic-presentation)
+      [data-infographic-section-id="i3-section-08-ouroboros-protocol"]
+      [data-role="ouroboros-sim"] .ouro-metric-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     [data-role="ouroboros-sim"] .ouro-phase {
       transition: none;
@@ -77,6 +156,15 @@
 <input class="mt-2 w-full" data-role="noise-slider" id="ouroNoiseSlider" max="100" min="0" step="1" type="range" value="45"/>
 </div>
 </div>
+<div class="mt-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Scenario presets</div>
+<div class="flex flex-wrap gap-2">
+<button class="soft-toggle font-mono ouro-preset" data-active="0" data-preset="converging" data-role="preset" type="button">Converging</button>
+<button class="soft-toggle font-mono ouro-preset" data-active="0" data-preset="thrashing" data-role="preset" type="button">Thrashing</button>
+<button class="soft-toggle font-mono ouro-preset" data-active="0" data-preset="no-attractor" data-role="preset" type="button">No <a class="concept-link" href="../../concepts#attractor" title="See concept: Attractor">Attractor</a></button>
+</div>
+<div class="mt-2 text-[11px] text-brand-muted" data-role="preset-note">Manual controls. Choose a preset to model a specific loop regime.</div>
+</div>
 <div class="mt-4 grid grid-cols-3 gap-2 text-xs font-mono">
 <div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="write" data-role="phase-pill">WRITE</div>
 <div class="ouro-phase rounded-lg p-2 text-center" data-active="0" data-phase="judge" data-role="phase-pill">JUDGE</div>
@@ -88,23 +176,31 @@
 <button class="soft-toggle font-mono" data-role="reset" type="button">Reset</button>
 </div>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Loop count</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="loop-count">0</span></div>
+<div class="ouro-metric-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="ouro-metric-card bg-brand-light border border-brand-border rounded-xl p-3 min-w-0">
+<div class="ouro-metric-copy text-xs font-mono text-brand-muted">Loop count</div>
+<div class="ouro-metric-copy mt-1 text-base sm:text-lg leading-snug font-bold text-brand-strong"><span data-role="loop-count">0</span></div>
+</div>
+<div class="ouro-metric-card bg-brand-light border border-brand-border rounded-xl p-3 min-w-0">
+<div class="ouro-metric-copy text-xs font-mono text-brand-muted">Current quality</div>
+<div class="ouro-metric-copy mt-1 text-base sm:text-lg leading-snug font-bold text-brand-strong"><span data-role="quality">52</span>/100</div>
+</div>
+<div class="ouro-metric-card bg-brand-light border border-brand-border rounded-xl p-3 min-w-0">
+<div class="ouro-metric-copy text-xs font-mono text-brand-muted">Open errors</div>
+<div class="ouro-metric-copy mt-1 text-base sm:text-lg leading-snug font-bold text-brand-strong"><span data-role="errors">6</span></div>
+</div>
+<div class="ouro-metric-card bg-brand-light border border-brand-border rounded-xl p-3 min-w-0">
+<div class="ouro-metric-copy text-xs font-mono text-brand-muted">Status</div>
+<div class="ouro-metric-copy mt-1 text-base sm:text-lg leading-snug font-bold text-brand-strong" data-role="status">READY</div>
+</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Current quality</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="quality">52</span>/100</div>
+<div class="flex items-center justify-between gap-3">
+<div class="text-xs font-mono text-brand-muted">Minimum progress window (W=4)</div>
+<div class="text-xs text-brand-muted" data-role="progress-status" data-state="baseline">Collecting baseline.</div>
 </div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Open errors</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="errors">6</span></div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Status</div>
-<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">READY</div>
-</div>
+<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2" data-role="progress-window"></div>
+<div class="mt-2 text-[11px] text-brand-muted" data-role="signature-status">Run the loop to inspect error signatures.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Structured error object</div>
@@ -114,7 +210,7 @@
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">Loop outcomes</div>
-<div class="text-xs text-brand-muted">Cyan = PASS, red = refine, violet = circuit-break</div>
+<div class="text-xs text-brand-muted">Cyan = PASS, red = refine, violet = escalate</div>
 </div>
 <div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
 </div>
@@ -146,6 +242,11 @@
   const errorJsonEl = sim.querySelector('[data-role="error-json"]');
   const outcomeEl = sim.querySelector('[data-role="outcome"]');
   const attemptsEl = sim.querySelector('[data-role="attempts"]');
+  const presetButtons = Array.from(sim.querySelectorAll('[data-role="preset"]'));
+  const presetNoteEl = sim.querySelector('[data-role="preset-note"]');
+  const progressStatusEl = sim.querySelector('[data-role="progress-status"]');
+  const progressWindowEl = sim.querySelector('[data-role="progress-window"]');
+  const signatureStatusEl = sim.querySelector('[data-role="signature-status"]');
   const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
   const stepBtn = sim.querySelector('[data-role="step"]');
   const runBtn = sim.querySelector('[data-role="run"]');
@@ -153,7 +254,8 @@
 
   if (!targetSlider || !budgetSlider || !refineSlider || !noiseSlider || !targetValue || !budgetValue || !refineValue || !noiseValue ||
       !loopCountEl || !qualityEl || !errorsEl || !statusEl || !errorJsonEl || !outcomeEl || !attemptsEl ||
-      !stepBtn || !runBtn || !resetBtn || phasePills.length === 0) return;
+      !stepBtn || !runBtn || !resetBtn || !presetNoteEl || !progressStatusEl || !progressWindowEl || !signatureStatusEl ||
+      phasePills.length === 0 || presetButtons.length === 0) return;
 
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
   const toInt = (v, fallback) => {
@@ -164,12 +266,48 @@
   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phaseDelay = reducedMotion ? 0 : 140;
   const loopDelay = reducedMotion ? 0 : 220;
+  const PRESETS = {
+    converging: {
+      target: 80,
+      budget: 10,
+      refine: 82,
+      noise: 18,
+      quality: 58,
+      errors: 6,
+      scenario: "normal",
+      note: "Low stochasticity + strong refine. Deficit should shrink within W attempts."
+    },
+    thrashing: {
+      target: 92,
+      budget: 8,
+      refine: 36,
+      noise: 78,
+      quality: 50,
+      errors: 6,
+      scenario: "normal",
+      note: "High stochasticity + weaker refine. Expect churn and repeated signatures."
+    },
+    "no-attractor": {
+      target: 90,
+      budget: 6,
+      refine: 42,
+      noise: 55,
+      quality: 60,
+      errors: 3,
+      scenario: "no-attractor",
+      note: "Contradictory constraints. PASS is unreachable; loop should escalate."
+    }
+  };
 
   const state = {
     target: toInt(targetSlider.value, 86),
     budget: toInt(budgetSlider.value, 8),
     refine: toInt(refineSlider.value, 55),
     noise: toInt(noiseSlider.value, 45),
+    preset: "custom",
+    scenario: "normal",
+    initialQuality: 52,
+    initialErrors: 6,
     loop: 0,
     quality: 52,
     errors: 6,
@@ -177,6 +315,8 @@
     running: false,
     animating: false,
     failStreak: 0,
+    progressWindowSize: 4,
+    history: [],
     lastSignal: {
       run: 0,
       code: "ready",
@@ -195,10 +335,23 @@
   };
 
   const clearPhases = () => setPhase("");
+  const scoreFor = (quality, errors) => Math.round(quality - (errors * 3));
+  const deficitFor = (score) => Math.max(0, state.target - score);
+  const currentPreset = () => PRESETS[state.preset] || null;
+  const setCustomScenario = () => {
+    state.preset = "custom";
+    state.scenario = "normal";
+    state.initialQuality = 52;
+    state.initialErrors = 6;
+  };
+  const signatureFor = (deficit, errors, code) => {
+    const deficitBucket = Math.ceil(deficit / 4);
+    return `${code}:${deficitBucket}:${errors}`;
+  };
 
   const appendAttempt = (kind) => {
     const pill = document.createElement("span");
-    const suffix = kind === "pass" ? "is-pass" : kind === "trip" ? "is-trip" : "is-fail";
+    const suffix = kind === "pass" ? "is-pass" : kind === "escalate" ? "is-trip" : "is-fail";
     pill.className = `attempt-pill ${suffix}`;
     attemptsEl.appendChild(pill);
     while (attemptsEl.children.length > 36) {
@@ -206,7 +359,140 @@
     }
   };
 
+  const pushHistory = (entry) => {
+    state.history.push(entry);
+    while (state.history.length > 24) {
+      state.history.shift();
+    }
+  };
+
+  const resetRunState = () => {
+    stopRun();
+    state.loop = 0;
+    state.quality = clamp(Math.round(state.initialQuality), 0, 100);
+    state.errors = clamp(Math.round(state.initialErrors), 0, 12);
+    state.status = "READY";
+    state.failStreak = 0;
+    state.history = [];
+    const baselineScore = scoreFor(state.quality, state.errors);
+    state.lastSignal = {
+      run: 0,
+      code: "ready",
+      gate: state.scenario === "no-attractor" ? "attractor" : "quality_floor",
+      expected: state.scenario === "no-attractor" ? "admissible(candidate) is unreachable under current constraints" : `score >= ${state.target} and errors <= 1`,
+      actual: `score=${baselineScore}, errors=${state.errors}`,
+      deficit: deficitFor(baselineScore),
+      next_action: "write"
+    };
+    attemptsEl.innerHTML = "";
+    clearPhases();
+    render();
+  };
+
+  const applyPreset = (presetKey) => {
+    const preset = PRESETS[presetKey];
+    if (!preset) return;
+    state.preset = presetKey;
+    state.scenario = preset.scenario;
+    state.target = preset.target;
+    state.budget = preset.budget;
+    state.refine = preset.refine;
+    state.noise = preset.noise;
+    state.initialQuality = preset.quality;
+    state.initialErrors = preset.errors;
+    resetRunState();
+  };
+
+  const renderProgress = () => {
+    const windowItems = state.history.slice(-state.progressWindowSize);
+    progressWindowEl.innerHTML = "";
+
+    for (const item of windowItems) {
+      const pill = document.createElement("div");
+      pill.className = "progress-pill";
+      pill.dataset.state = item.status === "PASS" ? "pass" : item.status === "ESCALATE" ? "escalate" : "iterating";
+      const runLabel = document.createElement("div");
+      runLabel.className = "text-[10px] font-mono text-brand-muted";
+      runLabel.textContent = `#${item.run}`;
+      const signal = document.createElement("div");
+      signal.className = "mt-1 text-[11px] font-mono text-brand-strong";
+      signal.textContent = `d${item.deficit} · e${item.errors}`;
+      pill.appendChild(runLabel);
+      pill.appendChild(signal);
+      progressWindowEl.appendChild(pill);
+    }
+
+    for (let i = windowItems.length; i < state.progressWindowSize; i += 1) {
+      const empty = document.createElement("div");
+      empty.className = "progress-pill";
+      empty.dataset.state = "empty";
+      const emptyRun = document.createElement("div");
+      emptyRun.className = "text-[10px] font-mono text-brand-muted";
+      emptyRun.textContent = "—";
+      const emptySignal = document.createElement("div");
+      emptySignal.className = "mt-1 text-[11px] font-mono text-brand-muted";
+      emptySignal.textContent = "d? · e?";
+      empty.appendChild(emptyRun);
+      empty.appendChild(emptySignal);
+      progressWindowEl.appendChild(empty);
+    }
+
+    if (windowItems.length === 0) {
+      progressStatusEl.dataset.state = "baseline";
+      progressStatusEl.textContent = "Collecting baseline.";
+      signatureStatusEl.textContent = "Run the loop to inspect error signatures.";
+      return;
+    }
+
+    const first = windowItems[0];
+    const last = windowItems[windowItems.length - 1];
+    const deficitDelta = last.deficit - first.deficit;
+    const errorDelta = last.errors - first.errors;
+    const signatureCount = new Set(windowItems.map((item) => item.signature)).size;
+    const repeated = signatureCount < windowItems.length;
+
+    let progressState = "baseline";
+    let progressText = "Collecting baseline.";
+
+    if (last.status === "PASS") {
+      progressState = "converged";
+      progressText = "Converged: attractor reached.";
+    } else if (state.scenario === "no-attractor") {
+      progressState = "unreachable";
+      progressText = "Unreachable attractor: retries cannot produce PASS.";
+    } else if (windowItems.length < 2) {
+      progressState = "baseline";
+      progressText = "Collecting baseline.";
+    } else if (deficitDelta <= -3 || (deficitDelta <= 0 && errorDelta < 0)) {
+      progressState = "improving";
+      progressText = "Improving: deficit trend is shrinking.";
+    } else if (repeated && windowItems.length >= 3) {
+      progressState = "stalled";
+      progressText = "Stalled: failure signature is repeating.";
+    } else if (deficitDelta >= 3 || errorDelta > 1) {
+      progressState = "diverging";
+      progressText = "Diverging: distance to target is increasing.";
+    } else {
+      progressState = "baseline";
+      progressText = "Mixed signal: not yet monotonic.";
+    }
+
+    progressStatusEl.dataset.state = progressState;
+    progressStatusEl.textContent = progressText;
+    if (state.scenario === "no-attractor") {
+      signatureStatusEl.textContent = "Reachability failure: tighten conflicting constraints or re-scope mission.";
+    } else if (repeated) {
+      signatureStatusEl.textContent = "Signature repeat detected. Consider re-scope or tighter constraints.";
+    } else {
+      signatureStatusEl.textContent = "Signature variation present. Continue until monotonic progress or escalate.";
+    }
+  };
+
   const render = () => {
+    targetSlider.value = String(state.target);
+    budgetSlider.value = String(state.budget);
+    refineSlider.value = String(state.refine);
+    noiseSlider.value = String(state.noise);
     targetValue.textContent = String(state.target);
     budgetValue.textContent = String(state.budget);
     refineValue.textContent = String(state.refine);
@@ -215,9 +501,15 @@
     qualityEl.textContent = String(state.quality);
     errorsEl.textContent = String(state.errors);
 
+    for (const button of presetButtons) {
+      button.dataset.active = button.dataset.preset === state.preset ? "1" : "0";
+    }
+    const preset = currentPreset();
+    presetNoteEl.textContent = preset ? preset.note : "Manual controls. Choose a preset to model a specific loop regime.";
+
     let statusColor = "#b5b6bf";
     if (state.status === "PASS") statusColor = "#2ac3de";
-    if (state.status === "TRIP") statusColor = "#bb9af7";
+    if (state.status === "ESCALATE") statusColor = "#bb9af7";
     if (state.status === "ITERATING") statusColor = "#f2f3f8";
     statusEl.textContent = state.status;
     statusEl.style.color = statusColor;
@@ -226,8 +518,12 @@
 
     if (state.status === "PASS") {
       outcomeEl.textContent = "PASS: converged under deterministic gates.";
-    } else if (state.status === "TRIP") {
-      outcomeEl.textContent = `CIRCUIT BREAK: loop budget (${state.budget}) exhausted. Escalate with evidence.`;
+    } else if (state.status === "ESCALATE") {
+      if (state.scenario === "no-attractor") {
+        outcomeEl.textContent = `CIRCUIT BREAK: no reachable attractor under current constraints. Escalate with evidence.`;
+      } else {
+        outcomeEl.textContent = `CIRCUIT BREAK: loop budget (${state.budget}) exhausted. Escalate with evidence.`;
+      }
     } else if (state.status === "ITERATING") {
       const nextAction = state.lastSignal.next_action || "refine";
       if (nextAction === "rewrite") {
@@ -242,6 +538,7 @@
     }
 
     runBtn.textContent = state.running ? "Stop" : "Run Loop";
+    renderProgress();
   };
 
   const pickDecision = (choices) => {
@@ -276,12 +573,13 @@
       12
     );
     const gateScore = candidateQuality - (candidateErrors * 3) + (randSigned() * 7 * noiseScale);
-    const pass = gateScore >= state.target && candidateErrors <= 1;
+    const attractorReachable = state.scenario !== "no-attractor";
+    const pass = attractorReachable && gateScore >= state.target && candidateErrors <= 1;
     const budgetHit = cycle >= state.budget;
 
     let nextQuality = candidateQuality;
     let nextErrors = candidateErrors;
-    let nextStatus = pass ? "PASS" : (budgetHit ? "TRIP" : "ITERATING");
+    let nextStatus = pass ? "PASS" : (budgetHit ? "ESCALATE" : "ITERATING");
     let nextAction = pass ? "accept" : (budgetHit ? "escalate" : "refine");
     let showRefinePhase = false;
 
@@ -292,43 +590,59 @@
     }
 
     if (!pass && !budgetHit) {
-      const refineBoost = Math.max(1, Math.round((state.refine - 35) / 18));
-      const deficitNow = Math.max(0, state.target - gateScore);
-      const decision = pickDecision([
-        { action: "refine", weight: clamp(0.38 + (state.refine / 240) + (deficitNow / 280), 0.2, 0.8) },
-        { action: "rewrite", weight: clamp(0.26 + (state.noise / 260) + (state.failStreak / 35), 0.12, 0.65) },
-        { action: "re-scope", weight: clamp(0.20 + ((100 - state.refine) / 420), 0.06, 0.42) }
-      ]);
-
-      nextAction = decision;
-      if (decision === "refine") {
-        nextQuality = clamp(candidateQuality + refineBoost + (randSigned() * 3 * noiseScale), 0, 100);
-        nextErrors = Math.max(0, candidateErrors - 1);
-        showRefinePhase = true;
-      } else if (decision === "rewrite") {
-        nextQuality = clamp(candidateQuality - 1 + (randSigned() * 4 * noiseScale), 0, 100);
-        nextErrors = clamp(candidateErrors + (Math.random() < (0.20 + 0.25 * noiseScale) ? 1 : 0), 0, 12);
+      if (!attractorReachable) {
+        nextAction = "re-scope";
+        nextQuality = clamp(candidateQuality + Math.max(0, Math.round(deficit * 0.04)), 0, 100);
+        nextErrors = Math.max(0, candidateErrors - (Math.random() < 0.20 ? 1 : 0));
       } else {
-        nextQuality = clamp(state.quality + Math.max(0, Math.round(deficit * 0.05 + (randSigned() * 2 * noiseScale))), 0, 100);
-        nextErrors = Math.max(0, state.errors - (Math.random() < 0.35 ? 1 : 0));
+        const refineBoost = Math.max(1, Math.round((state.refine - 35) / 18));
+        const deficitNow = Math.max(0, state.target - gateScore);
+        const decision = pickDecision([
+          { action: "refine", weight: clamp(0.38 + (state.refine / 240) + (deficitNow / 280), 0.2, 0.8) },
+          { action: "rewrite", weight: clamp(0.26 + (state.noise / 260) + (state.failStreak / 35), 0.12, 0.65) },
+          { action: "re-scope", weight: clamp(0.20 + ((100 - state.refine) / 420), 0.06, 0.42) }
+        ]);
+
+        nextAction = decision;
+        if (decision === "refine") {
+          nextQuality = clamp(candidateQuality + refineBoost + (randSigned() * 3 * noiseScale), 0, 100);
+          nextErrors = Math.max(0, candidateErrors - 1);
+          showRefinePhase = true;
+        } else if (decision === "rewrite") {
+          nextQuality = clamp(candidateQuality - 1 + (randSigned() * 4 * noiseScale), 0, 100);
+          nextErrors = clamp(candidateErrors + (Math.random() < (0.20 + 0.25 * noiseScale) ? 1 : 0), 0, 12);
+        } else {
+          nextQuality = clamp(state.quality + Math.max(0, Math.round(deficit * 0.05 + (randSigned() * 2 * noiseScale))), 0, 100);
+          nextErrors = Math.max(0, state.errors - (Math.random() < 0.35 ? 1 : 0));
+        }
       }
     }
 
     state.loop = cycle;
-    state.quality = nextQuality;
-    state.errors = nextErrors;
+    state.quality = clamp(Math.round(nextQuality), 0, 100);
+    state.errors = clamp(Math.round(nextErrors), 0, 12);
     state.status = nextStatus;
+    const scored = Math.round(gateScore);
+    const runDeficit = attractorReachable ? deficitFor(scored) : Math.max(1, deficitFor(scored));
+    const failureCode = pass ? "pass" : (!attractorReachable ? "unreachable_constraints" : "validator_fail");
     state.lastSignal = {
       run: state.loop,
-      code: pass ? "pass" : "validator_fail",
-      gate: "quality_floor",
-      expected: `score >= ${state.target} and errors <= 1`,
-      actual: `score=${Math.round(gateScore)}, errors=${candidateErrors}`,
-      deficit: Math.max(0, state.target - Math.round(gateScore)),
+      code: failureCode,
+      gate: attractorReachable ? "quality_floor" : "attractor",
+      expected: attractorReachable ? `score >= ${state.target} and errors <= 1` : "admissible(candidate) is unreachable under current constraints",
+      actual: attractorReachable ? `score=${scored}, errors=${candidateErrors}` : `attractor_unreachable, score=${scored}, errors=${candidateErrors}`,
+      deficit: runDeficit,
       next_action: nextAction
     };
+    pushHistory({
+      run: state.loop,
+      deficit: runDeficit,
+      errors: state.errors,
+      status: state.status,
+      signature: signatureFor(runDeficit, state.errors, failureCode)
+    });
 
-    appendAttempt(pass ? "pass" : (nextStatus === "TRIP" ? "trip" : "fail"));
+    appendAttempt(pass ? "pass" : (nextStatus === "ESCALATE" ? "escalate" : "fail"));
     render();
     return { action: nextAction, showRefinePhase };
   };
@@ -338,7 +652,7 @@
       if (done) done();
       return;
     }
-    if (state.status === "PASS" || state.status === "TRIP") {
+    if (state.status === "PASS" || state.status === "ESCALATE") {
       if (done) done();
       return;
     }
@@ -374,14 +688,14 @@
       stopRun();
       return;
     }
-    if (state.status === "PASS" || state.status === "TRIP") return;
+    if (state.status === "PASS" || state.status === "ESCALATE") return;
     state.running = true;
     render();
 
     const tick = () => {
       if (!state.running) return;
       runAnimatedCycle(() => {
-        if (state.status === "PASS" || state.status === "TRIP") {
+        if (state.status === "PASS" || state.status === "ESCALATE") {
           stopRun();
           return;
         }
@@ -392,22 +706,31 @@
   };
 
   targetSlider.addEventListener("input", () => {
+    setCustomScenario();
     state.target = toInt(targetSlider.value, state.target);
     state.lastSignal.expected = `score >= ${state.target} and errors <= 1`;
     render();
   });
   budgetSlider.addEventListener("input", () => {
+    setCustomScenario();
     state.budget = toInt(budgetSlider.value, state.budget);
     render();
   });
   refineSlider.addEventListener("input", () => {
+    setCustomScenario();
     state.refine = toInt(refineSlider.value, state.refine);
     render();
   });
   noiseSlider.addEventListener("input", () => {
+    setCustomScenario();
     state.noise = toInt(noiseSlider.value, state.noise);
     render();
   });
+  for (const presetButton of presetButtons) {
+    presetButton.addEventListener("click", () => {
+      applyPreset(presetButton.dataset.preset || "");
+    });
+  }
 
   stepBtn.addEventListener("click", () => {
     if (state.running || state.animating) return;
@@ -415,25 +738,17 @@
   });
   runBtn.addEventListener("click", runLoop);
   resetBtn.addEventListener("click", () => {
-    stopRun();
-    state.loop = 0;
-    state.quality = 52;
-    state.errors = 6;
-    state.status = "READY";
-    state.noise = toInt(noiseSlider.value, 45);
-    state.failStreak = 0;
-    state.lastSignal = {
-      run: 0,
-      code: "ready",
-      gate: "quality_floor",
-      expected: `score >= ${state.target} and errors <= 1`,
-      actual: "score=34, errors=6",
-      deficit: 52,
-      next_action: "write"
-    };
-    attemptsEl.innerHTML = "";
-    clearPhases();
-    render();
+    const preset = currentPreset();
+    if (preset) {
+      state.target = preset.target;
+      state.budget = preset.budget;
+      state.refine = preset.refine;
+      state.noise = preset.noise;
+      state.initialQuality = preset.quality;
+      state.initialErrors = preset.errors;
+      state.scenario = preset.scenario;
+    }
+    resetRunState();
   });
 
   render();

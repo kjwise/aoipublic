@@ -94,7 +94,7 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part V Reflect Limit Cases</div>
-<div class="chapter-meta"><span class="read-time">11 min read</span></div>
+<div class="chapter-meta"><span class="read-time">12 min read</span></div>
 <h1 id="chapter-14-the-race-to-reliable-autonomy">Chapter 14 – The Race
 to Reliable Autonomy</h1>
 <blockquote>
@@ -114,6 +114,11 @@ discipline.</p>
 <em>reliable autonomy</em> I mean: systems that can do real work without
 constant human babysitting, while staying inside explicit constraints
 and leaving evidence behind.</p>
+<p><a class="concept-link" href="concepts#core-thesis-intent---map---loop---convergence" title="See concept: Core Thesis
+(Intent -&gt; Map -&gt; Loop -&gt; Convergence)">Core thesis</a> in one line: intent starts as language, gets formalized
+into Maps, loops execute those Maps against Terrain, and governance
+keeps the loops converging while the Terrain is fed back into tomorrow’s
+Maps.</p>
 <section class="text-center py-12" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-05-loop-is-the-moat" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-2.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i2-section-05-loop-is-the-moat</span>
 <div class="moat-loop inline-block p-1 bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent rounded-2xl">
@@ -124,15 +129,20 @@ and leaving evidence behind.</p>
 <div class="bg-cyber-dark rounded-xl p-10 md:p-16">
 <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Loop is the Moat</h2>
 <p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
-                            If the loop is validated, the full function is:
-                            <span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
+                            Intent becomes operational when formalized into Maps and executed by loops:
+                            <span class="block font-mono text-cyber-success mt-3">intent -&gt; map -&gt; loop -&gt; terrain</span>
+<span class="block font-mono text-cyber-accent mt-1">terrain -&gt; map(sync) -&gt; next loop</span>
+<span class="block mt-3 text-base md:text-lg">
+                                If the loop is validated, a useful compact form is:
+                            </span>
+<span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
 <span class="block font-mono text-cyber-accent mt-1">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
 <span class="block mt-3 text-base md:text-lg">
-                                This only compounds with ratchets:
-                                <span class="font-mono text-cyber-vibrant">as long as q<sub>now</sub> &gt;= q<sub>prev</sub> generally holds</span>.
+                                Compounding only holds under ratchets:
+                                <span class="font-mono text-cyber-vibrant">q<sub>now</sub> &gt;= q<sub>prev</sub></span>.
                             </span>
 <span class="block mt-4">
-                                SDaC doesn't just give you a better way to build your business. It gives you the tooling for the business to self-improve: each loop upgrades capability, compounds speed, and hardens against ever-evolving competitors.
+                                This is how AI execution becomes reliable: bounded loops convert intent to verified state and feed reality back into tomorrow’s maps.
                             </span>
 </p>
 <button class="text-cyber-accent hover:text-white underline decoration-cyber-neon decoration-2 underline-offset-4 transition-colors" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -395,7 +405,9 @@ until a foundation model is trained on a corpus that includes yours.
 Data matters, but it’s not durable.</p>
 <p><strong>The loop is the moat.</strong></p>
 <p>A system that reliably converts intent to verified reality: that is
-the durable capability.</p>
+the durable capability. Intent alone is inert. It becomes operational
+when compiled into Map artifacts and executed by loops that continuously
+re-sync Map and Terrain.</p>
 <ul>
 <li>The Mission Object (Chapter 7) that encodes what you’re trying to
 do.</li>
@@ -427,8 +439,8 @@ in an afternoon?</p>
 <p>Teams that can answer “yes” move faster with less fear. Teams that
 can’t end up paying later: audits, incidents, rewrites, and engineers
 tired of firefighting.</p>
-<p><strong>The loop is the moat. Everything else is a
-commodity.</strong></p>
+<p><strong>The loop is the moat. Most other advantages commoditize
+faster.</strong></p>
 <hr/>
 <h2 id="a-final-manifesto">A Final Manifesto</h2>
 <p>We opened this book with a stance:</p>
@@ -452,6 +464,9 @@ compounding it.</p>
 <p>Not the model. Not the data. Not the features. The disciplined,
 auditable, compounding system that converts intent to reality and proves
 it did so.</p>
+<p>At machine speed, this is the practical target: near-optimal
+execution under explicit constraints, with evidence strong enough to
+replay every decision.</p>
 <blockquote>
 <p><em>Start building Friday. The bar is rising.</em></p>
 </blockquote>
@@ -512,7 +527,7 @@ compound effect starts small.</li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>07d8025693ab</code>
+      Version: <code>0258dd885574</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

@@ -157,6 +157,10 @@ Instructions to Typed Mission Objects</h2>
 <div class="text-xs font-mono text-brand-muted" id="missionIdLabel">—</div>
 </div>
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="missionYaml"></pre>
+<div class="mt-3 border border-brand-border rounded-lg bg-brand-light p-3">
+<div class="text-[10px] font-mono uppercase tracking-wide text-brand-muted">Constraint → Deterministic Gate</div>
+<div class="mt-2 space-y-1 text-[11px] leading-5 font-mono text-brand-muted" id="missionGateMap"></div>
+</div>
 </div>
 <div class="xl:col-span-5 space-y-3">
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
@@ -191,6 +195,24 @@ Instructions to Typed Mission Objects</h2>
 <div class="mt-3 text-xs text-brand-muted">If the budget is exceeded, the loop exits with a deterministic failure you can reason about.</div>
 </div>
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Mission State of Record</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between">
+<span>Status</span>
+<span class="font-mono text-brand-strong" id="missionLifecycleStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Attempt</span>
+<span class="font-mono text-brand-strong" id="missionAttemptLabel">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Last run</span>
+<span class="font-mono text-brand-strong" id="missionLastRun">—</span>
+</div>
+</div>
+<div class="mt-3 text-xs font-mono text-brand-muted break-all" id="missionEvidencePath">—</div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted">Trade-off</div>
 <div class="mt-2">
 <div class="flex items-center justify-between text-xs text-brand-muted">
@@ -208,6 +230,24 @@ Instructions to Typed Mission Objects</h2>
 <div class="h-2 rounded" id="missionTightBar" style="width: 0%; background: rgba(187, 154, 247, 0.82);"></div>
 </div>
 </div>
+</div>
+<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
+<div class="text-xs font-mono text-brand-muted">Validation Pipeline</div>
+<div class="mt-2 text-sm text-brand-muted leading-relaxed">
+<div class="flex items-center justify-between">
+<span>Schema compile</span>
+<span class="font-mono text-brand-strong" id="missionSchemaStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Scope gate</span>
+<span class="font-mono text-brand-strong" id="missionScopeStatus">—</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span>Quality gate</span>
+<span class="font-mono text-brand-strong" id="missionQualityGateStatus">—</span>
+</div>
+</div>
+<div class="mt-3 text-xs text-brand-muted" id="missionSchemaNote">—</div>
 </div>
 </div>
 </div>
@@ -815,7 +855,7 @@ loop.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>07d8025693ab</code>
+      Version: <code>0258dd885574</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

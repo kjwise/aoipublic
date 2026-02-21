@@ -104,104 +104,164 @@ behavior).</li>
 <li><strong>Map:</strong> a versioned intent surface derived from that
 Terrain (docs, specs, inventories).</li>
 </ul>
-<h2 id="the-fractal-structure">The Fractal Structure</h2>
-<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-03-drift-vs-convergence" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-2.html" data-infographic-status="published">
-<span aria-hidden="true" data-infographic-fragment-label="1">i2-section-03-drift-vs-convergence</span>
+<p>Fractal structure in one view:</p>
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i2-section-01-fractal-nature</span>
+<style>
+    [data-role="fractal-sim"] .scale-button {
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.7rem;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: #cbd5f5;
+      transition: all 0.2s ease;
+      background: rgba(15, 23, 42, 0.6);
+    }
+    [data-role="fractal-sim"] .scale-button.is-active {
+      border-color: rgba(6, 182, 212, 0.7);
+      background: rgba(6, 182, 212, 0.18);
+      color: #fff;
+    }
+    [data-role="fractal-sim"] .fractal-layer.is-active {
+      border-color: rgba(6, 182, 212, 0.8) !important;
+      background: rgba(6, 182, 212, 0.08);
+      transform: translateX(4px);
+    }
+  </style>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-<div class="lg:col-span-4 flex flex-col justify-center">
-<h2 class="text-3xl font-bold mb-4 text-white">Drift vs. Convergence</h2>
-<div class="h-1 w-20 bg-cyber-danger mb-6"></div>
-<p class="text-cyber-muted mb-6">
-                        Acceleration without structure is chaos.
-                        <br/><br/>
-<strong>Red Band:</strong> Vibe coding. It starts fast, but variance expands and rework dominates as the foundations crack.
-                        <br/><br/>
-<strong>Green Band:</strong> SDaC. It starts slower while tooling is built, then compounds into higher throughput with tighter variance.
-                    </p>
-<div class="p-4 bg-cyber-panel rounded border border-gray-700 space-y-4">
-<div class="flex items-center justify-between gap-4">
-<label class="text-xs uppercase tracking-wide text-gray-500" for="drift-week-slider">Timeline</label>
-<div class="flex items-center gap-3">
-<button class="text-xs font-mono px-3 py-1.5 rounded border border-gray-600 text-gray-200 hover:text-white hover:border-gray-400 transition-colors" id="drift-play-btn">
-                                    Play
-                                </button>
-<span class="font-mono text-xs text-gray-300" id="drift-week-value">8 / 26</span>
-</div>
-</div>
-<input class="w-full accent-cyber-success" id="drift-week-slider" max="26" min="1" type="range" value="8"/>
-<p class="text-xs text-gray-500">
-                            Early: Vibe coding wins on speed. By week 8 SDaC overtakes. After that, vibe collapses under rising foundation debt.
-                        </p>
-<div class="grid grid-cols-2 gap-4">
-<div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
-<div class="text-xs uppercase tracking-wide text-cyber-danger mb-2">Vibe Coding</div>
-<div class="flex justify-between text-xs text-gray-400">
-<span id="vibe-output-label">Net Output</span>
-<span class="font-mono text-gray-200" id="vibe-output">-</span>
-</div>
-<div class="flex justify-between text-xs text-gray-400">
-<span>Variance</span>
-<span class="font-mono text-gray-200" id="vibe-variance">-</span>
-</div>
-<div class="flex justify-between text-xs text-gray-400">
-<span>Foundation Debt</span>
-<span class="font-mono text-gray-200" id="vibe-debt">-</span>
-</div>
-<div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
-<div class="h-2 bg-cyber-danger transition-all duration-300" id="vibe-debt-bar" style="width: 0%;"></div>
-</div>
-</div>
-<div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
-<div class="text-xs uppercase tracking-wide text-cyber-success mb-2">SDaC</div>
-<div class="flex justify-between text-xs text-gray-400">
-<span id="sdac-output-label">Net Output</span>
-<span class="font-mono text-gray-200" id="sdac-output">-</span>
-</div>
-<div class="flex justify-between text-xs text-gray-400">
-<span>Variance</span>
-<span class="font-mono text-gray-200" id="sdac-variance">-</span>
-</div>
-<div class="flex justify-between text-xs text-gray-400">
-<span>Tooling Maturity</span>
-<span class="font-mono text-gray-200" id="sdac-maturity">-</span>
-</div>
-<div class="mt-2 h-2 bg-gray-700 rounded-full overflow-hidden">
-<div class="h-2 bg-cyber-success transition-all duration-300" id="sdac-maturity-bar" style="width: 0%;"></div>
-</div>
-</div>
-</div>
-<div class="flex justify-between text-xs text-gray-500">
-<span>Velocity (iterations / time)</span>
-<span class="font-mono text-gray-300" id="drift-velocity-readout">-</span>
-</div>
-<div class="flex items-center justify-between gap-4 pt-1">
-<span class="text-xs uppercase tracking-wide text-gray-500">View</span>
-<div class="inline-flex items-center rounded-lg border border-gray-700 bg-gray-900/40 p-1 text-xs font-mono">
-<button class="px-3 py-1.5 rounded-md bg-cyber-success/20 text-white border border-cyber-success/40" id="drift-view-weekly">
-                                    Weekly
-                                </button>
-<button class="px-3 py-1.5 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 transition-colors" id="drift-view-cumulative">
-                                    Cumulative
-                                </button>
-</div>
-</div>
-</div>
-<div class="p-4 bg-cyber-panel rounded border border-gray-700">
-<strong class="text-white block mb-2">The SDaC Bundle:</strong>
-<ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
-<li>Explicit Intent Surfaces</li>
-<li>Bounded Effectors</li>
-<li>Deterministic Validators</li>
-<li>Loops that Converge</li>
+<div class="lg:col-span-5">
+<h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature of Work</h2>
+<div class="h-1 w-20 bg-cyber-accent mb-6"></div>
+<p class="text-cyber-muted mb-6 text-lg leading-relaxed">
+      Same loop, different cadence. Historically, a function evolved in minutes; a company evolved in years.
+      AI compresses the lower-loop cadences first, but organizational loops still move slower.
+      Each level’s state is the accumulated output of the faster loops beneath it.
+    </p>
+<ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
+<li>Bottom-layer drift multiplies upward.</li>
+<li>Bottom-layer improvements compound upward.</li>
+<li>Intent and validation at every scale keep the loop coherent.</li>
 </ul>
+<div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
+<p class="font-mono text-sm text-cyber-neon">
+        Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)<br/>
+        P<sub>k+1</sub> = improve(P<sub>k</sub>, evidence)
+      </p>
 </div>
 </div>
-<div class="lg:col-span-8">
-<div class="chart-container">
-<canvas id="driftChart"></canvas>
+<div class="lg:col-span-7">
+<div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
+<div class="flex flex-wrap items-center gap-2 mb-4">
+<span class="text-xs font-mono text-gray-500 uppercase">Scale lens</span>
+<button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
+<button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
+<button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
+<button class="scale-button" data-role="scale-button" data-scale="function" type="button">Function</button>
+</div>
+<div class="space-y-3">
+<div class="fractal-layer border-l-cyber-primary is-active" data-cadence="Years" data-example="Strategic bets" data-process="Culture + leadership" data-role="scale-card" data-scale="company" data-state="Market position">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-lg text-cyber-primary">Company Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
+</div>
+<div class="text-xs text-gray-400">State: Market position · Process: Culture + leadership</div>
+</div>
+<div class="fractal-layer border-l-cyber-neon ml-4" data-cadence="Months" data-example="Portfolio bets" data-process="Org + strategy" data-role="scale-card" data-scale="product" data-state="System architecture">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-md text-cyber-neon">Product Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
+</div>
+<div class="text-xs text-gray-400">State: System architecture · Process: Org + strategy</div>
+</div>
+<div class="fractal-layer border-l-cyber-accent ml-8" data-cadence="Days" data-example="Release scope" data-process="Team practices" data-role="scale-card" data-scale="feature" data-state="Capabilities">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
+</div>
+<div class="text-xs text-gray-400">State: Capabilities · Process: Team practices</div>
+</div>
+<div class="fractal-layer border-l-cyber-success ml-12" data-cadence="Minutes" data-example="Code edits" data-process="Dev tools" data-role="scale-card" data-scale="function" data-state="Implementation">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-xs text-cyber-success">Function Scale</span>
+<span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
+</div>
+<div class="text-xs text-gray-400">State: Implementation · Process: Dev tools</div>
+</div>
+</div>
+<div class="mt-4 bg-gray-900/70 p-4 rounded-lg border border-gray-700">
+<div class="text-xs font-mono text-gray-500">Selected scale</div>
+<div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+<div>
+<div class="text-xs text-gray-500">State</div>
+<div class="text-white font-semibold" data-role="fractal-state">Market position</div>
+</div>
+<div>
+<div class="text-xs text-gray-500">Process</div>
+<div class="text-white font-semibold" data-role="fractal-process">Culture + leadership</div>
+</div>
+<div>
+<div class="text-xs text-gray-500">Cadence</div>
+<div class="text-white font-semibold" data-role="fractal-cadence">Years</div>
+</div>
+<div>
+<div class="text-xs text-gray-500">Example</div>
+<div class="text-white font-semibold" data-role="fractal-example">Strategic bets</div>
+</div>
+</div>
+<div class="mt-3 text-xs text-gray-500" data-role="fractal-insight">
+          Improve the fastest loops first; the rest of the stack inherits the gain.
+        </div>
 </div>
 </div>
 </div>
+</div>
+<script>
+  (function () {
+    const script = document.currentScript;
+    const root = script ? script.closest('[data-infographic-section-id="i2-section-01-fractal-nature"]') : null;
+    if (!root || root.dataset.fractalReady === "1") return;
+    root.dataset.fractalReady = "1";
+
+    const buttons = Array.from(root.querySelectorAll('[data-role="scale-button"]'));
+    const cards = Array.from(root.querySelectorAll('[data-role="scale-card"]'));
+    const stateEl = root.querySelector('[data-role="fractal-state"]');
+    const processEl = root.querySelector('[data-role="fractal-process"]');
+    const cadenceEl = root.querySelector('[data-role="fractal-cadence"]');
+    const exampleEl = root.querySelector('[data-role="fractal-example"]');
+    const insightEl = root.querySelector('[data-role="fractal-insight"]');
+
+    if (!buttons.length || !cards.length || !stateEl || !processEl || !cadenceEl || !exampleEl || !insightEl) return;
+
+    const selectScale = (scale) => {
+      cards.forEach((card) => {
+        const active = card.dataset.scale === scale;
+        card.classList.toggle('is-active', active);
+      });
+      buttons.forEach((btn) => {
+        const active = btn.dataset.scale === scale;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      const selected = cards.find((card) => card.dataset.scale === scale) || cards[0];
+      stateEl.textContent = selected.dataset.state || '—';
+      processEl.textContent = selected.dataset.process || '—';
+      cadenceEl.textContent = selected.dataset.cadence || '—';
+      exampleEl.textContent = selected.dataset.example || '—';
+      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the loop state is "${selected.dataset.state || 'state'}" and the process is "${selected.dataset.process || 'process'}".`;
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => selectScale(btn.dataset.scale || 'company'));
+    });
+    cards.forEach((card) => {
+      card.addEventListener('click', () => selectScale(card.dataset.scale || 'company'));
+    });
+
+    selectScale('company');
+  })();
+  </script>
 </section>
 <p>Map and Terrain aren’t just two layers—they nest.</p>
 <p>What counts as Terrain at one level becomes the Map for the level
@@ -232,22 +292,22 @@ body.</li>
 same: explicit intent (Map), validated reality (Terrain), and a loop
 that keeps them aligned.</p>
 <pre class="mermaid"><code>graph TB
-    subgraph "Organization Level"
+    subgraph ORG["Organization Level"]
         O_Map["Strategy Docs&lt;br/&gt;(Map)"]
         O_Terrain["Running Systems&lt;br/&gt;(Terrain)"]
     end
 
-    subgraph "Service Level"
+    subgraph SRV["Service Level"]
         S_Map["API Contracts&lt;br/&gt;(Map)"]
         S_Terrain["Deployed Services&lt;br/&gt;(Terrain)"]
     end
 
-    subgraph "Module Level"
+    subgraph MOD["Module Level"]
         M_Map["Type Signatures&lt;br/&gt;(Map)"]
         M_Terrain["Implementations&lt;br/&gt;(Terrain)"]
     end
 
-    subgraph "Function Level"
+    subgraph FUN["Function Level"]
         F_Map["Docstring + Signature&lt;br/&gt;(Map)"]
         F_Terrain["Function Body&lt;br/&gt;(Terrain)"]
     end
@@ -256,14 +316,26 @@ that keeps them aligned.</p>
     S_Terrain --&gt; M_Map
     M_Terrain --&gt; F_Map
 
-    style O_Map fill:#e1f5fe
-    style S_Map fill:#e1f5fe
-    style M_Map fill:#e1f5fe
-    style F_Map fill:#e1f5fe
-    style O_Terrain fill:#fff3e0
-    style S_Terrain fill:#fff3e0
-    style M_Terrain fill:#fff3e0
-    style F_Terrain fill:#fff3e0</code></pre>
+  %% aoi:layout
+  O_Map --&gt; O_Terrain
+  S_Map --&gt; S_Terrain
+  M_Map --&gt; M_Terrain
+  F_Map --&gt; F_Terrain
+  linkStyle 3 opacity:0
+  linkStyle 4 opacity:0
+  linkStyle 5 opacity:0
+  linkStyle 6 opacity:0
+
+    classDef map fill:#151B2B,stroke:#06b6d4,stroke-width:2px,color:#f8fafc
+    classDef terrain fill:#151B2B,stroke:#10b981,stroke-width:2px,color:#f8fafc
+    class O_Map,S_Map,M_Map,F_Map map
+    class O_Terrain,S_Terrain,M_Terrain,F_Terrain terrain
+
+    style ORG fill:#0B0F19,stroke:#374151,color:#94a3b8
+    style SRV fill:#0B0F19,stroke:#374151,color:#94a3b8
+    style MOD fill:#0B0F19,stroke:#374151,color:#94a3b8
+    style FUN fill:#0B0F19,stroke:#374151,color:#94a3b8
+    linkStyle default stroke:#6366f1,stroke-width:2px</code></pre>
 <p>The arrows show the <a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a>: each level’s Terrain becomes the next
 level’s Map. This is why SDaC scales—you’re not managing one loop,
 you’re managing a fractal of loops, each with the same
@@ -704,7 +776,7 @@ drifts.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>07d8025693ab</code>
+      Version: <code>0258dd885574</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
