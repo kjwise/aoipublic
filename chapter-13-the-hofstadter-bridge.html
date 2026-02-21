@@ -94,7 +94,7 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part V Reflect Limit Cases</div>
-<div class="chapter-meta"><span class="read-time">11 min read</span></div>
+<div class="chapter-meta"><span class="read-time">12 min read</span></div>
 <h1 id="chapter-13-the-hofstadter-bridge">Chapter 13 – The Hofstadter
 Bridge</h1>
 <blockquote>
@@ -109,6 +109,9 @@ breaking.</p>
 <p>The <strong><a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a></strong> is the boundary where that
 stops being true. Parts of the Map become enforceable: drift turns into
 a failing gate.</p>
+<p>Name note: the term nods to Douglas Hofstadter’s work on
+self-reference and “strange loops.” Here it is narrower and practical: a
+bridge from advisory text to enforceable constraints.</p>
 <h2 id="the-smallest-step-toward-the-bridge-one-generated-block-one-gate">The
 Smallest Step Toward the Bridge: One Generated Block + One Gate</h2>
 <section class="bg-gray-900/50 rounded-2xl p-6 md:p-7 border border-gray-800" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published">
@@ -717,10 +720,36 @@ becomes a constraint that can’t silently regress.</li>
 maintain the meta-infrastructure, but keep Physics and protected paths
 non-negotiable.</li>
 </ol>
-<p>Full crossing (where most documentation is executable and enforced)
-remains aspirational for many systems. But the direction is consistent:
-the more autonomy you deploy, the more of your intent needs to become
-enforceable, or your loop can optimize against fiction.</p>
+<p>Full crossing (where most high-impact documentation surfaces are
+executable and enforced) remains aspirational for many systems. But the
+direction is consistent: the more autonomy you deploy, the more of your
+intent needs to become enforceable, or your loop can optimize against
+fiction.</p>
+<p>What “full crossing” looks like in practice:</p>
+<ol type="1">
+<li>Most operationally critical Map surfaces are machine-readable and
+versioned (contracts, policies, dependency boundaries, runbooks with
+structured checks).</li>
+<li>CI/deploy paths compile those surfaces into deterministic gates, and
+failures block promotion by default.</li>
+<li>Exceptions are explicit, time-bounded, and logged in the Ledger with
+owner and expiry.</li>
+<li>Governance surfaces (grader code, merge policy, protected paths)
+remain human-owned even when lower-level loops are autonomous.</li>
+</ol>
+<p>Is full crossing always desirable? Not always.</p>
+<ul>
+<li>If you over-formalize volatile surfaces, you can slow exploration
+and create spec churn.</li>
+<li>If your formal model is weak, you can create false confidence:
+“green gates, wrong system.”</li>
+<li>If every change requires spec updates, review load can increase
+faster than reliability gains.</li>
+</ul>
+<p>For many teams, the right target is selective crossing: formalize
+high-blast-radius surfaces first, keep fast-changing narrative guidance
+advisory, and ratchet coverage only where the reliability return is
+clear.</p>
 <h2 id="self-reference-safety-what-can-change-and-under-what-approval">Self-Reference
 Safety (what can change, and under what approval?)</h2>
 <p>Crossing the Bridge creates a new temptation: tune the gates to
@@ -911,7 +940,7 @@ Bridge.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>95bab5309525</code>
+      Version: <code>5c8eb092d79b</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

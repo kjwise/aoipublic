@@ -94,7 +94,7 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">13 min read</span></div>
+<div class="chapter-meta"><span class="read-time">14 min read</span></div>
 <h1 id="chapter-11-automated-refactoring-under-guards">Chapter 11 –
 Automated Refactoring Under Guards</h1>
 <p>In <a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a>, we established <a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a>: the
@@ -311,8 +311,26 @@ sensitive to behavioral changes. The tool edits your code in small ways
 <span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="co"># Inspect survivors (mutations that tests failed to catch)</span></span>
 <span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a><span class="ex">mutmut</span> results</span></code></pre></div>
 <p>Use mutation testing selectively. It’s too expensive as a default
-gate, but it can be the right tool for deciding whether a module is safe
-to refactor autonomously.</p>
+per-PR gate, but it is useful for deciding whether a module is safe for
+autonomous refactors.</p>
+<p>A practical operating pattern:</p>
+<ol type="1">
+<li>Run mutation testing before allowlisting a refactor class on a
+module.</li>
+<li>Track a simple mutation score (<code>killed / total</code>) over
+time.</li>
+<li>If score drops below your floor, pause broad autonomous refactors on
+that surface.</li>
+<li>Open a guard-strengthening mission (add assertions, contracts, or
+integration cases), then re-measure.</li>
+</ol>
+<p>Treat survivors as map updates:</p>
+<ul>
+<li>categorize by risk (data integrity &gt; auth &gt; formatting)</li>
+<li>link each survivor to a missing test or contract</li>
+<li>close survivors before increasing refactor blast radius</li>
+</ul>
+<p>For extended recipes and stack variants, see <a class="chapter-link" href="appendix-c-pattern-library#appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a>.</p>
 <h2 id="scope-boundaries-how-wide-is-the-refactor-allowed-to-reach">Scope
 Boundaries (How wide is the refactor allowed to reach?)</h2>
 <p>“Refactor the code” is not a Mission. A refactoring mission needs
@@ -938,13 +956,47 @@ whether tests pass.</p>
 <span id="cb2-17"><a aria-hidden="true" href="#cb2-17" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
 <p>The baseline files are updated only when a commit passes all
 ratchets. They become the new floor.</p>
+<h3 id="ratchet-tolerance-and-flaky-metrics-noise-management">Ratchet
+tolerance and flaky metrics (noise management)</h3>
+<p>Not all metrics are equally stable. Keep hard invariants strict, and
+handle noisy metrics explicitly.</p>
+<ul>
+<li><strong>Hard invariants (strict):</strong> test pass/fail, lint
+errors, security findings. No tolerance.</li>
+<li><strong>Noisy metrics (modeled):</strong> benchmark latency,
+throughput, memory peaks. Use statistical guards, not single-run
+comparisons.</li>
+</ul>
+<p>A practical noise policy:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">ratchets</span><span class="kw">:</span></span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="at">  </span><span class="fu">benchmark_p95_ms</span><span class="kw">:</span></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> down</span></span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/benchmark_p95.json</span></span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance_mode</span><span class="kw">:</span><span class="at"> relative</span></span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.05</span><span class="co">              # 5%</span></span>
+<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="at">    </span><span class="fu">sample_runs</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a><span class="at">    </span><span class="fu">aggregation</span><span class="kw">:</span><span class="at"> median</span></span>
+<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="at">    </span><span class="fu">required_consecutive_failures</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="at">    </span><span class="fu">on_first_violation</span><span class="kw">:</span><span class="at"> warn</span></span>
+<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a><span class="at">    </span><span class="fu">on_repeated_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
+<p>Guidance:</p>
+<ol type="1">
+<li>Pin the benchmark harness (hardware class, warmup, dataset, runtime
+flags).</li>
+<li>Compare aggregates (<code>median-of-N</code> or trimmed mean), not
+single runs.</li>
+<li>Use relative tolerances for variable metrics and absolute tolerances
+for counts.</li>
+<li>Escalate on persistent regression; avoid blocking on one noisy
+sample.</li>
+</ol>
 <p>To enforce this in CI, the ratchet is typically a short shell
 gate:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="va">OLD_COV</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> .pct .metrics/coverage.json<span class="va">)</span></span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="va">NEW_COV</span><span class="op">=</span><span class="va">$(</span><span class="ex">pytest</span> <span class="at">--cov</span> <span class="at">--cov-report</span><span class="op">=</span>json <span class="kw">|</span> <span class="ex">jq</span> .pct<span class="va">)</span></span>
-<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="cf">if</span> <span class="kw">((</span> <span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$NEW_COV</span><span class="st"> &lt; </span><span class="va">$OLD_COV</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">bc</span> <span class="at">-l</span><span class="va">)</span> <span class="kw">));</span> <span class="cf">then</span></span>
-<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Ratchet failed: coverage dropped."</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span> 1</span>
-<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="va">OLD_COV</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> .pct .metrics/coverage.json<span class="va">)</span></span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="va">NEW_COV</span><span class="op">=</span><span class="va">$(</span><span class="ex">pytest</span> <span class="at">--cov</span> <span class="at">--cov-report</span><span class="op">=</span>json <span class="kw">|</span> <span class="ex">jq</span> .pct<span class="va">)</span></span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a><span class="cf">if</span> <span class="kw">((</span> <span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$NEW_COV</span><span class="st"> &lt; </span><span class="va">$OLD_COV</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">bc</span> <span class="at">-l</span><span class="va">)</span> <span class="kw">));</span> <span class="cf">then</span></span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Ratchet failed: coverage dropped."</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span> 1</span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
 <p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
 <code>ratchet-check</code> and <code>ratchet-baseline</code> targets
 that demonstrate this. <code>ratchet_check.py</code> compares current
@@ -987,6 +1039,57 @@ point.</p>
 └─────────────────────────────────────────────────────────┘</code></pre>
 <p>This audit trail is governance. Anyone can see when baselines changed
 and why.</p>
+<h2 id="rollback-mechanics-what-revert-means-operationally">Rollback
+Mechanics (what “revert” means operationally)</h2>
+<p>“Revert” is not one mechanism. Use the rollback pattern that matches
+the change surface:</p>
+<table>
+<colgroup>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+<col style="width: 25%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Change surface</th>
+<th>Primary rollback</th>
+<th>Typical trigger</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Candidate code diff (pre-merge)</td>
+<td>Drop candidate branch / discard workspace</td>
+<td>Any guard failure</td>
+<td>Default and cheapest path</td>
+</tr>
+<tr>
+<td>Runtime behavior behind flag</td>
+<td>Disable feature flag</td>
+<td>Post-merge SLO breach</td>
+<td>Requires flag discipline and owner</td>
+</tr>
+<tr>
+<td>Deployment/runtime config</td>
+<td>Blue-green or canary rollback</td>
+<td>Error budget burn, health checks</td>
+<td>Prefer automated rollback thresholds</td>
+</tr>
+</tbody>
+</table>
+<p>Concrete defaults:</p>
+<ol type="1">
+<li><strong>Pre-merge refactors:</strong> never mutate
+<code>main</code>; failed guard means no merge artifact exists.</li>
+<li><strong>Post-merge exposure:</strong> gate high-risk behavior behind
+kill switches or flags.</li>
+<li><strong>Production rollout:</strong> pair ratchets with rollout
+monitors so rollback can trigger automatically.</li>
+</ol>
+<p>Rollback itself is part of the Immune System: test it, log it, and
+make it deterministic.</p>
 <h2 id="containing-the-blast-radius">Containing the Blast Radius</h2>
 <p>Even with robust guards, it’s wise to limit the potential impact of
 any single automated change. Blast radius controls ensure that if an
@@ -1007,6 +1110,32 @@ out of protected governance surfaces (CI workflows, policy files,
 validator code). If a change touches those paths, require explicit human
 review before merge.</p></li>
 </ul>
+<h3 id="monorepo-and-multi-repo-ratchets">Monorepo and multi-repo
+ratchets</h3>
+<p>Repository topology changes where ratchets live, not whether you need
+them.</p>
+<p><strong>Monorepo pattern:</strong></p>
+<ul>
+<li>Keep per-surface baselines (for example
+<code>.metrics/service-a/coverage.json</code>,
+<code>.metrics/service-b/latency.json</code>).</li>
+<li>Evaluate ratchets only for affected packages, plus shared
+contracts.</li>
+<li>Keep a small set of global ratchets for shared infrastructure and
+policy surfaces.</li>
+</ul>
+<p><strong>Multi-repo pattern:</strong></p>
+<ul>
+<li>Keep local ratchets per repo, but add contract ratchets on published
+interfaces (OpenAPI/schema/event versions).</li>
+<li>Use a central governance ledger to track cross-repo exceptions and
+releases.</li>
+<li>For cross-repo refactors, use compatibility windows:
+producer-compatible change first, consumer migration second, removal
+last.</li>
+</ul>
+<p>The rule is consistent: ratchet at the boundary where failure becomes
+expensive.</p>
 <h2 id="refactoring-pattern-gallery-and-the-guards-that-make-them-safe">Refactoring
 Pattern Gallery (and the guards that make them safe)</h2>
 <p>Refactoring patterns are useful because they define a bounded change
@@ -1178,7 +1307,7 @@ into the Measure → Mutate → Measure loop.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>95bab5309525</code>
+      Version: <code>5c8eb092d79b</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
