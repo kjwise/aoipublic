@@ -4,12 +4,12 @@
     <title>Architects of Intent</title>
     <link>https://architectsofintent.com/</link>
     <description>Chapter updates for Architects of Intent.</description>
-    <lastBuildDate>Sat, 21 Feb 2026 17:01:45 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Feb 2026 02:17:10 +0000</lastBuildDate>
     <item>
       <title>Architects of Intent Infographic Deck</title>
       <link>https://architectsofintent.com/infographic-deck</link>
       <guid>https://architectsofintent.com/infographic-deck</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:44 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:09 +0000</pubDate>
       <description>Use this page as a talk-ready sequence. Arrow keys (←/→), page keys, and dots jump between slides.
       The deck marker below now auto-loads all published fragments from the library index.</description>
     </item>
@@ -17,7 +17,7 @@
       <title>Architects of Intent 10-Slide Deck</title>
       <link>https://architectsofintent.com/infographic-deck-10</link>
       <guid>https://architectsofintent.com/infographic-deck-10</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:44 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:08 +0000</pubDate>
       <description>Curated sequence for a shorter presentation. This flow starts with loop fundamentals,
       moves through speed, drift, and control mechanisms, and closes on strategic moat.</description>
     </item>
@@ -25,14 +25,14 @@
       <title>The Illusion of AI vs. The Reality of Results</title>
       <link>https://architectsofintent.com/infographic-4</link>
       <guid>https://architectsofintent.com/infographic-4</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:44 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:08 +0000</pubDate>
       <description>A landing-page-ready section: why deterministic loops beat “smarter models” on first try.</description>
     </item>
     <item>
       <title>Architects of Intent</title>
       <link>https://architectsofintent.com/infographic-3</link>
       <guid>https://architectsofintent.com/infographic-3</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:44 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:08 +0000</pubDate>
       <description>Programming patterns that make loops safe, fast, and self-improving.</description>
     </item>
     <item>
@@ -40,7 +40,7 @@
 The Dream Daemon (Background Maintenance)</title>
       <link>https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance</link>
       <guid>https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:08 +0000</pubDate>
       <description>We’ve explored how to build individual Mission Objects to encapsulate intent ( Chapter 7 ) and how Map-Updaters keep
 our system’s understanding of its environment fresh ( Chapter 8 ). These
 mechanisms shine when triggered by explicit events: a code commit, a
@@ -54,7 +54,7 @@ diverge.</description>
 Map Fresh (Map-Updaters)</title>
       <link>https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters</link>
       <guid>https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:08 +0000</pubDate>
       <description>Drift is the default state. Docs fall behind code. Specs lag behind
 services. Inventories and indexes rot. Policies miss new surfaces.</description>
     </item>
@@ -63,7 +63,7 @@ services. Inventories and indexes rot. Policies miss new surfaces.</description>
 Code (Mission Objects)</title>
       <link>https://architectsofintent.com/chapter-7-intent-as-code-mission-objects</link>
       <guid>https://architectsofintent.com/chapter-7-intent-as-code-mission-objects</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:08 +0000</pubDate>
       <description>The dream of a fully autonomous engineering system often gets bogged
 down in the reality of instruction tweaking. Intent is often implicit or
 scattered across tickets, docs, and conversations, then compressed into
@@ -79,7 +79,7 @@ sideways.</description>
 Context Architecture (Why Slicing Matters)</title>
       <link>https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters</link>
       <guid>https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>You’ve built your first SDaC loop in Part I. You’ve seen it reliably
 generate, judge, and refine code. Now, in Part II, we drill into why it works, starting with the most critical ingredient:
 context.</description>
@@ -89,7 +89,7 @@ context.</description>
 The Ouroboros Protocol (Why Loops Converge)</title>
       <link>https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge</link>
       <guid>https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>In Part I, you built a working loop: take a goal, propose a change,
 validate it, and if it fails, feed the error signal into the next
 attempt. This iterative process is the engine of reliability for
@@ -100,7 +100,7 @@ Software Development as Code.</description>
 – The Stochastic Engine (Why You Need Physics)</title>
       <link>https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics</link>
       <guid>https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>Before we talk about drift, a quick recap from Part I:</description>
     </item>
     <item>
@@ -108,7 +108,7 @@ Software Development as Code.</description>
 “Good” (Your First Validators)</title>
       <link>https://architectsofintent.com/chapter-3-define-good-your-first-validators</link>
       <guid>https://architectsofintent.com/chapter-3-define-good-your-first-validators</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>You’ve built a loop and named the sandwich. Now define “good” so the
 gate means something.</description>
     </item>
@@ -117,7 +117,7 @@ gate means something.</description>
 2 – The Deterministic Sandwich (Your First Pattern)</title>
       <link>https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern</link>
       <guid>https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>In Chapter 1 , you built a loop that produces a diff and a PASS/FAIL gate. Now you need the pattern that makes that
 loop reusable: one stochastic call pinned between two deterministic
 layers.</description>
@@ -127,7 +127,7 @@ layers.</description>
 to Reliable Autonomy</title>
       <link>https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy</link>
       <guid>https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:43 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>Or: The Bar Is Rising</description>
     </item>
     <item>
@@ -135,7 +135,7 @@ to Reliable Autonomy</title>
 Bridge</title>
       <link>https://architectsofintent.com/chapter-13-the-hofstadter-bridge</link>
       <guid>https://architectsofintent.com/chapter-13-the-hofstadter-bridge</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>Limit case: A design meditation on what happens when
 the Map becomes enforceable, not just advisory.</description>
     </item>
@@ -144,7 +144,7 @@ the Map becomes enforceable, not just advisory.</description>
 at Machine Speed</title>
       <link>https://architectsofintent.com/chapter-12-governance-at-machine-speed</link>
       <guid>https://architectsofintent.com/chapter-12-governance-at-machine-speed</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>The promise of Software Development as Code (SDaC) is rapid,
 autonomous evolution. But speed without control is chaos. If Chapter 11 focused on the mechanics of automated refactoring—the mutate step—this chapter is about the engineering controls that make that
 mutation safe and predictable. We shift from how an agent
@@ -156,7 +156,7 @@ machine speed.</description>
 Automated Refactoring Under Guards</title>
       <link>https://architectsofintent.com/chapter-11-automated-refactoring-under-guards</link>
       <guid>https://architectsofintent.com/chapter-11-automated-refactoring-under-guards</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:07 +0000</pubDate>
       <description>In Chapter 10 , we established Immutable Infrastructure : the
 non-negotiable boundary that keeps the system from rewriting the graders
 and guardrails that govern it.</description>
@@ -166,7 +166,7 @@ and guardrails that govern it.</description>
 Immutable Infrastructure (The Guardrails)</title>
       <link>https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails</link>
       <guid>https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:06 +0000</pubDate>
       <description>We built a loop that lets your system write its own code. We
 demonstrated how it can propose changes, measure their impact, and even
 refine them. This autonomy promises efficiency, but it also introduces a
@@ -181,14 +181,14 @@ safe?</description>
 – The Minimum Viable Factory (Your First Loop)</title>
       <link>https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop</link>
       <guid>https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:06 +0000</pubDate>
       <description>Build a tiny loop: Terrain → Effector → Map → Validator .</description>
     </item>
     <item>
       <title>Chapter 0 – Introduction</title>
       <link>https://architectsofintent.com/chapter-0-introduction</link>
       <guid>https://architectsofintent.com/chapter-0-introduction</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:06 +0000</pubDate>
       <description>Every productive process follows the same loop at every scale: P(Zn) = Z(n+1) .
                     The state changes; the process itself can also evolve.</description>
     </item>
@@ -197,7 +197,7 @@ safe?</description>
 &amp; Translation Guide</title>
       <link>https://architectsofintent.com/appendix-d-glossary-and-translation-guide</link>
       <guid>https://architectsofintent.com/appendix-d-glossary-and-translation-guide</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:06 +0000</pubDate>
       <description>Developing and operating reliable autonomous systems demands a
 precise, shared vocabulary. This appendix defines the canonical terms
 used throughout this book and provides a small translation layer to
@@ -207,7 +207,7 @@ familiar industry language.</description>
       <title>Appendix C: Pattern Library</title>
       <link>https://architectsofintent.com/appendix-c-pattern-library</link>
       <guid>https://architectsofintent.com/appendix-c-pattern-library</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:06 +0000</pubDate>
       <description>This appendix serves as a practical library of patterns, templates,
 and configurations for various components of a Software Development as
 Code (SDaC) loop. Exhausted engineers and technical leaders need
@@ -221,7 +221,7 @@ and establishing circuit breakers for safety and control.</description>
 Gallery</title>
       <link>https://architectsofintent.com/appendix-b-failure-mode-gallery</link>
       <guid>https://architectsofintent.com/appendix-b-failure-mode-gallery</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:06 +0000</pubDate>
       <description>This appendix catalogues common failure modes encountered when
 building and operating Software Development as Code (SDaC) loops.
 Understanding these patterns helps in designing robust systems, writing
@@ -234,14 +234,14 @@ and suggests diagnostic and mitigation strategies.</description>
 and Implementation Checklist</title>
       <link>https://architectsofintent.com/appendix-a-setup-and-implementation-checklist</link>
       <guid>https://architectsofintent.com/appendix-a-setup-and-implementation-checklist</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:42 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:06 +0000</pubDate>
       <description>This appendix does three things:</description>
     </item>
     <item>
       <title>Search</title>
       <link>https://architectsofintent.com/search</link>
       <guid>https://architectsofintent.com/search</guid>
-      <pubDate>Sat, 21 Feb 2026 17:01:40 +0000</pubDate>
+      <pubDate>Sun, 22 Feb 2026 02:17:04 +0000</pubDate>
       <description>Search works entirely in your browser. Results update as you type.</description>
     </item>
   </channel>
