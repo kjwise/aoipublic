@@ -96,6 +96,46 @@
 <div class="part-title">Introduction</div>
 <div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-0-introduction">Chapter 0 – Introduction</h1>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This book shows how to turn stochastic AI output into deterministic,
+auditable engineering systems. The core move is to engineer the
+development loop itself, not trust raw generation.</p>
+<p>The system is built from five mechanisms:</p>
+<ul>
+<li><strong>Deterministic context:</strong> give the model a narrow,
+versioned slice of the real system.</li>
+<li><strong>Structured intent:</strong> express the requested change as
+a machine-checkable mission/contract, not a vague prompt.</li>
+<li><strong>Hard validators:</strong> enforce invariant checks that
+return <code>PASS/FAIL</code> before merge.</li>
+<li><strong>Bounded loops:</strong> iterate
+<code>propose -&gt; validate -&gt; refine</code> with explicit retry and
+scope limits.</li>
+<li><strong>Immutable governance:</strong> record receipts (diffs,
+validator logs, decisions) in an append-only evidence trail.</li>
+</ul>
+<p>What this buys you:</p>
+<ul>
+<li>Higher iteration speed without higher drift risk.</li>
+<li>Changes that are auditable, replayable, and reviewable.</li>
+<li>A pattern that scales from single-file edits to organization-level
+change control.</li>
+</ul>
+<p>How to read this book:</p>
+<ul>
+<li>Part I builds a working loop first.</li>
+<li>Later parts explain the model and scaling patterns behind it.</li>
+</ul>
+<h2 id="the-sdac-stack-one-diagram">The SDaC Stack (One Diagram)</h2>
+<p>This is the full operating stack used throughout the book:</p>
+<pre class="mermaid"><code>flowchart TB
+  S["Substrate"] --&gt; L["Loop"]
+  L --&gt; G["Governance"]
+  G --&gt; M["Maintenance"]
+  M --&gt; R["Reflection"]</code></pre>
+<p>Read left to right: build on a concrete substrate, run bounded loops,
+enforce governance, sustain through maintenance, and improve through
+reflection.</p>
 <h2 id="the-shape-of-all-work">The Shape of All Work</h2>
 <section class="col-span-1 md:col-span-12 mt-2 mb-12" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-01-shape-of-all-work" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i1-section-01-shape-of-all-work</span>
@@ -316,99 +356,94 @@ surfaces at higher ones.</p>
 <p>The iteration that took a day now takes minutes. The cycle that took
 a sprint now takes a day. The process that required a team now runs with
 one person and an agent.</p>
-<p>This sounds like pure acceleration—and it is. But acceleration
-without structure isn’t progress; it’s chaos. A faster loop that drifts
-is just faster drift. A faster loop that breaks is just faster breakage.
-Speed amplifies whatever’s already there: good practices become
-superpowers, bad practices become disasters.</p>
+<p>This is pure acceleration. Without structure, it becomes chaos. A
+faster loop that drifts is faster drift. A faster loop that breaks is
+faster breakage. Speed amplifies what is already there: good practices
+become superpowers, bad practices become disasters.</p>
 <p><strong>This is the question Software Development as Code (SDaC)
 answers: How do you harness accelerated iteration without accelerating
 into a wall?</strong></p>
-<p>In this book, SDaC is the name I’m giving to the bundle of mechanisms
-that make accelerated iteration safe: explicit intent surfaces, bounded
-effectors, deterministic validators, and loops that converge.</p>
-<p>The answer is deceptively simple: you make the loop itself the
-product.</p>
-<p>Not the code. Not the features. Not the output. The <em>loop</em>—the
-process that produces output—becomes the thing you design, validate, and
-improve. If your loop is sound, the outputs tend to follow. If your loop
-is broken, no amount of effort saves you.</p>
+<p>In this book, SDaC names the mechanisms that make accelerated
+iteration safe: explicit intent surfaces, bounded effectors,
+deterministic validators, and loops that converge.</p>
+<p>The answer is simple: make the loop the product.</p>
+<p>You design, validate, and improve the <em>loop</em> that produces
+output. If the loop is sound, outputs tend to follow. If the loop is
+broken, no amount of effort saves you.</p>
 <p>If the process is validated, then <span class="math inline"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span>
-is trustworthy.</p>
-<p>This is why the book is structured the way it is. Part I builds a
-loop. Not a product, not a feature—a loop. Once you have a validated
-loop, you can feed it anything. The loop is the moat.</p>
+becomes trustworthy.</p>
+<p>This is why the book is structured this way. Part I builds a loop
+first. Once you have a validated loop, you can feed it anything.</p>
 <p><strong>The fractal structure means this scales.</strong></p>
 <p>A validated loop at the function level is the same pattern as a
 validated loop at the organization level. The primitives (intent →
 attempt → validation → integration) are identical. The clock speeds
 differ. The artifacts differ. But the shape is the same.</p>
-<p>The way you scale is composition: function-level loops roll up into
-feature loops, feature loops roll up into service loops, and service
-loops roll up into org-level change control—same shape, different
-artifacts.</p>
+<p>You scale by composition: function-level loops roll up into feature
+loops, feature loops roll up into service loops, and service loops roll
+up into org-level change control—same shape, different artifacts.</p>
 <p>SDaC doesn’t give you a better way to write code. It gives you a
-better way to <em>iterate</em>—and since all work is iteration, that’s
-the same as giving you a better way to work.</p>
-<p>The rest of this book is about making that concrete. Let’s zoom in to
-one Friday—the kind of Friday that reveals what’s missing.</p>
+better way to <em>iterate</em>.</p>
+<p>With that framing in place, zoom in to one Friday—the kind that
+reveals what’s missing.</p>
 <p>Friday, 4:03 PM.</p>
 <p>You vibe-code a feature with an AI assistant:</p>
 <p>“Add pagination to <code>GET /api/users</code>.”</p>
 <p>It drafts the handler, tweaks a test, edits the API contract
 (OpenAPI), and slips in a refactor you didn’t ask for.</p>
 <p>The diff looks reasonable. CI passes. You merge it.</p>
-<p>This is what vibe coding feels like: high velocity, low friction, and
-a widening gap between what shipped and what you can confidently
-explain.</p>
-<p>Vibe coding isn’t irrational—it produces rapid prototypes and demos.
-The problem emerges on Day 30, not Day 1.</p>
-<p>CI compiled the service. It didn’t validate the API contract your
+<p>Velocity is high, friction is low, and the gap between what shipped
+and what you can explain gets wider.</p>
+<p>Vibe coding is not irrational; it produces rapid prototypes and
+demos. The problem appears on Day 30, not Day 1 – when drift
+compounds.</p>
+<p>CI compiled the service. It did not validate the API contract your
 mobile client ships against.</p>
 <p>Saturday morning, your mobile app is down.</p>
 <p>The assistant introduced a contract drift: <code>limit</code> became
 a string in the OpenAPI spec while the rest of the system still treats
 it as an integer.</p>
-<p>Variants include enum changes, breaking nested object structures, and
-silently dropping required fields. Your type system never saw it; the
-mismatch lived in a JSON contract surface.</p>
+<p>Variants include enum changes, broken nested object structures, and
+dropped required fields. Your type system never saw it; the mismatch
+lived in a JSON contract surface.</p>
 <p>Three engineers spend the weekend rolling back and rebuilding
 confidence.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="kw">--- a/openapi.json</span></span>
-<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="dt">+++ b/openapi.json</span></span>
-<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="dt">@@ -312,7 +312,7 @@</span></span>
-<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a>   "limit": {</span>
-<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a><span class="st">-    "type": "integer"</span></span>
-<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a><span class="va">+    "type": "string"</span></span>
-<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a>   }</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="kw">--- a/openapi.json</span></span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="dt">+++ b/openapi.json</span></span>
+<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="dt">@@ -312,7 +312,7 @@</span></span>
+<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a>   "limit": {</span>
+<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="st">-    "type": "integer"</span></span>
+<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="va">+    "type": "string"</span></span>
+<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a>   }</span></code></pre></div>
 <p>Now the same scenario, but with SDaC.</p>
 <p>In SDaC, the assistant doesn’t get to “just make the change.” It
 proposes a diff inside a loop: narrow the context → propose a patch →
-run fast deterministic gates → tighten constraints and retry → record
+run deterministic gates → tighten constraints and retry → record
 evidence.</p>
-<p>Think of it like a factory line: a robot can place parts quickly, but
-the product only ships if the QA gate says PASS.</p>
+<p>Think of it as a factory gate: generation is fast, but only validated
+output ships.</p>
 <p>Later we’ll give names to these pieces: the diff-writer is an
 <strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a></strong>, the gates are <strong>Validators</strong>
 (together, the system’s “<a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>”), and the evidence trail is the
 <strong>Ledger</strong>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> make ship MISSION=<span class="st">"Paginate GET /api/users"</span></span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="ex">[PREP]</span> Slice: openapi.json, src/users_handler.ts, clients/mobile/<span class="pp">*</span></span>
-<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 1: proposed patch</span>
-<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Contract alignment <span class="er">(</span><span class="ex">Map/Terrain</span><span class="kw">)</span><span class="bu">:</span> FAIL <span class="er">(</span><span class="ex">OpenAPI</span> drift: <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> must remain integer<span class="kw">)</span></span>
-<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="ex">[REFINE]</span> Retrying with constraint: keep <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> as integer everywhere</span>
-<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 2: proposed patch</span>
-<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Contract alignment <span class="er">(</span><span class="ex">Map/Terrain</span><span class="kw">)</span><span class="bu">:</span> PASS</span>
-<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Generated client Validator: PASS</span>
-<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="ex">[LEDGER]</span> build/ledger/2026-02-06T1603Z/ <span class="er">(</span><span class="fu">diff</span> + validator output<span class="kw">)</span></span>
-<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="ex">[RESULT]</span> PR ready for review <span class="er">(</span><span class="ex">gates</span> passing<span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="ex">$</span> make ship MISSION=<span class="st">"Paginate GET /api/users"</span></span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="ex">[PREP]</span> Slice: openapi.json, src/users_handler.ts, clients/mobile/<span class="pp">*</span></span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 1: proposed patch</span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Contract alignment <span class="er">(</span><span class="ex">Map/Terrain</span><span class="kw">)</span><span class="bu">:</span> FAIL <span class="er">(</span><span class="ex">OpenAPI</span> drift: <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> must remain integer<span class="kw">)</span></span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a><span class="ex">[REFINE]</span> Retrying with constraint: keep <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> as integer everywhere</span>
+<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 2: proposed patch</span>
+<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Contract alignment <span class="er">(</span><span class="ex">Map/Terrain</span><span class="kw">)</span><span class="bu">:</span> PASS</span>
+<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Generated client Validator: PASS</span>
+<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a><span class="ex">[LEDGER]</span> build/ledger/2026-02-06T1603Z/ <span class="er">(</span><span class="fu">diff</span> + validator output<span class="kw">)</span></span>
+<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a><span class="ex">[RESULT]</span> PR ready for review <span class="er">(</span><span class="ex">gates</span> passing<span class="kw">)</span></span></code></pre></div>
 <p><em>Composite example (representative): log lines and paths
 simplified, but the gate structure is real.</em></p>
-<p>Contract alignment here just means: the API contract (Map) still
-matches the service behavior (Terrain). The validator rejects type drift
-before it escapes into production.</p>
-<p>The gate catches it in seconds, before review. Nobody’s weekend is
-ruined. That’s the difference.</p>
+<p>Contract alignment means the API contract (Map) still matches service
+behavior (Terrain). The validator rejects type drift before it escapes
+into production.</p>
+<p>The gate catches it in seconds. Nobody’s weekend is ruined.</p>
+<p>In an AI-accelerated environment, this is the default failure
+mode.</p>
 <p>The goal is not a smarter assistant. The goal is a safer process:
 bounded context in, diffs out, deterministic gates decide what can
 merge, and the Ledger records why.</p>
@@ -423,7 +458,7 @@ that makes changes auditable.</p>
 <p>This book is for engineers building or governing AI-assisted
 development who want mechanisms, not hype. If you want to build
 immediately, start with Part I: it gives you a working loop first, then
-we earn the theory by explaining why it works.</p>
+earns the theory by explaining why it works.</p>
 <h2 id="what-sdac-is-quickstart">What SDaC is (Quickstart)</h2>
 <p>This book is not about using AI inside CI. It’s about turning the
 software development lifecycle (SDLC) itself into a compiled artifact —
@@ -446,8 +481,8 @@ retry.</p>
   L --&gt; R[Review + Merge]
   V --&gt;|FAIL| F["Refine / Revert&lt;br/&gt;(tighten + retry)"]
   F --&gt; M</code></pre>
-<p>Caption: The FAIL path loops back to refine context and retry—this is
-the core mechanism that makes the loop self-correcting.</p>
+<p>Caption: The FAIL path loops back to refine context and retry. This
+is the core mechanism that makes the loop self-correcting.</p>
 <h3 id="why-now-economics">Why now (economics)</h3>
 <p>SDaC becomes practical once the economics of automation change.
 Foundation work that used to be expensive to build and maintain—schemas,
@@ -474,9 +509,9 @@ thresholds) first-class, versioned, and enforceable?</li>
 <li>Is the model an assistant, or an <strong>Effector</strong> inside a
 constrained machine?</li>
 </ul>
-<p>If the answer is “no, humans are still the engine,” it’s CI-adjacent
-automation. If “yes, humans are operators of an executable system,”
-that’s SDaC.</p>
+<p>If the answer is “no,” you do not have SDaC. You have CI-adjacent
+automation. If “yes, humans are operators of an executable system,” that
+is SDaC.</p>
 <h3 id="start-here-one-loop-one-gate">Start here (one loop, one
 gate)</h3>
 <p>Go to <a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a> and run MVF v0 (“Quick Bootstrap”). You should see a
@@ -501,11 +536,10 @@ map, jump to <a class="chapter-link" href="appendix-a-setup-and-implementation-c
 <h2 id="the-manifesto">The Manifesto</h2>
 <p>We do not optimize for “smart” models; we optimize for converging
 systems.</p>
-<p>AI is a stochastic engine. We do not negotiate with it. We constrain
-it.</p>
-<p>We buy down uncertainty with constraints, logs, and tests. We treat
-language as a contract. We do not ship vibes. We ship verifiable
-state.</p>
+<p>AI is a stochastic engine. We constrain it.</p>
+<p>We buy down uncertainty with constraints, logs, and tests – not hope.
+We treat language as a contract. We do not ship vibes. We ship
+verifiable state.</p>
 <p>We do not trust the model. We trust the loop.</p>
 <p>Start reading Friday, ship it Monday.</p>
 <p>If you want the longer version (the stance behind the mechanics), it
@@ -580,7 +614,7 @@ trails matter.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>60cb484cf600</code>
+      Version: <code>c911c6ae0a86</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

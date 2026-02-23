@@ -94,18 +94,15 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">15 min read</span></div>
+<div class="chapter-meta"><span class="read-time">12 min read</span></div>
 <h1 id="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 –
 The Ouroboros Protocol (Why Loops Converge)</h1>
-<p>In Part I, you built a working loop: take a goal, propose a change,
-validate it, and if it fails, feed the error signal into the next
-attempt. This iterative process is the engine of reliability for
-Software Development as Code.</p>
-<p>We call it the <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a> because each iteration consumes its
-own artifacts as input: the last diff and the deterministic failure
-signal. But this is not an endless cycle. It is <a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a> with an exit
-strategy: converge to a stable passing state, or abort via circuit
-breakers and leave the Terrain unchanged.</p>
+<p>In Part I, you built the loop: propose a change, validate it, and
+feed deterministic failures into the next attempt.</p>
+<p>We call this bounded self-reference the <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a>. Each
+iteration consumes the last diff plus <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> findings, and each Mission
+ends deterministically: <code>PASS</code> and commit, <code>FAIL</code>
+and revert, or escalate with evidence.</p>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-08-ouroboros-protocol" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-08-ouroboros-protocol</span>
 <style>
@@ -221,7 +218,7 @@ breakers and leave the Terrain unchanged.</p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Deterministic stop conditions</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-<span class="block font-mono text-brand-vibrant">Write → <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> → Refine</span>
+<span class="block font-mono text-brand-vibrant">Write → Judge → Refine</span>
 <span class="block mt-2">Stop on <span class="font-mono text-brand-strong">PASS</span> (converged) or on
           <span class="font-mono text-brand-strong">budget exhausted</span> (escalate).</span>
 <span class="block mt-2">Judge can route to refine, rewrite, or re-scope before the next loop.</span>
@@ -876,15 +873,8 @@ rules drift). Ouroboros is the unit process that turns drift into a
 bounded repair under <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> — whether the diff touches code (Terrain)
 or a Map surface.</p></li>
 </ol>
-<p>Ouroboros is finite per <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>. A single run should end in
-one of a few outcomes: <code>PASS</code> and commit, <code>FAIL</code>
-and revert, or defer/escalate with evidence. The system can run many
-Ouroboros loops over months. That is where continuous renewal lives —
-not in an infinite retry loop.</p>
-<p>The core insight here is that you don’t need a perfectly
-deterministic Large Language Model (LLM) to achieve reliable, auditable
-outputs. You need a deterministic <em>process</em> that can tame a
-stochastic engine. The Ouroboros Protocol provides that process.</p>
+<p>The core insight: you do not need a deterministic LLM. You need a
+deterministic process that can tame a stochastic engine.</p>
 <h2 id="the-core-loop-write-judge-refine">The Core Loop: Write → Judge →
 Refine</h2>
 <p>At its heart, the Ouroboros Protocol is a feedback control loop:</p>
@@ -896,16 +886,10 @@ LLMs are stochastic engines (<a class="chapter-link" href="chapter-4-the-stochas
 probabilistic. Even with identical inputs, the output might vary
 slightly between runs.</p></li>
 <li><p><strong>Judge</strong>: Run deterministic Validators (Physics) to
-produce structured findings. In the simplest loops, the Judge is just
-the validator suite. In richer loops, it also selects the next move
-(commit, refine, revert/defer) from explicit policy.</p></li>
-<li><p><strong>Refine</strong>: If the <code>Judge</code> reports errors
-or non-compliance, the <code>Refine</code> step prepares the feedback
-for the next iteration. This usually involves formatting the
-<code>Judge</code>’s output (e.g., error messages, diffs against a
-target, failing <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> cases) and feeding it into the next model
-request. The LLM then attempts to incorporate this specific,
-deterministic feedback to improve its next generation.</p></li>
+produce structured findings and the next move (commit, refine,
+revert/defer).</p></li>
+<li><p><strong>Refine</strong>: Feed the exact findings back into the
+next attempt, with scope and output constraints unchanged.</p></li>
 </ol>
 <p>This cycle repeats until the <code>Judge</code> reports success, or a
 circuit breaker is tripped.</p>
@@ -934,7 +918,7 @@ progress stalls; route hard cases to humans.</li>
   Pass -- yes --&gt; Commit["COMMIT + TRACE"] --&gt; End([END])
   Pass -- no --&gt; Budgets{"BUDGETS / PROGRESS OK?"}
   Budgets -- yes --&gt; Refine["REFINE FEEDBACK&lt;br/&gt;+ UPDATE STATE"] --&gt; Write
-  Budgets -- no --&gt; Escalate["ESCALATE / DEFER + TRACE"] --&gt; Write</code></pre>
+  Budgets -- no --&gt; Escalate["ESCALATE / DEFER + TRACE"] --&gt; End</code></pre>
 <h3 id="state-what-the-loop-remembers">State (what the loop
 remembers)</h3>
 <p>There are two “memories” in Ouroboros:</p>
@@ -948,7 +932,7 @@ used to generate the next candidate.</li>
 entire run history back into the model request.</p>
 <p><strong>Practical state bundle per attempt:</strong></p>
 <ul>
-<li><code>mission</code>: the Mission Object (authority)</li>
+<li><code>mission</code>: the <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> (authority)</li>
 <li><code>scope</code>: allowlist/denylist + allowed edit regions
 (policy)</li>
 <li><code>budgets</code>: remaining attempts, time, spend, diff/scope
@@ -1001,39 +985,29 @@ OUTPUT: Unified diff only. No prose.
 <p>If your work is JSON-only, swap “Unified diff only” for “Valid JSON
 only” and make strict parsing the first gate.</p>
 <h2 id="convergence-vs.-thrashing">Convergence vs. Thrashing</h2>
-<p>Understanding how this loop behaves is crucial for building robust
-SDaC systems.</p>
-<h3 id="convergence-when-the-loop-settles">Convergence: When the Loop
-Settles</h3>
-<p><a class="concept-link" href="concepts#convergence" title="See concept: Convergence">Convergence</a> occurs when the <code>Write → Judge → Refine</code> loop
-successfully guides the LLM to an output that satisfies all
-<code>Judge</code> criteria. This looks like:</p>
+<p><a class="concept-link" href="concepts#convergence" title="See concept: Convergence">Convergence</a> means the failing set shrinks to zero and the loop exits
+with <code>PASS</code>. Thrashing means signatures repeat or scope
+expands without reducing failures.</p>
+<h3 id="convergence-signals-in-practice">Convergence signals in
+practice</h3>
+<p>In real traces, convergence usually has three visible signals:</p>
 <ul>
-<li><p><strong>Decreasing Errors</strong>: The <code>Judge</code>
-reports fewer and fewer errors with each iteration.</p></li>
-<li><p><strong>Stable Output</strong>: The diffs between successive LLM
-outputs become smaller, eventually leading to a stable output that
-passes all Validators.</p></li>
-<li><p><strong>Successful Validation</strong>: The <code>Judge</code>
-returns a “pass” or “no issues found.”</p></li>
+<li>the failing validator set shrinks across attempts</li>
+<li>the diff gets more localized (fewer files, smaller edit
+regions)</li>
+<li>retries shift from structural fixes to small semantic fixes</li>
 </ul>
-<p><strong>Why it happens:</strong> The deterministic feedback from the
-<code>Judge</code> acts as a strong gravitational pull, guiding the LLM
-towards the desired state. Even though the LLM’s internal generation
-process is stochastic, its subsequent attempts are conditioned by
-precise, unambiguous error messages. It’s like navigating a maze: the
-LLM might try different paths, but the <code>Judge</code> reliably tells
-it “dead end here, try another direction.”</p>
-<p><strong>Evidence of Convergence:</strong> A key output of a
-converging loop is a trace that shows the progressive reduction of
-errors, leading to a final successful validation. This trace, often
-stored as part of your SDaC system’s audit log, is your evidence of
-reliability.</p>
+<p>You do not need perfectly monotonic progress every attempt, but you
+should see net progress inside a bounded window.</p>
+<p>A common starting point is a 3-attempt progress window: require
+either a smaller failing-code set or a smaller authorized diff surface
+inside that window. If neither changes, classify the run as
+non-converging and escalate.</p>
 <h3 id="attractors-system-geometry-for-done">Attractors: System Geometry
 for “Done”</h3>
 <p>Convergence is not luck. It’s geometry.</p>
 <p>An <strong>Attractor</strong> is the region of “solution space” where
-your Immune System is satisfied: the candidate parses cleanly, stays in
+your <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> is satisfied: the candidate parses cleanly, stays in
 scope, respects budgets, and passes every Validator.</p>
 <p>You can picture it as a “valley” in the space of possible diffs: once
 a candidate lands inside it, the Validators stop pushing it back
@@ -1155,76 +1129,63 @@ quality.”</li>
 </ul>
 <p>The goal is a loop that is strict about boundaries, cheap about early
 failure, and honest about when a human needs to intervene.</p>
-<blockquote>
-<p><strong>Why Loops Converge (Or Don’t)</strong></p>
-<p>The SDaC loop is a dynamical system. Each iteration transforms state:
-<span class="math inline"><em>s</em><sub><em>n</em> + 1</sub> = <em>F</em>(<em>s</em><sub><em>n</em></sub>)</span>.
-Understanding <em>why</em> some loops stabilize while others thrash
-forever comes from one concept: <strong>attractors</strong>.</p>
-<p>An <strong>attractor</strong> is a state the system settles
-into—where the Immune System passes and the loop stops mutating. Think
-of it as a basin: once you’re close enough, iterations pull you toward
-the stable point.</p>
-<pre class="mermaid"><code>flowchart TD
-  subgraph Basin["Basin of attraction"]
-    S1["State 1"] --&gt; S2["State 2"] --&gt; Stable["Stable&lt;br/&gt;(Attractor: tests pass, loop exits)"]
-  end
-  I[Iteration] --&gt; S1</code></pre>
-<p><strong>Why loops thrash:</strong> When the attractor basin is small
-or the iteration steps are too large, the system overshoots and never
-settles. This is why slice size matters—large slices mean large state
-jumps, which can hop over the attractor entirely.</p>
-<p><strong>Why small changes sometimes break everything:</strong> The
-boundary between “converges” and “diverges” can be fractal. Tiny changes
-to the <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a>, the Mission Object, or generation parameters can
-shift which basin you’re in. This isn’t a bug in SDaC—it’s the nature of
-iterative systems. The defense is validation at every step, so you
-detect divergence early.</p>
-<p><strong>The practical takeaway:</strong> If your loop isn’t
-converging, make smaller steps (reduce slice scope), tighten the
-attractor (add more specific acceptance criteria), or check whether the
-problem even has a stable solution in the current configuration.</p>
-<p><em>This framing isn’t required to use SDaC, but it explains the
-“why” behind slice sizing and iteration limits.</em></p>
-</blockquote>
-<h3 id="thrashing-when-the-loop-flails">Thrashing: When the Loop
-Flails</h3>
-<p>Thrashing occurs when the loop fails to converge, either getting
-stuck in a cycle of errors or producing wildly different (and still
-incorrect) outputs with each attempt. This looks like:</p>
+<h3 id="failure-routing-matrix-fast-policy">Failure routing matrix (fast
+policy)</h3>
+<p>Codify the first response per failure class so retries stay
+deterministic:</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Failure class</th>
+<th>First response</th>
+<th>Retry policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parse/shape (<code>invalid diff</code>,
+<code>invalid JSON</code>)</td>
+<td>tighten output contract, fail fast</td>
+<td>retry after contract tightening</td>
+</tr>
+<tr>
+<td>Scope/policy (<code>out_of_allowlist</code>)</td>
+<td>reject candidate, keep mission scope fixed</td>
+<td>retry only with stricter scope</td>
+</tr>
+<tr>
+<td>Semantic validator failures</td>
+<td>feed exact findings back to Refine</td>
+<td>retry within progress window</td>
+</tr>
+<tr>
+<td>Infra/transient (<code>timeout</code>, rate limit)</td>
+<td>backoff, preserve last good state</td>
+<td>retry with bounded attempts</td>
+</tr>
+</tbody>
+</table>
+<p>This prevents a common anti-pattern: treating every <code>FAIL</code>
+as equivalent and blindly retrying.</p>
+<h3 id="thrashing-deterministic-stop-signals">Thrashing: deterministic
+stop signals</h3>
+<p>Treat thrash as a state classification, not a vibe:</p>
 <ul>
-<li><p><strong>Persistent Errors</strong>: The <code>Judge</code>
-reports the same errors repeatedly across iterations, or replaces old
-errors with new, unrelated ones.</p></li>
-<li><p><strong>Unstable Output</strong>: Successive diffs are large,
-indicating significant changes in the LLM’s output without moving
-towards a correct solution.</p></li>
-<li><p><strong>Circuit Breakers Tripped</strong>: The loop hits its
-maximum iteration count or other predefined limits.</p></li>
+<li>repeated <code>(diff_hash, failing_validator_codes)</code>
+signatures</li>
+<li>no shrinking failure set within your progress window</li>
+<li>expanding blast radius without better Judge output</li>
+<li>recurring scope/policy failures</li>
 </ul>
-<p><strong>Why it happens:</strong></p>
-<ul>
-<li><p><strong>The attractor is malformed:</strong> the “definition of
-done” is too loose (the loop wanders) or not reachable (the loop cannot
-possibly pass).</p></li>
-<li><p><strong>Ambiguous or Insufficient Context</strong>: If the
-initial Mission Object or supplementary context is too vague, the LLM
-lacks the clear parameters needed to generate correctly.</p></li>
-<li><p><strong>Flawed Validation</strong>: A <code>Judge</code> that is
-incorrect, too strict, or provides unhelpful feedback can confuse the
-LLM, making convergence impossible.</p></li>
-<li><p><strong>Conflicting Requirements</strong>: If the task itself is
-contradictory, the LLM will struggle to find a solution that satisfies
-all criteria.</p></li>
-<li><p><strong>Misunderstood Feedback</strong>: The LLM might not
-correctly interpret the error messages provided by the
-<code>Judge</code>, leading to irrelevant changes.</p></li>
-</ul>
-<p><strong>Evidence of Thrashing:</strong> A trace showing repeated or
-shifting errors, large diffs across many iterations, and ultimately a
-“failed” status due to a tripped circuit breaker. This is equally
-valuable audit information, highlighting areas where your context, your
-Mission Object, or your validation rules need improvement.</p>
+<p>When these signals appear, abort and escalate. Re-running unchanged
+inputs is budget burn, not progress. Typical fixes are: tighten the
+slice, tighten the acceptance criteria, or split the Mission into
+smaller units.</p>
 <h2 id="circuit-breakers-guardrails-for-stochasticity">Circuit Breakers:
 Guardrails for Stochasticity</h2>
 <p>A loop that can retry can also thrash. Circuit breakers make failure
@@ -1343,46 +1304,48 @@ engine; the loop is the vehicle.</p>
 <p>“Vehicle” is not poetry here. It’s governance: your loop defines
 scope, budgets, validation, and audit evidence. That is what lets you
 scale autonomy without scaling incidents.</p>
-<h2 id="convergence-and-thrashing-compressed-traces">Convergence and
-Thrashing (Compressed Traces)</h2>
-<p>You don’t need long logs to spot the pattern.</p>
-<p><strong>Converging loop:</strong> the Judge’s error set shrinks.</p>
+<h2 id="compressed-trace-readout">Compressed Trace Readout</h2>
+<p>You can classify loop behavior quickly from a short trace:</p>
 <table>
 <thead>
 <tr>
 <th>attempt</th>
-<th>Judge signal</th>
-<th>Next move</th>
+<th>failing codes</th>
+<th>diff scope</th>
+<th>classification</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
-<td>missing required field</td>
-<td>refine with the exact failure</td>
+<td>5</td>
+<td>4 files</td>
+<td>initial</td>
 </tr>
 <tr>
 <td>2</td>
-<td>missing nested field</td>
-<td>refine again</td>
+<td>3</td>
+<td>2 files</td>
+<td>converging</td>
 </tr>
 <tr>
 <td>3</td>
+<td>1</td>
+<td>1 file</td>
+<td>converging</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0</td>
+<td>1 file</td>
 <td><code>PASS</code></td>
-<td>commit and exit</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Thrashing loop:</strong> the error set doesn’t shrink (or
-becomes unjudgeable).</p>
-<ul>
-<li>attempt 1: errors=3</li>
-<li>attempt 2: errors=3 (same)</li>
-<li>abort: minimum-progress violated → revert/defer</li>
-</ul>
-<p>When you see thrash, the move is not “try harder.” The move is to
-tighten the slice, tighten the attractor, or split the Mission
-Object.</p>
+<p>A thrashing trace tends to alternate signatures
+(<code>A -&gt; B -&gt; A</code>) or keep the same failing set while
+scope expands. That is your signal to stop retries and change inputs,
+not keep sampling.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
@@ -1440,7 +1403,7 @@ deterministic <code>Judge</code> drives the stochastic LLM.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>60cb484cf600</code>
+      Version: <code>c911c6ae0a86</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

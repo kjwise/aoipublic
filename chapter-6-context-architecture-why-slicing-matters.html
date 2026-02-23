@@ -94,24 +94,19 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">16 min read</span></div>
+<div class="chapter-meta"><span class="read-time">14 min read</span></div>
 <h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
 Context Architecture (Why Slicing Matters)</h1>
-<p>You’ve built your first SDaC loop in Part I. You’ve seen it reliably
-generate, judge, and refine code. Now, in Part II, we drill into
-<em>why</em> it works, starting with the most critical ingredient:
-context.</p>
-<p>If you’ve spent any time working with large language models (LLMs),
-you’ve encountered the context window: the maximum amount of text a
-model can process in one call. Context windows range from thousands to
-hundreds of thousands of tokens and keep expanding, but the patterns in
-this chapter don’t depend on a specific number.</p>
-<p>The limit itself is <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>. What you choose to put inside the window
-is architecture. It’s tempting to treat the window like a bucket: dump
-everything relevant (and often irrelevant) into it and hope the model
-figures it out. This approach might work for quick demos, but it’s a
-recipe for non-determinism, <a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a>, and unreliable systems in
-production. It’s why “better Mission Objects” alone stops scaling.</p>
+<p>Part I showed the loop. This chapter defines the <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">context architecture</a>
+that makes that loop deterministic.</p>
+<p>Context windows keep expanding, but attention is finite. The limit
+itself is <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>; what you put inside the window is architecture.</p>
+<p>Slicing is not about fitting more tokens. It is about concentrating
+attention on contracts, evidence, and boundaries so generation does not
+wander into drift. When context grows faster than attention quality,
+outputs can look complete while quietly violating constraints. Slicing
+is the control surface that keeps that failure mode visible and
+testable.</p>
 <section class="col-span-1 md:col-span-12 mt-8 mb-8" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-08-optimization-terrain" data-infographic-selector="main &gt; section:nth-of-type(8)" data-infographic-source="infographic.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i1-section-08-optimization-terrain</span>
 <div class="bg-brand-dark rounded-xl shadow-2xl p-8 text-white overflow-hidden relative">
@@ -138,42 +133,21 @@ production. It’s why “better Mission Objects” alone stops scaling.</p>
                 </div>
 </div>
 </section>
-<p>Even when a model accepts enormous contexts, attention is not
-uniform. A huge context window is not a huge attention budget:
-information buried in the middle of long contexts is easy to underuse
-(“lost in the middle”). Slicing isn’t about fitting more data in — it’s
-about focusing attention to reduce Stochastic Drift. Structure is
-compression for attention: it shrinks the surface area where generation
-can wander into irrelevant edits or invented structure.</p>
-<p>In practice, the Map is an essential part of a context slice. A
-well-kept Map is a compression artifact: it turns a large Terrain into a
-smaller set of identities, constraints, and invariants. For many tasks,
-that Map carries more meaning per token than dumping the entire
-Terrain.</p>
-<p>From one perspective, SDaC is about maximizing semantic density: pack
-the slice with contracts, evidence, and boundaries so the stochastic
-step spends its budget on the right surface.</p>
-<p>Reliable GenAI systems don’t just <em>have</em> context; they
-<em>engineer</em> it.</p>
-<p>If you want the Part I version first: Chapter 2 introduced slicing
-hygiene as a <code>Prep</code> responsibility (“Slicing 101” and the
-Skeleton-First Rule). This chapter is the full treatment: Context
-Graphs, <a class="concept-link" href="concepts#branching-factor-rule-of-seven" title="See concept: Branching Factor (Rule of
-Seven)">Branching Factor</a>, and the failure modes that show up in real
-systems. <a class="chapter-link" href="appendix-b-failure-mode-gallery#appendix-b-failure-mode-gallery" title="Go to: Appendix B">Appendix B</a> is the quick debugging atlas when a loop starts
-producing weird diffs or thrashing.</p>
+<p>Even when models accept huge contexts, attention is not uniform
+(“lost in the middle”). Structure is compression for attention: it
+shrinks the surface where generation can invent structure or leak
+scope.</p>
+<p>In practice, a well-kept Map carries more meaning per token than
+dumping full Terrain. Reliable systems do not just have context; they
+engineer it.</p>
+<p>Chapter 2 gave the operational version of slicing in
+<code>Prep</code>. Here we add the full model: Context Graphs,
+branching-factor heuristics, and slice failure modes.</p>
 <h2 id="from-context-windows-to-context-graphs">From Context Windows to
 Context Graphs</h2>
-<p>A raw context window is like giving a junior engineer access to your
-entire codebase, asking them to Refine a specific bug, and telling them,
-“It’s in there somewhere.” They’ll spend more time sifting through noise
-than Refining the problem, and their solution might introduce new issues
-because they misunderstood the boundaries of their task.</p>
-<p>This is where <strong><a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a></strong> comes in. It’s
-the discipline of engineering how context is selected, structured, and
-bounded so an LLM (or any agent) can act deterministically. It moves
-beyond raw text dumps to a precise, verifiable understanding of what
-information is relevant and how it relates.</p>
+<p><strong>Context Architecture</strong> is the discipline of
+engineering how context is selected, structured, and bounded so an LLM
+(or any agent) can act deterministically.</p>
 <p>The core artifact of Context Architecture is the <strong>Context
 Graph</strong>. Imagine a graph where nodes represent discrete units of
 information—files, functions, classes, symbols, documentation segments,
@@ -256,72 +230,93 @@ extractor, and <code>slice_context_graph.py</code> consumes the graph to
 produce a bounded <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">context packet</a>.</p>
 <h2 id="how-to-slice-a-context-graph-for-deterministic-action">How to
 Slice a Context Graph for Deterministic Action</h2>
-<p>The goal of slicing is precision: the minimum necessary context to
-complete a task with high determinism and low risk of Stochastic Drift.
-Too little context leads to incomplete work; too much leads to “lost in
-the middle” phenomena and irrelevant generations.</p>
-<p>Here’s a systematic approach to slicing, building on concepts
-familiar to software engineers:</p>
+<p>The goal of slicing is precision: the minimum context that keeps
+determinism high and drift low.</p>
+<p>Use a deterministic four-step slice:</p>
 <ol type="1">
-<li><p><strong>Identify the Anchor Node:</strong> Every task has a focal
-point. This is your anchor node. If you’re Refining a bug, it might be
-the failing Immune System case, the function implicated in the stack
-trace, or the specific line of code. If you’re adding a feature, it’s
-the interface definition or the target file for implementation. This
-anchor defines the immediate scope of work.</p></li>
-<li><p><strong>Map First (Intent &amp; Constraints):</strong> Before
-diving into implementation details, an agent needs to understand the
-<em>intent</em> and <em>constraints</em>. This is your “Map” layer of
-context.</p>
+<li><strong>Anchor first:</strong> start from the failing case, target
+symbol, or interface being changed.
 <ul>
-<li><p><strong>Project Structure:</strong> How is the repository
-organized? (e.g., <code>src/</code>, <code>tests/</code>,
-<code>docs/</code>, <code>meta/</code>)</p></li>
-<li><p><strong>Architectural Contracts:</strong> Which interfaces,
-schemas, or data models must be adhered to? (e.g.,
-<code>api/v1/schema.json</code>, <code>interfaces.ts</code>)</p></li>
-<li><p><strong>Documentation:</strong> Relevant high-level design
-documents, user stories, or requirements. (e.g.,
-<code>docs/feature_x.md</code>)</p></li>
-<li><p><strong>Configuration:</strong> Global settings, environment
-variables, or build configurations that impact the change. (e.g.,
-<code>package.json</code>, <code>tsconfig.json</code>) The Map provides
-the guardrails and ensures the agent understands the “why” and “what are
-the rules” before the “how.” In SDaC, this often translates to providing
-your <code>meta/</code> directory or key architectural
-<code>README</code>s as initial context.</p></li>
+<li>Good anchors are concrete and machine-addressable (file + symbol,
+failing test id, validator code).</li>
+<li>If you cannot name the anchor precisely, you are still in diagnosis
+mode, not execution mode.</li>
 </ul></li>
-<li><p><strong>Terrain Second (Implementation Details):</strong> Once
-the Map is understood, you pull in the actual code and immediate
-dependencies—the “Terrain.” This layer is always interpreted
-<em>through</em> the lens of the Map.</p>
+<li><strong>Map first:</strong> include contracts, schemas, mission
+policy, and only docs/config that constrain correctness.
 <ul>
-<li><p><strong>Code Dependencies:</strong> The functions, classes, or
-modules directly called by, or calling, your anchor node.</p></li>
-<li><p><strong>Immune System cases:</strong> Related unit, integration,
-or end-to-end cases, especially if the task is bug-Refining or adding a
-new feature.</p></li>
-<li><p><strong>Relevant Snippets:</strong> Specific blocks of code, not
-entire files, that are tightly coupled to the task.</p></li>
+<li>Prefer sources that define “must” conditions (schema, API contract,
+policy file) over explanatory prose.</li>
+<li>Keep authority explicit: what is allowed to change, and what counts
+as done.</li>
 </ul></li>
-<li><p><strong>Prune Aggressively:</strong> This is where the “less is
-more” principle becomes paramount. After identifying potential context,
-ruthlessly eliminate anything that isn’t <em>strictly necessary</em> for
-the current task.</p>
+<li><strong>Terrain second:</strong> include anchor implementation,
+one-hop dependencies, and the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> surface that proves correctness.
 <ul>
-<li><p><strong>Irrelevant Modules:</strong> If you’re working on a
-backend API, frontend UI code is usually noise.</p></li>
-<li><p><strong>Unused Functions:</strong> Functions in the same file
-that are unrelated to the current task.</p></li>
-<li><p><strong>Excessive History:</strong> While useful for humans,
-commit history or extensive diffs might not be necessary for an LLM to
-generate a specific Refinement if the current state and target change
-are well-defined. The most effective pruning often relies on
-deterministic tools: AST parsers for dependency graphs, static analysis
-tools, or even simple <code>grep</code> commands for symbol
-resolution.</p></li>
+<li>Pull runtime behavior and test/assertion surfaces together so edits
+can be validated immediately.</li>
+<li>Avoid pulling whole subsystems when a one-hop neighborhood is
+enough.</li>
+</ul></li>
+<li><strong>Prune by budget:</strong> remove unrelated modules/history
+and enforce node/token/diff budgets.
+<ul>
+<li>Budget is part of correctness, not just performance.</li>
+<li>If scope grows, make that an explicit mission change instead of
+silent drift.</li>
 </ul></li>
 </ol>
+<p>If required dependencies still do not fit, split the Mission or chunk
+deterministically.</p>
+<h3 id="minimal-slice-manifest-deterministic-handoff">Minimal slice
+manifest (deterministic handoff)</h3>
+<p>Treat each slice as an explicit artifact, not an implicit prompt. A
+minimal manifest can be serialized and audited:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> tax-fix-2026-02-23</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="fu">anchor</span><span class="kw">:</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="at">  </span><span class="fu">file</span><span class="kw">:</span><span class="at"> tests/test_tax_service.py</span></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a><span class="at">  </span><span class="fu">symbol</span><span class="kw">:</span><span class="at"> test_calculate_income_tax_high_earner_scenario</span></span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="fu">map</span><span class="kw">:</span></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> docs/tax_rules.md</span><span class="co">#progressive_brackets</span></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="fu">terrain</span><span class="kw">:</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/tax_service.py</span><span class="co">#calculate_income_tax</span></span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">50</span></span>
+<span id="cb1-12"><a aria-hidden="true" href="#cb1-12" tabindex="-1"></a><span class="at">  </span><span class="fu">max_attempts</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
+<span id="cb1-13"><a aria-hidden="true" href="#cb1-13" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
+<span id="cb1-14"><a aria-hidden="true" href="#cb1-14" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> signature_unchanged</span></span>
+<span id="cb1-15"><a aria-hidden="true" href="#cb1-15" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_test_tax_case</span></span></code></pre></div>
+<p>Two reasons this helps:</p>
+<ul>
+<li>It separates <strong>selection</strong> (what evidence is in-bounds)
+from <strong>generation</strong> (what candidate to propose).</li>
+<li>It gives the Judge and Ledger a stable contract for replay, diffing,
+and incident review.</li>
+</ul>
+<p>If a run fails, update the manifest deterministically (scope,
+budgets, gates) instead of growing ad-hoc prompt text.</p>
+<h3 id="slice-qa-checklist-before-you-call-the-model">Slice QA checklist
+(before you call the model)</h3>
+<p>Run a quick deterministic check:</p>
+<ul>
+<li>Anchor is explicit (<code>file + symbol</code> or
+<code>validator code + path</code>), not a vague sentence.</li>
+<li>At least one contract source is present (schema/interface/policy),
+not just implementation files.</li>
+<li>At least one Judge surface is present (failing case or validator
+assertion).</li>
+<li>Write scope is declared (allowlist or allowed regions), not
+implied.</li>
+<li>Budgets are finite (<code>max_attempts</code>, scope/diff limits),
+not open-ended.</li>
+<li>Retrieved evidence has provenance (file + line or section id).</li>
+<li>No unrelated subsystems are included “just in case.”</li>
+<li>The slice can be replayed without hidden chat state.</li>
+</ul>
+<p>If any of these fail, repair the slice before generation. Many “model
+quality” complaints in production loops are unresolved slice-quality
+defects.</p>
 <h3 id="context-priority-stack-what-to-include-first">Context priority
 stack (what to include first)</h3>
 <p>When you have a fixed context budget, prioritization matters more
@@ -329,7 +324,7 @@ than cleverness. A practical ordering:</p>
 <ol type="1">
 <li><strong>Authority:</strong> system instructions + <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>
 (what is allowed, what “done” means).</li>
-<li><strong>Latest deterministic findings:</strong> the last <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>
+<li><strong>Latest deterministic findings:</strong> the last Judge
 output (structured failures, file/line, error codes).</li>
 <li><strong>The anchor surface:</strong> the exact file/region/symbol
 you’re changing.</li>
@@ -458,18 +453,18 @@ any policy that constrains it).</p>
 <code>GET /api/users</code> and <code>limit</code></p></li>
 <li><p>the Mission Object for the repair (scope allowlist + budgets +
 acceptance criteria), for example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Restore contract alignment for GET /api/users pagination"</span></span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="fu">scope_allowlist</span><span class="kw">:</span></span>
-<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> openapi.json</span></span>
-<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/users_handler.ts</span></span>
-<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> clients/mobile/src/types.ts</span></span>
-<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
-<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
-<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
-<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> validate_openapi_compat</span></span>
-<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_tests</span></span>
-<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mobile_typecheck</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Restore contract alignment for GET /api/users pagination"</span></span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="fu">scope_allowlist</span><span class="kw">:</span></span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> openapi.json</span></span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/users_handler.ts</span></span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> clients/mobile/src/types.ts</span></span>
+<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
+<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
+<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> validate_openapi_compat</span></span>
+<span id="cb4-11"><a aria-hidden="true" href="#cb4-11" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_tests</span></span>
+<span id="cb4-12"><a aria-hidden="true" href="#cb4-12" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mobile_typecheck</span></span></code></pre></div></li>
 </ul>
 <p><strong>Terrain second:</strong> include only the code and the Immune
 System cases that interpret that contract.</p>
@@ -492,7 +487,8 @@ drift” deterministic instead of creative.</p>
 <h3 id="branching-factor-rule-of-seven">Branching Factor (Rule of
 Seven)</h3>
 <p>Structure is a compression algorithm for attention. Keep your Map and
-Terrain queryable by maintaining a healthy branching factor (fan-out) at
+Terrain queryable by maintaining a healthy <a class="concept-link" href="concepts#branching-factor-rule-of-seven" title="See concept: Branching Factor (Rule of
+Seven)">branching factor</a> (fan-out) at
 each layer.</p>
 <ul>
 <li><strong>Junk drawers (high fan-out):</strong> A directory with 50
@@ -515,9 +511,6 @@ you’re at 1, flatten.</li>
 <p>The companion repo includes a <code>make branching-factor</code>
 target that runs <code>lint_branching_factor.py</code> to demonstrate
 this kind of linting.</p>
-<p>This layered approach ensures that the LLM receives relevant context
-in a structure that guides deterministic behavior, reducing the surface
-area for stochastic generation.</p>
 <h2 id="failure-modes-the-wrong-slice">Failure Modes: The Wrong
 Slice</h2>
 <p>The easiest way to feel why slicing matters is to watch it fail.
@@ -528,7 +521,7 @@ signal.</li>
 <li><strong>Slice too big:</strong> you drown the anchor in noise and
 invite scope leak.</li>
 </ul>
-<p>If you’re debugging a real loop, Appendix B has a longer failure mode
+<p>If you’re debugging a real loop, <a class="chapter-link" href="appendix-b-failure-mode-gallery#appendix-b-failure-mode-gallery" title="Go to: Appendix B">Appendix B</a> has a longer failure mode
 gallery (including slice-too-big / slice-too-small patterns and how to
 recognize them quickly).</p>
 <h3 id="slice-too-small-missing-the-contract">Slice too small: missing
@@ -579,49 +572,23 @@ steps.</p>
 converge.</p>
 <h2 id="skeleton-first-rule-sensors-extract-models-generate">Skeleton-First
 Rule: Sensors Extract, Models Generate</h2>
-<p>One of the core ideas for taming stochastic generation is to separate
-the “skeleton” from the “flesh.”</p>
-<p>The <strong>Skeleton-First Rule</strong> dictates that critical,
-structural elements of the system (the “skeleton”) must be
-deterministically <em>extracted</em> and <em>presented</em> to the LLM,
-not generated by it. The LLM’s role is then to fill in the “flesh”—the
-implementation details, the exact wording, the logic within established
-boundaries.</p>
-<p>Examples of “skeleton” elements include:</p>
+<p>Canonical rule: deterministic Sensors extract the skeleton, and
+models generate only the flesh.</p>
+<p>Typical skeleton surfaces:</p>
 <ul>
-<li><p>Function signatures</p></li>
-<li><p>Class definitions and their members</p></li>
-<li><p>Interface contracts</p></li>
-<li><p>Data schemas (e.g., JSON Schema, Protobuf definitions)</p></li>
-<li><p>Immune System definitions (e.g., <code>describe</code> blocks,
-<code>it</code> descriptions)</p></li>
-<li><p>File paths and names</p></li>
-<li><p>Imports/exports</p></li>
+<li>signatures and interface contracts</li>
+<li>schemas and route definitions</li>
+<li>Immune System case names/assertion surfaces</li>
+<li>file paths, imports, and allowed edit regions</li>
 </ul>
-<p>These are elements that, if changed randomly by an LLM, would break
-the system’s architecture or external contracts. A
-<strong><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></strong> (deterministic extractor: AST walker, schema
-parser, router introspector) extracts these elements from the existing
-codebase and provides them as immutable context. The LLM is then
-instructed (and often constrained by tools) to operate <em>within</em>
-these provided structures.</p>
-<p>For instance, if you’re asking an LLM to implement a new method for
-an existing interface, the interface definition itself is
-deterministically extracted by a Sensor and provided as context. The LLM
-can then <em>only</em> generate the body of the method, ensuring it
-adheres to the contract. This significantly reduces the model’s degrees
-of freedom, pushing it towards reliable and verifiable outputs.</p>
+<p>Lock these with Validators before generation. If a candidate changes
+skeleton unintentionally, fail fast and retry with tighter scope.</p>
 <h2 id="worked-example-debugging-a-tax-calculation-with-a-precise-slice">Worked
 Example: Debugging a Tax Calculation with a Precise Slice</h2>
-<p>Imagine a tax function is failing one Immune System case. You want
-the agent to fix the bug without rewriting the service.</p>
-<p>A common mistake is to slice <em>implementation-only</em>:</p>
-<ul>
-<li>include: the source file</li>
-<li>omit: the failing case and the rule that defines correctness</li>
-</ul>
-<p>That forces guessing.</p>
-<p>A precise slice is small but complete:</p>
+<p>This is the same pattern from the contract-drift example, on a
+smaller surface. The goal is to repair behavior without widening blast
+radius.</p>
+<p>Apply the same pattern:</p>
 <ul>
 <li><strong>Anchor (Terrain signal):</strong> the failing Immune System
 case.</li>
@@ -641,17 +608,17 @@ terrain:
 validators:
   - signature_unchanged(calculate_income_tax)
   - diff_budget(files&lt;=1, lines&lt;=50)</code></pre>
-<p>Now the Judge has the contract, the symptom, and the exact edit
-surface. The model is not “being smart”; it’s being constrained.</p>
+<p>Now the Judge has the contract, symptom, and exact edit surface. This
+is constrained repair, not open-ended generation. If this still
+thrashes, split by rule boundary (one bracket/rule per mission) rather
+than broadening the slice.</p>
 <p>The <code>examples/tax_service</code> directory in the companion repo
 provides a full, runnable example of this, including the test, a buggy
 implementation, and the tools to build and slice its context graph.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
-<p>Start thinking about the context you provide to your own GenAI
-agents. Instead of giving them entire files or directories, identify a
-single task, an anchor node, and then manually construct a “slice” of
-context for it. Include:</p>
+<p>For one real task this week, build a manual slice instead of sending
+whole files. Include:</p>
 <ol type="1">
 <li><p>The anchor node (e.g., a function, an Immune System).</p></li>
 <li><p>Any <code>meta/</code> or <code>docs/</code> files that define
@@ -659,10 +626,8 @@ the intent or constraints.</p></li>
 <li><p>Only the directly relevant code dependencies.</p></li>
 <li><p>Then, ruthlessly prune anything that isn’t essential.</p></li>
 </ol>
-<p>Experiment with how a smaller, more focused context slice affects the
-output quality and determinism compared to a larger, less structured
-one. Pay attention to how many tokens you use, and how often the model
-strays from the core task.</p>
+<p>Compare it against your usual broad context: token use, failure rate,
+and scope leaks.</p>
 </main>
 <section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 6 – Context Architecture (Why Slicing Matters)" data-share-title="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" role="region">
 <div class="share-panel__label">Share</div>
@@ -684,7 +649,7 @@ strays from the core task.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>60cb484cf600</code>
+      Version: <code>c911c6ae0a86</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

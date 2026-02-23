@@ -94,16 +94,20 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">11 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
 <h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
 – The Stochastic Engine (Why You Need Physics)</h1>
-<p>Before we talk about drift, a quick recap from Part I:</p>
+<p>Before we talk about drift, one callback from Part I:</p>
 <ul>
 <li><strong>Terrain:</strong> what runs (code, configs, runtime
 behavior).</li>
 <li><strong>Map:</strong> a versioned intent surface derived from that
 Terrain (docs, specs, inventories).</li>
 </ul>
+<p>Map/Terrain alignment is fractal: what is Terrain at one level
+becomes Map for the next. The same SDaC shape applies at every scale:
+explicit intent (Map), validated reality (Terrain), and a loop that
+keeps them aligned.</p>
 <p>Fractal structure in one view:</p>
 <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i2-section-01-fractal-nature</span>
@@ -263,34 +267,6 @@ Terrain (docs, specs, inventories).</li>
   })();
   </script>
 </section>
-<p>Map and Terrain aren’t just two layers—they nest.</p>
-<p>What counts as Terrain at one level becomes the Map for the level
-above. A function is Terrain to the developer writing it, but that
-function is part of a module, and the module is Map for the service that
-consumes it. The service is Terrain to the team that owns it, but Map to
-the platform team orchestrating multiple services.</p>
-<p>This continues in both directions:</p>
-<ul>
-<li><strong>Zoom in:</strong> A single function has its own Map (the
-docstring, the type signature, the intent) and Terrain (the
-implementation, the actual behavior).</li>
-<li><strong>Zoom out:</strong> An organization has its own Map
-(architecture diagrams, team charters, strategy docs) and Terrain (the
-running systems, the actual workflows, the emergent behavior).</li>
-</ul>
-<p>Concrete examples help:</p>
-<ul>
-<li>An agent instruction file in a directory (for example
-<code>agents.md</code>) is a Map for the Terrain that directory
-contains: its purpose, boundaries, and “how to operate it.”</li>
-<li>A header at the top of a source file (module docstring, top comment)
-is a Map for that file’s Terrain.</li>
-<li>A function signature and docstring are a Map for the function
-body.</li>
-</ul>
-<p>The SDaC pattern can apply at many levels because the shape is the
-same: explicit intent (Map), validated reality (Terrain), and a loop
-that keeps them aligned.</p>
 <pre class="mermaid"><code>graph TB
     subgraph ORG["Organization Level"]
         O_Map["Strategy Docs&lt;br/&gt;(Map)"]
@@ -571,11 +547,9 @@ diff.</li>
 <li>Hash the diffs and count unique hashes.</li>
 </ol>
 <p>If you want a runnable script, see the companion repo at
-<code>github.com/kjwise/aoi_code</code> (drift measurement example).</p>
-<p>The companion repo includes a <code>drift</code> target that runs
-this experiment. It uses a <em>stochastic</em> effector
-(<code>stochastic_sync_public_interfaces.py</code>) that intentionally
-introduces variance in formatting, ordering, and content.</p>
+<code>github.com/kjwise/aoi_code</code> (the <code>drift</code> target
+uses a stochastic effector,
+<code>stochastic_sync_public_interfaces.py</code>).</p>
 <p>Running it produces a summary like this:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> make drift</span>
 <span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="ex">python3</span> factory/tools/measure_drift.py <span class="at">--src</span> product/src <span class="at">--doc</span> product/docs/architecture.md <span class="at">--runs</span> 10</span>
@@ -719,11 +693,7 @@ region, schema)</li>
 <p>Instructions are suggestions. Physics are constraints.</p>
 <h2 id="why-this-matters-for-your-loop">Why This Matters for Your
 Loop</h2>
-<p>You built a working loop in Chapter 1. You wrapped the stochastic
-call in a <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a> in Chapter 2. You defined Validators in
-<a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>.</p>
-<p><a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a> gives you the uncomfortable truth those patterns are
-designed to address:</p>
+<p><a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a> is the canonical definition of the problem.</p>
 <ul>
 <li>Without deterministic context and gates, your loop produces
 different outputs on every run.</li>
@@ -732,9 +702,7 @@ downstream automation.</li>
 <li>Failures show up as non-reproducible production incidents, not clean
 local errors.</li>
 </ul>
-<p>The drift you measured is not a tuning problem. It’s an architectural
-property of stochastic generation.</p>
-<p>The next chapters show you how to constrain it:</p>
+<p>The next chapters apply the constraints:</p>
 <ul>
 <li><strong>Chapter 5:</strong> Loops that converge despite
 stochasticity.</li>
@@ -776,7 +744,7 @@ drifts.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>60cb484cf600</code>
+      Version: <code>c911c6ae0a86</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
