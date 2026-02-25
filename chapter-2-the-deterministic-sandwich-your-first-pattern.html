@@ -240,10 +240,13 @@ validates and shapes <em>inputs</em> (Maps + evidence).
 <code>Validation</code> validates <em>outputs</em> (candidate diffs /
 JSON / artifacts). They’re both deterministic in execution, but they
 guard different surfaces.</p>
-<p>If you want a frame: this is RSI-as-lens. You can recurse (retry with
-tighter constraints, improve the harness), but only the middle is
-stochastic; <code>Prep</code> and <code>Validation</code> stay
-deterministic.</p>
+<p>If you want a frame: this is Recursive Self-Improvement (RSI) applied
+to the harness. You can recurse (retry with tighter constraints, improve
+the harness), but only the middle step is stochastic; <code>Prep</code>
+and <code>Validation</code> stay deterministic.</p>
+<p>We already have mature validator frameworks in most programming
+ecosystems. Pick what fits your stack and wire it into the Validation
+layer.</p>
 <p><strong>Portability map (keep the roles; swap the
 tooling):</strong></p>
 <ul>
@@ -268,7 +271,8 @@ diagnosis</li>
 execution vs complete specification</h3>
 <p>In this book, “deterministic” means <strong>execution
 determinism</strong>: given the same input, the layer returns the same
-output every time.</p>
+output every time. To be clear: the bread layers are deterministic; the
+meat is not.</p>
 <p>That is not the same thing as <strong>specification
 completeness</strong>: whether your Validators actually check everything
 that matters (and only what matters). A Validator can be perfectly
@@ -303,17 +307,17 @@ instructions (Mission Object + rules). This is how you resist
 instruction injection without relying on vibes.</p>
 <h4 id="prep-is-your-firewall">Prep is your firewall</h4>
 <p>In a traditional web app, you sanitize user input before it hits the
-database. In SDaC, the “user input” is the Terrain itself: comments,
-tickets, logs, error messages, and any other text your Sensors
-extract.</p>
+database.</p>
+<p>In SDaC, the “user input” is the Terrain itself: comments, tickets,
+logs, error messages, and any other text your Sensors extract.</p>
 <p><code>Prep</code> is where you decide what counts as authority:</p>
 <ul>
 <li><strong>Mission Objects</strong> (compiled from allowlisted
 templates): authority</li>
 <li><strong>Terrain excerpts</strong> (extracted by Sensors):
 evidence</li>
-<li><strong>External signals</strong> (tickets, alerts, human messages):
-evidence</li>
+<li><strong>External signals</strong> (tickets, alerts, logs, git
+history, human messages): evidence</li>
 </ul>
 <p>If it isn’t compiled from an allowlisted template, it’s evidence.
 Evidence informs; it doesn’t command.</p>
@@ -786,7 +790,7 @@ does.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>08c792421665</code>
+      Version: <code>21256e3d3f67</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

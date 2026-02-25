@@ -94,7 +94,7 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Introduction</div>
-<div class="chapter-meta"><span class="read-time">10 min read</span></div>
+<div class="chapter-meta"><span class="read-time">11 min read</span></div>
 <h1 id="chapter-0-introduction">Chapter 0 – Introduction</h1>
 <h2 id="executive-summary">Executive Summary</h2>
 <p>This book shows how to turn stochastic AI output into deterministic,
@@ -352,7 +352,8 @@ scale:</p>
 cumulative output of faster iterations beneath it. This is why small
 improvements compound and why dysfunction at lower levels eventually
 surfaces at higher ones.</p>
-<p><strong>What AI changes is the clock speed.</strong></p>
+<h2 id="what-ai-changes-is-the-clock-speed">What AI changes is the clock
+speed</h2>
 <p>The iteration that took a day now takes minutes. The cycle that took
 a sprint now takes a day. The process that required a team now runs with
 one person and an agent.</p>
@@ -360,30 +361,37 @@ one person and an agent.</p>
 faster loop that drifts is faster drift. A faster loop that breaks is
 faster breakage. Speed amplifies what is already there: good practices
 become superpowers, bad practices become disasters.</p>
-<p><strong>This is the question Software Development as Code (SDaC)
-answers: How do you harness accelerated iteration without accelerating
-into a wall?</strong></p>
-<p>In this book, SDaC names the mechanisms that make accelerated
-iteration safe: explicit intent surfaces, bounded effectors,
-deterministic validators, and loops that converge.</p>
+<blockquote>
+<p><strong>This is the question SDaC answers:</strong><br/>
+<em>How do you harness accelerated iteration without accelerating into a
+wall?</em></p>
+</blockquote>
 <p>The answer is simple: make the loop the product.</p>
 <p>You design, validate, and improve the <em>loop</em> that produces
 output. If the loop is sound, outputs tend to follow. If the loop is
 broken, no amount of effort saves you.</p>
+<p>In this book, SDaC (Software Development as Code) names the
+mechanisms that make accelerated iteration safe: explicit intent
+surfaces, bounded effectors, deterministic validators, and loops that
+converge. In its own way, SDaC is an outer loop around Infrastructure as
+Code (IaC): it applies the same “declare intent, converge via
+automation” mindset to the development process itself.</p>
 <p>If the process is validated, then <span class="math inline"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span>
 becomes trustworthy.</p>
-<p>This is why the book is structured this way. Part I builds a loop
-first. Once you have a validated loop, you can feed it anything.</p>
+<p>Part I builds a loop first. Once you have a validated loop, you can
+feed it anything.</p>
 <p><strong>The fractal structure means this scales.</strong></p>
 <p>A validated loop at the function level is the same pattern as a
 validated loop at the organization level. The primitives (intent →
 attempt → validation → integration) are identical. The clock speeds
 differ. The artifacts differ. But the shape is the same.</p>
-<p>You scale by composition: function-level loops roll up into feature
-loops, feature loops roll up into service loops, and service loops roll
-up into org-level change control—same shape, different artifacts.</p>
+<p>You scale by <strong>composition</strong>: function-level loops roll
+up into feature loops, feature loops roll up into service loops, and
+service loops roll up into org-level change control—same shape,
+different artifacts.</p>
 <p>SDaC doesn’t give you a better way to write code. It gives you a
 better way to <em>iterate</em>.</p>
+<hr/>
 <p>With that framing in place, zoom in to one Friday—the kind that
 reveals what’s missing.</p>
 <p>Friday, 4:03 PM.</p>
@@ -447,6 +455,8 @@ mode.</p>
 <p>The goal is not a smarter assistant. The goal is a safer process:
 bounded context in, diffs out, deterministic gates decide what can
 merge, and the Ledger records why.</p>
+<p>You can still vibe-code inside the loop. The point is that safety and
+validation must scale faster than creativity can drift.</p>
 <blockquote>
 <p><strong>Architect of Intent (role):</strong> This is <strong>Intent
 Architecture</strong>: you design the rules and receipts that make
@@ -455,7 +465,8 @@ that makes changes auditable.</p>
 </blockquote>
 <hr/>
 <h2 id="who-this-book-is-for">Who this book is for</h2>
-<p>This book is for engineers building or governing AI-assisted
+<p>This book is for engineers asking “what now?” after the first wave of
+AI assistants — especially those building or governing AI-assisted
 development who want mechanisms, not hype. If you want to build
 immediately, start with Part I: it gives you a working loop first, then
 earns the theory by explaining why it works.</p>
@@ -548,13 +559,14 @@ appears at the end of Part I, after you’ve built the first loop.</p>
 <p>While the principles in this book are meant to be portable, this book
 uses a concrete, accessible substrate for its examples: standard files,
 Git for version control, <code>make</code> for orchestrating effects,
-and Python for scripting. This combination provides a practical, widely
-understood environment to demonstrate the core concepts. The patterns
-and architectures you’ll learn are designed to be stack-agnostic, easily
-portable to other languages, build systems, and VCS platforms. Appendix
-C includes validator recipes for other stacks (for example
-TypeScript/Node). The focus is on the engineering principles, not the
-specific tooling.</p>
+and Python for scripting.</p>
+<p>This combination provides a practical, widely understood environment
+to demonstrate the core concepts. The patterns and architectures you’ll
+learn are designed to be stack-agnostic, easily portable to other
+languages, build systems, and VCS platforms.</p>
+<p><a class="chapter-link" href="appendix-c-pattern-library#appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a> includes example validator recipes for other stacks (for
+example TypeScript/Node). The focus is on the engineering principles,
+not the specific tooling.</p>
 <hr/>
 <h2 id="prerequisites-assumed-knowledge">Prerequisites (Assumed
 Knowledge)</h2>
@@ -614,7 +626,7 @@ trails matter.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>08c792421665</code>
+      Version: <code>21256e3d3f67</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

@@ -170,17 +170,21 @@ reuse them precisely.</p>
 <p>We’re going to build a weekend-grade factory that proves the
 substrate:</p>
 <ul>
-<li>one bounded surface of truth (<strong>Terrain</strong>)</li>
-<li>one versionable intent surface (<strong>Map</strong>)</li>
-<li>one <strong>Effector</strong> that proposes a patch</li>
-<li>one <strong>Validator</strong> that enforces alignment</li>
+<li>one bounded surface of truth (<strong>Terrain</strong> — your source
+files)</li>
+<li>one versionable intent surface (<strong>Map</strong> — a spec, a
+README)</li>
+<li>one <strong>Effector</strong> that proposes a patch (writes a
+diff)</li>
+<li>one <strong>Validator</strong> that enforces alignment (a
+deterministic gate)</li>
 </ul>
 <p>That Validator is our first example of <strong><a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a></strong>:
 deterministic constraints the Effector cannot argue with.</p>
-<p>In MVF v0, intent is implicit: it’s hard-coded into CLI flags and
-Make targets. You can think of that as a “Mission v0.” In <a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>, we
-promote it into a typed <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> you can diff, version, and
-re-run.</p>
+<p>In MVF v0, intent is implicit: it’s hard-coded into CLI (command-line
+interface) flags and Make targets. You can think of that as a “Mission
+v0.” In <a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>, we promote it into a typed <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> you can
+diff, version, and re-run.</p>
 <p>This first loop is deterministic on purpose. It lets you see the
 mechanics without keys, SDKs, or network calls. Later, you can swap in a
 stochastic Effector and keep everything else unchanged.</p>
@@ -188,7 +192,7 @@ stochastic Effector and keep everything else unchanged.</p>
 you add a model)</h3>
 <p>MVF v0 avoids model failure modes by design. The moment you replace
 the deterministic Effector with a stochastic one, a few “Day 2” issues
-appear:</p>
+might appear:</p>
 <ul>
 <li><strong>Malformed output:</strong> wrong format (not a diff), wrong
 paths, or unparseable structure.</li>
@@ -265,8 +269,9 @@ and can apply it.</p></li>
 backticked signatures under one heading. If you change that surface, you
 change both the Effector’s rewrite and the Validator’s parse.</p></li>
 <li><p>The <strong>Validator</strong> re-extracts those signatures from
-the Terrain, parses the same bounded Map block, and returns
-<code>pass/fail</code> based on set equality.</p></li>
+the Terrain using a stricter parser than the Effector, checks the Map
+block is well-formed, and returns <code>pass/fail</code> based on exact
+match.</p></li>
 </ul>
 <p>You now have a minimal loop that (1) senses drift, (2) proposes a
 patch, (3) applies it inside a bounded Map surface, and (4) proves
@@ -297,29 +302,33 @@ same targets.</li>
 <li><strong>Swappable internals:</strong> you can replace scripts under
 the hood without changing callers.</li>
 </ul>
-<h3 id="hardening-ladder-mvf-v0-v1-v2">Hardening ladder: MVF v0 → v1 →
-v2</h3>
+<h3 id="hardening-ladder-mvf-v0-v0.2-v0.5-v1-v2">Hardening ladder: MVF
+v0 → v0.2 → v0.5 → v1 → v2</h3>
 <p>The factory grows by adding Physics and governance, not by widening
 autonomy. This ladder provides a practical path from a simple,
 deterministic loop to a more robust, autonomous system.</p>
 <ul>
-<li><p><strong>MVF v0 (Weekend):</strong> This is what you’ve just
-built. It’s a foreground loop with one narrow, deterministic Effector,
-one Validator, and a clear trace of its work in the Git Ledger. It
-proves the core mechanics are sound.</p></li>
-<li><p><strong>MVF v1 (Week):</strong> The next step is to introduce
-explicit <strong>Mission Objects</strong> (Chapter 7), which are
-structured, versionable requests that replace implicit CLI flags. This
-allows you to introduce bounded stochastic changes (i.e., using an LLM)
-within the same hard gates you’ve already established. The loop remains
-safe because the Physics haven’t changed.</p></li>
-<li><p><strong>MVF v2 (Month):</strong> With a reliable loop and
-explicit missions, you can now scale its operation. This involves
-scheduled runs via a <strong><a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a></strong> (<a class="chapter-link" href="chapter-9-the-dream-daemon-background-maintenance#chapter-9-the-dream-daemon-background-maintenance" title="Go to: Chapter 9">Chapter 9</a>) to
-perform background maintenance, building <strong>Map-Updaters</strong>
-(<a class="chapter-link" href="chapter-8-keep-the-map-fresh-map-updaters#chapter-8-keep-the-map-fresh-map-updaters" title="Go to: Chapter 8">Chapter 8</a>) to keep more complex documentation in sync, and establishing
-<strong><a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a></strong> (<a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a>) to create
-protected boundaries that even the system itself cannot change.</p></li>
+<li><strong>MVF v0 (Weekend):</strong> This is what you’ve just built.
+It’s a foreground loop with one narrow, deterministic Effector, one
+Validator, and a clear trace of its work in the Git Ledger. It proves
+the core mechanics are sound.</li>
+<li><strong>MVF v0.2 (Day 2):</strong> Use AI to help you author new
+deterministic Effectors and Validators faster — but keep the runtime
+loop deterministic.</li>
+<li><strong>MVF v0.5 (Week):</strong> Put your first stochastic model
+call inside an Effector (Chapter 2’s <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>), while
+keeping the same hard gates and scope boundaries.</li>
+<li><strong>MVF v1 (Week+):</strong> Introduce explicit <strong>Mission
+Objects</strong> (Chapter 7), which are structured, versionable requests
+that replace implicit CLI flags. This makes runs replayable and
+governable without changing the Physics.</li>
+<li><strong>MVF v2:</strong> With a reliable loop and explicit missions,
+you can now scale its operation. This involves scheduled runs via a
+<strong><a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a></strong> (<a class="chapter-link" href="chapter-9-the-dream-daemon-background-maintenance#chapter-9-the-dream-daemon-background-maintenance" title="Go to: Chapter 9">Chapter 9</a>) to perform background
+maintenance, building <strong>Map-Updaters</strong> (<a class="chapter-link" href="chapter-8-keep-the-map-fresh-map-updaters#chapter-8-keep-the-map-fresh-map-updaters" title="Go to: Chapter 8">Chapter 8</a>) to keep
+more complex documentation in sync, and establishing <strong>Immutable
+Infrastructure</strong> (<a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a>) to create protected boundaries that
+even the system itself cannot change.</li>
 </ul>
 <h2 id="naming-the-parts-the-canon">Naming the parts (the canon)</h2>
 <p>You just ran an Effector and a Validator against a real boundary. In
@@ -397,8 +406,7 @@ toward making parts of the Map enforceable instead of merely
 advisory.</p>
 <p>SDaC doesn’t require knowing the destination up front. It requires
 knowing what a safe iteration looks like (also Chapter 13).</p>
-<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
-do this week</h2>
+<h2 id="actionable-what-you-can-do">Actionable: What you can do</h2>
 <ol type="1">
 <li><p><strong>Run MVF v0 (recommended path):</strong></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
@@ -455,7 +463,7 @@ concrete diffs, and <code>pass/fail</code> gates.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>08c792421665</code>
+      Version: <code>21256e3d3f67</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
