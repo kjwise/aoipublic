@@ -345,6 +345,27 @@ admissible.</p>
 <p><strong>Tier:</strong> 2</p>
 <p><strong>What it is</strong> Engineering how context is selected,
 structured, and bounded so a model can act deterministically.</p>
+<h2 id="lehmans-system-types-s-p-and-e">Lehman’s System Types (S, P, and
+E)</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> Meir M. Lehman’s 1980 classification of
+software based on how its correctness is verified and how it evolves: -
+<strong>S-Type (Specifiable):</strong> Software whose correctness is
+absolute because it is derived from a formal specification (for example,
+a sorting algorithm, a schema validator, or a parser). - <strong>P-Type
+(Problem-solving):</strong> Software that approximates a solution to a
+real-world problem using heuristics. Perfect specs are impossible, so
+correctness is evaluated by acceptability (for example, a chess engine
+or an LLM). - <strong>E-Type (Evolutionary):</strong> Software embedded
+in the real world. Because the environment changes, the software must
+continuously adapt or it degrades (for example, your production
+codebase).</p>
+<p><strong>Why it matters</strong> It provides the theoretical baseline
+for SDaC. LLMs are P-Type heuristic engines. Your repository is an
+E-Type system. You cannot mathematically prove an E-Type system is safe;
+you can only govern it. Safe autonomy requires isolating logic into
+S-Type components (which Hard Physics can gate) so that the E-Type whole
+can be safely managed by P-Type agents.</p>
 <h2 id="branching-factor-rule-of-seven">Branching Factor (Rule of
 Seven)</h2>
 <p><strong>Tier:</strong> 2</p>
@@ -529,7 +550,7 @@ capability</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>21256e3d3f67</code>
+      Version: <code>bc9c9b87fa47</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
       ·

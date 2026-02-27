@@ -94,7 +94,7 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">10 min read</span></div>
+<div class="chapter-meta"><span class="read-time">11 min read</span></div>
 <h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
 – The Stochastic Engine (Why You Need Physics)</h1>
 <p>Before we talk about drift, one callback from Part I:</p>
@@ -365,6 +365,41 @@ execution path.</p></li>
 </ul>
 <p>This is why SDaC treats generation as a component, not a plan: you
 measure variance, constrain it, and gate it.</p>
+<h2 id="the-spe-mismatch-heuristics-in-a-deterministic-world">The S/P/E
+Mismatch: Heuristics in a Deterministic World</h2>
+<p>To understand why drift is inevitable—and why we must engineer around
+it—we look to Meir M. Lehman’s classification of software systems:</p>
+<ol type="1">
+<li><strong>S-Type (Specifiable):</strong> The problem is formally
+defined. Correctness is absolute. A compiler and a schema validator are
+S-Type systems.</li>
+<li><strong>P-Type (Problem-solving):</strong> The solution is a
+heuristic approximation. An LLM is a P-Type system. It does not “know”
+absolute truth; it finds a high-probability answer.</li>
+<li><strong>E-Type (Evolutionary):</strong> The system is embedded in
+reality. Because the world changes, the software must continuously
+evolve to remain useful. Your production codebase is an E-Type
+system.</li>
+</ol>
+<p>Lehman’s First Law states that an E-Type system must be continually
+adapted, or it becomes progressively less satisfactory. This is the
+exact dynamic that breaks vibe coding.</p>
+<p>When you use a raw AI assistant, you are pointing a <strong>P-Type
+<a class="concept-link" href="concepts#engine" title="See concept: Engine">engine</a></strong> (a probabilistic heuristic machine) directly at an
+<strong>E-Type system</strong> (your mutating, real-world codebase).</p>
+<p>If you do not constrain the P-Type engine, it will generate
+plausible, heuristically “good” code that subtly violates the absolute
+realities of your E-Type environment. The resulting friction is
+<a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a>.</p>
+<p><strong>The SDaC Synthesis: S-P-S Composition</strong></p>
+<p>You cannot tame an E-Type system using only P-Type tools. You must
+introduce <strong>S-Type constraints</strong>.</p>
+<p>This is the theoretical justification for the <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>
+(Chapter 2). We wrap the P-Type stochastic generation (the model) in
+S-Type formal specifications (Prep and Validation).</p>
+<p>When you write a <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>, you are creating an S-Type boundary. The
+model is allowed to use P-Type heuristics to generate the flesh, but it
+must pass the S-Type skeleton gate to survive.</p>
 <h2 id="operating-the-stochastic-engine-controls-budgets-tiering">Operating
 the Stochastic Engine (Controls, Budgets, Tiering)</h2>
 <p>If you’re going to wire an LLM into a real pipeline, you need
@@ -563,7 +598,7 @@ variable.</li>
 <li>There were no outright failures (e.g., crashes), but the high drift
 means the surface is not stable.</li>
 </ul>
-<p>This is <strong><a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a></strong> with a ruler next to it:
+<p>This is <strong>Stochastic Drift</strong> with a ruler next to it:
 you can measure it, budget it, and reduce it by tightening context
 selection and hardening validators.</p>
 <h3 id="a-simple-drift-coefficient-plus-an-illustrative-run-log">A
@@ -720,7 +755,7 @@ you hit <code>FAIL</code> and how many iterations it took to reach
 <code>PASS</code>.</p></li>
 <li><p><strong>Pick one invariant and enforce it:</strong> Choose one
 deterministic rule (exact signature surface, allowed edit region,
-required headings) and add a <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> that fails fast when the output
+required headings) and add a Validator that fails fast when the output
 drifts.</p></li>
 </ol>
 </main>
@@ -744,7 +779,7 @@ drifts.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>21256e3d3f67</code>
+      Version: <code>bc9c9b87fa47</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
