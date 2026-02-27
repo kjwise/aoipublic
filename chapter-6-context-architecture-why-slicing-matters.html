@@ -373,6 +373,10 @@ before you attempt to merge it with other candidates.</li>
 chunk.” Expand the slice and run another iteration with the missing
 contract/code present.</li>
 </ul>
+<p>Operationally, treat chunks as review units: open a small PR per
+chunk (stack if you want), merge sequentially so each diff stays inside
+the <a class="concept-link" href="concepts#review-budget" title="See concept: Review Budget">Review Budget</a> and leaves a clean Ledger trace, and only squash at
+the end if your merge policy requires it.</p>
 <p>Chunking is a sign your slice is doing real work. It is not a
 failure. It’s a reminder that context is a resource you budget, not an
 ocean you swim in.</p>
@@ -669,7 +673,7 @@ and scope leaks.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>47c80f78c25e</code>
+      Version: <code>ff07b38647e9</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

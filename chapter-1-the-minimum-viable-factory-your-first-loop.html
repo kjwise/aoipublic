@@ -291,11 +291,14 @@ stable interface (<code>make sync</code>, <code>make validate</code>,
 <h3 id="why-make-shows-up-in-this-book">Why <code>make</code> shows up
 in this book</h3>
 <p>In this book, <code>make</code> is the default command panel: one
-stable command surface that humans, CI, and agents can all call.</p>
+stable command surface that humans, CI, and agents can all call. In
+Chapter 7 we name this abstraction (the <a class="concept-link" href="concepts#driver-pattern" title="See concept: Driver Pattern">Driver Pattern</a>);
+<code>make</code> is the canonical Driver implementation for the book’s
+substrate.</p>
 <p>You can replace <code>make</code> with any task runner. The point is
 the interface, not the tool:</p>
 <p>If you’re a Bazel/Nx/Turborepo shop, mentally substitute your
-monorepo task runner; Chapter 7’s <a class="concept-link" href="concepts#driver-pattern" title="See concept: Driver Pattern">Driver Pattern</a> shows how to put a
+monorepo task runner; Chapter 7’s Driver Pattern shows how to put a
 stable command surface in front of whatever you already run.</p>
 <ul>
 <li><strong>Discoverable:</strong> <code>make help</code> can print a
@@ -466,7 +469,7 @@ concrete diffs, and <code>pass/fail</code> gates.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>47c80f78c25e</code>
+      Version: <code>ff07b38647e9</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
