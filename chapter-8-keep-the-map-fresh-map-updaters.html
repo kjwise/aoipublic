@@ -657,16 +657,12 @@ the normalized Terrain. The output is a clear difference.</p></li>
 bring Map and Terrain back into alignment (in the direction your
 authority model permits). The patch must be reviewable.</p></li>
 </ol>
-<p>This is the <strong><a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a></strong> aimed at a Map
-surface.</p>
-<p>In SDaC terms: <code>Sense/Normalize/Compare</code> is
-<code>Prep</code>, <code>Propose</code> is the
-<strong>Effector</strong>, and the skeleton match (below) is a
-<strong><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a></strong> you run alongside the rest of your
-<strong><a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a></strong>. The <strong><a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a></strong> is
-mechanical: <code>PASS</code> means “admissible diff,” <code>FAIL</code>
-means “drift still exists.” Record the diff + Validator output in the
-<strong>Ledger</strong> so the next run is explainable.</p>
+<p>This is Chapter 2’s <strong><a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a></strong>, aimed at
+a Map surface: <code>Sense/Normalize/Compare</code> is
+<code>Prep</code>, <code>Propose</code> is the stochastic step, and
+Validation is the hard gates (skeleton match + <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a>).</p>
+<p>Keep the loop honest by emitting a reviewable diff plus <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>
+output into the Ledger.</p>
 <p>If you want the loop in one screen:</p>
 <pre class="text"><code>terrain = normalize(sense_terrain())
 map = normalize(read_map())
@@ -680,39 +676,31 @@ and intent artifacts). Both directions are valid, but they require a
 clear authority model.</p>
 <h2 id="meta-pattern-skeleton-first-rule-maps-get-skeletons-from-sensors">Meta-Pattern:
 Skeleton-First Rule (Maps get skeletons from Sensors)</h2>
-<p>Map-Updaters are where teams get hurt by fabricated structure.</p>
+<p>Map-Updaters are where teams get hurt by fabricated structure.
+Chapter 2 covered the Skeleton-First rule in general; here is the
+Map-specific version.</p>
 <p><strong>Rule:</strong> build the Map on a deterministically extracted
 skeleton, then (optionally) let the model add “flesh” such as
 explanations or formatting. The model must never invent the
 skeleton.</p>
-<p>Concrete examples of skeletons you can (and should) extract
-deterministically:</p>
+<p>Concrete skeletons you can extract deterministically:</p>
 <ul>
 <li>public function signatures from an AST</li>
 <li>HTTP routes from your router definitions</li>
 <li>API shapes from OpenAPI/JSON Schema</li>
 <li>dependency edges from import graphs</li>
 </ul>
-<p><strong>Failure mode:</strong> if the model generates the skeleton,
-it can invent routes, symbols, or fields. Those invented facts enter the
-Map, get treated as “context” in later runs, and the updater starts
-converging on a self-consistent story instead of reality. This is
-<strong><a class="concept-link" href="concepts#map-contamination" title="See concept: Map Contamination">Map Contamination</a></strong> in SDaC: generation contaminates what
-later steps treat as extracted fact.</p>
-<p><strong><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">Mechanism</a>:</strong> treat skeleton mismatch as a hard
-failure.</p>
-<ul>
-<li>Sense/Normalize: compute skeleton from the Terrain.</li>
-<li>Propose: generate a patch that preserves the skeleton and only edits
-the allowed region.</li>
-<li>Validate: re-extract the skeleton from the proposed Map and require
-exact match.</li>
-</ul>
+<p>If the model writes the skeleton, it will eventually invent routes,
+symbols, or fields. Those invented facts enter the Map, get treated as
+“context” later, and the updater starts converging on a clean story
+instead of reality. This is <strong><a class="concept-link" href="concepts#map-contamination" title="See concept: Map Contamination">Map Contamination</a></strong> in SDaC:
+generation contaminates what later steps treat as extracted fact.</p>
+<p><strong><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">Mechanism</a>:</strong> extract the skeleton from the Terrain,
+constrain edits to an allowed region, then re-extract the skeleton from
+the candidate Map and require an exact match. Treat mismatch as a hard
+fail in CI.</p>
 <p>When you can, make the skeleton the whole story: generate the Map
-deterministically from Sensors. This repository’s
-<code>tools/flow_report.py</code> does exactly that for Workflow wiring:
-it produces a Flow Map report from code structure, with zero AI in the
-critical path.</p>
+deterministically from Sensors, with zero AI in the critical path.</p>
 <h2 id="brownfield-adoption-the-hollow-map-flashlight">Brownfield
 Adoption: The Hollow Map (Flashlight)</h2>
 <p>In a legacy monolith, a full <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a> is often the wrong first
@@ -1040,7 +1028,7 @@ evidence to review.</li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>bc9c9b87fa47</code>
+      Version: <code>47c80f78c25e</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
