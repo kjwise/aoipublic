@@ -4,8 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Infographic 4 — Illusion vs. Reality</title>
-<meta content="The Illusion of AI vs. The Reality of Results — why loops beat raw intelligence." name="description"/>
+<title>Infographic 4 — The Loop is the Moat</title>
+<meta content="Clock speed goes up. Drift goes up. Verified loops become the moat." name="description"/>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
@@ -13,302 +13,988 @@
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
-<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Work+Sans:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
-<link href="infographic-fragment-shell.css" rel="stylesheet"/>
-<script defer="" src="infographic-deck-runtime.js"></script>
 <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Work Sans', 'system-ui', 'sans-serif'],
+                        display: ['Space Grotesk', 'Work Sans', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
                     },
                     colors: {
-                        brand: {
-                            dark: '#0b0c10',
-                            surface: 'rgba(17, 19, 26, 0.92)',
-                            light: 'rgba(255, 255, 255, 0.03)',
-                            border: 'rgba(255, 255, 255, 0.08)',
-                            text: '#e7e7ea',
-                            strong: '#f2f3f8',
-                            muted: '#b5b6bf',
-                            primary: '#7aa2f7',
-                            accent: '#bb9af7',
-                            vibrant: '#2ac3de',
-                            danger: '#f7768e',
-                            success: '#10b981',
+                        fm: {
+                            bg: 'oklch(12% .02 250)',
+                            fg: 'oklch(95% .005 250)',
+                            card: 'oklch(15% .02 250)',
+                            popover: 'oklch(15% .02 250)',
+                            muted: 'oklch(20% .015 250)',
+                            mutedFg: 'oklch(60% .015 250)',
+                            border: 'oklch(25% .01 250)',
+                            primary: 'oklch(78% .19 155)',
+                            primaryFg: 'oklch(12% .02 250)',
+                            danger: 'oklch(57.7% .245 27.325)',
+                            warn: 'oklch(82.8% .189 84.429)',
+                            info: 'oklch(70.7% .165 254.624)'
                         }
                     }
                 }
             }
         };
     </script>
+<style>
+        body {
+            background:
+                radial-gradient(900px 600px at 15% 0%, oklch(78% .19 155 / 0.18), transparent 55%),
+                radial-gradient(900px 700px at 100% 20%, oklch(70.7% .165 254.624 / 0.10), transparent 55%),
+                oklch(12% .02 250);
+        }
+
+        .fm-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.75rem;
+            border-radius: 0.85rem;
+            border: 1px solid oklch(25% .01 250 / 0.7);
+            background: oklch(15% .02 250 / 0.55);
+            color: oklch(60% .015 250);
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1.1;
+            transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+            user-select: none;
+        }
+        .fm-toggle:hover {
+            border-color: oklch(78% .19 155 / 0.55);
+            color: oklch(95% .005 250);
+        }
+        .fm-toggle[aria-pressed="true"] {
+            border-color: oklch(78% .19 155 / 0.85);
+            background: oklch(78% .19 155 / 0.18);
+            color: oklch(95% .005 250);
+            box-shadow: 0 0 0 1px oklch(78% .19 155 / 0.25), 0 0 18px oklch(78% .19 155 / 0.12);
+        }
+        .fm-toggle:active {
+            transform: translateY(1px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .fm-toggle {
+                transition: none;
+            }
+            .fm-toggle:active {
+                transform: none;
+            }
+        }
+
+        .fm-risk[data-level="low"] { color: oklch(78% .19 155); }
+        .fm-risk[data-level="medium"] { color: oklch(82.8% .189 84.429); }
+        .fm-risk[data-level="high"] { color: oklch(57.7% .245 27.325); }
+    </style>
 </head>
-<body class="bg-brand-dark text-brand-text font-sans antialiased">
-<header class="bg-brand-dark text-white py-10 px-6 shadow-xl relative overflow-hidden">
-<div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-vibrant via-brand-primary to-transparent"></div>
-<div class="max-w-5xl mx-auto relative z-10 text-center">
-<div class="mb-5 inline-flex items-center rounded-lg border border-brand-border bg-brand-light p-1 text-sm">
-<a class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors" href="infographic.html">Infographic 1</a>
-<a class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors" href="infographic-2.html">Infographic 2</a>
-<a class="px-3 py-1.5 rounded-md text-brand-muted hover:text-brand-strong hover:bg-brand-surface transition-colors" href="infographic-3.html">Infographic 3</a>
-<a class="px-3 py-1.5 rounded-md bg-[rgba(122,162,247,0.16)] text-brand-strong border border-[rgba(122,162,247,0.35)]" href="infographic-4.html">Infographic 4</a>
+<body class="text-fm-fg font-sans antialiased selection:bg-fm-primary selection:text-fm-primaryFg">
+<header class="relative overflow-hidden border-b border-fm-border">
+<div class="absolute inset-0 opacity-60 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-fm-card via-fm-bg to-fm-bg"></div>
+<div class="max-w-6xl mx-auto px-6 pt-6 relative z-10">
+<nav class="inline-flex flex-wrap items-center justify-center gap-1 rounded-xl border border-fm-border bg-fm-card/50 p-1 text-sm">
+<a class="px-3 py-1.5 rounded-lg text-fm-mutedFg hover:text-fm-fg hover:bg-fm-muted transition-colors" href="infographic.html">Infographic 1</a>
+<a class="px-3 py-1.5 rounded-lg text-fm-mutedFg hover:text-fm-fg hover:bg-fm-muted transition-colors" href="infographic-2.html">Infographic 2</a>
+<a class="px-3 py-1.5 rounded-lg text-fm-mutedFg hover:text-fm-fg hover:bg-fm-muted transition-colors" href="infographic-3.html">Infographic 3</a>
+<a class="px-3 py-1.5 rounded-lg bg-fm-primary/20 text-fm-fg border border-fm-primary/40" href="infographic-4.html">Infographic 4</a>
+</nav>
 </div>
-<h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">The Illusion of AI vs. The Reality of Results</h1>
-<p class="mt-3 text-brand-muted max-w-2xl mx-auto text-lg">
-                A landing-page-ready section: why deterministic loops beat “smarter models” on first try.
-            </p>
+<div class="max-w-6xl mx-auto px-6 py-14 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+<div>
+<p class="font-mono text-xs tracking-widest uppercase text-fm-mutedFg mb-4">Architects of Intent — Essence</p>
+<h1 class="font-display text-5xl md:text-6xl font-bold tracking-tight leading-[1.03]">
+                        The Loop<br/>
+<span class="text-fm-primary">is the Moat</span>
+</h1>
+<p class="mt-5 text-lg text-fm-mutedFg max-w-xl leading-relaxed">
+                        AI accelerates execution. That raises clock speed — and it raises drift.
+                        The defensible advantage is a loop that can ship fast <em>and</em> verify itself.
+                    </p>
+<div class="mt-7 flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-2 rounded-full border border-fm-border bg-fm-card px-4 py-2 text-sm">
+<span class="h-2 w-2 rounded-full bg-fm-primary"></span>
+                            Clock speed
+                        </span>
+<span class="inline-flex items-center gap-2 rounded-full border border-fm-border bg-fm-card px-4 py-2 text-sm">
+<span class="h-2 w-2 rounded-full bg-fm-danger"></span>
+                            Drift
+                        </span>
+<span class="inline-flex items-center gap-2 rounded-full border border-fm-border bg-fm-card px-4 py-2 text-sm">
+<span class="h-2 w-2 rounded-full bg-fm-info"></span>
+                            Governance
+                        </span>
+</div>
+</div>
+<div class="rounded-2xl border border-fm-border bg-fm-card p-6 md:p-8 shadow-[0_0_0_1px_oklch(25%_.01_250/0.35),_0_22px_60px_oklch(12%_.02_250/0.55)]">
+<div class="flex items-center justify-between gap-4">
+<div>
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">The recurrence</div>
+<div class="mt-2 font-mono text-2xl text-fm-primary">Z<sub>n+1</sub> = P(Z<sub>n</sub>)</div>
+</div>
+<div class="text-right">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">The rule</div>
+<div class="mt-2 font-mono text-sm text-fm-fg">If it can’t be verified,<br/>it doesn’t ship.</div>
+</div>
+</div>
+<div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+<div class="rounded-xl border border-fm-border bg-fm-popover p-4">
+<div class="font-mono text-xs text-fm-mutedFg uppercase tracking-widest">Generate</div>
+<p class="mt-2 text-fm-mutedFg">Fast, cheap, probabilistic.</p>
+</div>
+<div class="rounded-xl border border-fm-border bg-fm-popover p-4">
+<div class="font-mono text-xs text-fm-mutedFg uppercase tracking-widest">Validate</div>
+<p class="mt-2 text-fm-mutedFg">Deterministic gates: schema, lint, types, tests.</p>
+</div>
+<div class="rounded-xl border border-fm-border bg-fm-popover p-4">
+<div class="font-mono text-xs text-fm-mutedFg uppercase tracking-widest">Learn</div>
+<p class="mt-2 text-fm-mutedFg">Reality updates tomorrow’s intent.</p>
+</div>
+</div>
+<div class="mt-6 rounded-xl border border-fm-border bg-fm-muted p-4">
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div class="text-sm">
+<span class="font-semibold text-fm-fg">Build the safe highway</span>
+<span class="text-fm-mutedFg">before you start speeding.</span>
+</div>
+<a class="font-mono text-xs uppercase tracking-widest text-fm-primary hover:underline underline-offset-4" href="#clock-speed">Start →</a>
+</div>
+</div>
+</div>
+</div>
 </div>
 </header>
-<main class="max-w-5xl mx-auto px-4 py-10">
-<section class="my-10" data-infographic-fragment-shell="1" data-infographic-section-id="i4-section-01-illusion-vs-results" data-infographic-selector="(fragment)" data-infographic-source="landing_page.md" data-infographic-status="published">
-<span aria-hidden="true" data-infographic-fragment-label="1">i4-section-01-illusion-vs-results</span>
-<div class="bg-brand-surface border border-brand-border rounded-2xl overflow-hidden">
-<div class="p-6 md:p-8 text-center">
-<div class="inline-flex items-center justify-center p-3 bg-[rgba(42,195,222,0.10)] border border-[rgba(42,195,222,0.25)] rounded-full shadow-[0_0_18px_rgba(42,195,222,0.18)]">
-<svg aria-hidden="true" class="w-8 h-8 text-brand-vibrant" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
-<path d="M12 2a3 3 0 0 0-3 3v1a3 3 0 0 0-2 3v2a3 3 0 0 0 2 3v1a3 3 0 0 0 3 3"></path>
-<path d="M12 2a3 3 0 0 1 3 3v1a3 3 0 0 1 2 3v2a3 3 0 0 1-2 3v1a3 3 0 0 1-3 3"></path>
-<path d="M9 8h6"></path>
-<path d="M9 12h6"></path>
-<path d="M9 16h6"></path>
-<circle cx="9" cy="8" r="1"></circle>
-<circle cx="15" cy="8" r="1"></circle>
-<circle cx="9" cy="12" r="1"></circle>
-<circle cx="15" cy="12" r="1"></circle>
-<circle cx="9" cy="16" r="1"></circle>
-<circle cx="15" cy="16" r="1"></circle>
-</svg>
+<main class="max-w-6xl mx-auto px-6 py-12 space-y-16">
+<section class="rounded-2xl border border-fm-border bg-fm-card p-6 md:p-8" id="clock-speed">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+<div class="lg:col-span-5">
+<div class="flex items-center gap-3">
+<span class="font-mono text-xs text-fm-mutedFg">01</span>
+<div class="h-px flex-1 bg-fm-border"></div>
 </div>
-<h1 class="mt-5 text-3xl md:text-4xl font-extrabold tracking-tight text-brand-strong border-b-0 pb-0">
-The Illusion of AI <span class="hidden md:inline">—</span><br class="md:hidden"/>
-<span class="text-brand-vibrant">vs.</span> The Reality of Results
-</h1>
-<p class="mt-3 text-base md:text-lg text-brand-muted max-w-2xl mx-auto">
-Why simply buying a “smarter AI” isn’t enough, and how the world’s best companies are turning unpredictable AI into a reliable competitive advantage.
-</p>
-<div aria-label="Infographic tabs" class="mt-6 flex flex-wrap justify-center gap-2" role="tablist">
-<button aria-pressed="true" class="px-5 py-2.5 rounded-full font-semibold transition-all duration-200 border border-[rgba(42,195,222,0.35)] bg-[rgba(42,195,222,0.20)] text-brand-strong shadow-[0_0_16px_rgba(42,195,222,0.22)]" data-i4-tab="concept" type="button">
-The Core Concept
-</button>
-<button aria-pressed="false" class="px-5 py-2.5 rounded-full font-semibold transition-all duration-200 border border-brand-border bg-brand-light text-brand-muted hover:bg-brand-surface hover:text-brand-strong" data-i4-tab="simulator" type="button">
-Interactive Simulator
-</button>
-</div>
-</div>
-<div class="border-t border-brand-border">
-<!-- CONCEPT PANEL -->
-<div class="p-6 md:p-8 space-y-10" data-i4-panel="concept">
-<section>
-<h2 class="text-2xl font-bold text-brand-strong text-center border-b-0 pb-0">The Problem: AI is a Wild Artist</h2>
-<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="rounded-xl border border-[rgba(247,118,142,0.28)] bg-[rgba(247,118,142,0.06)] p-5">
-<div class="flex items-center gap-3 mb-3">
-<svg aria-hidden="true" class="w-6 h-6 text-brand-danger" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
-<path d="M10.3 3.4 1.8 18.1A2 2 0 0 0 3.6 21h16.8a2 2 0 0 0 1.8-2.9L13.7 3.4a2 2 0 0 0-3.4 0z"></path>
-<path d="M12 9v4"></path>
-<path d="M12 17h.01"></path>
-</svg>
-<h3 class="text-lg font-bold text-brand-danger">The “Vibe Coding” Myth</h3>
-</div>
-<p class="text-brand-muted">
-Most people treat AI like a magic vending machine: you put a prompt in, and hope perfect work comes out.
-</p>
-<ul class="mt-4 space-y-2 text-[rgba(247,118,142,0.85)]">
-<li class="flex items-start gap-2">
-<span class="mt-2 w-2 h-2 rounded-full bg-brand-danger shadow-[0_0_8px_rgba(247,118,142,0.55)]"></span>
-<span>It hallucinates.</span>
+<h1 class="mt-4 font-display text-3xl font-semibold tracking-tight">Clock speed changed</h1>
+<p class="mt-3 text-fm-mutedFg leading-relaxed">
+                        When generation collapses from days to minutes, the bottleneck moves.
+                        The limiting factor becomes verification: what can you check cheaply, deterministically, and fast?
+                    </p>
+<ul class="mt-6 space-y-3 text-sm text-fm-mutedFg">
+<li class="flex gap-3">
+<span class="mt-1.5 h-2 w-2 rounded-full bg-fm-primary"></span>
+<span><span class="text-fm-fg font-semibold">AI accelerates output</span>, not correctness.</span>
 </li>
-<li class="flex items-start gap-2">
-<span class="mt-2 w-2 h-2 rounded-full bg-brand-danger shadow-[0_0_8px_rgba(247,118,142,0.55)]"></span>
-<span>It’s inconsistent run to run.</span>
+<li class="flex gap-3">
+<span class="mt-1.5 h-2 w-2 rounded-full bg-fm-info"></span>
+<span><span class="text-fm-fg font-semibold">Governance sets the speed</span>: the gates define the throughput.</span>
 </li>
-<li class="flex items-start gap-2">
-<span class="mt-2 w-2 h-2 rounded-full bg-brand-danger shadow-[0_0_8px_rgba(247,118,142,0.55)]"></span>
-<span>As you go faster, the risk of total failure spikes.</span>
+<li class="flex gap-3">
+<span class="mt-1.5 h-2 w-2 rounded-full bg-fm-warn"></span>
+<span>Cheap checks first. Failing fast is throughput.</span>
 </li>
 </ul>
 </div>
-<div class="rounded-xl border border-[rgba(16,185,129,0.26)] bg-[rgba(16,185,129,0.06)] p-5">
-<div class="flex items-center gap-3 mb-3">
-<svg aria-hidden="true" class="w-6 h-6 text-[rgba(16,185,129,0.95)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
-<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-<path d="m9 12 2 2 4-4"></path>
-</svg>
-<h4 class="text-lg font-bold text-[rgba(16,185,129,0.95)]">The “Architecture” Reality</h4>
+<div class="lg:col-span-7">
+<div class="chart-container">
+<canvas aria-label="Illustrative chart showing cycle time collapsing with AI, with verification as the limiting factor." id="clockSpeedChart" role="img"></canvas>
 </div>
-<p class="text-brand-muted">
-Winners don’t just use AI; they build a factory around it. They use strict rules to catch the AI’s mistakes before you ever see them.
-</p>
-<ul class="mt-4 space-y-2 text-[rgba(16,185,129,0.85)]">
-<li class="flex items-start gap-2">
-<span class="mt-2 w-2 h-2 rounded-full bg-[rgba(16,185,129,0.95)] shadow-[0_0_8px_rgba(16,185,129,0.45)]"></span>
-<span>Intent is clearly defined.</span>
-</li>
-<li class="flex items-start gap-2">
-<span class="mt-2 w-2 h-2 rounded-full bg-[rgba(16,185,129,0.95)] shadow-[0_0_8px_rgba(16,185,129,0.45)]"></span>
-<span>Rules act as a safety net.</span>
-</li>
-<li class="flex items-start gap-2">
-<span class="mt-2 w-2 h-2 rounded-full bg-[rgba(16,185,129,0.95)] shadow-[0_0_8px_rgba(16,185,129,0.45)]"></span>
-<span>Mistakes are caught and fixed automatically.</span>
-</li>
-</ul>
+<p class="mt-3 text-xs text-fm-mutedFg">
+                        Illustrative (not measured): the point is the shift from “typing speed” to “verification speed.”
+                    </p>
+</div>
+</div>
+<div class="mt-10 rounded-2xl border border-fm-border bg-fm-muted p-6 md:p-7" id="fm-controls">
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+<div>
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Controls (affects all charts)</div>
+<p class="mt-1 text-sm text-fm-mutedFg">Adjust clock speed and gates. All charts update.</p>
+</div>
+<button class="self-start px-3 py-2 rounded-lg border border-fm-border bg-fm-card text-fm-mutedFg hover:text-fm-fg hover:border-fm-primary/50 transition-colors font-mono text-xs uppercase tracking-widest" id="fmResetBtn" type="button">
+                        Reset
+                    </button>
+</div>
+<div class="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<div class="lg:col-span-5 space-y-5">
+<div>
+<div class="flex items-center justify-between gap-4">
+<label class="text-xs uppercase tracking-wide text-fm-mutedFg" for="fmClockSpeedSlider">Clock speed</label>
+<span class="font-mono text-xs text-fm-fg"><span id="fmClockSpeedValue">12×</span></span>
+</div>
+<input class="mt-2 w-full" id="fmClockSpeedSlider" max="20" min="1" step="1" type="range" value="12"/>
+<p class="mt-1 text-xs text-fm-mutedFg">Higher speed magnifies both output and mistakes.</p>
+</div>
+<div>
+<div class="flex items-center justify-between gap-4">
+<span class="text-xs uppercase tracking-wide text-fm-mutedFg">Hard gates</span>
+<span class="font-mono text-xs text-fm-mutedFg"><span id="fmGateCount">3</span>/5 enabled</span>
+</div>
+<div aria-label="Hard gate toggles" class="mt-2 flex flex-wrap gap-2" role="group">
+<button aria-pressed="true" class="fm-toggle" data-fm-gate="schema" type="button">Schema</button>
+<button aria-pressed="true" class="fm-toggle" data-fm-gate="lint" type="button">Lint</button>
+<button aria-pressed="true" class="fm-toggle" data-fm-gate="types" type="button">Types</button>
+<button aria-pressed="false" class="fm-toggle" data-fm-gate="tests" type="button">Tests</button>
+<button aria-pressed="false" class="fm-toggle" data-fm-gate="policy" type="button">Policy</button>
+</div>
+<p class="mt-2 text-xs text-fm-mutedFg">Gates add overhead, but make speed safe.</p>
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<div class="rounded-lg border border-fm-border bg-fm-card p-3">
+<div class="font-mono text-[11px] uppercase tracking-widest text-fm-mutedFg">AI + gates</div>
+<div class="mt-1 font-mono text-sm text-fm-fg"><span id="fmLoopTimeValue">—</span></div>
+<div class="mt-1 text-[11px] text-fm-mutedFg">cycle time</div>
+</div>
+<div class="rounded-lg border border-fm-border bg-fm-card p-3">
+<div class="font-mono text-[11px] uppercase tracking-widest text-fm-mutedFg">Overhead</div>
+<div class="mt-1 font-mono text-sm text-fm-fg"><span id="fmOverheadValue">—</span></div>
+<div class="mt-1 text-[11px] text-fm-mutedFg">from gates</div>
+</div>
+<div class="rounded-lg border border-fm-border bg-fm-card p-3">
+<div class="font-mono text-[11px] uppercase tracking-widest text-fm-mutedFg">Break-even</div>
+<div class="mt-1 font-mono text-sm text-fm-fg"><span id="fmBreakEvenValue">—</span></div>
+<div class="mt-1 text-[11px] text-fm-mutedFg">validated &gt; drift</div>
+</div>
+<div class="rounded-lg border border-fm-border bg-fm-card p-3">
+<div class="font-mono text-[11px] uppercase tracking-widest text-fm-mutedFg">Drift risk</div>
+<div class="mt-1 font-mono text-sm"><span class="fm-risk" data-level="medium" id="fmRiskValue">—</span></div>
+<div class="mt-1 text-[11px] text-fm-mutedFg">at this speed</div>
+</div>
+</div>
+<p class="mt-3 text-xs text-fm-mutedFg">
+                            Deterministic model: illustrative shapes meant to communicate the tradeoff, not claim a measured curve.
+                        </p>
+</div>
 </div>
 </div>
 </section>
-<section class="rounded-xl border border-brand-border bg-[rgba(6,7,12,0.72)] p-6 relative overflow-hidden">
-<div class="absolute top-0 right-0 p-8 opacity-10">
-<svg aria-hidden="true" class="w-28 h-28 text-brand-vibrant" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
-<path d="M3 3v18h18"></path>
-<path d="m19 9-5 5-4-4-4 4"></path>
-</svg>
+<section class="rounded-2xl border border-fm-border bg-fm-card p-6 md:p-8" id="drift">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+<div class="lg:col-span-5">
+<div class="flex items-center gap-3">
+<span class="font-mono text-xs text-fm-mutedFg">02</span>
+<div class="h-px flex-1 bg-fm-border"></div>
 </div>
-<h3 class="text-xl font-bold text-brand-strong border-b-0 pb-0">The Secret Math of AI Dominance</h3>
-<p class="mt-2 text-brand-muted">
-Everyone is obsessing over buying the biggest, smartest AI model. But the real explosion in productivity comes from a different formula:
-</p>
-<div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-6">
-<div class="text-center">
-<div class="text-2xl font-mono text-brand-vibrant drop-shadow-[0_0_10px_rgba(42,195,222,0.25)]">Raw AI</div>
-<div class="text-xs text-brand-muted mt-1">(the brains)</div>
-</div>
-<div class="text-2xl font-bold text-brand-muted">×</div>
-<div class="text-center">
-<div class="text-2xl font-mono text-[rgba(16,185,129,0.95)] drop-shadow-[0_0_10px_rgba(16,185,129,0.20)]">Good Rules</div>
-<div class="text-xs text-brand-muted mt-1">(physics / checks)</div>
-</div>
-<div class="text-2xl font-bold text-brand-muted">^</div>
-<div class="text-center">
-<div class="text-2xl font-mono text-brand-accent drop-shadow-[0_0_10px_rgba(187,154,247,0.20)]">Loops</div>
-<div class="text-xs text-brand-muted mt-1">(automatic tries)</div>
+<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight">Speed amplifies drift</h2>
+<p class="mt-3 text-fm-mutedFg leading-relaxed">
+                        If the gate is “looks good,” faster loops don’t make you better — they make you faster at accumulating rework.
+                        Drift is technical debt at machine speed.
+                    </p>
+<div class="mt-6 rounded-xl border border-fm-border bg-fm-muted p-4">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Rule of thumb</div>
+<p class="mt-2 text-sm text-fm-mutedFg">
+<span class="text-fm-fg font-semibold">Acceleration without structure</span> is just faster variance.
+                            <a class="concept-link" href="concepts#convergence" title="See concept: Convergence">Convergence</a> requires deterministic gates.
+                        </p>
 </div>
 </div>
-<div class="mt-6 rounded-lg border border-brand-border bg-brand-surface p-4 text-center">
-<p class="font-semibold text-brand-strong">
-A smaller, cheaper AI in a <span class="text-[rgba(16,185,129,0.95)]">self-correcting loop</span> will ALWAYS beat a genius AI on its first try.
-</p>
+<div class="lg:col-span-7">
+<div class="chart-container">
+<canvas aria-label="Illustrative chart contrasting drift without gates versus convergence with gates." id="driftChart" role="img"></canvas>
+</div>
+<p class="mt-3 text-xs text-fm-mutedFg">
+                        Illustrative shapes: eyeballing starts fast, then collapses under rising rework; validated loops start slower, then compound.
+                    </p>
+</div>
 </div>
 </section>
-<section class="text-center max-w-3xl mx-auto">
-<svg aria-hidden="true" class="w-12 h-12 text-brand-muted mx-auto mb-3 opacity-70" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24">
-<path d="M12 1a4 4 0 0 0-4 4v4H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2V5a4 4 0 0 0-4-4z"></path>
-<path d="M8 9V5a4 4 0 0 1 8 0v4"></path>
-</svg>
-<h3 class="text-2xl font-bold text-brand-strong border-b-0 pb-0">Your New Competitive Moat</h3>
-<p class="mt-2 text-brand-muted">
-AI models get better for everyone. Prompts can be copy-pasted. Talent moves around.
-But a finely-tuned system that automatically generates, checks, and perfects work?
-<span class="block mt-3 text-brand-vibrant font-semibold">That is a moat your competitors cannot steal.</span>
-</p>
+<section class="rounded-2xl border border-fm-border bg-fm-card p-6 md:p-10" id="moat">
+<div class="flex items-center gap-3">
+<span class="font-mono text-xs text-fm-mutedFg">03</span>
+<div class="h-px flex-1 bg-fm-border"></div>
+</div>
+<div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+<div>
+<h2 class="font-display text-3xl md:text-4xl font-semibold tracking-tight">The moat is a verified loop</h2>
+<p class="mt-3 text-fm-mutedFg leading-relaxed">
+                        Models get better for everyone. Prompts spread. Talent moves.
+                        What doesn’t copy-paste is a system that repeatedly turns intent into verified state — and learns from reality.
+                    </p>
+<div class="mt-6 space-y-3">
+<div class="rounded-xl border border-fm-border bg-fm-popover p-4">
+<div class="flex items-center justify-between gap-4">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Hard gates</div>
+<div class="font-mono text-xs text-fm-primary">PASS / FAIL</div>
+</div>
+<p class="mt-2 text-sm text-fm-mutedFg">Make “good” executable: schemas, lint, types, tests, policies.</p>
+</div>
+<div class="rounded-xl border border-fm-border bg-fm-popover p-4">
+<div class="flex items-center justify-between gap-4">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">A ratchet</div>
+<div class="font-mono text-sm md:text-base font-semibold text-fm-info leading-none">q<sub>now</sub> ≥ q<sub>prev</sub></div>
+</div>
+<p class="mt-2 text-sm text-fm-mutedFg">Once the bar rises, don’t let it slip — especially in self-modifying loops.</p>
+</div>
+</div>
+</div>
+<div class="rounded-2xl border border-fm-border bg-fm-muted p-6">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Loop sketch</div>
+<div class="mt-4 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 items-stretch">
+<div class="rounded-xl border border-fm-border bg-fm-card p-5 md:p-6 min-h-[96px] flex flex-col justify-center">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Intent</div>
+<div class="mt-2 text-base font-semibold text-fm-fg">Spec / plan</div>
+</div>
+<div aria-hidden="true" class="hidden md:flex items-center justify-center text-fm-mutedFg font-mono text-2xl px-2 opacity-80">→</div>
+<div class="rounded-xl border border-fm-border bg-fm-card p-5 md:p-6 min-h-[96px] flex flex-col justify-center">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Generate</div>
+<div class="mt-2 text-base font-semibold text-fm-fg">Propose diff</div>
+</div>
+<div aria-hidden="true" class="hidden md:flex items-center justify-center text-fm-mutedFg font-mono text-2xl px-2 opacity-80">→</div>
+<div class="rounded-xl border border-fm-border bg-fm-card p-5 md:p-6 min-h-[96px] flex flex-col justify-center">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Validate</div>
+<div class="mt-2 text-base font-semibold text-fm-fg">Gates + evidence</div>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-center text-fm-mutedFg font-mono md:hidden">↓</div>
+<div class="mt-3 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
+<div class="rounded-xl border border-fm-border bg-fm-card p-5 md:p-6 min-h-[96px] flex flex-col justify-center">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Ship</div>
+<div class="mt-2 text-base font-semibold text-fm-fg">Merge / deploy</div>
+</div>
+<div aria-hidden="true" class="hidden md:flex items-center justify-center text-fm-mutedFg font-mono text-2xl px-2 opacity-80">→</div>
+<div class="rounded-xl border border-fm-border bg-fm-card p-5 md:p-6 min-h-[96px] flex flex-col justify-center">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Reality</div>
+<div class="mt-2 text-base font-semibold text-fm-fg">Signals update intent</div>
+</div>
+</div>
+<div class="mt-6 rounded-xl border border-fm-border bg-fm-card p-4">
+<p class="text-sm text-fm-mutedFg">
+                            The goal isn’t a “smarter model.” It’s a system that converges: bounded changes,
+                            deterministic gates, and a feedback loop you can run at high clock speed.
+                        </p>
+</div>
+</div>
+</div>
 </section>
+<section class="rounded-2xl border border-fm-border bg-fm-card p-6 md:p-8" id="envelope">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+<div class="lg:col-span-5">
+<div class="flex items-center gap-3">
+<span class="font-mono text-xs text-fm-mutedFg">04</span>
+<div class="h-px flex-1 bg-fm-border"></div>
 </div>
-<!-- SIMULATOR PANEL -->
-<div class="p-6 md:p-8" data-i4-panel="simulator" hidden="">
-<div class="text-center mb-8">
-<h3 class="text-2xl font-bold text-brand-strong border-b-0 pb-0">The “Deterministic Sandwich” Simulator</h3>
-<p class="mt-2 text-brand-muted max-w-2xl mx-auto">
-Wrap an unpredictable generator in deterministic prep + deterministic validation. The loop retries until it’s admissible.
+<h2 class="mt-4 font-display text-3xl font-semibold tracking-tight">Autonomy needs an envelope</h2>
+<p class="mt-3 text-fm-mutedFg leading-relaxed">
+                        When output gets cheap, <span class="text-fm-fg font-semibold">the limiter becomes verification</span>.
+                        Autonomy isn’t a vibe — it’s something you earn with deterministic gates.
+                    </p>
+<div class="mt-6 rounded-xl border border-fm-border bg-fm-muted p-4">
+<div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Where you are</div>
+<p class="mt-2 text-sm text-fm-mutedFg">
+<span class="font-mono text-fm-fg" id="fmEnvelopeAt">—</span>
+<span class="text-fm-mutedFg">→</span>
+<span class="fm-risk font-semibold" data-level="medium" id="fmEnvelopeStatus">—</span>
 </p>
-</div>
-<div class="space-y-4">
-<div class="p-5 rounded-xl border border-brand-border bg-brand-light flex items-center justify-between opacity-60 transition-all duration-300" data-i4-step-card="mission">
-<div class="flex items-center gap-4">
-<svg aria-hidden="true" class="w-8 h-8 text-brand-vibrant" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
-<circle cx="12" cy="12" r="9"></circle>
-<path d="M12 7v5l3 3"></path>
-</svg>
-<div>
-<div class="font-bold text-brand-strong"><span class="mr-2 text-brand-muted">1.</span><span>The <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> (Top Bun)</span></div>
-<div class="text-sm text-brand-muted">Clear intent. Example: “3 paragraphs, zero typos.”</div>
+<p class="mt-2 text-xs text-fm-mutedFg" id="fmEnvelopeNote">—</p>
+<ul class="mt-3 space-y-2 text-xs text-fm-mutedFg" id="fmEnvelopeActions"></ul>
+<p class="mt-4 text-xs text-fm-mutedFg">
+                            Use the <a class="font-mono text-fm-primary hover:underline underline-offset-4" href="#fm-controls">controls</a> to move the dot.
+                        </p>
 </div>
 </div>
-<div class="text-sm font-mono text-brand-vibrant motion-reduce:animate-none" data-i4-status="mission" hidden="">Setting intent…</div>
+<div class="lg:col-span-7">
+<div class="chart-container">
+<canvas aria-label="Chart showing a governance envelope: higher clock speed requires more hard gates to keep autonomy safe." id="envelopeChart" role="img"></canvas>
 </div>
-<div class="p-5 rounded-xl border border-brand-border bg-brand-light flex items-center justify-between opacity-60 transition-all duration-300" data-i4-step-card="generator">
-<div class="flex items-center gap-4">
-<svg aria-hidden="true" class="w-8 h-8 text-brand-accent" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
-<path d="M12 8V4H8"></path>
-<rect height="12" rx="2" width="16" x="4" y="8"></rect>
-<path d="M9 12h6"></path>
-<path d="M9 16h6"></path>
-</svg>
-<div>
-<div class="font-bold text-brand-strong"><span class="mr-2 text-brand-muted">2.</span><span>AI Generator (Center)</span></div>
-<div class="text-sm text-brand-muted">Stochastic attempt. Creative, error-prone.</div>
-</div>
-</div>
-<div class="flex items-center gap-2 text-sm font-mono text-brand-accent motion-reduce:animate-none" data-i4-status="generator" hidden="">
-<svg aria-hidden="true" class="w-5 h-5 animate-spin motion-reduce:animate-none" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-<path d="M21 12a9 9 0 1 1-3-6.7"></path>
-<path d="M21 3v6h-6"></path>
-</svg>
-<div class="leading-none">Drafting attempt #<span data-i4-attempt="">1</span>…</div>
-</div>
-</div>
-<div class="flex justify-center py-2" data-i4-feedback="" hidden="">
-<div class="px-4 py-1 rounded-full text-xs font-bold flex items-center gap-2 border border-[rgba(255,158,100,0.45)] bg-[rgba(255,158,100,0.10)] text-[rgba(255,158,100,0.95)] shadow-[0_0_18px_rgba(255,158,100,0.18)] animate-bounce motion-reduce:animate-none">
-<svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-<path d="M10.3 3.4 1.8 18.1A2 2 0 0 0 3.6 21h16.8a2 2 0 0 0 1.8-2.9L13.7 3.4a2 2 0 0 0-3.4 0z"></path>
-<path d="M12 9v4"></path>
-<path d="M12 17h.01"></path>
-</svg>
-<div class="leading-none">Error context fed back to the model</div>
-</div>
-</div>
-<div class="p-5 rounded-xl border border-brand-border bg-brand-light flex items-center justify-between opacity-60 transition-all duration-300" data-i4-step-card="validator">
-<div class="flex items-center gap-4">
-<svg aria-hidden="true" class="w-8 h-8 text-[rgba(96,165,250,0.95)]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
-<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-</svg>
-<div>
-<div class="font-bold text-brand-strong"><span class="mr-2 text-brand-muted">3.</span><span>The Quality Filter (Bottom Bun)</span></div>
-<div class="text-sm text-brand-muted">Deterministic checks: typos, format, length.</div>
-</div>
-</div>
-<div class="text-sm font-mono" data-i4-status="validator" hidden=""></div>
-</div>
-</div>
-<div class="mt-8 rounded-xl border border-brand-border bg-[rgba(6,7,12,0.72)] p-6 text-center">
-<div class="text-xs font-mono text-brand-muted">Total loops run: <span class="text-brand-strong text-lg font-bold" data-i4-loops="">0</span></div>
-<div class="mt-5">
-<button class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold border border-[rgba(42,195,222,0.45)] bg-[rgba(42,195,222,0.22)] text-brand-strong shadow-[0_0_18px_rgba(42,195,222,0.18)] transition-all hover:bg-[rgba(42,195,222,0.28)]" data-i4-action="start" type="button">
-<svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-<path d="M12 2v20"></path>
-<path d="m5 12 7-7 7 7"></path>
-</svg>
-Start the loop process
-</button>
-<button class="hidden inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold border border-brand-border bg-brand-light text-brand-muted" data-i4-action="reset" type="button">
-<svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-<path d="M21 12a9 9 0 1 1-3-6.7"></path>
-<path d="M21 3v6h-6"></path>
-</svg>
-Reset simulation
-</button>
-<button class="hidden inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold border border-brand-border bg-[rgba(255,255,255,0.04)] text-brand-muted cursor-not-allowed" data-i4-action="running" disabled="" type="button">
-<svg aria-hidden="true" class="w-5 h-5 animate-spin motion-reduce:animate-none" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
-<path d="M21 12a9 9 0 1 1-3-6.7"></path>
-<path d="M21 3v6h-6"></path>
-</svg>
-Process running…
-</button>
-</div>
-<div class="mt-4 hidden text-left max-w-2xl mx-auto rounded-lg border border-[rgba(16,185,129,0.28)] bg-[rgba(16,185,129,0.08)] p-4 text-[rgba(16,185,129,0.95)]" data-i4-result="">
-<strong class="text-brand-strong">Result:</strong>
-We turned failed drafts into a trusted outcome by using rules and retries — not wishful prompting.
-</div>
-</div>
-</div>
+<p class="mt-3 text-xs text-fm-mutedFg">
+                        Green = safe, amber = caution, red = unsafe. The point is your current clock speed and enabled gates.
+                    </p>
 </div>
 </div>
 </section>
 </main>
-<footer class="bg-brand-light py-8 text-center border-t border-brand-border">
-<p class="text-brand-muted text-sm">Architects of Intent — Infographic 4</p>
+<footer class="max-w-6xl mx-auto px-6 py-10 text-center text-xs text-fm-mutedFg">
+<p class="font-mono tracking-widest uppercase">Architects of Intent — Infographic 4</p>
 </footer>
+<script>
+        (() => {
+            const prefersReducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+            const animationDuration = prefersReducedMotion ? 0 : 240;
+
+            const byId = (id) => document.getElementById(id);
+            const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+            const toInt = (value, fallback) => {
+                const n = Number.parseInt(String(value), 10);
+                return Number.isFinite(n) ? n : fallback;
+            };
+
+            const toRgb = (cssColor) => {
+                const node = document.createElement('span');
+                node.style.color = cssColor;
+                node.style.display = 'none';
+                document.body.appendChild(node);
+                const rgb = getComputedStyle(node).color;
+                node.remove();
+                return rgb || cssColor;
+            };
+
+            const cssVar = (name, fallback) => {
+                const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+                return v || fallback;
+            };
+
+            const palette = {
+                fg: toRgb(cssVar('--foreground', 'oklch(95% .005 250)')),
+                muted: toRgb(cssVar('--muted-foreground', 'oklch(60% .015 250)')),
+                border: toRgb(cssVar('--border', 'oklch(25% .01 250)')),
+                primary: toRgb(cssVar('--primary', 'oklch(78% .19 155)')),
+                danger: toRgb(cssVar('--destructive', 'oklch(57.7% .245 27.325)')),
+                info: toRgb('oklch(70.7% .165 254.624)'),
+                warn: toRgb('oklch(82.8% .189 84.429)'),
+            };
+
+            const grid = {
+                color: palette.border.replace('rgb(', 'rgba(').replace(')', ', 0.35)'),
+            };
+
+            const baseOpts = {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: animationDuration
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: palette.muted,
+                            boxWidth: 12,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(0,0,0,0.75)',
+                        borderColor: palette.border,
+                        borderWidth: 1,
+                        titleColor: palette.fg,
+                        bodyColor: palette.fg
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: palette.muted },
+                        grid: { color: grid.color }
+                    },
+                    y: {
+                        ticks: { color: palette.muted },
+                        grid: { color: grid.color }
+                    }
+                }
+            };
+
+            const round1 = (n) => Math.round(n * 10) / 10;
+            const logisticDown = (t, k, t0) => 1 / (1 + Math.exp(k * (t - t0)));
+            const logisticUp = (t, k, t0) => 1 / (1 + Math.exp(-k * (t - t0)));
+
+            const withAlpha = (rgb, alpha) => rgb.replace('rgb(', 'rgba(').replace(')', `, ${alpha})`);
+
+            const envelopeLines = (clockSpeed) => {
+                const speed = clamp(clockSpeed, 1, 20);
+                const caution = clamp(1 + (speed - 1) * 0.12, 0, 5);
+                const safe = clamp(2 + (speed - 1) * 0.12, 0, 5);
+                return { caution, safe };
+            };
+
+            const compute = (clockSpeed, gateCount) => {
+                const manual = 100;
+                const speed = clamp(clockSpeed, 1, 20);
+                const aiGen = manual / speed;
+
+                const overhead = 1.5 + gateCount * 1.3;
+                const aiPlusGates = aiGen + overhead;
+
+                const n = 12;
+                const speedFactor = speed / 12;
+                const gateFactor = gateCount / 5;
+
+                const weeks = Array.from({ length: n }, (_, i) => `W${i + 1}`);
+
+                const startE = clamp(12 + (speedFactor - 1) * 1.4, 10, 15);
+                const endE = clamp(4 - (speedFactor - 1) * 1.8, 2.0, 6);
+                const t0E = clamp(0.55 - (speedFactor - 1) * 0.18, 0.28, 0.62);
+                const kE = clamp(6 + (speedFactor - 1) * 5, 5, 12);
+
+                const startV = clamp(6 - gateFactor * 0.9 + (speedFactor - 1) * 0.3, 4.8, 7.2);
+                const maxV = clamp(13.5 + gateFactor * 4.0 + (speedFactor - 1) * 1.2, 10.5, 20.0);
+                const t0V = clamp(0.55 - gateFactor * 0.18 - (speedFactor - 1) * 0.10, 0.25, 0.58);
+                const kV = clamp(5 + gateFactor * 5, 5, 10);
+
+                const eyeballing = [];
+                const validated = [];
+
+                for (let i = 0; i < n; i++) {
+                    const t = i / (n - 1);
+                    const e = endE + (startE - endE) * logisticDown(t, kE, t0E);
+                    eyeballing.push(round1(e));
+
+                    const g = logisticUp(t, kV, t0V);
+                    const v = startV + (maxV - startV) * g;
+                    validated.push(round1(v));
+                }
+
+                const breakEvenIdx = validated.findIndex((v, idx) => v >= (eyeballing[idx] ?? Number.POSITIVE_INFINITY));
+                const breakEven = breakEvenIdx >= 0 ? `W${breakEvenIdx + 1}` : '—';
+
+                const riskScore = (speed / 20) * (1 - gateFactor);
+                const risk = riskScore > 0.55 ? 'High' : riskScore > 0.25 ? 'Medium' : 'Low';
+                const riskLevel = risk.toLowerCase();
+
+                return {
+                    manual,
+                    aiGen: round1(aiGen),
+                    aiPlusGates: round1(aiPlusGates),
+                    overhead: round1(overhead),
+                    weeks,
+                    eyeballing,
+                    validated,
+                    breakEven,
+                    risk,
+                    riskLevel,
+                };
+            };
+
+            const state = {
+                clockSpeed: 12,
+                gates: new Set(['schema', 'lint', 'types']),
+            };
+
+            const els = {
+                clockSlider: byId('fmClockSpeedSlider'),
+                clockValue: byId('fmClockSpeedValue'),
+                gateCount: byId('fmGateCount'),
+                resetBtn: byId('fmResetBtn'),
+                loopTimeValue: byId('fmLoopTimeValue'),
+                overheadValue: byId('fmOverheadValue'),
+                breakEvenValue: byId('fmBreakEvenValue'),
+                riskValue: byId('fmRiskValue'),
+                envelopeAt: byId('fmEnvelopeAt'),
+                envelopeStatus: byId('fmEnvelopeStatus'),
+                envelopeNote: byId('fmEnvelopeNote'),
+                envelopeActions: byId('fmEnvelopeActions'),
+                gateButtons: Array.from(document.querySelectorAll('[data-fm-gate]')),
+            };
+
+            if (els.clockSlider) {
+                state.clockSpeed = clamp(toInt(els.clockSlider.value, state.clockSpeed), 1, 20);
+            }
+            if (els.gateButtons.length > 0) {
+                state.gates.clear();
+                els.gateButtons.forEach((btn) => {
+                    const gate = btn.getAttribute('data-fm-gate');
+                    const pressed = btn.getAttribute('aria-pressed') === 'true';
+                    if (pressed && gate) state.gates.add(gate);
+                });
+                if (state.gates.size === 0) state.gates = new Set(['schema', 'lint', 'types']);
+            }
+
+            const clockCanvas = byId('clockSpeedChart');
+            const driftCanvas = byId('driftChart');
+            const envelopeCanvas = byId('envelopeChart');
+
+            let clockChart = null;
+            let driftChart = null;
+            let envelopeChart = null;
+
+            const envelopeZones = {
+                id: 'envelopeZones',
+                beforeDraw: (chart) => {
+                    const { ctx, chartArea, scales } = chart;
+                    if (!chartArea) return;
+
+                    const { left, right, top, bottom } = chartArea;
+                    const x = scales.x;
+                    const y = scales.y;
+
+                    const steps = 90;
+                    const xs = Array.from({ length: steps + 1 }, (_, i) => 1 + (19 * i) / steps);
+
+                    const safePts = xs.map((s) => ({ x: x.getPixelForValue(s), y: y.getPixelForValue(envelopeLines(s).safe) }));
+                    const cautionPts = xs.map((s) => ({ x: x.getPixelForValue(s), y: y.getPixelForValue(envelopeLines(s).caution) }));
+
+                    const safePoly = new Path2D();
+                    safePoly.moveTo(safePts[0].x, safePts[0].y);
+                    safePts.forEach((p) => safePoly.lineTo(p.x, p.y));
+                    safePoly.lineTo(safePts[safePts.length - 1].x, top);
+                    safePoly.lineTo(safePts[0].x, top);
+                    safePoly.closePath();
+
+                    const cautionPoly = new Path2D();
+                    cautionPoly.moveTo(safePts[0].x, safePts[0].y);
+                    safePts.forEach((p) => cautionPoly.lineTo(p.x, p.y));
+                    for (let i = cautionPts.length - 1; i >= 0; i--) {
+                        cautionPoly.lineTo(cautionPts[i].x, cautionPts[i].y);
+                    }
+                    cautionPoly.closePath();
+
+                    const unsafePoly = new Path2D();
+                    unsafePoly.moveTo(cautionPts[0].x, cautionPts[0].y);
+                    cautionPts.forEach((p) => unsafePoly.lineTo(p.x, p.y));
+                    unsafePoly.lineTo(cautionPts[cautionPts.length - 1].x, bottom);
+                    unsafePoly.lineTo(cautionPts[0].x, bottom);
+                    unsafePoly.closePath();
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.rect(left, top, right - left, bottom - top);
+                    ctx.clip();
+
+                    ctx.fillStyle = withAlpha(palette.primary, 0.10);
+                    ctx.fill(safePoly);
+
+                    ctx.fillStyle = withAlpha(palette.warn, 0.09);
+                    ctx.fill(cautionPoly);
+
+                    ctx.fillStyle = withAlpha(palette.danger, 0.08);
+                    ctx.fill(unsafePoly);
+
+                    ctx.restore();
+                }
+            };
+
+            const initCharts = () => {
+                if (!window.Chart) return;
+
+                if (clockCanvas) {
+                    clockChart = new Chart(clockCanvas.getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: ['Manual dev', 'AI generation', 'AI + gates'],
+                            datasets: [
+                                {
+                                    label: 'Relative cycle time (lower is faster)',
+                                    data: [100, 8, 12],
+                                    backgroundColor: [
+                                        'rgba(255,255,255,0.10)',
+                                        palette.info.replace('rgb(', 'rgba(').replace(')', ', 0.35)'),
+                                        palette.primary.replace('rgb(', 'rgba(').replace(')', ', 0.35)'),
+                                    ],
+                                    borderColor: [palette.border, palette.info, palette.primary],
+                                    borderWidth: 1.5,
+                                    borderRadius: 10
+                                }
+                            ]
+                        },
+                        options: {
+                            ...baseOpts,
+                            plugins: {
+                                ...baseOpts.plugins,
+                                legend: { display: false }
+                            },
+                            scales: {
+                                ...baseOpts.scales,
+                                y: {
+                                    ...baseOpts.scales.y,
+                                    suggestedMax: 110,
+                                    title: {
+                                        display: true,
+                                        text: 'Cycle time (illustrative units)',
+                                        color: palette.muted,
+                                        font: { family: 'JetBrains Mono', size: 11 }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                if (envelopeCanvas) {
+                    const xs = Array.from({ length: 20 }, (_, i) => i + 1);
+                    const safeLine = xs.map((s) => ({ x: s, y: envelopeLines(s).safe }));
+                    const cautionLine = xs.map((s) => ({ x: s, y: envelopeLines(s).caution }));
+
+                    envelopeChart = new Chart(envelopeCanvas.getContext('2d'), {
+                        type: 'scatter',
+                        data: {
+                            datasets: [
+                                {
+                                    type: 'line',
+                                    label: 'Safe boundary',
+                                    data: safeLine,
+                                    borderColor: palette.primary,
+                                    backgroundColor: withAlpha(palette.primary, 0.08),
+                                    borderWidth: 2,
+                                    pointRadius: 0,
+                                    tension: 0.25
+                                },
+                                {
+                                    type: 'line',
+                                    label: 'Caution boundary',
+                                    data: cautionLine,
+                                    borderColor: palette.warn,
+                                    borderWidth: 1.5,
+                                    borderDash: [6, 6],
+                                    pointRadius: 0,
+                                    tension: 0.25
+                                },
+                                {
+                                    type: 'scatter',
+                                    label: 'You',
+                                    data: [{ x: state.clockSpeed, y: clamp(state.gates.size, 0, 5) }],
+                                    pointRadius: 7,
+                                    pointHoverRadius: 8,
+                                    pointBorderColor: palette.fg,
+                                    pointBorderWidth: 2,
+                                    pointBackgroundColor: palette.info
+                                }
+                            ]
+                        },
+                        options: {
+                            ...baseOpts,
+                            plugins: {
+                                ...baseOpts.plugins,
+                                tooltip: {
+                                    ...baseOpts.plugins.tooltip,
+                                    callbacks: {
+                                        label: (ctx) => {
+                                            const p = ctx.raw || {};
+                                            const x = typeof p.x === 'number' ? p.x : null;
+                                            const y = typeof p.y === 'number' ? p.y : null;
+                                            if (x === null || y === null) return ctx.dataset.label || '';
+                                            return `${ctx.dataset.label}: ${x}×, ${y} gates`;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    type: 'linear',
+                                    min: 1,
+                                    max: 20,
+                                    ticks: {
+                                        color: palette.muted,
+                                        callback: (value) => `${value}×`,
+                                    },
+                                    grid: { color: grid.color },
+                                    title: {
+                                        display: true,
+                                        text: 'Clock speed',
+                                        color: palette.muted,
+                                        font: { family: 'JetBrains Mono', size: 11 }
+                                    }
+                                },
+                                y: {
+                                    min: 0,
+                                    max: 5,
+                                    ticks: { color: palette.muted, stepSize: 1 },
+                                    grid: { color: grid.color },
+                                    title: {
+                                        display: true,
+                                        text: 'Hard gates enabled',
+                                        color: palette.muted,
+                                        font: { family: 'JetBrains Mono', size: 11 }
+                                    }
+                                }
+                            }
+                        },
+                        plugins: [envelopeZones]
+                    });
+                }
+
+                if (driftCanvas) {
+                    const weeks = Array.from({ length: 12 }, (_, i) => `W${i + 1}`);
+
+                    driftChart = new Chart(driftCanvas.getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels: weeks,
+                            datasets: [
+                                {
+                                    label: 'Eyeballing gate (drift)',
+                                    data: weeks.map(() => 0),
+                                    borderColor: palette.danger,
+                                    backgroundColor: palette.danger.replace('rgb(', 'rgba(').replace(')', ', 0.12)'),
+                                    tension: 0.35,
+                                    pointRadius: 0,
+                                    borderWidth: 2,
+                                },
+                                {
+                                    label: 'Validated loop (converges)',
+                                    data: weeks.map(() => 0),
+                                    borderColor: palette.primary,
+                                    backgroundColor: palette.primary.replace('rgb(', 'rgba(').replace(')', ', 0.10)'),
+                                    tension: 0.35,
+                                    pointRadius: 0,
+                                    borderWidth: 2,
+                                }
+                            ]
+                        },
+                        options: {
+                            ...baseOpts,
+                            scales: {
+                                ...baseOpts.scales,
+                                y: {
+                                    ...baseOpts.scales.y,
+                                    title: {
+                                        display: true,
+                                        text: 'Net output (illustrative)',
+                                        color: palette.muted,
+                                        font: { family: 'JetBrains Mono', size: 11 }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            };
+
+            const render = () => {
+                const gateCount = clamp(state.gates.size, 0, 5);
+                const model = compute(state.clockSpeed, gateCount);
+                const speed = clamp(state.clockSpeed, 1, 20);
+                const lines = envelopeLines(speed);
+
+                if (els.clockValue) els.clockValue.textContent = `${clamp(state.clockSpeed, 1, 20)}×`;
+                if (els.gateCount) els.gateCount.textContent = String(gateCount);
+                if (els.loopTimeValue) els.loopTimeValue.textContent = `${model.aiPlusGates.toFixed(1)}`;
+                if (els.overheadValue) els.overheadValue.textContent = `+${model.overhead.toFixed(1)}`;
+                if (els.breakEvenValue) els.breakEvenValue.textContent = model.breakEven;
+                if (els.riskValue) {
+                    els.riskValue.textContent = model.risk;
+                    els.riskValue.setAttribute('data-level', model.riskLevel);
+                }
+
+                const safeNeed = clamp(Math.ceil(lines.safe), 0, 5);
+                const cautionNeed = clamp(Math.ceil(lines.caution), 0, 5);
+                const envelopeLevel = gateCount >= lines.safe ? 'low' : gateCount >= lines.caution ? 'medium' : 'high';
+                const envelopeText = envelopeLevel === 'low' ? 'Safe' : envelopeLevel === 'medium' ? 'Caution' : 'Unsafe';
+
+                if (els.envelopeAt) els.envelopeAt.textContent = `${speed}× · ${gateCount}/5 gates`;
+                if (els.envelopeStatus) {
+                    els.envelopeStatus.textContent = envelopeText;
+                    els.envelopeStatus.setAttribute('data-level', envelopeLevel);
+                }
+
+                if (els.envelopeNote) {
+                    if (envelopeLevel === 'low') {
+                        els.envelopeNote.textContent = `You’re above the envelope at this speed. Keep the ratchet: don’t let quality slip.`;
+                    } else if (envelopeLevel === 'medium') {
+                        els.envelopeNote.textContent = `You’re on the edge. Aim for ≥${safeNeed} gates before raising speed or autonomy.`;
+                    } else {
+                        els.envelopeNote.textContent = `You’re below the envelope. Either add gates (aim for ≥${cautionNeed}) or slow the loop.`;
+                    }
+                }
+
+                if (els.envelopeActions) {
+                    const gateOrder = [
+                        { key: 'schema', label: 'Schema' },
+                        { key: 'lint', label: 'Lint' },
+                        { key: 'types', label: 'Types' },
+                        { key: 'tests', label: 'Tests' },
+                        { key: 'policy', label: 'Policy' },
+                    ];
+
+                    const missing = gateOrder.filter((g) => !state.gates.has(g.key));
+                    const needed = Math.max(0, safeNeed - gateCount);
+
+                    const actions = [];
+                    if (envelopeLevel !== 'low' && needed > 0 && missing.length > 0) {
+                        missing.slice(0, Math.min(3, needed)).forEach((g) => actions.push(`Enable: ${g.label}`));
+                    } else if (envelopeLevel === 'high' && missing.length > 0) {
+                        missing.slice(0, 2).forEach((g) => actions.push(`Enable: ${g.label}`));
+                    }
+
+                    if (envelopeLevel !== 'low' && actions.length < 3) {
+                        actions.push('Prefer cheap checks first: fail fast, then move up the stack.');
+                    }
+                    if (envelopeLevel === 'low' && actions.length < 3) {
+                        actions.push('Raise autonomy before you raise speed.');
+                        actions.push('Keep changes bounded (small diffs, clear evidence).');
+                    }
+
+                    els.envelopeActions.replaceChildren(...actions.slice(0, 3).map((text) => {
+                        const li = document.createElement('li');
+                        li.className = 'flex gap-3';
+                        const dot = document.createElement('span');
+                        dot.className = 'mt-1.5 h-2 w-2 rounded-full bg-fm-border';
+                        const span = document.createElement('span');
+                        span.textContent = text;
+                        li.append(dot, span);
+                        return li;
+                    }));
+                }
+
+                if (clockChart) {
+                    const series = [model.manual, model.aiGen, model.aiPlusGates];
+                    clockChart.data.datasets[0].data = series;
+                    clockChart.options.scales.y.suggestedMax = Math.max(110, ...series) * 1.05;
+                    clockChart.update();
+                }
+
+                if (envelopeChart) {
+                    const dot = envelopeChart.data.datasets[2];
+                    dot.data = [{ x: speed, y: gateCount }];
+                    const dotColor = envelopeLevel === 'low' ? palette.primary : envelopeLevel === 'medium' ? palette.warn : palette.danger;
+                    dot.pointBackgroundColor = dotColor;
+                    envelopeChart.update();
+                }
+
+                if (driftChart) {
+                    driftChart.data.labels = model.weeks;
+                    driftChart.data.datasets[0].data = model.eyeballing;
+                    driftChart.data.datasets[1].data = model.validated;
+                    driftChart.data.datasets[1].label = `Validated loop (${gateCount} gates)`;
+                    driftChart.update();
+                }
+            };
+
+            const wire = () => {
+                if (els.clockSlider) {
+                    els.clockSlider.addEventListener('input', () => {
+                        state.clockSpeed = clamp(toInt(els.clockSlider.value, state.clockSpeed), 1, 20);
+                        render();
+                    });
+                }
+
+                if (els.gateButtons.length > 0) {
+                    els.gateButtons.forEach((btn) => {
+                        btn.addEventListener('click', () => {
+                            const gate = btn.getAttribute('data-fm-gate');
+                            if (!gate) return;
+
+                            const pressed = btn.getAttribute('aria-pressed') === 'true';
+                            const next = !pressed;
+                            btn.setAttribute('aria-pressed', String(next));
+
+                            if (next) state.gates.add(gate);
+                            else state.gates.delete(gate);
+
+                            render();
+                        });
+                    });
+                }
+
+                if (els.resetBtn) {
+                    els.resetBtn.addEventListener('click', () => {
+                        const defaults = {
+                            clockSpeed: 12,
+                            gates: new Set(['schema', 'lint', 'types']),
+                        };
+
+                        state.clockSpeed = defaults.clockSpeed;
+                        state.gates = new Set(defaults.gates);
+
+                        if (els.clockSlider) els.clockSlider.value = String(defaults.clockSpeed);
+                        if (els.gateButtons.length > 0) {
+                            els.gateButtons.forEach((btn) => {
+                                const gate = btn.getAttribute('data-fm-gate');
+                                const pressed = !!(gate && defaults.gates.has(gate));
+                                btn.setAttribute('aria-pressed', String(pressed));
+                            });
+                        }
+
+                        render();
+                    });
+                }
+            };
+
+            initCharts();
+            wire();
+            render();
+        })();
+    </script>
 </body>
 </html>
