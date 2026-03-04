@@ -94,18 +94,14 @@
 </header>
 <main class="content" id="main">
 <div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">16 min read</span></div>
+<div class="chapter-meta"><span class="read-time">15 min read</span></div>
 <h1 id="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as
 Code (Mission Objects)</h1>
-<p>The dream of a fully autonomous engineering system often gets bogged
-down in the reality of instruction tweaking. Intent is often implicit or
-scattered across tickets, docs, and conversations, then compressed into
-one brittle instruction string. We’ve all been there: a meticulously
-crafted instruction, revised endlessly, still produces inconsistent
-results, or worse, confidently wrong output. The core problem is that a
-raw instruction string is not a contract. It lacks explicit scope,
-verifiable gates, and a clear path for recovery when things go
-sideways.</p>
+<p>Fully autonomous engineering systems usually fail for a boring
+reason: intent is scattered across tickets and conversations, then
+compressed into a brittle instruction string. A raw instruction string
+isn’t a contract: it has no explicit scope, verifiable gates, or
+recovery path when things go sideways.</p>
 <p>This chapter introduces the <strong><a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a></strong>: your
 typed, executable contract for what a GenAI system should achieve. It is
 a structured declaration of intent that brings rigor and reliability to
@@ -114,6 +110,8 @@ AI-driven engineering tasks.</p>
 (“update the docs”). A <strong>Mission Object</strong> is the versioned
 YAML/JSON artifact that encodes that objective plus scope, budgets,
 gates, and fallbacks.</p>
+<p><a class="chapter-link" href="chapter-0-introduction#chapter-0-introduction" title="Go to: Chapter 0">Chapter 0</a> called intent the attractor. A Mission Object is how you
+compile that attractor into something the loop can check.</p>
 <h2 id="from-ad-hoc-instructions-to-typed-mission-objects">From Ad-hoc
 Instructions to Typed Mission Objects</h2>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-02-mission-objects" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-3.html" data-infographic-status="published">
@@ -855,7 +853,7 @@ loop.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>a5b778f7f7da</code>
+      Version: <code>6ea8c9d43738</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

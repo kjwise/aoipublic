@@ -1025,6 +1025,11 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
     word-break: break-word;
   }
 
+  .content :not(pre) > code {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
   .content ul,
   .content ol {
     padding-left: 1.1em;
