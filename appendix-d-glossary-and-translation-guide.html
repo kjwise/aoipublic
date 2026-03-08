@@ -5,14 +5,15 @@
 <title>Appendix D: Glossary &amp; Translation Guide | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Appendix D: Glossary &amp; Translation Guide" name="description"/>
+<meta content="Appendix D of Architects of Intent: Appendix D: Glossary &amp; Translation Guide. Developing and operating reliable autonomous systems demands a precise, shared…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/appendix-d-glossary-and-translation-guide" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Appendix D: Glossary &amp; Translation Guide | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Appendix D: Glossary &amp; Translation Guide" property="og:description"/>
+<meta content="Appendix D of Architects of Intent: Appendix D: Glossary &amp; Translation Guide. Developing and operating reliable autonomous systems demands a precise, shared…" property="og:description"/>
 <meta content="https://architectsofintent.com/appendix-d-glossary-and-translation-guide" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,16 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Appendix D: Glossary &amp; Translation Guide | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Appendix D: Glossary &amp; Translation Guide" name="twitter:description"/>
+<meta content="Appendix D of Architects of Intent: Appendix D: Glossary &amp; Translation Guide. Developing and operating reliable autonomous systems demands a precise, shared…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Appendix D: Glossary &amp; Translation Guide | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix D: Glossary & Translation Guide", "description": "Appendix D of Architects of Intent: Appendix D: Glossary & Translation Guide. Developing and operating reliable autonomous systems demands a precise, shared…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-d-glossary-and-translation-guide", "mainEntityOfPage": "https://architectsofintent.com/appendix-d-glossary-and-translation-guide", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT6M", "articleSection": "Part VI Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -41,20 +43,27 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part VI Appendices</div>
 <div class="chapter-meta"><span class="read-time">6 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="appendix-d-glossary-translation-guide">Appendix D: Glossary
 &amp; Translation Guide</h1>
 <p>Developing and operating reliable autonomous systems demands a
 precise, shared vocabulary. This appendix defines the canonical terms
 used throughout this book and provides a small translation layer to
 familiar industry language.</p>
+</div>
+</header>
 <h2 id="software-development-as-code-sdac">Software Development as Code
 (SDaC)</h2>
 <p><strong>Software Development as Code (SDaC)</strong> is the
@@ -65,8 +74,9 @@ loops that produce diffs you can review.</p>
 and you’ll have enough vocabulary to build a working loop.</p>
 <h2 id="tier-1-substrate-use-everywhere">Tier 1 (Substrate: use
 everywhere)</h2>
-<p><strong>Map</strong>: Structured, version-controlled intent (docs,
-contracts, inventories, derived views).</p>
+<p><strong>Map</strong>: Structured, version-controlled intent and
+memory (docs, contracts, inventories, derived views, and higher-level
+operating memory).</p>
 <p><strong>Terrain</strong>: Reality-as-code (source, configs, schemas,
 runtime behavior).</p>
 <p><strong>Ledger</strong>: Append-only evidence (diffs, validator
@@ -128,8 +138,10 @@ feedback), Governance (blast-radius limits + protected graders).</p>
 under the same Mission Object and context slice.</p>
 <p><strong><a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a></strong>: The iterative loop:
 <code>Write → Judge → Refine</code> until convergence or a circuit
-breaker. Refine is the constrained mutation step in response to a
-specific failure signal, producing a smaller, cleaner diff.</p>
+breaker. It is named for a loop that feeds itself back into the next
+turn and evolves through that feedback, not for a static circle. Refine
+is the constrained mutation step in response to a specific failure
+signal, producing a smaller, cleaner diff.</p>
 <p><strong><a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">Circuit Breakers</a></strong>: Hard stop conditions that keep
 loops finite (max iterations, max wall-clock, max diff size, min
 progress).</p>
@@ -150,6 +162,10 @@ recoverable.</p>
 <p><strong><a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a></strong>: Engineering how context is
 selected, structured, and bounded so the model can act
 deterministically.</p>
+<p><strong><a class="concept-link" href="concepts#operating-map" title="See concept: Operating Map">Operating Map</a></strong>: The higher-level Map of an
+organization: strategy, architecture decisions, policy, incident
+learnings, onboarding guidance, brand voice, tone, culture, and other
+durable constraints that say what the system is trying to preserve.</p>
 <p><strong><a class="concept-link" href="concepts#directives" title="See concept: Directives">Directives</a></strong>: Human-authored behavioral laws for the
 Agent (for example <code>agent_directives.md</code>). Unlike Physics
 (enforced by code), Directives are enforced by the agent instruction
@@ -175,10 +191,10 @@ and Terrain becomes a build failure.</p>
 the slice, budgets, and planned gates without calling the model. Catch
 “wrong files, wrong scope, wrong cost” before you spend tokens.</p>
 <h3 id="meta-patterns">Meta-Patterns</h3>
-<p><strong>Meta-Pattern: Don’t Chat, Compile</strong>: Use chat for
+<p><strong>Meta-Pattern: <a class="concept-link" href="concepts#dont-chat-compile" title="See concept: Don’t Chat, Compile">Don’t Chat, Compile</a></strong>: Use chat for
 ideation, but ship work through versioned Missions and deterministic
 runners (diffs + logs).</p>
-<p><strong><a class="concept-link" href="concepts#meta-pattern-physics-is-law" title="See concept: Meta-Pattern: Physics is Law">Meta-Pattern: Physics is Law</a></strong>: If a change fails
+<p><strong>Meta-Pattern: Physics is Law</strong>: If a change fails
 Physics, it does not exist. No warnings. No loopholes.</p>
 <h2 id="tier-3-governance-maintenance-and-safety">Tier 3 (Governance:
 maintenance and safety)</h2>
@@ -201,7 +217,8 @@ the system can accept refactorings and other changes without collapsing
 into regressions (because it is bounded by Immutable Infrastructure,
 budgets, and hard gates).</p>
 <p><strong><a class="concept-link" href="concepts#dream-manifest" title="See concept: Dream Manifest">Dream Manifest</a></strong>: Measurable maintenance targets: an
-entropy backlog expressed as concrete work selectors.</p>
+entropy backlog expressed as concrete work selectors and memory
+updates.</p>
 <p><strong><a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a></strong>: Scheduled background maintenance (many
 teams start with the human-approved 90% solution).</p>
 <p><strong>Automated Refactoring Under Guards</strong>: Measure → Mutate
@@ -210,10 +227,17 @@ protected graders.</p>
 <p><strong><a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a></strong>: The boundary where documentation
 becomes executable constraints: the Map is no longer advisory; it is
 enforced.</p>
-<p><strong><a class="concept-link" href="concepts#mirror" title="See concept: Mirror">Mirror</a></strong>: A limit case: a system can treat its own
-docs/spec as an input to its maintenance and governance loops.</p>
+<p><strong><a class="concept-link" href="concepts#mirror" title="See concept: Mirror">Mirror</a></strong>: An optional advanced case: a system can
+treat its own operating Map, or a formal derivative of it, as an input
+to its maintenance and governance loops.</p>
+<p><strong><a class="concept-link" href="concepts#torus" title="See concept: Torus">Torus</a></strong>: Bounded autonomy under governance. The
+governed path by which declared intent meets changing reality and,
+through memory, validation, and adaptation, converges on the best state
+that can actually be reached and proved. At organizational scale, it is
+many bounded loops running in parallel across different levels, from
+code to strategy, under the same governing pattern.</p>
 <h3 id="meta-patterns-1">Meta-Patterns</h3>
-<p><strong><a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">Meta-Pattern: Recursion</a></strong>: The same toolchain used by
+<p><strong>Meta-Pattern: <a class="concept-link" href="concepts#recursion" title="See concept: Recursion">Recursion</a></strong>: The same toolchain used by
 humans is used by maintenance loops (Dream Daemon emits Missions; the
 loop validates changes under Immutable Infrastructure boundaries).</p>
 <h2 id="translation-guide-one-time-bridge-then-use-canon">Translation
@@ -234,7 +258,7 @@ what is the Map, what is the Terrain, what is your Ledger, and what is
 your Immune System? Once you can point to those artifacts, you can start
 building reliable loops.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Appendix D: Glossary &amp; Translation Guide" data-share-title="Appendix D: Glossary &amp; Translation Guide | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-d-glossary-and-translation-guide" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Appendix D of Architects of Intent: Appendix D: Glossary &amp; Translation Guide. Developing and operating reliable autonomous systems demands a precise, shared…" data-share-title="Appendix D: Glossary &amp; Translation Guide | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-d-glossary-and-translation-guide" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -242,7 +266,7 @@ building reliable loops.</p>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-d-glossary-and-translation-guide" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fappendix-d-glossary-and-translation-guide" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-d-glossary-and-translation-guide&amp;title=Appendix%20D%3A%20Glossary%20%26%20Translation%20Guide%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20D%3A%20Glossary%20%26%20Translation%20Guide%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Appendix%20D%3A%20Glossary%20%26%20Translation%20Guide%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-d-glossary-and-translation-guide">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20D%3A%20Glossary%20%26%20Translation%20Guide%20%7C%20Architects%20of%20Intent&amp;body=Appendix%20D%20of%20Architects%20of%20Intent%3A%20Appendix%20D%3A%20Glossary%20%26%20Translation%20Guide.%20Developing%20and%20operating%20reliable%20autonomous%20systems%20demands%20a%20precise%2C%20shared%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-d-glossary-and-translation-guide">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -253,7 +277,7 @@ building reliable loops.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

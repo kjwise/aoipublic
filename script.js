@@ -2,6 +2,7 @@
 // Keep this file small and dependency-light for static hosting.
 
 let mermaidLoadPromise = null;
+let infographicRuntimeLoadPromise = null;
 let activeMermaidModal = null;
 
 const LANGUAGE_LABELS = {
@@ -171,6 +172,111 @@ function loadScript(src) {
     script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
     document.head.appendChild(script);
   });
+}
+
+function loadInfographicRuntime() {
+  if (window.__aoiInfographicRuntimeLoaded) return Promise.resolve();
+  if (infographicRuntimeLoadPromise) return infographicRuntimeLoadPromise;
+
+  infographicRuntimeLoadPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector("script[data-aoi-infographic-runtime='1']");
+    if (existing) {
+      existing.addEventListener("load", () => {
+        window.__aoiInfographicRuntimeLoaded = true;
+        resolve();
+      }, { once: true });
+      existing.addEventListener("error", () => {
+        infographicRuntimeLoadPromise = null;
+        reject(new Error("Failed to load infographic runtime."));
+      }, { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "infographic-deck-runtime.js";
+    script.defer = true;
+    script.dataset.aoiInfographicRuntime = "1";
+    script.onload = () => {
+      window.__aoiInfographicRuntimeLoaded = true;
+      resolve();
+    };
+    script.onerror = () => {
+      infographicRuntimeLoadPromise = null;
+      reject(new Error("Failed to load infographic runtime."));
+    };
+    document.body.appendChild(script);
+  });
+
+  return infographicRuntimeLoadPromise;
+}
+
+function setupDeferredInfographicRuntime() {
+  if (document.body.dataset.lazyInfographicRuntime !== "1") return;
+
+  const selector = "[data-infographic-section-id], [data-infographic-deck]";
+  const targets = Array.from(document.querySelectorAll(selector));
+  if (!targets.length) return;
+
+  let triggered = false;
+
+  const cleanup = () => {
+    document.removeEventListener("pointerover", onPointerOver, true);
+    document.removeEventListener("click", onClick, true);
+    document.removeEventListener("focusin", onFocusIn, true);
+  };
+
+  const trigger = () => {
+    if (triggered) return;
+    triggered = true;
+    cleanup();
+    void loadInfographicRuntime();
+  };
+
+  const replayClickAfterLoad = (target) => {
+    if (!(target instanceof HTMLElement)) return;
+    void loadInfographicRuntime().then(() => {
+      window.requestAnimationFrame(() => {
+        target.click();
+      });
+    }).catch(() => {});
+  };
+
+  const onPointerOver = (event) => {
+    if (window.__aoiInfographicRuntimeLoaded) {
+      cleanup();
+      return;
+    }
+    const target = event.target instanceof Element ? event.target.closest(selector) : null;
+    if (target) trigger();
+  };
+
+  const onClick = (event) => {
+    if (window.__aoiInfographicRuntimeLoaded) {
+      cleanup();
+      return;
+    }
+    const target = event.target instanceof Element ? event.target.closest(selector) : null;
+    if (!target) return;
+    event.preventDefault();
+    event.stopPropagation();
+    cleanup();
+    triggered = true;
+    const replayTarget = event.target instanceof HTMLElement ? event.target : target;
+    replayClickAfterLoad(replayTarget);
+  };
+
+  const onFocusIn = (event) => {
+    if (window.__aoiInfographicRuntimeLoaded) {
+      cleanup();
+      return;
+    }
+    const target = event.target instanceof Element ? event.target.closest(selector) : null;
+    if (target) trigger();
+  };
+
+  document.addEventListener("pointerover", onPointerOver, true);
+  document.addEventListener("click", onClick, true);
+  document.addEventListener("focusin", onFocusIn, true);
 }
 
 function loadMermaid() {
@@ -934,6 +1040,7 @@ const bootstrapPage = () => {
   setupSearchPage();
   setupSharePanels();
   enhanceCodeBlocks();
+  setupDeferredInfographicRuntime();
   initInfographicDecks();
   void renderMermaidIfPresent();
 };

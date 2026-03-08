@@ -10,8 +10,7 @@
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <!-- Chart.js (vendored with CDN fallback) -->
 <script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
 <!-- Google Fonts -->
@@ -19,33 +18,9 @@
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 <script defer="" src="infographic-deck-runtime.js"></script>
-<script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
-                    },
-                    colors: {
-                        brand: {
-                            dark: '#0b0c10',
-                            surface: 'rgba(17, 19, 26, 0.92)',
-                            light: 'rgba(255, 255, 255, 0.03)',
-                            border: 'rgba(255, 255, 255, 0.08)',
-                            text: '#e7e7ea',
-                            strong: '#f2f3f8',
-                            muted: '#b5b6bf',
-                            primary: '#7aa2f7',
-                            accent: '#bb9af7',
-                            vibrant: '#2ac3de',
-                            danger: '#f7768e'
-                        }
-                    }
-                }
-            }
-        };
-    </script>
+<meta content="Interactive infographic companion page for Architects of Intent." name="description"/>
+<meta content="noindex,follow" name="robots"/>
+<link href="https://architectsofintent.com/infographic-3" rel="canonical"/>
 </head>
 <body class="bg-brand-dark text-brand-text font-sans antialiased">
 <header class="bg-brand-dark text-white py-12 px-6 shadow-xl relative overflow-hidden">
@@ -70,28 +45,28 @@
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <div class="flex flex-col lg:flex-row gap-8 substrate-main-layout">
 <div class="lg:w-5/12 substrate-main-copy">
-<h1 class="text-3xl font-bold text-brand-strong mb-3">The Substrate (Map · Terrain · Ledger)</h1>
+<h1 class="text-3xl font-bold text-brand-strong mb-3">Three Surfaces You Can Trust (Map · Terrain · Ledger)</h1>
 <p class="text-brand-muted leading-relaxed">
-                            SDaC is practical when the system has three explicit surfaces:
-                            <span class="text-brand-strong font-semibold">intent</span>,
-                            <span class="text-brand-strong font-semibold">runnable reality</span>,
-                            and a deterministic <span class="text-brand-strong font-semibold">evidence trail</span>.
+                            This loop gets practical when three things are explicit:
+                            what should be true,
+                            what actually runs,
+                            and what changed last time.
                         </p>
 <div class="mt-5 grid grid-cols-1 gap-3">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted">MAP</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Intent surface</div>
-<div class="mt-1 text-xs text-brand-muted leading-relaxed">Mission objects, constraints, and acceptance criteria.</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Versioned description</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">The README, spec, or contract you want to keep honest.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted">TERRAIN</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Runnable reality</div>
-<div class="mt-1 text-xs text-brand-muted leading-relaxed">Code, configs, schemas, and policies your system actually runs.</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">What actually runs</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">The code and config your system actually runs.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted">LEDGER</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Evidence trail</div>
-<div class="mt-1 text-xs text-brand-muted leading-relaxed">Append-only records of diffs, validator output, and decisions.</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Change record</div>
+<div class="mt-1 text-xs text-brand-muted leading-relaxed">The diff and check output from the last run.</div>
 </div>
 </div>
 </div>
@@ -122,7 +97,7 @@
 <span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch read"></span>read</span>
 <span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch write"></span>write</span>
 <span class="inline-flex items-center gap-2 font-mono"><span class="trace-swatch exec"></span>execute</span>
-<span class="text-xs text-brand-muted">Toggle trace to see which artifacts the loop touches.</span>
+<span class="text-xs text-brand-muted">Toggle trace to see what the loop reads, writes, and runs.</span>
 </div>
 </div>
 </div>
@@ -136,14 +111,14 @@
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Mission Objects (Intent As Code)</h2>
 <p class="text-brand-muted leading-relaxed">
-                            A <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">mission object</a> is a programmable unit of work: goals, constraints, budgets, and acceptance criteria.
-                            It turns a vague request into a deterministic interface.
+                            A <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> is the versioned contract for a unit of work: goal, scope, constraints, budgets, and gates.
+                            It turns a vague request into something the loop can compile, run, and audit.
                         </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Why it matters</div>
 <div class="text-sm text-brand-muted leading-relaxed">
                                 The tighter the mission boundary, the smaller the search space.
-                                That is how you get faster convergence without “trusting the model.”
+                                That is how you get faster convergence without turning a prompt into pseudo-authority.
                             </div>
 </div>
 </div>
@@ -274,16 +249,16 @@
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">The Deterministic Sandwich (Contain Stochasticity)</h2>
+<h2 class="text-3xl font-bold text-brand-strong mb-3">The Deterministic Sandwich (Keep the model in the middle)</h2>
 <p class="text-brand-muted leading-relaxed">
-                            Put probabilistic generation in the middle. Wrap it in deterministic prep and deterministic validation.
+                            Put the model in the middle. Wrap it with deterministic setup on one side and deterministic checks on the other.
                             The goal is not “trust the model.” It is “trust the loop.”
                         </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-                                Increase entropy and you get more retries. Strengthen the gate and you trade acceptance for quality.
-                                Either way, the sandwich keeps outcomes bounded.
+                                Increase model variability and you get more retries. Strengthen the gate and you trade acceptance for quality.
+                                Either way, the sandwich keeps the result bounded.
                             </div>
 </div>
 </div>
@@ -296,19 +271,19 @@
 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-center">
 <div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Prep</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Context + constraints</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Build request</div>
 </div>
 <div class="text-brand-muted font-mono text-xl sm:hidden">↓</div>
 <div class="text-brand-muted font-mono text-xl hidden sm:block">→</div>
 <div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Model</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Stochastic search</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">One model call</div>
 </div>
 <div class="text-brand-muted font-mono text-xl sm:hidden">↓</div>
 <div class="text-brand-muted font-mono text-xl hidden sm:block">→</div>
 <div class="w-full sm:flex-1 border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Validation</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Deterministic gates</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Parse + gate</div>
 </div>
 </div>
 </div>
@@ -316,7 +291,7 @@
 <div class="xl:col-span-12 min-w-0 space-y-3">
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Model entropy</span>
+<span class="font-mono">Model variability</span>
 <span class="font-mono text-brand-strong"><span id="sandwichEntropyValue">60</span>/100</span>
 </div>
 <label class="sr-only" for="sandwichEntropySlider">Model entropy slider</label>
@@ -345,7 +320,7 @@
 <div class="text-xs text-brand-muted mt-1">Index (calls + evals)</div>
 </div>
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Bounded exit</div>
+<div class="text-xs font-mono text-brand-muted">Final result</div>
 <div class="mt-1 text-lg font-bold text-brand-strong"><span id="sandwichExit">PASS</span></div>
 <div class="text-xs text-brand-muted mt-1">Deterministic gate decides.</div>
 </div>
@@ -359,7 +334,7 @@
 </div>
 <div class="mt-3 grid grid-cols-12 gap-1" id="sandwichAttempts"></div>
 <div class="mt-3 text-xs text-brand-muted">
-                                            Red = rejected candidate. Cyan = accepted output after the gate.
+                                            Red = rejected attempt. Cyan = accepted output after the gate.
                                         </div>
 </div>
 </div>
@@ -419,21 +394,21 @@
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Skeleton-First Rule (Prevent Map Contamination)</h2>
 <p class="text-brand-muted leading-relaxed">
-              Deterministically extract skeleton from Terrain, then let the model fill prose around it.
-              If skeleton mismatch appears, hard-fail the update and record a receipt.
+              Extract the skeleton from Terrain first, then let the model fill prose around it.
+              If the skeleton changes, fail the update and write a receipt.
             </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Interactive updater</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-                Toggle extraction and run bounded attempts. You should see either deterministic convergence
-                (<span class="font-mono text-brand-strong">PASS</span>) or a deterministic exit
-                (<span class="font-mono text-brand-strong">ESCALATE</span>) when budget is exhausted.
+                Toggle extraction and run bounded attempts. You should see either a clean
+                <span class="font-mono text-brand-strong">PASS</span> or a deterministic
+                <span class="font-mono text-brand-strong">ESCALATE</span> when the budget runs out.
               </div>
 </div>
 </div>
 <div class="lg:w-7/12 space-y-4" data-role="skeleton-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3"><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> pipeline</div>
+<div class="text-xs font-mono text-brand-muted mb-3"><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> loop</div>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Sense/Normalize</div>
@@ -441,7 +416,7 @@
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Propose</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Generate flesh patch</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Generate prose patch</div>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Validate</div>
@@ -899,15 +874,15 @@
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-danger">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">Validator Bundles (Define Good + Budgets)</h2>
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Validator Bundles (Make “good” explicit)</h2>
 <p class="text-brand-muted leading-relaxed">
-                            Validators are “physics.” Budgets are “governors.” Together they turn open-ended iteration into a bounded system.
-                            The loop can fail, but it fails deterministically.
+                            Validators are the hard checks. Budgets stop the loop from grinding forever.
+                            Together they turn open-ended iteration into a bounded system.
                         </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-                                Toggle validators and adjust the retry budget. Run the bundle and watch what becomes provable.
+                                Turn checks on and off, adjust the retry budget, then run the bundle and watch what becomes provable.
                             </div>
 </div>
 </div>
@@ -916,7 +891,7 @@
 <div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
 <div class="xl:col-span-5 space-y-3">
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Validator bundle</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Checks in the bundle</div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
 <button aria-pressed="true" class="soft-toggle font-mono" data-validator="schema" type="button">Schema</button>
 <button aria-pressed="true" class="soft-toggle font-mono" data-validator="tests" type="button">Unit tests</button>
@@ -933,7 +908,7 @@
 </div>
 <label class="sr-only" for="validatorBudgetSlider">Retry budget slider</label>
 <input class="mt-2 w-full" id="validatorBudgetSlider" max="10" min="1" type="range" value="4"/>
-<button aria-pressed="false" class="mt-3 soft-toggle w-full font-mono" id="validatorRunBtn" type="button">Run Validators</button>
+<button aria-pressed="false" class="mt-3 soft-toggle w-full font-mono" id="validatorRunBtn" type="button">Run checks</button>
 </div>
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted mb-2">Results</div>
@@ -947,7 +922,7 @@
 </div>
 <div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
 <div class="flex items-center justify-between mb-2">
-<div class="text-xs font-mono text-brand-muted">Ledger entry (evidence)</div>
+<div class="text-xs font-mono text-brand-muted">Run record</div>
 <div class="text-xs font-mono text-brand-muted" id="validatorRunId">run_000</div>
 </div>
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-56 font-mono" id="validatorLedger"></pre>
@@ -1068,22 +1043,22 @@
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Ouroboros Protocol (Write → Judge → Refine)</h2>
 <p class="text-brand-muted leading-relaxed">
-        This is the control loop for iterative delivery: write a bounded candidate, judge it with deterministic gates,
-        then refine only against the failure signal. Repeat until convergence or circuit-break.
+        This is the retry loop behind reliable agent work: produce one bounded candidate, run deterministic checks,
+        then retry only against the exact failure signal. Repeat until the checks pass or the circuit breaker stops the run.
       </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Deterministic stop conditions</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Clear stop conditions</div>
 <div class="text-sm text-brand-muted leading-relaxed">
 <span class="block font-mono text-brand-vibrant">Write → <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> → Refine</span>
-<span class="block mt-2">Stop on <span class="font-mono text-brand-strong">PASS</span> (converged) or on
-          <span class="font-mono text-brand-strong">budget exhausted</span> (escalate).</span>
-<span class="block mt-2">Judge can route to refine, rewrite, or re-scope before the next loop.</span>
+<span class="block mt-2">Stop on <span class="font-mono text-brand-strong">PASS</span> (checks pass) or when the
+          <span class="font-mono text-brand-strong">loop budget runs out</span> (escalate).</span>
+<span class="block mt-2">The Judge can send the next step to refine, rewrite, or re-scope.</span>
 </div>
 </div>
 </div>
 <div class="lg:w-7/12 space-y-4" data-role="ouroboros-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive loop model</div>
 <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
 <div class="md:col-span-6">
 <div class="flex items-center justify-between text-xs text-brand-muted">
@@ -1421,7 +1396,7 @@
       progressText = "Converged: attractor reached.";
     } else if (state.scenario === "no-attractor") {
       progressState = "unreachable";
-      progressText = "Unreachable attractor: retries cannot produce PASS.";
+      progressText = "No reachable attractor: retries cannot produce PASS.";
     } else if (windowItems.length < 2) {
       progressState = "baseline";
       progressText = "Collecting baseline.";
@@ -1482,7 +1457,7 @@
       outcomeEl.textContent = "PASS: converged under deterministic gates.";
     } else if (state.status === "ESCALATE") {
       if (state.scenario === "no-attractor") {
-        outcomeEl.textContent = `CIRCUIT BREAK: no reachable attractor under current constraints. Escalate with evidence.`;
+        outcomeEl.textContent = "CIRCUIT BREAK: no reachable attractor under current constraints. Escalate with evidence.";
       } else {
         outcomeEl.textContent = `CIRCUIT BREAK: loop budget (${state.budget}) exhausted. Escalate with evidence.`;
       }
@@ -1752,16 +1727,16 @@
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Ratchets (Quality Floors That Only Move Up)</h2>
 <p class="text-brand-muted leading-relaxed">
-      Ratchets turn quality expectations into executable law. A candidate can fail, but the floor does not move down.
+      Ratchets turn quality expectations into executable law. A candidate may fail, but the floor does not move down.
       If a candidate passes deterministic guards, the floor moves up and future loops start from a stronger baseline.
     </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Atomic admission loop</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Admission loop</div>
 <div class="text-sm text-brand-muted leading-relaxed space-y-2">
 <span class="block"><span class="font-mono text-brand-vibrant">1) Measure</span> baseline metrics.</span>
 <span class="block"><span class="font-mono text-brand-vibrant">2) Mutate</span> one bounded candidate.</span>
 <span class="block"><span class="font-mono text-brand-vibrant">3) Validate</span> ratchets + policy gates.</span>
-<span class="block"><span class="font-mono text-brand-vibrant">4) Decide</span> raise floor, reject, or route to human gate.</span>
+<span class="block"><span class="font-mono text-brand-vibrant">4) Decide</span> raise the floor, reject, or route to human review.</span>
 </div>
 </div>
 <div class="mt-4 bg-brand-light border border-brand-border rounded-xl p-4">
@@ -2248,7 +2223,7 @@
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Always-On Loops (Maintenance That Compounds)</h2>
 <p class="text-brand-muted leading-relaxed">
               A <a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a> is not a cron job. It is a bounded control loop that senses entropy,
-              ranks one target, and exits with a deterministic decision: PASS, DEFER, or ESCALATE.
+              picks one target, and exits with a deterministic decision: PASS, DEFER, or ESCALATE.
             </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4 space-y-4">
 <div>
@@ -2307,8 +2282,8 @@
 </div>
 </div>
 <div class="mt-4 text-xs text-brand-muted leading-relaxed">
-              The chart shows long-horizon trajectory. The controls below model the bounded execution loop:
-              one target per cycle, hard budget, and deterministic admission gates.
+              The chart shows the long-horizon trend. The controls below model the bounded loop:
+              one target per cycle, a hard budget, and deterministic admission gates.
             </div>
 </div>
 <div class="lg:w-7/12 space-y-4">
@@ -2805,8 +2780,8 @@
 <div class="lg:w-5/12 min-w-0">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Governance Envelope (Policy + Evidence)</h2>
 <p class="text-brand-muted leading-relaxed">
-      Governance at machine speed means deterministic policy outcomes for every candidate diff.
-      The model proposes; policy decides; the ledger records why.
+      Governance at machine speed means every candidate diff gets a deterministic policy outcome.
+      The model proposes, policy decides, and the ledger records why.
     </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Execution path</div>

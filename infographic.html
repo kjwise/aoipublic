@@ -9,45 +9,20 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="infographic-tailwind.css">
     <!-- Chart.js -->
     <script src="chart.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'"></script>
     <!-- Plotly.js (For 3D Terrain) -->
-    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="plotly-canvas-patch.js"></script>
+    <script src="https://cdn.plot.ly/plotly-3.3.1.min.js"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="infographic-deck-runtime.css">
     <link rel="stylesheet" href="infographic-fragment-shell.css">
     <script src="infographic-deck-runtime.js" defer></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-	                extend: {
-	                    fontFamily: {
-	                        sans: ['Inter', 'sans-serif'],
-	                        mono: ['JetBrains Mono', 'monospace'],
-	                    },
-	                    colors: {
-	                        brand: {
-                            dark: '#0b0c10',
-                            surface: 'rgba(17, 19, 26, 0.92)',
-                            light: 'rgba(255, 255, 255, 0.03)',
-                            border: 'rgba(255, 255, 255, 0.08)',
-                            text: '#e7e7ea',
-                            strong: '#f2f3f8',
-                            muted: '#b5b6bf',
-                            primary: '#7aa2f7',
-                            accent: '#bb9af7',
-                            vibrant: '#2ac3de',
-                            danger: '#f7768e'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+  <meta name="description" content="Interactive infographic companion page for Architects of Intent.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://architectsofintent.com/infographic">
 </head>
 <body class="bg-brand-dark text-brand-text font-sans antialiased">
 
@@ -77,9 +52,9 @@
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <h2 class="text-3xl md:text-4xl font-bold text-brand-strong mb-3">The Shape of All Work</h2>
 <p class="text-brand-muted max-w-4xl leading-relaxed">
-                    Every productive process follows the same loop at every scale:
+                    Every productive process follows the same pattern at every scale:
                     <span class="font-mono text-brand-strong">P(Zn) = Z(n+1)</span>.
-                    The state changes; the process itself can also evolve.
+                    You start somewhere, run a process, and end up somewhere else. Sometimes the process improves too.
                 </p>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
 <div class="lg:col-span-4 space-y-4">
@@ -110,17 +85,17 @@
 </div>
 <div class="border border-brand-border rounded-xl bg-brand-light p-4 transition-colors duration-200" id="shapeSdacCard">
 <div class="flex items-center justify-between gap-3">
-<div class="text-xs font-mono text-brand-muted uppercase tracking-wide">SDaC Protocol</div>
+<div class="text-xs font-mono text-brand-muted uppercase tracking-wide">SDaC Guardrails</div>
 <button aria-pressed="false" class="relative inline-flex w-12 h-6 rounded-full border border-brand-border bg-brand-surface transition-colors duration-200" id="shapeSdacToggle" type="button">
 <span class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200" id="shapeSdacKnob"></span>
 </button>
 </div>
 <p class="mt-3 text-sm text-brand-muted leading-relaxed" id="shapeSdacDescription">
-                                Standard mode: acceleration without structure. Faster loops can also accelerate drift.
+                                Standard mode: faster work without better guardrails. Speed can amplify mistakes.
                             </p>
 <div class="mt-3 hidden flex-wrap gap-2" id="shapeSdacBadges">
-<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Validation</span>
-<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Bounded Effectors</span>
+<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Checks</span>
+<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Scoped writes</span>
 </div>
 </div>
 </div>
@@ -174,40 +149,40 @@
 </div>
 <div class="mt-8 border border-brand-border rounded-xl bg-brand-light p-4">
 <div class="flex flex-wrap gap-4 border-b border-brand-border pb-3">
-<button aria-selected="true" class="shape-tab-btn is-active text-sm font-semibold pb-1" data-shape-tab="concept" type="button">The Fractal Shape</button>
-<button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="recursive" type="button">Recursive Improvement</button>
+<button aria-selected="true" class="shape-tab-btn is-active text-sm font-semibold pb-1" data-shape-tab="concept" type="button">Same Pattern</button>
+<button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="recursive" type="button">Improve the Process</button>
 <button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="sdac" type="button">Why SDaC?</button>
 </div>
 <div class="mt-4">
 <div data-shape-panel="concept">
-<p class="text-brand-strong text-lg font-semibold mb-2">The structure is identical at every scale.</p>
+<p class="text-brand-strong text-lg font-semibold mb-2">The same pattern shows up at every scale.</p>
 <p class="text-brand-muted leading-relaxed">
                                 Whether you type one character or steer a company, you still transform a current state into a next state through a process. What changes is the time constant and impact radius.
                             </p>
 </div>
 <div class="hidden" data-shape-panel="recursive">
-<p class="text-brand-strong text-lg font-semibold mb-2">The process itself is part of the loop.</p>
+<p class="text-brand-strong text-lg font-semibold mb-2">The process can get better too.</p>
 <div class="rounded-xl border border-brand-border bg-brand-surface p-3 font-mono text-sm text-brand-muted">
 <div><span class="text-brand-accent">next_state</span> = process(current_state)</div>
 <div class="mt-1"><span class="text-brand-vibrant">process</span> = improve(process, evidence)</div>
 </div>
 <p class="text-brand-muted leading-relaxed mt-3">
-                                Real systems are recursive: execution generates evidence, and evidence upgrades the process that executes.
+                                Real systems improve indirectly: you execute, collect evidence, and use that evidence to improve the way the work gets done.
                             </p>
 </div>
 <div class="hidden" data-shape-panel="sdac">
-<p class="text-brand-strong text-lg font-semibold mb-2">Acceleration without structure is chaos.</p>
+<p class="text-brand-strong text-lg font-semibold mb-2">Acceleration without guardrails is chaos.</p>
 <p class="text-brand-muted leading-relaxed">
-                                AI raises loop speed. SDaC adds deterministic validation, bounded effectors, and explicit intent so higher velocity converges instead of drifting.
+                                AI speeds up the loop. SDaC adds explicit intent, scoped writes, and deterministic checks so higher speed produces better outcomes instead of faster drift.
                             </p>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
 <div class="p-3 rounded-xl border border-[rgba(247,118,142,0.35)] bg-[rgba(247,118,142,0.08)]">
 <div class="text-sm font-semibold text-brand-danger">Standard loop</div>
-<div class="text-xs text-brand-muted mt-1">Trust the model; mistakes scale with speed.</div>
+<div class="text-xs text-brand-muted mt-1">Trust the model; mistakes speed up too.</div>
 </div>
 <div class="p-3 rounded-xl border border-[rgba(42,195,222,0.35)] bg-[rgba(42,195,222,0.10)]">
 <div class="text-sm font-semibold text-brand-vibrant">SDaC loop</div>
-<div class="text-xs text-brand-muted mt-1">Trust the loop; validators enforce convergence.</div>
+<div class="text-xs text-brand-muted mt-1">Trust the loop; checks keep change inside bounds.</div>
 </div>
 </div>
 </div>
@@ -689,10 +664,9 @@
 <div class="bg-brand-dark rounded-xl shadow-2xl p-8 text-white overflow-hidden relative">
 <h2 class="text-3xl font-bold mb-2">Shaping the Optimization Terrain</h2>
 <p class="text-brand-muted mb-6 max-w-3xl text-lg">
-	                    This is the new game. You do not push the boulder up the hill. You <strong>reshape the hill</strong> so the boulder falls into the hole you want.
+	                    This is the geometry view of slicing. You are not dumping the whole repository into the window. You <strong>reshape the terrain</strong> so valid paths are easier and drift is harder.
 	                    <br/><br/>
-<span class="text-brand-vibrant">Intent = Gravity.</span> Changing your intent warps the geometry of the solution space. 
-                    The "Loop" simply calculates the shortest path to the mathematical optima you have defined. Who defines the sharpest peaks wins.
+<span class="text-brand-vibrant">Intent defines the target basin.</span> The slice, contracts, and validators warp the solution space so each loop iteration takes the shortest safe path toward the optima you actually want, not a nearby but wrong local maximum.
                 </p>
 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
 <div class="text-sm text-brand-muted">
@@ -706,7 +680,7 @@
 <!-- Plotly Container -->
 <div class="plotly-container mx-auto bg-[rgba(6,7,12,0.70)] rounded-lg shadow-inner border border-brand-border" id="terrainPlot"></div>
 <div class="text-center mt-2 text-sm text-brand-muted">
-                    Interactive 3D Terrain: The "Peaks" are the Optima (High Value Outcomes). The "Valleys" are Failure States.
+                    Interactive 3D terrain: peaks are higher-value, contract-satisfying outcomes; valleys are failure states and drift.
                 </div>
 </div>
 </section>
@@ -716,7 +690,7 @@
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-t-4 border-t-brand-accent">
 <h2 class="text-center text-3xl font-bold text-brand-strong mb-2">The Hierarchy of Stewardship</h2>
 <p class="text-center text-brand-muted mb-8 max-w-2xl mx-auto">
-	                    When the foundation is infinite, the structure above it must be precise.
+	                    Lower layers provide capability. Upper layers decide what that capability is allowed to do.
 	                </p>
 <div class="max-w-6xl mx-auto flex flex-col items-center">
 <div class="pyramid-shell">

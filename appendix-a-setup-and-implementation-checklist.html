@@ -5,14 +5,15 @@
 <title>Appendix A: Setup and Implementation Checklist | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Appendix A: Setup and Implementation Checklist" name="description"/>
+<meta content="Appendix A of Architects of Intent: Appendix A: Setup and Implementation Checklist. You can implement Software Development as Code (SDaC) in any stack. The…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/appendix-a-setup-and-implementation-checklist" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Appendix A: Setup and Implementation Checklist | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Appendix A: Setup and Implementation Checklist" property="og:description"/>
+<meta content="Appendix A of Architects of Intent: Appendix A: Setup and Implementation Checklist. You can implement Software Development as Code (SDaC) in any stack. The…" property="og:description"/>
 <meta content="https://architectsofintent.com/appendix-a-setup-and-implementation-checklist" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,16 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Appendix A: Setup and Implementation Checklist | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Appendix A: Setup and Implementation Checklist" name="twitter:description"/>
+<meta content="Appendix A of Architects of Intent: Appendix A: Setup and Implementation Checklist. You can implement Software Development as Code (SDaC) in any stack. The…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Appendix A: Setup and Implementation Checklist | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix A: Setup and Implementation Checklist", "description": "Appendix A of Architects of Intent: Appendix A: Setup and Implementation Checklist. You can implement Software Development as Code (SDaC) in any stack. The…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-a-setup-and-implementation-checklist", "mainEntityOfPage": "https://architectsofintent.com/appendix-a-setup-and-implementation-checklist", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT8M", "articleSection": "Part VI Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -41,20 +43,27 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part VI Appendices</div>
 <div class="chapter-meta"><span class="read-time">8 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="appendix-a-setup-and-implementation-checklist">Appendix A: Setup
 and Implementation Checklist</h1>
 <p>This appendix does three things:</p>
+</div>
+</header>
 <ol type="1">
 <li>It defines the minimal setup you need to run the examples and build
-your own SDaC loop.</li>
+your own Software Development as Code (SDaC) loop.</li>
 <li>It provides an implementation checklist (a dependency graph plus
 milestones).</li>
 <li>It includes a concept map so you can skim the book without
@@ -127,6 +136,9 @@ directory inside your repo (for example <code>.githooks</code>):</p>
 <h2 id="implementation-checklist">Implementation checklist</h2>
 <p>The goal is not to implement every chapter. The goal is to ship a
 small loop that is correct, auditable, and easy to extend.</p>
+<p>For reusable copy/paste artifacts, use <a class="chapter-link" href="appendix-c-pattern-library#appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a> as the canonical
+home: output-contract patterns, Mission templates, and the Day 2
+hardening checklist live there.</p>
 <h3 id="the-dependency-graph">The dependency graph</h3>
 <pre class="mermaid"><code>flowchart TD
   MVF["Ch 1:\nMinimum Viable Factory"] --&gt; Sandwich["Ch 2:\nDeterministic Sandwich"]
@@ -284,10 +296,11 @@ intentional waiver.</li>
 <li>Blast radius boundaries are explicit and enforced.</li>
 <li>Audit artifacts are retained (logs, diffs, run metadata).</li>
 </ul>
-<h3 id="part-v-reflections-limit-cases">Part V: Reflections (limit
-cases)</h3>
-<p><a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a> is a useful limit case. Treat it as a tool for thinking,
-not a build requirement.</p>
+<h3 id="part-v-reflections-destination-stakes">Part V: Reflections
+(destination + stakes)</h3>
+<p><a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a> is the destination the rest of the book has been building
+toward. Most teams will cross that bridge one bounded surface at a time,
+not all at once.</p>
 <h2 id="concept-map-where-terms-live">Concept map (where terms
 live)</h2>
 <p>You don’t need to memorize the canon up front. The terms arrive in
@@ -339,7 +352,7 @@ Machine, Map-Updaters, <a class="concept-link" href="concepts#immutable-infrastr
 </tr>
 <tr>
 <td style="text-align: left;">Part V</td>
-<td style="text-align: left;">Limit cases + stakes</td>
+<td style="text-align: left;">Destination + stakes</td>
 <td style="text-align: left;"><a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a>, Race to Reliable
 Autonomy</td>
 </tr>
@@ -349,7 +362,7 @@ Autonomy</td>
 concepts are introduced (chapter-level)</h3>
 <ul>
 <li><strong><a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a>:</strong> Map, Terrain, Ledger, Effector,
-Validator (MVF v0: a loop you can run).</li>
+Validator (Minimum Viable Factory (MVF) v0: a loop you can run).</li>
 <li><strong>Chapter 2:</strong> The Deterministic Sandwich (Prep → Model
 → Validation).</li>
 <li><strong><a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>:</strong> Validators → Immune System (Physics you
@@ -360,13 +373,13 @@ reduce it).</li>
 circuit breakers (debug convergence).</li>
 <li><strong><a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a>:</strong> <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a> + Context Graph +
 <a class="concept-link" href="concepts#branching-factor-rule-of-seven" title="See concept: Branching Factor (Rule of
-Seven)">Branching Factor</a> + Skeleton-First Rule (slice deterministically).</li>
+Seven)">Branching Factor</a> + <a class="concept-link" href="concepts#skeleton-first-rule" title="See concept: Skeleton-First Rule">Skeleton-First Rule</a> (slice deterministically).</li>
 <li><strong>Chapters 7–9:</strong> Mission Objects, Map-Updaters, Dream
 (scale the loop into a system).</li>
 <li><strong>Chapters 10–12:</strong> Immutable Infrastructure +
 governance at machine speed (protect graders and blast radius).</li>
-<li><strong>Chapter 13:</strong> Hofstadter Bridge (limit case: when the
-Map becomes enforceable).</li>
+<li><strong>Chapter 13:</strong> Hofstadter Bridge (destination: when
+the Map becomes enforceable, one bounded surface at a time).</li>
 <li><strong>Chapter 14:</strong> The Race to Reliable Autonomy (stakes:
 why the bar is rising).</li>
 <li><strong><a class="chapter-link" href="appendix-d-glossary-and-translation-guide#appendix-d-glossary-translation-guide" title="Go to: Appendix D">Appendix D</a>:</strong> glossary + translation guide.</li>
@@ -382,7 +395,7 @@ loop working.</p></li>
 human review for it.</p></li>
 </ol>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Appendix A: Setup and Implementation Checklist" data-share-title="Appendix A: Setup and Implementation Checklist | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-a-setup-and-implementation-checklist" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Appendix A of Architects of Intent: Appendix A: Setup and Implementation Checklist. You can implement Software Development as Code (SDaC) in any stack. The…" data-share-title="Appendix A: Setup and Implementation Checklist | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-a-setup-and-implementation-checklist" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -390,7 +403,7 @@ human review for it.</p></li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-a-setup-and-implementation-checklist" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fappendix-a-setup-and-implementation-checklist" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-a-setup-and-implementation-checklist&amp;title=Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-a-setup-and-implementation-checklist">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist%20%7C%20Architects%20of%20Intent&amp;body=Appendix%20A%20of%20Architects%20of%20Intent%3A%20Appendix%20A%3A%20Setup%20and%20Implementation%20Checklist.%20You%20can%20implement%20Software%20Development%20as%20Code%20%28SDaC%29%20in%20any%20stack.%20The%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-a-setup-and-implementation-checklist">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -402,7 +415,7 @@ human review for it.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

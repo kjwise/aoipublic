@@ -5,14 +5,15 @@
 <title>Chapter 0 – Introduction | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Chapter 0 – Introduction" name="description"/>
+<meta content="Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-0-introduction" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 0 – Introduction | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Chapter 0 – Introduction" property="og:description"/>
+<meta content="Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-0-introduction" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,58 +21,19 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 0 – Introduction | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Chapter 0 – Introduction" name="twitter:description"/>
+<meta content="Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 0 – Introduction | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 0 – Introduction", "description": "Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-0-introduction", "mainEntityOfPage": "https://architectsofintent.com/chapter-0-introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT10M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0b0c10',
-              surface: 'rgba(17, 19, 26, 0.92)',
-              panel: 'rgba(17, 19, 26, 0.92)',
-              light: 'rgba(255, 255, 255, 0.03)',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#e7e7ea',
-              strong: '#f2f3f8',
-              muted: '#b5b6bf',
-              primary: '#7aa2f7',
-              accent: '#bb9af7',
-              vibrant: '#2ac3de',
-              danger: '#f7768e',
-              success: '#10b981',
-            },
-            cyber: {
-              dark: '#0B0F19',
-              panel: '#151B2B',
-              primary: '#6366f1',
-              accent: '#06b6d4',
-              neon: '#d946ef',
-              success: '#10b981',
-              danger: '#ef4444',
-              text: '#f8fafc',
-              muted: '#94a3b8'
-            }
-          }
-        }
-      }
-    }
-  </script>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
@@ -85,53 +47,96 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Introduction</div>
-<div class="chapter-meta"><span class="read-time">11 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="chapter-0-introduction">Chapter 0 – Introduction</h1>
+<p>Friday, 4:03 PM.</p>
+<p>You use an AI assistant to ship a feature fast:</p>
+<p>“Add pagination to <code>GET /api/users</code>.”</p>
+<p>It updates the handler, tweaks a test, edits the API contract
+(OpenAPI), and slips in a refactor you did not ask for.</p>
+<p>The diff looks reasonable. CI passes. You merge it.</p>
+<p>Velocity is high. Friction is low. Your confidence is mostly based on
+how reasonable the diff looks.</p>
+<p>Saturday morning, your mobile app is down.</p>
+<p>The assistant introduced a contract drift: <code>limit</code> became
+a string in the OpenAPI spec while the rest of the system still treats
+it as an integer.</p>
+</div>
+</header>
+<div class="sourceCode" id="cb1"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="kw">--- a/openapi.json</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="dt">+++ b/openapi.json</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="dt">@@ -312,7 +312,7 @@</span></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>   "limit": {</span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="st">-    "type": "integer"</span></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a><span class="va">+    "type": "string"</span></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a>   }</span></code></pre></div>
+<p>Now run the same scenario inside a bounded loop:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="ex">$</span> make ship MISSION=<span class="st">"Paginate GET /api/users"</span></span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="ex">[PREP]</span> Slice: openapi.json, src/users_handler.ts, clients/mobile/<span class="pp">*</span></span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 1: proposed patch</span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Contract alignment <span class="er">(</span><span class="ex">Map/Terrain</span><span class="kw">)</span><span class="bu">:</span> FAIL <span class="er">(</span><span class="ex">OpenAPI</span> drift: <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> must remain integer<span class="kw">)</span></span>
+<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a><span class="ex">[REFINE]</span> Retrying with constraint: keep <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> as integer everywhere</span>
+<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 2: proposed patch</span>
+<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Contract alignment <span class="er">(</span><span class="ex">Map/Terrain</span><span class="kw">)</span><span class="bu">:</span> PASS</span>
+<span id="cb2-8"><a aria-hidden="true" href="#cb2-8" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Generated client Validator: PASS</span>
+<span id="cb2-9"><a aria-hidden="true" href="#cb2-9" tabindex="-1"></a><span class="ex">[LEDGER]</span> build/ledger/2026-02-06T1603Z/ <span class="er">(</span><span class="fu">diff</span> + validator output<span class="kw">)</span></span>
+<span id="cb2-10"><a aria-hidden="true" href="#cb2-10" tabindex="-1"></a><span class="ex">[RESULT]</span> PR ready for review <span class="er">(</span><span class="ex">gates</span> passing<span class="kw">)</span></span></code></pre></div>
+<p><em>Illustrative transcript: the commands, paths, and gate shape are
+representative. <a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a> shows the runnable loop, and <a class="chapter-link" href="appendix-a-setup-and-implementation-checklist#appendix-a-setup-and-implementation-checklist" title="Go to: Appendix A">Appendix A</a> marks
+what is fully runnable versus explanatory.</em></p>
+<p>That is the whole wager of this book: do not trust raw generation.
+Engineer the loop that decides what ships.</p>
 <h2 id="executive-summary">Executive Summary</h2>
-<p>This book shows how to turn stochastic AI output into deterministic,
-auditable engineering systems. The core move is to engineer the
-development loop itself, not trust raw generation.</p>
-<p>The system is built from five mechanisms:</p>
+<p>This book is about using AI to speed up software development without
+giving up control.</p>
+<p>The core move is simple: do not trust raw generation. Put the model
+inside an engineering loop you can inspect, rerun, and block.</p>
+<p>That loop has five parts:</p>
 <ul>
-<li><strong>Deterministic context:</strong> give the model a narrow,
-versioned slice of the real system.</li>
-<li><strong>Structured intent:</strong> express the requested change as
-a machine-checkable mission/contract, not a vague prompt.</li>
-<li><strong>Hard validators:</strong> enforce invariant checks that
-return <code>PASS/FAIL</code> before merge.</li>
-<li><strong>Bounded loops:</strong> iterate
-<code>propose -&gt; validate -&gt; refine</code> with explicit retry and
-scope limits.</li>
-<li><strong>Immutable governance:</strong> record receipts (diffs,
-validator logs, decisions) in an append-only evidence trail.</li>
+<li><strong>Narrow context:</strong> give the model a small, versioned
+slice of the real system.</li>
+<li><strong>Clear intent:</strong> describe the requested change in a
+form that is specific and checkable.</li>
+<li><strong>Hard checks:</strong> run validators that return
+<code>PASS/FAIL</code> before merge.</li>
+<li><strong>Bounded retries:</strong> let the system try again, but with
+scope limits and retry limits.</li>
+<li><strong>Evidence:</strong> keep the diff, logs, and decisions so you
+can explain what happened later.</li>
 </ul>
 <p>What this buys you:</p>
 <ul>
-<li>Higher iteration speed without higher drift risk.</li>
-<li>Changes that are auditable, replayable, and reviewable.</li>
-<li>A pattern that scales from single-file edits to organization-level
-change control.</li>
+<li>Faster iteration without turning speed into drift.</li>
+<li>Changes you can review, replay, and audit.</li>
+<li>A pattern that starts with one file and scales to teams and
+organization-level change control.</li>
 </ul>
 <p>How to read this book:</p>
 <ul>
-<li>Part I builds a working loop first.</li>
-<li>Later parts explain the model and scaling patterns behind it.</li>
+<li>Part I gets a working loop running first.</li>
+<li>Later parts explain why it works and how to scale it.</li>
 </ul>
-<h2 id="the-sdac-stack-one-diagram">The SDaC Stack (One Diagram)</h2>
+<h2 id="the-software-development-as-code-sdac-stack-one-diagram">The
+Software Development as Code (SDaC) Stack (One Diagram)</h2>
 <p>This is the full operating stack used throughout the book:</p>
 <pre class="mermaid"><code>flowchart TB
   S["Substrate"] --&gt; L["Loop"]
   L --&gt; G["Governance"]
   G --&gt; M["Maintenance"]
   M --&gt; R["Reflection"]</code></pre>
-<p>Read left to right: build on a concrete substrate, run bounded loops,
+<p>Read top to bottom: build on a concrete substrate, run bounded loops,
 enforce governance, sustain through maintenance, and improve through
 reflection.</p>
 <h2 id="the-shape-of-all-work">The Shape of All Work</h2>
@@ -140,9 +145,9 @@ reflection.</p>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
 <h2 class="text-3xl md:text-4xl font-bold text-brand-strong mb-3">The Shape of All Work</h2>
 <p class="text-brand-muted max-w-4xl leading-relaxed">
-                    Every productive process follows the same loop at every scale:
+                    Every productive process follows the same pattern at every scale:
                     <span class="font-mono text-brand-strong">P(Zn) = Z(n+1)</span>.
-                    The state changes; the process itself can also evolve.
+                    You start somewhere, run a process, and end up somewhere else. Sometimes the process improves too.
                 </p>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
 <div class="lg:col-span-4 space-y-4">
@@ -173,17 +178,17 @@ reflection.</p>
 </div>
 <div class="border border-brand-border rounded-xl bg-brand-light p-4 transition-colors duration-200" id="shapeSdacCard">
 <div class="flex items-center justify-between gap-3">
-<div class="text-xs font-mono text-brand-muted uppercase tracking-wide">SDaC Protocol</div>
+<div class="text-xs font-mono text-brand-muted uppercase tracking-wide">SDaC Guardrails</div>
 <button aria-pressed="false" class="relative inline-flex w-12 h-6 rounded-full border border-brand-border bg-brand-surface transition-colors duration-200" id="shapeSdacToggle" type="button">
 <span class="absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200" id="shapeSdacKnob"></span>
 </button>
 </div>
 <p class="mt-3 text-sm text-brand-muted leading-relaxed" id="shapeSdacDescription">
-                                Standard mode: acceleration without structure. Faster loops can also accelerate drift.
+                                Standard mode: faster work without better guardrails. Speed can amplify mistakes.
                             </p>
 <div class="mt-3 hidden flex-wrap gap-2" id="shapeSdacBadges">
-<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Validation</span>
-<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Bounded Effectors</span>
+<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Checks</span>
+<span class="text-[10px] px-2 py-1 rounded border border-[rgba(187,154,247,0.4)] text-brand-accent bg-[rgba(187,154,247,0.12)]">Scoped writes</span>
 </div>
 </div>
 </div>
@@ -237,40 +242,40 @@ reflection.</p>
 </div>
 <div class="mt-8 border border-brand-border rounded-xl bg-brand-light p-4">
 <div class="flex flex-wrap gap-4 border-b border-brand-border pb-3">
-<button aria-selected="true" class="shape-tab-btn is-active text-sm font-semibold pb-1" data-shape-tab="concept" type="button">The Fractal Shape</button>
-<button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="recursive" type="button">Recursive Improvement</button>
+<button aria-selected="true" class="shape-tab-btn is-active text-sm font-semibold pb-1" data-shape-tab="concept" type="button">Same Pattern</button>
+<button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="recursive" type="button">Improve the Process</button>
 <button aria-selected="false" class="shape-tab-btn text-sm font-semibold pb-1" data-shape-tab="sdac" type="button">Why SDaC?</button>
 </div>
 <div class="mt-4">
 <div data-shape-panel="concept">
-<p class="text-brand-strong text-lg font-semibold mb-2">The structure is identical at every scale.</p>
+<p class="text-brand-strong text-lg font-semibold mb-2">The same pattern shows up at every scale.</p>
 <p class="text-brand-muted leading-relaxed">
                                 Whether you type one character or steer a company, you still transform a current state into a next state through a process. What changes is the time constant and impact radius.
                             </p>
 </div>
 <div class="hidden" data-shape-panel="recursive">
-<p class="text-brand-strong text-lg font-semibold mb-2">The process itself is part of the loop.</p>
+<p class="text-brand-strong text-lg font-semibold mb-2">The process can get better too.</p>
 <div class="rounded-xl border border-brand-border bg-brand-surface p-3 font-mono text-sm text-brand-muted">
 <div><span class="text-brand-accent">next_state</span> = process(current_state)</div>
 <div class="mt-1"><span class="text-brand-vibrant">process</span> = improve(process, evidence)</div>
 </div>
 <p class="text-brand-muted leading-relaxed mt-3">
-                                Real systems are recursive: execution generates evidence, and evidence upgrades the process that executes.
+                                Real systems improve indirectly: you execute, collect evidence, and use that evidence to improve the way the work gets done.
                             </p>
 </div>
 <div class="hidden" data-shape-panel="sdac">
-<p class="text-brand-strong text-lg font-semibold mb-2">Acceleration without structure is chaos.</p>
+<p class="text-brand-strong text-lg font-semibold mb-2">Acceleration without guardrails is chaos.</p>
 <p class="text-brand-muted leading-relaxed">
-                                AI raises loop speed. SDaC adds deterministic validation, bounded effectors, and explicit intent so higher velocity converges instead of drifting.
+                                AI speeds up the loop. SDaC adds explicit intent, scoped writes, and deterministic checks so higher speed produces better outcomes instead of faster drift.
                             </p>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
 <div class="p-3 rounded-xl border border-[rgba(247,118,142,0.35)] bg-[rgba(247,118,142,0.08)]">
 <div class="text-sm font-semibold text-brand-danger">Standard loop</div>
-<div class="text-xs text-brand-muted mt-1">Trust the model; mistakes scale with speed.</div>
+<div class="text-xs text-brand-muted mt-1">Trust the model; mistakes speed up too.</div>
 </div>
 <div class="p-3 rounded-xl border border-[rgba(42,195,222,0.35)] bg-[rgba(42,195,222,0.10)]">
 <div class="text-sm font-semibold text-brand-vibrant">SDaC loop</div>
-<div class="text-xs text-brand-muted mt-1">Trust the loop; validators enforce convergence.</div>
+<div class="text-xs text-brand-muted mt-1">Trust the loop; checks keep change inside bounds.</div>
 </div>
 </div>
 </div>
@@ -282,38 +287,35 @@ reflection.</p>
 <p><span class="math display"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span></p>
 <p>Start with a state (<span class="math inline"><em>Z</em><sub><em>n</em></sub></span>). Run a
 process (<span class="math inline"><em>P</em></span>). You get the next
-state (<span class="math inline"><em>Z</em><sub><em>n</em> + 1</sub></span>). This is
-a day of programming. A sprint cycle. A product iteration. A career.</p>
-<p>The hope—always—is that the new state is <em>better</em>:</p>
+state (<span class="math inline"><em>Z</em><sub><em>n</em> + 1</sub></span>).</p>
+<p>That could be a code edit. A sprint. A release. A quarter. The
+pattern is the same.</p>
+<p>The hope is always that the new state is <em>better</em>:</p>
 <p><span class="math display"><em>Z</em><sub><em>n</em> + 1</sub> ≻ <em>Z</em><sub><em>n</em></sub></span></p>
 <p>Here “<span class="math inline">≻</span>” just means “better than,”
 by whatever measure matters: closer to the goal, more stable, more
 complete.</p>
-<p>That “measure” is intent.</p>
-<p>Intent is the attractor. It answers:</p>
+<p>That measure is intent. It answers:</p>
 <ul>
 <li>What are we optimizing for?</li>
-<li>What is allowed to compound?</li>
-<li>What must never compound?</li>
-<li>What is the invariant across all layers?</li>
+<li>What is allowed to change?</li>
+<li>What must never drift?</li>
+<li>What must stay true at every layer?</li>
 </ul>
-<p>SDaC is what happens when you encode those answers into artifacts and
-gates, instead of leaving them as vibes.</p>
-<p>But here’s what makes this recursive, not just iterative: the process
-can change too.</p>
+<p>SDaC is what happens when you write those answers down in artifacts
+and gates instead of leaving them as shared intuition.</p>
+<p>The important twist is that the process can change too.</p>
 <p><span class="math display"><em>P</em><sub><em>k</em></sub>(<em>Z</em><sub><em>n</em></sub>) → (<em>P</em><sub><em>k</em> + 1</sub>, <em>Z</em><sub><em>n</em> + 1</sub>)</span></p>
 <p><span class="math inline"><em>k</em></span> indexes the process
-itself over time. Each iteration doesn’t just produce a new state — it
-can produce a new process.</p>
-<p>You write code, and you also refine how you write code. You ship a
-feature, and you also learn what features to ship. The system that does
-the work becomes part of the work being done.</p>
+itself over time. Each iteration does not just produce a new state. It
+can also improve the process that produced it.</p>
+<p>You write code, and you also improve how you write code. You ship a
+feature, and you also learn how to choose and validate features better.
+The system that does the work becomes part of the work.</p>
 <p>If you prefer pseudocode, it’s the same idea:</p>
 <pre class="text"><code>next_state = process(current_state)
 process = improve(process, evidence)</code></pre>
-<p>This is fractal. Zoom in: a single function evolves through edits.
-Zoom out: a company evolves through quarters. Same shape at every
-scale:</p>
+<p>The pattern repeats at every scale:</p>
 <table>
 <thead>
 <tr>
@@ -356,139 +358,66 @@ scale:</p>
 </tr>
 </tbody>
 </table>
-<p>Each level contains the levels below it. Each level’s “state” is the
-cumulative output of faster iterations beneath it. This is why small
-improvements compound and why dysfunction at lower levels eventually
-surfaces at higher ones.</p>
-<h2 id="what-ai-changes-is-the-clock-speed">What AI changes is the clock
-speed</h2>
-<p>The iteration that took a day now takes minutes. The cycle that took
-a sprint now takes a day. The process that required a team now runs with
-one person and an agent.</p>
-<p>This is pure acceleration. Without structure, it becomes chaos. A
-faster loop that drifts is faster drift. A faster loop that breaks is
-faster breakage. Speed amplifies what is already there: good practices
-become superpowers, bad practices become disasters.</p>
+<p>Each level sits on top of faster loops beneath it. That is why small
+improvements compound, and why small failures eventually surface at
+higher levels.</p>
+<h2 id="the-velocity-trap">The Velocity Trap</h2>
+<p>AI makes each loop cheaper and faster.</p>
+<p>Work that took a day can now take minutes. Work that took a sprint
+can now happen in a day. In some cases, work that needed a small team
+can now be pushed forward by one engineer and an agent.</p>
+<p>That is useful only if the loop stays sane. AI changes the clock
+speed; the trap is thinking speed alone is progress.</p>
+<p>A faster loop that drifts is faster drift. A faster loop that breaks
+is faster breakage. Speed amplifies what is already there: good
+practices get stronger, bad practices get more expensive.</p>
 <blockquote>
-<p><strong>This is the question SDaC answers:</strong><br/>
-<em>How do you harness accelerated iteration without accelerating into a
-wall?</em></p>
+<p><strong>This is the question SDaC answers:</strong> <em>How do you
+harness accelerated iteration without accelerating into a wall?</em></p>
 </blockquote>
-<p>The answer is simple: make the loop the product.</p>
+<p>The answer is simple: engineer the loop, not just the output.</p>
 <p>You design, validate, and improve the <em>loop</em> that produces
-output. If the loop is sound, outputs tend to follow. If the loop is
-broken, no amount of effort saves you.</p>
+output. If the loop is sound, the outputs get better. If the loop is
+broken, no amount of model cleverness saves you.</p>
 <p>In this book, SDaC (Software Development as Code) names the
-mechanisms that make accelerated iteration safe: explicit intent
-surfaces, bounded effectors, deterministic validators, and loops that
-converge. In its own way, SDaC is an outer loop around Infrastructure as
-Code (IaC): it applies the same “declare intent, converge via
-automation” mindset to the development process itself.</p>
+mechanisms that make accelerated iteration safe: explicit intent,
+bounded writes, deterministic validators, and loops that converge.</p>
 <p>If the process is validated, then <span class="math inline"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span>
 becomes trustworthy.</p>
-<p>Part I builds a loop first. Once you have a validated loop, you can
-feed it anything.</p>
-<p><strong>The fractal structure means this scales.</strong></p>
-<p>A validated loop at the function level is the same pattern as a
-validated loop at the organization level. The primitives (intent →
-attempt → validation → integration) are identical. The clock speeds
-differ. The artifacts differ. But the shape is the same.</p>
+<p>Part I builds a loop first. Once you can trust the loop, you can use
+it on many kinds of work.</p>
+<p><strong>The same structure means this scales.</strong></p>
+<p>A validated loop at the function level follows the same pattern as a
+validated loop at the organization level. The artifacts differ. The
+clock speed differs. The shape does not.</p>
 <p>You scale by <strong>composition</strong>: function-level loops roll
 up into feature loops, feature loops roll up into service loops, and
 service loops roll up into org-level change control—same shape,
 different artifacts.</p>
-<p>SDaC doesn’t give you a better way to write code. It gives you a
-better way to <em>iterate</em>.</p>
+<p>SDaC does not give you a magical way to write code. It gives you a
+safer way to <em>iterate</em>.</p>
 <hr/>
-<p>With that framing in place, zoom in to one Friday—the kind that
-reveals what’s missing.</p>
-<p>Friday, 4:03 PM.</p>
-<p>You vibe-code a feature with an AI assistant:</p>
-<p>“Add pagination to <code>GET /api/users</code>.”</p>
-<p>It drafts the handler, tweaks a test, edits the API contract
-(OpenAPI), and slips in a refactor you didn’t ask for.</p>
-<p>The diff looks reasonable. CI passes. You merge it.</p>
-<p>Velocity is high, friction is low, and the gap between what shipped
-and what you can explain gets wider.</p>
-<p>Vibe coding is not irrational; it produces rapid prototypes and
-demos. The problem appears on Day 30, not Day 1 – when drift
-compounds.</p>
-<p>CI compiled the service. It did not validate the API contract your
-mobile client ships against.</p>
-<p>Saturday morning, your mobile app is down.</p>
-<p>The assistant introduced a contract drift: <code>limit</code> became
-a string in the OpenAPI spec while the rest of the system still treats
-it as an integer.</p>
-<p>Variants include enum changes, broken nested object structures, and
-dropped required fields. Your type system never saw it; the mismatch
-lived in a JSON contract surface.</p>
-<p>Three engineers spend the weekend rolling back and rebuilding
-confidence.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="kw">--- a/openapi.json</span></span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="dt">+++ b/openapi.json</span></span>
-<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="dt">@@ -312,7 +312,7 @@</span></span>
-<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a>   "limit": {</span>
-<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="st">-    "type": "integer"</span></span>
-<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="va">+    "type": "string"</span></span>
-<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a>   }</span></code></pre></div>
-<p>Now the same scenario, but with SDaC.</p>
-<p>In SDaC, the assistant doesn’t get to “just make the change.” It
-proposes a diff inside a loop: narrow the context → propose a patch →
-run deterministic gates → tighten constraints and retry → record
-evidence.</p>
-<p>Think of it as a factory gate: generation is fast, but only validated
-output ships.</p>
-<p>Later we’ll give names to these pieces: the diff-writer is an
-<strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a></strong>, the gates are <strong>Validators</strong>
-(together, the system’s “<a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>”), and the evidence trail is the
-<strong>Ledger</strong>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="ex">$</span> make ship MISSION=<span class="st">"Paginate GET /api/users"</span></span>
-<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="ex">[PREP]</span> Slice: openapi.json, src/users_handler.ts, clients/mobile/<span class="pp">*</span></span>
-<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 1: proposed patch</span>
-<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Contract alignment <span class="er">(</span><span class="ex">Map/Terrain</span><span class="kw">)</span><span class="bu">:</span> FAIL <span class="er">(</span><span class="ex">OpenAPI</span> drift: <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> must remain integer<span class="kw">)</span></span>
-<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a><span class="ex">[REFINE]</span> Retrying with constraint: keep <span class="kw">`</span><span class="ex">limit</span><span class="kw">`</span> as integer everywhere</span>
-<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a><span class="ex">[WRITE]</span> Attempt 2: proposed patch</span>
-<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Contract alignment <span class="er">(</span><span class="ex">Map/Terrain</span><span class="kw">)</span><span class="bu">:</span> PASS</span>
-<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a><span class="ex">[VALIDATE]</span> Generated client Validator: PASS</span>
-<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a><span class="ex">[LEDGER]</span> build/ledger/2026-02-06T1603Z/ <span class="er">(</span><span class="fu">diff</span> + validator output<span class="kw">)</span></span>
-<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a><span class="ex">[RESULT]</span> PR ready for review <span class="er">(</span><span class="ex">gates</span> passing<span class="kw">)</span></span></code></pre></div>
-<p><em>Composite example (representative): log lines and paths
-simplified, but the gate structure is real.</em></p>
-<p>Contract alignment means the API contract (Map) still matches service
-behavior (Terrain). The validator rejects type drift before it escapes
-into production.</p>
-<p>The gate catches it in seconds. Nobody’s weekend is ruined.</p>
-<p>In an AI-accelerated environment, this is the default failure
-mode.</p>
-<p>The goal is not a smarter assistant. The goal is a safer process:
-bounded context in, diffs out, deterministic gates decide what can
-merge, and the Ledger records why.</p>
-<p>You can still vibe-code inside the loop. The point is that safety and
-validation must scale faster than creativity can drift.</p>
-<blockquote>
-<p><strong>Architect of Intent (role):</strong> This is <strong>Intent
-Architecture</strong>: you keep the attractor explicit (objective +
-invariants) and encode it into missions and specs, Validators and
-budgets, and a Ledger that makes changes auditable.</p>
-</blockquote>
-<hr/>
+<p>The Friday failure is the motivating case for the rest of the book.
+Everything from here on is a way to make that second transcript routine
+instead of exceptional.</p>
 <h2 id="who-this-book-is-for">Who this book is for</h2>
 <p>This book is for engineers asking “what now?” after the first wave of
-AI assistants — especially those building or governing AI-assisted
-development who want mechanisms, not hype. If you want to build
-immediately, start with Part I: it gives you a working loop first, then
-earns the theory by explaining why it works.</p>
+AI assistants, especially people building or governing AI-assisted
+development who want mechanisms, not hype.</p>
+<p>If you want to build immediately, start with Part I. It gives you a
+working loop first, then earns the theory by explaining why it
+works.</p>
 <h2 id="what-sdac-is-quickstart">What SDaC is (Quickstart)</h2>
-<p>This book is not about using AI inside CI. It’s about turning the
-software development lifecycle (SDLC) itself into a compiled artifact —
-<strong>Software Development as Code</strong>.</p>
+<p>This book is not about sprinkling AI into CI. It is about turning the
+software development process itself into something explicit, versioned,
+and enforceable: <strong>Software Development as Code</strong>.</p>
 <blockquote>
 <p><strong>CI compiles the program. SDaC compiles the development of the
 program.</strong></p>
 </blockquote>
 <p>SDaC in one picture:</p>
-<p>Follow the arrows: intent → slice context → propose a patch → run
-checks → record evidence → merge. On FAIL, tighten constraints and
+<p>Follow the arrows: express intent, slice context, propose a patch,
+run checks, record evidence, merge. On FAIL, tighten constraints and
 retry.</p>
 <pre class="mermaid"><code>flowchart TD
   H[Human intent] --&gt; M["Mission Object&lt;br/&gt;(structured request)"]
@@ -503,20 +432,18 @@ retry.</p>
 <p>Caption: The FAIL path loops back to refine context and retry. This
 is the core mechanism that makes the loop self-correcting.</p>
 <h3 id="why-now-economics">Why now (economics)</h3>
-<p>SDaC becomes practical once the economics of automation change.
-Foundation work that used to be expensive to build and maintain—schemas,
-extractors, validators, runners—can now be generated and iterated
-cheaply, as long as you keep strict contracts and fast deterministic
-checks.</p>
+<p>SDaC becomes practical once the economics of automation change. The
+boring but necessary scaffolding that used to be expensive to build and
+maintain, like schemas, extractors, validators, and runners, can now be
+generated and tightened much faster.</p>
 <p>A rough back-of-envelope: a first-pass validator or extractor that
-used to take 1–3 engineer-days can now be generated in 15–60 minutes,
-then tightened over a few iterations. That changes which architectures
-are worth building early.</p>
+used to take 1–3 engineer-days can now often be generated in 15–60
+minutes, then tightened over a few iterations. That changes which
+architectures are worth building early.</p>
 <p>At the same time, models are good at the linguistic parts of
-engineering (decomposition, summarization, classification, doc
-drafting). Generation got cheap. Governance and review did not. The
-bottleneck becomes review throughput: how many diffs humans can
-govern.</p>
+engineering: decomposition, summarization, classification, and drafting.
+Generation got cheaper. Governance and review did not. The bottleneck
+becomes review throughput: how many diffs humans can safely govern.</p>
 <h3 id="the-litmus-test">The litmus test</h3>
 <p>If someone says “this is just CI,” ask:</p>
 <ul>
@@ -525,16 +452,17 @@ implementation → review → tests → release → postmortem → docs) from th
 repo + compute?</li>
 <li>Are the rules (contracts, validators, policies, merge criteria, risk
 thresholds) first-class, versioned, and enforceable?</li>
-<li>Is the model an assistant, or an <strong>Effector</strong> inside a
+<li>Is the model an assistant, or an <strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a></strong> inside a
 constrained machine?</li>
 </ul>
 <p>If the answer is “no,” you do not have SDaC. You have CI-adjacent
-automation. If “yes, humans are operators of an executable system,” that
-is SDaC.</p>
+automation. If the answer is “yes, humans are operators of an executable
+system,” that is SDaC.</p>
 <h3 id="start-here-one-loop-one-gate">Start here (one loop, one
 gate)</h3>
-<p>Go to <a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a> and run MVF v0 (“Quick Bootstrap”). You should see a
-small diff and a deterministic <code>PASS/FAIL</code> gate.</p>
+<p>Go to Chapter 1 and run Minimum Viable Factory (MVF) v0 (“Quick
+Bootstrap”). You should see a small diff and a deterministic
+<code>PASS/FAIL</code> gate.</p>
 <p>Minimum vocabulary for the first pass:</p>
 <ul>
 <li><strong>Terrain:</strong> what runs (real behavior).</li>
@@ -551,11 +479,12 @@ checks, invariants).</li>
 PASS.</li>
 </ul>
 <p>If you want a dependency graph, a week-by-week ladder, and a concept
-map, jump to <a class="chapter-link" href="appendix-a-setup-and-implementation-checklist#appendix-a-setup-and-implementation-checklist" title="Go to: Appendix A">Appendix A</a>.</p>
+map, jump to Appendix A.</p>
 <h2 id="the-manifesto">The Manifesto</h2>
 <p>We do not optimize for “smart” models; we optimize for converging
 systems.</p>
-<p>AI is a stochastic engine. We constrain it.</p>
+<p>AI is non-deterministic. The same request can produce different
+answers. We constrain it.</p>
 <p>We buy down uncertainty with constraints, logs, and tests – not hope.
 We treat language as a contract. We do not ship vibes. We ship
 verifiable state.</p>
@@ -564,14 +493,13 @@ verifiable state.</p>
 <p>If you want the longer version (the stance behind the mechanics), it
 appears at the end of Part I, after you’ve built the first loop.</p>
 <h2 id="a-note-on-substrate">A Note on Substrate</h2>
-<p>While the principles in this book are meant to be portable, this book
-uses a concrete, accessible substrate for its examples: standard files,
-Git for version control, <code>make</code> for orchestrating effects,
-and Python for scripting.</p>
-<p>This combination provides a practical, widely understood environment
-to demonstrate the core concepts. The patterns and architectures you’ll
-learn are designed to be stack-agnostic, easily portable to other
-languages, build systems, and VCS platforms.</p>
+<p>The principles in this book are portable, but the examples use a
+simple, familiar setup: standard files, Git for version control,
+<code>make</code> for orchestration, and Python for scripting.</p>
+<p>That gives us a practical environment for demonstrating the core
+ideas without hiding behind framework magic. The patterns are meant to
+transfer to other languages, build systems, and version-control
+setups.</p>
 <p><a class="chapter-link" href="appendix-c-pattern-library#appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a> includes example validator recipes for other stacks (for
 example TypeScript/Node). The focus is on the engineering principles,
 not the specific tooling.</p>
@@ -600,10 +528,7 @@ configuration).</li>
 <p>Thanks to Abler’s CTO, who implemented Axiom and used it for
 production-grade code after reading a previous iteration of this
 book.</p>
-<p>I’m also grateful for the people behind LumiPad and AI GreenBytes
-(projects I’m currently associated with). The work has provided
-real-world constraints, failure modes, and feedback that shaped this
-iteration.</p>
+<p>I’m also grateful to my co-founders at AIGB and LumiLoop.</p>
 <h2 id="about-the-author">About the author</h2>
 <p>I’m Jóhann Haukur Gunnarsson, a systems architect and senior software
 engineer. I’ve built and operated reliability-critical systems,
@@ -626,8 +551,11 @@ do this week</h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/kjwise/aoi_code.git</span>
 <span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="bu">cd</span> aoi_code</span>
 <span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="fu">make</span> all</span></code></pre></div>
+<p>These commands are runnable as written in the companion repo. The
+earlier <code>make ship</code> transcript is illustrative; this
+quickstart is not.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 0 – Introduction" data-share-title="Chapter 0 – Introduction | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-0-introduction" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…" data-share-title="Chapter 0 – Introduction | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-0-introduction" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -635,7 +563,7 @@ do this week</h2>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-0-introduction" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-0-introduction" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-0-introduction&amp;title=Chapter%200%20%E2%80%93%20Introduction%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%200%20%E2%80%93%20Introduction%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%200%20%E2%80%93%20Introduction%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-0-introduction">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%200%20%E2%80%93%20Introduction%20%7C%20Architects%20of%20Intent&amp;body=Chapter%200%20of%20Architects%20of%20Intent%3A%20Introduction.%20It%20updates%20the%20handler%2C%20tweaks%20a%20test%2C%20edits%20the%20API%20contract%20%28OpenAPI%29%2C%20and%20slips%20in%20a%20refactor%20you%20did%20not%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-0-introduction">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -646,7 +574,7 @@ do this week</h2>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

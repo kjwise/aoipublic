@@ -4,15 +4,16 @@
   <title>Concepts | Architects of Intent</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Key concepts for Architects of Intent.">
+  <meta name="description" content="Canonical vocabulary for SDaC: Map/Terrain/Ledger, Physics, Validators, Mission Objects, convergence and governance.">
   <meta name="keywords" content="Architects of Intent, concepts">
   <meta name="author" content="Jóhann Haukur Gunnarsson">
+  <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://architectsofintent.com/concepts">
-  <link rel="alternate" type="application/rss+xml" href="rss-book.xml" title="Architects of Intent RSS">
+  <link rel="alternate" type="application/rss+xml" href="https://architectsofintent.com/rss-book.xml" title="Architects of Intent RSS">
 
   <meta property="og:site_name" content="Architects of Intent">
   <meta property="og:title" content="Concepts | Architects of Intent">
-  <meta property="og:description" content="Key concepts for Architects of Intent.">
+  <meta property="og:description" content="Canonical vocabulary for SDaC: Map/Terrain/Ledger, Physics, Validators, Mission Objects, convergence and governance.">
   <meta property="og:url" content="https://architectsofintent.com/concepts">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
@@ -21,18 +22,18 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Concepts | Architects of Intent">
-  <meta name="twitter:description" content="Key concepts for Architects of Intent.">
+  <meta name="twitter:description" content="Canonical vocabulary for SDaC: Map/Terrain/Ledger, Physics, Validators, Mission Objects, convergence and governance.">
   <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
   <meta name="twitter:image:alt" content="Concepts | Architects of Intent">
 
-  
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Concepts | Architects of Intent", "description": "Canonical vocabulary for SDaC: Map/Terrain/Ledger, Physics, Validators, Mission Objects, convergence and governance.", "url": "https://architectsofintent.com/concepts", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=3381982e05e3">
+  <script src="script.js?v=3381982e05e3" defer></script>
   
 </head>
 <body>
@@ -45,17 +46,22 @@
       </a>
       <a class="site-nav__toc" href="toc">Table of Contents</a>
       <div class="site-nav__links">
-        <a href="concepts">Concepts</a>
+        <a href="philosophy">Philosophy</a>
+<a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
       </div>
     </nav>
   </header>
 
-  <main id="main" class="content">
+  <main id="main" class="content ">
     <h1 id="key-concepts">Key Concepts</h1>
 <blockquote>
 <p>The canonical vocabulary for <em>Architects of Intent</em>.</p>
 </blockquote>
+<p>The book introduces this canon iteratively. If you are reading
+linearly, do not try to load every term at once. The <a
+href="/philosophy">Philosophy</a> page states the whole system in
+compressed form; this page is the tiered map back to the chapters.</p>
 <p>This canon is intentionally tiered:</p>
 <ul>
 <li><p><strong>Tier 1</strong>: Substrate (use everywhere).</p></li>
@@ -63,11 +69,18 @@
 <li><p><strong>Tier 3</strong>: Governance (when autonomy grows and
 governance matters).</p></li>
 </ul>
+<p>In practice: learn Tier 1 first, expect Tier 2 once the loop is real,
+and reach for Tier 3 when autonomy, policy, and protected surfaces start
+to matter.</p>
+<p>Most entries are concrete concepts. A few are marked explicitly as a
+<strong>Frame</strong>, <strong>Rule</strong>, or
+<strong>Pattern</strong> when they describe how concepts compose rather
+than naming one artifact.</p>
 <h2 id="core-thesis-intent---map---loop---convergence">Core Thesis
 (Intent -&gt; Map -&gt; Loop -&gt; Convergence)</h2>
 <p><strong>Tier:</strong> 1</p>
-<p><strong>What it is</strong> A compact statement of SDaC
-mechanics:</p>
+<p><strong>What it is</strong> A compact statement of Software
+Development as Code (SDaC) mechanics:</p>
 <ol type="1">
 <li>Intent starts as language.</li>
 <li>Intent is formalized into Maps (Mission Objects, specs, schemas,
@@ -86,23 +99,38 @@ bounded, auditable progress toward better states.</p>
 <ul>
 <li><p><strong>Terrain</strong>: reality-as-code (source, configs,
 schemas, runtime behavior).</p></li>
-<li><p><strong>Map</strong>: the structured, machine-readable
-representation of that reality (docs, inventories, contracts, indexes,
-derived views).</p></li>
+<li><p><strong>Map</strong>: the structured, versioned representation of
+reality and intent (docs, inventories, contracts, indexes, derived
+views, and higher-level operating memory).</p></li>
 <li><p><strong>Ledger</strong>: the append-only history of changes and
-evidence (diffs, validator output, decision traces).</p></li>
+evidence (diffs, validator output, decision traces, approvals,
+reversions, and provenance about what constitutional surface changed and
+who authorized it).</p></li>
 </ul>
 <p><strong>Why they matter</strong> Autonomy is safe only when intent
 (Map) and reality (Terrain) are explicit, and every change is traceable
 (Ledger). Without Map/Terrain synchronization loops, today’s Terrain
-becomes tomorrow’s stale Map.</p>
+becomes tomorrow’s stale Map. Without a legible Ledger, memory collapses
+into folklore.</p>
+<h2 id="operating-map">Operating Map</h2>
+<p><strong>Tier:</strong> 2</p>
+<p><strong>What it is</strong> The higher-level Map of an organization:
+strategy, architecture decisions, operating policy, incident learnings,
+onboarding guidance, brand voice, tone, culture, and other durable
+constraints that say what the system is trying to preserve. It is the
+organization’s executable memory, not just its documentation.</p>
+<p><strong>Why it matters</strong> Without this Map, loops optimize
+locally and relearn the same lessons. With it, evidence can become
+future defaults, not just yesterday’s ticket, and future work can start
+from a truer organizational memory.</p>
 <h2 id="physics">Physics</h2>
 <p><strong>Tier:</strong> 1</p>
 <p><strong>What it is</strong> Deterministic constraints that shape a
 stochastic process: schemas, linters, tests, architectural rules, gates,
 budgets, and stopping conditions.</p>
 <p><strong>Why it matters</strong> Physics turns “seems fine” into
-PASS/FAIL signals the system can act on.</p>
+PASS/FAIL signals the system can act on. In operation, Physics is law:
+if a change fails Physics, it does not exist.</p>
 <h2 id="mechanism">Mechanism</h2>
 <p><strong>Tier:</strong> 1</p>
 <p><strong>What it is</strong> A specific, checkable implementation
@@ -150,10 +178,15 @@ hotspots).</p>
 <h2 id="mission-object">Mission Object</h2>
 <p><strong>Tier:</strong> 1</p>
 <p><strong>What it is</strong> Typed intent and state: goal, scope,
-constraints, budgets, quality gate, fallbacks, telemetry, plus lifecycle
-fields (for example <code>status</code> and <code>completed_at</code>).
-A persistent artifact (YAML/JSON) that acts as an executable pull
-request and the state of record for one unit of work.</p>
+constraints, budgets, quality gate, fallbacks, telemetry, relevant
+prompts or prompt-template references, plus lifecycle fields (for
+example <code>status</code> and <code>completed_at</code>). A persistent
+artifact (YAML/JSON) that acts as an executable pull request and the
+state of record for one unit of work. It is the artifact that moves
+through the loop.</p>
+<p><strong>Why it matters</strong> It moves intent out of chat and into
+a bounded, rerunnable, reviewable artifact that can survive retries,
+judgement, escalation, and later reuse.</p>
 <h2 id="judge">Judge</h2>
 <p><strong>Tier:</strong> 1</p>
 <p><strong>What it is</strong> Consumes validator signals + evidence and
@@ -187,30 +220,24 @@ component inside the Engine, not the system itself.</p>
 <h2 id="the-three-tier-frame-substrate-loop-governance">The Three-Tier
 Frame (Substrate → Loop → Governance)</h2>
 <p><strong>Tier:</strong> 2</p>
+<p><strong>Kind:</strong> Frame</p>
 <p><strong>What it is</strong> A compact frame for SDaC systems:
 Substrate (Map/Terrain/Ledger + Physics + Context Graph), Loop
 (Deterministic Sandwich + feedback-driven refinement), and Governance
 (blast-radius limits + protected graders).</p>
 <p><strong>Why it matters</strong> It’s a completeness check: if you’re
 missing a layer, autonomy fails in a predictable way.</p>
-<h2 id="meta-pattern-dont-chat-compile">Meta-Pattern: Don’t Chat,
-Compile</h2>
+<h2 id="dont-chat-compile">Don’t Chat, Compile</h2>
 <p><strong>Tier:</strong> 2</p>
+<p><strong>Kind:</strong> Law</p>
 <p><strong>What it is</strong> Shift interaction from ephemeral chat to
 executable artifacts: Missions, deterministic runners, diffs, and
 logs.</p>
 <p><strong>Why it matters</strong> It makes intent reproducible and
 makes provenance cheap.</p>
-<h2 id="meta-pattern-physics-is-law">Meta-Pattern: Physics is Law</h2>
+<h2 id="skeleton-first-rule">Skeleton-First Rule</h2>
 <p><strong>Tier:</strong> 2</p>
-<p><strong>What it is</strong> The stance that Physics is enforced,
-binary, and non-bypassable. If a change fails Physics, it does not
-exist.</p>
-<p><strong>Why it matters</strong> Autonomy exploits loopholes. “Law”
-closes them.</p>
-<h2 id="meta-pattern-skeleton-first-rule">Meta-Pattern: Skeleton-First
-Rule</h2>
-<p><strong>Tier:</strong> 2</p>
+<p><strong>Kind:</strong> Rule</p>
 <p><strong>What it is</strong> Extract structure deterministically;
 generate prose stochastically.</p>
 <p>In practice: build Maps on a skeleton of facts computed by Sensors
@@ -234,8 +261,9 @@ runs.</p>
 <p><strong>Why it matters</strong> It corrupts the Ledger with plausible
 fiction. Validators and Judges can’t reliably debug or govern a system
 whose context is no longer grounded in the Terrain.</p>
-<h2 id="meta-pattern-recursion">Meta-Pattern: Recursion</h2>
+<h2 id="recursion">Recursion</h2>
 <p><strong>Tier:</strong> 3</p>
+<p><strong>Kind:</strong> Pattern</p>
 <p><strong>What it is</strong> The same toolchain used by humans is used
 by maintenance loops (Dream Daemon emitting Missions, the loop
 validating itself under Immutable Infrastructure boundaries).</p>
@@ -260,8 +288,11 @@ whether your Physics is actually reducing variance.</p>
 <p><strong>Tier:</strong> 2</p>
 <p><strong>What it is</strong> The iterative loop:
 <code>Write → Judge → Refine</code> until convergence or a circuit
-breaker. Refine is a constrained mutation step in response to a specific
-failure signal, producing a smaller, cleaner diff.</p>
+breaker. It is called Ouroboros because the loop feeds its own artifacts
+back into the next turn and evolves through that feedback, rather than
+repeating as a static circle. Refine is a constrained mutation step in
+response to a specific failure signal, producing a smaller, cleaner
+diff.</p>
 <h2 id="convergence">Convergence</h2>
 <p><strong>Tier:</strong> 2</p>
 <p><strong>What it is</strong> The state where the loop produces an
@@ -351,7 +382,8 @@ admissible.</p>
 <h2 id="context-architecture">Context Architecture</h2>
 <p><strong>Tier:</strong> 2</p>
 <p><strong>What it is</strong> Engineering how context is selected,
-structured, and bounded so a model can act deterministically.</p>
+structured, and bounded so a model can act deterministically, including
+which slices of the operating Map belong in one task.</p>
 <h2 id="lehmans-system-types-s-p-and-e">Lehman’s System Types (S, P, and
 E)</h2>
 <p><strong>Tier:</strong> 2</p>
@@ -363,10 +395,10 @@ a sorting algorithm, a schema validator, or a parser). - <strong>P-Type
 (Problem-solving):</strong> Software that approximates a solution to a
 real-world problem using heuristics. Perfect specs are impossible, so
 correctness is evaluated by acceptability (for example, a chess engine
-or an LLM). - <strong>E-Type (Evolutionary):</strong> Software embedded
-in the real world. Because the environment changes, the software must
-continuously adapt or it degrades (for example, your production
-codebase).</p>
+or a large language model (LLM)). - <strong>E-Type
+(Evolutionary):</strong> Software embedded in the real world. Because
+the environment changes, the software must continuously adapt or it
+degrades (for example, your production codebase).</p>
 <p><strong>Why it matters</strong> It provides the theoretical baseline
 for SDaC. LLMs are P-Type heuristic engines. Your repository is an
 E-Type system. You cannot mathematically prove an E-Type system is safe;
@@ -454,15 +486,21 @@ replayability.</p>
 <p><strong>Tier:</strong> 2</p>
 <p><strong>What it is</strong> The metadata trail that makes a run
 reproducible: commit hash, context slice identifiers, tool versions,
-Mission Object ID, timestamps, and validator versions.</p>
+Mission Object ID, timestamps, validator versions, and, when governance
+surfaces move, which protected or constitutional surface changed and who
+authorized the change.</p>
 <p><strong>Why it matters</strong> Without provenance, you can’t
 reliably reproduce failures or prove that a loop ran under the
-constraints you think it did.</p>
+constraints you think it did. You also lose the ability to explain how
+the rules themselves changed.</p>
 <h2 id="immutable-infrastructure">Immutable Infrastructure</h2>
 <p><strong>Tier:</strong> 3</p>
 <p><strong>What it is</strong> Protected paths and pipelines that grade
 and govern the system (validators, CI, policy). The system can propose
-changes, but cannot merge them without human approval.</p>
+changes, but cannot merge or weaken them without human approval.</p>
+<p><strong>Why it matters</strong> It keeps autonomy delegated, not
+sovereign. The loop may act inside the constitution, but it does not get
+to rewrite the constitution on its own.</p>
 <h2 id="scope-guard">Scope Guard</h2>
 <p><strong>Tier:</strong> 3</p>
 <p><strong>What it is</strong> Blast-radius control enforced by the
@@ -497,12 +535,21 @@ stalls).</li>
 </ul>
 <h2 id="dream-manifest">Dream Manifest</h2>
 <p><strong>Tier:</strong> 3</p>
-<p><strong>What it is</strong> Measurable maintenance targets: an
-entropy backlog expressed as concrete work selectors.</p>
+<p><strong>What it is</strong> Measurable maintenance targets: a
+versioned entropy backlog expressed as concrete work selectors and
+memory updates.</p>
+<p><strong>Why it matters</strong> It turns recurring incidents, review
+comments, and drift signals into durable maintenance memory instead of
+letting them disappear into chat or tickets.</p>
 <h2 id="dream-daemon">Dream Daemon</h2>
 <p><strong>Tier:</strong> 3</p>
-<p><strong>What it is</strong> Scheduled background maintenance. Most
-teams start with the “90% solution”: human-approved scheduled runs.</p>
+<p><strong>What it is</strong> Scheduled background maintenance: a
+controller that turns entropy signals into bounded maintenance work.
+Most teams start with the “90% solution”: human-approved scheduled
+runs.</p>
+<p><strong>Why it matters</strong> It keeps the operating Map and the
+Terrain from drifting apart between incidents, and it gives the system a
+way to preserve lessons instead of relearning them.</p>
 <h2 id="automated-refactoring-under-guards">Automated Refactoring Under
 Guards</h2>
 <p><strong>Tier:</strong> 3</p>
@@ -517,8 +564,26 @@ In practice, teams cross it one bounded surface at a time: one heading,
 one extractor, one gate.</p>
 <h2 id="mirror">Mirror</h2>
 <p><strong>Tier:</strong> 3</p>
-<p><strong>What it is</strong> A limit case: a system can treat its own
-book/spec as an input to its maintenance and governance loops.</p>
+<p><strong>What it is</strong> An optional advanced case: a system can
+treat its own operating Map, or a formal derivative of it, as an input
+to its maintenance and governance loops.</p>
+<h2 id="torus">Torus</h2>
+<p><strong>Tier:</strong> 3</p>
+<p><strong>What it is</strong> Bounded autonomy under governance. The
+governed path by which declared intent meets changing reality and,
+through memory, validation, and adaptation, converges on the best state
+that can actually be reached and proved. In practice, it is not one loop
+but many bounded loops running in parallel across the organization at
+different levels of abstraction.</p>
+<p><strong>Why it matters</strong> It distinguishes an organizational
+second brain from a static knowledge base. The system does not just
+store memory; it uses memory, tests it against reality, keeps it alive,
+and turns it back into action. It also gives a shape to organizational
+scaling: code loops, maintenance loops, policy loops, and strategic
+loops can all run under the same constitutional pattern without
+collapsing into one monolithic process. It is also where value
+compounds: accepted changes improve the memory, gates, and defaults that
+shape future accepted changes.</p>
 <h2 id="translation-guide-one-time-bridge-then-use-canon">Translation
 guide (one-time bridge, then use canon)</h2>
 <ul>
@@ -535,7 +600,7 @@ capability</p></li>
 
   </main>
 
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Concepts | Architects of Intent" data-share-url="https://architectsofintent.com/concepts" data-share-text="Key concepts for Architects of Intent.">
+  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Concepts | Architects of Intent" data-share-url="https://architectsofintent.com/concepts" data-share-text="Canonical vocabulary for SDaC: Map/Terrain/Ledger, Physics, Validators, Mission Objects, convergence and governance.">
   <div class="share-panel__label">Share</div>
   <div class="share-panel__actions">
     <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
@@ -543,7 +608,7 @@ capability</p></li>
     <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fconcepts" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
     <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fconcepts" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
     <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fconcepts&amp;title=Concepts%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Concepts%20%7C%20Architects%20of%20Intent&amp;body=Key%20concepts%20for%20Architects%20of%20Intent.%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fconcepts" aria-label="Share by email">email</a>
+    <a class="share-button" data-share="email" href="mailto:?subject=Concepts%20%7C%20Architects%20of%20Intent&amp;body=Canonical%20vocabulary%20for%20SDaC%3A%20Map%2FTerrain%2FLedger%2C%20Physics%2C%20Validators%2C%20Mission%20Objects%2C%20convergence%20and%20governance.%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fconcepts" aria-label="Share by email">email</a>
     <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
   </div>
   <span class="share-status" aria-live="polite"></span>
@@ -557,7 +622,7 @@ capability</p></li>
   <footer class="site-footer">
     <p>© Jóhann Haukur Gunnarsson</p>
     <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" target="_blank" rel="me noopener noreferrer">LinkedIn</a>
       ·

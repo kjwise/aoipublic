@@ -5,14 +5,15 @@
 <title>Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)" name="description"/>
+<meta content="Chapter 5 of Architects of Intent: The Ouroboros Protocol (Why Loops Converge). That is the whole chapter in four lines. The loop is not just “trying again.”…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)" property="og:description"/>
+<meta content="Chapter 5 of Architects of Intent: The Ouroboros Protocol (Why Loops Converge). That is the whole chapter in four lines. The loop is not just “trying again.”…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,58 +21,19 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)" name="twitter:description"/>
+<meta content="Chapter 5 of Architects of Intent: The Ouroboros Protocol (Why Loops Converge). That is the whole chapter in four lines. The loop is not just “trying again.”…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 5 – The Ouroboros Protocol (Why Loops Converge)", "description": "Chapter 5 of Architects of Intent: The Ouroboros Protocol (Why Loops Converge). That is the whole chapter in four lines. The loop is not just “trying again.”…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge", "mainEntityOfPage": "https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT15M", "articleSection": "Part II Understand It The Theory Behind Reliability", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0b0c10',
-              surface: 'rgba(17, 19, 26, 0.92)',
-              panel: 'rgba(17, 19, 26, 0.92)',
-              light: 'rgba(255, 255, 255, 0.03)',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#e7e7ea',
-              strong: '#f2f3f8',
-              muted: '#b5b6bf',
-              primary: '#7aa2f7',
-              accent: '#bb9af7',
-              vibrant: '#2ac3de',
-              danger: '#f7768e',
-              success: '#10b981',
-            },
-            cyber: {
-              dark: '#0B0F19',
-              panel: '#151B2B',
-              primary: '#6366f1',
-              accent: '#06b6d4',
-              neon: '#d946ef',
-              success: '#10b981',
-              danger: '#ef4444',
-              text: '#f8fafc',
-              muted: '#94a3b8'
-            }
-          }
-        }
-      }
-    }
-  </script>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
@@ -85,22 +47,45 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">12 min read</span></div>
+<div class="chapter-meta"><span class="read-time">15 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="chapter-5-the-ouroboros-protocol-why-loops-converge">Chapter 5 –
 The Ouroboros Protocol (Why Loops Converge)</h1>
+<p>Start with a convergence trace:</p>
+</div>
+</header>
+<pre class="text"><code>attempt 1 -&gt; FAIL schema.required_field_missing(path=items[0].country)
+attempt 2 -&gt; FAIL scope.out_of_allowlist(path=docs/runbook.md)
+attempt 3 -&gt; FAIL unit_test.tax_rounding
+attempt 4 -&gt; PASS</code></pre>
+<p>That is the whole chapter in four lines. The loop is not just “trying
+again.” It is tightening against specific deterministic findings until
+it reaches a pass state or a circuit breaker says stop.</p>
 <p>In Part I, you built the loop: propose a change, validate it, and
 feed deterministic failures into the next attempt.</p>
-<p>We call this bounded self-reference the <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a>. Each
-iteration consumes the last diff plus <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> findings, and each Mission
-ends deterministically: <code>PASS</code> and commit, <code>FAIL</code>
-and revert, or escalate with evidence.</p>
+<p><a class="chapter-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge#chapter-5-the-ouroboros-protocol-why-loops-converge" title="Go to: Chapter 5">Chapter 5</a> explains why that loop can settle instead of wandering. We
+call that pattern the <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a>, with a deliberate nod to the
+myth of the ouroboros, the serpent that eats its own tail: the loop
+feeds its own output back into the next turn and evolves as it goes. It
+is not a static circle, but a self-correcting one. Each attempt uses the
+last candidate and the last validator findings as input to the next one,
+and each Mission still ends in a small set of deterministic outcomes:
+<code>PASS</code> and commit, <code>FAIL</code> and revert, or escalate
+with evidence.</p>
+<p>That is the difference between a useful retry loop and blind
+sampling. The system is not just “trying again.” It is retrying against
+a shrinking set of explicit constraints.</p>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-08-ouroboros-protocol" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-08-ouroboros-protocol</span>
 <style>
@@ -210,22 +195,22 @@ and revert, or escalate with evidence.</p>
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Ouroboros Protocol (Write → Judge → Refine)</h2>
 <p class="text-brand-muted leading-relaxed">
-        This is the control loop for iterative delivery: write a bounded candidate, judge it with deterministic gates,
-        then refine only against the failure signal. Repeat until convergence or circuit-break.
+        This is the retry loop behind reliable agent work: produce one bounded candidate, run deterministic checks,
+        then retry only against the exact failure signal. Repeat until the checks pass or the circuit breaker stops the run.
       </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Deterministic stop conditions</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Clear stop conditions</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-<span class="block font-mono text-brand-vibrant">Write → Judge → Refine</span>
-<span class="block mt-2">Stop on <span class="font-mono text-brand-strong">PASS</span> (converged) or on
-          <span class="font-mono text-brand-strong">budget exhausted</span> (escalate).</span>
-<span class="block mt-2">Judge can route to refine, rewrite, or re-scope before the next loop.</span>
+<span class="block font-mono text-brand-vibrant">Write → <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> → Refine</span>
+<span class="block mt-2">Stop on <span class="font-mono text-brand-strong">PASS</span> (checks pass) or when the
+          <span class="font-mono text-brand-strong">loop budget runs out</span> (escalate).</span>
+<span class="block mt-2">The Judge can send the next step to refine, rewrite, or re-scope.</span>
 </div>
 </div>
 </div>
 <div class="lg:w-7/12 space-y-4" data-role="ouroboros-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Interactive model</div>
+<div class="text-xs font-mono text-brand-muted mb-3">Interactive loop model</div>
 <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
 <div class="md:col-span-6">
 <div class="flex items-center justify-between text-xs text-brand-muted">
@@ -563,7 +548,7 @@ and revert, or escalate with evidence.</p>
       progressText = "Converged: attractor reached.";
     } else if (state.scenario === "no-attractor") {
       progressState = "unreachable";
-      progressText = "Unreachable attractor: retries cannot produce PASS.";
+      progressText = "No reachable attractor: retries cannot produce PASS.";
     } else if (windowItems.length < 2) {
       progressState = "baseline";
       progressText = "Collecting baseline.";
@@ -624,7 +609,7 @@ and revert, or escalate with evidence.</p>
       outcomeEl.textContent = "PASS: converged under deterministic gates.";
     } else if (state.status === "ESCALATE") {
       if (state.scenario === "no-attractor") {
-        outcomeEl.textContent = `CIRCUIT BREAK: no reachable attractor under current constraints. Escalate with evidence.`;
+        outcomeEl.textContent = "CIRCUIT BREAK: no reachable attractor under current constraints. Escalate with evidence.";
       } else {
         outcomeEl.textContent = `CIRCUIT BREAK: loop budget (${state.budget}) exhausted. Escalate with evidence.`;
       }
@@ -861,31 +846,31 @@ and revert, or escalate with evidence.</p>
 </section>
 <p>Two properties make this loop more than “retry until it passes”:</p>
 <ol type="1">
-<li><p><strong>Self-reference is a feature.</strong> The loop treats its
-own artifacts as input: the last diff, the last <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> failures, the
-last scope decision, the last trace. It is not “try again.” It is “try
-again with the evidence of why you failed.”</p></li>
+<li><p><strong>Self-reference is a feature.</strong> The loop feeds its
+own artifacts back in: the last diff, the last validator failures, the
+last scope decision, and the last trace. It is not “try again.” It is
+“try again with the exact evidence of what failed.”</p></li>
 <li><p><strong>Maintenance is drift repair.</strong> Over time, the
-Terrain changes and the Map lags behind (docs, inventories, indexes, and
-rules drift). Ouroboros is the unit process that turns drift into a
-bounded repair under <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> — whether the diff touches code (Terrain)
-or a Map surface.</p></li>
+Terrain changes and the Map falls behind: docs, inventories, indexes,
+and rules drift. Ouroboros is the small repair loop that turns that
+drift into a bounded fix under deterministic checks (<a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>), whether
+the diff touches code (Terrain) or a Map surface.</p></li>
 </ol>
-<p>The core insight: you do not need a deterministic LLM. You need a
-deterministic process that can tame a stochastic engine.</p>
+<p>The core insight: you do not need a deterministic large language
+model (LLM). You need a deterministic process around a stochastic
+engine.</p>
 <h2 id="the-core-loop-write-judge-refine">The Core Loop: Write → Judge →
 Refine</h2>
-<p>At its heart, the Ouroboros Protocol is a feedback control loop:</p>
+<p>At its heart, Ouroboros is a feedback loop with three steps:</p>
 <ol type="1">
-<li><p><strong>Write</strong>: The LLM, given context and a Mission
-Object (which may include prior errors), generates a candidate output.
-This output is the LLM’s best attempt to fulfill the current task. Since
-LLMs are stochastic engines (<a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a>), this step is inherently
-probabilistic. Even with identical inputs, the output might vary
-slightly between runs.</p></li>
-<li><p><strong>Judge</strong>: Run deterministic Validators (Physics) to
-produce structured findings and the next move (commit, refine,
-revert/defer).</p></li>
+<li><p><strong>Write</strong>: The model gets the mission, scope, and
+prior findings, then produces one candidate output. Since LLMs are
+stochastic engines (<a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a>), this step is inherently probabilistic.
+Even with identical inputs, the output might vary between runs.</p></li>
+<li><p><strong>Judge</strong>: Run deterministic validators. In this
+book, the checker stack is Physics and this decision stage is the Judge.
+It produces structured findings and the next move (commit, refine,
+revert, or defer).</p></li>
 <li><p><strong>Refine</strong>: Feed the exact findings back into the
 next attempt, with scope and output constraints unchanged.</p></li>
 </ol>
@@ -893,8 +878,8 @@ next attempt, with scope and output constraints unchanged.</p></li>
 circuit breaker is tripped.</p>
 <h2 id="the-loop-as-a-state-machine-what-persists-what-resets">The Loop
 as a State Machine (what persists, what resets)</h2>
-<p>Ouroboros feels mystical in prose. In implementation, it’s a small
-state machine with deterministic memory.</p>
+<p>Ouroboros sounds mystical in prose. In implementation, it is a small
+state machine with a short memory.</p>
 <p>If you’re implementing this in a real repository, build it in
 layers:</p>
 <ol type="1">
@@ -917,16 +902,34 @@ progress stalls; route hard cases to humans.</li>
   Pass -- no --&gt; Budgets{"BUDGETS / PROGRESS OK?"}
   Budgets -- yes --&gt; Refine["REFINE FEEDBACK&lt;br/&gt;+ UPDATE STATE"] --&gt; Write
   Budgets -- no --&gt; Escalate["ESCALATE / DEFER + TRACE"] --&gt; End</code></pre>
+<p><strong>Same loop, rendered as implementation
+pseudocode:</strong></p>
+<pre class="text"><code>state = init_state(mission, scope, budgets)
+
+while True:
+    candidate = write(state.slice, state.mission, state.findings)
+    parsed = parse_candidate(candidate)
+    if parsed == invalid:
+        return escalate("parse_shape_failure", trace=state.trace + [candidate])
+
+    findings = judge(parsed, state.mission, state.scope)
+    if findings == []:
+        return commit(candidate, trace=state.trace + [candidate])
+
+    if should_stop(state, findings):
+        return escalate("non_converging_or_budget_exhausted", findings=findings, trace=state.trace + [candidate])
+
+    state = refine(state, candidate, findings)</code></pre>
 <h3 id="state-what-the-loop-remembers">State (what the loop
 remembers)</h3>
-<p>There are two “memories” in Ouroboros:</p>
+<p>There are two kinds of memory in Ouroboros:</p>
 <ul>
 <li><strong>Ledger memory (for audit):</strong> the full trace
 (candidates, findings, timings, budgets).</li>
-<li><strong>Context memory (for iteration):</strong> a compact bundle
-used to generate the next candidate.</li>
+<li><strong>Working memory (for the next attempt):</strong> a compact
+bundle used to generate the next candidate.</li>
 </ul>
-<p>Keep the context memory small and deterministic. Do not feed the
+<p>Keep that working memory small and deterministic. Do not feed the
 entire run history back into the model request.</p>
 <p><strong>Practical state bundle per attempt:</strong></p>
 <ul>
@@ -945,9 +948,9 @@ detection</li>
 </ul>
 <h3 id="feedback-is-constraint-the-model-isnt-learning">Feedback is
 constraint (the model isn’t “learning”)</h3>
-<p>Inside one Ouroboros run, nothing about the model’s weights changes.
-The model is not learning. The loop is narrowing the solution space by
-adding explicit, deterministic constraints.</p>
+<p>Inside one Ouroboros run, the model is not getting smarter. Its
+weights do not change. The loop gets better only by adding explicit,
+deterministic constraints.</p>
 <p>The difference between a good loop and a bad one is the feedback
 contract:</p>
 <ul>
@@ -984,8 +987,9 @@ OUTPUT: Unified diff only. No prose.
 only” and make strict parsing the first gate.</p>
 <h2 id="convergence-vs.-thrashing">Convergence vs. Thrashing</h2>
 <p><a class="concept-link" href="concepts#convergence" title="See concept: Convergence">Convergence</a> means the failing set shrinks to zero and the loop exits
-with <code>PASS</code>. Thrashing means signatures repeat or scope
-expands without reducing failures.</p>
+with <code>PASS</code>. Thrashing means the loop keeps moving without
+getting closer: signatures repeat or scope expands while the same
+failures remain.</p>
 <h3 id="convergence-signals-in-practice">Convergence signals in
 practice</h3>
 <p>In real traces, convergence usually has three visible signals:</p>
@@ -1001,44 +1005,45 @@ should see net progress inside a bounded window.</p>
 either a smaller failing-code set or a smaller authorized diff surface
 inside that window. If neither changes, classify the run as
 non-converging and escalate.</p>
-<h3 id="attractors-system-geometry-for-done">Attractors: System Geometry
-for “Done”</h3>
-<p>Convergence is not luck. It’s geometry.</p>
-<p>An <strong>Attractor</strong> is the region of “solution space” where
-your <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> is satisfied: the candidate parses cleanly, stays in
-scope, respects budgets, and passes every Validator.</p>
-<p>You can picture it as a “valley” in the space of possible diffs: once
-a candidate lands inside it, the Validators stop pushing it back
-out.</p>
+<h3 id="attractors-the-region-that-counts-as-done">Attractors: the
+region that counts as “done”</h3>
+<p>Convergence is not luck. It comes from defining what a successful
+candidate looks like.</p>
+<p>An <strong>attractor</strong> is the set of candidates your checks
+would accept. In this book’s terms, it is the region where the candidate
+parses cleanly, stays in scope, respects budgets, and passes every
+validator.</p>
+<p>You can picture it as a valley in the space of possible diffs: once a
+candidate lands inside it, the validators stop pushing it back out.</p>
 <p>If you prefer a less poetic definition:</p>
 <pre class="text"><code>admissible(candidate) =
   parse_ok
   AND in_scope
   AND budgets_ok
   AND all_validators_pass</code></pre>
-<p>That boolean predicate defines the attractor. The loop “settles” when
+<p>That boolean predicate defines the attractor. The loop settles when
 successive candidates land in the same admissible region and stop
 moving.</p>
-<p>This framing is useful because thrashing stops looking like “the
-model is being weird” and starts looking like a topological failure:</p>
+<p>This framing is useful because it turns “the model is being weird”
+into a design diagnosis:</p>
 <ul>
-<li><p><strong>Attractor too flat (constraints too loose):</strong> many
-candidates are admissible, but there’s no canonical “shape.” The loop
-wanders: formatting churn, reordering, and needless variation. Fix it by
-tightening the attractor: smaller allowed edit region, stricter output
-schema, canonical formatting, and stronger Validators that reject
-variance you don’t want to review.</p></li>
+<li><p><strong>Attractor too flat (constraints too loose):</strong> too
+many candidates are admissible, but there is no canonical shape. The
+loop wanders: formatting churn, reordering, and needless variation. Fix
+it by tightening the pass region: smaller allowed edit regions, stricter
+output schemas, canonical formatting, and stronger validators that
+reject variance you do not want to review.</p></li>
 <li><p><strong>No attractor (constraints too tight or
-contradictory):</strong> there is no candidate that can satisfy all
-gates at once. The loop cycles until a circuit breaker fires. Fix it by
-making “Done” reachable: correct conflicting rules, include the missing
-contract in the slice (schema, interface, policy), or split the Mission
-Object into smaller steps.</p></li>
+contradictory):</strong> no candidate can satisfy all gates at once. The
+loop cycles until a circuit breaker fires. Fix it by making
+<code>PASS</code> reachable: correct conflicting rules, include the
+missing contract in the slice (schema, interface, policy), or split the
+Mission into smaller steps.</p></li>
 </ul>
 <p>When you debug thrash, ask one question first: <strong>did I define
-an attractor that actually exists?</strong> (In other words: is
-<code>PASS</code> mathematically reachable inside the declared scope and
-budgets?)</p>
+an attractor that actually exists?</strong> In plain language: is there
+a reachable <code>PASS</code> state inside the declared scope and
+budgets?</p>
 <blockquote>
 <p><strong>Thrash debug checklist (Attractor):</strong></p>
 <ul>
@@ -1057,17 +1062,17 @@ validators to emit structured failures.)</li>
 </blockquote>
 <h3 id="convergence-criteria-heuristics-you-can-implement">Convergence
 criteria (heuristics you can implement)</h3>
-<p>“Passes all Validators” is the termination condition, but it’s not
-enough to <em>guide</em> a loop. For guidance you need heuristics:
-small, deterministic functions that answer “are we moving toward the
-attractor?”</p>
-<p>These heuristics are where the <strong><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> Principle</strong>
-shows up inside Ouroboros: once you can measure progress (or safety),
-you refuse to let it slip. (<a class="chapter-link" href="chapter-11-automated-refactoring-under-guards#chapter-11-automated-refactoring-under-guards" title="Go to: Chapter 11">Chapter 11</a> applies the same idea to
-repo-wide quality metrics over time.)</p>
+<p><code>PASS</code> is the termination condition, but it is not enough
+to steer a loop. For guidance you need heuristics: small, deterministic
+checks that answer a simpler question, “are we getting closer?”</p>
+<p>This is the <strong><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> Principle</strong> inside Ouroboros: once
+you can measure progress or safety, you stop letting it slip. (Chapter
+11 applies the same idea to repo-wide quality metrics.)</p>
 <h4 id="reachability-prove-pass-is-possible">1) Reachability: prove
 <code>PASS</code> is possible</h4>
-<p>Before you spend retries, ask if the attractor exists.</p>
+<p>Before you spend retries, ask if the attractor exists at all. In
+plain language: can any candidate actually reach <code>PASS</code> under
+the declared scope and budgets?</p>
 <ul>
 <li><strong>Spec feasibility:</strong> does the Mission describe an
 achievable change inside the declared scope and budgets?</li>
@@ -1170,6 +1175,95 @@ deterministic:</p>
 </table>
 <p>This prevents a common anti-pattern: treating every <code>FAIL</code>
 as equivalent and blindly retrying.</p>
+<h3 id="practical-stop-defaults">Practical stop defaults</h3>
+<p>If you do not have better repo-specific numbers yet, start here:</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Control</th>
+<th>Default</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_iterations</code></td>
+<td>3</td>
+<td>Enough to use structured feedback once or twice without hiding
+thrash</td>
+</tr>
+<tr>
+<td>progress window</td>
+<td>3 attempts</td>
+<td>Long enough to see net improvement, short enough to stop budget
+burn</td>
+</tr>
+<tr>
+<td><code>max_files_changed</code></td>
+<td>3 for bounded missions</td>
+<td>Keeps blast radius small while the loop is immature</td>
+</tr>
+<tr>
+<td><code>max_lines_changed</code></td>
+<td>120</td>
+<td>Forces splitting before changes become hard to review</td>
+</tr>
+<tr>
+<td>repeated failure signature</td>
+<td>2 identical signatures</td>
+<td>Signals the loop is stuck, not learning</td>
+</tr>
+<tr>
+<td>infra retry budget</td>
+<td>2 retries with backoff</td>
+<td>Enough for transient noise without masking system issues</td>
+</tr>
+</tbody>
+</table>
+<h3 id="loop-latency-fast-local-judges-vs.-slow-remote-judges">Loop
+latency: fast local Judges vs. slow remote Judges</h3>
+<p>This chapter can sound unrealistically snappy if your full
+integration suite takes 20-30 minutes. In many real systems, that is
+normal. If every retry waits on the slowest gate, the loop dies of
+latency.</p>
+<p>The fix is not to drop the deep checks. The fix is to tier the
+Judge:</p>
+<ul>
+<li><strong>Fast local Judge:</strong> parse/shape checks, scope/policy
+checks, lint, types, unit tests, narrow contract checks. These are the
+signals you can afford to run on every retry.</li>
+<li><strong>Slow remote Judge:</strong> integration suites, staging
+smoke tests, performance/security scans, or checks that require real
+infrastructure. These are promotion gates, not inner-loop feedback on
+every attempt.</li>
+</ul>
+<p>This is also one reason the book keeps pushing bounded units.
+Breaking a monolith into smaller, explicit surfaces is not only a
+context optimization. It is also a testing and verification
+optimization: smaller units give you smaller validator surfaces, faster
+local checks, and a much better chance that the inner loop can run at
+human-useful speed.</p>
+<p>One practical pattern:</p>
+<ol type="1">
+<li>Retry only against the fast local Judge.</li>
+<li>Run the slow remote Judge only after the candidate is locally
+admissible.</li>
+<li>If the slow Judge fails, feed back one structured summary, then
+either retry with a narrower slice or escalate.</li>
+<li>If the same slow gate keeps failing, stop pretending it is a cheap
+retry loop and change the slice, the Mission, or the validator
+layout.</li>
+</ol>
+<p>In other words: <strong>fast local validation keeps the loop alive;
+slow remote validation keeps the system honest.</strong> Later chapters
+split this out into governance and CI policy. The key point here is
+simpler: Ouroboros survives enterprise latency only when the Judge is
+staged, not monolithic.</p>
 <h3 id="thrashing-deterministic-stop-signals">Thrashing: deterministic
 stop signals</h3>
 <p>Treat thrash as a state classification, not a vibe:</p>
@@ -1184,6 +1278,19 @@ signatures</li>
 inputs is budget burn, not progress. Typical fixes are: tighten the
 slice, tighten the acceptance criteria, or split the Mission into
 smaller units.</p>
+<h3 id="escalate-immediately-when">Escalate immediately when</h3>
+<ul>
+<li>the same findings signature repeats without a smaller failing
+set</li>
+<li>the candidate violates scope or protected-path policy more than
+once</li>
+<li>the loop needs a constraint or validator that does not exist
+yet</li>
+<li>the diff keeps expanding while the Judge output stays equally
+vague</li>
+<li>a human approval surface is touched and the mission does not
+explicitly allow it</li>
+</ul>
 <h2 id="circuit-breakers-guardrails-for-stochasticity">Circuit Breakers:
 Guardrails for Stochasticity</h2>
 <p>A loop that can retry can also thrash. Circuit breakers make failure
@@ -1228,13 +1335,13 @@ failures.</li>
 <li><strong>Stop conditions:</strong> max iterations, time/cost limits,
 minimum-progress windows.</li>
 </ol>
-<h2 id="the-economics-of-determinism-and-why-inference-is-strategy">The
-Economics of Determinism (and Why Inference Is Strategy)</h2>
+<h2 id="the-economics-of-determinism-why-loop-budgets-matter">The
+Economics of Determinism (Why Loop Budgets Matter)</h2>
 <p>The book has talked about ROI for <em>building</em> loops. You also
 need ROI for <em>running</em> them.</p>
-<p>The right comparison is not “a loop costs tokens.” It’s “a loop costs
-tokens” versus “a human costs time” versus “production costs money and
-trust.”</p>
+<p>The right comparison is not “a loop costs tokens.” It is “a bounded
+retry loop costs tokens” versus “a human debugging session costs time”
+versus “a production mistake costs money and trust.”</p>
 <p><strong>Illustrative cost comparison (order of magnitude; plug in
 your numbers):</strong></p>
 <table>
@@ -1260,11 +1367,11 @@ your numbers):</strong></p>
 </tbody>
 </table>
 <p>This is why circuit breakers matter. You want to spend a small,
-bounded budget <em>before merge</em> so you don’t spend an unbounded
+bounded budget <em>before merge</em> so you do not spend an unbounded
 budget <em>after deploy</em>.</p>
-<p>Now widen the lens: <strong>inference economics is strategy</strong>.
-Your inference contract determines whether you can afford retries,
-strict gating, and background maintenance at scale.</p>
+<p>Now widen the lens: your inference cost model is a strategic choice.
+It determines whether you can afford retries, strict gating, and
+background maintenance at scale.</p>
 <table>
 <thead>
 <tr>
@@ -1294,14 +1401,16 @@ strict gating, and background maintenance at scale.</p>
 <p>State the thesis explicitly:</p>
 <blockquote>
 <p><strong>A constrained loop with a weaker model can beat an
-unconstrained flagship model.</strong> Teams that own their inference —
-including open-weight models behind validated loops — can outcompete
-teams renting flagship models without constraints. The model is the
-engine; the loop is the vehicle.</p>
+unconstrained flagship model.</strong> Teams that control inference
+costs, including teams running open-weight models behind validated
+loops, can outcompete teams renting flagship models without constraints.
+The model is the engine; the loop is the vehicle. The loop is also where
+the value compounds: once it exists, new tasks can reuse the same scope
+controls, validators, and audit trail.</p>
 </blockquote>
-<p>“Vehicle” is not poetry here. It’s governance: your loop defines
-scope, budgets, validation, and audit evidence. That is what lets you
-scale autonomy without scaling incidents.</p>
+<p>“Vehicle” is not poetry here. It cashes out into governance: your
+loop defines scope, budgets, validation, and audit evidence. That is
+what lets you scale autonomy without scaling incidents.</p>
 <h2 id="compressed-trace-readout">Compressed Trace Readout</h2>
 <p>You can classify loop behavior quickly from a short trace:</p>
 <table>
@@ -1347,19 +1456,21 @@ not keep sampling.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
-<li><p><strong>Identify a simple, schema-driven generation task</strong>
-in your current work (e.g., generating a JSON configuration file, a SQL
+<li><p><strong>Pick a small, schema-driven generation task</strong> in
+your current work (e.g., generating a JSON configuration file, a SQL
 query based on a schema, or a simple code snippet that must pass a
 linter).</p></li>
-<li><p><strong>Define your <code>Judge</code> function</strong>: Write a
+<li><p><strong>Define your deterministic checker</strong>: Write a
 simple tool or use an existing validator (like a JSON schema validator,
 a Kubernetes schema validator such as <code>kubeconform</code>, or a
 linter/type checker) that can deterministically validate the output of
-your chosen task. The <code>Judge</code> should return clear, structured
+your chosen task. In this chapter, that checker is the
+<code>Judge</code>, and it should return clear, structured
 errors.</p></li>
 <li><p><strong>Build a manual Ouroboros loop</strong>:</p>
 <ul>
-<li>Write a Mission Object for an LLM to generate the artifact.</li>
+<li>Write a Mission Object: an explicit task contract for the
+model.</li>
 <li>Run your <code>Judge</code> against the output.</li>
 <li>If it fails, paste the <code>Judge</code> output into the next
 request and ask for a fix that addresses only the recorded
@@ -1367,8 +1478,8 @@ failures.</li>
 <li>Repeat until it converges or you hit a manual
 <code>max_iterations</code> limit.</li>
 </ul></li>
-<li><p><strong>Debug thrashing as a missing attractor:</strong> If you
-can’t converge, don’t “try harder.” Check reachability:</p>
+<li><p><strong>Debug thrashing as a reachability problem:</strong> If
+you cannot converge, do not “try harder.” Check reachability:</p>
 <ul>
 <li>Can a human produce a <code>PASS</code> artifact under the same
 scope and budgets?</li>
@@ -1378,10 +1489,10 @@ true)?</li>
 so the loop is guessing?</li>
 </ul></li>
 </ol>
-<p>This exercise will give you a visceral understanding of how the
-deterministic <code>Judge</code> drives the stochastic LLM.</p>
+<p>This exercise makes the core point tangible: deterministic checks
+drive a stochastic model toward something reviewable and safe.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 5 – The Ouroboros Protocol (Why Loops Converge)" data-share-title="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 5 of Architects of Intent: The Ouroboros Protocol (Why Loops Converge). That is the whole chapter in four lines. The loop is not just “trying again.”…" data-share-title="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -1389,7 +1500,7 @@ deterministic <code>Judge</code> drives the stochastic LLM.</p>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge&amp;title=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%205%20%E2%80%93%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%205%20of%20Architects%20of%20Intent%3A%20The%20Ouroboros%20Protocol%20%28Why%20Loops%20Converge%29.%20That%20is%20the%20whole%20chapter%20in%20four%20lines.%20The%20loop%20is%20not%20just%20%E2%80%9Ctrying%20again.%E2%80%9D%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-ouroboros-protocol-why-loops-converge">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -1401,7 +1512,7 @@ deterministic <code>Judge</code> drives the stochastic LLM.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

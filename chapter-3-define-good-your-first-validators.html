@@ -5,14 +5,15 @@
 <title>Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)" name="description"/>
+<meta content="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-3-define-good-your-first-validators" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)" property="og:description"/>
+<meta content="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-3-define-good-your-first-validators" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,58 +21,19 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)" name="twitter:description"/>
+<meta content="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Define “Good” (Your First Validators)", "description": "Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT15M", "articleSection": "Part I Build It The Weekend Sprint", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0b0c10',
-              surface: 'rgba(17, 19, 26, 0.92)',
-              panel: 'rgba(17, 19, 26, 0.92)',
-              light: 'rgba(255, 255, 255, 0.03)',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#e7e7ea',
-              strong: '#f2f3f8',
-              muted: '#b5b6bf',
-              primary: '#7aa2f7',
-              accent: '#bb9af7',
-              vibrant: '#2ac3de',
-              danger: '#f7768e',
-              success: '#10b981',
-            },
-            cyber: {
-              dark: '#0B0F19',
-              panel: '#151B2B',
-              primary: '#6366f1',
-              accent: '#06b6d4',
-              neon: '#d946ef',
-              success: '#10b981',
-              danger: '#ef4444',
-              text: '#f8fafc',
-              muted: '#94a3b8'
-            }
-          }
-        }
-      }
-    }
-  </script>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
@@ -85,16 +47,38 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part I Build It The Weekend Sprint</div>
-<div class="chapter-meta"><span class="read-time">14 min read</span></div>
+<div class="chapter-meta"><span class="read-time">15 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="chapter-3-define-good-your-first-validators">Chapter 3 – Define
 “Good” (Your First Validators)</h1>
+<p>Start with one concrete gate:</p>
+</div>
+</header>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>  <span class="dt">"validator"</span><span class="fu">:</span> <span class="st">"json_schema"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a>  <span class="dt">"status"</span><span class="fu">:</span> <span class="st">"fail"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>  <span class="dt">"artifact"</span><span class="fu">:</span> <span class="st">"generated/pr_summary_bad.json"</span><span class="fu">,</span></span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>  <span class="dt">"errors"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a>      <span class="dt">"path"</span><span class="fu">:</span> <span class="st">"reviewer_suggestions"</span><span class="fu">,</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a>      <span class="dt">"message"</span><span class="fu">:</span> <span class="st">"'charlie_qa' is not of type 'array'"</span></span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Nothing mystical happened there. The model produced plausible-looking
+output. A cheap deterministic gate caught a structural bug before
+review, and the loop now has a precise finding it can act on.</p>
 <p>You’ve built a loop and named the sandwich. Now define “good” so the
 gate means something.</p>
 <p>Validators turn “looks fine” into a deterministic signal (often
@@ -103,16 +87,16 @@ small: hard physics first (linters, types, schemas), then a few
 task-specific checks you can tighten over time.</p>
 <p>Two practical rules:</p>
 <ul>
-<li>A <strong><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a></strong> is a <strong><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></strong>, not a
-<a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>. It emits a structured signal; the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> decides whether to
-refine, revert, or escalate.</li>
+<li>A <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> reports what it found; it does not decide the entire
+outcome. In the book’s terms, a <strong>Validator</strong> is a
+<strong><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></strong>, not a <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>.</li>
 <li>Put the cheapest Validators first. Failing fast is not pessimism;
 it’s throughput.</li>
 </ul>
 <p>One reality check up front: Validators are not omniscient. They are
 executable opinions about what matters. Your job is to keep them
-<em>cheap, terminating, and aligned</em> with the invariants you
-actually care about.</p>
+<em>cheap, guaranteed to finish, and aligned</em> with the invariants
+you actually care about.</p>
 <h2 id="where-validators-live-in-real-systems">Where Validators live in
 real systems</h2>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published">
@@ -120,15 +104,15 @@ real systems</h2>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-danger">
 <div class="flex flex-col lg:flex-row gap-8">
 <div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">Validator Bundles (Define Good + Budgets)</h2>
+<h2 class="text-3xl font-bold text-brand-strong mb-3">Validator Bundles (Make “good” explicit)</h2>
 <p class="text-brand-muted leading-relaxed">
-                            Validators are “physics.” Budgets are “governors.” Together they turn open-ended iteration into a bounded system.
-                            The loop can fail, but it fails deterministically.
+                            Validators are the hard checks. Budgets stop the loop from grinding forever.
+                            Together they turn open-ended iteration into a bounded system.
                         </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-                                Toggle validators and adjust the retry budget. Run the bundle and watch what becomes provable.
+                                Turn checks on and off, adjust the retry budget, then run the bundle and watch what becomes provable.
                             </div>
 </div>
 </div>
@@ -137,7 +121,7 @@ real systems</h2>
 <div class="grid grid-cols-1 xl:grid-cols-12 gap-4">
 <div class="xl:col-span-5 space-y-3">
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Validator bundle</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Checks in the bundle</div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
 <button aria-pressed="true" class="soft-toggle font-mono" data-validator="schema" type="button">Schema</button>
 <button aria-pressed="true" class="soft-toggle font-mono" data-validator="tests" type="button">Unit tests</button>
@@ -154,7 +138,7 @@ real systems</h2>
 </div>
 <label class="sr-only" for="validatorBudgetSlider">Retry budget slider</label>
 <input class="mt-2 w-full" id="validatorBudgetSlider" max="10" min="1" type="range" value="4"/>
-<button aria-pressed="false" class="mt-3 soft-toggle w-full font-mono" id="validatorRunBtn" type="button">Run Validators</button>
+<button aria-pressed="false" class="mt-3 soft-toggle w-full font-mono" id="validatorRunBtn" type="button">Run checks</button>
 </div>
 <div class="bg-brand-surface border border-brand-border rounded-xl p-3">
 <div class="text-xs font-mono text-brand-muted mb-2">Results</div>
@@ -168,7 +152,7 @@ real systems</h2>
 </div>
 <div class="border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
 <div class="flex items-center justify-between mb-2">
-<div class="text-xs font-mono text-brand-muted">Ledger entry (evidence)</div>
+<div class="text-xs font-mono text-brand-muted">Run record</div>
 <div class="text-xs font-mono text-brand-muted" id="validatorRunId">run_000</div>
 </div>
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-56 font-mono" id="validatorLedger"></pre>
@@ -180,41 +164,27 @@ real systems</h2>
 </div>
 </div>
 </section>
-<p>In production-grade implementations, Validators are rarely “just
-scripts.” They tend to exist as explicit <strong>Steps</strong> in a
-<strong>Workflow</strong> graph so the loop is inspectable and
+<p>In production systems, Validators are rarely “just scripts.” They
+usually exist as explicit workflow steps so the loop is inspectable and
 reproducible.</p>
 <p>In the engine behind this book, the workflow runtime lives in
-<code>core/workflow.py</code>, and common <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> checks are implemented
-as Step classes in <code>core/steps/</code> (for example
-<code>LintStep</code>, <code>TypeCheckStep</code>,
-<code>CoverageStep</code>, and <code>TestStep</code> in
-<code>core/steps/code_steps.py</code>). A controller wires these Steps
-together into a deterministic graph with named transitions, then records
-a trace.</p>
-<p>That implementation detail matters: when Validators are first-class
+<code>core/workflow.py</code>, and common checks live in
+<code>core/steps/</code> (for example <code>LintStep</code>,
+<code>TypeCheckStep</code>, <code>CoverageStep</code>, and
+<code>TestStep</code> in <code>core/steps/code_steps.py</code>). A
+controller wires those steps into a deterministic graph with named
+transitions, then records a trace.</p>
+<p>That implementation detail matters: once Validators are first-class
 nodes, you can tag them, order them, retry them, visualize them, and
-reuse the same gates across every loop (human-written or machine-written
-changes).</p>
-<p>The <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> phase can be a single model call, a chain, or a
-multi-agent swarm; the loop doesn’t care because Physics validates the
-output artifact, not the process that produced it.</p>
-<p>A useful Validator output shape looks like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>  <span class="dt">"validator"</span><span class="fu">:</span> <span class="st">"json_schema"</span><span class="fu">,</span></span>
-<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a>  <span class="dt">"status"</span><span class="fu">:</span> <span class="st">"fail"</span><span class="fu">,</span></span>
-<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>  <span class="dt">"artifact"</span><span class="fu">:</span> <span class="st">"generated/pr_summary_bad.json"</span><span class="fu">,</span></span>
-<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>  <span class="dt">"errors"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a>      <span class="dt">"path"</span><span class="fu">:</span> <span class="st">"reviewer_suggestions"</span><span class="fu">,</span></span>
-<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a>      <span class="dt">"message"</span><span class="fu">:</span> <span class="st">"'charlie_qa' is not of type 'array'"</span></span>
-<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+reuse the same gates across every loop.</p>
+<p>The change phase can be a single model call, a chain, or a
+multi-agent swarm; the loop does not care because the checks validate
+the output artifact, not the process that produced it.</p>
 <h2 id="the-hard-physics-of-validation">The Hard Physics of
 Validation</h2>
 <p>Forget the philosophical debates about AI truthfulness for a moment.
-Instead, focus on the “hard physics” of code and data:</p>
+Ask a simpler question: what can you check deterministically in code and
+data?</p>
 <ul>
 <li><p><strong>Linters:</strong> Do your generated code blocks conform
 to a style guide? Are they valid syntax?</p></li>
@@ -233,14 +203,14 @@ disclaimers?</p></li>
 </ul>
 <p>These are “hard physics” because they are entirely deterministic.
 Given an input and a rule, the outcome is always the same: valid or
-invalid. This is your anchor in the sea of stochastic generation.</p>
+invalid. This is your anchor while the model remains variable.</p>
 <h3 id="validator-taxonomy-hard-first-then-semantic">Validator Taxonomy:
 Hard First, Then Semantic</h3>
-<p>Hard physics gets you admissible artifacts. It does not get you
-correct artifacts.</p>
-<p>In practice, an <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> blends:</p>
+<p>Hard physics gets you artifacts that pass the gate. It does not
+guarantee correct artifacts.</p>
+<p>In practice, a validator stack blends:</p>
 <ul>
-<li><strong>Hard Physics Validators:</strong> syntax, formatting, types,
+<li><strong>Hard <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> Validators:</strong> syntax, formatting, types,
 schemas, path invariants.</li>
 <li><strong>Terminology Validators:</strong> banned/redirect terms,
 canonical vocabulary, contract language.</li>
@@ -290,14 +260,14 @@ sense?”)</td>
 <td style="text-align: left;">Low</td>
 </tr>
 <tr>
-<td style="text-align: left;">Immune System cases (unit)</td>
+<td style="text-align: left;">Unit tests</td>
 <td style="text-align: left;">local logic errors (covered paths)</td>
 <td style="text-align: left;">uncovered paths, integration
 boundaries</td>
 <td style="text-align: left;">Medium</td>
 </tr>
 <tr>
-<td style="text-align: left;">Immune System cases (integration)</td>
+<td style="text-align: left;">Integration tests</td>
 <td style="text-align: left;">interface mismatches across
 components</td>
 <td style="text-align: left;">full production environment behavior</td>
@@ -363,12 +333,11 @@ criteria (what “good enough” looks like)</h3>
 bars. Treat these as heuristics you can ratchet over time:</p>
 <ul>
 <li><strong>Minimum bar (local loop):</strong> formatting + lint + basic
-types (if you have them) + one fast <a class="concept-link" href="concepts#immune-system-case" title="See concept: Immune System case">Immune System case</a> gate that catches
-the common failure mode for your surface.</li>
-<li><strong>Professional bar (shared repo):</strong> above + Immune
-System cases for invariants + a scope validator (paths + allowed edit
-regions) + at least one security check (secrets scan and/or static
-analysis).</li>
+types (if you have them) + one fast <a class="concept-link" href="concepts#immune-system-case" title="See concept: Immune System case">unit test</a> or equivalent gate that
+catches the common failure mode for your surface.</li>
+<li><strong>Professional bar (shared repo):</strong> above + test cases
+for invariants + a scope validator (paths + allowed edit regions) + at
+least one security check (secrets scan and/or static analysis).</li>
 <li><strong>Production-critical bar (blast radius is real):</strong>
 above + integration tests for key flows + property-based tests for the
 core parser/serializer or money/auth logic + explicit policy gates
@@ -377,8 +346,8 @@ core parser/serializer or money/auth logic + explicit policy gates
 <p>Notice what’s missing: “100% coverage.” The goal is not to prove
 perfection. The goal is to make drift expensive and failures
 legible.</p>
-<h3 id="who-writes-the-physics-authorship-without-circularity">Who
-writes the Physics? (authorship without circularity)</h3>
+<h3 id="who-writes-the-physics-who-owns-the-rules">Who writes the
+Physics? (who owns the rules)</h3>
 <p>If Validators are the laws, you don’t want a system that can quietly
 rewrite its own laws to make the gates green.</p>
 <p>A practical middle ground:</p>
@@ -387,17 +356,17 @@ rewrite its own laws to make the gates green.</p>
 The Validator that enforces “don’t touch protected paths” should not be
 solely written by the agent it constrains.</li>
 <li><strong>Derived validators can be AI-assisted.</strong> Let the
-Effector propose a new Immune System case, a schema update, or a
-semantic invariant — but require it to pass existing Physics, and
-require human review when it changes governance surfaces.</li>
+change step propose a new test case, a schema update, or a semantic
+invariant, but require it to pass existing Physics and require human
+review when it changes governance surfaces.</li>
 <li><strong>Validators must be testable artifacts.</strong> A Validator
 is only trustworthy when you can show a case where it fails and a case
 where it passes. Treat “add a validator” as a normal change that itself
 goes through gates.</li>
 </ul>
 <p><a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a> is where we make this enforceable: protected paths,
-CODEOWNERS, and a userspace boundary so the loop cannot edit its own
-graders.</p>
+CODEOWNERS, and a boundary around the grader code so the loop cannot
+quietly edit its own checks.</p>
 <h3 id="validation-vs.-evaluation-keep-the-gate-deterministic">Validation
 vs. evaluation (keep the gate deterministic)</h3>
 <p>It’s easy to blur two different activities:</p>
@@ -409,11 +378,10 @@ merges and halts loops.</li>
 model-based scoring. Useful, but not reproducible enough to be a
 gate.</li>
 </ul>
-<p>You can absolutely use evaluation to help your Judge decide what to
-do next (refine, revert, escalate). But do not mistake it for
-Physics.</p>
-<p>Rule: if you can’t make it deterministic, it isn’t a Validator. Treat
-it as a Sensor and keep it downstream of human review or hard
+<p>You can absolutely use evaluation to help decide what to do next
+(refine, revert, escalate). But do not mistake it for Physics.</p>
+<p>Rule: if you cannot make it deterministic, it is not a Validator.
+Treat it as a signal and keep it downstream of human review or hard
 policy.</p>
 <h3 id="property-based-tests-soft-physics-and-how-to-design-properties">Property-based
 tests (Soft Physics) and how to design properties</h3>
@@ -477,7 +445,7 @@ deterministic PASS/FAIL signals do not.</p>
 <td style="text-align: left;"><code>rustc</code></td>
 </tr>
 <tr>
-<td style="text-align: left;">Immune System suite</td>
+<td style="text-align: left;"><a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Test suite</a></td>
 <td style="text-align: left;"><code>pytest</code></td>
 <td style="text-align: left;"><code>jest</code></td>
 <td style="text-align: left;"><code>cargo test</code></td>
@@ -496,12 +464,12 @@ equivalents). The tool doesn’t matter as much as the contract:
 deterministic <code>PASS/FAIL</code> on a bounded surface.</p>
 <h2 id="a-validator-that-catches-a-real-bug">A Validator That Catches a
 Real Bug</h2>
-<p>Let’s anchor this with a concrete example. Imagine you’re using an
-LLM to help summarize pull requests and suggest reviewers. Your system
-expects a JSON output with specific fields. A common GenAI bug class is
-<em>structural drift</em>—the model sometimes deviates from the
-requested JSON format, either subtly changing field names, missing
-fields, or providing the wrong data type for a value.</p>
+<p>Let’s anchor this with a concrete example. Imagine you’re using a
+large language model (LLM) to help summarize pull requests and suggest
+reviewers. Your system expects a JSON output with specific fields. A
+common GenAI bug class is <em>structural drift</em>—the model sometimes
+deviates from the requested JSON format, either subtly changing field
+names, missing fields, or providing the wrong data type for a value.</p>
 <p>We’ll use a JSON Schema validator to enforce the expected
 structure.</p>
 <p>First, define a JSON Schema for the smallest invariant you care
@@ -525,11 +493,12 @@ deterministically fails with a type error at
 <li>Exit code <code>0</code> on success, non-zero on failure</li>
 </ul>
 <p>That exit code is the universal signal a runner needs to halt the
-loop. It’s also why MVF v0 works: in the companion repo
-(<code>github.com/kjwise/aoi_code</code>), <code>make validate</code> is
-a deterministic gate that can block integration without debate. The
-<code>validate_map_alignment.py</code> script is a concrete example of a
-Validator that enforces a specific, hard rule.</p>
+loop. It’s also why Minimum Viable Factory (MVF) v0 works: in the
+companion repo (<code>github.com/kjwise/aoi_code</code>),
+<code>make validate</code> is a deterministic gate that can block
+integration without debate. The <code>validate_map_alignment.py</code>
+script is a concrete example of a Validator that enforces a specific,
+hard rule.</p>
 <h2 id="failure-modes-false-positives-and-false-negatives">Failure
 Modes: False Positives and False Negatives</h2>
 <p>Once you have Validators, you’ll hit the two classic failure
@@ -569,12 +538,12 @@ allowlist (or your directory) and fails if any are unknown.</li>
 <li>Add a budget (“at most 3 suggestions”) and a policy (“must include
 at least 1 code owner when touching protected paths”).</li>
 </ul>
-<h2 id="composing-validators-your-immune-system">Composing Validators:
-Your Immune System</h2>
-<p>One validator is good, but multiple validators working together form
-a more robust “immune system” for your generated artifacts. You can
-compose them by chaining them together, often using a simple script or a
-<code>Makefile</code>.</p>
+<h2 id="composing-validators-build-a-checker-stack">Composing
+Validators: Build a checker stack</h2>
+<p>One validator is good, but several working together are much
+stronger. Later in the book that bundle becomes an “immune system,” but
+you do not need the term to use the pattern: chain checks together
+behind one command.</p>
 <p>Consider a <code>generated</code> directory that contains JSON,
 Python code, and documentation. Each might need its own type of
 validation:</p>
@@ -597,32 +566,41 @@ order:</p>
 </ul>
 <p>Fail fast on the first violation. That’s not pessimism; it’s
 throughput.</p>
+<p>This is also where AI changes the economics of strictness. It lowers
+the cost of generating drafts, and it lowers the cost of writing many of
+the validators, schemas, and harness glue that grade those drafts. When
+both sides get cheaper, strictness becomes leverage: schemas, parsers,
+type checks, and compilers turn hidden runtime drift into loud, local
+failures the loop can correct quickly. Rust is the clearest language
+example here: once AI can write the boilerplate, <code>rustc</code>,
+Clippy, and the type system stop feeling like ceremony and start acting
+like an always-on grader.</p>
 <p>At this point, you have seen how to build a deterministic gate for
-your AI-generated outputs. Any deviation from your explicit definition
-of “good” (as encoded in schemas, linters, or type systems) will halt
-your SDaC loop, preventing erroneous outputs from propagating.</p>
+model-generated outputs. Any deviation from your explicit definition of
+“good” (as encoded in schemas, linters, or type systems) will halt the
+loop before bad output propagates.</p>
 <h2 id="coverage-and-strictness-a-ladder-not-a-cliff">Coverage and
 Strictness: A Ladder, Not a Cliff</h2>
-<p>Don’t aim for perfect validation from the start. Think of building
-your validator “immune system” as a ladder:</p>
+<p>Don’t aim for perfect validation from the start. Think of validator
+coverage as a ladder:</p>
 <ol type="1">
-<li><p><strong>Start with the basics (Minimal Coverage, Low
-Strictness):</strong> Ensure your outputs are valid JSON/YAML/Python.
+<li><p><strong>Start with the basics (minimal coverage, low
+strictness):</strong> Ensure your outputs are valid JSON/YAML/Python.
 Check one or two invariants you care about (types, required fields).
-This catches the most egregious, system-breaking errors. Our schema
-example started with one invariant: <code>"reviewer_suggestions"</code>
-is an array of strings.</p></li>
-<li><p><strong>Increase Coverage (More Files, More Structures):</strong>
+This catches the most obvious system-breaking errors. Our schema example
+started with one invariant: <code>"reviewer_suggestions"</code> is an
+array of strings.</p></li>
+<li><p><strong>Increase coverage (more files, more structures):</strong>
 Extend validators to all generated artifacts. If you generate 5 types of
 JSON, write 5 schemas. If you generate 10 Python files, lint and
 type-check all 10.</p></li>
-<li><p><strong>Increase Strictness (More Granular Rules):</strong> Once
+<li><p><strong>Increase strictness (more granular rules):</strong> Once
 basic structure is guaranteed, start adding more specific rules. For
 example: add an <code>enum</code> for an <code>impact_scope</code> field
 (<code>"minor", "medium", "major"</code>), enforce minimum/maximum
 lengths, or add regex patterns. This catches more subtle, but still
 critical, semantic errors.</p></li>
-<li><p><strong>Custom Validators (Business Logic):</strong> For very
+<li><p><strong>Custom validators (business logic):</strong> For very
 specific business rules that can’t be expressed purely in schemas or
 linters, write custom scripts. For instance, a script that checks if all
 suggested reviewers (<code>reviewer_suggestions</code>) are actual known
@@ -632,33 +610,34 @@ users in your system.</p></li>
 this incrementally, focusing on the highest-impact checks first, and
 tightening your grip on “good” over time.</p>
 <hr/>
-<h2 id="the-manifesto-full">The Manifesto (Full)</h2>
-<p>Now that you’ve defined “good” as Physics, here’s the stance behind
-the mechanics.</p>
+<h2 id="the-stance-behind-the-mechanics">The stance behind the
+mechanics</h2>
+<p>Now that you’ve defined “good” as hard checks, here is the stance
+behind the mechanics.</p>
 <h3 id="central-dogma">Central dogma</h3>
-<p>We do not optimize for “smart” models; we optimize for converging
-systems.</p>
-<p>AI is a stochastic engine. We do not negotiate with it. We constrain
-it.</p>
+<p>We do not optimize for “smart” models. We optimize for loops that
+converge.</p>
+<p>Model behavior varies. We do not negotiate with that variance. We
+constrain it.</p>
 <p>A GenAI system is more likely to hold up in production when three
 things hold at once:</p>
 <ul>
-<li>It carries durable intent: a <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> you can name, version,
-and test.</li>
+<li>It carries durable intent: a <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>, which is the typed
+request you can name, version, and test.</li>
 <li>It resists entropy as models, data, and people change.</li>
 <li>It adapts through a repeatable ratchet of feedback and revision, not
 heroic one-off instructions.</li>
 </ul>
-<p>You can keep the whole system in your head as one chain:</p>
+<p>If you want the book’s canonical chain, here it is:</p>
 <blockquote>
 <p><strong>Mission Object → <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a> → Effectors → Immune
 System → <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a></strong></p>
 </blockquote>
 <h3 id="the-meta-patterns">The meta-patterns</h3>
 <h4 id="dont-chat-compile">1) Don’t Chat, Compile</h4>
-<p>Chat is for ideation. Production work is an artifact you can version
-and rerun: a Mission Object plus a deterministic runner that produces a
-diff and a trace.</p>
+<p>Chat is for ideation. Production work should end up as an artifact
+you can version and rerun: a Mission Object (typed request) plus a
+deterministic runner that produces a diff and a trace.</p>
 <p>Rule: if it isn’t in a file, it isn’t an instruction. It’s just a
 vibe.</p>
 <h4 id="physics-is-law">2) Physics is Law</h4>
@@ -672,9 +651,9 @@ maintenance turns entropy signals into Missions and runs them through
 the same Validators. No privileged mode.</p>
 <h3 id="the-goal">The goal</h3>
 <p>Build a factory where intent (the Map) is systematically converted
-into reality (the Terrain) through verifiable loops, guarded by hard
-constraints, and recorded in a Ledger with enough evidence to explain
-why each diff exists.</p>
+into real changes (the Terrain) through verifiable loops, guarded by
+hard constraints, and recorded in a Ledger with enough evidence to
+explain why each diff exists.</p>
 <ul>
 <li>If it cannot be verified, it does not ship.</li>
 <li>If it cannot be reproduced, it does not exist.</li>
@@ -713,10 +692,11 @@ failure.</p></li>
 gate.</p></li>
 </ul></li>
 <li><p><strong>Integrate and Observe:</strong> Add this validator to
-your existing SDaC <code>Makefile</code> or validation script.
-Intentionally generate an output that <em>violates</em> your rule and
-confirm that your build fails deterministically. Then, generate a
-correct output and confirm it passes.</p></li>
+your existing Software Development as Code (SDaC) <code>Makefile</code>
+or validation script. Intentionally generate an output that
+<em>violates</em> your rule and confirm that your build fails
+deterministically. Then, generate a correct output and confirm it
+passes.</p></li>
 <li><p><strong>Expand (Optional):</strong> If you’re feeling ambitious,
 add a second, different type of validator (e.g., if you have a JSON
 schema, add a linter for a Python script).</p></li>
@@ -726,7 +706,7 @@ validator, or making the selection logic explicit in
 <code>Prep</code>.</p></li>
 </ol>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 3 – Define “Good” (Your First Validators)" data-share-title="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-3-define-good-your-first-validators" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…" data-share-title="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-3-define-good-your-first-validators" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -734,7 +714,7 @@ validator, or making the selection logic explicit in
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;title=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%203%20of%20Architects%20of%20Intent%3A%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29.%20Nothing%20mystical%20happened%20there.%20The%20model%20produced%20plausible-looking%20output.%20A%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -746,7 +726,7 @@ validator, or making the selection logic explicit in
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

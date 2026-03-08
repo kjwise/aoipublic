@@ -5,14 +5,15 @@
 <title>Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Chapter 8 – Keep the Map Fresh (Map-Updaters)" name="description"/>
+<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Chapter 8 – Keep the Map Fresh (Map-Updaters)" property="og:description"/>
+<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,58 +21,19 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Chapter 8 – Keep the Map Fresh (Map-Updaters)" name="twitter:description"/>
+<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 8 – Keep the Map Fresh (Map-Updaters)", "description": "Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "mainEntityOfPage": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT13M", "articleSection": "Part III Scale It From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0b0c10',
-              surface: 'rgba(17, 19, 26, 0.92)',
-              panel: 'rgba(17, 19, 26, 0.92)',
-              light: 'rgba(255, 255, 255, 0.03)',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#e7e7ea',
-              strong: '#f2f3f8',
-              muted: '#b5b6bf',
-              primary: '#7aa2f7',
-              accent: '#bb9af7',
-              vibrant: '#2ac3de',
-              danger: '#f7768e',
-              success: '#10b981',
-            },
-            cyber: {
-              dark: '#0B0F19',
-              panel: '#151B2B',
-              primary: '#6366f1',
-              accent: '#06b6d4',
-              neon: '#d946ef',
-              success: '#10b981',
-              danger: '#ef4444',
-              text: '#f8fafc',
-              muted: '#94a3b8'
-            }
-          }
-        }
-      }
-    }
-  </script>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
@@ -85,32 +47,52 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">12 min read</span></div>
+<div class="chapter-meta"><span class="read-time">13 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="chapter-8-keep-the-map-fresh-map-updaters">Chapter 8 – Keep the
 Map Fresh (Map-Updaters)</h1>
 <p>Drift is the default state. Docs fall behind code. Specs lag behind
 services. Inventories and indexes rot. Policies miss new surfaces.</p>
-<p>In SDaC, you do not fight drift with reminders. You fight it with a
-loop that turns “this Map surface is wrong” into a bounded, reviewable
-patch.</p>
-<p>Enter the <strong><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a></strong>. A Map-Updater is a
-specialized loop designed to keep a specific Map surface synchronized
-with its corresponding Terrain. It does this by observing reality,
-comparing it to expectations, and proposing concrete, reviewable patches
-to reconcile any differences.</p>
+<p>In Software Development as Code (SDaC), you do not fight drift with
+reminders. You fight it with a loop that turns “this Map surface is
+wrong” into a bounded, reviewable patch.</p>
+<p>Enter the <strong>Map-Updater</strong>. A Map-Updater is the
+specialized loop that keeps one Map surface synchronized with its
+corresponding Terrain. It observes reality, compares it to the current
+Map, and emits a concrete, reviewable patch when the two diverge.</p>
 <p>A Map-Updater matters because <strong>a Map is part of a context
-slice</strong>. You rarely want to pass “the whole Terrain” into an
-<a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>. You want a compact Map that says what matters, what is
-in-bounds, and what invariants must hold. A well-kept Map can be more
-expressive than a dump of raw Terrain because it is intentional
-compression: higher semantic density, lower drift.</p>
+slice</strong>. You rarely want to hand an Effector the whole Terrain.
+You want a compact Map that says what matters, what is in-bounds, and
+what must hold. A well-kept Map can be more useful than a raw dump
+because it preserves intent without dragging in stale detail.</p>
+</div>
+</header>
+<h2 id="the-operating-map">The Operating Map</h2>
+<p>At small scales, the Map is easy to point to: a schema, an interface
+spec, an inventory, a policy file. At larger scales, it becomes the
+<a class="concept-link" href="concepts#operating-map" title="See concept: Operating Map">operating Map</a>: strategy, architecture decisions, operating rules,
+incident learnings, onboarding guidance, brand voice, tone, and
+culture.</p>
+<p>That does not mean every one of those surfaces becomes a hard CI
+gate. It means they are all memory surfaces the system should stop
+forgetting.</p>
+<p>Map-Updaters are how that memory stays coupled to reality. A changed
+API should update the contract. A repeated incident should update a
+runbook or validator. A new architectural boundary should update the
+architecture Map and policy. Without these loops, the organization
+relearns the same lessons in tickets, chat threads, and review
+comments.</p>
 <h2 id="the-map-updater-loop-sense-normalize-compare-propose">The
 Map-Updater Loop: Sense → Normalize → Compare → Propose</h2>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
@@ -163,21 +145,21 @@ Map-Updater Loop: Sense → Normalize → Compare → Propose</h2>
 <div class="lg:w-5/12">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Skeleton-First Rule (Prevent Map Contamination)</h2>
 <p class="text-brand-muted leading-relaxed">
-              Deterministically extract skeleton from Terrain, then let the model fill prose around it.
-              If skeleton mismatch appears, hard-fail the update and record a receipt.
+              Extract the skeleton from Terrain first, then let the model fill prose around it.
+              If the skeleton changes, fail the update and write a receipt.
             </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Interactive model</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Interactive updater</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-                Toggle extraction and run bounded attempts. You should see either deterministic convergence
-                (<span class="font-mono text-brand-strong">PASS</span>) or a deterministic exit
-                (<span class="font-mono text-brand-strong">ESCALATE</span>) when budget is exhausted.
+                Toggle extraction and run bounded attempts. You should see either a clean
+                <span class="font-mono text-brand-strong">PASS</span> or a deterministic
+                <span class="font-mono text-brand-strong">ESCALATE</span> when the budget runs out.
               </div>
 </div>
 </div>
 <div class="lg:w-7/12 space-y-4" data-role="skeleton-sim">
 <div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Map-Updater pipeline</div>
+<div class="text-xs font-mono text-brand-muted mb-3"><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> loop</div>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Sense/Normalize</div>
@@ -185,7 +167,7 @@ Map-Updater Loop: Sense → Normalize → Compare → Propose</h2>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Propose</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Generate flesh patch</div>
+<div class="mt-1 text-sm font-semibold text-brand-strong">Generate prose patch</div>
 </div>
 <div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
 <div class="text-xs font-mono text-brand-muted">Validate</div>
@@ -640,25 +622,23 @@ Map-Updater Loop: Sense → Normalize → Compare → Propose</h2>
 </section>
 <p>A Map-Updater follows a consistent four-step process:</p>
 <ol type="1">
-<li><p><strong>Sense:</strong> Observe the current state of the Terrain.
-This means reading directly from the source of truth—a running service,
-a code repository, a cloud configuration, a schema file. The output is
-raw reality.</p></li>
-<li><p><strong>Normalize:</strong> Transform the sensed data into a
-structured, canonical form that is easy to compare. This might involve
-parsing, sorting, standardizing field names, or omitting irrelevant
-transient data.</p></li>
-<li><p><strong>Compare:</strong> Fetch the current state of the Map and
-normalize it. Then, deterministically compare the normalized Map with
-the normalized Terrain. The output is a clear difference.</p></li>
-<li><p><strong>Propose:</strong> Generate a patch—concrete changes that
-bring Map and Terrain back into alignment (in the direction your
-authority model permits). The patch must be reviewable.</p></li>
+<li><p><strong>Sense:</strong> read the Terrain directly from the source
+of truth: a running service, a repository, a cloud config, a schema
+file. The output is raw reality.</p></li>
+<li><p><strong>Normalize:</strong> turn that sensed data into a
+structured, canonical form that is easy to compare: parse it, sort it,
+standardize names, and drop irrelevant transients.</p></li>
+<li><p><strong>Compare:</strong> read the current Map, normalize it too,
+then deterministically compare normalized Map and normalized Terrain.
+The output is a precise diff.</p></li>
+<li><p><strong>Propose:</strong> generate the patch that brings Map and
+Terrain back into alignment, in the direction your authority model
+permits. The patch must be reviewable.</p></li>
 </ol>
-<p>This is Chapter 2’s <strong><a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a></strong>, aimed at
-a Map surface: <code>Sense/Normalize/Compare</code> is
-<code>Prep</code>, <code>Propose</code> is the stochastic step, and
-Validation is the hard gates (skeleton match + <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a>).</p>
+<p>This is the same Sandwich pattern, aimed at a Map surface:
+<code>Sense/Normalize/Compare</code> is <code>Prep</code>,
+<code>Propose</code> is the stochastic step, and Validation is the hard
+gate.</p>
 <p>Keep the loop honest by emitting a reviewable diff plus <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>
 output into the Ledger.</p>
 <p>If you want the loop in one screen:</p>
@@ -675,7 +655,7 @@ clear authority model.</p>
 <h2 id="meta-pattern-skeleton-first-rule-maps-get-skeletons-from-sensors">Meta-Pattern:
 Skeleton-First Rule (Maps get skeletons from Sensors)</h2>
 <p>Map-Updaters are where teams get hurt by fabricated structure.
-Chapter 2 covered the Skeleton-First rule in general; here is the
+Chapter 2 covered the <a class="concept-link" href="concepts#skeleton-first-rule" title="See concept: Skeleton-First Rule">Skeleton-First rule</a> in general; here is the
 Map-specific version.</p>
 <p><strong>Rule:</strong> build the Map on a deterministically extracted
 skeleton, then (optionally) let the model add “flesh” such as
@@ -689,14 +669,17 @@ skeleton.</p>
 <li>dependency edges from import graphs</li>
 </ul>
 <p>If the model writes the skeleton, it will eventually invent routes,
-symbols, or fields. Those invented facts enter the Map, get treated as
-“context” later, and the updater starts converging on a clean story
+symbols, or fields. Those invented facts then get fed back in as context
+on the next run, and the updater starts converging on a clean story
 instead of reality. This is <strong><a class="concept-link" href="concepts#map-contamination" title="See concept: Map Contamination">Map Contamination</a></strong> in SDaC:
-generation contaminates what later steps treat as extracted fact.</p>
+generated structure gets mistaken for extracted fact.</p>
 <p><strong><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">Mechanism</a>:</strong> extract the skeleton from the Terrain,
 constrain edits to an allowed region, then re-extract the skeleton from
 the candidate Map and require an exact match. Treat mismatch as a hard
 fail in CI.</p>
+<p>If the re-extracted skeleton does not match exactly, stop
+immediately. Do not let the model “explain” or prose-polish its way past
+a skeleton mismatch.</p>
 <p>When you can, make the skeleton the whole story: generate the Map
 deterministically from Sensors, with zero AI in the critical path.</p>
 <h2 id="brownfield-adoption-the-hollow-map-flashlight">Brownfield
@@ -721,8 +704,8 @@ later. But do not start by trying to maintain a “perfect architecture
 doc” for a system you can’t yet reason about.</p>
 <h2 id="example-keep-agent-instructions-aligned-a-self-referential-map-updater">Example:
 Keep agent instructions aligned (a self-referential Map-Updater)</h2>
-<p>A powerful (and practical) Map-Updater is one that keeps its own
-operating instructions current.</p>
+<p>A practical Map-Updater is one that keeps its own operating
+instructions current.</p>
 <p>In this repository, we keep per-directory agent-instructions files as
 local operator manuals: what this directory is for, what invariants
 matter, and how to run the tools here. Different agent runtimes use
@@ -743,8 +726,8 @@ Map-Updater:</p>
 </ul>
 <p>This is intentionally an <strong>advisory</strong> updater: if AI is
 unavailable it emits an explicit no-change marker and returns success.
-That keeps your build deterministic while still making drift visible
-when the tool can run.</p>
+That keeps the build deterministic while still making drift visible
+whenever the tool can run.</p>
 <pre class="text"><code>@@ NO CHANGE @@</code></pre>
 <p>Here is the loop in action:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> tools.update_agents <span class="at">--path</span> mk/book.mk</span>
@@ -764,7 +747,7 @@ proposes; humans accept.</p>
 <h3 id="alternative-the-low-tech-start">Alternative: The Low-Tech
 Start</h3>
 <p>You can also do a “cheap Map-Updater” version without wiring the full
-deterministic pipeline yet: keep a small instruction file close to the
+deterministic pipeline yet. Keep a small instruction file close to the
 code it governs, then ask a programming AI agent to propose an update
 when the directory’s purpose, commands, or boundaries change. Review the
 diff like any other doc change.</p>
@@ -778,8 +761,8 @@ Map stays focused on the Terrain it’s describing:</p>
   AGENTS.md
   tools/AGENTS.md
   services/payments/AGENTS.md</code></pre>
-<p>This isn’t “complete SDaC” on day one — your sensing and comparison
-may be less formal than <code>make help</code> parsing — but it still
+<p>This is not “complete SDaC” on day one. Your sensing and comparison
+may be less formal than <code>make help</code> parsing, but it still
 tightens intent. It reduces context pollution (“what is this directory
 for?”) and gives both humans and agents a small, versioned Map surface
 to anchor on.</p>
@@ -822,9 +805,13 @@ Terrain differs, you update the Terrain to comply. This is common for
 policy surfaces: if the Map says “all buckets are encrypted,” you change
 the infrastructure until the scan matches.</p></li>
 </ul>
-<p>Trying to make one surface both Terrain-first and Map-first produces
-an unstable equilibrium where automated systems fight over what “truth”
-is.</p>
+<p>Trying to make one surface both Terrain-first and Map-first creates a
+tug-of-war over what “truth” is.</p>
+<p>Different memory surfaces also compile differently. Contracts and
+policies often become hard gates. Brand voice, tone, and onboarding
+rules usually compile into templates, directives, retrieval defaults,
+review checklists, or <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> criteria. Treating them all as if they were
+schemas is naive; treating them all as versioned memory is correct.</p>
 <h2 id="map-quality-criteria-what-fresh-means">Map Quality Criteria
 (what “fresh” means)</h2>
 <p>Keeping a Map “fresh” is not the same as making it long. A good Map
@@ -916,11 +903,17 @@ cannot argue with.</p>
 Star: Map-Updaters are a plank of the Hofstadter Bridge</h2>
 <p>At first, a Map-Updater feels like housekeeping: “keep docs
 fresh.”</p>
-<p>The higher-leverage view is that you’re turning documentation from an
-output into an input: Map/Terrain sync today is the prerequisite for
-Maps that can become executable constraints tomorrow. <a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a>
-explores that limit case (the <a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a>): the Map stops being
+<p>The higher-leverage view is that you are turning documentation from
+an output into an input. Map/Terrain sync today is the prerequisite for
+Maps that can become executable constraints tomorrow. <a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a> takes
+that next step in full (the <a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a>): the Map stops being
 advisory and starts acting as an enforcer.</p>
+<p>The larger north star is a <strong><a class="concept-link" href="concepts#torus" title="See concept: Torus">Torus</a></strong>: think of a looped
+surface rather than a straight line, where the operating Map shapes
+execution, execution produces evidence, evidence updates the Map, and
+the next loop starts from a truer operating Map. Over time, that is not
+just one loop but many bounded loops running in parallel across the
+organization at different levels.</p>
 <p>If you want that future safely, you start here: deterministic
 skeletons, bounded diffs, and hard gates.</p>
 <h2 id="meta-maps-when-maps-need-maps">Meta-Maps: When Maps Need
@@ -929,8 +922,8 @@ Maps</h2>
 works for a feature. A handful of slice maps work for a release. But
 what happens when you have fifty slice maps across twelve teams?</p>
 <p>You need a map of maps—a <strong>meta-map</strong>.</p>
-<p>This isn’t new complexity; it’s the fractal structure asserting
-itself at scale. Just as a function’s docstring is a Map for its
+<p>This is not new complexity. It is the same fractal structure showing
+up at scale. Just as a function’s docstring is a Map for its
 implementation, and a module’s API is a Map for its functions, a
 meta-map is a Map for your collection of slice maps.</p>
 <pre class="mermaid"><code>flowchart TD
@@ -969,13 +962,13 @@ meta-map is a Map for your collection of slice maps.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>The key insight:</strong> Meta-maps don’t require new
-primitives. They use the same structure—explicit intent, typed
-artifacts, validation gates—just applied to maps instead of code. The
+<p><strong>The key insight:</strong> meta-maps do not require new
+primitives. They reuse the same structure: explicit intent, typed
+artifacts, and validation gates, applied to maps instead of code. The
 <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> for a meta-map is “coordinate these child maps toward
-this milestone.” The Immune System checks cross-map invariants.</p>
+this milestone.” The <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> checks cross-map invariants.</p>
 <p>This is how SDaC scales without becoming a different system at each
-level. The <a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a> is the scaling mechanism.</p>
+level. <a class="concept-link" href="concepts#recursion" title="See concept: Recursion">Recursion</a> is the scaling mechanism.</p>
 <p><strong>When you need a meta-map:</strong></p>
 <ul>
 <li>More than ~7 active slice maps (attention dilution threshold)</li>
@@ -999,6 +992,9 @@ Map-first. Write it down.</li>
 <code>Sense -&gt; Normalize -&gt; Compare -&gt; Propose</code>.</li>
 <li><strong>Pick a skeleton you can extract deterministically:</strong>
 signatures, routes, schemas, inventories. Treat it as truth.</li>
+<li><strong>Add one deterministic gate:</strong> re-extract the skeleton
+after the patch, or make drift fail in CI with the proposed patch
+attached as evidence.</li>
 <li><strong>Make the output reviewable:</strong> emit a unified diff or
 a patch file, not a paragraph of advice.</li>
 <li><strong>Wire it into your loop:</strong> run it on every relevant
@@ -1006,7 +1002,7 @@ change, and decide whether it should fail the build or simply attach
 evidence to review.</li>
 </ol>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 8 – Keep the Map Fresh (Map-Updaters)" data-share-title="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…" data-share-title="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -1014,7 +1010,7 @@ evidence to review.</li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters&amp;title=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%208%20of%20Architects%20of%20Intent%3A%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29.%20Drift%20is%20the%20default%20state.%20Docs%20fall%20behind%20code.%20Specs%20lag%20behind%20services.%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -1026,7 +1022,7 @@ evidence to review.</li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

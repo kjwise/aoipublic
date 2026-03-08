@@ -5,14 +5,15 @@
 <title>Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)" name="description"/>
+<meta content='Chapter 4 of Architects of Intent: The Stochastic Engine (Why You Need Physics). Both are "reasonable." If your only validators are “valid Markdown” and “the…' name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)" property="og:description"/>
+<meta content='Chapter 4 of Architects of Intent: The Stochastic Engine (Why You Need Physics). Both are "reasonable." If your only validators are “valid Markdown” and “the…' property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,58 +21,19 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)" name="twitter:description"/>
+<meta content='Chapter 4 of Architects of Intent: The Stochastic Engine (Why You Need Physics). Both are "reasonable." If your only validators are “valid Markdown” and “the…' name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 4 – The Stochastic Engine (Why You Need Physics)", "description": "Chapter 4 of Architects of Intent: The Stochastic Engine (Why You Need Physics). Both are \"reasonable.\" If your only validators are “valid Markdown” and “the…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics", "mainEntityOfPage": "https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT12M", "articleSection": "Part II Understand It The Theory Behind Reliability", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0b0c10',
-              surface: 'rgba(17, 19, 26, 0.92)',
-              panel: 'rgba(17, 19, 26, 0.92)',
-              light: 'rgba(255, 255, 255, 0.03)',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#e7e7ea',
-              strong: '#f2f3f8',
-              muted: '#b5b6bf',
-              primary: '#7aa2f7',
-              accent: '#bb9af7',
-              vibrant: '#2ac3de',
-              danger: '#f7768e',
-              success: '#10b981',
-            },
-            cyber: {
-              dark: '#0B0F19',
-              panel: '#151B2B',
-              primary: '#6366f1',
-              accent: '#06b6d4',
-              neon: '#d946ef',
-              success: '#10b981',
-              danger: '#ef4444',
-              text: '#f8fafc',
-              muted: '#94a3b8'
-            }
-          }
-        }
-      }
-    }
-  </script>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
@@ -85,28 +47,59 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">11 min read</span></div>
+<div class="chapter-meta"><span class="read-time">12 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="chapter-4-the-stochastic-engine-why-you-need-physics">Chapter 4
 – The Stochastic Engine (Why You Need Physics)</h1>
-<p>Before we talk about drift, one callback from Part I:</p>
+<p>Run the same small task twice:</p>
+<p><strong>Run 1:</strong></p>
+</div>
+</header>
+<ul>
+<li><code>normalize_country(country)</code></li>
+<li><code>calculate_tax(amount, country, rate)</code></li>
+</ul>
+<p><strong>Run 2:</strong></p>
+<ul>
+<li><code>normalize_country(country: str)</code> — Normalize an input
+country string.</li>
+<li><code>calculate_tax(amount: float, country: str, rate: float)</code>
+— Compute tax for an amount.</li>
+</ul>
+<p>Both are “reasonable.” If your only validators are “valid Markdown”
+and “the doc mentions the right function names,” both pass. But they’re
+different: different signature surfaces, extra prose, different
+formatting.</p>
+<p>That difference is the chapter’s subject. This is what drift looks
+like on a bounded surface: the same task, the same apparent intent,
+different outputs.</p>
+<p>The rest of the chapter gives that variance a ruler. We will measure
+it, explain why it happens, and show why deterministic <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> is what
+makes the loop reusable instead of lucky.</p>
+<p>Carry one idea forward from Part I:</p>
 <ul>
 <li><strong>Terrain:</strong> what runs (code, configs, runtime
 behavior).</li>
 <li><strong>Map:</strong> a versioned intent surface derived from that
 Terrain (docs, specs, inventories).</li>
 </ul>
-<p>Map/Terrain alignment is fractal: what is Terrain at one level
-becomes Map for the next. The same SDaC shape applies at every scale:
-explicit intent (Map), validated reality (Terrain), and a loop that
-keeps them aligned.</p>
-<p>Fractal structure in one view:</p>
+<p>The pattern repeats at every level. What counts as runnable reality
+at one level becomes the spec for the next. The same Software
+Development as Code (SDaC) shape shows up again and again: explicit
+intent (Map), validated reality (Terrain), and a loop that keeps them
+aligned.</p>
+<p>Same pattern at multiple levels:</p>
 <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i2-section-01-fractal-nature</span>
 <style>
@@ -133,17 +126,16 @@ keeps them aligned.</p>
   </style>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 <div class="lg:col-span-5">
-<h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature of Work</h2>
+<h2 class="text-3xl font-bold mb-4 text-white">The Same Loop at Different Scales</h2>
 <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
 <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-      Same loop, different cadence. Historically, a function evolved in minutes; a company evolved in years.
-      AI compresses the lower-loop cadences first, but organizational loops still move slower.
-      Each level’s state is the accumulated output of the faster loops beneath it.
+      The same pattern shows up at multiple levels. Functions change in minutes; products change in weeks; organizations change much more slowly.
+      Faster loops feed the slower ones above them.
     </p>
 <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
-<li>Bottom-layer drift multiplies upward.</li>
-<li>Bottom-layer improvements compound upward.</li>
-<li>Intent and validation at every scale keep the loop coherent.</li>
+<li>Drift at lower levels spreads upward.</li>
+<li>Improvements at lower levels spread upward too.</li>
+<li>Intent and validation at every scale keep the stack coherent.</li>
 </ul>
 <div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
 <p class="font-mono text-sm text-cyber-neon">
@@ -155,7 +147,7 @@ keeps them aligned.</p>
 <div class="lg:col-span-7">
 <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
 <div class="flex flex-wrap items-center gap-2 mb-4">
-<span class="text-xs font-mono text-gray-500 uppercase">Scale lens</span>
+<span class="text-xs font-mono text-gray-500 uppercase">Pick a scale</span>
 <button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
 <button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
 <button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
@@ -251,7 +243,7 @@ keeps them aligned.</p>
       processEl.textContent = selected.dataset.process || '—';
       cadenceEl.textContent = selected.dataset.cadence || '—';
       exampleEl.textContent = selected.dataset.example || '—';
-      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the loop state is "${selected.dataset.state || 'state'}" and the process is "${selected.dataset.process || 'process'}".`;
+      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the state is "${selected.dataset.state || 'state'}" and the process shaping it is "${selected.dataset.process || 'process'}".`;
     };
 
     buttons.forEach((btn) => {
@@ -310,49 +302,28 @@ keeps them aligned.</p>
     style MOD fill:#0B0F19,stroke:#374151,color:#94a3b8
     style FUN fill:#0B0F19,stroke:#374151,color:#94a3b8
     linkStyle default stroke:#6366f1,stroke-width:2px</code></pre>
-<p>The arrows show the <a class="concept-link" href="concepts#meta-pattern-recursion" title="See concept: Meta-Pattern: Recursion">recursion</a>: each level’s Terrain becomes the next
-level’s Map. This is why SDaC scales—you’re not managing one loop,
-you’re managing a fractal of loops, each with the same
+<p>The arrows show the recursion: each level’s Terrain becomes the next
+level’s Map. This is why SDaC scales. You are not managing one loop. You
+are managing the same loop shape at multiple levels, each with the same
 validate-before-trust structure.</p>
-<p>This also explains why “just document everything” fails.
-Documentation that doesn’t nest—that tries to capture all levels in one
-flat Map—becomes unmanageable. The fractal structure lets you work at
-the level you’re at, trusting that adjacent levels have their own
-Map/Terrain alignment.</p>
-<p>Now let’s zoom back to a small, bounded surface and watch drift
-appear.</p>
-<p>Here’s what happens when you take the <a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a> Map/Terrain sync loop
-and swap the deterministic <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> for a stochastic one.</p>
-<p><strong>Run 1:</strong></p>
-<ul>
-<li><code>normalize_country(country)</code></li>
-<li><code>calculate_tax(amount, country, rate)</code></li>
-</ul>
-<p><strong>Run 2:</strong></p>
-<ul>
-<li><code>normalize_country(country: str)</code> — Normalize an input
-country string.</li>
-<li><code>calculate_tax(amount: float, country: str, rate: float)</code>
-— Compute tax for an amount.</li>
-</ul>
-<p>Both are “reasonable.” If your only validators are “valid Markdown”
-and “the doc mentions the right function names,” both pass. But they’re
-different: different signature surfaces, extra prose, different
-formatting.</p>
-<p>This isn’t a bug in your loop. This is the nature of the engine.</p>
+<p>This also explains why “just document everything” fails. A single
+flat document that tries to cover every level becomes unmanageable. The
+repeating structure lets you work at the level you are in, trusting that
+adjacent levels have their own Map/Terrain alignment.</p>
+<p>This is not a bug in your loop. This is the nature of the engine.</p>
 <p>Large Language Models (LLMs) are <em>stochastic engines</em>:
 probability machines that produce plausible outputs, not guaranteed
-ones. If you want reliable automation, you have to add <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> around
-the generation.</p>
+ones. If you want reliable automation, you have to put hard checks
+around the generation.</p>
 <h2 id="llms-are-probability-engines">LLMs Are Probability Engines</h2>
-<p>At its heart, an LLM assigns probabilities to possible next tokens,
-then samples one. Even if the “best” token has a 90% chance, there’s
-still a 10% tail. That tail is where regressions come from.</p>
+<p>At its core, an LLM assigns probabilities to possible next tokens,
+then samples one. Even if the “best” token has a 90% chance, there is
+still a tail. That tail is where regressions come from.</p>
 <p>Three implications matter in SDaC:</p>
 <ul>
 <li><p><strong>No guarantee of identical output</strong>: With sampling
-enabled, the same <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> can produce slightly different
-candidates across runs. Even at very low temperature (or temperature
+enabled, the same task request can produce slightly different candidates
+across runs. Even at very low temperature (or temperature
 <code>0</code>), treat outputs as near-reproducible, not a
 contract.</p></li>
 <li><p><strong>Contextual sensitivity</strong>: Small changes in input
@@ -361,46 +332,47 @@ or context can shift the distribution and change the output.</p></li>
 move a change from “passes” to “fails” without a clean, debuggable
 execution path.</p></li>
 </ul>
-<p>This is why SDaC treats generation as a component, not a plan: you
-measure variance, constrain it, and gate it.</p>
-<h2 id="the-spe-mismatch-heuristics-in-a-deterministic-world">The S/P/E
-Mismatch: Heuristics in a Deterministic World</h2>
-<p>To understand why drift is inevitable—and why we must engineer around
-it—we look to Meir M. Lehman’s classification of software systems:</p>
+<p>This is why SDaC treats generation as one component in a system, not
+as the plan itself: you measure variance, constrain it, and gate it.</p>
+<h2 id="the-specifiable-problem-solving-evolutionary-spe-mismatch-heuristics-meeting-reality">The
+Specifiable / Problem-solving / Evolutionary (S/P/E) Mismatch:
+heuristics meeting reality</h2>
+<p>To understand why drift is inevitable, it helps to borrow one useful
+frame from Meir M. Lehman’s classification of software systems. In plain
+language: some systems are exact, some are heuristic, and some live in a
+changing world.</p>
 <ol type="1">
 <li><strong>S-Type (Specifiable):</strong> The problem is formally
-defined. Correctness is absolute. A compiler and a schema validator are
-S-Type systems.</li>
-<li><strong>P-Type (Problem-solving):</strong> The solution is a
-heuristic approximation. An LLM is a P-Type system. It does not “know”
-absolute truth; it finds a high-probability answer.</li>
+defined. Correctness is absolute. A compiler or schema validator is
+S-Type.</li>
+<li><strong>P-Type (Problem-solving):</strong> The solution is
+heuristic. An LLM is P-Type. It does not know absolute truth; it
+produces a high-probability answer.</li>
 <li><strong>E-Type (Evolutionary):</strong> The system is embedded in
-reality. Because the world changes, the software must continuously
-evolve to remain useful. Your production codebase is an E-Type
-system.</li>
+reality. Because the world changes, the software must keep changing to
+stay useful. Your production codebase is E-Type.</li>
 </ol>
-<p>Lehman’s First Law states that an E-Type system must be continually
-adapted, or it becomes progressively less satisfactory. This is the
-exact dynamic that breaks vibe coding.</p>
+<p>Lehman’s First Law says an E-Type system must be continually adapted,
+or it becomes progressively less satisfactory. That is exactly the
+dynamic that breaks vibe coding.</p>
 <p>When you use a raw AI assistant, you are pointing a <strong>P-Type
-<a class="concept-link" href="concepts#engine" title="See concept: Engine">engine</a></strong> (a probabilistic heuristic machine) directly at an
-<strong>E-Type system</strong> (your mutating, real-world codebase).</p>
-<p>If you do not constrain the P-Type engine, it will generate
-plausible, heuristically “good” code that subtly violates the absolute
-realities of your E-Type environment. The resulting friction is
-<a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">Stochastic Drift</a>.</p>
+<a class="concept-link" href="concepts#engine" title="See concept: Engine">engine</a></strong> directly at an <strong>E-Type system</strong>: a
+heuristic generator touching a changing real-world codebase.</p>
+<p>If you do not constrain the P-Type engine, it will generate plausible
+code that subtly violates the hard realities of your E-Type environment.
+The resulting friction is <a class="concept-link" href="concepts#stochastic-drift" title="See concept: Stochastic Drift">stochastic drift</a>.</p>
 <p><strong>The SDaC Synthesis: S-P-S Composition</strong></p>
-<p>You cannot tame an E-Type system using only P-Type tools. You must
-introduce <strong>S-Type constraints</strong>.</p>
+<p>You cannot tame an E-Type system using only P-Type tools. You need
+<strong>S-Type constraints</strong>.</p>
 <p>This is the theoretical justification for the <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>
-(Chapter 2). We wrap the P-Type stochastic generation (the model) in
-S-Type formal specifications (Prep and Validation).</p>
+from Chapter 2. You wrap the P-Type generator (the model) in S-Type
+constraints (<code>Prep</code> and <code>Validation</code>).</p>
 <p>When you write a <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>, you are creating an S-Type boundary. The
-model is allowed to use P-Type heuristics to generate the flesh, but it
-must pass the S-Type skeleton gate to survive.</p>
+model can use heuristics to generate the flesh, but it still has to pass
+the hard gate.</p>
 <h2 id="operating-the-stochastic-engine-controls-budgets-tiering">Operating
 the Stochastic Engine (Controls, Budgets, Tiering)</h2>
-<p>If you’re going to wire an LLM into a real pipeline, you need
+<p>If you are going to wire an LLM into a real pipeline, you need
 operating discipline: controls, budgets, and a selection strategy.</p>
 <h3 id="sampling-controls-temperature-is-a-dial-not-a-guarantee">Sampling
 controls (temperature is a dial, not a guarantee)</h3>
@@ -414,7 +386,7 @@ candidates).</li>
 <p>In many tasks, you want <strong>near-reproducibility</strong>, not
 “creativity.” That usually means a low temperature (often in the
 <code>0.1–0.2</code> range) and a tight output contract (diff-only,
-JSON-only, schema-first). Exact <code>0</code> can be useful, but it’s
+JSON-only, schema-first). Exact <code>0</code> can be useful, but it is
 not a guarantee: distributed inference can still vary across calls, and
 some models degrade when you clamp too hard.</p>
 <p>The point is not to find the perfect temperature. The point is:
@@ -440,7 +412,7 @@ the economics of determinism). The key move here is simpler:
 powerful.</strong></p>
 <h3 id="model-selection-rubric-pick-the-smallest-engine-that-converges">Model
 selection rubric (pick the smallest engine that converges)</h3>
-<p>Model selection is not “best model you can afford.” It’s “smallest
+<p>Model selection is not “best model you can afford.” It is “smallest
 model that converges under your Physics.”</p>
 <p>Use a simple rubric:</p>
 <table>
@@ -484,7 +456,7 @@ strategy</td>
 </tr>
 </tbody>
 </table>
-<p>How to evaluate fit for your repo: run the drift experiment (next
+<p>To evaluate fit for your repo, run the drift experiment (next
 section) across your candidate model tiers and compare <strong>failure
 rate</strong> and <strong>time-to-<a class="concept-link" href="concepts#convergence" title="See concept: Convergence">convergence</a></strong>, not vibes.</p>
 <h3 id="retry-strategy-feed-back-deterministic-failures">Retry strategy
@@ -509,12 +481,13 @@ the exact failure signal.”</p>
 <span id="cb2-15"><a aria-hidden="true" href="#cb2-15" tabindex="-1"></a><span class="cf">raise</span> NonConverged(<span class="st">"Exceeded budget; escalate to human or split the mission"</span>)</span></code></pre></div>
 <p>The loop converges when each retry is narrower than the last. If you
 keep seeing the same failure, treat it as a signal problem (bad slice,
-wrong contract, impossible constraint), not a “model problem.”</p>
+wrong contract, impossible constraint), not just as a “model
+problem.”</p>
 <h3 id="instruction-channel-hardening-authority-vs.-evidence">Instruction-channel
 hardening (authority vs. evidence)</h3>
 <p>LLMs often follow instruction-shaped text even when it comes from
-untrusted sources (tickets, comments, logs, README snippets). If you
-don’t harden the instruction channel, you can build a perfect loop and
+untrusted sources (tickets, comments, logs, README snippets). If you do
+not harden the instruction channel, you can build a perfect loop and
 still get a bypass (often called <code>prompt injection</code>).</p>
 <p>This is a <code>Prep</code>-layer problem:</p>
 <ul>
@@ -539,20 +512,20 @@ compiler, linter, schema validator, or runtime. At best, it is
 simulating what validation <em>might</em> say.</p>
 <p><strong>External loop (SDaC):</strong> The system talks to Physics:
 compilers, tests, schemas, linters, and policy gates. It validates
-against reality. The <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> does not care how confident the model sounds;
-it cares whether the artifact passes the gates.</p>
+against reality. The decision layer does not care how confident the
+model sounds; it cares whether the artifact passes the gates.</p>
 <p>Reasoning models can be better Effectors: they often produce
 higher-quality candidates and reduce the number of iterations needed to
 converge. But they are not Validators, and they do not remove the need
-for the Judge.</p>
+for an external decision layer.</p>
 <p>Don’t confuse a model “thinking hard” with a test passing.</p>
 <h2 id="the-drift-experiment-measure-structural-variance">The Drift
 Experiment: Measure Structural Variance</h2>
-<p>Run the same Mission Object 10 times. The goal is to make variance
+<p>Run the same task request 10 times. The goal is to make variance
 measurable.</p>
 <p><strong>Setup (hold everything constant):</strong></p>
 <ol type="1">
-<li><p>Same Mission Object: “Update <code>## Public Interfaces</code> in
+<li><p>Same task request: “Update <code>## Public Interfaces</code> in
 <code>product/docs/architecture.md</code> to match
 <code>product/src/</code>.”</p></li>
 <li><p>Same model, same temperature, same system instructions, same
@@ -564,12 +537,12 @@ measure drift where it matters: on the change surface.</p>
 <p><strong>Drift measurements</strong></p>
 <ul>
 <li><strong>Unique diffs:</strong> how many distinct patches you get for
-the same Mission Object under identical <code>Prep</code>.</li>
+the same task under identical <code>Prep</code>.</li>
 <li><strong>Failure rate:</strong> how often you cannot reach
 <code>PASS</code> within your circuit breakers (max iters, time, or diff
 budget).</li>
 <li><strong>Time-to-convergence:</strong> seconds (or iterations) until
-the patch is admissible under your Validators.</li>
+the patch passes your Validators.</li>
 </ul>
 <p><strong>One simple proxy: count unique diffs</strong></p>
 <ol type="1">
@@ -581,7 +554,7 @@ diff.</li>
 </ol>
 <p>If you want a runnable script, see the companion repo at
 <code>github.com/kjwise/aoi_code</code> (the <code>drift</code> target
-uses a stochastic effector,
+uses a model-driven sync script,
 <code>stochastic_sync_public_interfaces.py</code>).</p>
 <p>Running it produces a summary like this:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> make drift</span>
@@ -596,13 +569,13 @@ variable.</li>
 <li>There were no outright failures (e.g., crashes), but the high drift
 means the surface is not stable.</li>
 </ul>
-<p>This is <strong>Stochastic Drift</strong> with a ruler next to it:
+<p>This is <strong>stochastic drift</strong> with a ruler next to it:
 you can measure it, budget it, and reduce it by tightening context
 selection and hardening validators.</p>
 <h3 id="a-simple-drift-coefficient-plus-an-illustrative-run-log">A
 simple drift coefficient (plus an illustrative run log)</h3>
-<p>You don’t need a perfect statistical model to make drift operational.
-Start with a simple, auditable coefficient:</p>
+<p>You do not need a perfect statistical model to make drift
+operational. Start with a simple, auditable coefficient:</p>
 <p><span class="math display">$$
 d = \frac{u}{n}
 $$</span></p>
@@ -611,7 +584,7 @@ unique diffs, and <span class="math inline"><em>n</em></span> is the
 total runs.</p>
 <p>This is an operational proxy, not a statistical claim or a benchmark.
 Use it to compare the same workflow over time, set budgets, and detect
-regressions — not to compare different repositories or teams.</p>
+regressions, not to compare different repositories or teams.</p>
 <p>Interpretation:</p>
 <ul>
 <li><span class="math inline"><em>d</em> = 0.1</span> means “one in ten
@@ -715,18 +688,19 @@ you only learn the rules were violated after something breaks.</p></li>
 </ol>
 <p>Compare the two approaches:</p>
 <p><strong>Instruction-string approach:</strong></p>
-<p>You encode constraints in prose and hope they’re followed.</p>
+<p>You encode constraints in prose and hope they are followed.</p>
 <p><strong>Physics approach:</strong></p>
 <ul>
 <li>deterministically extract the skeleton (signatures, allowed edit
 region, schema)</li>
 <li>generate only within that boundary (templates help)</li>
-<li>validate alignment and reject variance you don’t want to review</li>
+<li>validate alignment and reject variance you do not want to
+review</li>
 </ul>
 <p>Instructions are suggestions. Physics are constraints.</p>
 <h2 id="why-this-matters-for-your-loop">Why This Matters for Your
 Loop</h2>
-<p><a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a> is the canonical definition of the problem.</p>
+<p><a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a> is the clean definition of the problem.</p>
 <ul>
 <li>Without deterministic context and gates, your loop produces
 different outputs on every run.</li>
@@ -748,8 +722,8 @@ executable.</li>
 do this week</h2>
 <ol type="1">
 <li><p><strong>Measure drift on the change surface:</strong> Run the
-same Mission Object 10 times and count unique diffs. Record how often
-you hit <code>FAIL</code> and how many iterations it took to reach
+same task request 10 times and count unique diffs. Record how often you
+hit <code>FAIL</code> and how many iterations it took to reach
 <code>PASS</code>.</p></li>
 <li><p><strong>Pick one invariant and enforce it:</strong> Choose one
 deterministic rule (exact signature surface, allowed edit region,
@@ -757,7 +731,7 @@ required headings) and add a Validator that fails fast when the output
 drifts.</p></li>
 </ol>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 4 – The Stochastic Engine (Why You Need Physics)" data-share-title="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text='Chapter 4 of Architects of Intent: The Stochastic Engine (Why You Need Physics). Both are "reasonable." If your only validators are “valid Markdown” and “the…' data-share-title="Chapter 4 – The Stochastic Engine (Why You Need Physics) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -765,7 +739,7 @@ drifts.</p></li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics&amp;title=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%204%20%E2%80%93%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%204%20of%20Architects%20of%20Intent%3A%20The%20Stochastic%20Engine%20%28Why%20You%20Need%20Physics%29.%20Both%20are%20%22reasonable.%22%20If%20your%20only%20validators%20are%20%E2%80%9Cvalid%20Markdown%E2%80%9D%20and%20%E2%80%9Cthe%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-engine-why-you-need-physics">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -777,7 +751,7 @@ drifts.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

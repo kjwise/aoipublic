@@ -11,39 +11,10 @@
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <script onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Work+Sans:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
-<script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Work Sans', 'system-ui', 'sans-serif'],
-                        display: ['Space Grotesk', 'Work Sans', 'system-ui', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
-                    },
-                    colors: {
-                        fm: {
-                            bg: 'oklch(12% .02 250)',
-                            fg: 'oklch(95% .005 250)',
-                            card: 'oklch(15% .02 250)',
-                            popover: 'oklch(15% .02 250)',
-                            muted: 'oklch(20% .015 250)',
-                            mutedFg: 'oklch(60% .015 250)',
-                            border: 'oklch(25% .01 250)',
-                            primary: 'oklch(78% .19 155)',
-                            primaryFg: 'oklch(12% .02 250)',
-                            danger: 'oklch(57.7% .245 27.325)',
-                            warn: 'oklch(82.8% .189 84.429)',
-                            info: 'oklch(70.7% .165 254.624)'
-                        }
-                    }
-                }
-            }
-        };
-    </script>
 <style>
         body {
             background:
@@ -93,6 +64,8 @@
         .fm-risk[data-level="medium"] { color: oklch(82.8% .189 84.429); }
         .fm-risk[data-level="high"] { color: oklch(57.7% .245 27.325); }
     </style>
+<meta content="noindex,follow" name="robots"/>
+<link href="https://architectsofintent.com/infographic-4" rel="canonical"/>
 </head>
 <body class="text-fm-fg font-sans antialiased selection:bg-fm-primary selection:text-fm-primaryFg">
 <header class="relative overflow-hidden border-b border-fm-border">

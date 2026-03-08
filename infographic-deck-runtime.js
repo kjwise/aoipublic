@@ -1046,8 +1046,8 @@
                 sdacCard.style.borderColor = isSDaC ? 'rgba(187, 154, 247, 0.55)' : 'rgba(255, 255, 255, 0.08)';
                 sdacCard.style.background = isSDaC ? 'rgba(187, 154, 247, 0.08)' : 'rgba(255, 255, 255, 0.03)';
                 sdacDescription.textContent = isSDaC
-                    ? 'Convergence mode: explicit intent surfaces, bounded effectors, and deterministic validation are active.'
-                    : 'Standard mode: acceleration without structure. Faster loops can also accelerate drift.';
+                    ? 'Guardrail mode: explicit intent, scoped writes, and deterministic checks are active.'
+                    : 'Standard mode: faster work without better guardrails. Speed can amplify mistakes.';
                 sdacBadges.classList.toggle('hidden', !isSDaC);
                 guardRing.classList.toggle('hidden', !isSDaC);
                 guardStatus.classList.toggle('hidden', !isSDaC);

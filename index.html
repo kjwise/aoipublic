@@ -8,8 +8,9 @@
 <meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw." name="description"/>
 <meta content="Architects of Intent, Ship autonomous GenAI systems., Software Development as Code, SDaC, GenAI, LLM, deterministic context, validation, governance, feedback loops" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Architects of Intent — Ship autonomous GenAI systems." property="og:title"/>
 <meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw." property="og:description"/>
@@ -23,60 +24,19 @@
 <meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw." name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Architects of Intent — Ship autonomous GenAI systems." name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Book", "name": "Architects of Intent", "alternateName": "Ship autonomous GenAI systems.", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/", "inLanguage": "en", "description": "Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw."}</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Book", "name": "Architects of Intent", "alternateName": "Ship autonomous GenAI systems.", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/", "inLanguage": "en", "description": "Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw."}, {"@context": "https://schema.org", "@type": "WebSite", "name": "Architects of Intent", "url": "https://architectsofintent.com/", "description": "Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw.", "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://architectsofintent.com/search?q={search_term_string}"}, "query-input": "required name=search_term_string"}}]</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0b0c10',
-              surface: 'rgba(17, 19, 26, 0.92)',
-              panel: 'rgba(17, 19, 26, 0.92)',
-              light: 'rgba(255, 255, 255, 0.03)',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#e7e7ea',
-              strong: '#f2f3f8',
-              muted: '#b5b6bf',
-              primary: '#7aa2f7',
-              accent: '#bb9af7',
-              vibrant: '#2ac3de',
-              danger: '#f7768e',
-              success: '#10b981',
-            },
-            cyber: {
-              dark: '#0B0F19',
-              panel: '#151B2B',
-              primary: '#6366f1',
-              accent: '#06b6d4',
-              neon: '#d946ef',
-              success: '#10b981',
-              danger: '#ef4444',
-              text: '#f8fafc',
-              muted: '#94a3b8'
-            }
-          }
-        }
-      }
-    }
-  </script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
-<body>
+<body data-lazy-infographic-runtime="1">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
 <nav aria-label="Primary" class="site-nav">
@@ -86,12 +46,23 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
 <main class="content" id="main">
+<div class="landing-hero-block">
+<div class="landing-hero-main">
+<div class="landing-hero-meta">
+<p class="landing-eyebrow">
+Online Book on Software Development as Code
+</p>
+<div aria-label="Core themes" class="landing-chip-row">
+<span class="landing-chip">Practice before theory</span><span class="landing-chip">Deterministic context</span><span class="landing-chip">Auditable loops</span>
+</div>
+</div>
 <div class="landing-title-grid">
 <span aria-hidden="true" class="landing-logo-stack"><img alt="" src="favicon.svg"/></span>
 <div class="landing-title-text">
@@ -106,17 +77,48 @@ Ship autonomous GenAI systems.
 <p>Friday afternoon, you merge an AI-assisted change. Saturday morning,
 your app is down. The AI quietly broke a contract your type system never
 saw.</p>
-<p>This book is about making that much harder to do by accident.</p>
+<p>This book is about making that much harder to do by accident. It
+starts with one bounded loop you can build quickly, then shows why that
+loop works, where it breaks, and how to scale it without giving up
+control.</p>
 <blockquote>
 <p>“We don’t trust the model. We trust the loop.”</p>
 </blockquote>
-<hr/>
 <p class="cta-row">
 <a class="cta-button" href="chapter-0-introduction">Start Reading →</a>
 <a class="cta-button cta-button--secondary" href="toc">Table of
 Contents</a>
 </p>
-<hr/>
+</div>
+<div class="landing-hero-rail">
+<div class="landing-signal-grid">
+<section class="landing-signal">
+<span class="landing-signal__step">Build</span> <strong>Ship one working
+loop fast</strong>
+<p>
+Start with a bounded task, a proposed diff, and one deterministic
+<code>PASS/FAIL</code> gate.
+</p>
+</section>
+<section class="landing-signal">
+<span class="landing-signal__step">Understand</span> <strong>See why the
+loop holds</strong>
+<p>
+Learn how slicing, validators, and <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a> keep stochastic
+generation inside a known blast radius.
+</p>
+</section>
+<section class="landing-signal">
+<span class="landing-signal__step">Scale</span> <strong>Turn one pattern
+into a system</strong>
+<p>
+Move from a single loop to Mission Objects, reusable control surfaces,
+and governance that stays legible under load.
+</p>
+</section>
+</div>
+</div>
+</div>
 <section class="my-10" data-infographic-fragment-shell="1" data-infographic-section-id="i4-section-01-illusion-vs-results" data-infographic-selector="(fragment)" data-infographic-source="landing_page.md" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i4-section-01-illusion-vs-results</span>
 <div class="bg-brand-surface border border-brand-border rounded-2xl overflow-hidden">
@@ -359,40 +361,76 @@ We turned failed drafts into a trusted outcome by using rules and retries — no
 </div>
 </div>
 </section>
-<p><strong>Architects of Intent</strong> is an online book on
+<div class="landing-panel-grid">
+<section class="landing-panel">
+<h2>
+Who This Is For
+</h2>
+<ul>
+<li>
+Teams shipping AI-assisted changes to production
+</li>
+<li>
+Platform and tooling teams building AI-assisted development workflows
+</li>
+<li>
+Engineering, security, and compliance leaders establishing AI governance
+</li>
+<li>
+Anyone who has been burned by code that “looked fine”
+</li>
+</ul>
+</section>
+<section class="landing-panel">
+<h2>
+What This Book Covers
+</h2>
+<ul>
+<li>
+<strong>The <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a></strong>: a pattern for wrapping AI
+calls in <code>Prep -&gt; Model -&gt; Validation</code>
+</li>
+<li>
+<strong>Mission Objects</strong>: a way to turn vague requests and chat
+into typed, executable contracts
+</li>
+<li>
+<strong>Validators</strong>: how to turn “looks fine” into deterministic
+<code>PASS/FAIL</code> checks
+</li>
+<li>
+<strong>Circuit breakers</strong>: techniques for keeping loops finite
+and auditable
+</li>
+<li>
+<strong>Governance at scale</strong>: practices for protecting the
+graders from the system they grade
+</li>
+</ul>
+</section>
+</div>
+<section class="landing-panel landing-panel--about">
+<h2>
+About
+</h2>
+<p>
+<strong>Architects of Intent</strong> is an online book on
 <strong>Software Development as Code (SDaC)</strong>. SDaC is the name
 I’m giving to building reliable, auditable GenAI systems with
-deterministic context, gates, and verifiable loops.</p>
-<h2 id="who-this-is-for">Who This Is For</h2>
-<ul>
-<li>Teams shipping AI-assisted changes to production</li>
-<li>Platform/tooling teams building AI-assisted development
-workflows</li>
-<li>Engineering, security, and compliance leaders establishing AI
-governance</li>
-<li>Anyone who has been burned by code that “looked fine”</li>
-</ul>
-<h2 id="what-this-book-covers">What This Book Covers</h2>
-<ul>
-<li><strong>The <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a></strong>: a pattern for wrapping
-AI calls in <code>Prep -&gt; Model -&gt; Validation</code></li>
-<li><strong>Mission Objects</strong>: a way to turn vague requests /
-chat into typed, executable contracts</li>
-<li><strong>Validators</strong>: how to turn “looks fine” into
-deterministic <code>PASS/FAIL</code> checks</li>
-<li><strong><a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">Circuit breakers</a></strong>: techniques for keeping loops
-finite and auditable</li>
-<li><strong>Governance at scale</strong>: practices for protecting the
-graders from the system they grade</li>
-</ul>
-<h2 id="about">About</h2>
-<p>Written by <strong>Jóhann Haukur Gunnarsson</strong>, an Icelandic
+deterministic context, gates, and verifiable loops.
+</p>
+<p>
+Written by <strong>Jóhann Haukur Gunnarsson</strong>, an Icelandic
 systems architect. I’ve built systems where audit trails and failure
-modes matter (including in finance), and I’ve learned the hard way that
+modes matter, including in finance, and I’ve learned the hard way that
 “looks fine” is not a strategy. This book is a practical synthesis of
 the loops, gates, and evidence that help make AI-assisted changes boring
-in production.</p>
-<p>Connect on <a href="https://www.linkedin.com/in/jhaukur/">LinkedIn</a>.</p>
+in production.
+</p>
+<p>
+Connect on <a href="https://www.linkedin.com/in/jhaukur/">LinkedIn</a>.
+</p>
+</section>
 </main>
 <section aria-label="Share this page" class="share-panel" data-share-text="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw." data-share-title="Architects of Intent — Ship autonomous GenAI systems." data-share-url="https://architectsofintent.com/" role="region">
 <div class="share-panel__label">Share</div>
@@ -410,13 +448,12 @@ in production.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
       <a href="infographic">Infographic</a>
 </p>
 </footer>
-<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>

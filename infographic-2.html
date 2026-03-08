@@ -9,48 +9,15 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="infographic-tailwind.css">
     <script src="chart.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="infographic-deck-runtime.css">
     <link rel="stylesheet" href="infographic-fragment-shell.css">
     <script src="infographic-deck-runtime.js" defer></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    colors: {
-                        cyber: {
-                            dark: '#0B0F19',
-                            panel: '#151B2B',
-                            primary: '#6366f1',
-                            accent: '#06b6d4',
-                            neon: '#d946ef',
-                            success: '#10b981',
-                            danger: '#ef4444',
-                            text: '#f8fafc',
-                            muted: '#94a3b8'
-                        }
-                    },
-                    animation: {
-                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        glow: {
-                            '0%': { boxShadow: '0 0 5px #6366f1' },
-                            '100%': { boxShadow: '0 0 20px #6366f1, 0 0 10px #06b6d4' }
-                        }
-                    }
-                }
-            }
-        };
-    </script>
+  <meta name="description" content="Interactive infographic companion page for Architects of Intent.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://architectsofintent.com/infographic-2">
 </head>
 <body class="bg-cyber-dark text-cyber-text font-sans antialiased selection:bg-cyber-neon selection:text-white">
 
@@ -143,17 +110,16 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
     <div class="lg:col-span-5">
-    <h2 class="text-3xl font-bold mb-4 text-white">The Fractal Nature of Work</h2>
+    <h2 class="text-3xl font-bold mb-4 text-white">The Same Loop at Different Scales</h2>
     <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
     <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-      Same loop, different cadence. Historically, a function evolved in minutes; a company evolved in years.
-      AI compresses the lower-loop cadences first, but organizational loops still move slower.
-      Each level’s state is the accumulated output of the faster loops beneath it.
+      The same pattern shows up at multiple levels. Functions change in minutes; products change in weeks; organizations change much more slowly.
+      Faster loops feed the slower ones above them.
     </p>
     <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
-      <li>Bottom-layer drift multiplies upward.</li>
-      <li>Bottom-layer improvements compound upward.</li>
-      <li>Intent and validation at every scale keep the loop coherent.</li>
+      <li>Drift at lower levels spreads upward.</li>
+      <li>Improvements at lower levels spread upward too.</li>
+      <li>Intent and validation at every scale keep the stack coherent.</li>
     </ul>
     <div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
       <p class="font-mono text-sm text-cyber-neon">
@@ -166,7 +132,7 @@
     <div class="lg:col-span-7">
       <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
       <div class="flex flex-wrap items-center gap-2 mb-4">
-        <span class="text-xs font-mono text-gray-500 uppercase">Scale lens</span>
+        <span class="text-xs font-mono text-gray-500 uppercase">Pick a scale</span>
         <button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
         <button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
         <button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
@@ -265,7 +231,7 @@
       processEl.textContent = selected.dataset.process || '—';
       cadenceEl.textContent = selected.dataset.cadence || '—';
       exampleEl.textContent = selected.dataset.example || '—';
-      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the loop state is "${selected.dataset.state || 'state'}" and the process is "${selected.dataset.process || 'process'}".`;
+      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the state is "${selected.dataset.state || 'state'}" and the process shaping it is "${selected.dataset.process || 'process'}".`;
     };
 
     buttons.forEach((btn) => {
@@ -813,8 +779,8 @@
       <h2 class="text-3xl font-bold mb-4 text-white">Micro-Bridge: One Block + One Gate</h2>
       <div class="h-1 w-20 bg-cyber-neon mb-6"></div>
       <p class="text-cyber-muted text-lg leading-relaxed">
-        The smallest Hofstadter Bridge is one bounded Map heading that is regenerated from Terrain
-        and validated as a hard gate.
+        The smallest Hofstadter Bridge is one bounded Map heading regenerated from Terrain
+        and checked by a hard gate.
       </p>
       <div class="mt-6 bg-cyber-panel border border-gray-700 rounded-xl p-4">
         <div class="text-xs font-mono text-gray-500 mb-2">Deterministic micro-loop</div>

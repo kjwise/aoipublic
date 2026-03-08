@@ -5,14 +5,15 @@
 <title>Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)" name="description"/>
+<meta content="Chapter 9 of Architects of Intent: The Dream Daemon (Background Maintenance). That is already a Dream loop. It is scheduled, boring, and useful. It fights…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)" property="og:description"/>
+<meta content="Chapter 9 of Architects of Intent: The Dream Daemon (Background Maintenance). That is already a Dream loop. It is scheduled, boring, and useful. It fights…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,59 +21,20 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)" name="twitter:description"/>
+<meta content="Chapter 9 of Architects of Intent: The Dream Daemon (Background Maintenance). That is already a Dream loop. It is scheduled, boring, and useful. It fights…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 9 – The Dream Daemon (Background Maintenance)", "description": "Chapter 9 of Architects of Intent: The Dream Daemon (Background Maintenance). That is already a Dream loop. It is scheduled, boring, and useful. It fights…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance", "mainEntityOfPage": "https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT12M", "articleSection": "Part III Scale It From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <script defer="" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/chart.js'" src="chart.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0b0c10',
-              surface: 'rgba(17, 19, 26, 0.92)',
-              panel: 'rgba(17, 19, 26, 0.92)',
-              light: 'rgba(255, 255, 255, 0.03)',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#e7e7ea',
-              strong: '#f2f3f8',
-              muted: '#b5b6bf',
-              primary: '#7aa2f7',
-              accent: '#bb9af7',
-              vibrant: '#2ac3de',
-              danger: '#f7768e',
-              success: '#10b981',
-            },
-            cyber: {
-              dark: '#0B0F19',
-              panel: '#151B2B',
-              primary: '#6366f1',
-              accent: '#06b6d4',
-              neon: '#d946ef',
-              success: '#10b981',
-              danger: '#ef4444',
-              text: '#f8fafc',
-              muted: '#94a3b8'
-            }
-          }
-        }
-      }
-    }
-  </script>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
@@ -86,36 +48,52 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">10 min read</span></div>
+<div class="chapter-meta"><span class="read-time">12 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="chapter-9-the-dream-daemon-background-maintenance">Chapter 9 –
 The Dream Daemon (Background Maintenance)</h1>
-<p>We’ve explored how to build individual <code>Mission Objects</code>
-to encapsulate intent (<a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>) and how <code>Map-Updaters</code> keep
-our system’s understanding of its environment fresh (<a class="chapter-link" href="chapter-8-keep-the-map-fresh-map-updaters#chapter-8-keep-the-map-fresh-map-updaters" title="Go to: Chapter 8">Chapter 8</a>). These
-mechanisms shine when triggered by explicit events: a code commit, a
-schema change, or a manual command. But many maintenance tasks aren’t
-tied to specific events; they’re about the slow accumulation of entropy.
-Documentation drifts, dependencies age, and conventions subtly
-diverge.</p>
-<p>This is where background maintenance comes in. For systems that
-evolve over months and years, you need mechanisms to systematically
-combat entropy, not just react to it.</p>
+<p>Start with the 90% version most teams should actually run:</p>
+</div>
+</header>
+<pre class="text"><code>02:00 nightly scan
+  -&gt; rank the top maintenance target
+  -&gt; open no PRs
+  -&gt; emit one report with evidence
+09:00 human picks one item
+  -&gt; run one bounded maintenance loop
+  -&gt; review the diff like any other PR</code></pre>
+<p>That is already a Dream loop. It is scheduled, boring, and useful. It
+fights entropy without asking the team to trust background merges.</p>
+<p>By now, we have seen two key loops: <code>Mission Objects</code>
+package intent (<a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>), and <code>Map-Updaters</code> keep system
+understanding current (<a class="chapter-link" href="chapter-8-keep-the-map-fresh-map-updaters#chapter-8-keep-the-map-fresh-map-updaters" title="Go to: Chapter 8">Chapter 8</a>). Both usually start from an explicit
+trigger: a code commit, a schema change, or a manual command. But a lot
+of maintenance work has no clean trigger. It comes from slow entropy:
+docs drift, dependencies age, and conventions quietly diverge.</p>
+<p>Background maintenance is how you handle that slow drift. If a system
+lives for months or years, you need a way to fight entropy
+systematically, not just react when something breaks.</p>
 <p>This chapter introduces the <a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a> as a
 <strong>pattern</strong>: a controller that turns entropy signals into
-bounded maintenance work. We’ll start at <strong>Depth 0</strong>
-(sensors only) and then outline deeper implementations you can grow
-into.</p>
+bounded maintenance work. Here, <code>daemon</code> just means a
+background process or controller, not anything mystical. We start at
+<strong>Depth 0</strong> (sensors only) and then outline the deeper
+implementations you can grow into.</p>
 <p>Dream is powerful, but it is not “free productivity.” A daemon that
 can propose changes while humans sleep can also compound mistakes while
-humans sleep. The difference is not intent. The difference is
-governance: task selection, budgets, and gates.</p>
+humans sleep. What makes the difference is governance: task selection,
+budgets, and gates.</p>
 <h2 id="dream-is-a-control-loop-not-a-schedule">Dream is a Control Loop,
 Not a Schedule</h2>
 <section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-05-always-on-loops" data-infographic-selector="main &gt; section:nth-of-type(8)" data-infographic-source="infographic-3.html" data-infographic-status="published">
@@ -177,7 +155,7 @@ Not a Schedule</h2>
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Always-On Loops (Maintenance That Compounds)</h2>
 <p class="text-brand-muted leading-relaxed">
               A Dream Daemon is not a cron job. It is a bounded control loop that senses entropy,
-              ranks one target, and exits with a deterministic decision: PASS, DEFER, or ESCALATE.
+              picks one target, and exits with a deterministic decision: PASS, DEFER, or ESCALATE.
             </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4 space-y-4">
 <div>
@@ -236,8 +214,8 @@ Not a Schedule</h2>
 </div>
 </div>
 <div class="mt-4 text-xs text-brand-muted leading-relaxed">
-              The chart shows long-horizon trajectory. The controls below model the bounded execution loop:
-              one target per cycle, hard budget, and deterministic admission gates.
+              The chart shows the long-horizon trend. The controls below model the bounded loop:
+              one target per cycle, a hard budget, and deterministic admission gates.
             </div>
 </div>
 <div class="lg:w-7/12 space-y-4">
@@ -315,12 +293,13 @@ measured entropy into bounded work.</p>
 report. Scheduling is optional. Automated changes come later, after you
 trust your sensors, budgets, and gates. The mistake is thinking “cron”
 is the architecture. Cron is packaging.</p>
-<p>Scrum, Kanban, and every other process are also control loops: select
-work, execute, inspect, adapt. The difference is enforcement. Those
-loops run on meetings and social contracts. Dream is the same posture
-compiled into executable artifacts: Sensors emit signals, a
-deterministic ranker selects targets, Effectors produce bounded diffs,
-Validators grade, and governance gates decide what is admitted.</p>
+<p>Scrum, Kanban, and most other delivery processes are also control
+loops: select work, execute, inspect, adapt. The difference is
+enforcement. Those loops run on meetings and social contracts. Dream
+takes the same posture and compiles it into executable artifacts:
+Sensors emit signals, a deterministic ranker selects targets, Effectors
+produce bounded diffs, Validators grade, and governance gates decide
+what is admitted.</p>
 <h2 id="the-dream-loop-sense-decide-act-verify">The Dream Loop: Sense →
 Decide → Act → Verify</h2>
 <p>At its best, Dream is a controller with a simple posture:</p>
@@ -335,8 +314,8 @@ diff.</li>
 merges.</li>
 </ol>
 <p>The pattern stays the same. What changes is the depth of
-implementation: at Depth 0 you only Sense + Decide. A human performs
-Act. Verification still runs through the <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a>.</p>
+implementation: at Depth 0 you stop after Sense + Decide. A human
+performs Act. Verification still runs through the <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a>.</p>
 <p>Dream reads both directions:</p>
 <ul>
 <li>It reads <strong>Terrain</strong> (code, metrics, drift signals) to
@@ -351,33 +330,93 @@ ratchets) to learn what is allowed.</li>
   E --&gt; IS["Immune System"]
   IS --&gt; PR[PR]
   PR --&gt; R[Review]</code></pre>
+<h2 id="dream-maintains-memory-not-just-code">Dream Maintains Memory,
+Not Just Code</h2>
+<p>Dream is not only janitorial code automation. It is one of the ways a
+system keeps its <a class="concept-link" href="concepts#operating-map" title="See concept: Operating Map">operating Map</a> alive.</p>
+<p>When reality teaches something new, the loop should be able to route
+that learning back into the Map:</p>
+<ul>
+<li>a repeated incident can become a new <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> or tighter
+budget</li>
+<li>a recurring review comment can become a checklist item or Mission
+template</li>
+<li>a policy exception can become a clarified runbook, glossary rule, or
+escalation path</li>
+</ul>
+<p>If an incident never changes the Map, the organization has no memory.
+It just pays tuition repeatedly.</p>
+<p>This is where a <strong><a class="concept-link" href="concepts#dream-manifest" title="See concept: Dream Manifest">Dream Manifest</a></strong> becomes useful: a
+versioned backlog of entropy signals, work selectors, and memory
+updates. It tells Dream not just what code to clean up, but what lessons
+to preserve.</p>
+<p>When Dream starts touching memory surfaces that shape future
+behavior, provenance matters. It is not enough to know that a runbook,
+validator, or policy changed. You want the Ledger to say which operating
+or constitutional surface moved, what evidence justified the move, and
+who authorized it: a human steward, or a prior bounded loop acting
+inside an explicit delegation.</p>
 <h2 id="task-selection-is-the-problem">Task Selection Is the
 Problem</h2>
 <p>“Run a maintenance daemon” is easy to say. The hard question is:
 <strong>what is it allowed to work on, and how does it
-decide?</strong></p>
+choose?</strong></p>
 <p>You want Dream to spend its budget on high-impact, high-feasibility
 maintenance that is low risk and easy to verify. That is a task
 selection problem, not an agent problem.</p>
 <h3 id="a-practical-task-taxonomy">A practical task taxonomy</h3>
 <p>Not all maintenance work is daemon-shaped. A simple taxonomy:</p>
-<div class="line-block">Task category | Good Dream targets?<br/>
-Why | |—|—|—| | Deterministic hygiene (formatters, lint fixes, dead
-imports) | Yes | Low risk, high feasibility, easy to verify | | Coverage
-gaps and missing tests | Often | The <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> signal is clear, but
-scope must be bounded | | Local refactors (simplify a function, reduce
-complexity) | Sometimes | Useful when scoped to one symbol/file with
-strict budgets | | Deduplication (remove repeated helpers, merge
-near-copies) | Sometimes | Risk of subtle behavior changes; needs strong
-tests/ratchets | | Product behavior changes (business logic) | No by
-default | High risk, ambiguous intent, requires domain judgment | |
-Architecture changes (new modules, moving boundaries) | Rare | Expensive
-and destabilizing unless tightly constrained |</div>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Task category</th>
+<th>Good Dream targets?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deterministic hygiene (formatters, lint fixes, dead imports)</td>
+<td>Yes</td>
+<td>Low risk, high feasibility, easy to verify</td>
+</tr>
+<tr>
+<td>Coverage gaps and missing tests</td>
+<td>Often</td>
+<td>The Validator signal is clear, but scope must be bounded</td>
+</tr>
+<tr>
+<td>Local refactors (simplify a function, reduce complexity)</td>
+<td>Sometimes</td>
+<td>Useful when scoped to one symbol/file with strict budgets</td>
+</tr>
+<tr>
+<td>Deduplication (remove repeated helpers, merge near-copies)</td>
+<td>Sometimes</td>
+<td>Risk of subtle behavior changes; needs strong tests/ratchets</td>
+</tr>
+<tr>
+<td>Product behavior changes (business logic)</td>
+<td>No by default</td>
+<td>High risk, ambiguous intent, requires domain judgment</td>
+</tr>
+<tr>
+<td>Architecture changes (new modules, moving boundaries)</td>
+<td>Rare</td>
+<td>Expensive and destabilizing unless tightly constrained</td>
+</tr>
+</tbody>
+</table>
 <p>Dream becomes safe when it is not “a general fixer,” but a controller
 for an allowlisted catalog of actions, each with known <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>.</p>
 <h3 id="a-scoring-heuristic-impact-feasibility-cost-risk">A scoring
 heuristic (impact × feasibility ÷ cost × risk)</h3>
-<p>Dream doesn’t need a perfect model of value. It needs a conservative
+<p>Dream does not need a perfect model of value. It needs a conservative
 filter.</p>
 <p>One way to formalize the decision:</p>
 <pre class="text"><code>score(task) = (impact(task) * feasibility(task)) / (cost(task) * risk(task))</code></pre>
@@ -396,13 +435,19 @@ how reversible is it?</li>
 <p>The important part is not the algebra. It is the posture: <em>only
 attempt tasks that are easy to grade, cheap to try, and cheap to
 undo.</em></p>
-<p>Treat the task-selection heuristic as a Map surface:</p>
+<p>Treat the task-selection heuristic and Dream Manifest as Map
+surfaces:</p>
 <ul>
 <li>It is versioned.</li>
 <li>It is reviewable.</li>
 <li>It is tuned with evidence (what converged, what thrashed, what
 caused incidents).</li>
+<li>It is part of the operating Map, not just a list of chores.</li>
 </ul>
+<p>Higher-order maintenance depends on that legibility. If Dream can
+later ask “why is this selector set this way?” or “why did this
+validator become mandatory?”, the answer has to live in a queryable
+Ledger entry, not in oral history.</p>
 <h2 id="implementation-depths-start-at-depth-0">Implementation Depths
 (Start at Depth 0)</h2>
 <p>You can implement Dream as a ladder. Each step adds autonomy, but
@@ -441,9 +486,10 @@ specific:</p>
 <p>In this repository, the Dream controller is implemented in
 <code>tools/dream.py</code> and wired behind <code>make dream</code>
 (one cycle) and <code>make dream-loop</code> (continuous mode). It can
-dispatch bounded maintenance actions, so don’t treat it as “Depth 0 by
-default.” Treat its scan + decide phase as the Depth 0 building block:
-deterministic signals turned into a ranked target with evidence.</p>
+dispatch bounded maintenance actions, so do not treat the current
+implementation as “Depth 0 by default.” Treat its scan + decide phase as
+the Depth 0 building block: deterministic signals turned into a ranked
+target with evidence.</p>
 <p>The scan combines a few signals:</p>
 <ul>
 <li><strong>Coverage per file</strong> (a proxy for risk and
@@ -492,8 +538,8 @@ can inspect it, adjust thresholds, and argue about it with evidence.</p>
 choose the file with highest score, then do one bounded action</code></pre>
 <p>At Depth 0, you stop at “Sense + Decide”: emit a ranked worklist and
 attach evidence. A human (or a later Depth) can then pick one item and
-run a normal SDaC loop against that bounded target, under the same
-Physics gates.</p>
+run a normal Software Development as Code (SDaC) loop against that
+bounded target, under the same Physics gates.</p>
 <p>If you do implement a writer, keep the unit of work small: one target
 per cycle, strict diff budgets, and a hard stop when the signal doesn’t
 improve (<a class="chapter-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge#chapter-5-the-ouroboros-protocol-why-loops-converge" title="Go to: Chapter 5">Chapter 5</a>’s minimum-progress ratchets).</p>
@@ -503,7 +549,7 @@ reports (no diffs)</h3>
 <p>You run the sensors nightly or weekly and publish the report as an
 artifact: a dashboard entry, a ticket, or a message with the top
 findings and their evidence. Nothing is modified. No diffs are
-generated. The automation is real, but it is read-only.</p>
+generated. The automation is real, but it stays read-only.</p>
 <p>Treat the schedule as a throttle, not as “off-hours.” Global teams
 and incident timelines do not respect a single clock.</p>
 <p>This is often the lowest-friction path to adoption: you get a
@@ -572,6 +618,31 @@ branch is out of date).</li>
 <li>Prefer tasks that reduce review burden (small diffs, local scopes)
 over tasks that create it.</li>
 </ul>
+<p>Before Dream opens a PR, run one deterministic conflict-avoidance
+check:</p>
+<ul>
+<li>refresh the base branch</li>
+<li>require a clean worktree</li>
+<li>compare the candidate paths to open PRs or active branches</li>
+<li>if the same surface is already moving, defer and attach the conflict
+as evidence</li>
+</ul>
+<p>This keeps Dream from turning normal parallel work into
+merge-noise.</p>
+<p><strong>Minimal evidence payload for a Dream-generated
+PR:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">dream_evidence</span><span class="kw">:</span></span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="at">  </span><span class="fu">trigger</span><span class="kw">:</span><span class="at"> </span><span class="st">"coverage_gap"</span><span class="co">        # or duplication / complexity / drift</span></span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="at">  </span><span class="fu">target</span><span class="kw">:</span><span class="at"> </span><span class="st">"path/to/file_or_root"</span></span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a><span class="at">  </span><span class="fu">budgets</span><span class="kw">:</span></span>
+<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a><span class="at">    </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a><span class="at">    </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">120</span></span>
+<span id="cb6-7"><a aria-hidden="true" href="#cb6-7" tabindex="-1"></a><span class="at">  </span><span class="fu">validators</span><span class="kw">:</span></span>
+<span id="cb6-8"><a aria-hidden="true" href="#cb6-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"make test"</span></span>
+<span id="cb6-9"><a aria-hidden="true" href="#cb6-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"make lint"</span></span>
+<span id="cb6-10"><a aria-hidden="true" href="#cb6-10" tabindex="-1"></a><span class="at">  </span><span class="fu">decision_trace</span><span class="kw">:</span></span>
+<span id="cb6-11"><a aria-hidden="true" href="#cb6-11" tabindex="-1"></a><span class="at">    </span><span class="fu">scan_run_id</span><span class="kw">:</span><span class="at"> </span><span class="st">"2026-03-06T120000Z"</span></span>
+<span id="cb6-12"><a aria-hidden="true" href="#cb6-12" tabindex="-1"></a><span class="at">    </span><span class="fu">why_this_target</span><span class="kw">:</span><span class="at"> </span><span class="st">"highest impact within allowlist"</span></span></code></pre></div>
 <h2 id="security-hostile-terrain-and-instruction-injection">Security:
 Hostile Terrain and Instruction Injection</h2>
 <p>So far, we’ve focused on protecting the repository from the agent
@@ -608,7 +679,7 @@ failure modes, add Depth 1 proposals and keep them
 human-approved.</p></li>
 </ol>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 9 – The Dream Daemon (Background Maintenance)" data-share-title="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 9 of Architects of Intent: The Dream Daemon (Background Maintenance). That is already a Dream loop. It is scheduled, boring, and useful. It fights…" data-share-title="Chapter 9 – The Dream Daemon (Background Maintenance) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -616,7 +687,7 @@ human-approved.</p></li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance&amp;title=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%209%20%E2%80%93%20The%20Dream%20Daemon%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%209%20of%20Architects%20of%20Intent%3A%20The%20Dream%20Daemon%20%28Background%20Maintenance%29.%20That%20is%20already%20a%20Dream%20loop.%20It%20is%20scheduled%2C%20boring%2C%20and%20useful.%20It%20fights%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-dream-daemon-background-maintenance">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -628,7 +699,7 @@ human-approved.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

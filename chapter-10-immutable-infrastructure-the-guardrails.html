@@ -5,14 +5,15 @@
 <title>Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)" name="description"/>
+<meta content="Chapter 10 of Architects of Intent: Immutable Infrastructure (The Guardrails). Once the loop can move faster and touch more surfaces, the grader boundary…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)" property="og:description"/>
+<meta content="Chapter 10 of Architects of Intent: Immutable Infrastructure (The Guardrails). Once the loop can move faster and touch more surfaces, the grader boundary…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,58 +21,19 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)" name="twitter:description"/>
+<meta content="Chapter 10 of Architects of Intent: Immutable Infrastructure (The Guardrails). Once the loop can move faster and touch more surfaces, the grader boundary…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 10 – Immutable Infrastructure (The Guardrails)", "description": "Chapter 10 of Architects of Intent: Immutable Infrastructure (The Guardrails). Once the loop can move faster and touch more surfaces, the grader boundary…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails", "mainEntityOfPage": "https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT13M", "articleSection": "Part IV Govern It Safe Evolution", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0b0c10',
-              surface: 'rgba(17, 19, 26, 0.92)',
-              panel: 'rgba(17, 19, 26, 0.92)',
-              light: 'rgba(255, 255, 255, 0.03)',
-              border: 'rgba(255, 255, 255, 0.08)',
-              text: '#e7e7ea',
-              strong: '#f2f3f8',
-              muted: '#b5b6bf',
-              primary: '#7aa2f7',
-              accent: '#bb9af7',
-              vibrant: '#2ac3de',
-              danger: '#f7768e',
-              success: '#10b981',
-            },
-            cyber: {
-              dark: '#0B0F19',
-              panel: '#151B2B',
-              primary: '#6366f1',
-              accent: '#06b6d4',
-              neon: '#d946ef',
-              success: '#10b981',
-              danger: '#ef4444',
-              text: '#f8fafc',
-              muted: '#94a3b8'
-            }
-          }
-        }
-      }
-    }
-  </script>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
@@ -85,37 +47,54 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">14 min read</span></div>
+<div class="chapter-meta"><span class="read-time">13 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="chapter-10-immutable-infrastructure-the-guardrails">Chapter 10 –
 Immutable Infrastructure (The Guardrails)</h1>
-<p>We built a loop that lets your system write its own code. We
-demonstrated how it can propose changes, measure their impact, and even
-refine them. This autonomy promises efficiency, but it also introduces a
-fundamental dilemma: if the system can rewrite its own code, what
-prevents it from rewriting the very rules and graders that govern its
-behavior? What happens when a self-modifying system decides to grant
-itself more power, or worse, remove the checks designed to keep it
-safe?</p>
+<p>Start with the boundary, not the philosophy.</p>
+<p>Once the loop can move faster and touch more surfaces, the grader
+boundary becomes part of the threat model.</p>
+<p>Minimal posture:</p>
+</div>
+</header>
+<pre class="text"><code># governance/immutable_paths.txt
+.github/
+policies/
+validators/
+CODEOWNERS</code></pre>
+<pre class="text"><code># CODEOWNERS (illustrative)
+/policies/           @platform-engineering @security
+/validators/         @platform-engineering
+/.github/workflows/  @platform-engineering
+/CODEOWNERS          @platform-engineering</code></pre>
+<pre class="text"><code># runner posture (illustrative)
+user=sdac-bot
+write_allowlist=src/ docs/
+read_only=governance/ .github/ policies/ validators/</code></pre>
+<p>If the loop can propose app changes but cannot write its own
+guardrails, it stays an <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>. If it can rewrite the graders that
+decide what ships, it becomes a governance risk.</p>
 <p>This is where <em><a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">immutable infrastructure</a></em> becomes
-non-negotiable. In the context of Software Development as Code (SDaC),
-immutable infrastructure refers to the protected paths and pipelines
-that are designed to grade and govern the system. These are the
-guardrails, hard-coded into your engineering process, that ensure even
-the most autonomous agent cannot merge changes without human approval,
-especially when those changes affect the guardrails themselves. It’s
-about building a robust system that can propose and even test changes,
-but cannot unilaterally escalate its own privileges or diminish the
-quality and safety standards that protect you.</p>
-<p>The goal isn’t to impede the agent; it’s to guarantee its proposals
-are rigorously vetted against non-negotiable, human-defined policy
-before they become reality.</p>
+non-negotiable. In Software Development as Code (SDaC), immutable
+infrastructure means the protected paths and pipelines that grade the
+system: <code>CODEOWNERS</code>, branch protection, CI workflows, policy
+validators, and the manifests that define the protected boundary. The
+agent may propose changes to them, but it cannot merge or weaken them on
+its own.</p>
+<p>The goal is not to slow the agent down. The goal is to ensure every
+proposal is checked against human-defined policy that the agent itself
+cannot rewrite.</p>
 <h2 id="the-canon-of-truth-what-can-override-what">The Canon of Truth
 (what can override what)</h2>
 <section class="col-span-1 md:col-span-12 mt-4 mb-12" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-09-hierarchy-of-stewardship" data-infographic-selector="main &gt; section:nth-of-type(9)" data-infographic-source="infographic.html" data-infographic-status="published">
@@ -123,7 +102,7 @@ before they become reality.</p>
 <div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-t-4 border-t-brand-accent">
 <h2 class="text-center text-3xl font-bold text-brand-strong mb-2">The Hierarchy of Stewardship</h2>
 <p class="text-center text-brand-muted mb-8 max-w-2xl mx-auto">
-                        When the foundation is infinite, the structure above it must be precise.
+                        Lower layers provide capability. Upper layers decide what that capability is allowed to do.
                     </p>
 <div class="max-w-6xl mx-auto flex flex-col items-center">
 <div class="pyramid-shell">
@@ -172,17 +151,41 @@ sources aren’t a documentation problem. They’re a governance bypass.</p>
 <p>So we define a canon: a practical hierarchy of truth. Higher tiers
 constrain lower tiers, and lower tiers are never allowed to “outvote”
 deterministic reality.</p>
-<div class="line-block">Tier | Source examples | What it means | | :– |
-:– | :– | | <strong>Tier 1</strong> | Code, type definitions, schemas,
-<a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> cases, CI gates | <strong>Deterministic truth.</strong>
-Machine-enforced. If Tier 1 says “no,” the change does not exist.<br/>
-| <strong>Tier 2</strong> | Structured configuration, domain models,
-design docs, runbooks | <strong>Authoritative intent.</strong>
-Human-readable and often machine-checked against Tier 1. This is where
-you declare what you mean. | | <strong>Tier 3</strong> | General
-documentation, UI copy, release notes | <strong>Explanations.</strong>
-Useful, but non-authoritative. Must remain consistent with higher tiers.
-|</div>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Source examples</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tier 1</strong></td>
+<td>Code, type definitions, schemas, <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> cases, CI gates</td>
+<td><strong>Deterministic truth.</strong> Machine-enforced. If Tier 1
+says “no,” the change does not exist.</td>
+</tr>
+<tr>
+<td><strong>Tier 2</strong></td>
+<td>Structured configuration, domain models, design docs, runbooks</td>
+<td><strong>Authoritative intent.</strong> Human-readable and often
+machine-checked against Tier 1. This is where you declare what you
+mean.</td>
+</tr>
+<tr>
+<td><strong>Tier 3</strong></td>
+<td>General documentation, UI copy, release notes</td>
+<td><strong>Explanations.</strong> Useful, but non-authoritative. Must
+remain consistent with higher tiers.</td>
+</tr>
+</tbody>
+</table>
 <p>Immutable Infrastructure is how you enforce this hierarchy in
 practice: you protect Tier 1 (and the gates that interpret it) so the
 system cannot weaken the very constraints that keep it safe.</p>
@@ -213,28 +216,22 @@ and runs the same Validators, under the same Immutable Infrastructure
 boundaries.</p>
 <h2 id="the-core-problem-guardrails-that-can-grade-themselves">The Core
 Problem: Guardrails that Can Grade Themselves</h2>
-<p>Imagine an autonomous agent proposing a change to your CI pipeline.
-Perhaps it’s optimizing the Immune System suite, or adding a new linter.
-Now imagine it <em>also</em> proposes disabling a critical security
-scan, or modifying the <code>CODEOWNERS</code> file so it no longer
-requires human review for its own changes. If the system is allowed to
-approve such a combined change, you’ve just created a vulnerability that
-could spiral into an unmanageable production incident.</p>
+<p>Imagine an autonomous agent proposing a CI change. Perhaps it adds a
+useful linter or speeds up the Immune System suite. In the same diff, it
+could also disable a security scan or relax <code>CODEOWNERS</code> so
+its own changes no longer need human review. If that change can approve
+itself, you no longer have guardrails. You have self-authorization.</p>
 <p>Our SDaC agents operate on the principle of <em>proposing</em>
 changes, not merging them directly into protected branches. The
-mechanism by which those proposals are reviewed and approved must be
-explicitly outside the agent’s direct control. This setup ensures that
-while the system can generate powerful modifications, the ultimate
-authority for <em>governance</em> remains with human engineers. The
-guardrails themselves must be immutable to the autonomous system; they
-can only be changed by explicit human action following rigorous
-procedures.</p>
+mechanism that reviews and admits changes to governance surfaces must
+sit explicitly outside the agent’s control. The guardrails themselves
+must be immutable to the autonomous system; only explicit human action
+can change them.</p>
 <h2 id="protected-paths-your-engineering-constitution">Protected Paths:
 Your Engineering Constitution</h2>
-<p>To establish immutable infrastructure, you define specific paths
-within your repository that represent the “constitution” of your
-engineering practices. Changes to these paths are subject to the highest
-scrutiny.</p>
+<p>To establish immutable infrastructure, define the repository paths
+that act as the “constitution” of your engineering process. Changes to
+those paths get the highest scrutiny.</p>
 <p>If the Map is your intent and the Terrain is your code, immutable
 infrastructure is the bedrock: you build on it, but you don’t let the
 loop rewrite it.</p>
@@ -262,24 +259,71 @@ radius, or weaken its graders, it belongs behind the immutable
 boundary.</p>
 </blockquote>
 <p>Use a simple rubric:</p>
-<div class="line-block">Surface | Mutable by the <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>? | Rationale |
-| :– | :– | :– | | Application code | Yes | This is the work. It’s what
-you’re automating. | | Unit tests | Yes | Tests are part of the
-artifact; they travel with code changes.<br/>
-| Integration tests | Limited | Higher cost and higher flake risk; often
-need human review when touching real systems. | | CI/CD workflows | No |
-They control deployment safety and can silently weaken gates. | |
-Production configs | No | Direct production impact; small mistakes can
-create large outages. | | Security policies / secrets surfaces | No |
-Trust boundary; protect from both drift and exfiltration. | | Database
-migrations | Human review | Data integrity risk; allow assistance,
-require approval and audits. | | The immutable manifest itself | No | If
-the Effector can edit the boundary, it can remove the boundary. |</div>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Mutable by the Effector?</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application code</td>
+<td>Yes</td>
+<td>This is the work. It’s what you’re automating.</td>
+</tr>
+<tr>
+<td>Unit tests</td>
+<td>Yes</td>
+<td>Tests are part of the artifact; they travel with code changes.</td>
+</tr>
+<tr>
+<td>Integration tests</td>
+<td>Limited</td>
+<td>Higher cost and higher flake risk; often need human review when
+touching real systems.</td>
+</tr>
+<tr>
+<td>CI/CD workflows</td>
+<td>No</td>
+<td>They control deployment safety and can silently weaken gates.</td>
+</tr>
+<tr>
+<td>Production configs</td>
+<td>No</td>
+<td>Direct production impact; small mistakes can create large
+outages.</td>
+</tr>
+<tr>
+<td>Security policies / secrets surfaces</td>
+<td>No</td>
+<td>Trust boundary; protect from both drift and exfiltration.</td>
+</tr>
+<tr>
+<td>Database migrations</td>
+<td>Human review</td>
+<td>Data integrity risk; allow assistance, require approval and
+audits.</td>
+</tr>
+<tr>
+<td>The immutable manifest itself</td>
+<td>No</td>
+<td>If the Effector can edit the boundary, it can remove the
+boundary.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="immutability-enforcement-defense-in-depth">Immutability
 enforcement (defense in depth)</h3>
 <p>Immutability is not a single mechanism. It’s a stack of independent
 controls that all say “no” in different ways.</p>
-<p>At minimum, you want:</p>
+<p>At minimum, you want three independent controls:</p>
 <ol type="1">
 <li><strong>Userspace boundary (OS permissions):</strong> the loop runs
 as a dedicated user that simply cannot write protected paths.</li>
@@ -303,9 +347,9 @@ open the file for write. Run your loop as a dedicated user (for example
 <code>sdac-bot</code>) and use file access bits / ACLs so protected
 directories are writable only by a human-owned group.</p>
 <p>This matters because CI runners configured as restricted Unix users
-physically neuter self-rewrite: even a very capable LLM cannot edit
-<code>.github/workflows/*.yml</code> or other immutable paths from which
-it could weaken its own controls.</p>
+physically neuter self-rewrite: even a very capable large language model
+(LLM) cannot edit <code>.github/workflows/*.yml</code> or other
+immutable paths from which it could weaken its own controls.</p>
 <p><strong>Example (illustrative):</strong></p>
 <pre class="text"><code># Protected surfaces owned by platform/security; agent user has read-only access.
 chgrp -R platform .github policies validators .sdac
@@ -323,39 +367,39 @@ immutable manifest + deterministic gate</h4>
 inspectable. Then enforce it with a deterministic validator that fails
 on any touched immutable path.</p>
 <p><strong>Example manifest:</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="co"># .sdac/immutable.yaml</span></span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="fu">immutable</span><span class="kw">:</span></span>
-<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="at">  </span><span class="fu">paths</span><span class="kw">:</span></span>
-<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".github/workflows/**"</span></span>
-<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"policies/**"</span></span>
-<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"validators/**"</span></span>
-<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"config/production.yaml"</span></span>
-<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".sdac/immutable.yaml"</span></span>
-<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="at">  </span><span class="fu">patterns</span><span class="kw">:</span></span>
-<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"*.pem"</span></span>
-<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"*.key"</span></span>
-<span id="cb3-13"><a aria-hidden="true" href="#cb3-13" tabindex="-1"></a><span class="fu">reasons</span><span class="kw">:</span></span>
-<span id="cb3-14"><a aria-hidden="true" href="#cb3-14" tabindex="-1"></a><span class="at">  </span><span class="fu">".sdac/immutable.yaml"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Defines the immutable boundary"</span></span>
-<span id="cb3-15"><a aria-hidden="true" href="#cb3-15" tabindex="-1"></a><span class="at">  </span><span class="fu">"config/production.yaml"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Production configuration"</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="co"># .sdac/immutable.yaml</span></span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="fu">immutable</span><span class="kw">:</span></span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a><span class="at">  </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".github/workflows/**"</span></span>
+<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"policies/**"</span></span>
+<span id="cb6-7"><a aria-hidden="true" href="#cb6-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"validators/**"</span></span>
+<span id="cb6-8"><a aria-hidden="true" href="#cb6-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"config/production.yaml"</span></span>
+<span id="cb6-9"><a aria-hidden="true" href="#cb6-9" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".sdac/immutable.yaml"</span></span>
+<span id="cb6-10"><a aria-hidden="true" href="#cb6-10" tabindex="-1"></a><span class="at">  </span><span class="fu">patterns</span><span class="kw">:</span></span>
+<span id="cb6-11"><a aria-hidden="true" href="#cb6-11" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"*.pem"</span></span>
+<span id="cb6-12"><a aria-hidden="true" href="#cb6-12" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"*.key"</span></span>
+<span id="cb6-13"><a aria-hidden="true" href="#cb6-13" tabindex="-1"></a><span class="fu">reasons</span><span class="kw">:</span></span>
+<span id="cb6-14"><a aria-hidden="true" href="#cb6-14" tabindex="-1"></a><span class="at">  </span><span class="fu">".sdac/immutable.yaml"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Defines the immutable boundary"</span></span>
+<span id="cb6-15"><a aria-hidden="true" href="#cb6-15" tabindex="-1"></a><span class="at">  </span><span class="fu">"config/production.yaml"</span><span class="kw">:</span><span class="at"> </span><span class="st">"Production configuration"</span></span></code></pre></div>
 <p><strong>Example gate (illustrative):</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="im">import</span> fnmatch</span>
-<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>IMMUTABLE <span class="op">=</span> [</span>
-<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>    <span class="st">".github/workflows/**"</span>,</span>
-<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a>    <span class="st">"policies/**"</span>,</span>
-<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a>    <span class="st">"validators/**"</span>,</span>
-<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a>    <span class="st">"config/production.yaml"</span>,</span>
-<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a>    <span class="st">".sdac/immutable.yaml"</span>,</span>
-<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a>]</span>
-<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a></span>
-<span id="cb4-11"><a aria-hidden="true" href="#cb4-11" tabindex="-1"></a><span class="kw">def</span> is_immutable(path: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
-<span id="cb4-12"><a aria-hidden="true" href="#cb4-12" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">any</span>(fnmatch.fnmatch(path, pat) <span class="cf">for</span> pat <span class="kw">in</span> IMMUTABLE)</span>
-<span id="cb4-13"><a aria-hidden="true" href="#cb4-13" tabindex="-1"></a></span>
-<span id="cb4-14"><a aria-hidden="true" href="#cb4-14" tabindex="-1"></a><span class="kw">def</span> validate_touched_paths(touched_paths: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb4-15"><a aria-hidden="true" href="#cb4-15" tabindex="-1"></a>    violations <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> touched_paths <span class="cf">if</span> is_immutable(p)]</span>
-<span id="cb4-16"><a aria-hidden="true" href="#cb4-16" tabindex="-1"></a>    <span class="cf">if</span> violations:</span>
-<span id="cb4-17"><a aria-hidden="true" href="#cb4-17" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="ss">f"Immutable path(s) modified: </span><span class="sc">{</span>violations<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="im">import</span> fnmatch</span>
+<span id="cb7-2"><a aria-hidden="true" href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a aria-hidden="true" href="#cb7-3" tabindex="-1"></a>IMMUTABLE <span class="op">=</span> [</span>
+<span id="cb7-4"><a aria-hidden="true" href="#cb7-4" tabindex="-1"></a>    <span class="st">".github/workflows/**"</span>,</span>
+<span id="cb7-5"><a aria-hidden="true" href="#cb7-5" tabindex="-1"></a>    <span class="st">"policies/**"</span>,</span>
+<span id="cb7-6"><a aria-hidden="true" href="#cb7-6" tabindex="-1"></a>    <span class="st">"validators/**"</span>,</span>
+<span id="cb7-7"><a aria-hidden="true" href="#cb7-7" tabindex="-1"></a>    <span class="st">"config/production.yaml"</span>,</span>
+<span id="cb7-8"><a aria-hidden="true" href="#cb7-8" tabindex="-1"></a>    <span class="st">".sdac/immutable.yaml"</span>,</span>
+<span id="cb7-9"><a aria-hidden="true" href="#cb7-9" tabindex="-1"></a>]</span>
+<span id="cb7-10"><a aria-hidden="true" href="#cb7-10" tabindex="-1"></a></span>
+<span id="cb7-11"><a aria-hidden="true" href="#cb7-11" tabindex="-1"></a><span class="kw">def</span> is_immutable(path: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb7-12"><a aria-hidden="true" href="#cb7-12" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">any</span>(fnmatch.fnmatch(path, pat) <span class="cf">for</span> pat <span class="kw">in</span> IMMUTABLE)</span>
+<span id="cb7-13"><a aria-hidden="true" href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a aria-hidden="true" href="#cb7-14" tabindex="-1"></a><span class="kw">def</span> validate_touched_paths(touched_paths: <span class="bu">list</span>[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb7-15"><a aria-hidden="true" href="#cb7-15" tabindex="-1"></a>    violations <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> touched_paths <span class="cf">if</span> is_immutable(p)]</span>
+<span id="cb7-16"><a aria-hidden="true" href="#cb7-16" tabindex="-1"></a>    <span class="cf">if</span> violations:</span>
+<span id="cb7-17"><a aria-hidden="true" href="#cb7-17" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="ss">f"Immutable path(s) modified: </span><span class="sc">{</span>violations<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div>
 <p>This gate belongs in CI, not in the agent. A <code>.gitignore</code>
 rule does not count as enforcement; it hides files, but it doesn’t
 prevent changes.</p>
@@ -367,12 +411,10 @@ tickets in context, treat them as evidence with provenance (Chapter 2),
 not as authority.</p>
 <h3 id="codeowners-defining-human-responsibility">CODEOWNERS: Defining
 Human Responsibility</h3>
-<p>The <code>CODEOWNERS</code> file, a common feature in Git-based
-platforms like GitHub, GitLab, and Bitbucket, is your first line of
-defense. It specifies which teams or individuals are responsible for
-reviewing code in particular directories or file types. For SDaC, this
-is crucial for protecting the agent’s definition, its policies, and the
-validation pipelines.</p>
+<p><code>CODEOWNERS</code> is the first human accountability layer. It
+assigns review responsibility to specific paths. For SDaC, that means
+the agent definition, its policies, and the validation pipelines already
+have named human owners before any PR is opened.</p>
 <p><strong>Example (trimmed):</strong></p>
 <pre class="text"><code># CODEOWNERS (illustrative)
 /core/              @platform-engineering
@@ -385,18 +427,16 @@ validation pipelines.</p>
 <p>With this configuration, most modern Git platforms can automatically
 require approval from the specified teams when a pull request (PR)
 touches your engine, Validators, policies, or CI workflow definitions.
-Crucially, changes to the <code>CODEOWNERS</code> file itself are also
-protected, preventing an agent (or even a malicious human actor) from
-easily bypassing these rules.</p>
+Just as important, the <code>CODEOWNERS</code> file itself is protected.
+Otherwise the approval model can be edited out of existence.</p>
 <h3 id="branch-protection-rules-enforcing-the-rules-of-engagement">Branch
 Protection Rules: Enforcing the Rules of Engagement</h3>
-<p><code>CODEOWNERS</code> is powerful, but it relies on humans to
-respect its guidance. Branch protection rules (available in virtually
-all modern Git platforms) enforce these requirements at a repository
-level. They prevent direct pushes to critical branches (like
-<code>main</code> or <code>production</code>), require passing status
-checks (CI/CD pipelines), and mandate a certain number of approving
-reviews, often integrating directly with <code>CODEOWNERS</code>.</p>
+<p><code>CODEOWNERS</code> declares who must review. Branch protection
+makes that requirement enforceable. At the repository level, it prevents
+direct pushes to critical branches (like <code>main</code> or
+<code>production</code>), requires passing status checks, and mandates
+approving reviews, often integrating directly with
+<code>CODEOWNERS</code>.</p>
 <p><strong>Key Branch Protection Rules for SDaC:</strong></p>
 <ul>
 <li><p><strong>Require pull request reviews before merging:</strong>
@@ -432,14 +472,14 @@ the Mission scope.</p></li>
 allowed paths.</p></li>
 </ul>
 <p><strong>Example (Mission scope):</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="at">  </span><span class="fu">write_allowlist</span><span class="kw">:</span></span>
-<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"src/**"</span></span>
-<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"tests/**"</span></span>
-<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a><span class="at">  </span><span class="fu">denylist</span><span class="kw">:</span></span>
-<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".github/**"</span></span>
-<span id="cb6-7"><a aria-hidden="true" href="#cb6-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"policies/**"</span></span>
-<span id="cb6-8"><a aria-hidden="true" href="#cb6-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"validators/**"</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
+<span id="cb9-2"><a aria-hidden="true" href="#cb9-2" tabindex="-1"></a><span class="at">  </span><span class="fu">write_allowlist</span><span class="kw">:</span></span>
+<span id="cb9-3"><a aria-hidden="true" href="#cb9-3" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"src/**"</span></span>
+<span id="cb9-4"><a aria-hidden="true" href="#cb9-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"tests/**"</span></span>
+<span id="cb9-5"><a aria-hidden="true" href="#cb9-5" tabindex="-1"></a><span class="at">  </span><span class="fu">denylist</span><span class="kw">:</span></span>
+<span id="cb9-6"><a aria-hidden="true" href="#cb9-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">".github/**"</span></span>
+<span id="cb9-7"><a aria-hidden="true" href="#cb9-7" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"policies/**"</span></span>
+<span id="cb9-8"><a aria-hidden="true" href="#cb9-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"validators/**"</span></span></code></pre></div>
 <p>This is how you keep autonomy focused: the Mission defines the blast
 radius, and the system enforces it mechanically.</p>
 <h3 id="mission-gate-validation-without-the-agent">Mission Gate:
@@ -459,34 +499,23 @@ authored it (human or agent).</p></li>
 <p>This turns “good” into executable law.</p>
 <h3 id="ci-path-filters-targeted-vetting">CI Path Filters: Targeted
 Vetting</h3>
-<p>While branch protection ensures all changes pass <em>some</em> CI,
-path filters in your CI/CD pipelines allow you to trigger
-<em>specific</em>, more intensive checks for critical paths. If an agent
-proposes a change to a policy file, you might want to run a more
-extensive formal verification or compliance check that wouldn’t be
-necessary for a simple application code change.</p>
+<p>Branch protection ensures every change passes <em>some</em> CI. Path
+filters decide which extra checks run for critical paths.</p>
 <p>Mechanically, this is just: “when <code>policies/**</code> changes,
 run the policy suite,” and “when <code>.github/workflows/**</code>
-changes, run the CI self-check suite.” Your everyday app PRs stay fast;
-your governance surfaces get extra scrutiny.</p>
-<p>This pattern ensures that any change affecting your SDaC policies or
-their validation schema triggers dedicated, rigorous checks. It’s a
-pragmatic way to scale governance without slowing down every single pull
-request.</p>
+changes, run the CI self-check suite.” Everyday app PRs stay fast;
+governance surfaces get deeper scrutiny.</p>
 <h2 id="human-as-supreme-court-break-glass-kill-switches">Human as
 Supreme Court; Break-Glass; Kill Switches</h2>
-<p>Even with robust automated guardrails, there are times when human
-intervention is absolutely essential. These are the “Supreme Court”
+<p>Some decisions stay explicitly human. These are the “Supreme Court”
 moments, the break-glass procedures, and the kill switches.</p>
 <h3 id="human-as-supreme-court">Human as Supreme Court</h3>
 <p>The human role in SDaC is to serve as the ultimate arbiter of intent
 and safety. When an autonomous system proposes a change and the
 automated checks are green, a human still provides the final approval.
-This is especially true for changes to the SDaC system itself. The
-<code>CODEOWNERS</code> and branch protection rules funnel these
-high-impact changes to the engineers with the most context and
-authority. This ensures that the system always remains a tool serving
-human objectives, not an uncontrolled entity.</p>
+This is especially true for changes to the SDaC system itself.
+<code>CODEOWNERS</code> and branch protection funnel these high-impact
+changes to the engineers with the most context and authority.</p>
 <h3 id="break-glass-procedures">Break-Glass Procedures</h3>
 <p>Despite all planning, emergencies happen. A critical bug in a policy,
 an agent generating bad code, or a security vulnerability might require
@@ -518,18 +547,17 @@ required.</li>
 hours.</li>
 </ol>
 <p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
-a <code>governance/BREAK_GLASS.md</code> template and a CI workflow
-(<code>governance/ci/break_glass_checker.yml</code>) that demonstrates
-how to enforce this.</p>
+a concrete <code>governance/BREAK_GLASS.md</code> template and a
+workflow template (<code>governance/ci/break_glass_checker.yml</code>)
+you can adapt. The checklist above is illustrative policy prose; those
+repo files are the copy-and-specialize starting points.</p>
 <p>This procedure makes it <em>possible</em> to act fast in a crisis,
 but ensures it’s not done lightly and always leaves an audit trail for
 accountability and learning.</p>
 <h3 id="kill-switches-that-work">Kill Switches That Work</h3>
-<p>Autonomous systems, by definition, run themselves. But you need a way
-to stop them if they go rogue, enter an infinite loop, or start
-generating undesirable changes. A kill switch is a mechanism to
-immediately pause or disable the agent’s ability to propose or merge
-changes.</p>
+<p>Autonomous systems only stay safe if you can stop them quickly. A
+kill switch is the mechanism that immediately pauses or disables the
+agent’s ability to propose or merge changes.</p>
 <p><strong>Characteristics of an effective kill switch:</strong></p>
 <ul>
 <li><p><strong>Simple to activate:</strong> Should be a single,
@@ -558,19 +586,18 @@ agent-generated PR could check for the existence of this branch. If it
 exists, the CI job automatically fails, preventing the agent from
 merging.</p></li>
 </ol>
-<p>You don’t need a complex workflow to get the safety property. You
-need: “if kill switch is active, agent PRs can’t merge.” Implement it
-however your platform supports (feature flags, CI checks, required
-status checks).</p>
+<p>You do not need a complex workflow to get the safety property. You
+need: “if kill switch is active, agent PRs cannot merge.” Implement it
+however your platform supports that invariant (feature flags, CI checks,
+required status checks).</p>
 <p>The companion repo includes a
 <code>governance/ci/agent_merge_blocker.yml</code> workflow that
 implements a branch-based kill switch.</p>
 <p>Immutable infrastructure, protected paths, and emergency controls are
-foundational to safe SDaC implementations. They establish the boundaries
-within which autonomous agents can operate, ensuring that innovation
-doesn’t come at the cost of control and safety. With these guardrails in
-place, we can move towards more sophisticated autonomous operations with
-confidence.</p>
+what keep autonomy governable. They define what the loop may change, who
+must approve changes to the guardrails, and how to stop the system when
+needed. With that boundary in place, deeper autonomy becomes a
+governance choice, not a leap of faith.</p>
 <h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
 do this week</h2>
 <ol type="1">
@@ -604,7 +631,7 @@ bypass standard controls in a critical emergency, emphasizing
 auditability and post-mortem requirements.</p></li>
 </ol>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Chapter 10 – Immutable Infrastructure (The Guardrails)" data-share-title="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 10 of Architects of Intent: Immutable Infrastructure (The Guardrails). Once the loop can move faster and touch more surfaces, the grader boundary…" data-share-title="Chapter 10 – Immutable Infrastructure (The Guardrails) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -612,7 +639,7 @@ auditability and post-mortem requirements.</p></li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails&amp;title=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2010%20%E2%80%93%20Immutable%20Infrastructure%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2010%20of%20Architects%20of%20Intent%3A%20Immutable%20Infrastructure%20%28The%20Guardrails%29.%20Once%20the%20loop%20can%20move%20faster%20and%20touch%20more%20surfaces%2C%20the%20grader%20boundary%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-10-immutable-infrastructure-the-guardrails">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -624,7 +651,7 @@ auditability and post-mortem requirements.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

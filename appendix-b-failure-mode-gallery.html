@@ -5,14 +5,15 @@
 <title>Appendix B: Failure Mode Gallery | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Architects of Intent — Appendix B: Failure Mode Gallery" name="description"/>
+<meta content="Appendix B of Architects of Intent: Appendix B: Failure Mode Gallery. This appendix catalogues common failure modes encountered when building and operating…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/appendix-b-failure-mode-gallery" rel="canonical"/>
-<link href="rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Appendix B: Failure Mode Gallery | Architects of Intent" property="og:title"/>
-<meta content="Architects of Intent — Appendix B: Failure Mode Gallery" property="og:description"/>
+<meta content="Appendix B of Architects of Intent: Appendix B: Failure Mode Gallery. This appendix catalogues common failure modes encountered when building and operating…" property="og:description"/>
 <meta content="https://architectsofintent.com/appendix-b-failure-mode-gallery" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -20,16 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Appendix B: Failure Mode Gallery | Architects of Intent" name="twitter:title"/>
-<meta content="Architects of Intent — Appendix B: Failure Mode Gallery" name="twitter:description"/>
+<meta content="Appendix B of Architects of Intent: Appendix B: Failure Mode Gallery. This appendix catalogues common failure modes encountered when building and operating…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Appendix B: Failure Mode Gallery | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix B: Failure Mode Gallery", "description": "Appendix B of Architects of Intent: Appendix B: Failure Mode Gallery. This appendix catalogues common failure modes encountered when building and operating…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-b-failure-mode-gallery", "mainEntityOfPage": "https://architectsofintent.com/appendix-b-failure-mode-gallery", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-08T20:24:09Z", "timeRequired": "PT14M", "articleSection": "Part VI Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
-<script defer="" src="script.js"></script>
+<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
+<script defer="" src="script.js?v=3381982e05e3"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -41,14 +43,19 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
 </header>
-<main class="content" id="main">
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
 <div class="part-title">Part VI Appendices</div>
 <div class="chapter-meta"><span class="read-time">14 min read</span></div>
+</div>
+<div class="chapter-header__body">
 <h1 id="appendix-b-failure-mode-gallery">Appendix B: Failure Mode
 Gallery</h1>
 <p>This appendix catalogues common failure modes encountered when
@@ -57,26 +64,64 @@ Understanding these patterns helps in designing robust systems, writing
 effective Mission Objects, and debugging issues when they arise. Each
 entry describes the failure, its typical causes, provides an example,
 and suggests diagnostic and mitigation strategies.</p>
+</div>
+</header>
 <h2 id="loop-diagnostics-cheat-sheet">Loop Diagnostics Cheat Sheet</h2>
 <p>Use this when you’re debugging the <em>loop itself</em> (not just the
 code it touches).</p>
-<div class="line-block">Symptom | Likely Cause | Check | | — | — | — | |
-Invented structure (new signatures/routes/fields appear “from nowhere”)
-| <a class="concept-link" href="concepts#map-contamination" title="See concept: Map Contamination">Map Contamination</a> | Was the skeleton extracted by Sensors or generated
-by the model?</div>
-<p>Is the Map asserting structure the Terrain never had? | | Endless
-cycling / <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a> trip | Missing attractor (no reachable
-<code>PASS</code>) | Can any candidate satisfy all Validators and
-budgets? Can a human-written diff pass under the same gates? | | Fixes
-A, breaks B | Slice too wide | Did the slice include unrelated surfaces?
-Are you changing multiple contracts in one <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>? | | Same
-error every iteration | Insufficient feedback | Is the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> signal
-specific (file/line/symbol)? Are failures actionable, or just “no”? | |
-Output ignores constraints | Context dilution | Is the slice too large?
-Are constraints buried among noise? Is Skeleton-First enforced? | |
-<a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> always fails | <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> bug or impossible constraint | Can a
-hand-written diff pass? Is the <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> checking the right baseline and
-scope? |</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely Cause</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Invented structure (new signatures/routes/fields appear “from
+nowhere”)</td>
+<td><a class="concept-link" href="concepts#map-contamination" title="See concept: Map Contamination">Map Contamination</a></td>
+<td>Was the skeleton extracted by Sensors or generated by the model? Is
+the Map asserting structure the Terrain never had?</td>
+</tr>
+<tr>
+<td>Endless cycling / <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a> trip</td>
+<td>Missing attractor (no reachable <code>PASS</code>)</td>
+<td>Can any candidate satisfy all Validators and budgets? Can a
+human-written diff pass under the same gates?</td>
+</tr>
+<tr>
+<td>Fixes A, breaks B</td>
+<td>Slice too wide</td>
+<td>Did the slice include unrelated surfaces? Are you changing multiple
+contracts in one <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>?</td>
+</tr>
+<tr>
+<td>Same error every iteration</td>
+<td>Insufficient feedback</td>
+<td>Is the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> signal specific (file/line/symbol)? Are failures
+actionable, or just “no”?</td>
+</tr>
+<tr>
+<td>Output ignores constraints</td>
+<td>Context dilution</td>
+<td>Is the slice too large? Are constraints buried among noise? Is
+Skeleton-First enforced?</td>
+</tr>
+<tr>
+<td><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> always fails</td>
+<td>Validator bug or impossible constraint</td>
+<td>Can a hand-written diff pass? Is the Validator checking the right
+baseline and scope?</td>
+</tr>
+</tbody>
+</table>
 <h2 id="slice-too-large-or-too-small">Slice Too Large or Too Small</h2>
 <h3 id="what-it-looks-like">What it looks like</h3>
 <p>The generative system (e.g., your Map or Updater) produces output
@@ -102,11 +147,11 @@ generative step, often embedded in the system’s Mission Object.</p>
 <ul>
 <li><p><strong>Too Large</strong>: The Mission Object is too open-ended,
 lacks clear boundaries, or does not sufficiently specify the
-<em>kind</em> of change expected. The LLM interprets the lack of
-constraints as an invitation to be highly creative or broad. This is
-common when the context provided to the LLM is also very large,
-encouraging it to draw connections across disparate parts of the
-codebase.</p></li>
+<em>kind</em> of change expected. The large language model (LLM)
+interprets the lack of constraints as an invitation to be highly
+creative or broad. This is common when the context provided to the LLM
+is also very large, encouraging it to draw connections across disparate
+parts of the codebase.</p></li>
 <li><p><strong>Too Small</strong>: The Mission Object is overly
 restrictive, specifies an atomic change when a conceptual refactor is
 needed, or the provided context is insufficient for the LLM to
@@ -181,7 +226,7 @@ not alter existing interfaces.”</p></li>
 <li><p><strong>Context Management</strong>: Provide only the necessary
 context. Too much context can lead to overreach; too little can lead to
 an inability to make meaningful changes.</p></li>
-<li><p><strong>Skeleton-First Rule</strong>: Extract structural facts
+<li><p><strong><a class="concept-link" href="concepts#skeleton-first-rule" title="See concept: Skeleton-First Rule">Skeleton-First Rule</a></strong>: Extract structural facts
 deterministically and treat them as read-only. If the skeleton
 mismatches, fail fast. This prevents Map Contamination from becoming
 “authoritative context.”</p></li>
@@ -240,11 +285,11 @@ docstring makes the line exceed 80 characters.</p>
 <span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a>    <span class="co">"""This function calculates the sum of two numbers, a and b, and returns the result."""</span> <span class="co"># Line too long</span></span>
 <span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div></li>
 <li><p><strong>Validator</strong>: Fails due to line length.</p></li>
-<li><p><strong>Updater</strong>: Tries to Refine the line length, but in
-doing so, either removes part of the docstring (making it too short or
-invalid) or formats it in a way that the Validator <em>still</em> finds
-problematic, or simply tries to wrap it without realizing that the
-original docstring content itself is too verbose.</p>
+<li><p><strong>Updater</strong>: Tries to Refine the line length. It may
+remove part of the docstring (making it too short or invalid), format it
+in a way that the Validator <em>still</em> finds problematic, or simply
+try to wrap it without realizing that the original docstring content
+itself is too verbose.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="kw">def</span> calculate_sum(a, b):</span>
 <span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a>    <span class="co">"""Calculates the sum of two numbers."""</span> <span class="co"># Valid line, but less descriptive. Original mission was not to shorten it.</span></span>
 <span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div>
@@ -293,9 +338,10 @@ Structure</h3>
 <h4 id="what-it-looks-like-2">What it looks like</h4>
 <p>The generative system (typically the Map or Updater) introduces new
 file paths, directories, data structures, or architectural patterns that
-were not explicitly part of its mission, were not present in the
-provided context, or deviate significantly from established project
-conventions. This often leads to:</p>
+were not explicitly part of its mission. It can also invent structures
+that were not present in the provided context or that deviate
+significantly from established project conventions. In practice, that
+often leads to:</p>
 <ul>
 <li><p>Broken builds or CI/CD pipelines (e.g., new files not included in
 build Effectors).</p></li>
@@ -499,7 +545,7 @@ line like “Only modify files within <code>src/feature_x/</code>” if
 you’re seeing overreach.</p></li>
 </ol>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Architects of Intent — Appendix B: Failure Mode Gallery" data-share-title="Appendix B: Failure Mode Gallery | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-b-failure-mode-gallery" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Appendix B of Architects of Intent: Appendix B: Failure Mode Gallery. This appendix catalogues common failure modes encountered when building and operating…" data-share-title="Appendix B: Failure Mode Gallery | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-b-failure-mode-gallery" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -507,7 +553,7 @@ you’re seeing overreach.</p></li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-b-failure-mode-gallery" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fappendix-b-failure-mode-gallery" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-b-failure-mode-gallery&amp;title=Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent&amp;body=Architects%20of%20Intent%20%E2%80%94%20Appendix%20B%3A%20Failure%20Mode%20Gallery%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-b-failure-mode-gallery">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20B%3A%20Failure%20Mode%20Gallery%20%7C%20Architects%20of%20Intent&amp;body=Appendix%20B%20of%20Architects%20of%20Intent%3A%20Appendix%20B%3A%20Failure%20Mode%20Gallery.%20This%20appendix%20catalogues%20common%20failure%20modes%20encountered%20when%20building%20and%20operating%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-b-failure-mode-gallery">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -519,7 +565,7 @@ you’re seeing overreach.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>0050e3be19b4</code>
+      Version: <code>3381982e05e3</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
