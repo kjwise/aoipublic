@@ -5,7 +5,7 @@
 <title>Architects of Intent — Ship autonomous GenAI systems.</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw." name="description"/>
+<meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The model quietly changed a contract your type system never saw." name="description"/>
 <meta content="Architects of Intent, Ship autonomous GenAI systems., Software Development as Code, SDaC, GenAI, LLM, deterministic context, validation, governance, feedback loops" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
@@ -13,7 +13,7 @@
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Architects of Intent — Ship autonomous GenAI systems." property="og:title"/>
-<meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw." property="og:description"/>
+<meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The model quietly changed a contract your type system never saw." property="og:description"/>
 <meta content="https://architectsofintent.com/" property="og:url"/>
 <meta content="website" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -21,17 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Architects of Intent — Ship autonomous GenAI systems." name="twitter:title"/>
-<meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw." name="twitter:description"/>
+<meta content="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The model quietly changed a contract your type system never saw." name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Architects of Intent — Ship autonomous GenAI systems." name="twitter:image:alt"/>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Book", "name": "Architects of Intent", "alternateName": "Ship autonomous GenAI systems.", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/", "inLanguage": "en", "description": "Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw."}, {"@context": "https://schema.org", "@type": "WebSite", "name": "Architects of Intent", "url": "https://architectsofintent.com/", "description": "Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw.", "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://architectsofintent.com/search?q={search_term_string}"}, "query-input": "required name=search_term_string"}}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Book", "name": "Architects of Intent", "alternateName": "Ship autonomous GenAI systems.", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/", "inLanguage": "en", "description": "Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The model quietly changed a contract your type system never saw."}, {"@context": "https://schema.org", "@type": "WebSite", "name": "Architects of Intent", "url": "https://architectsofintent.com/", "description": "Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The model quietly changed a contract your type system never saw.", "potentialAction": {"@type": "SearchAction", "target": {"@type": "EntryPoint", "urlTemplate": "https://architectsofintent.com/search?q={search_term_string}"}, "query-input": "required name=search_term_string"}}]</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=3381982e05e3" rel="stylesheet"/>
-<script defer="" src="script.js?v=3381982e05e3"></script>
+<link href="style.css?v=1876789ccfa9" rel="stylesheet"/>
+<script defer="" src="script.js?v=1876789ccfa9"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
 <link href="infographic-fragment-shell.css" rel="stylesheet"/>
@@ -60,7 +60,7 @@
 Online Book on Software Development as Code
 </p>
 <div aria-label="Core themes" class="landing-chip-row">
-<span class="landing-chip">Practice before theory</span><span class="landing-chip">Deterministic context</span><span class="landing-chip">Auditable loops</span>
+<span class="landing-chip">Intent as code</span><span class="landing-chip"><a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> over vibes</span><span class="landing-chip">Evidence in the ledger</span>
 </div>
 </div>
 <div class="landing-title-grid">
@@ -75,12 +75,14 @@ Ship autonomous GenAI systems.
 </div>
 </div>
 <p>Friday afternoon, you merge an AI-assisted change. Saturday morning,
-your app is down. The AI quietly broke a contract your type system never
-saw.</p>
-<p>This book is about making that much harder to do by accident. It
-starts with one bounded loop you can build quickly, then shows why that
-loop works, where it breaks, and how to scale it without giving up
-control.</p>
+your app is down. The model quietly changed a contract your type system
+never saw.</p>
+<p>This book is about making that failure mode boring to catch. Start
+with one bounded loop: declare intent, slice context, generate once, and
+gate with deterministic <code>PASS/FAIL</code> checks.</p>
+<p>Then scale the same shape across teams: Map reality, execute in
+bounded loops, and keep a ledger of evidence so governance stays
+legible.</p>
 <blockquote>
 <p>“We don’t trust the model. We trust the loop.”</p>
 </blockquote>
@@ -93,16 +95,16 @@ Contents</a>
 <div class="landing-hero-rail">
 <div class="landing-signal-grid">
 <section class="landing-signal">
-<span class="landing-signal__step">Build</span> <strong>Ship one working
-loop fast</strong>
+<span class="landing-signal__step">Build</span> <strong>Ship one
+governed loop fast</strong>
 <p>
-Start with a bounded task, a proposed diff, and one deterministic
-<code>PASS/FAIL</code> gate.
+Start with a <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>, a bounded diff, and one deterministic
+<code>PASS/FAIL</code> validator.
 </p>
 </section>
 <section class="landing-signal">
 <span class="landing-signal__step">Understand</span> <strong>See why the
-loop holds</strong>
+loop converges</strong>
 <p>
 Learn how slicing, validators, and <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a> keep stochastic
 generation inside a known blast radius.
@@ -110,10 +112,10 @@ generation inside a known blast radius.
 </section>
 <section class="landing-signal">
 <span class="landing-signal__step">Scale</span> <strong>Turn one pattern
-into a system</strong>
+into an operating model</strong>
 <p>
-Move from a single loop to Mission Objects, reusable control surfaces,
-and governance that stays legible under load.
+Move from a single loop to reusable control surfaces and governance that
+stays explicit under load.
 </p>
 </section>
 </div>
@@ -277,7 +279,7 @@ Wrap an unpredictable generator in deterministic prep + deterministic validation
 <path d="M12 7v5l3 3"></path>
 </svg>
 <div>
-<div class="font-bold text-brand-strong"><span class="mr-2 text-brand-muted">1.</span><span>The <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> (Top Bun)</span></div>
+<div class="font-bold text-brand-strong"><span class="mr-2 text-brand-muted">1.</span><span>The Mission Object (Top Bun)</span></div>
 <div class="text-sm text-brand-muted">Clear intent. Example: “3 paragraphs, zero typos.”</div>
 </div>
 </div>
@@ -432,7 +434,7 @@ Connect on <a href="https://www.linkedin.com/in/jhaukur/">LinkedIn</a>.
 </p>
 </section>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The AI quietly broke a contract your type system never saw." data-share-title="Architects of Intent — Ship autonomous GenAI systems." data-share-url="https://architectsofintent.com/" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Friday afternoon, you merge an AI-assisted change. Saturday morning, your app is down. The model quietly changed a contract your type system never saw." data-share-title="Architects of Intent — Ship autonomous GenAI systems." data-share-url="https://architectsofintent.com/" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -440,7 +442,7 @@ Connect on <a href="https://www.linkedin.com/in/jhaukur/">LinkedIn</a>.
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2F" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2F" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2F&amp;title=Architects%20of%20Intent%20%E2%80%94%20Ship%20autonomous%20GenAI%20systems." rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Architects%20of%20Intent%20%E2%80%94%20Ship%20autonomous%20GenAI%20systems.&amp;body=Friday%20afternoon%2C%20you%20merge%20an%20AI-assisted%20change.%20Saturday%20morning%2C%20your%20app%20is%20down.%20The%20AI%20quietly%20broke%20a%20contract%20your%20type%20system%20never%20saw.%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2F">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Architects%20of%20Intent%20%E2%80%94%20Ship%20autonomous%20GenAI%20systems.&amp;body=Friday%20afternoon%2C%20you%20merge%20an%20AI-assisted%20change.%20Saturday%20morning%2C%20your%20app%20is%20down.%20The%20model%20quietly%20changed%20a%20contract%20your%20type%20system%20never%20saw.%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2F">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -448,7 +450,7 @@ Connect on <a href="https://www.linkedin.com/in/jhaukur/">LinkedIn</a>.
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>3381982e05e3</code>
+      Version: <code>1876789ccfa9</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
