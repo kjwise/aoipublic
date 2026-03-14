@@ -24,14 +24,14 @@
 <meta content="Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 0 – Introduction | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 0 – Introduction", "description": "Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-0-introduction", "mainEntityOfPage": "https://architectsofintent.com/chapter-0-introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-09T01:56:29Z", "timeRequired": "PT10M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 0 – Introduction", "description": "Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-0-introduction", "mainEntityOfPage": "https://architectsofintent.com/chapter-0-introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-14T03:41:28Z", "timeRequired": "PT11M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=83fa3d46f9a8" rel="stylesheet"/>
-<script defer="" src="script.js?v=83fa3d46f9a8"></script>
+<link href="style.css?v=2143092f6a3a" rel="stylesheet"/>
+<script defer="" src="script.js?v=2143092f6a3a"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -57,7 +57,7 @@
 <header class="chapter-header">
 <div class="chapter-kicker">
 <div class="part-title">Introduction</div>
-<div class="chapter-meta"><span class="read-time">10 min read</span></div>
+<div class="chapter-meta"><span class="read-time">11 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-0-introduction">Chapter 0 – Introduction</h1>
@@ -431,6 +431,76 @@ retry.</p>
   F --&gt; M</code></pre>
 <p>Caption: The FAIL path loops back to refine context and retry. This
 is the core mechanism that makes the loop self-correcting.</p>
+<h2 id="from-the-v-model-to-governed-loops">From the V-Model to Governed
+Loops</h2>
+<p>The classical V-model is not obsolete; it is incomplete for
+AI-assisted engineering. It still describes the deterministic spine of
+development: formalize intent on the left, implement at the bottom,
+prove correspondence on the right. Once a probabilistic model enters
+implementation, that center must be wrapped in deterministic
+preparation, validation, governance, and runtime feedback.</p>
+<p>In this book, the left side of the V is not just requirements and
+design documents. It is the formalization chain that makes intent
+admissible to a loop:
+<code>goal -&gt; Mission Object -&gt; scope -&gt; constraints -&gt; acceptance criteria -&gt; context slice -&gt; output contract</code>.
+That is how traceability becomes executable instead of aspirational.</p>
+<p>The bottom of the V is no longer an unexamined implementation step.
+It is one bounded model call inside the <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>:
+<code>Prep -&gt; Model -&gt; Validation</code>. The model is an <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>
+that proposes a candidate diff. It is not the thing being trusted.</p>
+<p>On the right side, proof is layered rather than deferred to one final
+“test phase”: strict parsing, schema and contract checks, tests and
+ratchets, scope and policy validators, <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> decisions, Ledger evidence,
+review, and merge. The classical V-model gives you traceability. The
+loop in this book adds convergence: when the candidate fails, the system
+tightens against deterministic findings until it passes or stops with
+evidence.</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Classic V-model</th>
+<th>This book’s canon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirements</td>
+<td><a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a></td>
+</tr>
+<tr>
+<td>System design</td>
+<td>Map / <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a></td>
+</tr>
+<tr>
+<td>Module design</td>
+<td>bounded slice / contracts / skeleton</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>Effector / candidate diff / model step</td>
+</tr>
+<tr>
+<td>Unit verification</td>
+<td>Validators / tests / types / schemas</td>
+</tr>
+<tr>
+<td>Integration verification</td>
+<td>contract checks / policy / scope gates</td>
+</tr>
+<tr>
+<td>System validation</td>
+<td>Judge / acceptance criteria / review</td>
+</tr>
+<tr>
+<td>Acceptance / operational validation</td>
+<td>Ledger / Dream / Map-Updaters / governance</td>
+</tr>
+</tbody>
+</table>
 <h3 id="why-now-economics">Why now (economics)</h3>
 <p>SDaC becomes practical once the economics of automation change. The
 boring but necessary scaffolding that used to be expensive to build and
@@ -452,7 +522,7 @@ implementation → review → tests → release → postmortem → docs) from th
 repo + compute?</li>
 <li>Are the rules (contracts, validators, policies, merge criteria, risk
 thresholds) first-class, versioned, and enforceable?</li>
-<li>Is the model an assistant, or an <strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a></strong> inside a
+<li>Is the model an assistant, or an <strong>Effector</strong> inside a
 constrained machine?</li>
 </ul>
 <p>If the answer is “no,” you do not have SDaC. You have CI-adjacent
@@ -497,9 +567,9 @@ appears at the end of Part I, after you’ve built the first loop.</p>
 simple, familiar setup: standard files, Git for version control,
 <code>make</code> for orchestration, and Python for scripting.</p>
 <p>That gives us a practical environment for demonstrating the core
-ideas without hiding behind framework magic. The patterns are meant to
-transfer to other languages, build systems, and version-control
-setups.</p>
+ideas without hiding behind framework-specific machinery. The patterns
+are meant to transfer to other languages, build systems, and
+version-control setups.</p>
 <p><a class="chapter-link" href="appendix-c-pattern-library#appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a> includes example validator recipes for other stacks (for
 example TypeScript/Node). The focus is on the engineering principles,
 not the specific tooling.</p>
@@ -574,7 +644,7 @@ quickstart is not.</p>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>83fa3d46f9a8</code>
+      Version: <code>2143092f6a3a</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

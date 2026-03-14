@@ -2780,13 +2780,13 @@
 <div class="lg:w-5/12 min-w-0">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Governance Envelope (Policy + Evidence)</h2>
 <p class="text-brand-muted leading-relaxed">
-      Governance at machine speed means every candidate diff gets a deterministic policy outcome.
-      The model proposes, policy decides, and the ledger records why.
+      Governance at machine speed is not just a verdict path. The model proposes, policy decides,
+      the ledger records why, and runtime evidence hardens later Maps, policies, and Missions.
     </p>
 <div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
 <div class="text-xs font-mono text-brand-muted mb-2">Execution path</div>
 <div class="text-sm text-brand-muted leading-relaxed">
-<span class="block font-mono text-brand-vibrant">Mission -&gt; Policy Validators -&gt; Decision -&gt; Ledger Event</span>
+<span class="block font-mono text-brand-vibrant">Mission -&gt; Policy Validators -&gt; Decision -&gt; Ledger Event -&gt; Hardening Feedback</span>
 <span class="block mt-2">Outcomes are explicit: <span class="font-mono">allow</span>, <span class="font-mono">block</span>, <span class="font-mono">escalate</span>, or <span class="font-mono">warn (time-bounded exception)</span>.</span>
 <span class="block mt-2">Policy precedence resolves conflicts: <span class="font-mono">security &gt; scope &gt; architecture &gt; style</span>.</span>
 </div>
@@ -2798,6 +2798,14 @@
 <span class="block font-mono text-brand-vibrant mt-1">secrets_scan(diff) = PASS|FAIL</span>
 <span class="block font-mono text-brand-vibrant mt-1">dynamic_exec_scan(diff) = PASS|FAIL</span>
 <span class="block font-mono text-brand-vibrant mt-1">architecture_guard(diff) = PASS|ESCALATE</span>
+</div>
+</div>
+<div class="mt-4 bg-brand-light border border-brand-border rounded-xl p-4">
+<div class="text-xs font-mono text-brand-muted mb-2">Feed-forward assurance</div>
+<div class="text-sm text-brand-muted leading-relaxed">
+<span class="block">Incidents, audit findings, Dream outputs, and Map-Updaters produce evidence.</span>
+<span class="block mt-2">That evidence feeds into tighter policies, budgets, and future Missions.</span>
+<span class="block mt-2">Runtime assurance strengthens later deterministic gates; it does not replace them.</span>
 </div>
 </div>
 </div>
@@ -2868,6 +2876,7 @@
 <div class="mt-3 text-xs font-mono text-brand-muted mb-2">Ledger event</div>
 <pre class="text-[11px] leading-relaxed font-mono text-brand-strong whitespace-pre-wrap break-words" data-role="ledger-json"></pre>
 <div class="mt-2 text-xs text-brand-muted" data-role="outcome">Select a case and evaluate policy outcomes.</div>
+<div class="mt-2 text-xs text-brand-muted" data-role="hardening-note">Next hardening: current policy envelope was sufficient.</div>
 </div>
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
@@ -2912,11 +2921,13 @@
   const gateArchEl = sim.querySelector('[data-role="gate-arch"]');
   const ledgerJsonEl = sim.querySelector('[data-role="ledger-json"]');
   const outcomeEl = sim.querySelector('[data-role="outcome"]');
+  const hardeningNoteEl = sim.querySelector('[data-role="hardening-note"]');
   const historyEl = sim.querySelector('[data-role="history"]');
 
   if (!caseButtons.length || !caseNoteEl || phasePills.length === 0 || !ttlSlider || !ttlValueEl || !exceptionStateEl ||
       !evaluateBtn || !exceptionBtn || !resetBtn || !selectedLabelEl || !verdictEl || !actionEl || !runEl ||
-      !precedenceEl || !gateScopeEl || !gateSecretsEl || !gateDynexecEl || !gateArchEl || !ledgerJsonEl || !outcomeEl || !historyEl) return;
+      !precedenceEl || !gateScopeEl || !gateSecretsEl || !gateDynexecEl || !gateArchEl || !ledgerJsonEl || !outcomeEl ||
+      !hardeningNoteEl || !historyEl) return;
 
   const toInt = (v, fallback) => {
     const n = Number.parseInt(String(v), 10);
@@ -2930,6 +2941,7 @@
     allowlisted_refactor: {
       label: 'Allowlisted Refactor',
       note: 'Low-risk refactor inside allowlisted scope.',
+      nextHardening: 'Next hardening: current policy envelope was sufficient for this class of change.',
       missionId: 'mission/refactor/formatter-v3',
       paths: ['services/orders/src/formatter.ts'],
       findings: { scope: false, secrets: false, dynexec: false, architecture: false },
@@ -2938,6 +2950,7 @@
     protected_path_touch: {
       label: 'Protected Path Touch',
       note: 'Candidate touches immutable governance surfaces.',
+      nextHardening: 'Next hardening: preserve immutable boundaries and tighten review around protected-path attempts.',
       missionId: 'mission/refactor/ci-fastlane',
       paths: ['.github/workflows/main.yml'],
       findings: { scope: true, secrets: false, dynexec: false, architecture: false },
@@ -2946,6 +2959,7 @@
     hardcoded_secret: {
       label: 'Hardcoded Secret',
       note: 'Diff contains credential-like assignment pattern.',
+      nextHardening: 'Next hardening: strengthen secret detection and require stricter approval on adjacent sensitive surfaces.',
       missionId: 'mission/refactor/auth-helper',
       paths: ['services/auth/src/token.ts'],
       findings: { scope: false, secrets: true, dynexec: false, architecture: false },
@@ -2954,6 +2968,7 @@
     architecture_change: {
       label: 'Architecture Change',
       note: 'Cross-module contract shift requires explicit human review.',
+      nextHardening: 'Next hardening: convert repeated architecture escalations into clearer policy, templates, or Mission shaping.',
       missionId: 'mission/refactor/service-split',
       paths: ['services/orders/src/adapter.ts', 'services/payments/src/bridge.ts'],
       findings: { scope: false, secrets: false, dynexec: false, architecture: true },
@@ -3066,6 +3081,7 @@
 
     selectedLabelEl.textContent = selectedCase.label;
     caseNoteEl.textContent = selectedCase.note;
+    hardeningNoteEl.textContent = selectedCase.nextHardening;
     ttlValueEl.textContent = String(state.exceptionDays);
     exceptionStateEl.textContent = state.exceptionActiveUntil ? `active until ${state.exceptionActiveUntil}` : 'none';
 
@@ -3143,6 +3159,7 @@
     } else {
       outcomeEl.textContent = `BLOCK: ${result.precedence} policy failed at highest precedence.`;
     }
+    hardeningNoteEl.textContent = result.selectedCase.nextHardening;
   };
 
   const runEvaluation = async (withException) => {

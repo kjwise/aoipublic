@@ -24,14 +24,14 @@
 <meta content="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Define “Good” (Your First Validators)", "description": "Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-09T01:56:29Z", "timeRequired": "PT15M", "articleSection": "Part I Build It The Weekend Sprint", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Define “Good” (Your First Validators)", "description": "Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-14T03:41:28Z", "timeRequired": "PT15M", "articleSection": "Part I Build It The Weekend Sprint", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=83fa3d46f9a8" rel="stylesheet"/>
-<script defer="" src="script.js?v=83fa3d46f9a8"></script>
+<link href="style.css?v=2143092f6a3a" rel="stylesheet"/>
+<script defer="" src="script.js?v=2143092f6a3a"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -333,8 +333,8 @@ criteria (what “good enough” looks like)</h3>
 bars. Treat these as heuristics you can ratchet over time:</p>
 <ul>
 <li><strong>Minimum bar (local loop):</strong> formatting + lint + basic
-types (if you have them) + one fast <a class="concept-link" href="concepts#immune-system-case" title="See concept: Immune System case">unit test</a> or equivalent gate that
-catches the common failure mode for your surface.</li>
+types (if you have them) + one fast <a class="concept-link" href="concepts#immune-system-case" title="See concept: Immune System case">Immune System case</a> or equivalent
+gate that catches the common failure mode for your surface.</li>
 <li><strong>Professional bar (shared repo):</strong> above + test cases
 for invariants + a scope validator (paths + allowed edit regions) + at
 least one security check (secrets scan and/or static analysis).</li>
@@ -367,22 +367,33 @@ goes through gates.</li>
 <p><a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a> is where we make this enforceable: protected paths,
 CODEOWNERS, and a boundary around the grader code so the loop cannot
 quietly edit its own checks.</p>
-<h3 id="validation-vs.-evaluation-keep-the-gate-deterministic">Validation
-vs. evaluation (keep the gate deterministic)</h3>
-<p>It’s easy to blur two different activities:</p>
+<h3 id="verification-validation-evaluation-and-runtime-assurance">Verification,
+validation, evaluation, and runtime assurance</h3>
+<p>It helps to separate four jobs that often get blurred:</p>
 <ul>
-<li><strong>Validation (Physics):</strong> deterministic
-<code>PASS/FAIL</code>. Same input, same result. This is what blocks
-merges and halts loops.</li>
+<li><strong>Verification:</strong> deterministic checks that an artifact
+is correctly formed or aligned.</li>
+<li><strong>Validation:</strong> deterministic confirmation that the
+bounded change satisfies declared intent, acceptance criteria, and merge
+policy.</li>
 <li><strong>Evaluation (Judgement support):</strong> heuristic or
-model-based scoring. Useful, but not reproducible enough to be a
-gate.</li>
+model-based scoring. Useful, but not reproducible enough to be gate
+law.</li>
+<li><strong>Runtime assurance:</strong> post-merge evidence that the
+live system is still operating inside acceptable bounds.</li>
 </ul>
-<p>You can absolutely use evaluation to help decide what to do next
-(refine, revert, escalate). But do not mistake it for Physics.</p>
-<p>Rule: if you cannot make it deterministic, it is not a Validator.
-Treat it as a signal and keep it downstream of human review or hard
-policy.</p>
+<p>That role separation matters. A Validator emits findings, so in this
+book it remains a <strong>Sensor</strong>, not a Judge. The Judge is the
+decision layer: it operates over deterministic findings plus declared
+acceptance criteria and policy to decide whether the candidate passes,
+refines, reverts, or escalates.</p>
+<p>You can absolutely use evaluation to help decide what to do next. But
+do not mistake it for Physics. If you cannot make it deterministic, it
+is not merge law.</p>
+<p>Runtime assurance has the same posture. It produces evidence from
+production behavior, drift, and incidents, then feeds that evidence back
+into future Maps, Missions, and Validators. It does not create a softer
+parallel gate.</p>
 <h3 id="property-based-tests-soft-physics-and-how-to-design-properties">Property-based
 tests (Soft Physics) and how to design properties</h3>
 <p>Property-based tests are powerful because they explore the input
@@ -445,7 +456,7 @@ deterministic PASS/FAIL signals do not.</p>
 <td style="text-align: left;"><code>rustc</code></td>
 </tr>
 <tr>
-<td style="text-align: left;"><a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Test suite</a></td>
+<td style="text-align: left;"><a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a></td>
 <td style="text-align: left;"><code>pytest</code></td>
 <td style="text-align: left;"><code>jest</code></td>
 <td style="text-align: left;"><code>cargo test</code></td>
@@ -726,7 +737,7 @@ validator, or making the selection logic explicit in
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>83fa3d46f9a8</code>
+      Version: <code>2143092f6a3a</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·

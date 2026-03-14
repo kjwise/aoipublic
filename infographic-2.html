@@ -780,7 +780,7 @@
       <div class="h-1 w-20 bg-cyber-neon mb-6"></div>
       <p class="text-cyber-muted text-lg leading-relaxed">
         The smallest Hofstadter Bridge is one bounded Map heading regenerated from Terrain
-        and checked by a hard gate.
+        and checked by a hard gate. Start with high-blast-radius surfaces first, not total formalization.
       </p>
       <div class="mt-6 bg-cyber-panel border border-gray-700 rounded-xl p-4">
         <div class="text-xs font-mono text-gray-500 mb-2">Deterministic micro-loop</div>
@@ -790,10 +790,11 @@
           <div><span class="text-cyber-neon font-mono">3) Validate</span> exact Map/Terrain match.</div>
           <div><span class="text-cyber-neon font-mono">4) Gate</span> merge on PASS/FAIL.</div>
         </div>
+        <div class="mt-3 text-xs text-gray-400">One bounded surface, not total formalization.</div>
       </div>
       <div class="mt-4 bg-cyber-panel border border-gray-700 rounded-xl p-4 text-xs text-gray-400">
-        <strong class="text-white">Why this crosses the Bridge:</strong>
-        drift is no longer advisory text debt; it becomes a deterministic CI failure.
+        <strong class="text-white">Selective crossing:</strong>
+        formalize bounded, high-value surfaces first so drift becomes a deterministic CI failure where the reliability return is clear, while fast-moving narrative guidance can stay advisory.
       </div>
     </div>
 

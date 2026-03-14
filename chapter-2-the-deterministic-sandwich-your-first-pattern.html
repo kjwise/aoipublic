@@ -24,14 +24,14 @@
 <meta content="Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). That is the whole pattern in miniature: one probabilistic step pinned…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 2 – The Deterministic Sandwich (Your First Pattern)", "description": "Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). That is the whole pattern in miniature: one probabilistic step pinned…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "mainEntityOfPage": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-09T01:56:29Z", "timeRequired": "PT18M", "articleSection": "Part I Build It The Weekend Sprint", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 2 – The Deterministic Sandwich (Your First Pattern)", "description": "Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). That is the whole pattern in miniature: one probabilistic step pinned…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "mainEntityOfPage": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-14T03:41:28Z", "timeRequired": "PT18M", "articleSection": "Part I Build It The Weekend Sprint", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=83fa3d46f9a8" rel="stylesheet"/>
-<script defer="" src="script.js?v=83fa3d46f9a8"></script>
+<link href="style.css?v=2143092f6a3a" rel="stylesheet"/>
+<script defer="" src="script.js?v=2143092f6a3a"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -208,6 +208,16 @@ out, and you reject anything that breaks the contract.</p>
   B --&gt; C["Model&lt;br/&gt;(one bounded generation step)"]
   C --&gt; D["Validation / Physics&lt;br/&gt;(parse + run gates)"]
   D --&gt; E["PASS / FAIL&lt;br/&gt;(+ findings)"]</code></pre>
+<h3 id="the-bottom-of-the-v-one-bounded-probabilistic-step">The Bottom
+of the V: One Bounded Probabilistic Step</h3>
+<p>The classical V-model assumed a cleaner handoff from design into
+implementation than AI-assisted systems actually have. Here the bottom
+of the V is explicit: <code>Prep</code> compiles the left-side intent
+into a bounded request, the model produces one candidate, and
+<code>Validation</code> starts the right-side proof.</p>
+<p>That is why the sandwich matters. It does not replace the V-model; it
+makes the probabilistic center governable. The model stays one bounded
+<a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> inside a deterministic loop, not an ungoverned author.</p>
 <p>One nuance: the sandwich has two kinds of bread. <code>Prep</code>
 shapes and validates <em>inputs</em> (docs, code facts, evidence).
 <code>Validation</code> checks <em>outputs</em> (candidate diffs, JSON,
@@ -298,7 +308,7 @@ validators, safe failure modes, and audit trails.</p>
 <p>For example, in Chapter 1 you kept
 <code>product/docs/architecture.md</code> aligned with
 <code>product/src/</code>. A <code>Prep</code> layer for a model-driven
-version of that <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> might:</p>
+version of that Effector might:</p>
 <ul>
 <li><p>Parse the public function signatures from the code
 (<code>product/src/</code>).</p></li>
@@ -789,7 +799,7 @@ does.</p></li>
 <footer class="site-footer">
 <p>© Jóhann Haukur Gunnarsson</p>
 <p>
-      Version: <code>83fa3d46f9a8</code>
+      Version: <code>2143092f6a3a</code>
       ·
       <a href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
       ·
