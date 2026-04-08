@@ -24,14 +24,14 @@
 <meta content="Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 0 – Introduction | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 0 – Introduction", "description": "Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-0-introduction", "mainEntityOfPage": "https://architectsofintent.com/chapter-0-introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-24T19:09:06Z", "timeRequired": "PT11M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 0 – Introduction", "description": "Chapter 0 of Architects of Intent: Introduction. It updates the handler, tweaks a test, edits the API contract (OpenAPI), and slips in a refactor you did not…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-0-introduction", "mainEntityOfPage": "https://architectsofintent.com/chapter-0-introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT11M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=4be998cb3534" rel="stylesheet"/>
-<script defer="" src="script.js?v=4be998cb3534"></script>
+<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
+<script defer="" src="script.js?v=180c7c0ba0a2"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -47,6 +47,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="for-leaders">For Leaders</a>
 <a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
@@ -96,8 +97,8 @@ it as an integer.</p>
 <p><em>Illustrative transcript: the commands, paths, and gate shape are
 representative. <a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a> shows the runnable loop, and <a class="chapter-link" href="appendix-a-setup-and-implementation-checklist#appendix-a-setup-and-implementation-checklist" title="Go to: Appendix A">Appendix A</a> marks
 what is fully runnable versus explanatory.</em></p>
-<p>That is the whole wager of this book: do not trust raw generation.
-Engineer the loop that decides what ships.</p>
+<p>That is the core wager here: do not trust raw generation. Engineer
+the loop that decides what ships.</p>
 <h2 id="executive-summary">Executive Summary</h2>
 <p>This book is about using AI to speed up software development without
 giving up control.</p>
@@ -130,7 +131,7 @@ organization-level change control.</li>
 </ul>
 <h2 id="the-software-development-as-code-sdac-stack-one-diagram">The
 Software Development as Code (SDaC) Stack (One Diagram)</h2>
-<p>This is the full operating stack used throughout the book:</p>
+<p>This is the operating stack used throughout the manuscript:</p>
 <pre class="mermaid"><code>flowchart TB
   S["Substrate"] --&gt; L["Loop"]
   L --&gt; G["Governance"]
@@ -379,9 +380,9 @@ harness accelerated iteration without accelerating into a wall?</em></p>
 <p>You design, validate, and improve the <em>loop</em> that produces
 output. If the loop is sound, the outputs get better. If the loop is
 broken, no amount of model cleverness saves you.</p>
-<p>In this book, SDaC (Software Development as Code) names the
-mechanisms that make accelerated iteration safe: explicit intent,
-bounded writes, deterministic validators, and loops that converge.</p>
+<p>Here, SDaC (Software Development as Code) names the mechanisms that
+make accelerated iteration safe: explicit intent, bounded writes,
+deterministic validators, and loops that converge.</p>
 <p>If the process is validated, then <span class="math inline"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span>
 becomes trustworthy.</p>
 <p>Part I builds a loop first. Once you can trust the loop, you can use
@@ -439,9 +440,9 @@ development: formalize intent on the left, implement at the bottom,
 prove correspondence on the right. Once a probabilistic model enters
 implementation, that center must be wrapped in deterministic
 preparation, validation, governance, and runtime feedback.</p>
-<p>In this book, the left side of the V is not just requirements and
-design documents. It is the formalization chain that makes intent
-admissible to a loop:
+<p>Here, the left side of the V is not just requirements and design
+documents. It is the formalization chain that makes intent admissible to
+a loop:
 <code>goal -&gt; Mission Object -&gt; scope -&gt; constraints -&gt; acceptance criteria -&gt; context slice -&gt; output contract</code>.
 That is how traceability becomes executable instead of aspirational.</p>
 <p>The bottom of the V is no longer an unexamined implementation step.
@@ -452,7 +453,7 @@ that proposes a candidate diff. It is not the thing being trusted.</p>
 “test phase”: strict parsing, schema and contract checks, tests and
 ratchets, scope and policy validators, <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> decisions, Ledger evidence,
 review, and merge. The classical V-model gives you traceability. The
-loop in this book adds convergence: when the candidate fails, the system
+loop here adds convergence: when the candidate fails, the system
 tightens against deterministic findings until it passes or stops with
 evidence.</p>
 <table>
@@ -463,7 +464,7 @@ evidence.</p>
 <thead>
 <tr>
 <th>Classic V-model</th>
-<th>This book’s canon</th>
+<th>Architects of Intent canon</th>
 </tr>
 </thead>
 <tbody>
@@ -563,8 +564,8 @@ verifiable state.</p>
 <p>If you want the longer version (the stance behind the mechanics), it
 appears at the end of Part I, after you’ve built the first loop.</p>
 <h2 id="a-note-on-substrate">A Note on Substrate</h2>
-<p>The principles in this book are portable, but the examples use a
-simple, familiar setup: standard files, Git for version control,
+<p>These principles are portable, but the examples use a simple,
+familiar setup: standard files, Git for version control,
 <code>make</code> for orchestration, and Python for scripting.</p>
 <p>That gives us a practical environment for demonstrating the core
 ideas without hiding behind framework-specific machinery. The patterns
@@ -658,7 +659,7 @@ quickstart is not.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>4be998cb3534</code></span>
+<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

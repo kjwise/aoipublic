@@ -173,7 +173,7 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   margin: 0 auto;
   padding: 0.92rem var(--pad);
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 0.25rem 0.6rem;
   align-items: center;
 }
@@ -1121,6 +1121,57 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   margin: 2.3rem auto;
   border: none;
   border-top: 1px solid var(--border);
+}
+
+.content .footnote-ref {
+  display: inline-block;
+  margin-left: 0.08rem;
+  font-family: var(--ui-font);
+  font-size: 0.78em;
+  font-weight: 620;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: super;
+}
+
+.content .footnote-ref:hover {
+  text-decoration: underline;
+}
+
+.content .footnotes {
+  margin-top: 2.6rem;
+  padding-top: 0.35rem;
+  color: rgba(228, 232, 241, 0.84);
+}
+
+.content .footnotes hr {
+  display: none;
+}
+
+.content .footnotes ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.content .footnotes li {
+  margin: 0.7rem 0;
+}
+
+.content .footnotes p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.62;
+  overflow-wrap: anywhere;
+}
+
+.content .footnotes a {
+  overflow-wrap: anywhere;
+}
+
+.content .footnote-back {
+  margin-left: 0.32rem;
+  font-family: var(--ui-font);
+  text-decoration: none;
 }
 
 .content table {

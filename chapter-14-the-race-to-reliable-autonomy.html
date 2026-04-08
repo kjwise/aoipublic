@@ -24,14 +24,14 @@
 <meta content="Chapter 14 of Architects of Intent: The Race to Reliable Autonomy. So far the focus has been on mechanisms: how to build loops that converge (Chapter 5),…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 14 – The Race to Reliable Autonomy | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 14 – The Race to Reliable Autonomy", "description": "Chapter 14 of Architects of Intent: The Race to Reliable Autonomy. So far the focus has been on mechanisms: how to build loops that converge (Chapter 5),…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy", "mainEntityOfPage": "https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-24T19:09:06Z", "timeRequired": "PT14M", "articleSection": "Part V Reflect The Destination", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 14 – The Race to Reliable Autonomy", "description": "Chapter 14 of Architects of Intent: The Race to Reliable Autonomy. So far the focus has been on mechanisms: how to build loops that converge (Chapter 5),…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy", "mainEntityOfPage": "https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT15M", "articleSection": "Part V Reflect The Destination", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=4be998cb3534" rel="stylesheet"/>
-<script defer="" src="script.js?v=4be998cb3534"></script>
+<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
+<script defer="" src="script.js?v=180c7c0ba0a2"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -47,6 +47,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="for-leaders">For Leaders</a>
 <a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
@@ -57,7 +58,7 @@
 <header class="chapter-header">
 <div class="chapter-kicker">
 <div class="part-title">Part V Reflect The Destination</div>
-<div class="chapter-meta"><span class="read-time">14 min read</span></div>
+<div class="chapter-meta"><span class="read-time">15 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-14-the-race-to-reliable-autonomy">Chapter 14 – The Race
@@ -324,8 +325,17 @@ without tests increasingly felt like shipping with your eyes closed.</p>
 team needs the same depth of SDaC. Some products can run lighter loops
 for a long time. The directional claim is narrower: as generation gets
 cheaper, evidence and governance become more economically important.</p>
-<p>Today, many teams treat the patterns in this book as advanced. “We’ll
-add validators when we have time.” “Mission Objects are overkill for our
+<p>The floor is already moving. On July 1, 2025, Gartner said 90% of
+enterprise software engineers would use AI code assistants by 2028, up
+from less than 14% in early 2024, and on June 25, 2025, it said 33% of
+enterprise software applications would include agentic AI by 2028, up
+from less than 1% in 2024.<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a> That does not prove
+reliable autonomy is solved; it shows the opposite problem: autonomous
+behavior is entering normal engineering and application workflows faster
+than most teams are formalizing evidence, constraints, and
+governance.</p>
+<p>Today, many teams still treat these patterns as advanced. “We’ll add
+validators when we have time.” “Mission Objects are overkill for our
 stage.” “We’ll formalize the loop after we find product-market fit.”</p>
 <p>This is the same logic that said “we’ll add tests later” in 2008.
 Later never comes. The debt compounds. The wall approaches.</p>
@@ -551,6 +561,16 @@ diff, the validator output, the timestamp.</li>
 many loops have you hardened? How many validators have you added? The
 compound effect starts small.</li>
 </ol>
+<section class="footnotes footnotes-end-of-document" id="footnotes" role="doc-endnotes">
+<hr/>
+<ol>
+<li id="fn1"><p>Gartner, “Gartner Identifies the Top Strategic Trends in
+Software Engineering for 2025 and Beyond,” July 1, 2025. <a href="https://www.gartner.com/en/newsroom/press-releases/2025-07-01-gartner-identifies-the-top-strategic-trends-in-software-engineering-for-2025-and-beyond">Press
+release</a>. Gartner, “Gartner Predicts Over 40% of Agentic AI Projects
+Will Be Canceled by End of 2027,” June 25, 2025. <a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027">Press
+release</a>.<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </main>
 <section aria-label="Share this page" class="share-panel" data-share-text="Chapter 14 of Architects of Intent: The Race to Reliable Autonomy. So far the focus has been on mechanisms: how to build loops that converge (Chapter 5),…" data-share-title="Chapter 14 – The Race to Reliable Autonomy | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy" role="region">
 <div class="share-panel__label">Share</div>
@@ -586,7 +606,7 @@ compound effect starts small.</li>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>4be998cb3534</code></span>
+<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

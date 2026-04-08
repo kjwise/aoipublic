@@ -24,14 +24,14 @@
 <meta content="Appendix C of Architects of Intent: Appendix C: Pattern Library. This appendix serves as a practical library of patterns, templates, and configurations for…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Appendix C: Pattern Library | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix C: Pattern Library", "description": "Appendix C of Architects of Intent: Appendix C: Pattern Library. This appendix serves as a practical library of patterns, templates, and configurations for…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-c-pattern-library", "mainEntityOfPage": "https://architectsofintent.com/appendix-c-pattern-library", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-24T19:09:06Z", "timeRequired": "PT18M", "articleSection": "Part VI Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix C: Pattern Library", "description": "Appendix C of Architects of Intent: Appendix C: Pattern Library. This appendix serves as a practical library of patterns, templates, and configurations for…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-c-pattern-library", "mainEntityOfPage": "https://architectsofintent.com/appendix-c-pattern-library", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT18M", "articleSection": "Part VI Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=4be998cb3534" rel="stylesheet"/>
-<script defer="" src="script.js?v=4be998cb3534"></script>
+<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
+<script defer="" src="script.js?v=180c7c0ba0a2"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -43,6 +43,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="for-leaders">For Leaders</a>
 <a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
@@ -114,8 +115,8 @@ behavior.</li>
 runner boundary. Do not teach readers a second Mission Object
 schema.</p>
 <h2 id="canonical-reusable-artifacts">Canonical reusable artifacts</h2>
-<p>Use this appendix as the book’s single copy-and-specialize home for
-reusable loop artifacts:</p>
+<p>Use this appendix as the single copy-and-specialize home for reusable
+loop artifacts:</p>
 <ul>
 <li>canonical Effector output-contract patterns</li>
 <li>canonical minimal and production Mission Object templates</li>
@@ -333,9 +334,9 @@ with its implementation.</p></li>
 </ul>
 <h4 id="reference-implementation-note-dream-in-the-genaibook-engine">Reference
 implementation note: Dream in the genAIbook engine</h4>
-<p>The book is not a “here is the finished system” handoff. But it can
-be useful to see one real Dream loop wiring so you know what “Depth 2”
-looks like in practice.</p>
+<p>This appendix is not a “here is the finished system” handoff. But it
+can be useful to see one real Dream loop wiring so you know what “Depth
+2” looks like in practice.</p>
 <p>In this repository, Dream is exposed as Make targets:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="fu">make</span> dream</span>
 <span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="fu">make</span> dream-loop</span></code></pre></div>
@@ -377,7 +378,7 @@ satisfied.</p>
 <em>instruction layer</em>. The name doesn’t matter. The output contract
 does.</p>
 <p>This section is the canonical copy-and-specialize source for
-output-contract text used elsewhere in the book.</p>
+output-contract text used elsewhere in the manuscript.</p>
 <p>Keep the system message stable per Effector. Put task-specific intent
 in the Mission Object and the slice.</p>
 <h3 id="the-effector-system-message-diff-only">The Effector system
@@ -457,7 +458,7 @@ mission needs them.</p>
 internally, but keep the manuscript canon stable. In other words:
 <em>translate in code, not in docs</em>.</p>
 <p>This section is the canonical copy-and-specialize source for Mission
-templates used elsewhere in the book.</p>
+templates used elsewhere in the manuscript.</p>
 <h3 id="minimal-mission-object-skeleton-copy-then-specialize">Minimal
 Mission Object skeleton (copy, then specialize)</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> change-one-surface</span></span>
@@ -576,8 +577,7 @@ enforce yet, you have two safe options:</p>
 enforced is not Physics yet.</p>
 <h2 id="day-2-hardening-checklist">Day 2 hardening checklist</h2>
 <p>When you swap Chapter 1’s deterministic loop for a stochastic
-Effector, use this as the default hardening order. This is the book’s
-canonical Day 2 checklist.</p>
+Effector, use this as the default hardening order.</p>
 <ul>
 <li>Freeze the output contract first: pick <code>diff-only</code> or
 <code>JSON-only</code>, parse strictly, and fail closed on extra prose
@@ -604,7 +604,7 @@ mission schema immutable/code-owned while you tighten the loop.</li>
 </ul>
 <h2 id="runner-configuration-validator-recipes-by-stack">Runner
 Configuration: Validator Recipes by Stack</h2>
-<p>Validators are the bedrock of SDaC as defined in this book, providing
+<p>Validators are the bedrock of SDaC in this framework, providing
 deterministic gates that ensure quality, correctness, and adherence to
 standards.</p>
 <p>These YAML snippets are <strong>runner configuration</strong>, not
@@ -919,7 +919,7 @@ how the system handles reaching that threshold.</p></li>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>4be998cb3534</code></span>
+<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

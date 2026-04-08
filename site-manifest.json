@@ -8,7 +8,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-1-the-minimum-viable-factory-your-first-loop.html",
@@ -18,7 +18,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-2-the-deterministic-sandwich-your-first-pattern.html",
@@ -28,7 +28,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-3-define-good-your-first-validators.html",
@@ -38,7 +38,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-4-the-stochastic-engine-why-you-need-physics.html",
@@ -48,7 +48,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-5-the-ouroboros-protocol-why-loops-converge.html",
@@ -58,7 +58,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-6-context-architecture-why-slicing-matters.html",
@@ -68,7 +68,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-7-intent-as-code-mission-objects.html",
@@ -78,7 +78,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-8-keep-the-map-fresh-map-updaters.html",
@@ -88,7 +88,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-9-the-dream-daemon-background-maintenance.html",
@@ -98,7 +98,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-10-immutable-infrastructure-the-guardrails.html",
@@ -108,7 +108,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-11-automated-refactoring-under-guards.html",
@@ -118,7 +118,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-12-governance-at-machine-speed.html",
@@ -128,7 +128,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-13-the-hofstadter-bridge.html",
@@ -138,7 +138,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "chapter-14-the-race-to-reliable-autonomy.html",
@@ -148,7 +148,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "appendix-a-setup-and-implementation-checklist.html",
@@ -158,7 +158,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "appendix-b-failure-mode-gallery.html",
@@ -168,7 +168,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "appendix-c-pattern-library.html",
@@ -178,7 +178,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "appendix-d-glossary-and-translation-guide.html",
@@ -188,17 +188,27 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
+    },
+    {
+      "output_filename": "for-leaders.html",
+      "canonical_url": "https://architectsofintent.com/for-leaders",
+      "title": "For CTOs and CEOs | Architects of Intent",
+      "description": "AI can already generate code. The hard part is turning that output into shipped outcomes without increasing incident load, review drag, audit anxiety, or the…",
+      "kind": "leaders",
+      "robots_directives": "index,follow,max-image-preview:large",
+      "include_in_sitemap": true,
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "philosophy.html",
       "canonical_url": "https://architectsofintent.com/philosophy",
       "title": "Philosophy | Architects of Intent",
-      "description": "Read this as the compressed whole-system view of AoI, not as the first thing the book expects you to fully internalize. The book builds toward this picture…",
+      "description": "Read this as the compressed whole-system view of AoI, not as the first thing the manuscript expects you to fully internalize. The argument builds toward this…",
       "kind": "philosophy",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "concepts.html",
@@ -208,7 +218,7 @@
       "kind": "concepts",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "search.html",
@@ -218,17 +228,17 @@
       "kind": "search",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "toc.html",
       "canonical_url": "https://architectsofintent.com/toc",
       "title": "Table of Contents | Architects of Intent",
-      "description": "Table of contents for Architects of Intent, including chapters, appendices, philosophy, and concepts.",
+      "description": "Table of contents for Architects of Intent, including chapters, appendices, the executive guide, philosophy, and concepts.",
       "kind": "toc",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "index.html",
@@ -238,17 +248,7 @@
       "kind": "landing",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-03-24T19:09:06Z"
-    },
-    {
-      "output_filename": "infographic-deck-10.html",
-      "canonical_url": "https://architectsofintent.com/infographic-deck-10",
-      "title": "Architects of Intent | 10-Slide Deck",
-      "description": "Curated 10-slide presentation deck built from reusable infographic sections.",
-      "kind": "infographic",
-      "robots_directives": "noindex,follow",
-      "include_in_sitemap": false,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "infographic.html",
@@ -258,27 +258,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-03-24T19:09:06Z"
-    },
-    {
-      "output_filename": "infographic-2.html",
-      "canonical_url": "https://architectsofintent.com/infographic-2",
-      "title": "Infographic 2 — The Shape of All Work: SDaC",
-      "description": "Interactive infographic companion page for Architects of Intent.",
-      "kind": "infographic",
-      "robots_directives": "noindex,follow",
-      "include_in_sitemap": false,
-      "lastmod": "2026-03-24T19:09:06Z"
-    },
-    {
-      "output_filename": "infographic-3.html",
-      "canonical_url": "https://architectsofintent.com/infographic-3",
-      "title": "Infographic 3 — Practical SDaC Programming Patterns",
-      "description": "Interactive infographic companion page for Architects of Intent.",
-      "kind": "infographic",
-      "robots_directives": "noindex,follow",
-      "include_in_sitemap": false,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "infographic-4.html",
@@ -288,7 +268,37 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
+    },
+    {
+      "output_filename": "infographic-2.html",
+      "canonical_url": "https://architectsofintent.com/infographic-2",
+      "title": "Infographic 2 — The Shape of All Work: SDaC",
+      "description": "Interactive infographic companion page for Architects of Intent.",
+      "kind": "infographic",
+      "robots_directives": "noindex,follow",
+      "include_in_sitemap": false,
+      "lastmod": "2026-04-08T13:23:45Z"
+    },
+    {
+      "output_filename": "infographic-3.html",
+      "canonical_url": "https://architectsofintent.com/infographic-3",
+      "title": "Infographic 3 — Practical SDaC Programming Patterns",
+      "description": "Interactive infographic companion page for Architects of Intent.",
+      "kind": "infographic",
+      "robots_directives": "noindex,follow",
+      "include_in_sitemap": false,
+      "lastmod": "2026-04-08T13:23:45Z"
+    },
+    {
+      "output_filename": "infographic-deck-10.html",
+      "canonical_url": "https://architectsofintent.com/infographic-deck-10",
+      "title": "Architects of Intent | 10-Slide Deck",
+      "description": "Curated 10-slide presentation deck built from reusable infographic sections.",
+      "kind": "infographic",
+      "robots_directives": "noindex,follow",
+      "include_in_sitemap": false,
+      "lastmod": "2026-04-08T13:23:45Z"
     },
     {
       "output_filename": "infographic-deck.html",
@@ -298,7 +308,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-03-24T19:09:06Z"
+      "lastmod": "2026-04-08T13:23:45Z"
     }
   ]
 }

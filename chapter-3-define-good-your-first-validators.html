@@ -24,14 +24,14 @@
 <meta content="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Define “Good” (Your First Validators)", "description": "Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-24T19:09:06Z", "timeRequired": "PT15M", "articleSection": "Part I Build It The Weekend Sprint", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Define “Good” (Your First Validators)", "description": "Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). Nothing mystical happened there. The model produced plausible-looking output. A…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT15M", "articleSection": "Part I Build It The Weekend Sprint", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=4be998cb3534" rel="stylesheet"/>
-<script defer="" src="script.js?v=4be998cb3534"></script>
+<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
+<script defer="" src="script.js?v=180c7c0ba0a2"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -47,6 +47,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="for-leaders">For Leaders</a>
 <a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
@@ -88,7 +89,7 @@ task-specific checks you can tighten over time.</p>
 <p>Two practical rules:</p>
 <ul>
 <li>A <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> reports what it found; it does not decide the entire
-outcome. In the book’s terms, a <strong>Validator</strong> is a
+outcome. Here, a <strong>Validator</strong> is a
 <strong><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></strong>, not a <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>.</li>
 <li>Put the cheapest Validators first. Failing fast is not pessimism;
 it’s throughput.</li>
@@ -167,8 +168,8 @@ real systems</h2>
 <p>In production systems, Validators are rarely “just scripts.” They
 usually exist as explicit workflow steps so the loop is inspectable and
 reproducible.</p>
-<p>In the engine behind this book, the workflow runtime lives in
-<code>core/workflow.py</code>, and common checks live in
+<p>In one engine built around these patterns, the workflow runtime lives
+in <code>core/workflow.py</code>, and common checks live in
 <code>core/steps/</code> (for example <code>LintStep</code>,
 <code>TypeCheckStep</code>, <code>CoverageStep</code>, and
 <code>TestStep</code> in <code>core/steps/code_steps.py</code>). A
@@ -382,8 +383,8 @@ law.</li>
 <li><strong>Runtime assurance:</strong> post-merge evidence that the
 live system is still operating inside acceptable bounds.</li>
 </ul>
-<p>That role separation matters. A Validator emits findings, so in this
-book it remains a <strong>Sensor</strong>, not a Judge. The Judge is the
+<p>That role separation matters. A Validator emits findings, so it
+remains a <strong>Sensor</strong>, not a Judge. The Judge is the
 decision layer: it operates over deterministic findings plus declared
 acceptance criteria and policy to decide whether the candidate passes,
 refines, reverts, or escalates.</p>
@@ -552,9 +553,9 @@ at least 1 code owner when touching protected paths”).</li>
 <h2 id="composing-validators-build-a-checker-stack">Composing
 Validators: Build a checker stack</h2>
 <p>One validator is good, but several working together are much
-stronger. Later in the book that bundle becomes an “immune system,” but
-you do not need the term to use the pattern: chain checks together
-behind one command.</p>
+stronger. Later chapters call that bundle an “immune system,” but you do
+not need the term to use the pattern: chain checks together behind one
+command.</p>
 <p>Consider a <code>generated</code> directory that contains JSON,
 Python code, and documentation. Each might need its own type of
 validation:</p>
@@ -639,7 +640,7 @@ request you can name, version, and test.</li>
 <li>It adapts through a repeatable ratchet of feedback and revision, not
 heroic one-off instructions.</li>
 </ul>
-<p>If you want the book’s canonical chain, here it is:</p>
+<p>If you want the canonical chain used here, it is:</p>
 <blockquote>
 <p><strong>Mission Object → <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">Context Architecture</a> → Effectors → Immune
 System → <a class="concept-link" href="concepts#ouroboros-protocol" title="See concept: Ouroboros Protocol">Ouroboros Protocol</a></strong></p>
@@ -751,7 +752,7 @@ validator, or making the selection logic explicit in
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>4be998cb3534</code></span>
+<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

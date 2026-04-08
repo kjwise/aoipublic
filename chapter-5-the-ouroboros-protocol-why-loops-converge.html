@@ -24,14 +24,14 @@
 <meta content="Chapter 5 of Architects of Intent: The Ouroboros Protocol (Why Loops Converge). That is the whole chapter in four lines. The loop is not just “trying again.”…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 5 – The Ouroboros Protocol (Why Loops Converge) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 5 – The Ouroboros Protocol (Why Loops Converge)", "description": "Chapter 5 of Architects of Intent: The Ouroboros Protocol (Why Loops Converge). That is the whole chapter in four lines. The loop is not just “trying again.”…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge", "mainEntityOfPage": "https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-03-24T19:09:06Z", "timeRequired": "PT15M", "articleSection": "Part II Understand It The Theory Behind Reliability", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 5 – The Ouroboros Protocol (Why Loops Converge)", "description": "Chapter 5 of Architects of Intent: The Ouroboros Protocol (Why Loops Converge). That is the whole chapter in four lines. The loop is not just “trying again.”…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge", "mainEntityOfPage": "https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT15M", "articleSection": "Part II Understand It The Theory Behind Reliability", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=4be998cb3534" rel="stylesheet"/>
-<script defer="" src="script.js?v=4be998cb3534"></script>
+<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
+<script defer="" src="script.js?v=180c7c0ba0a2"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -47,6 +47,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
+<a href="for-leaders">For Leaders</a>
 <a href="philosophy">Philosophy</a>
 <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
@@ -878,10 +879,10 @@ Refine</h2>
 prior findings, then produces one candidate output. Since LLMs are
 stochastic engines (<a class="chapter-link" href="chapter-4-the-stochastic-engine-why-you-need-physics#chapter-4-the-stochastic-engine-why-you-need-physics" title="Go to: Chapter 4">Chapter 4</a>), this step is inherently probabilistic.
 Even with identical inputs, the output might vary between runs.</p></li>
-<li><p><strong>Judge</strong>: Run deterministic validators. In this
-book, the checker stack is Physics and this decision stage is the Judge.
-It produces structured findings and the next move (commit, refine,
-revert, or defer).</p></li>
+<li><p><strong>Judge</strong>: Run deterministic validators. Here, the
+checker stack is Physics and this decision stage is the Judge. It
+produces structured findings and the next move (commit, refine, revert,
+or defer).</p></li>
 <li><p><strong>Refine</strong>: Feed the exact findings back into the
 next attempt, with scope and output constraints unchanged.</p></li>
 </ol>
@@ -961,7 +962,10 @@ detection</li>
 constraint (the model isn’t “learning”)</h3>
 <p>Inside one Ouroboros run, the model is not getting smarter. Its
 weights do not change. The loop gets better only by adding explicit,
-deterministic constraints.</p>
+deterministic constraints. In practical terms, treat the model as a
+stochastic optimizer over a search space: reliability is set less by
+eloquent prompting and more by the constraints, validators, and feedback
+contract wrapped around it.</p>
 <p>The difference between a good loop and a bad one is the feedback
 contract:</p>
 <ul>
@@ -1021,8 +1025,8 @@ region that counts as “done”</h3>
 <p>Convergence is not luck. It comes from defining what a successful
 candidate looks like.</p>
 <p>An <strong>attractor</strong> is the set of candidates your checks
-would accept. In this book’s terms, it is the region where the candidate
-parses cleanly, stays in scope, respects budgets, and passes every
+would accept. Operationally, it is the region where the candidate parses
+cleanly, stays in scope, respects budgets, and passes every
 validator.</p>
 <p>You can picture it as a valley in the space of possible diffs: once a
 candidate lands inside it, the validators stop pushing it back out.</p>
@@ -1253,7 +1257,7 @@ smoke tests, performance/security scans, or checks that require real
 infrastructure. These are promotion gates, not inner-loop feedback on
 every attempt.</li>
 </ul>
-<p>This is also one reason the book keeps pushing bounded units.
+<p>This is also one reason the argument keeps pushing bounded units.
 Breaking a monolith into smaller, explicit surfaces is not only a
 context optimization. It is also a testing and verification
 optimization: smaller units give you smaller validator surfaces, faster
@@ -1348,7 +1352,7 @@ minimum-progress windows.</li>
 </ol>
 <h2 id="the-economics-of-determinism-why-loop-budgets-matter">The
 Economics of Determinism (Why Loop Budgets Matter)</h2>
-<p>The book has talked about ROI for <em>building</em> loops. You also
+<p>So far, the focus has been ROI for <em>building</em> loops. You also
 need ROI for <em>running</em> them.</p>
 <p>The right comparison is not “a loop costs tokens.” It is “a bounded
 retry loop costs tokens” versus “a human debugging session costs time”
@@ -1537,7 +1541,7 @@ drive a stochastic model toward something reviewable and safe.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>4be998cb3534</code></span>
+<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>
