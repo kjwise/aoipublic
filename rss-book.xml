@@ -4,23 +4,19 @@
     <title>Architects of Intent</title>
     <link>https://architectsofintent.com/</link>
     <description>Chapter updates for Architects of Intent.</description>
-    <lastBuildDate>Wed, 08 Apr 2026 13:24:12 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 26 Jul 2026 06:41:07 +0000</lastBuildDate>
     <item>
-      <title>The Philosophy of
-Architects of Intent</title>
-      <link>https://architectsofintent.com/philosophy</link>
-      <guid>https://architectsofintent.com/philosophy</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:11 +0000</pubDate>
-      <description>Read this as the compressed whole-system view of AoI, not as the
-first thing the manuscript expects you to fully internalize. The
-argument builds toward this picture iteratively: substrate first, then
-the loop, then governance, then reflection.</description>
+      <title>Introduction</title>
+      <link>https://architectsofintent.com/introduction</link>
+      <guid>https://architectsofintent.com/introduction</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
+      <description>Friday, 4:03 PM.</description>
     </item>
     <item>
       <title>Architects of Intent Infographic Deck</title>
       <link>https://architectsofintent.com/infographic-deck</link>
       <guid>https://architectsofintent.com/infographic-deck</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:11 +0000</pubDate>
+      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
       <description>Use this page as a talk-ready sequence. Arrow keys (←/→), page keys, and dots jump between slides.
       The deck marker below now auto-loads all published fragments from the library index.</description>
     </item>
@@ -28,205 +24,198 @@ the loop, then governance, then reflection.</description>
       <title>Architects of Intent 10-Slide Deck</title>
       <link>https://architectsofintent.com/infographic-deck-10</link>
       <guid>https://architectsofintent.com/infographic-deck-10</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:10 +0000</pubDate>
+      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
       <description>Curated sequence for a shorter presentation. This flow starts with loop fundamentals,
-      moves through speed, drift, and control mechanisms, and closes on strategic moat.</description>
+      moves through candidate economics, drift, and control mechanisms, and closes on the defensibility hypothesis.</description>
     </item>
     <item>
-      <title>The Loopis the Moat</title>
+      <title>The LoopMay Be the Moat</title>
       <link>https://architectsofintent.com/infographic-4</link>
       <guid>https://architectsofintent.com/infographic-4</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:10 +0000</pubDate>
+      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
       <description>Architects of Intent — Essence</description>
     </item>
     <item>
       <title>Architects of Intent</title>
       <link>https://architectsofintent.com/infographic-3</link>
       <guid>https://architectsofintent.com/infographic-3</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:10 +0000</pubDate>
-      <description>Programming patterns that make loops safe, fast, and self-improving.</description>
+      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
+      <description>Architectural mechanisms for bounded work, inspectable evidence, finite outcomes, and separate admission.</description>
     </item>
     <item>
-      <title>Chapter 9 –
-The Dream Daemon (Background Maintenance)</title>
-      <link>https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance</link>
-      <guid>https://architectsofintent.com/chapter-9-the-dream-daemon-background-maintenance</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:10 +0000</pubDate>
-      <description>Start with the 90% version most teams should actually run:</description>
+      <title>Chapter
+9 – The Maintenance Controller (Background Maintenance)</title>
+      <link>https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance</link>
+      <guid>https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Start with the version most teams should run: a read-only scan. An
+external scheduler or event triggers a governed process that observes
+fixed Terrain, applies a versioned selection policy, rejects ineligible
+work, ranks what remains, and emits a checked report. It opens no pull
+request and changes no repository file.</description>
     </item>
     <item>
       <title>Chapter 8 – Keep the
 Map Fresh (Map-Updaters)</title>
       <link>https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters</link>
       <guid>https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:10 +0000</pubDate>
-      <description>Drift is the default state. Docs fall behind code. Specs lag behind
-services. Inventories and indexes rot. Policies miss new surfaces.</description>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Documentation, specifications, inventories, and policies drift
+because the systems they describe continue to change. A workflow can
+make selected drift visible and propose a bounded correction.</description>
     </item>
     <item>
       <title>Chapter 7 – Intent as
 Code (Mission Objects)</title>
       <link>https://architectsofintent.com/chapter-7-intent-as-code-mission-objects</link>
       <guid>https://architectsofintent.com/chapter-7-intent-as-code-mission-objects</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:10 +0000</pubDate>
-      <description>Start with the smallest useful Mission Object:</description>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>A serious workflow needs more than an instruction string. It needs a
+versioned work contract that states what the work is, what may define
+correctness, what may change, what evidence is required, when execution
+must stop, and who may admit the result.</description>
     </item>
     <item>
       <title>Chapter 6 –
 Context Architecture (Why Slicing Matters)</title>
       <link>https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters</link>
       <guid>https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:09 +0000</pubDate>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
       <description>Start with a failing tax case:</description>
     </item>
     <item>
-      <title>Chapter 5 –
-The Ouroboros Protocol (Why Loops Converge)</title>
-      <link>https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge</link>
-      <guid>https://architectsofintent.com/chapter-5-the-ouroboros-protocol-why-loops-converge</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:09 +0000</pubDate>
-      <description>Start with a convergence trace:</description>
+      <title>Chapter
+5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite
+Stopping</title>
+      <link>https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping</link>
+      <guid>https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Start with one bounded trace:</description>
     </item>
     <item>
-      <title>Chapter 4
-– The Stochastic Engine (Why You Need Physics)</title>
-      <link>https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics</link>
-      <guid>https://architectsofintent.com/chapter-4-the-stochastic-engine-why-you-need-physics</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:09 +0000</pubDate>
-      <description>Run the same small task twice:</description>
+      <title>Chapter
+4 – The Stochastic Generator (Why You Need Physics)</title>
+      <link>https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics</link>
+      <guid>https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Consider two representative outputs from the same fixed request:</description>
     </item>
     <item>
       <title>Chapter 3 – Define
 “Good” (Your First Validators)</title>
       <link>https://architectsofintent.com/chapter-3-define-good-your-first-validators</link>
       <guid>https://architectsofintent.com/chapter-3-define-good-your-first-validators</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:09 +0000</pubDate>
-      <description>Start with one concrete gate:</description>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>The Deterministic Sandwich from Chapter 2 relies on an independent
+check outside the probabilistic change step. Start with one concrete
+result:</description>
     </item>
     <item>
       <title>Chapter
 2 – The Deterministic Sandwich (Your First Pattern)</title>
       <link>https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern</link>
       <guid>https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:09 +0000</pubDate>
-      <description>Start with the trace:</description>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Chapter 1 traced a minimal loop that stayed in bounds because every
+step was deterministic. This chapter shows what changes when one of
+those steps uses a foundation model.</description>
     </item>
     <item>
-      <title>Chapter 14 – The Race
-to Reliable Autonomy</title>
-      <link>https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy</link>
-      <guid>https://architectsofintent.com/chapter-14-the-race-to-reliable-autonomy</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:09 +0000</pubDate>
-      <description>Or: The Bar Is Rising</description>
+      <title>Chapter 14 –
+Implications for Delegated Automation</title>
+      <link>https://architectsofintent.com/chapter-14-implications-for-delegated-automation</link>
+      <guid>https://architectsofintent.com/chapter-14-implications-for-delegated-automation</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>The previous chapters treated the software change process as an
+engineering object. Adopted intent fixes authority, probabilistic steps
+operate inside declared effects, independent evidence guides refinement,
+every run stops finitely, and separate authority decides what becomes
+real. This chapter asks what follows when those governed processes
+become recurring, composable organizational capabilities.</description>
     </item>
     <item>
-      <title>Chapter 13 – The Hofstadter
-Bridge</title>
-      <link>https://architectsofintent.com/chapter-13-the-hofstadter-bridge</link>
-      <guid>https://architectsofintent.com/chapter-13-the-hofstadter-bridge</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:09 +0000</pubDate>
-      <description>Destination: Maps become enforceable, not just
-advisory.</description>
+      <title>Chapter 13
+– From Documentation to Enforceable Constraints</title>
+      <link>https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints</link>
+      <guid>https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Destination: Selected Map claims become enforceable
+rather than merely advisory.</description>
     </item>
     <item>
-      <title>Chapter 12 – Governance
-at Machine Speed</title>
-      <link>https://architectsofintent.com/chapter-12-governance-at-machine-speed</link>
-      <guid>https://architectsofintent.com/chapter-12-governance-at-machine-speed</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:09 +0000</pubDate>
-      <description>Start with one minimal policy chain:</description>
+      <title>Chapter 12 –
+Governance for High-Rate Automation</title>
+      <link>https://architectsofintent.com/chapter-12-governance-for-high-rate-automation</link>
+      <guid>https://architectsofintent.com/chapter-12-governance-for-high-rate-automation</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>A maintenance Mission is authorized to edit one service. Its
+candidate diff stays inside that directory, but the process also
+attempts an undeclared network call. A path-only check would pass.</description>
     </item>
     <item>
       <title>Chapter 11 –
 Automated Refactoring Under Guards</title>
       <link>https://architectsofintent.com/chapter-11-automated-refactoring-under-guards</link>
       <guid>https://architectsofintent.com/chapter-11-automated-refactoring-under-guards</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:08 +0000</pubDate>
-      <description>Start with one bounded refactor:</description>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Start with one candidate whose run ended in complete and
+whose Run Record is sealed, but which has not yet been admitted:</description>
     </item>
     <item>
-      <title>Chapter 10 –
-Immutable Infrastructure (The Guardrails)</title>
-      <link>https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails</link>
-      <guid>https://architectsofintent.com/chapter-10-immutable-infrastructure-the-guardrails</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:08 +0000</pubDate>
-      <description>Start with the boundary, not the philosophy.</description>
+      <title>Chapter
+10 – The Protected Control Plane (The Guardrails)</title>
+      <link>https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails</link>
+      <guid>https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Start with a denied effect.</description>
     </item>
     <item>
-      <title>Chapter 1
-– The Minimum Viable Factory (Your First Loop)</title>
-      <link>https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop</link>
-      <guid>https://architectsofintent.com/chapter-1-the-minimum-viable-factory-your-first-loop</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:08 +0000</pubDate>
-      <description>Build a tiny loop: code changes, docs sync, checks decide.</description>
+      <title>Chapter 1 – A Minimal
+Governed Loop</title>
+      <link>https://architectsofintent.com/chapter-1-a-minimal-governed-loop</link>
+      <guid>https://architectsofintent.com/chapter-1-a-minimal-governed-loop</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>Build one small loop: code changes, docs sync, checks decide.</description>
     </item>
     <item>
-      <title>Chapter 0 – Introduction</title>
-      <link>https://architectsofintent.com/chapter-0-introduction</link>
-      <guid>https://architectsofintent.com/chapter-0-introduction</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:08 +0000</pubDate>
-      <description>Friday, 4:03 PM.</description>
+      <title>Appendix B: Core Vocabulary</title>
+      <link>https://architectsofintent.com/appendix-b-core-vocabulary</link>
+      <guid>https://architectsofintent.com/appendix-b-core-vocabulary</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>These terms carry the architectural argument. They are collected here
+for reference; each is introduced and developed where its mechanism
+first matters.</description>
     </item>
     <item>
-      <title>Appendix D: Glossary
-&amp; Translation Guide</title>
-      <link>https://architectsofintent.com/appendix-d-glossary-and-translation-guide</link>
-      <guid>https://architectsofintent.com/appendix-d-glossary-and-translation-guide</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:08 +0000</pubDate>
-      <description>Developing and operating reliable autonomous systems demands a
-precise, shared vocabulary. This appendix defines the canonical terms
-used throughout the manuscript and provides a small translation layer to
-familiar industry language.</description>
-    </item>
-    <item>
-      <title>Appendix C: Pattern Library</title>
-      <link>https://architectsofintent.com/appendix-c-pattern-library</link>
-      <guid>https://architectsofintent.com/appendix-c-pattern-library</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:08 +0000</pubDate>
-      <description>This appendix serves as a practical library of patterns, templates,
-and configurations for various components of a Software Development as
-Code (SDaC) loop. Exhausted engineers and technical leaders need
-blueprints, not just concepts. Here, you’ll find concrete examples for
-defining missions, crafting robust validators for common technology
-stacks, configuring effectors to integrate with your existing workflows,
-and establishing circuit breakers for safety and control.</description>
-    </item>
-    <item>
-      <title>Appendix B: Failure Mode
-Gallery</title>
-      <link>https://architectsofintent.com/appendix-b-failure-mode-gallery</link>
-      <guid>https://architectsofintent.com/appendix-b-failure-mode-gallery</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:08 +0000</pubDate>
-      <description>This appendix catalogues common failure modes encountered when
-building and operating Software Development as Code (SDaC) loops.
-Understanding these patterns helps in designing robust systems, writing
-effective Mission Objects, and debugging issues when they arise. Each
-entry describes the failure, its typical causes, provides an example,
-and suggests diagnostic and mitigation strategies.</description>
-    </item>
-    <item>
-      <title>Appendix A: Setup
-and Implementation Checklist</title>
-      <link>https://architectsofintent.com/appendix-a-setup-and-implementation-checklist</link>
-      <guid>https://architectsofintent.com/appendix-a-setup-and-implementation-checklist</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:08 +0000</pubDate>
-      <description>This appendix does three things:</description>
+      <title>Appendix A: Failure Modes
+and Limits</title>
+      <link>https://architectsofintent.com/appendix-a-failure-modes-and-limits</link>
+      <guid>https://architectsofintent.com/appendix-a-failure-modes-and-limits</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <description>A governed loop offers conditional guarantees, not universal
+correctness. Under its stated trust assumptions, it can establish that
+effects stayed within declared bounds, required checks ran, transitions
+followed policy, terminal evidence was sealed, and admission used the
+required authority. It cannot establish that the Map was wise, that the
+Validators covered every relevant property, that hidden dependencies did
+not correlate two evaluators, or that the governance cost was
+justified.</description>
     </item>
     <item>
       <title>Search</title>
       <link>https://architectsofintent.com/search</link>
       <guid>https://architectsofintent.com/search</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:06 +0000</pubDate>
+      <pubDate>Sun, 26 Jul 2026 06:41:04 +0000</pubDate>
       <description>Search works entirely in your browser. Results update as you type.</description>
     </item>
     <item>
-      <title>For CTOs and CEOs</title>
-      <link>https://architectsofintent.com/for-leaders</link>
-      <guid>https://architectsofintent.com/for-leaders</guid>
-      <pubDate>Wed, 08 Apr 2026 13:24:06 +0000</pubDate>
-      <description>AI can already generate code. The hard part is turning that output
-into shipped outcomes without increasing incident load, review drag,
-audit anxiety, or the cost of being wrong.</description>
+      <title>Acknowledgements and
+About the Author</title>
+      <link>https://architectsofintent.com/acknowledgements-and-about-the-author</link>
+      <guid>https://architectsofintent.com/acknowledgements-and-about-the-author</guid>
+      <pubDate>Sun, 26 Jul 2026 06:41:04 +0000</pubDate>
+      <description>Thanks to the CTO at Abler for implementing ideas from an earlier
+draft and testing them against production-grade work.</description>
     </item>
   </channel>
 </rss>

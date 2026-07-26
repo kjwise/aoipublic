@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Chapter 4 – The Stochastic Generator (Why You Need Physics) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Chapter 4 of Architects of Intent: The Stochastic Generator (Why You Need Physics). Both are reasonable enough to pass a weak Validator set. If the only…" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 4 – The Stochastic Generator (Why You Need Physics) | Architects of Intent" property="og:title"/>
+<meta content="Chapter 4 of Architects of Intent: The Stochastic Generator (Why You Need Physics). Both are reasonable enough to pass a weak Validator set. If the only…" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 4 – The Stochastic Generator (Why You Need Physics) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 4 – The Stochastic Generator (Why You Need Physics) | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 4 of Architects of Intent: The Stochastic Generator (Why You Need Physics). Both are reasonable enough to pass a weak Validator set. If the only…" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 4 – The Stochastic Generator (Why You Need Physics) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 4 – The Stochastic Generator (Why You Need Physics)", "description": "Chapter 4 of Architects of Intent: The Stochastic Generator (Why You Need Physics). Both are reasonable enough to pass a weak Validator set. If the only…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics", "mainEntityOfPage": "https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT8M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part II – Reliability Foundations</div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="chapter-4-the-stochastic-generator-why-you-need-physics">Chapter
+4 – The Stochastic Generator (Why You Need Physics)</h1>
+<p>Consider two representative outputs from the same fixed request:</p>
+</div>
+</header>
+<blockquote>
+<p>Update the <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>’s <code>## Public Interfaces</code> block to match the
+exported signatures in the <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>.</p>
+</blockquote>
+<p><strong>Run 1:</strong></p>
+<ul>
+<li><code>normalize_country(country)</code></li>
+<li><code>calculate_tax(amount, country, rate)</code></li>
+</ul>
+<p><strong>Run 2:</strong></p>
+<ul>
+<li><code>normalize_country(country: str)</code> — Normalize an input
+country string.</li>
+<li><code>calculate_tax(amount: float, country: str, rate: float)</code>
+— Compute tax for an amount.</li>
+</ul>
+<p>Both are reasonable enough to pass a weak <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> set. If the only
+checks are “valid Markdown” and “the Map mentions the right function
+names,” neither check catches the difference. But only Run 1 matches the
+canonical signature surface declared for this example. Run 2 invents
+type annotations and adds prose.</p>
+<p>That gap is the chapter’s subject. This is drift on a bounded
+surface: the same task, the same apparent intent, different outputs. It
+is why the governed Map surface and observed Terrain must remain
+distinct, with authority declared for the specific property.</p>
+<p>A Map is the structured representation being governed. It may express
+adopted intent or record selected observed structure. Terrain is the
+system state the workflow observes or proposes to change.</p>
+<p>Part I established the mechanism before the theory. Part II explains
+why it needs external checks and enforced limits, which the book calls
+<a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>. Lower-level evidence may inform higher-level Maps, while
+adopted Maps constrain the workflows below. Variance is the starting
+condition those workflows must manage.</p>
+<p>Large Language Models (LLMs) are <strong>Stochastic
+Generators</strong>: probability models that produce plausible outputs,
+not guaranteed ones. Reliable automation puts deterministic checks
+around generation. The full Software Development as Code (SDaC) runtime
+is the <strong>SDaC Engine</strong>; the model is one component inside
+it.</p>
+<h2 id="llms-are-probability-generators">LLMs Are Probability
+Generators</h2>
+<p>At its core, an autoregressive LLM assigns probabilities to possible
+next tokens. The decoder then selects or samples a token according to
+its configuration. Small differences early in that sequence can produce
+materially different candidates.</p>
+<p>Three implications matter in SDaC:</p>
+<ul>
+<li><p><strong>No guarantee of identical output</strong>: With sampling
+enabled, the same task request can produce different candidates across
+runs. Even when a provider supports greedy decoding or a temperature of
+<code>0</code>, do not assume exact replay unless the full inference
+path provides that guarantee.</p></li>
+<li><p><strong>Contextual sensitivity</strong>: Small changes in input
+or context can shift the distribution and change the output.</p></li>
+<li><p><strong>Small variations can cause distant effects</strong>: A
+minor output change can alter another interface, file, or behavior
+without producing a simple local failure path.</p></li>
+</ul>
+<p>This is why SDaC treats generation as one component in a system, not
+as the plan itself: you measure variance, constrain it, and gate it.</p>
+<h2 id="the-specifiable-problem-solving-evolutionary-spe-mismatch">The
+Specifiable / Problem-solving / Evolutionary (S/P/E) Mismatch</h2>
+<p>Lehman’s frame separates three different kinds of software work.<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a> In plain language: some systems are
+exact, some are heuristic, and some live in a changing world.</p>
+<ol type="1">
+<li><strong>S-Type (Specifiable):</strong> The problem is formally
+defined. Correctness is absolute. A compiler or schema validator is
+S-Type.</li>
+<li><strong>P-Type (Problem-solving):</strong> The solution is judged by
+acceptability rather than a <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> formal specification. Bounded LLM
+generation is P-Type work in this frame.</li>
+<li><strong>E-Type (Evolutionary):</strong> The system is embedded in
+reality. Because the world changes, the software must keep changing to
+stay useful. Your production codebase is E-Type.</li>
+</ol>
+<p>Lehman’s First Law says an E-Type system must be continually adapted,
+or it becomes progressively less satisfactory. Raw one-shot generation
+does not solve that evolutionary problem: the system and its environment
+continue to change while the generator sees only a bounded, partial
+representation.</p>
+<p>When you use a raw AI assistant, you are asking a <strong>Stochastic
+Generator</strong> to perform <strong>P-Type work</strong> directly on
+an <strong>E-Type system</strong>: a heuristic component touching a
+changing real-world codebase.</p>
+<p>An unconstrained <a class="concept-link" href="concepts#stochastic-generator" title="See concept: Stochastic Generator">Stochastic Generator</a> produces variants, some of
+which violate the realities of the E-Type environment. The variance is
+stochastic drift; a violated constraint is a validation failure.</p>
+<p>In short: AI performs P-Type work through a Stochastic Generator, the
+real-world system is E-Type, and SDaC places deterministic boundaries
+between them.</p>
+<p><strong>The SDaC Synthesis: P-Type Work Behind Deterministic
+Boundaries</strong></p>
+<p>Formally grounded Validators can be implemented as S-Type components:
+parsers, schema checks, type boundaries, and other exact checks.
+Rule-based and behavioral grounding add authored constraints and
+observed cases where formal completeness is impossible.</p>
+<p>This is the theoretical justification for the <a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>
+from Chapter 2. Deterministic <code>Prep</code> and
+<code>Validation</code> bound the Stochastic Generator’s P-Type work
+without pretending every rule is formally complete.</p>
+<p>Every Validator supplies findings at an enforceable boundary. Its
+grounding may be formal, rule-based, or behavioral, but its result is
+still explicit evidence for routing, including a <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> when one is
+needed.</p>
+<h2 id="generative-ai-changes-the-rate-not-the-evolutionary-problem">Generative
+AI Changes the Rate, Not the Evolutionary Problem</h2>
+<p>The S/P/E mismatch describes the risk around one generated candidate.
+Lehman’s broader laws describe pressures that emerge as an E-Type system
+changes repeatedly.<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a> They apply to the evolving system
+and its development process, not to the model in isolation. The
+applications below are the author’s synthesis.</p>
+<p>The laws matter here in three groups: continuing change and growth
+create pressure to act; increasing complexity and declining quality
+create costs; organizational limits and feedback constrain how quickly
+useful change can be absorbed.</p>
+<p>The First Law, <strong>Continuing Change</strong>, and the Sixth,
+<strong>Continuing Growth</strong>, establish that an E-Type system must
+keep adapting and developing useful capability. Generative AI makes
+proposals for both cheaper. It does not establish that a proposal
+reflects current intent, fits the system, preserves existing
+obligations, or deserves admission.</p>
+<p>The Second Law, <strong>Increasing Complexity</strong>, and the
+Seventh, <strong>Declining Quality</strong>, describe two costs of
+repeated change. New abstractions, dependencies, and exceptions can
+accumulate faster than they are integrated, while the operating
+environment can move away from assumptions that were once valid. A
+generator evaluated against stale checks can optimize an obsolete target
+efficiently. Deliberate simplification and refreshed evidence therefore
+belong inside evolutionary work.</p>
+<p>The Fourth Law, <strong>Conservation of Organisational
+Stability</strong>, and the Fifth, <strong>Conservation of
+Familiarity</strong>, concern limits in the activity and shared
+understanding around evolution. AI may alter their historical rates, but
+candidate output is not completed work. Intent, validation, review,
+integration, and learning still consume scarce capacity. A larger
+context window also does not explain why an interface exists or which
+external promise depends on it. <a class="concept-link" href="concepts#work-and-evidence" title="See concept: Work and Evidence">Work and evidence</a> must remain small
+enough to reconstruct.</p>
+<p>The Third Law, <strong>Self-Regulation</strong>, and the Eighth,
+<strong>Feedback System</strong>, frame evolution as a constrained,
+multi-level feedback process. Faster proposals can reappear as review
+queues, failed checks, reversions, or delay until throughput stabilizes
+at an expensive or unsafe point. Explicit budgets and stopping rules
+make those pressures visible. The <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a> must also keep observation,
+proposal, validation, and admission distinct so a workflow cannot treat
+its own output as proof.</p>
+<p>These laws are empirical tendencies, not formal invariants, and the
+evidence behind them was uneven, particularly for the Fourth and Seventh
+Laws. Generative AI may change their rates. It does not abolish the
+underlying need to keep an E-Type system useful under changing
+conditions.</p>
+<p><a class="chapter-link" href="chapter-14-implications-for-delegated-automation#chapter-14-implications-for-delegated-automation" title="Go to: Chapter 14">Chapter 14</a> returns to the strategic consequence: proposal speed
+matters only as part of the full time to a governed response. It names
+and measures that interval as <strong>adaptation latency</strong>, then
+develops the author’s competitive hypothesis for environments where
+other organizations also accelerate search and implementation.</p>
+<h2 id="operating-a-stochastic-generator">Operating a Stochastic
+Generator</h2>
+<p>Pin whatever the provider exposes: model identity, decoding controls,
+request, context, tool versions, and any provider-supplied identifier
+that helps determine whether two runs used the same inference path. Then
+measure the exact workflow rather than copying a universal temperature
+or seed. A tight output contract matters more than a fashionable
+parameter value.</p>
+<p>Better models and prompts can improve candidate quality. Use the
+least expensive combination that reliably reaches the required checks
+within the declared attempt, time, and cost budgets. Mechanical edits
+under strict gates may need little capability; ambiguous cross-surface
+work may need a stronger model or a human decision. Compare alternatives
+only inside the same bounded workflow and checks.</p>
+<h2 id="internal-reasoning-does-not-replace-the-loop">Internal Reasoning
+Does Not Replace the Loop</h2>
+<p>Models may deliberate before producing an answer, and some APIs
+expose summaries of that reasoning.<a class="footnote-ref" href="#fn3" id="fnref3" role="doc-noteref"><sup>3</sup></a> Deliberation can improve
+a candidate, but it is not independent evidence. In a tool-enabled
+runtime the model may request a compiler or test run; the evidence comes
+from the recorded tool result, not from the model’s prediction of
+it.</p>
+<p>Reasoning capability may improve the change step. It does not turn
+the model into the external check or make “thinking hard” equivalent to
+a test passing.</p>
+<h2 id="the-drift-experiment-measure-structural-variance">The Drift
+Experiment: Measure Structural Variance</h2>
+<p>Repeat one bounded task under fixed inputs and controls. Distinguish
+textual variation from structural variation, failures, and the time or
+attempts needed for a passing proposal. Two patches may differ in
+whitespace yet make the same structural change; two polished patches may
+touch different interfaces or files.</p>
+<p>This is a local operating observation, not a general model benchmark.
+If unwanted structural variation or failure remains high, narrow the
+context and edit region, strengthen the checks, or use a more capable
+generator. The point is to make variance visible enough to govern.</p>
+<h2 id="why-ad-hoc-instructions-stop-scaling">Why Ad-hoc Instructions
+Stop Scaling</h2>
+<p>More specific instructions can reduce variation, but they cannot
+eliminate sampling or enforce their own interpretation. Extract the
+skeleton and edit region deterministically, generate only inside that
+boundary, and reject unwanted structural variance with Validators.
+Instructions shape a candidate; Physics decides whether it may
+advance.</p>
+<section class="footnotes footnotes-end-of-document" id="footnotes" role="doc-endnotes">
+<hr/>
+<ol>
+<li id="fn1"><p>Meir M. Lehman, “Programs, Life Cycles, and Laws of
+Software Evolution,” <em>Proceedings of the IEEE</em> 68, no. 9 (1980).
+<a href="https://doi.org/10.1109/PROC.1980.11805">Paper</a>.<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Meir M. Lehman and Juan F. Ramil, “Rules and Tools for
+Software Evolution Planning and Management,” <em>Annals of Software
+Engineering</em> 11 (2001), 15–44. The authors reported that support
+remained under investigation for the Fourth Law and that the available
+data neither supported nor negated the Seventh. <a href="https://plg.uwaterloo.ca/~migod/846/papers/lehman-ase-01.pdf">Paper</a>.<a class="footnote-back" href="#fnref2" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Provider APIs distinguish private reasoning from exposed
+summaries and recorded tool outputs. <a href="https://developers.openai.com/api/docs/models">OpenAI model
+documentation</a>, <a href="https://ai.google.dev/gemini-api/docs/thinking">Google Gemini
+documentation</a>.<a class="footnote-back" href="#fnref3" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 4 of Architects of Intent: The Stochastic Generator (Why You Need Physics). Both are reasonable enough to pass a weak Validator set. If the only…" data-share-title="Chapter 4 – The Stochastic Generator (Why You Need Physics) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-generator-why-you-need-physics&amp;text=Chapter%204%20%E2%80%93%20The%20Stochastic%20Generator%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-generator-why-you-need-physics" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-generator-why-you-need-physics" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-generator-why-you-need-physics&amp;title=Chapter%204%20%E2%80%93%20The%20Stochastic%20Generator%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%204%20%E2%80%93%20The%20Stochastic%20Generator%20%28Why%20You%20Need%20Physics%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%204%20of%20Architects%20of%20Intent%3A%20The%20Stochastic%20Generator%20%28Why%20You%20Need%20Physics%29.%20Both%20are%20reasonable%20enough%20to%20pass%20a%20weak%20Validator%20set.%20If%20the%20only%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-4-the-stochastic-generator-why-you-need-physics">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-3-define-good-your-first-validators">← Chapter 3 – Define “Good” (Your First Validators)</a>
+<a class="next-link" href="chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping">Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+</body>
+</html>

@@ -724,6 +724,16 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   min-width: 0;
 }
 
+.content .landing-hero-main--compact {
+  max-width: 54rem;
+  margin: 0 auto 1.5rem auto;
+  padding: 0.8rem 0.65rem 0.25rem 0.65rem;
+}
+
+.content .landing-hero-main--compact > .landing-title-grid {
+  max-width: none;
+}
+
 .content .landing-hero-main > .landing-hero-meta,
 .content .landing-hero-main > .landing-title-grid,
 .content .landing-hero-main > p,
@@ -1020,6 +1030,7 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(0, 0, 0, 0.08)), var(--code-block-bg);
   overflow-x: auto;
   overflow-y: hidden;
+  scroll-margin-top: 6rem;
 }
 
 .content pre.mermaid::before {
@@ -1034,11 +1045,18 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 }
 
 .content pre.mermaid svg {
-  width: auto;
+  width: 100%;
   max-width: 100%;
+  min-width: 0;
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .content pre.mermaid {
+    scroll-margin-top: 11.5rem;
+  }
 }
 
 .mermaid-modal {
@@ -1793,6 +1811,23 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
   .content p.cta-row .cta-button {
     width: 100%;
     min-height: 2.75rem;
+  }
+
+  .content .landing-hero-main--compact {
+    margin-bottom: 1rem;
+    padding-top: 0.35rem;
+  }
+
+  .content .landing-hero-main--compact p.cta-row {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .content .landing-hero-main--compact p.cta-row .cta-button {
+    flex: 1 1 0;
+    width: auto;
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
   }
 
   .content .landing-signal-grid,

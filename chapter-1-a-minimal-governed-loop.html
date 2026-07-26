@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Chapter 1 – A Minimal Governed Loop | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Chapter 1 of Architects of Intent: A Minimal Governed Loop. Build one small loop: code changes, docs sync, checks decide." name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/chapter-1-a-minimal-governed-loop" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 1 – A Minimal Governed Loop | Architects of Intent" property="og:title"/>
+<meta content="Chapter 1 of Architects of Intent: A Minimal Governed Loop. Build one small loop: code changes, docs sync, checks decide." property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-1-a-minimal-governed-loop" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 1 – A Minimal Governed Loop | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 1 – A Minimal Governed Loop | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 1 of Architects of Intent: A Minimal Governed Loop. Build one small loop: code changes, docs sync, checks decide." name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 1 – A Minimal Governed Loop | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 1 – A Minimal Governed Loop", "description": "Chapter 1 of Architects of Intent: A Minimal Governed Loop. Build one small loop: code changes, docs sync, checks decide.", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-1-a-minimal-governed-loop", "mainEntityOfPage": "https://architectsofintent.com/chapter-1-a-minimal-governed-loop", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT5M", "articleSection": "Part I – Building a Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part I – Building a Governed Loop</div>
+<div class="chapter-meta"><span class="read-time">5 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="chapter-1-a-minimal-governed-loop">Chapter 1 – A Minimal
+Governed Loop</h1>
+<p>Build one small loop: code changes, docs sync, checks decide.</p>
+<p>The introduction argued for engineering the loop instead of trusting
+raw generation. This chapter defines the smallest useful version of that
+loop.</p>
+<p>We’ll keep the language plain until the pattern is visible, then
+we’ll name the parts so we can reuse them precisely.</p>
+</div>
+</header>
+<h2 id="keep-code-and-docs-in-sync">Keep Code and Docs in Sync</h2>
+<p>The loop aligns one code surface with one doc or spec block through a
+bounded change step, an independent check, and retained evidence. The
+change step emits a patch or works in an isolated candidate workspace;
+it does not adopt its own result. <a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a> later turns the goal into a
+typed <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> and separates that authority from the <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>
+for one execution.</p>
+<p>This first version stays deterministic so the mechanism is visible
+without model output, API failure, or non-convergence. Chapter 2 adds
+stochastic work; Chapter 5 adds bounded recovery.</p>
+<h3 id="the-smallest-useful-loop">The Smallest Useful Loop</h3>
+<p>The pattern needs one small code surface and one doc or spec block
+that should mirror it.</p>
+<p>A concrete first loop can be a public-interface sync. The code is the
+observed source. The generated inventory is the description that should
+mirror it. A bounded writer proposes the update, an independent
+comparison checks it, and a small evidence record preserves what
+happened. The book calls these roles <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>, <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>, <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>, <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>,
+and <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a>.</p>
+<p>A file is not authoritative in every context. Authority belongs to
+the specific property being decided. Here, source code defines the
+exported-signature inventory, but it does not define intended API policy
+or compatibility. This loop makes the following declaration:</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Declaration</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Governed property</td>
+<td>the generated inventory exactly reproduces the signatures exported
+by the pinned source revision</td>
+</tr>
+<tr>
+<td>Observed Terrain</td>
+<td>signatures extracted from that source revision</td>
+</tr>
+<tr>
+<td>Map surface</td>
+<td>only the generated <code>Public Interfaces</code> inventory
+block</td>
+</tr>
+<tr>
+<td>Authority for this property</td>
+<td>the pinned source revision, but only for its current
+exported-signature inventory</td>
+</tr>
+<tr>
+<td>Permitted effect and adoption</td>
+<td>propose a rewrite of that block; a separate authorized gate rechecks
+and adopts it</td>
+</tr>
+</tbody>
+</table>
+<p>Code is not authoritative for intended API policy, compatibility, or
+behavior. Those properties require their own adopted Maps and
+scope-matched Validators. If the architecture block were an API contract
+rather than a generated inventory, the direction would reverse: the
+contract would be Map authority, code would be observed Terrain, and a
+mismatch would fail instead of rewriting the contract. Chapter 10
+generalizes this as property-specific authority.</p>
+<p>The loop enters with one intent: update only the generated
+<code>Public Interfaces</code> inventory so it exactly matches the
+exported Terrain signatures. One compact trace shows the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>
+claim:</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What the loop establishes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Observed state</td>
+<td>Terrain exports <code>calculate_tax(amount, country, rate)</code>
+and <code>normalize_country(country)</code></td>
+</tr>
+<tr>
+<td><a class="concept-link" href="concepts#candidate" title="See concept: Candidate">Candidate</a></td>
+<td>The generated Map block contains those exact signatures, and nothing
+else changes</td>
+</tr>
+<tr>
+<td>Independent check</td>
+<td>Correspondence and scope both hold</td>
+</tr>
+<tr>
+<td>Run outcome</td>
+<td>The proposal and its evidence are recorded and sealed</td>
+</tr>
+<tr>
+<td>Separate adoption</td>
+<td>The gate rechecks the current Map state before applying the
+candidate</td>
+</tr>
+<tr>
+<td>Next run</td>
+<td>Map and Terrain already agree, so no change is required</td>
+</tr>
+</tbody>
+</table>
+<p>The Validator result is structured evidence, not a reassuring
+sentence. This loop has no separate <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> because there is no policy
+choice to make. Its scope-matched Validator covers the narrow
+correspondence claim, and each evidence class has one semantic
+outcome:</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Correspondence holds and the candidate changes the Map</td>
+<td>Successful proposal, sealed for separate adoption</td>
+</tr>
+<tr>
+<td>Correspondence already holds and nothing changed</td>
+<td>No-op, recorded and sealed</td>
+</tr>
+<tr>
+<td>Correspondence or scope fails</td>
+<td>Evidenced failure; the candidate does not advance</td>
+</tr>
+</tbody>
+</table>
+<p>If correspondence or scope failed but the recorded outcome says
+success, the record contradicts its own evidence. Reject that account
+rather than preserving it as valid run history. The Validator does not
+apply the patch, and a successful proposal does not make itself
+authoritative. A Terrain-changing candidate would likewise require
+separate admission.</p>
+<p>The implementation needs four things: a bounded writer, an
+independent check, a fixed mapping from each result to an outcome, and
+one stable interface through which the loop runs. For one mechanically
+decidable property, a separate decision layer adds nothing.</p>
+<p>The check must still be strong enough for the claim made at that
+scope. A unit test or the corresponding verification step in the V-model
+supports only the property it checks. Here, exact signature comparison
+decides the inventory claim; it says nothing broader about API intent,
+compatibility, behavior, or design quality. Chapter 5 introduces a Judge
+only when evidence can support more than one allowed transition or
+requires interpretation.</p>
+<h3 id="stable-interface">Stable Interface</h3>
+<p>Put the Effector and Validator behind a stable interface that humans,
+continuous integration, and agents can all call. They should invoke the
+same operation and receive the same structured result while
+implementations remain swappable. After alignment, the same interface
+returns a no-op without changing the contract.</p>
+<p>Git can preserve the patch, but a patch alone is not a Ledger. Even
+this minimal record ties the intent and input state to the diff,
+Validator result, terminal transition, and seal. Later chapters add
+Mission identity, Validator versions, approvals, and richer output
+evidence.</p>
+<p>The negative case is part of the contract: a deliberate Map/Terrain
+mismatch must produce machine-readable evidence and must not advance.
+After a corrected proposal is separately adopted, the next run should
+produce a no-op.</p>
+<h2 id="from-one-loop-to-a-factory">From One Loop to a Factory</h2>
+<p>One bounded loop is the unit of trust, not the destination. When its
+inputs, effects, checks, outputs, result, and evidence are stable, it
+can become a dependable step inside a larger workflow. The enclosing
+workflow may consume its declared outputs and sealed result. It may not
+turn a failed step into success, inherit undeclared effects, or treat
+the step’s evidence as new authority.</p>
+<p>Scale comes from accumulating these workflows around recurring
+changes. Evidence from a reliable recurring class of low-risk work can
+support a policy proposal for deeper delegation. If independently
+adopted, that policy may trigger or admit later instances without a new
+human decision. Human attention then moves toward exceptions, novel
+intent, protected rule changes, and high-consequence admission. The aim
+is fewer routine interruptions per admitted change, not autonomy for its
+own sake.</p>
+<p>This is why the first loop stays small. A step must be narrow enough
+to reason about before it can be trusted as part of something larger. We
+have made one change process explicit and checkable: its intent,
+effects, evidence, outcomes, and separate adoption path are visible.
+Finite, inspectable failure is the floor; the larger ambition is a
+factory in which most recurring steps converge toward stated intent
+within their budgets. The following chapters make the process
+probabilistic, versioned, composable, and protected without abandoning
+that unit.</p>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 1 of Architects of Intent: A Minimal Governed Loop. Build one small loop: code changes, docs sync, checks decide." data-share-title="Chapter 1 – A Minimal Governed Loop | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-1-a-minimal-governed-loop" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-a-minimal-governed-loop&amp;text=Chapter%201%20%E2%80%93%20A%20Minimal%20Governed%20Loop%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-a-minimal-governed-loop" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-a-minimal-governed-loop" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-1-a-minimal-governed-loop&amp;title=Chapter%201%20%E2%80%93%20A%20Minimal%20Governed%20Loop%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%201%20%E2%80%93%20A%20Minimal%20Governed%20Loop%20%7C%20Architects%20of%20Intent&amp;body=Chapter%201%20of%20Architects%20of%20Intent%3A%20A%20Minimal%20Governed%20Loop.%20Build%20one%20small%20loop%3A%20code%20changes%2C%20docs%20sync%2C%20checks%20decide.%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-1-a-minimal-governed-loop">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="introduction">← Introduction</a>
+<a class="next-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter 2 – The Deterministic Sandwich (Your First Pattern) →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+</body>
+</html>

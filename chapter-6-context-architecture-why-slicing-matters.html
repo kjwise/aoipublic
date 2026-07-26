@@ -5,7 +5,7 @@
 <title>Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). That packet is small enough to reason about and strict enough to grade. It is…" name="description"/>
+<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
@@ -13,7 +13,7 @@
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" property="og:title"/>
-<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). That packet is small enough to reason about and strict enough to grade. It is…" property="og:description"/>
+<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -21,23 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). That packet is small enough to reason about and strict enough to grade. It is…" name="twitter:description"/>
+<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 6 – Context Architecture (Why Slicing Matters)", "description": "Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). That packet is small enough to reason about and strict enough to grade. It is…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "mainEntityOfPage": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT16M", "articleSection": "Part II Understand It The Theory Behind Reliability", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 6 – Context Architecture (Why Slicing Matters)", "description": "Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "mainEntityOfPage": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT8M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
-<script defer="" src="script.js?v=180c7c0ba0a2"></script>
-<link href="infographic-tailwind.css" rel="stylesheet"/>
-<script src="plotly-canvas-patch.js"></script>
-<script defer="" src="https://cdn.plot.ly/plotly-3.3.1.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<link href="infographic-deck-runtime.css" rel="stylesheet"/>
-<link href="infographic-fragment-shell.css" rel="stylesheet"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -49,9 +43,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
-<a href="for-leaders">For Leaders</a>
-<a href="philosophy">Philosophy</a>
-<a href="concepts">Concepts</a>
+<a href="concepts">Core Vocabulary</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
@@ -59,8 +51,8 @@
 <main class="content content--chapter" id="main">
 <header class="chapter-header">
 <div class="chapter-kicker">
-<div class="part-title">Part II Understand It The Theory Behind Reliability</div>
-<div class="chapter-meta"><span class="read-time">16 min read</span></div>
+<div class="part-title">Part II – Reliability Foundations</div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
@@ -68,615 +60,290 @@ Context Architecture (Why Slicing Matters)</h1>
 <p>Start with a failing tax case:</p>
 </div>
 </header>
-<pre class="text"><code>FAIL test_calculate_income_tax_high_earner_scenario
+<pre class="test-output"><code>FAIL test_calculate_income_tax_high_earner_scenario
 expected: 42_750
 actual:   43_500</code></pre>
-<p>Do not hand the model the whole repo. Build one bounded slice:</p>
+<p>Do not hand the model the whole repository. Build one bounded
+slice:</p>
 <ul>
-<li><strong>Anchor:</strong> the failing test case.</li>
-<li><strong>Expand:</strong> the tax rule table, the function under
-test, and the one-hop helpers it calls.</li>
-<li><strong>Prune:</strong> everything else, including unrelated
-endpoints, docs, and historical tickets.</li>
+<li><strong>Anchor:</strong> start from the failing test.</li>
+<li><strong>Expand:</strong> include the approved tax rule, the function
+under test, its direct helpers, and the checks needed to judge a
+candidate.</li>
+<li><strong>Prune:</strong> exclude unrelated endpoints, documentation,
+history, and writable surfaces.</li>
 </ul>
-<p>One minimal slice manifest looks like this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="fu">anchor</span><span class="kw">:</span></span>
-<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="at">  </span><span class="fu">file</span><span class="kw">:</span><span class="at"> tests/test_tax_service.py</span></span>
-<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="at">  </span><span class="fu">symbol</span><span class="kw">:</span><span class="at"> test_calculate_income_tax_high_earner_scenario</span></span>
-<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a><span class="fu">map</span><span class="kw">:</span></span>
-<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> docs/tax_rules.md</span><span class="co">#progressive_brackets</span></span>
-<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a><span class="fu">terrain</span><span class="kw">:</span></span>
-<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/tax_service.py</span><span class="co">#calculate_income_tax</span></span>
-<span id="cb2-8"><a aria-hidden="true" href="#cb2-8" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/tax_service.py</span><span class="co">#round_currency</span></span>
-<span id="cb2-9"><a aria-hidden="true" href="#cb2-9" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
-<span id="cb2-10"><a aria-hidden="true" href="#cb2-10" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_test_tax_case</span></span>
-<span id="cb2-11"><a aria-hidden="true" href="#cb2-11" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> signature_unchanged</span></span></code></pre></div>
-<p>That packet is small enough to reason about and strict enough to
-grade. It is the practical slicing rule in one screen: <strong>Anchor
--&gt; Expand -&gt; Prune</strong>.</p>
-<p>Part I showed the loop. This chapter defines the <a class="concept-link" href="concepts#context-architecture" title="See concept: Context Architecture">context architecture</a>
-that makes that loop deterministic.</p>
-<p>Context windows keep expanding, but attention is finite. That limit
-is <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>. How you select, structure, and bound the window is
-architecture.</p>
-<p>Slicing is not about fitting more tokens. It is about concentrating
-attention on contracts, evidence, and boundaries so generation does not
-wander into drift. When context grows faster than attention quality,
-outputs can look complete while quietly violating constraints. Slicing
-is the control surface that keeps that failure mode visible and
-testable.</p>
-<section class="col-span-1 md:col-span-12 mt-8 mb-8" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-08-optimization-terrain" data-infographic-selector="main &gt; section:nth-of-type(8)" data-infographic-source="infographic.html" data-infographic-status="published">
-<span aria-hidden="true" data-infographic-fragment-label="1">i1-section-08-optimization-terrain</span>
-<div class="bg-brand-dark rounded-xl shadow-2xl p-8 text-white overflow-hidden relative">
-<h2 class="text-3xl font-bold mb-2">Shaping the Optimization Terrain</h2>
-<p class="text-brand-muted mb-6 max-w-3xl text-lg">
-                        This is the geometry view of slicing. You are not dumping the whole repository into the window. You <strong>reshape the terrain</strong> so valid paths are easier and drift is harder.
-                        <br/><br/>
-<span class="text-brand-vibrant">Intent defines the target basin.</span> The slice, contracts, and validators warp the solution space so each loop iteration takes the shortest safe path toward the optima you actually want, not a nearby but wrong local maximum.
-                </p>
-<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
-<div class="text-sm text-brand-muted">
-                        Intent preset:
-                        <span class="text-brand-strong font-semibold" id="terrainPresetLabel">Central Optima</span>
-</div>
-<button aria-controls="terrainPlot" class="inline-flex items-center justify-center px-4 py-2 rounded-xl border border-brand-border bg-brand-light text-brand-strong font-semibold hover:bg-[rgba(122,162,247,0.16)] focus:outline-none focus:ring-2 focus:ring-brand-primary/60" id="terrainReshapeButton" type="button">
-                        Reshape Terrain
-                    </button>
-</div>
-<!-- Plotly Container -->
-<div class="plotly-container mx-auto bg-[rgba(6,7,12,0.70)] rounded-lg shadow-inner border border-brand-border" id="terrainPlot"></div>
-<div class="text-center mt-2 text-sm text-brand-muted">
-                    Interactive 3D terrain: peaks are higher-value, contract-satisfying outcomes; valleys are failure states and drift.
-                </div>
-</div>
+<pre class="mermaid"><code>flowchart TB
+    A[Anchor&lt;br/&gt;Failing case or target] --&gt; E[Expand&lt;br/&gt;Authority + evidence]
+    E --&gt; P[Prune&lt;br/&gt;Scope + relevance + budgets]
+    P --&gt; S[Bounded input]</code></pre>
+<p>Part I established a bounded loop. This chapter asks what that loop
+should receive. The answer is not the largest available prompt. It is
+the smallest reproducible input that contains the authority and evidence
+required for one bounded change.</p>
+<p>Long context can still be useful, but capacity does not imply uniform
+use. In controlled multi-document question-answering and key-value
+retrieval experiments, performance often declined when relevant
+information appeared in the middle of long inputs.<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+Those experiments establish positional fragility in those tasks. They do
+not establish that repository slicing prevents scope errors. The
+Software Development as Code (SDaC) hypothesis is narrower and must be
+tested locally: bounded, structured inputs should reduce irrelevant
+context, invented structure, and unauthorized effects compared with
+broad repository dumps.</p>
+<h2 id="semantic-density-correctness-and-relevance">Semantic Density,
+Correctness, and Relevance</h2>
+<p>A supporting semantic layer is any source a workflow can consult:
+documentation, a contract catalog, a knowledge base, an ontology, a
+retrieval index, a runbook, or structured operational memory. One goal
+is to concentrate meaning that can change the decision. The book calls
+that property <strong><a class="concept-link" href="concepts#semantic-density" title="See concept: Semantic Density">Semantic Density</a></strong>, and it must be
+considered with two other qualities:</p>
+<ul>
+<li><strong>Semantic Density:</strong> how much distinct,
+decision-bearing meaning the context carries.</li>
+<li><strong>Correctness:</strong> whether claims are traceable to
+evidence current enough for the decision, with contradictions exposed
+rather than silently reconciled.</li>
+<li><strong>Relevance:</strong> whether the material bears on the active
+task, governed property, and decision.</li>
+</ul>
+<p>Dense falsehood is dangerous. Correct but irrelevant material is
+noise. Relevant material padded with repetition wastes attention.
+Context quality therefore cannot be reduced to token count or one
+universal score. A useful slice carries enough meaning to act, enough
+evidence to check the result, and little that invites unsupported
+work.</p>
+<p>Authority remains separate from relevance. A retrieved incident
+report may explain an observed failure without authorizing a code
+change. A current implementation may show what the system does without
+defining what it ought to do. Every included source needs a declared
+role and provenance.</p>
+<p>Semantic layers also preserve only what an organization makes
+explicit. They can retain contracts, decisions, incident findings, and
+provenance. They do not automatically preserve tacit judgment,
+apprenticeship, or the reasons people recognize a bad solution before a
+check does. Context Architecture should expose decision-bearing
+relationships without pretending that encoded context is <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>
+institutional knowledge.</p>
+<h2 id="build-a-context-graph">Build a Context Graph</h2>
+<p>The larger structure behind one slice is a versioned relationship
+graph from which the bounded input is selected. The book calls this
+structure a <strong><a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a></strong>. It can begin as a
+repository-local index over files, symbols, and their direct
+relationships; it does not require an organization-wide graph
+platform.</p>
+<p>Its nodes are addressable sources such as files, symbols,
+documentation sections, schemas, policy clauses, test cases, runbook
+steps, or incident records. Typed edges record why one source relates to
+another—for example, calls, depends on, implements, is documented by, or
+is checked by.</p>
+<p>Whatever its size, the graph needs stable identity, provenance,
+deterministic ordering, and explicit failure. Given the same declared
+source identities and extractor version, protected extraction should
+produce the same graph snapshot or fail loudly.</p>
+<p>Project identity and tooling should come from protected repository
+metadata rather than model inference. Manifests, ownership records,
+registered schemas, and policy identify whether a target belongs to
+code, documentation, infrastructure, or data, and which extraction and
+checking rules apply. File extensions alone are weak evidence: the same
+Markdown format may contain approved policy, generated reference
+material, or untrusted background text.</p>
+<blockquote>
+<p><strong>Fan-out heuristic:</strong> As a starting point, inspect
+conceptual layers whose immediate fan-out falls far outside roughly
+seven siblings, plus or minus two. High fan-out can hide the relevant
+relationship; repeated one-child layers can waste context on traversal.
+This is a mnemonic, not a cognitive law, repository invariant, or gate.
+Use evidence from actual packets before reorganizing source or enforcing
+a threshold.</p>
+</blockquote>
+<h2 id="assemble-a-context-packet">Assemble a Context Packet</h2>
+<p>Slicing then applies the same three moves used in the tax
+example:</p>
+<ol type="1">
+<li><strong>Anchor</strong> on a machine-addressable failing case,
+finding, symbol, interface, or contract.</li>
+<li><strong>Expand</strong> only across relationships needed to
+understand, change, and check the governed property.</li>
+<li><strong>Prune</strong> by read scope, write scope, denied surfaces,
+and finite context and effect budgets.</li>
+</ol>
+<p>The result is a bounded input assembled for one run: a
+<strong><a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a></strong>. Its serialization is incidental. Its
+claims are not.</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Property</th>
+<th>What the packet must establish</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity</td>
+<td>The exact Mission, source revision, graph snapshot, extractor,
+slicer, and request-template identities</td>
+</tr>
+<tr>
+<td>Anchor</td>
+<td>The machine-addressable case, symbol, contract, or finding from
+which selection began</td>
+</tr>
+<tr>
+<td>Authority</td>
+<td>Which included sources may instruct the run and which adopted policy
+grants that role</td>
+</tr>
+<tr>
+<td>Evidence</td>
+<td>Which sources are observations only, with provenance, trust
+classification, and integrity identity</td>
+</tr>
+<tr>
+<td>Selection</td>
+<td>The allowed relationships, deterministic order, included surfaces,
+and deliberate exclusions</td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>Separate read and write boundaries, including explicitly denied
+surfaces</td>
+</tr>
+<tr>
+<td>Budgets</td>
+<td>Finite limits on context, effects, attempts, and other governed
+resources</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td>The checks needed to grade packet integrity and the eventual
+candidate</td>
+</tr>
+</tbody>
+</table>
+<p>Given the same fixed inputs, the extractor and slicer must produce
+the same ordered packet or fail. Once used, the packet is immutable.
+Later findings may justify a new packet revision inside existing read
+authority. Changing authority, writable scope, budgets, or required
+checks requires a newly authorized Mission revision.</p>
+<p>Give each Context Packet and referenced source a stable, verified
+identity, such as a Git commit for repository content or a content
+digest for a packet. Once used by a run, those exact versions remain
+immutable. Reuse their references across attempts instead of copying the
+same material into each attempt, and retain them long enough to
+reconstruct the exact input later. If required context cannot be
+resolved within read authority, preparation stops rather than silently
+widening the packet.</p>
+<p>Before generation, preparation must establish that:</p>
+<ul>
+<li>the anchor resolves to the fixed source or evidence identity
+declared by the Mission;</li>
+<li>authority and evidence remain distinct;</li>
+<li>read, write, and deny boundaries are explicit;</li>
+<li>required checking surfaces are present;</li>
+<li>budgets are finite; and</li>
+<li>the packet can be reconstructed without hidden chat state.</li>
+</ul>
+<p>A defect here is a context defect, not evidence that the model needs
+a broader prompt.</p>
+<h2 id="retrieval-proposes-policy-selects">Retrieval Proposes; Policy
+Selects</h2>
+<p>Retrieval can propose relevant nodes, but it does not decide the
+slice. Apply read policy before retrieval, retain source provenance, and
+filter results through the same relationship, trust, and budget rules
+used for deterministic discovery. Summaries are lossy evidence; they
+cannot replace adopted intent, current findings, or authoritative
+contracts.</p>
+<h2 id="when-required-context-does-not-fit">When Required Context Does
+Not Fit</h2>
+<p>If all required context cannot fit, split the work along a real
+semantic boundary instead of dropping a required contract. Each smaller
+proposal must use the same fixed baseline. The workflow must also
+declare the proposal order, reject or govern overlapping edits, and
+validate the combined result. Local success does not establish that the
+combined candidate satisfies the required checks.</p>
+<h2 id="when-the-slice-is-wrong">When the Slice Is Wrong</h2>
+<p>The opening tax case already shows why a concrete anchor matters. Two
+broader failure classes complete the picture:</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Failure</th>
+<th>What goes wrong</th>
+<th>Correct response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Too small</td>
+<td>The packet omits required authority, a failing case, a direct
+dependency, or a checking surface; the generator must guess.</td>
+<td>Reject the packet and add the missing material within existing read
+authority. If that requires new authority, revise the Mission or
+stop.</td>
+</tr>
+<tr>
+<td>Too large</td>
+<td>Irrelevant material dilutes the governing property and exposes
+unrelated surfaces, encouraging broad or unauthorized changes.</td>
+<td>Tighten relationships and budgets, or split the Mission without
+discarding required context.</td>
+</tr>
+</tbody>
+</table>
+<p>Slicing cannot guarantee a good candidate. It makes the input
+boundary reproducible so a failure can be attributed more accurately to
+the candidate, the context, or the governing contract.</p>
+<h2 id="skeleton-first">Skeleton-First</h2>
+<p>Chapter 2 demonstrated one practical rule: deterministic checks
+extract the skeleton; probabilistic generation supplies only the
+permitted variable material. Context Architecture generalizes that
+rule.</p>
+<p>Typical skeleton surfaces include:</p>
+<ul>
+<li>signatures and interface contracts;</li>
+<li>schemas and route definitions;</li>
+<li>test names and assertion surfaces;</li>
+<li>file paths, imports, and allowed edit regions.</li>
+</ul>
+<p>Before generation, deterministic extraction records these surfaces
+from the fixed source revision. After generation, the workflow extracts
+them again from the candidate and compares them with the declared
+baseline. An unintended structural change fails before broader
+behavioral checks run.</p>
+<p>The rule does not make the extracted structure correct or current. It
+protects a declared boundary while the workflow evaluates the candidate
+against independent evidence. Missing context never authorizes broader
+scope by itself.</p>
+<p>Context Architecture therefore establishes a reproducible input
+boundary, not a successful outcome. In the tax example, it can establish
+which rule, failing case, implementation surface, and direct dependency
+the generator received, and which surfaces remained outside its
+authority. The checks must still decide whether the candidate satisfies
+the rule.</p>
+<p>With drift, refinement, and bounded context established, Part III can
+package work as explicit authority and compose these loops across
+recurring tasks.</p>
+<section class="footnotes footnotes-end-of-document" id="footnotes" role="doc-endnotes">
+<hr/>
+<ol>
+<li id="fn1"><p>Nelson F. Liu et al., “Lost in the Middle: How Language
+Models Use Long Contexts,” <em>Transactions of the Association for
+Computational Linguistics</em> 12 (2024): 157–173. <a href="https://aclanthology.org/2024.tacl-1.9/">Paper</a>.<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
-<p>Even when models accept huge contexts, attention is not uniform
-(“lost in the middle”). Structure is compression for attention: it
-shrinks the surface where generation can invent structure or leak
-scope.</p>
-<p>In practice, a well-kept Map carries more meaning per token than
-dumping full Terrain. Reliable systems do not just have context; they
-engineer it.</p>
-<p>Maps also exist at more than one scale. At the smallest scale, a Map
-might be a schema, a route table, or a dependency inventory. At larger
-scales, it becomes the <a class="concept-link" href="concepts#operating-map" title="See concept: Operating Map">operating Map</a>: architecture decisions, operating
-policies, incident learnings, onboarding guidance, brand voice, tone,
-and the constraints that tell the system what it is trying to preserve.
-Context Architecture decides which layer of that Map belongs in a given
-slice.</p>
-<p>Chapter 2 gave the operational version of slicing in
-<code>Prep</code>. Here we add the fuller model: Context Graphs,
-branching-factor heuristics, slice failure modes, and the boundary
-between deterministic extraction and stochastic generation.</p>
-<h2 id="from-one-slice-to-a-context-graph">From One Slice to a Context
-Graph</h2>
-<p>That tax slice did not come from intuition. It came from a larger
-topology.</p>
-<ul>
-<li>The failing test is one node.</li>
-<li>The tax rule document is a Map node that defines correctness.</li>
-<li><code>calculate_income_tax</code> and its helper functions are
-Terrain nodes.</li>
-<li>The test and validator surfaces are <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> nodes.</li>
-</ul>
-<p>Slicing is the act of pulling one bounded neighborhood out of that
-larger graph. <code>Anchor</code> chooses the starting node.
-<code>Expand</code> follows only the edges required to make the task
-executable. <code>Prune</code> enforces the budget so the slice stays
-reviewable.</p>
-<h2 id="from-context-windows-to-context-graphs">From Context Windows to
-Context Graphs</h2>
-<p><strong>Context Architecture</strong> is the discipline of
-engineering how context is selected, structured, and bounded so a large
-language model (LLM), or any agent, can act deterministically.</p>
-<p>The core artifact of Context Architecture is the <strong>Context
-Graph</strong>. It turns a repository into deterministic units plus
-typed relationships. Nodes can be files, functions, classes, symbols,
-documentation sections, API contracts, policy clauses, runbook steps,
-glossary entries, incident records, <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> cases, or specific
-lines. Edges express relations such as “depends on,” “implements,” “is
-validated by,” “calls,” “references,” and “is documented by.”</p>
-<p>In polyglot repositories, the graph also needs
-<strong>identity</strong>. A node is not just “a folder.” It is “a Rust
-crate built with Cargo” or “a Python package built with pyproject.” That
-identity is how the <a class="concept-link" href="concepts#driver-pattern" title="See concept: Driver Pattern">Driver Pattern</a> selects the right mechanism without
-guessing.</p>
-<p><strong>Example: node identity (computed
-deterministically)</strong></p>
-<ul>
-<li><code>services/ledger/</code> → Rust package
-(<code>cargo test</code>)</li>
-<li><code>services/api/</code> → Python package
-(<code>pytest</code>)</li>
-</ul>
-<p>Identity is not something the model should infer heuristically. It is
-something your deterministic extractors compute by reading manifests
-(<code>Cargo.toml</code>, <code>pyproject.toml</code>) and attaching the
-result to nodes.</p>
-<p>Instead of a monolithic blob, a <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a> lets you <em>slice</em>
-the exact subset of information relevant to one task. The slice is
-produced by deterministic rules. It should carry three things: the
-evidence itself, why it matters to the task, and how it should be
-interpreted. A good slice can mix hard and soft memory surfaces: an API
-schema, a runbook clause, a policy rule, and a tone guide can all be
-relevant, but they imply different kinds of enforcement.</p>
-<h3 id="deterministic-scope-routing-a-self-referential-example">Deterministic
-scope routing (a self-referential example)</h3>
-<p>Slicing starts one step earlier than “pick files”: it starts by
-deciding which plane you are in (docs, code, infra, data).</p>
-<p>Do that routing deterministically (path rules, manifest detection),
-not by asking a model to guess. The heuristics can be intentionally
-plain:</p>
-<ul>
-<li><code>*.md</code> targets are treated as book scope.</li>
-<li><code>*.py</code> targets are treated as code scope.</li>
-<li>directories that contain a <code>book/</code> subtree are treated as
-book scope.</li>
-</ul>
-<p>That is Context Architecture in practice: deterministic routing
-before any stochastic step runs.</p>
-<h2 id="building-the-context-graph-deterministic-extraction">Building
-the Context Graph (Deterministic Extraction)</h2>
-<p>You don’t need a perfect graph to start. You need a deterministic
-extractor that produces stable nodes and stable edges.</p>
-<p>If you want implementation guidance (storage options, incremental
-rebuilds, and query shapes), see the Context Graph implementation guide
-in <a class="chapter-link" href="appendix-c-pattern-library#appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a>.</p>
-<p>At minimum, build it in two passes:</p>
-<ol type="1">
-<li><strong>Extract nodes:</strong> files, symbols, doc sections,
-schemas, Immune System cases.</li>
-<li><strong>Derive edges:</strong> imports/calls, “documented by”,
-“validated by”, “exercises”.</li>
-</ol>
-<p>You don’t need a fancy query language on day one. You need one
-reliable move:</p>
-<ul>
-<li>choose an <strong>anchor</strong></li>
-<li>include the smallest neighborhood that makes the anchor executable
-(contract + code + tests)</li>
-<li>prune aggressively (node/token budgets, one-hop edges)</li>
-</ul>
-<p><strong>Example: anchor → slice (conceptual)</strong></p>
-<ul>
-<li><strong>Anchor:</strong> the failing case.</li>
-<li><strong>Map:</strong> the contract (schema / rules doc) that defines
-correctness.</li>
-<li><strong>Terrain:</strong> the implementation under test + direct
-dependencies.</li>
-<li><strong>Prune:</strong> one failing case, one-hop edges, strict
-budgets.</li>
-</ul>
-<p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
-<code>make graph</code> and <code>make slice</code> targets that
-demonstrate this. <code>build_context_graph.py</code> is a simple
-extractor, and <code>slice_context_graph.py</code> consumes the graph to
-produce a bounded <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">context packet</a>.</p>
-<h2 id="how-to-slice-a-context-graph-for-deterministic-action">How to
-Slice a Context Graph for Deterministic Action</h2>
-<p>The goal of slicing is precision: the minimum context that keeps
-determinism high and drift low.</p>
-<p>Use a deterministic four-step slice:</p>
-<ol type="1">
-<li><strong>Anchor first:</strong> start from the failing case, target
-symbol, or interface being changed.
-<ul>
-<li>Good anchors are concrete and machine-addressable (file + symbol,
-failing test id, validator code).</li>
-<li>If you cannot name the anchor precisely, you are still in diagnosis
-mode, not execution mode.</li>
-</ul></li>
-<li><strong>Map first:</strong> include contracts, schemas, mission
-policy, and only docs/config that constrain correctness.
-<ul>
-<li>Prefer sources that define “must” conditions (schema, API contract,
-policy file) over explanatory prose.</li>
-<li>Keep authority explicit: what is allowed to change, and what counts
-as done.</li>
-</ul></li>
-<li><strong>Terrain second:</strong> include anchor implementation,
-one-hop dependencies, and the Judge surface that proves correctness.
-<ul>
-<li>Pull runtime behavior and test/assertion surfaces together so edits
-can be validated immediately.</li>
-<li>Avoid pulling whole subsystems when a one-hop neighborhood is
-enough.</li>
-</ul></li>
-<li><strong>Prune by budget:</strong> remove unrelated modules/history
-and enforce node/token/diff budgets.
-<ul>
-<li>Budget is part of correctness, not just performance.</li>
-<li>If scope grows, make that an explicit mission change instead of
-silent drift.</li>
-</ul></li>
-</ol>
-<p>If required dependencies still do not fit, split the Mission or chunk
-deterministically.</p>
-<h3 id="minimal-slice-manifest-deterministic-handoff">Minimal slice
-manifest (deterministic handoff)</h3>
-<p>Treat each slice as an explicit artifact, not an implicit prompt. A
-minimal manifest can be serialized and audited:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> tax-fix-2026-02-23</span></span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="fu">anchor</span><span class="kw">:</span></span>
-<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="at">  </span><span class="fu">file</span><span class="kw">:</span><span class="at"> tests/test_tax_service.py</span></span>
-<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="at">  </span><span class="fu">symbol</span><span class="kw">:</span><span class="at"> test_calculate_income_tax_high_earner_scenario</span></span>
-<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="fu">map</span><span class="kw">:</span></span>
-<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> docs/tax_rules.md</span><span class="co">#progressive_brackets</span></span>
-<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a><span class="fu">terrain</span><span class="kw">:</span></span>
-<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/tax_service.py</span><span class="co">#calculate_income_tax</span></span>
-<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
-<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">50</span></span>
-<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a><span class="at">  </span><span class="fu">max_attempts</span><span class="kw">:</span><span class="at"> </span><span class="dv">4</span></span>
-<span id="cb3-13"><a aria-hidden="true" href="#cb3-13" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
-<span id="cb3-14"><a aria-hidden="true" href="#cb3-14" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> signature_unchanged</span></span>
-<span id="cb3-15"><a aria-hidden="true" href="#cb3-15" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_test_tax_case</span></span></code></pre></div>
-<p>Two reasons this helps:</p>
-<ul>
-<li>It separates <strong>selection</strong> (what evidence is in-bounds)
-from <strong>generation</strong> (what candidate to propose).</li>
-<li>It gives the Judge and Ledger a stable contract for replay, diffing,
-and incident review.</li>
-</ul>
-<p>If a run fails, update the manifest deterministically (scope,
-budgets, gates) instead of growing ad-hoc prompt text.</p>
-<h3 id="slice-qa-checklist-before-you-call-the-model">Slice QA checklist
-(before you call the model)</h3>
-<p>Run a quick deterministic check:</p>
-<ul>
-<li>Anchor is explicit (<code>file + symbol</code> or
-<code>validator code + path</code>), not a vague sentence.</li>
-<li>At least one contract source is present (schema/interface/policy),
-not just implementation files.</li>
-<li>At least one Judge surface is present (failing case or validator
-assertion).</li>
-<li>Write scope is declared (allowlist or allowed regions), not
-implied.</li>
-<li>Budgets are finite (<code>max_attempts</code>, scope/diff limits),
-not open-ended.</li>
-<li>Retrieved evidence has provenance (file + line or section id).</li>
-<li>No unrelated subsystems are included “just in case.”</li>
-<li>The slice can be replayed without hidden chat state.</li>
-</ul>
-<p>If any of these fail, repair the slice before generation. Many “model
-quality” complaints in production loops are unresolved slice-quality
-defects.</p>
-<h3 id="context-priority-stack-what-to-include-first">Context priority
-stack (what to include first)</h3>
-<p>When you have a fixed context budget, prioritization matters more
-than cleverness. A practical ordering:</p>
-<ol type="1">
-<li><strong>Authority:</strong> system instructions + <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>
-(what is allowed, what “done” means).</li>
-<li><strong>Latest deterministic findings:</strong> the last Judge
-output (structured failures, file/line, error codes).</li>
-<li><strong>The anchor surface:</strong> the exact file/region/symbol
-you’re changing.</li>
-<li><strong>Interfaces and contracts:</strong> signatures, schemas,
-route tables, inventories (skeleton-first).</li>
-<li><strong>Immune System expectations:</strong> the one failing case
-(or the one contract-compat check) and the assertion surface that
-defines “correct.”</li>
-<li><strong>Direct dependencies:</strong> one-hop imports/calls/types
-needed to make the anchor executable.</li>
-<li><strong>Everything else:</strong> only if you still have budget, and
-only if you can justify the edge.</li>
-</ol>
-<p>If you’re forced to choose between “more code” and “the contract,”
-choose the contract. The fastest way to create drift is to let the
-<a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> guess what the contract was supposed to be.</p>
-<h3 id="chunking-patterns-when-the-slice-still-doesnt-fit">Chunking
-patterns (when the slice still doesn’t fit)</h3>
-<p>Sometimes the minimal neighborhood still exceeds the budget (big
-files, big contracts, or a high fan-out module). When that happens,
-chunking is not “split the text.” It’s: <em>choose a boundary that
-preserves meaning, then keep Physics in the loop.</em></p>
-<p>Common chunking patterns and trade-offs:</p>
-<ol type="1">
-<li><strong>File-level chunking:</strong> each file is a chunk. Simple,
-but weak on cross-file reasoning unless you also include extracted
-interfaces.</li>
-<li><strong>Dependency-aware chunking:</strong> anchor file + one-hop
-dependencies as separate chunks. Strong default for code, because
-boundaries follow imports/calls.</li>
-<li><strong>Task-focused chunking:</strong> split by role, not by size:
-contract chunk, implementation chunk, failing-case chunk. This often
-outperforms naive file splits.</li>
-<li><strong>Sliding-window chunking (large files):</strong> split one
-file into overlapping regions, but treat overlap as evidence, not
-permission to edit everywhere. Always pair this with allowed edit
-regions.</li>
-</ol>
-<p>Recombining outputs should also be deterministic:</p>
-<ul>
-<li>Prefer <strong>diff-shaped outputs</strong> against a working tree,
-not free-form rewrites.</li>
-<li>Validate <strong>each candidate</strong> locally (parse/scope first)
-before you attempt to merge it with other candidates.</li>
-<li>If chunk A implies a change in chunk B, don’t “guess the other
-chunk.” Expand the slice and run another iteration with the missing
-contract/code present.</li>
-</ul>
-<p>Operationally, treat chunks as review units: open a small PR per
-chunk (stack if you want). Merge sequentially so each diff stays inside
-the <a class="concept-link" href="concepts#review-budget" title="See concept: Review Budget">Review Budget</a> and leaves a clean Ledger trace. Only squash at the
-end if your merge policy requires it.</p>
-<p>Chunking is a sign your slice is doing real work. It is not a
-failure. It’s a reminder that context is a resource you budget, not an
-ocean you swim in.</p>
-<h3 id="retrieval-augmented-generation-rag-as-a-slice-hint-not-a-decision">Retrieval-Augmented
-Generation (RAG) as a slice hint, not a decision</h3>
-<p>Retrieval-augmented generation can help when you don’t know where the
-relevant context lives. But retrieval is not the same thing as slicing.
-Retrieval proposes candidates; slicing enforces boundaries.</p>
-<p>A pragmatic approach in codebases is hybrid:</p>
-<ul>
-<li><strong>Lexical retrieval:</strong> symbol/name search (fast, high
-precision when you have good anchors).</li>
-<li><strong>Structural retrieval:</strong> import graphs, call graphs,
-test-to-code mappings (deterministic, semantics-aware).</li>
-<li><strong>Embedding retrieval:</strong> useful for prose and “what
-file talks about X” questions, less reliable as a sole signal for code
-edits.</li>
-</ul>
-<p>Guardrails:</p>
-<ul>
-<li>Treat retrieved text as <strong>evidence with <a class="concept-link" href="concepts#provenance" title="See concept: Provenance">provenance</a></strong>
-(file + line), not authority.</li>
-<li>Run deterministic filters after retrieval: scope allowlists,
-dependency rules, and node/token budgets.</li>
-<li>Expect retrieval errors (false positives/negatives). If the loop is
-thrashing, treat it as a slice problem before you blame the model.</li>
-</ul>
-<p>If you don’t have retrieval infrastructure, don’t block on it. You
-can get far with deterministic anchors (failing cases, stack traces,
-schemas) and cheap lexical search.</p>
-<h3 id="summarization-is-lossy-compression-use-it-last">Summarization is
-lossy compression (use it last)</h3>
-<p>Summarization can compress context, but it introduces new failure
-modes: it can drop constraints, blur interfaces, or smuggle in invented
-structure.</p>
-<p>Rules of thumb:</p>
-<ul>
-<li>Never summarize the Mission Object or the latest Judge
-findings.</li>
-<li>Prefer deterministic extraction (skeleton-first) over stochastic
-summarization for contracts and interfaces.</li>
-<li>If you must summarize, do it on <strong>low-authority
-evidence</strong> (background docs) and carry provenance so a human can
-verify.</li>
-<li>Treat summaries as a cache you can invalidate: when a summary
-becomes suspicious, re-extract from the Terrain.</li>
-</ul>
-<h3 id="token-budgeting-leave-headroom">Token budgeting: leave
-headroom</h3>
-<p>Token counting is approximate. Different models use different
-tokenizers, and your request needs space for the model’s response.</p>
-<p>Practical rule: reserve ~20% headroom. If your maximum context is
-<span class="math inline"><em>B</em></span> tokens, aim to use at most
-~<span class="math inline">0.8<em>B</em></span> for inputs, then let the
-output and tooling fit in the rest.</p>
-<h3 id="repo-shaped-pseudo-example-fixing-contract-drift-with-a-bounded-slice">Repo-shaped
-pseudo-example: Fixing contract drift with a bounded slice</h3>
-<p>Suppose a CI <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> fails because your API contract drifted:</p>
-<pre class="text"><code>[validator] FAIL: openapi_drift
-  path=/api/users GET parameter.limit.type
-  expected=integer
-  actual=string</code></pre>
-<p>Your repository might look like this:</p>
-<pre class="text"><code>repo/
-  openapi.json                 # Map: the public contract surface
-  src/users_handler.ts         # Terrain: runtime behavior
-  tests/test_users_api.py      # Immune System cases
-  clients/mobile/src/api.ts    # downstream consumer
-  clients/mobile/src/types.ts  # downstream contract surface</code></pre>
-<p><strong>Anchor:</strong> the failing Validator finding
-(<code>openapi_drift</code>) is your anchor node. It already tells you
-<em>where correctness lives</em> (the contract) and <em>what broke</em>
-(a specific field/type).</p>
-<p><strong>Map first:</strong> include only the contract surface (and
-any policy that constrains it).</p>
-<ul>
-<li><p>the exact <code>openapi.json</code> region that defines
-<code>GET /api/users</code> and <code>limit</code></p></li>
-<li><p>the Mission Object for the repair (scope allowlist + budgets +
-acceptance criteria), for example:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Restore contract alignment for GET /api/users pagination"</span></span>
-<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="fu">scope_allowlist</span><span class="kw">:</span></span>
-<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> openapi.json</span></span>
-<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> src/users_handler.ts</span></span>
-<span id="cb6-5"><a aria-hidden="true" href="#cb6-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> clients/mobile/src/types.ts</span></span>
-<span id="cb6-6"><a aria-hidden="true" href="#cb6-6" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
-<span id="cb6-7"><a aria-hidden="true" href="#cb6-7" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb6-8"><a aria-hidden="true" href="#cb6-8" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">80</span></span>
-<span id="cb6-9"><a aria-hidden="true" href="#cb6-9" tabindex="-1"></a><span class="fu">gates</span><span class="kw">:</span></span>
-<span id="cb6-10"><a aria-hidden="true" href="#cb6-10" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> validate_openapi_compat</span></span>
-<span id="cb6-11"><a aria-hidden="true" href="#cb6-11" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> unit_tests</span></span>
-<span id="cb6-12"><a aria-hidden="true" href="#cb6-12" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> mobile_typecheck</span></span></code></pre></div></li>
-</ul>
-<p><strong>Terrain second:</strong> include only the code and the Immune
-System cases that interpret that contract.</p>
-<ul>
-<li><code>src/users_handler.ts</code> (the parsing/serialization path
-for <code>limit</code>)</li>
-<li>the one failing check (or contract-compat case) that proves the
-drift</li>
-<li><code>clients/mobile/src/types.ts</code> only if it is directly
-coupled to the contract surface (otherwise omit it)</li>
-</ul>
-<p><strong>Prune:</strong> do <em>not</em> include
-<code>clients/mobile/</code> wholesale, the entire OpenAPI file, or
-unrelated endpoints. If a file isn’t on the dependency chain of the
-anchor, it’s noise.</p>
-<p>Now the Effector is constrained by (1) a precise anchor, (2) a
-bounded contract slice, (3) the exact runtime path that implements it,
-and (4) gates that can prove the fix. That is what makes “fix this
-drift” deterministic instead of creative.</p>
-<h3 id="branching-factor-rule-of-seven">Branching Factor (Rule of
-Seven)</h3>
-<p>Structure is a compression algorithm for attention. Keep your Map and
-Terrain queryable by maintaining a healthy <a class="concept-link" href="concepts#branching-factor-rule-of-seven" title="See concept: Branching Factor (Rule of
-Seven)">branching factor</a> (fan-out) at
-each layer.</p>
-<ul>
-<li><strong>Junk drawers (high fan-out):</strong> A directory with 50
-files, or a Mission Object with 30 flat constraints, dilutes signal.
-Important details get washed out.</li>
-<li><strong>Rabbit holes (low fan-out):</strong> Five layers of folders
-each containing one item wastes context on traversal and hides peer
-relationships.</li>
-<li><strong>Heuristic:</strong> aim for ~7 (±2) siblings per node
-(directories, headings, grouped constraints). If you’re at 20, you’re
-missing a sub-abstraction. If you’re at 1, flatten.</li>
-</ul>
-<p><strong><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">Mechanism</a>: quick branching-factor checks</strong></p>
-<ul>
-<li>Count immediate children in a directory layer.</li>
-<li>Count sibling headings in a doc layer.</li>
-<li>If you’re consistently above ~10, create a sub-abstraction; if
-you’re at 1, flatten.</li>
-</ul>
-<p>The companion repo includes a <code>make branching-factor</code>
-target that runs <code>lint_branching_factor.py</code> to demonstrate
-this kind of linting.</p>
-<h2 id="failure-modes-the-wrong-slice">Failure Modes: The Wrong
-Slice</h2>
-<p>The easiest way to feel why slicing matters is to watch it fail.
-There are two common failure modes:</p>
-<ul>
-<li><strong>Slice too small:</strong> you omit a critical constraint or
-signal.</li>
-<li><strong>Slice too big:</strong> you drown the anchor in noise and
-invite scope leak.</li>
-</ul>
-<p>If you’re debugging a real loop, <a class="chapter-link" href="appendix-b-failure-mode-gallery#appendix-b-failure-mode-gallery" title="Go to: Appendix B">Appendix B</a> has a longer failure mode
-gallery (including slice-too-big / slice-too-small patterns and how to
-recognize them quickly).</p>
-<h3 id="slice-too-small-missing-the-contract">Slice too small: missing
-the contract</h3>
-<p>You want to Refine a bug in <code>calculate_income_tax()</code>. You
-do the “obvious” thing: give the model the whole file and ask it to make
-the failing test pass.</p>
-<p><strong>Wrong slice (too small):</strong></p>
-<ul>
-<li>Includes <code>tax_service.py</code></li>
-<li>Omits the failing test case (so the model can’t see the exact
-assertion)</li>
-<li>Omits the tax rules source (so the model can’t see the
-contract)</li>
-</ul>
-<p>The model guesses. It changes constants and logic that look
-plausible, but it has no way to verify intent.</p>
-<pre class="text"><code>[immune] FAIL: test_calculate_income_tax_high_earner_scenario
-  expected: 30000
-  got:      35000
-[validator] FAIL: regression detected (previously passing scenario now fails)</code></pre>
-<p><strong>Fix:</strong> include the failing test case and the Map node
-that defines correctness (tax rules / schema). Now the Judge can
-localize the failure and the loop has a real target.</p>
-<h3 id="slice-too-big-noise-and-scope-leak">Slice too big: noise and
-scope leak</h3>
-<p>The opposite failure is to “be safe” by throwing in everything:</p>
-<p><strong>Wrong slice (too big):</strong></p>
-<ul>
-<li><code>src/</code> (multiple modules, not just the tax function)</li>
-<li><code>tests/</code> (entire suite, not the failing case)</li>
-<li><code>docs/</code> (all tax docs, plus unrelated decisions)</li>
-<li>Whatever happens to be nearby in the repository</li>
-</ul>
-<p>Now the agent spends tokens on traversal and story-building. It may
-“fix” the bug by rewriting large sections, or by editing unrelated
-modules that happen to look adjacent.</p>
-<pre class="text"><code>[validator] FAIL: diff_budget exceeded (files_changed=12 &gt; 3)
-[validator] FAIL: out_of_scope_edit (touched src/payments/)</code></pre>
-<p><strong>Fix:</strong> set budgets (<code>max_nodes</code>,
-<code>max_tokens</code>, diff budget), anchor hard (start from the
-failing case), and prune deterministically (imports/calls only, one-hop
-dependencies, one failing case). If the slice is still too large, that’s
-a signal to split the Mission Object into smaller steps.</p>
-<p>Slicing is not about giving the model more. It’s about giving it the
-<em>right</em> evidence, in a bounded packet, so the loop can
-converge.</p>
-<h2 id="skeleton-first-rule-sensors-extract-models-generate">Skeleton-First
-Rule: Sensors Extract, Models Generate</h2>
-<p>Canonical rule (introduced in Chapter 2): deterministic Sensors
-extract the skeleton, and models generate only the flesh.</p>
-<p>Typical skeleton surfaces:</p>
-<ul>
-<li>signatures and interface contracts</li>
-<li>schemas and route definitions</li>
-<li><a class="concept-link" href="concepts#immune-system-case" title="See concept: Immune System case">Immune System case</a> names/assertion surfaces</li>
-<li>file paths, imports, and allowed edit regions</li>
-</ul>
-<p>Lock these with Validators before generation. If a candidate changes
-skeleton unintentionally, fail fast and retry with tighter scope.</p>
-<p>Lehman gives useful language here. The Skeleton is an
-<strong>S-Type</strong> artifact: it can be formally verified and
-extracted by deterministic Sensors, so it should not be generated
-heuristically. The Flesh is a <strong>P-Type</strong> problem:
-descriptions, refactorings, and draft code rely on heuristics. The whole
-system remains <strong>E-Type</strong> because it lives inside a
-changing world. Slicing is the discipline of drawing that boundary
-correctly: what stays read-only truth, and what is the allowable
-generative area.</p>
-<h2 id="strategic-component-composition-s-type-boundaries">Strategic
-Component Composition (S-Type Boundaries)</h2>
-<p>As your Context Graph grows, you face a composition problem. If you
-connect two P-Type generative steps directly, variance multiplies. The
-combined system becomes harder to test, reason about, and govern.</p>
-<p>The solution is strategic component composition: <strong>compose
-probabilistic systems using deterministic boundaries.</strong> Reuse
-existing high-quality components first, internal or OSS, and wrap them
-in S-Type interfaces, extractors, and validators so each seam stays
-testable. That keeps the E-Type whole evolvable without turning every
-internal boundary into a stochastic dependency.</p>
-<h2 id="worked-example-debugging-a-tax-calculation-with-a-precise-slice">Worked
-Example: Debugging a Tax Calculation with a Precise Slice</h2>
-<p>This is the same pattern from the contract-drift example, on a
-smaller surface. The goal is to repair behavior without widening blast
-radius.</p>
-<p>Apply the same pattern:</p>
-<ul>
-<li><strong>Anchor (Terrain signal):</strong> the failing case.</li>
-<li><strong>Map (intent):</strong> the contract that defines correctness
-(schema, rules doc, API contract).</li>
-<li><strong>Terrain (code):</strong> the function under test (and only
-the constants it touches).</li>
-<li><strong>Physics (gates):</strong> budgets + Validators that lock the
-skeleton (signature unchanged) and bound the blast radius.</li>
-</ul>
-<p>One way to represent that work packet:</p>
-<pre class="text"><code>anchor: tests/test_tax_service.py#test_calculate_income_tax_high_earner_scenario
-map:
-  - docs/tax_rules.md#progressive_brackets
-terrain:
-  - src/tax_service.py#calculate_income_tax
-validators:
-  - signature_unchanged(calculate_income_tax)
-  - diff_budget(files&lt;=1, lines&lt;=50)</code></pre>
-<p>Now the Judge has the contract, symptom, and exact edit surface. This
-is constrained repair, not open-ended generation. If this still
-thrashes, split by rule boundary (one bracket/rule per mission) rather
-than broadening the slice.</p>
-<p>The <code>examples/tax_service</code> directory in the companion repo
-provides a full, runnable example of this, including the test, a buggy
-implementation, and the tools to build and slice its context graph.</p>
-<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
-do this week</h2>
-<p>For one real task this week, build a manual slice instead of sending
-whole files. Include:</p>
-<ol type="1">
-<li><p>The anchor node (e.g., a function, a failing test case, or a
-validator code plus path).</p></li>
-<li><p>Any <code>meta/</code> or <code>docs/</code> files that define
-the intent or constraints.</p></li>
-<li><p>Only the directly relevant code dependencies.</p></li>
-<li><p>Then, ruthlessly prune anything that isn’t essential.</p></li>
-</ol>
-<p>Compare it against your usual broad context: token use, failure rate,
-and scope leaks.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). That packet is small enough to reason about and strict enough to grade. It is…" data-share-title="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" data-share-title="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -684,13 +351,13 @@ and scope leaks.</p>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;title=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%206%20of%20Architects%20of%20Intent%3A%20Context%20Architecture%20%28Why%20Slicing%20Matters%29.%20That%20packet%20is%20small%20enough%20to%20reason%20about%20and%20strict%20enough%20to%20grade.%20It%20is%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%206%20of%20Architects%20of%20Intent%3A%20Context%20Architecture%20%28Why%20Slicing%20Matters%29.%20Part%20I%20established%20a%20bounded%20loop.%20This%20chapter%20asks%20what%20that%20loop%20should%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
-<a class="prev-link" href="chapter-5-the-ouroboros-protocol-why-loops-converge">← Chapter 5 – The Ouroboros Protocol (Why Loops Converge)</a>
+<a class="prev-link" href="chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping">← Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping</a>
 <a class="next-link" href="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as Code (Mission Objects) →</a>
 </nav>
 <footer class="site-footer">
@@ -710,10 +377,9 @@ and scope leaks.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>
-<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>

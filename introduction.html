@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Introduction | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/introduction" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Introduction | Architects of Intent" property="og:title"/>
+<meta content="Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”" property="og:description"/>
+<meta content="https://architectsofintent.com/introduction" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Introduction | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Introduction | Architects of Intent" name="twitter:title"/>
+<meta content="Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Introduction | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Introduction", "description": "Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/introduction", "mainEntityOfPage": "https://architectsofintent.com/introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT15M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Introduction</div>
+<div class="chapter-meta"><span class="read-time">15 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="introduction">Introduction</h1>
+<p>Friday, 4:03 PM.</p>
+<p>You use an AI assistant to ship a feature fast:</p>
+<p>“Add cursor pagination to <code>GET /api/users</code> without
+breaking existing clients.”</p>
+<p>It changes the response from an array to an object containing
+<code>items</code> and <code>next_cursor</code>. It updates the handler
+and OpenAPI contract, regenerates the in-repository client, and rewrites
+the tests, fixtures, and snapshots around the new shape.</p>
+<p>The diff is coherent. Every candidate-controlled surface agrees. CI
+passes, the assistant reports that pagination is complete, and you
+merge.</p>
+<p>Velocity is high. Friction is low. Your confidence comes from a
+candidate that appears to corroborate itself.</p>
+<p>Saturday morning, client requests begin failing.</p>
+<p>Previously released clients still expect an array. The candidate
+changed the implementation and the evidence inside its own scope, but
+nothing compared the proposed response with the last released
+interface—the independently admitted compatibility baseline.</p>
+</div>
+</header>
+<div class="sourceCode" id="cb1"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="kw">--- a/openapi.yaml</span></span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="dt">+++ b/openapi.yaml</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="dt">@@ -318,4 +318,11 @@</span></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>     schema:</span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="st">-      type: array</span></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a><span class="st">-      items:</span></span>
+<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="st">-        $ref: "#/components/schemas/User"</span></span>
+<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a><span class="va">+      type: object</span></span>
+<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a><span class="va">+      required: [items, next_cursor]</span></span>
+<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a><span class="va">+      properties:</span></span>
+<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a><span class="va">+        items:</span></span>
+<span id="cb1-12"><a aria-hidden="true" href="#cb1-12" tabindex="-1"></a><span class="va">+          type: array</span></span>
+<span id="cb1-13"><a aria-hidden="true" href="#cb1-13" tabindex="-1"></a><span class="va">+          items:</span></span>
+<span id="cb1-14"><a aria-hidden="true" href="#cb1-14" tabindex="-1"></a><span class="va">+            $ref: "#/components/schemas/User"</span></span>
+<span id="cb1-15"><a aria-hidden="true" href="#cb1-15" tabindex="-1"></a><span class="va">+        next_cursor:</span></span>
+<span id="cb1-16"><a aria-hidden="true" href="#cb1-16" tabindex="-1"></a><span class="va">+          type: string</span></span>
+<span id="cb1-17"><a aria-hidden="true" href="#cb1-17" tabindex="-1"></a><span class="va">+          nullable: true</span></span></code></pre></div>
+<p>The model did not merely make one bad edit. It propagated one
+interpretation across implementation, specification, generated code, and
+candidate-controlled checks. A human can make the same mistake. AI
+changes the economics of that mistake: one assumption can spread across
+many plausible artifacts in seconds and return as a convincing green
+result.</p>
+<p>Now place the same change inside a governed workflow. Activated
+intent requires compatibility with the released response contract. The
+pinned contract baseline and compatibility <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> remain outside
+candidate authority, while generated tests count as supporting evidence.
+The first candidate fails because released clients cannot consume the
+new envelope. That finding returns while intent and scope stay fixed. A
+corrected candidate preserves compatibility, passes the protected check,
+and becomes a sealed proposal. A separate current-base admission
+decision determines whether it is merged.</p>
+<h2 id="the-architecture-in-brief">The Architecture in Brief</h2>
+<p>Treat the change process itself as a versioned engineering artifact.
+Its work contract states the intended result, who or what has authority,
+what may change, and which evidence is required. The runtime enforces
+permitted effects, transitions, and stopping rules. A separate gate
+decides whether the candidate becomes effective, and each run leaves
+enough evidence to reconstruct that decision.</p>
+<p>This book develops that architecture through software change, where
+the problem is acute and the mechanisms can be made precise. The same
+distinctions may inform other high-rate domains, but each domain must
+supply its own authority, evidence, effects, and admission rules.</p>
+<p>This is not about sprinkling AI into continuous integration (CI). CI
+makes selected product checks repeatable. Software Development as Code
+(SDaC) makes selected properties of the change process explicit and
+enforceable.</p>
+<p>Follow the arrows: express intent, produce one bounded candidate,
+gather independent evidence, and seal a successful proposal. Applying
+that proposal is a separate authorized decision. A finding can support
+another bounded attempt or an evidenced stop; it cannot widen
+authority.</p>
+<pre class="mermaid"><code>flowchart TD
+  I["Declared intent"] --&gt; C["Bounded candidate"]
+  C --&gt; E["Independent evidence"]
+  E --&gt;|"sufficient"| S["Sealed proposal"]
+  S --&gt; A["Separate admission"]
+  E --&gt;|"finding"| R["Refine next candidate&lt;br/&gt;or seal evidenced stop"]</code></pre>
+<p>Caption: The generator may sit inside candidate production, but the
+architecture begins with declared intent and ends with independent
+admission. Evidence can justify refinement or closure; it cannot
+authorize its own effect.</p>
+<p>The primary claim is architectural, not a productivity result.</p>
+<p><strong>Design thesis.</strong> Human intelligence directs artificial
+intelligence through governed workflows. Human judgment enters the
+system through decisions people have already made or encoded in adopted
+policy. Those decisions fix the intent of the work, who has authority,
+and what constraints apply. They also fix the required evidence, the
+budgets that limit the run, and the separate rule for admitting a
+result. AI may propose, evaluate, or route work inside those decisions;
+it may not rewrite them during the run. Feedback from declared evidence
+is the primary mechanism by which the workflow adapts. It guides
+refinement, stopping, and escalation without requiring a new human
+decision at every step.</p>
+<p>A workflow may contain one or many probabilistic steps arranged
+sequentially, conditionally, or in parallel. Some steps may repeat
+inside one finite run; the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> workflow may run again when <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>
+or adopted intent changes. Chapter 2 makes those two scales precise and
+shows how a probabilistic step may wrap anything from a model call to a
+larger agentic system.</p>
+<p><strong>Architectural mechanism.</strong> Each probabilistic step
+operates under a declared contract. The contract fixes its allowed
+inputs, authority, effects, and budgets. It also defines the outputs the
+step must produce, the evidence and provenance it must retain, and the
+terminal outcomes it may reach. The enclosing workflow fixes transition
+rules, stopping conditions, and admission outside those steps.
+Intermediate outputs remain candidates or evidence until declared checks
+and routing rules allow them to advance.</p>
+<p><strong>Composition proposition.</strong> A governed step can become
+a reusable capability inside a larger workflow. That requires stable
+input and output contracts and declared authority. Its effects must be
+bounded, its evidence requirements explicit, and its terminal outcomes
+and failure semantics visible to the enclosing workflow. The enclosing
+workflow cannot reinterpret a step’s failure as success, inherit
+undeclared effects, or grant authority the step never possessed.
+Composing such capabilities creates a workflow factory that can retain
+organization-specific contracts, checks, context, evidence, and adopted
+operating knowledge.</p>
+<p><strong>Operational hypothesis.</strong> For recurring work that can
+be decomposed into bounded steps, composed governed workflows using
+structured feedback may produce greater operational value than isolated
+one-shot queries or manually orchestrated use of the same probabilistic
+capabilities.</p>
+<p>Speed is central to this hypothesis in rapidly changing, AI-exposed
+environments. In environments where competitors also accelerate search
+and implementation, the relevant measure is not candidate-generation
+speed but the time from meaningful change, through any required update
+to adopted intent, to a validated and admitted response.</p>
+<p><strong>Empirical test.</strong> Whether reuse and composition reduce
+routine human intervention, shorten the path from meaningful change to
+an admitted response, or improve operational value must be established
+on comparable workflows after full ownership cost. The architecture may
+improve governability without improving cost or delivery, and
+competitive advantage remains a further strategic hypothesis.</p>
+<h2 id="generation-is-one-part-of-the-system">Generation Is One Part of
+the System</h2>
+<p>I build these systems and work with regulated organizations trying to
+use them seriously. The deeper I go, the less impressed I am by
+generation alone.</p>
+<p>The opening showed the gap at an interface boundary. The same gap
+appears in smaller changes: satisfying visible requirements is not the
+same as producing good engineering.</p>
+<p>In one author-observed coding session, a capable model produced eight
+lines of quadratic Python to remove duplicates while preserving order.<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a> For the hashable values and Python
+version in question, the language already offered an idiomatic
+expression with expected linear behavior:
+<code>list(dict.fromkeys(items))</code>. The generated version was
+plausible. It was readable. It could pass ordinary examples. It was
+still poor engineering.</p>
+<p>This is not only a story about one model making a mistake. It exposes
+the gap between satisfying visible requirements and producing a good
+result. A test might establish that duplicates are removed and order is
+preserved. It says nothing about algorithmic complexity unless someone
+encodes that property. It says nothing about whether the implementation
+is idiomatic, maintainable, proportionate, or relevant to the
+surrounding system.</p>
+<p>Formal specifications narrow this gap. Types, schemas, contracts,
+proofs, and tests make selected properties explicit and checkable. They
+do not choose those properties for us. A specification can define
+selected properties completely while remaining silent about others that
+everyone assumed mattered.</p>
+<p>Natural language exposes a complementary problem. It carries enormous
+amounts of human meaning, but that meaning is compressed, contextual,
+and culturally negotiated. Words coordinate our attention; they do not
+reproduce experience or intent exactly. A language model learns
+statistical relationships among those words. It does not receive the
+underlying experience or intent directly. Given a small enough set of
+compatible constraints, it can often wrap them in remarkably convincing
+structure.</p>
+<p>This gap between representations is also where AI is useful.
+Deterministic tools should perform a transformation when its rules can
+be fully specified. A compiler, parser, schema generator, or formatter
+does not need to interpret an open-ended request. A probabilistic step
+becomes useful where the mapping still requires judgment. In one
+direction, it can elaborate adopted intent expressed in natural language
+into proposed contracts, tests, configuration, or implementation. In the
+other, it can turn formal artifacts and observed behavior into proposed
+human-readable Maps.</p>
+<p>Those directions are related but not symmetric. <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>-driven work
+proposes what should become real under adopted intent. Terrain-to-<a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>
+work proposes a description of what currently appears to be real. An
+implementation cannot recover the intent that originally produced it,
+and a generated description cannot make itself authoritative.</p>
+<p>As the task grows, the difficulty grows faster than the prompt.
+Requirements interact. Hidden assumptions become relevant. Local
+improvements create consequences elsewhere. The generator must infer
+which constraints are firm, which examples are accidental, which
+conventions are local, and which omitted properties still matter. The
+problem is not simply the number of requirements. It is the number of
+relationships among them and the amount of relevant meaning left
+unstated.</p>
+<p>This is why larger generated changes often look better from a
+distance than they do up close. The outer shape is coherent. The names
+are plausible. The tests may pass. Underneath, nuance has been replaced
+by statistically likely structure.</p>
+<p>The answer is not to abandon language or formalization. It is to stop
+asking either representation, or one end-to-end model call, to carry the
+whole burden. Divide the translation into narrow, governed steps. At
+each boundary, adopted intent and authority fix the direction, AI may
+propose across the semantic gap, deterministic tools check what they
+can, and feedback identifies mismatch. The process must stop when
+evidence is missing rather than filling the gap with confidence.</p>
+<p>That process is the loop. It is not merely a retry wrapper. It tests
+each partial representation against evidence from Terrain, exposes what
+the proposed translation missed, and supports a better next
+decision.</p>
+<p>The generator is therefore not the system. It is one process that
+transforms a state into a candidate next state. The engineering question
+is the shape of the process around it.</p>
+<p>None of this makes model or prompt quality irrelevant. Better models,
+prompts, and Context Packets shift the candidate distribution: they can
+produce more relevant proposals, reduce refinement cycles, and make
+harder Missions feasible. The loop is not a substitute for capability.
+It is the machinery that turns available capability into bounded
+proposals, evidence, and governed outcomes. A better generator can
+improve every compatible workflow without acquiring authority over the
+rules that judge it.</p>
+<h2 id="a-model-of-bounded-change">A Model of Bounded Change</h2>
+<section aria-labelledby="bounded-change-title" class="col-span-1 md:col-span-12 mt-2 mb-12" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-01-shape-of-all-work" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i1-section-01-shape-of-all-work</span>
+<figure class="aoi-book-diagram">
+<figcaption class="aoi-book-diagram__header">
+<p class="aoi-book-diagram__eyebrow">Notation, not proof</p>
+<h3 class="aoi-book-diagram__title" id="bounded-change-title">A Model of Bounded Change</h3>
+<p class="aoi-book-diagram__summary">The notation names a proposed transition. The workflow around that transition determines what was allowed, what evidence counts, and whether any effect becomes real.</p>
+</figcaption>
+<div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
+<div class="aoi-book-diagram__step">
+<span class="aoi-book-diagram__label">Observed state: Z<sub>n</sub></span>
+<p>The fixed base, current Terrain, and adopted intent used for this run.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="proposal">
+<span class="aoi-book-diagram__label">Bounded process: P</span>
+<p>One finite workflow proposes, checks, refines, or stops under fixed authority.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="evidence">
+<span class="aoi-book-diagram__label">Sealed result</span>
+<p>A supported candidate, a no-op, an external block, or an evidenced failure.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="authority">
+<span class="aoi-book-diagram__label">Separate authority</span>
+<p><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> may apply a candidate. <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a> may change future intent or policy.</p>
+</div>
+</div>
+<p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit its own result.</p>
+</figure>
+</section>
+<p>This book treats each bounded unit of engineering work as a proposed
+state change:</p>
+<p><span class="math display"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span></p>
+<p>Here <span class="math inline"><em>P</em></span> is the process,
+<span class="math inline"><em>Z</em><sub><em>n</em></sub></span> is the
+observed starting state, and <span class="math inline"><em>Z</em><sub><em>n</em> + 1</sub></span> is the
+proposed next state. The expression is bookkeeping, not formal evidence
+that the transition is correct, improved, convergent, or safely
+composable. Those claims depend on declared intent and evidence:</p>
+<ul>
+<li>What are we optimizing for?</li>
+<li>What is allowed to change?</li>
+<li>What must never drift?</li>
+<li>What must stay true at every layer?</li>
+</ul>
+<p>SDaC writes those answers into artifacts and gates instead of leaving
+them as shared intuition.</p>
+<p>The practical starting point is one recurring, bounded change:
+declare the property that must remain true, install an independent
+check, retain the evidence, and prevent the change process from
+weakening the rule that judges it. That loop is the unit of trust, not
+the destination.</p>
+<p>The composition proposition is that bounded loops can become
+dependable steps inside larger workflows when their inputs, effects,
+outputs, checks, and terminal results remain explicit. Each step either
+reaches its declared acceptance region or stops with inspectable
+evidence. Composition does not let an enclosing workflow reinterpret
+failure as success, inherit undeclared effects, or borrow authority that
+the smaller workflow never had.</p>
+<p>Evidence from recurring low-risk workflows can support a separately
+governed policy proposal. If adopted, that policy can allow instances in
+the demonstrated class to execute and be admitted without routine human
+interruption. Human attention moves toward new intent, exceptions,
+protected rule changes, and high-consequence decisions. The aim is not
+to remove people from development. It is to build a factory that needs
+less human attention for each admitted change without weakening the
+properties that earned that delegation.</p>
+<p>Finite, inspectable failure is the safety floor. Convergence is the
+ambition: most recurring Missions should reach admissible outcomes
+within their declared budgets and move Terrain toward stated intent.
+Evidence from exceptions and admitted changes may then support
+separately governed proposals to improve the Maps, Validators, and
+workflows that shape the next run.</p>
+<h2 id="the-velocity-trap">The Velocity Trap</h2>
+<p>AI can reduce proposal time dramatically in some workflows and
+increase total task time in others. Controlled studies have reported
+both substantial speedups and slowdowns across different tasks, users,
+and tools.<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a> The premise needed here is narrower:
+AI changes candidate economics. It can make it cheaper to propose more
+alternatives, many plausible enough to demand evaluation. Whether that
+improves delivery is a local empirical question.</p>
+<p>That change is useful only if the loop stays sane. AI can change the
+clock speed; the trap is treating proposal speed as delivery
+progress.</p>
+<p>A faster proposal loop that drifts is faster drift. A faster proposal
+loop that breaks is faster breakage. Where AI increases attempted-change
+rate, it amplifies the practices already present: strong controls absorb
+more candidates, while weak controls can move cost into review, rework,
+and incidents.</p>
+<p>Where an organization’s delivery system was not trustworthy before
+AI—because tests are sparse or flaky, integration environments drift,
+releases depend on manual knowledge, or production feedback is
+weak—increasing implementation throughput accelerates only the
+implementation side of the V-model. Specification, verification,
+validation, release, rollback, and observation remain constrained.</p>
+<p>In such settings, a higher-leverage early use of AI may be to
+strengthen the factory rather than increase code output. It can propose
+tests, contracts, fixtures, Validators, continuous integration and
+delivery improvements, deployment checks, rollback mechanisms, and
+observability. Those proposals still require independent validation;
+increasing assurance capacity may be more valuable than increasing
+implementation throughput.</p>
+<p>Not every task needs that machinery. A temporary, low-consequence
+artifact that can be inspected directly may justify little more than
+generation and inspection. The need for stronger workflow governance
+rises when an effect persists, is reused, reaches other people or
+systems, carries hidden obligations, or is costly to reverse.</p>
+<blockquote>
+<p><strong>This is the question SDaC answers:</strong> <em>How do you
+harness accelerated iteration without accelerating into a wall?</em></p>
+</blockquote>
+<p>SDaC answers by making the loop itself an engineering object:
+explicit intent, bounded writes, protected Validators, evidence, and
+stopping rules. A broken loop only makes model capability more
+dangerous.</p>
+<h2 id="who-this-book-is-for">Who This Book Is For</h2>
+<p>This book is for people responsible for making AI-accelerated
+software change safe and sustainable. Its primary readers are engineers,
+architects, and platform, developer experience, reliability, and
+security practitioners who design or govern the systems that turn
+proposals into admitted reality.</p>
+<p>Engineering managers and directors, along with quality and risk
+owners in regulated environments, can use the architectural argument
+without implementing every Validator themselves. The detailed mechanisms
+remain grounded in software change because that is where the problem is
+sharpest and most measurable.</p>
+<h2 id="from-traceability-to-governed-loops">From Traceability to
+Governed Loops</h2>
+<p>SDaC inherits rather than replaces several established mechanisms.
+The classical V-model supplies a useful spine: formalize intent,
+implement, then prove correspondence. Continuous integration makes
+selected checks repeatable. Supply-chain systems add adjacent controls:
+in-toto records authorized steps and artifact evidence, SLSA defines
+verifiable provenance, and the <a href="https://www.openpolicyagent.org/docs">Open Policy Agent</a> (OPA)
+separates policy decisions from their enforcement.<a class="footnote-ref" href="#fn3" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>The contribution developed here is their composition around
+stochastic proposals. For each run, an independently activated work
+contract fixes authority; a bounded change step produces a candidate;
+independent checks produce structured evidence; and declared routing
+determines whether work refines, closes, or stops. The resulting run
+record is sealed, while admission remains separate. Retained evidence
+may support a future Map or policy proposal, but it cannot install that
+proposal.</p>
+<p>A probabilistic implementation step therefore sits inside an
+executable chain from goal to bounded context and output contract.
+Assurance remains layered: parsers, schemas, tests, contract and scope
+checks, transition enforcement, and <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a> evidence. Traceability
+explains which requirement produced a change; the governed loop also
+explains how failed candidates refine or stop.</p>
+<p>These mechanisms support the architectural claim stated above. They
+do not prove that an admitted change is good or that governed generation
+is cheaper. Those outcome claims remain hypotheses to test across
+comparable workflows.</p>
+<h2 id="a-note-on-substrate">A Note on Substrate</h2>
+<p>These principles are portable, but the examples use a simple,
+familiar setup: standard files, Git for version control,
+<code>make</code> for orchestration, and Python for scripting.</p>
+<p>That gives us a practical environment for demonstrating the core
+ideas without hiding behind framework-specific machinery. The patterns
+are meant to transfer to other languages, build systems, and
+version-control setups.</p>
+<p>The specific tools are incidental. The argument depends on their
+roles and contracts, not on a particular language or runner.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>The examples assume ordinary software-engineering fluency: reading
+diffs, running checks, and editing text configuration. They do not
+require model training or control theory.</p>
+<p>Part I follows one bounded change from intent through work,
+validation, result, transition, and evidence. Part II explains why the
+mechanism works, Part III scales it into repeatable workflows, Part IV
+protects its governing surfaces, and Part V examines the destination and
+limits. <a class="chapter-link" href="chapter-1-a-minimal-governed-loop#chapter-1-a-minimal-governed-loop" title="Go to: Chapter 1">Chapter 1</a> begins with the smallest instance: one bounded writer,
+one scope-matched independent check, one fixed route, and one sealed
+result before separate adoption.</p>
+<section class="footnotes footnotes-end-of-document" id="footnotes" role="doc-endnotes">
+<hr/>
+<ol>
+<li id="fn1"><p>Author-observed coding session, anonymized to remove
+repository and model details.<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Controlled studies are task- and population-specific. <a href="https://arxiv.org/abs/2302.06590">Peng et al.</a> found 55.8%
+faster completion on a bounded JavaScript task; <a href="https://arxiv.org/abs/2410.12944">Paradis et al.</a> estimated
+about 21% shorter task time in an enterprise study, with a wide
+confidence interval and explicit limits on generalization; <a href="https://arxiv.org/abs/2507.09089">Becker et al.</a> found 19%
+longer task time for experienced maintainers working in familiar mature
+repositories. The studies are not directly comparable and do not
+establish a universal productivity multiplier.<a class="footnote-back" href="#fnref2" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>in-toto uses owner-signed layouts, authorized
+functionaries, artifact rules, and signed link metadata to verify
+supply-chain steps (<a href="https://in-toto.io/docs/getting-started/">documentation</a>). SLSA
+defines provenance as verifiable information about where, when, and how
+an artifact was produced (<a href="https://slsa.dev/spec/v1.2/provenance">specification</a>).<a class="footnote-back" href="#fnref3" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”" data-share-title="Introduction | Architects of Intent" data-share-url="https://architectsofintent.com/introduction" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fintroduction&amp;text=Introduction%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fintroduction" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fintroduction" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fintroduction&amp;title=Introduction%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Introduction%20%7C%20Architects%20of%20Intent&amp;body=Introduction%20to%20Architects%20of%20Intent.%20%E2%80%9CAdd%20cursor%20pagination%20to%20GET%20%2Fapi%2Fusers%20without%20breaking%20existing%20clients.%E2%80%9D%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fintroduction">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="next-link" href="chapter-1-a-minimal-governed-loop">Chapter 1 – A Minimal Governed Loop →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+<script defer="" src="infographic-deck-runtime.js"></script>
+</body>
+</html>

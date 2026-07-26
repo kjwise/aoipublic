@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Appendix B: Core Vocabulary | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Appendix B of Architects of Intent: Appendix B: Core Vocabulary. These terms carry the architectural argument. They are collected here for reference; each is…" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/appendix-b-core-vocabulary" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Appendix B: Core Vocabulary | Architects of Intent" property="og:title"/>
+<meta content="Appendix B of Architects of Intent: Appendix B: Core Vocabulary. These terms carry the architectural argument. They are collected here for reference; each is…" property="og:description"/>
+<meta content="https://architectsofintent.com/appendix-b-core-vocabulary" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Appendix B: Core Vocabulary | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Appendix B: Core Vocabulary | Architects of Intent" name="twitter:title"/>
+<meta content="Appendix B of Architects of Intent: Appendix B: Core Vocabulary. These terms carry the architectural argument. They are collected here for reference; each is…" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Appendix B: Core Vocabulary | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix B: Core Vocabulary", "description": "Appendix B of Architects of Intent: Appendix B: Core Vocabulary. These terms carry the architectural argument. They are collected here for reference; each is…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-b-core-vocabulary", "mainEntityOfPage": "https://architectsofintent.com/appendix-b-core-vocabulary", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT4M", "articleSection": "Part VI – Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part VI – Appendices</div>
+<div class="chapter-meta"><span class="read-time">4 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="appendix-b-core-vocabulary">Appendix B: Core Vocabulary</h1>
+<p>These terms carry the architectural argument. They are collected here
+for reference; each is introduced and developed where its mechanism
+first matters.</p>
+</div>
+</header>
+<h2 id="direction-and-state">Direction and State</h2>
+<ul>
+<li><strong><a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>:</strong> A structured, versioned representation of
+intent or observed system structure. A Map is authoritative only for the
+declared property and scope granted by its adopted source or
+policy.</li>
+<li><strong><a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>:</strong> The system state a loop can observe or
+affect, including source, configuration, infrastructure, runtime
+behavior, and external operational facts.</li>
+<li><strong><a class="concept-link" href="concepts#candidate" title="See concept: Candidate">Candidate</a>:</strong> A proposed state, not admitted
+Terrain.</li>
+</ul>
+<h2 id="work-and-evidence">Work and Evidence</h2>
+<ul>
+<li><strong><a class="concept-link" href="concepts#workflow" title="See concept: Workflow">Workflow</a>:</strong> A finite, governed execution graph of
+sequential, conditional, or parallel steps with declared authority,
+effects, transitions, stopping conditions, evidence requirements, and
+admission path.</li>
+<li><strong><a class="concept-link" href="concepts#loop" title="See concept: Loop">Loop</a>:</strong> Repetition of a step, subsequence, or
+<a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> workflow at a declared scale. Each workflow run remains finite
+and ends with a sealed result.</li>
+<li><strong><a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a>:</strong> A versioned work-contract artifact.
+Before activation it is a proposal; activation fixes the exact
+objective, authority, effects, outputs, checks, budgets, routing, and
+approval policy that govern one run.</li>
+<li><strong><a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>:</strong> The logically append-only execution
+record and retained evidence for one activated Mission. Every terminal
+result is sealed; later intervention creates a linked record.</li>
+<li><strong><a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a>:</strong> The versioned structure from which a
+bounded input is selected. Its nodes identify sources; its typed edges
+record why those sources relate.</li>
+<li><strong><a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a>:</strong> The bounded, ordered,
+provenance-bearing input assembled for one Mission from fixed authority
+and evidence.</li>
+<li><strong><a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a>:</strong> Logically append-only, reconstructable
+evidence for authority, attempts, effects, findings, decisions, terminal
+results, and admission. Its guarantees depend on a protected sink and
+trust root.</li>
+<li><strong><a class="concept-link" href="concepts#oracle" title="See concept: Oracle">Oracle</a>:</strong> The source or decision procedure allowed to
+settle a declared property.</li>
+<li><strong>Software Development as Code (SDaC) Engine:</strong> The
+complete runtime that executes governed workflows while keeping
+probabilistic steps inside fixed authority, evidence, stopping, and
+admission boundaries.</li>
+<li><strong><a class="concept-link" href="concepts#governed-loop-network" title="See concept: Governed Loop Network">Governed Loop Network</a>:</strong> A composed system of finite
+governed workflows whose declared contracts, effects, evidence, terminal
+outcomes, and failure semantics let them operate as reusable
+capabilities without inheriting undeclared authority.</li>
+<li><strong><a class="concept-link" href="concepts#semantic-density" title="See concept: Semantic Density">Semantic Density</a>:</strong> The concentration of distinct,
+decision-bearing meaning in context. Useful context combines Semantic
+Density, Correctness, and Relevance rather than maximizing volume.</li>
+</ul>
+<h2 id="roles-and-controls">Roles and Controls</h2>
+<ul>
+<li><strong><a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a>:</strong> A read-only measurement of Terrain or
+retained evidence that emits structured observations with
+provenance.</li>
+<li><strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>:</strong> A bounded transformation that proposes a
+declared change to Terrain or a Map surface. It does not admit its own
+output.</li>
+<li><strong><a class="concept-link" href="concepts#stochastic-generator" title="See concept: Stochastic Generator">Stochastic Generator</a>:</strong> A probabilistic model
+invocation that proposes a bounded candidate from declared inputs. It is
+one component of the system, not the system itself.</li>
+<li><strong><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>:</strong> A declared check of one property that
+emits a structured report. A Validator supplies evidence; it does not
+independently widen authority or admit a candidate.</li>
+<li><strong><a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a>:</strong> A policy-bound decision role used when
+evidence can support more than one allowed transition. Its
+implementation may vary; runtime enforcement still limits transitions
+and keeps admission separate.</li>
+<li><strong><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a>:</strong> A governed Terrain-to-Map workflow
+that proposes a bounded change to selected Map surfaces without changing
+Terrain.</li>
+<li><strong><a class="concept-link" href="concepts#maintenance-controller" title="See concept: Maintenance Controller">Maintenance Controller</a>:</strong> A recurring selector that
+senses, qualifies, and ranks eligible maintenance work without
+inheriting authority to perform it.</li>
+<li><strong><a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a>:</strong> A separately activated workflow
+for proposing a bounded change to protected policy or control surfaces.
+It cannot adopt its own proposal.</li>
+<li><strong><a class="concept-link" href="concepts#scope-guard" title="See concept: Scope Guard">Scope Guard</a>:</strong> Runtime enforcement of the declared
+effect boundary, including attempted filesystem, process, network,
+credential, platform, data, and deployment effects.</li>
+<li><strong><a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">Mission Gate</a>:</strong> The independent admission check that
+revalidates a sealed proposal against current base, policy, effects,
+evidence, and approvals.</li>
+<li><strong><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a>:</strong> A protected non-regression rule measured
+by one fixed protocol. Its floor advances only after admission.</li>
+<li><strong><a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>:</strong> The protected constraints that shape
+execution: schemas, Validators, effect boundaries, budgets, gates, and
+stopping conditions. The name is a control-model metaphor, not a claim
+that the checks are complete truth.</li>
+<li><strong><a class="concept-link" href="concepts#protected-control-plane" title="See concept: Protected Control Plane">Protected Control Plane</a>:</strong> The authority boundary
+around policy, trusted Validators, credentials, execution limits,
+evidence sinks, and admission mechanisms that ordinary work cannot
+rewrite.</li>
+<li><strong><a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic Sandwich">Deterministic Sandwich</a>:</strong> Deterministic preparation
+and validation around one bounded probabilistic invocation and its
+candidate output.</li>
+<li><strong><a class="concept-link" href="concepts#bounded-refinement-loop" title="See concept: Bounded Refinement Loop">Bounded Refinement Loop</a>:</strong> The governed
+<code>Propose -&gt; Check -&gt; Decide -&gt; Refine</code> cycle. An
+Effector proposes, Validators produce findings, and a Judge is used when
+evidence can support more than one permitted transition. Authority,
+scope, budgets, and stopping rules remain fixed.</li>
+</ul>
+<h2 id="outcomes">Outcomes</h2>
+<ul>
+<li><strong><code>complete</code>:</strong> A sealed terminal result
+indicating that a changed candidate satisfied the run’s declared
+completion conditions.</li>
+<li><strong><code>complete_noop</code>:</strong> A sealed terminal
+result indicating that the required property already held and no
+candidate effect exists.</li>
+<li><strong><code>blocked</code>:</strong> A sealed terminal result
+naming an external authority, oracle, contradiction, or environment
+repair required before a new linked run can proceed.</li>
+<li><strong><code>failed_with_evidence</code>:</strong> A sealed
+terminal result for exhausted, non-convergent, or otherwise unsuccessful
+execution that does not depend on an external unblock.</li>
+<li><strong><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a>:</strong> The separately authorized event that
+makes a candidate effective in Terrain.</li>
+<li><strong><a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a>:</strong> The separately authorized event that
+makes a proposed Map or policy authoritative.</li>
+</ul>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Appendix B of Architects of Intent: Appendix B: Core Vocabulary. These terms carry the architectural argument. They are collected here for reference; each is…" data-share-title="Appendix B: Core Vocabulary | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-b-core-vocabulary" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-b-core-vocabulary&amp;text=Appendix%20B%3A%20Core%20Vocabulary%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-b-core-vocabulary" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fappendix-b-core-vocabulary" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-b-core-vocabulary&amp;title=Appendix%20B%3A%20Core%20Vocabulary%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20B%3A%20Core%20Vocabulary%20%7C%20Architects%20of%20Intent&amp;body=Appendix%20B%20of%20Architects%20of%20Intent%3A%20Appendix%20B%3A%20Core%20Vocabulary.%20These%20terms%20carry%20the%20architectural%20argument.%20They%20are%20collected%20here%20for%20reference%3B%20each%20is%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-b-core-vocabulary">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="appendix-a-failure-modes-and-limits">← Appendix A: Failure Modes and Limits</a>
+<a class="next-link" href="acknowledgements-and-about-the-author">Acknowledgements and About the Author →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+</body>
+</html>

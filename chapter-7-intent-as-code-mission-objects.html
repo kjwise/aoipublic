@@ -5,7 +5,7 @@
 <title>Chapter 7 – Intent as Code (Mission Objects) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). That is already enough to do real work. It names the goal, the writable surface, the…" name="description"/>
+<meta content="Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). A serious workflow needs more than an instruction string. It needs a versioned work…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
@@ -13,7 +13,7 @@
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 7 – Intent as Code (Mission Objects) | Architects of Intent" property="og:title"/>
-<meta content="Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). That is already enough to do real work. It names the goal, the writable surface, the…" property="og:description"/>
+<meta content="Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). A serious workflow needs more than an instruction string. It needs a versioned work…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-7-intent-as-code-mission-objects" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -21,17 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 7 – Intent as Code (Mission Objects) | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). That is already enough to do real work. It names the goal, the writable surface, the…" name="twitter:description"/>
+<meta content="Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). A serious workflow needs more than an instruction string. It needs a versioned work…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 7 – Intent as Code (Mission Objects) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 7 – Intent as Code (Mission Objects)", "description": "Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). That is already enough to do real work. It names the goal, the writable surface, the…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-7-intent-as-code-mission-objects", "mainEntityOfPage": "https://architectsofintent.com/chapter-7-intent-as-code-mission-objects", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT17M", "articleSection": "Part III Scale It From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 7 – Intent as Code (Mission Objects)", "description": "Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). A serious workflow needs more than an instruction string. It needs a versioned work…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-7-intent-as-code-mission-objects", "mainEntityOfPage": "https://architectsofintent.com/chapter-7-intent-as-code-mission-objects", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT6M", "articleSection": "Part III – From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
-<script defer="" src="script.js?v=180c7c0ba0a2"></script>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -47,9 +47,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
-<a href="for-leaders">For Leaders</a>
-<a href="philosophy">Philosophy</a>
-<a href="concepts">Concepts</a>
+<a href="concepts">Core Vocabulary</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
@@ -57,477 +55,22 @@
 <main class="content content--chapter" id="main">
 <header class="chapter-header">
 <div class="chapter-kicker">
-<div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">17 min read</span></div>
+<div class="part-title">Part III – From Loop to System</div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as
 Code (Mission Objects)</h1>
-<p>Start with the smallest useful Mission Object:</p>
+<p>A serious workflow needs more than an instruction string. It needs a
+versioned work contract that states what the work is, what may define
+correctness, what may change, what evidence is required, when execution
+must stop, and who may admit the result.</p>
+<p>The formal name for that contract is a <strong>Mission
+Object</strong>. A mission is the abstract objective, such as “document
+the <code>/v2/users</code> endpoint.” The activated Mission Object is
+the exact, immutable authority for one run.</p>
 </div>
 </header>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> update-readme-api-endpoint</span></span>
-<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Document /v2/users in README.md"</span></span>
-<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
-<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> README.md</span></span>
-<span id="cb1-7"><a aria-hidden="true" href="#cb1-7" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span></span>
-<span id="cb1-8"><a aria-hidden="true" href="#cb1-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> docs/api/openapi.json</span></span>
-<span id="cb1-9"><a aria-hidden="true" href="#cb1-9" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
-<span id="cb1-10"><a aria-hidden="true" href="#cb1-10" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> ./scripts/validate_readme.sh</span></span>
-<span id="cb1-11"><a aria-hidden="true" href="#cb1-11" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
-<span id="cb1-12"><a aria-hidden="true" href="#cb1-12" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb1-13"><a aria-hidden="true" href="#cb1-13" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span></span></code></pre></div>
-<p>That is already enough to do real work. It names the goal, the
-writable surface, the authority source, the gate, and the failure
-posture. It is not a renamed prompt. It is a contract the loop can
-parse, log, and rerun.</p>
-<p>Fully autonomous engineering systems usually fail for a boring
-reason: intent is scattered across tickets and conversations, then
-compressed into a brittle instruction string. A raw instruction string
-is not a contract. It has no explicit scope, no verifiable gates, and no
-recovery path when things go sideways.</p>
-<p>This chapter introduces the <strong><a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a></strong>: the
-typed, executable contract for a unit of work. Terminology note: a
-<em>mission</em> is the abstract objective (“update the docs”). A
-<strong>Mission Object</strong> is the versioned YAML/JSON artifact that
-encodes that objective plus scope, budgets, gates, fallbacks, and the
-instruction bundle the runner will compile into one bounded model
-request.</p>
-<p><a class="chapter-link" href="chapter-0-introduction#chapter-0-introduction" title="Go to: Chapter 0">Chapter 0</a> called intent the attractor. A Mission Object is how you
-compile that attractor into something the loop can check. We will start
-small, then grow this into a production-shaped Mission later in the
-chapter and in <a class="chapter-link" href="appendix-c-pattern-library#appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a>.</p>
-<h2 id="from-ad-hoc-instructions-to-typed-mission-objects">From Ad-hoc
-Instructions to Typed Mission Objects</h2>
-<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-02-mission-objects" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-3.html" data-infographic-status="published">
-<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-02-mission-objects</span>
-<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-accent">
-<div class="flex flex-col lg:flex-row gap-8">
-<div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">Mission Objects (Intent As Code)</h2>
-<p class="text-brand-muted leading-relaxed">
-                            A Mission Object is the versioned contract for a unit of work: goal, scope, constraints, budgets, and gates.
-                            It turns a vague request into something the loop can compile, run, and audit.
-                        </p>
-<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Why it matters</div>
-<div class="text-sm text-brand-muted leading-relaxed">
-                                The tighter the mission boundary, the smaller the search space.
-                                That is how you get faster convergence without turning a prompt into pseudo-authority.
-                            </div>
-</div>
-</div>
-<div class="lg:w-7/12">
-<div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="space-y-3">
-<div class="inline-flex flex-wrap items-center gap-1 rounded-lg border border-brand-border bg-[rgba(6,7,12,0.72)] p-1 text-sm">
-<button aria-pressed="true" class="pill-tab font-mono" data-mission-preset="bugfix" type="button">Bugfix</button>
-<button aria-pressed="false" class="pill-tab font-mono" data-mission-preset="feature" type="button">Feature</button>
-<button aria-pressed="false" class="pill-tab font-mono" data-mission-preset="refactor" type="button">Refactor</button>
-<button aria-pressed="false" class="pill-tab font-mono" data-mission-preset="compliance" type="button">Compliance</button>
-</div>
-<div class="flex items-center justify-between text-xs font-mono text-brand-muted">
-<span>Constraint tightness</span>
-<span class="text-brand-strong" id="missionTightnessValue">55%</span>
-</div>
-</div>
-<label class="sr-only" for="missionTightnessSlider">Constraint tightness slider</label>
-<input class="mt-3 w-full" id="missionTightnessSlider" max="100" min="0" type="range" value="55"/>
-<div class="mt-4 grid grid-cols-1 xl:grid-cols-12 gap-4">
-<div class="xl:col-span-7 border border-brand-border rounded-xl p-3 bg-[rgba(6,7,12,0.72)]">
-<div class="flex items-center justify-between mb-2">
-<div class="text-xs font-mono text-brand-muted">mission.yaml</div>
-<div class="text-xs font-mono text-brand-muted" id="missionIdLabel">—</div>
-</div>
-<pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="missionYaml"></pre>
-<div class="mt-3 border border-brand-border rounded-lg bg-brand-light p-3">
-<div class="text-[10px] font-mono uppercase tracking-wide text-brand-muted">Constraint → Deterministic Gate</div>
-<div class="mt-2 space-y-1 text-[11px] leading-5 font-mono text-brand-muted" id="missionGateMap"></div>
-</div>
-</div>
-<div class="xl:col-span-5 space-y-3">
-<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Derived interface</div>
-<div class="mt-2 text-sm text-brand-muted leading-relaxed">
-<div class="flex items-center justify-between">
-<span>Expected retries</span>
-<span class="font-mono text-brand-strong"><span id="missionRetries">—</span>x</span>
-</div>
-<div class="mt-2 flex items-center justify-between">
-<span><a class="concept-link" href="concepts#convergence" title="See concept: Convergence">Convergence</a> rate</span>
-<span class="font-mono text-brand-strong"><span id="missionConvergence">—</span>/100</span>
-</div>
-<div class="mt-2 flex items-center justify-between">
-<span>Drift risk</span>
-<span class="font-mono text-brand-strong"><span id="missionDrift">—</span>/100</span>
-</div>
-</div>
-</div>
-<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Budgets (bounded exits)</div>
-<div class="mt-2 text-sm text-brand-muted leading-relaxed">
-<div class="flex items-center justify-between">
-<span>Max calls</span>
-<span class="font-mono text-brand-strong"><span id="missionMaxCalls">—</span></span>
-</div>
-<div class="mt-2 flex items-center justify-between">
-<span>Max latency</span>
-<span class="font-mono text-brand-strong"><span id="missionMaxLatency">—</span></span>
-</div>
-</div>
-<div class="mt-3 text-xs text-brand-muted">If the budget is exceeded, the loop exits with a deterministic failure you can reason about.</div>
-</div>
-<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Mission State of Record</div>
-<div class="mt-2 text-sm text-brand-muted leading-relaxed">
-<div class="flex items-center justify-between">
-<span>Status</span>
-<span class="font-mono text-brand-strong" id="missionLifecycleStatus">—</span>
-</div>
-<div class="mt-2 flex items-center justify-between">
-<span>Attempt</span>
-<span class="font-mono text-brand-strong" id="missionAttemptLabel">—</span>
-</div>
-<div class="mt-2 flex items-center justify-between">
-<span>Last run</span>
-<span class="font-mono text-brand-strong" id="missionLastRun">—</span>
-</div>
-</div>
-<div class="mt-3 text-xs font-mono text-brand-muted break-all" id="missionEvidencePath">—</div>
-</div>
-<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Trade-off</div>
-<div class="mt-2">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span>Flexibility</span>
-<span class="font-mono text-brand-strong"><span id="missionFlex">—</span>%</span>
-</div>
-<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
-<div class="h-2 rounded" id="missionFlexBar" style="width: 0%; background: rgba(42, 195, 222, 0.78);"></div>
-</div>
-<div class="mt-3 flex items-center justify-between text-xs text-brand-muted">
-<span>Constraint strength</span>
-<span class="font-mono text-brand-strong"><span id="missionTight">—</span>%</span>
-</div>
-<div class="mt-1 h-2 rounded bg-[rgba(255,255,255,0.08)] overflow-hidden">
-<div class="h-2 rounded" id="missionTightBar" style="width: 0%; background: rgba(187, 154, 247, 0.82);"></div>
-</div>
-</div>
-</div>
-<div class="bg-brand-surface border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Validation Pipeline</div>
-<div class="mt-2 text-sm text-brand-muted leading-relaxed">
-<div class="flex items-center justify-between">
-<span>Schema compile</span>
-<span class="font-mono text-brand-strong" id="missionSchemaStatus">—</span>
-</div>
-<div class="mt-2 flex items-center justify-between">
-<span>Scope gate</span>
-<span class="font-mono text-brand-strong" id="missionScopeStatus">—</span>
-</div>
-<div class="mt-2 flex items-center justify-between">
-<span>Quality gate</span>
-<span class="font-mono text-brand-strong" id="missionQualityGateStatus">—</span>
-</div>
-</div>
-<div class="mt-3 text-xs text-brand-muted" id="missionSchemaNote">—</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<p>Imagine you want an AI to update a specific section of your
-<code>README.md</code> to reflect a new API endpoint. A typical request
-might look like this: “Update the ‘API Endpoints’ section in
-<code>README.md</code> to include <code>/v2/users</code> and describe
-its pagination.”</p>
-<p>What is missing is not model intelligence. It is contract
-structure:</p>
-<ul>
-<li><p><strong>Scope</strong>: Does it only touch that section, or can
-it add new sections?</p></li>
-<li><p><strong>Constraints</strong>: What format should the description
-take? Are there keywords it must include?</p></li>
-<li><p><strong>Quality</strong>: How do we <em>know</em> it did a good
-job? Is it grammatical? Is the new endpoint actually present?</p></li>
-<li><p><strong>Recovery</strong>: What if it messes up the existing
-formatting? How do we fix it?</p></li>
-</ul>
-<p>A <strong>Mission Object</strong> transforms that opaque instruction
-into a clear, executable specification. It is a structured data
-artifact, usually YAML or JSON, that codifies the <em>goal</em>,
-<em>scope</em>, <em>constraints</em>, <em>quality gate</em>,
-<em>fallbacks</em>, <em>telemetry</em>, and the versioned instruction
-payload or prompt-template reference the runner needs. YAML is readable,
-but error-prone, so treat the Mission Object itself as a build input and
-validate it deterministically before you run anything.</p>
-<p>Here is a fuller production-shaped Mission for the same README update
-task:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="fu">mission_id</span><span class="kw">:</span><span class="at"> update-readme-api-endpoint</span></span>
-<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="fu">mission_version</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="fu">goal</span><span class="kw">:</span><span class="at"> </span><span class="st">"Ensure README documents /v2/users"</span></span>
-<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
-<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> docs/api/openapi.json</span></span>
-<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a><span class="fu">scope</span><span class="kw">:</span></span>
-<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a><span class="at">  </span><span class="fu">modify</span><span class="kw">:</span></span>
-<span id="cb2-8"><a aria-hidden="true" href="#cb2-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> README.md</span></span>
-<span id="cb2-9"><a aria-hidden="true" href="#cb2-9" tabindex="-1"></a><span class="at">  </span><span class="fu">read_only</span><span class="kw">:</span></span>
-<span id="cb2-10"><a aria-hidden="true" href="#cb2-10" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> docs/api/openapi.json</span></span>
-<span id="cb2-11"><a aria-hidden="true" href="#cb2-11" tabindex="-1"></a><span class="at">  </span><span class="fu">do_not_touch</span><span class="kw">:</span></span>
-<span id="cb2-12"><a aria-hidden="true" href="#cb2-12" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> .github/**</span></span>
-<span id="cb2-13"><a aria-hidden="true" href="#cb2-13" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> policies/**</span></span>
-<span id="cb2-14"><a aria-hidden="true" href="#cb2-14" tabindex="-1"></a><span class="at">  </span><span class="fu">edit_regions</span><span class="kw">:</span></span>
-<span id="cb2-15"><a aria-hidden="true" href="#cb2-15" tabindex="-1"></a><span class="at">    </span><span class="fu">README.md</span><span class="kw">:</span></span>
-<span id="cb2-16"><a aria-hidden="true" href="#cb2-16" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"## API Endpoints"</span></span>
-<span id="cb2-17"><a aria-hidden="true" href="#cb2-17" tabindex="-1"></a><span class="fu">constraints</span><span class="kw">:</span></span>
-<span id="cb2-18"><a aria-hidden="true" href="#cb2-18" tabindex="-1"></a><span class="at">  </span><span class="fu">forbidden</span><span class="kw">:</span></span>
-<span id="cb2-19"><a aria-hidden="true" href="#cb2-19" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"Introduce endpoints not present in openapi.json"</span></span>
-<span id="cb2-20"><a aria-hidden="true" href="#cb2-20" tabindex="-1"></a><span class="fu">acceptance_criteria</span><span class="kw">:</span></span>
-<span id="cb2-21"><a aria-hidden="true" href="#cb2-21" tabindex="-1"></a><span class="at">  </span><span class="fu">must_contain</span><span class="kw">:</span></span>
-<span id="cb2-22"><a aria-hidden="true" href="#cb2-22" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"/v2/users"</span></span>
-<span id="cb2-23"><a aria-hidden="true" href="#cb2-23" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"pagination"</span></span>
-<span id="cb2-24"><a aria-hidden="true" href="#cb2-24" tabindex="-1"></a><span class="at">  </span><span class="fu">must_not_contain</span><span class="kw">:</span></span>
-<span id="cb2-25"><a aria-hidden="true" href="#cb2-25" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">"/v1/users"</span></span>
-<span id="cb2-26"><a aria-hidden="true" href="#cb2-26" tabindex="-1"></a><span class="fu">budgets</span><span class="kw">:</span></span>
-<span id="cb2-27"><a aria-hidden="true" href="#cb2-27" tabindex="-1"></a><span class="at">  </span><span class="fu">max_files_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb2-28"><a aria-hidden="true" href="#cb2-28" tabindex="-1"></a><span class="at">  </span><span class="fu">max_lines_changed</span><span class="kw">:</span><span class="at"> </span><span class="dv">60</span></span>
-<span id="cb2-29"><a aria-hidden="true" href="#cb2-29" tabindex="-1"></a><span class="fu">quality_gate</span><span class="kw">:</span></span>
-<span id="cb2-30"><a aria-hidden="true" href="#cb2-30" tabindex="-1"></a><span class="at">  </span><span class="fu">cmd</span><span class="kw">:</span><span class="at"> ./scripts/validate_readme.sh</span></span>
-<span id="cb2-31"><a aria-hidden="true" href="#cb2-31" tabindex="-1"></a><span class="fu">rollback_on</span><span class="kw">:</span></span>
-<span id="cb2-32"><a aria-hidden="true" href="#cb2-32" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"quality_gate_fail"</span></span>
-<span id="cb2-33"><a aria-hidden="true" href="#cb2-33" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">"scope_violation"</span></span>
-<span id="cb2-34"><a aria-hidden="true" href="#cb2-34" tabindex="-1"></a><span class="fu">fallbacks</span><span class="kw">:</span></span>
-<span id="cb2-35"><a aria-hidden="true" href="#cb2-35" tabindex="-1"></a><span class="at">  </span><span class="fu">max_iterations</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb2-36"><a aria-hidden="true" href="#cb2-36" tabindex="-1"></a><span class="at">  </span><span class="fu">on_fail</span><span class="kw">:</span><span class="at"> revert</span></span></code></pre></div>
-<p>This is still readable. But now the system has something it can
-compile: bounded scope, explicit constraints, an executable gate, and a
-safe failure policy.</p>
-<h3 id="mission-object-anatomy-what-vs.-boundaries-vs.-verification">Mission
-Object anatomy (what vs. boundaries vs. verification)</h3>
-<p>When Mission Objects get muddy, loops thrash. The fix is to keep the
-categories crisp:</p>
-<ol type="1">
-<li><strong>Objective (the what):</strong> the intended outcome.
-<ul>
-<li>Example: “Implement token validation.”</li>
-</ul></li>
-<li><strong>Interface contracts (the surface area):</strong> the
-skeleton you must preserve or evolve.
-<ul>
-<li>Example: function signature, JSON Schema, API route table.</li>
-<li>In practice, these often belong in <code>scope.read_only</code> and
-in your slice as deterministically extracted skeleton.</li>
-</ul></li>
-<li><strong>Constraints (the how-not):</strong> forbidden behaviors and
-hard boundaries.
-<ul>
-<li>Example: “no network calls,” “do not modify
-<code>.github/**</code>,” “only edit this region,” “do not add new
-endpoints.”</li>
-</ul></li>
-<li><strong>Acceptance criteria (the how to verify):</strong> statements
-you can test deterministically.
-<ul>
-<li>Good: “p99 latency &lt; 100ms under benchmark X.”</li>
-<li>Bad: “fast enough.”</li>
-<li>Good: “output is valid JSON and conforms to schema Y.”</li>
-<li>Bad: “well structured.”</li>
-</ul></li>
-</ol>
-<p>If a criterion cannot be validated deterministically, it doesn’t
-become <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a>. It becomes an operator check: a required human review
-item, or a deferred quality goal you ratchet in later.</p>
-<h3 id="mission-objects-from-natural-language-assistive-not-authoritative">Mission
-Objects from natural language (assistive, not authoritative)</h3>
-<p>It’s tempting to use a model to convert a ticket into a Mission
-Object. That can be a useful accelerator, but treat it as
-<strong>drafting</strong>, not authority:</p>
-<ul>
-<li>A human validates that the structured Mission Object actually
-matches intent (especially for scope boundaries and forbidden
-actions).</li>
-<li>The Mission Object is schema-validated before it becomes a runnable
-input.</li>
-<li>Guardrails that protect the loop itself (protected paths, denylist,
-policy gates) must not be solely authored by the <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> they constrain
-(<a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a>).</li>
-</ul>
-<p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
-runnable mission templates such as
-<code>missions/templates/doc_sync.mission.json</code> and
-<code>missions/templates/update_readme_api_endpoint.mission.yaml</code>.
-They use the companion repo’s local schema, but the semantics match the
-canon here: goal + bounded scope + budgets + gates.</p>
-<h2 id="mission-objects-are-stateful-artifacts-executable-pr-state-of-record">Mission
-Objects are stateful artifacts (Executable PR + state of record)</h2>
-<p>A Mission Object is not only an input to a run. It is the state of
-record for that unit of work: the thing you can point at in review,
-rerun tomorrow, and audit later.</p>
-<p>It is also the artifact that actually moves through the recursive
-loop. The same Mission can survive multiple attempts with tighter
-findings, stricter budgets, or a different escalation outcome, while
-still preserving the original declared intent.</p>
-<p>In practice, treat the Mission as an artifact with a run record:</p>
-<ul>
-<li>status: planned / running / completed / failed / reverted</li>
-<li>attempt count and last run id</li>
-<li>timestamps</li>
-<li>pointers to evidence in your Ledger (diffs, validator output,
-traces)</li>
-<li>prompt template / rendered request provenance when a model step is
-involved</li>
-</ul>
-<p>The Mission stays human-readable, but it stops being prose. It
-becomes an executable work order: goal + scope + budgets + gates, plus
-the reusable instruction bundle, outcome, and evidence.</p>
-<p>That state can accumulate as the Mission moves through loops within
-the loop. A retry can append findings. A slicer can append a
-context-packet identifier. A policy gate can append a decision trace. A
-deeper loop can append a child-run reference. What it should
-<em>not</em> do is silently rewrite the constitutional core of the
-Mission while it is active.</p>
-<h3 id="lifecycle-and-versioning-draft-active-completed">Lifecycle and
-versioning (Draft → Active → Completed)</h3>
-<p>Mission Objects live in version control, so they need a lifecycle
-that keeps provenance clean.</p>
-<p>A pragmatic lifecycle:</p>
-<ol type="1">
-<li><strong>Draft:</strong> created from a human idea, a ticket, or a
-template.</li>
-<li><strong>Under review:</strong> boundaries and gates are inspected
-like code (scope, budgets, rollback).</li>
-<li><strong>Active:</strong> the runnable Mission Object version that a
-loop is executing.</li>
-<li><strong>Completed / Reverted:</strong> finished with evidence
-(<code>PASS</code> + diff) or safely aborted (<code>FAIL</code> +
-trace).</li>
-<li><strong>Archived:</strong> retained for audit and pattern
-mining.</li>
-</ol>
-<p>Two rules keep the Ledger honest:</p>
-<ul>
-<li><strong>Once Active, Mission Objects are append-only.</strong> If
-you need to change intent, create a new version
-(<code>mission_version: 2</code>) or a new <code>mission_id</code>.
-Don’t silently rewrite the record of what the loop was asked to do.</li>
-<li><strong>Every diff is attributable to a Mission Object
-version.</strong> In practice, tag PRs/branches/commit trailers with
-<code>mission_id@mission_version</code>, and store traces under a
-directory named the same way. That’s how you answer “which Mission
-produced this change?” without guesswork.</li>
-</ul>
-<p>The easiest way to keep this straight is to split the Mission
-mentally into two regions:</p>
-<ul>
-<li><strong>Constitutional core:</strong> <code>goal</code>,
-<code>scope</code>, <code>constraints</code>, <code>budgets</code>,
-<code>quality_gate</code>, <code>fallbacks</code></li>
-<li><strong>Append-only decorations:</strong> findings, attempt
-counters, context-packet ids, rendered prompt provenance, policy
-outcomes, evidence links, escalation decisions, child-loop
-references</li>
-</ul>
-<p>If the work itself changes, version the Mission. If the loop learns
-more while executing the same work, decorate the active Mission and keep
-going.</p>
-<h2 id="the-meta-patterns-applied-to-missions">The Meta-Patterns Applied
-to Missions</h2>
-<p>Mission Objects are where the Meta-Patterns become concrete.</p>
-<h3 id="dont-chat-compile-mission-objects-are-build-inputs">1) Don’t
-Chat, Compile (Mission Objects are build inputs)</h3>
-<p>Chat is fine for ideation. For repeatable work, turn intent into an
-artifact you can version and rerun.</p>
-<ul>
-<li><p>Store the Mission Object as data
-(<code>missions/update_readme.mission.yaml</code>) and treat it like
-source code.</p></li>
-<li><p>Run a deterministic runner that produces a diff plus a Decision
-Trace (validator output, structured errors, and final
-<code>PASS/FAIL</code>).</p></li>
-</ul>
-<p>The point is provenance: you can rerun the same Mission Object
-tomorrow and debug the process, not just the outcome.</p>
-<h3 id="physics-is-law-the-mission-must-be-gateable">2) Physics is Law
-(the Mission must be gateable)</h3>
-<p>A Mission Object is only useful if the system can reject it
-deterministically. That means the Mission must define:</p>
-<ul>
-<li><p>A bounded scope.</p></li>
-<li><p>Executable gates (constraints, a <code>quality_gate</code>,
-and/or tests).</p></li>
-<li><p>A revert policy when the gate fails.</p></li>
-</ul>
-<p>If the gate fails, the correct result is <code>FAIL</code> and a
-revert.</p>
-<h4 id="schema-validate-mission-objects-input-hygiene-before-autonomy">Schema-validate
-Mission Objects (input hygiene before autonomy)</h4>
-<p>A Mission Object is authority. A malformed Mission is not “bad luck”
-— it’s a bug in your intent surface.</p>
-<p>Before you call any model:</p>
-<ul>
-<li>Parse the Mission deterministically.</li>
-<li>Validate it against a schema (and fail fast on missing fields or
-unknown keys).</li>
-<li>Enforce minimum invariants: bounded scope, non-empty gates, and
-explicit rollback policy.</li>
-</ul>
-<p><strong>Illustrative JSON Schema (trimmed):</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a>  <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"object"</span><span class="fu">,</span></span>
-<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a>  <span class="dt">"required"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a>    <span class="st">"mission_id"</span><span class="ot">,</span></span>
-<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a>    <span class="st">"mission_version"</span><span class="ot">,</span></span>
-<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a>    <span class="st">"goal"</span><span class="ot">,</span></span>
-<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a>    <span class="st">"scope"</span><span class="ot">,</span></span>
-<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a>    <span class="st">"quality_gate"</span><span class="ot">,</span></span>
-<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a>    <span class="st">"fallbacks"</span></span>
-<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a>  <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a>    <span class="dt">"mission_id"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span> <span class="dt">"minLength"</span><span class="fu">:</span> <span class="dv">3</span> <span class="fu">},</span></span>
-<span id="cb3-13"><a aria-hidden="true" href="#cb3-13" tabindex="-1"></a>    <span class="dt">"mission_version"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"integer"</span><span class="fu">,</span> <span class="dt">"minimum"</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
-<span id="cb3-14"><a aria-hidden="true" href="#cb3-14" tabindex="-1"></a>    <span class="dt">"goal"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span> <span class="dt">"minLength"</span><span class="fu">:</span> <span class="dv">10</span> <span class="fu">},</span></span>
-<span id="cb3-15"><a aria-hidden="true" href="#cb3-15" tabindex="-1"></a>    <span class="dt">"dependencies"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"array"</span><span class="fu">,</span> <span class="dt">"items"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span> <span class="fu">}</span> <span class="fu">},</span></span>
-<span id="cb3-16"><a aria-hidden="true" href="#cb3-16" tabindex="-1"></a>    <span class="dt">"scope"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-17"><a aria-hidden="true" href="#cb3-17" tabindex="-1"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"object"</span><span class="fu">,</span></span>
-<span id="cb3-18"><a aria-hidden="true" href="#cb3-18" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"modify"</span><span class="ot">,</span> <span class="st">"do_not_touch"</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb3-19"><a aria-hidden="true" href="#cb3-19" tabindex="-1"></a>      <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-20"><a aria-hidden="true" href="#cb3-20" tabindex="-1"></a>        <span class="dt">"modify"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"array"</span><span class="fu">,</span> <span class="dt">"items"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span> <span class="fu">},</span> <span class="dt">"minItems"</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
-<span id="cb3-21"><a aria-hidden="true" href="#cb3-21" tabindex="-1"></a>        <span class="dt">"read_only"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"array"</span><span class="fu">,</span> <span class="dt">"items"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span> <span class="fu">}</span> <span class="fu">},</span></span>
-<span id="cb3-22"><a aria-hidden="true" href="#cb3-22" tabindex="-1"></a>        <span class="dt">"do_not_touch"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"array"</span><span class="fu">,</span> <span class="dt">"items"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span> <span class="fu">},</span> <span class="dt">"minItems"</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">}</span></span>
-<span id="cb3-23"><a aria-hidden="true" href="#cb3-23" tabindex="-1"></a>      <span class="fu">}</span></span>
-<span id="cb3-24"><a aria-hidden="true" href="#cb3-24" tabindex="-1"></a>    <span class="fu">},</span></span>
-<span id="cb3-25"><a aria-hidden="true" href="#cb3-25" tabindex="-1"></a>    <span class="dt">"constraints"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"object"</span> <span class="fu">},</span></span>
-<span id="cb3-26"><a aria-hidden="true" href="#cb3-26" tabindex="-1"></a>    <span class="dt">"acceptance_criteria"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"object"</span> <span class="fu">},</span></span>
-<span id="cb3-27"><a aria-hidden="true" href="#cb3-27" tabindex="-1"></a>    <span class="dt">"budgets"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"object"</span> <span class="fu">},</span></span>
-<span id="cb3-28"><a aria-hidden="true" href="#cb3-28" tabindex="-1"></a>    <span class="dt">"quality_gate"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-29"><a aria-hidden="true" href="#cb3-29" tabindex="-1"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"object"</span><span class="fu">,</span></span>
-<span id="cb3-30"><a aria-hidden="true" href="#cb3-30" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"cmd"</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb3-31"><a aria-hidden="true" href="#cb3-31" tabindex="-1"></a>      <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"cmd"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span> <span class="dt">"minLength"</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">}</span> <span class="fu">}</span></span>
-<span id="cb3-32"><a aria-hidden="true" href="#cb3-32" tabindex="-1"></a>    <span class="fu">},</span></span>
-<span id="cb3-33"><a aria-hidden="true" href="#cb3-33" tabindex="-1"></a>    <span class="dt">"rollback_on"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"array"</span><span class="fu">,</span> <span class="dt">"items"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span> <span class="fu">}</span> <span class="fu">},</span></span>
-<span id="cb3-34"><a aria-hidden="true" href="#cb3-34" tabindex="-1"></a>    <span class="dt">"fallbacks"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-35"><a aria-hidden="true" href="#cb3-35" tabindex="-1"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"object"</span><span class="fu">,</span></span>
-<span id="cb3-36"><a aria-hidden="true" href="#cb3-36" tabindex="-1"></a>      <span class="dt">"required"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"max_iterations"</span><span class="ot">,</span> <span class="st">"on_fail"</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb3-37"><a aria-hidden="true" href="#cb3-37" tabindex="-1"></a>      <span class="dt">"properties"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb3-38"><a aria-hidden="true" href="#cb3-38" tabindex="-1"></a>        <span class="dt">"max_iterations"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"integer"</span><span class="fu">,</span> <span class="dt">"minimum"</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
-<span id="cb3-39"><a aria-hidden="true" href="#cb3-39" tabindex="-1"></a>        <span class="dt">"on_fail"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"string"</span><span class="fu">,</span> <span class="dt">"enum"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"revert"</span><span class="ot">,</span> <span class="st">"escalate"</span><span class="ot">]</span> <span class="fu">}</span></span>
-<span id="cb3-40"><a aria-hidden="true" href="#cb3-40" tabindex="-1"></a>      <span class="fu">}</span></span>
-<span id="cb3-41"><a aria-hidden="true" href="#cb3-41" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb3-42"><a aria-hidden="true" href="#cb3-42" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb3-43"><a aria-hidden="true" href="#cb3-43" tabindex="-1"></a>  <span class="dt">"additionalProperties"</span><span class="fu">:</span> <span class="kw">false</span></span>
-<span id="cb3-44"><a aria-hidden="true" href="#cb3-44" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
-<p>Treat this schema like Physics: version it, run it in CI, and protect
-it behind immutable boundaries (Chapter 10).</p>
-<h4 id="constraint-gate-mapping-what-can-be-enforced-vs.-what-needs-review">Constraint
-→ gate mapping (what can be enforced vs. what needs review)</h4>
-<p>Mission Objects don’t magically enforce themselves. A constraint is
-only real when you can map it to a deterministic gate.</p>
-<p>Examples:</p>
 <table>
 <colgroup>
 <col style="width: 33%"/>
@@ -536,322 +79,234 @@ only real when you can map it to a deterministic gate.</p>
 </colgroup>
 <thead>
 <tr>
-<th>Mission field</th>
+<th>Contract part</th>
+<th>What it fixes</th>
 <th>Example</th>
-<th>Enforcement</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>scope.do_not_touch</code></td>
-<td><code>.github/**</code></td>
-<td>diff gate + protected paths + userspace boundary</td>
+<td>Objective</td>
+<td>The intended outcome</td>
+<td>Document <code>/v2/users</code> in the service README</td>
 </tr>
 <tr>
-<td><code>scope.edit_regions</code></td>
-<td><code>README.md</code> under <code>## API Endpoints</code></td>
-<td>edit-region validator</td>
+<td>Authority</td>
+<td>The adopted sources that may define the governed property</td>
+<td>The fixed OpenAPI path definition</td>
 </tr>
 <tr>
-<td><code>budgets.max_lines_changed</code></td>
-<td><code>60</code></td>
-<td>diff budget validator</td>
+<td>Effects</td>
+<td>Writable, read-only, and prohibited surfaces</td>
+<td>Edit one README block; do not touch code, policy, or CI</td>
 </tr>
 <tr>
-<td><code>acceptance_criteria.must_contain</code></td>
-<td><code>/v2/users</code></td>
-<td>deterministic content check (<code>grep</code>-style)</td>
+<td>Outputs and checks</td>
+<td>What must exist and which independent checks must pass</td>
+<td>A bounded README candidate whose route inventory matches the
+contract</td>
 </tr>
 <tr>
-<td>latency / cost targets</td>
-<td><code>p99 &lt; 100ms</code></td>
-<td>benchmark gate + budgeted <a class="concept-link" href="concepts#circuit-breakers" title="See concept: Circuit Breakers">circuit breakers</a></td>
-</tr>
-<tr>
-<td>subjective criteria</td>
-<td>“maintainable,” “best practice”</td>
-<td>explicit human review item (not Physics)</td>
+<td>Stopping and admission</td>
+<td>Budgets, failure routing, approval, and the separate path by which a
+proposal may become effective</td>
+<td>Stop after three attempts; docs-owner review admits the patch</td>
 </tr>
 </tbody>
 </table>
-<p>If you add a new constraint type and you don’t have a gate for it
-yet, make that explicit: either fail fast (“unknown constraint”) or
-route to escalation. Silent “constraints” are just prose.</p>
-<h3 id="recursion-missions-are-system-currency">3) Recursion (Missions
-are system currency)</h3>
-<p>Once Missions exist as artifacts, maintenance loops can emit them
-too.</p>
-<ul>
-<li><p>A <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> emits a concrete entropy signal (drift, unused config,
-missing docs).</p></li>
-<li><p>The loop writes a Mission Object that scopes the repair and
-defines gates.</p></li>
-<li><p>The same runner executes it and records evidence in the
-Ledger.</p></li>
+<p>Before activation, a <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> is only a proposed work contract.
+Independent approval or adopted policy must activate its exact identity
+before it authorizes execution. Parsing proves only that the object has
+the required structure. It does not prove that the intent is correct or
+grant permission to execute it.</p>
+<section aria-labelledby="mission-object-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-02-mission-objects" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-02-mission-objects</span>
+<figure class="aoi-book-diagram">
+<figcaption class="aoi-book-diagram__header">
+<p class="aoi-book-diagram__eyebrow">Intent becomes proposed authority before it becomes active</p>
+<h2 class="aoi-book-diagram__title" id="mission-object-title">From Request to Activated Mission</h2>
+<p class="aoi-book-diagram__summary">AI may help translate an ordinary-language request into a formal work contract. That translation remains a draft until independent activation fixes its exact identity.</p>
+</figcaption>
+<div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
+<div class="aoi-book-diagram__step">
+<span class="aoi-book-diagram__label">1. Human request</span>
+<p>“Preserve the released API while adding pagination metadata.”</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="proposal">
+<span class="aoi-book-diagram__label">2. Draft Mission Object</span>
+<p>A proposed objective, authority, effects, outputs, checks, budgets, routes, and admission policy.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="authority">
+<span class="aoi-book-diagram__label">3. Independent activation</span>
+<p>An authorized identity or adopted policy approves the exact contract and fixed base.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="evidence">
+<span class="aoi-book-diagram__label">4. Governed run</span>
+<p>The workflow executes under the activated contract and records what actually happened.</p>
+</div>
+</div>
+<div class="aoi-book-diagram__grid">
+<div class="aoi-book-diagram__artifact">
+<span class="aoi-book-diagram__label">Mission Object: instruction</span>
+<ul class="aoi-book-diagram__list">
+<li>Fixed during the run</li>
+<li>States what may happen</li>
+<li>Cannot activate itself</li>
 </ul>
-<p>Now “maintenance” is a pipeline, not a calendar reminder.</p>
-<h2 id="judge-output-as-structured-error-objects-signal-rich-failure">Judge
-Output as Structured Error Objects (Signal-Rich Failure)</h2>
-<p>Once a model has attempted a task defined by a Mission Object, how do
-we evaluate its output? A simple “yes” or “no” is not enough. We need
-<strong>signal-rich failure</strong> that tells us <em>why</em>
-something went wrong, so the loop can iterate intelligently or a human
-can intervene with evidence. This is where the <code>quality_gate</code>
-field in the Mission Object comes into play.</p>
-<p>A <code>quality_gate</code> is not just a pass/fail check. It is the
-mechanism that turns a failed attempt into structured feedback. That
-feedback should be machine-readable and ideally conform to a predefined
-schema.</p>
-<p>Consider our <code>README.md</code> update. The
-<code>quality_gate</code> references a validator command (and optionally
-a schema for the validator’s output). After the AI proposes changes,
-your system runs the validator. The validator doesn’t just return an
-exit code; it emits structured findings.</p>
-<p>Here’s an example of what that validator script might output if it
-fails:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a>  <span class="dt">"status"</span><span class="fu">:</span> <span class="st">"FAILED"</span><span class="fu">,</span></span>
-<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a>  <span class="dt">"failed_checks"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a>    <span class="fu">{</span></span>
-<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a>      <span class="dt">"check"</span><span class="fu">:</span> <span class="st">"endpoint_description"</span><span class="fu">,</span></span>
-<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a>      <span class="dt">"expected"</span><span class="fu">:</span> <span class="st">"The /v2/users line mentions pagination"</span><span class="fu">,</span></span>
-<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a>      <span class="dt">"actual"</span><span class="fu">:</span> <span class="st">"- `/v2/users`: Manages user resources."</span></span>
-<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a>    <span class="fu">}</span></span>
-<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
-<p>That JSON output is not just a report. It is the next iteration’s
-input.</p>
-<p>When you feed the failing checks back into the next Refine step
-(<strong><a class="concept-link" href="concepts#feedback-injection" title="See concept: Feedback Injection">Feedback Injection</a></strong>), the model can fix one constraint
-instead of re-interpreting the whole mission.</p>
-<p>If you revert after a failure, keep the candidate diff and the
-validator output in a quarantine directory (<strong>Salvage
-Protocol</strong>). You want the system safe by default, and you want
-humans to recover useful fragments without re-running the model.</p>
-<p><strong>A concrete <a class="concept-link" href="concepts#salvage-protocol" title="See concept: Salvage Protocol">Salvage Protocol</a> example: loot the useful
-fragment</strong></p>
-<p>Imagine attempt 2 produced a good helper, but the overall patch
-failed a validator (wrong edit region, wrong formatting, missing
-required string). The runner should revert the working tree, but keep
-the evidence:</p>
-<pre class="text"><code>.sdac/workflow-quarantine/
-  update-readme-api-endpoint-v1/
-    attempt-2.diff
-    attempt-2.findings.json</code></pre>
-<p>On the next attempt, you can either:</p>
-<ul>
-<li>include the helper in the deterministic slice (so the model reuses
-it), or</li>
-<li>copy the helper into the final patch manually, without re-running
-the model.</li>
+</div>
+<div class="aoi-book-diagram__artifact">
+<span class="aoi-book-diagram__label"><a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>: history</span>
+<ul class="aoi-book-diagram__list">
+<li>Records attempts and effects</li>
+<li>Retains findings and transitions</li>
+<li>Seals at every terminal result</li>
 </ul>
-<p>Salvage is not “keep broken code.” It’s “keep the best parts of a
-failed attempt with provenance.”</p>
-<p>This is why structured findings matter: they turn <code>FAIL</code>
-into a specific next move. Instead of “validation failed,” the loop gets
-facts it can route and inject:</p>
-<ul>
-<li>what failed (<code>check</code> / <code>error_code</code>)</li>
-<li>where it failed (<code>file</code> / <code>path</code>, ideally with
-line)</li>
-<li>expected vs actual, plus one concrete fix to try next</li>
-</ul>
-<p>That feedback unit is what makes Refine converge instead of
-wander.</p>
-<h2 id="the-adaptation-state-machine-asm">The Adaptation State Machine
-(ASM)</h2>
-<p>Receiving structured feedback is powerful, but what do we <em>do</em>
-with it? This brings us to the <strong>Adaptation State
-Machine</strong>: the allowed moves after the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> step. The
-<code>fallbacks</code> section in a Mission Object sets boundaries for
-these moves.</p>
-<p>In a minimal implementation, the core moves are:</p>
-<pre class="mermaid"><code>stateDiagram-v2
-  direction TB
-  [*] --&gt; Write
-  Write --&gt; Judge
-  Judge --&gt; Commit: PASS
-  Judge --&gt; Iterate: FAIL (signal-rich)
-  Judge --&gt; UpdateEnvironment: FAIL (missing constraints/tools)
-  Judge --&gt; Revert: FAIL (unsafe or thrashing)
-  Iterate --&gt; Write
-  UpdateEnvironment --&gt; Write
-  Commit --&gt; [*]
-  Revert --&gt; [*]</code></pre>
-<ol type="1">
-<li><p><strong>Iterate:</strong> try again with tighter constraints and
-the exact failing evidence. This is only worth doing when the Judge
-output is signal-rich (file, line, failing check, expected vs
-actual).</p></li>
-<li><p><strong>Update Environment:</strong> change the deterministic
-context or tools, not the output. Add a missing schema to the slice. Add
-a validator. Add a fixture. If the system is failing because it lacks
-the contract, no amount of mutation fixes it.</p></li>
-<li><p><strong>Revert:</strong> abort and leave the Terrain unchanged.
-This is a successful outcome when the loop is thrashing or the blast
-radius is too high.</p></li>
-</ol>
-<p>If the Judge returns <code>PASS</code>, you can commit or merge. If
-it returns <code>FAIL</code>, the <a class="concept-link" href="concepts#adaptation-state-machine-asm" title="See concept: Adaptation State Machine
-(ASM)">ASM</a> decides whether it’s worth
-spending more compute or whether you should stop and ask for a better
-Mission Object.</p>
-<h2 id="templates-by-change-type">Templates by Change Type</h2>
-<p>Not every engineering task is unique. Many fall into predictable
-patterns: synchronizing documentation, evolving schemas, or performing
-bounded refactors. Attempting to craft a unique Mission Object for each
-instance of these common tasks is inefficient and error-prone. This is
-where <strong>Mission Object Templates</strong> come in.</p>
-<p>Templates pre-package the common <code>goal</code>,
-<code>scope</code>, <code>constraints</code>, <code>quality_gate</code>,
-and <code>fallbacks</code> for specific categories of changes. They
-allow engineers to invoke complex, AI-driven workflows with minimal
-input, inheriting a robust set of guardrails and validation logic.</p>
-<p>For copy-and-specialize artifacts, keep one source of truth: Appendix
-C holds the canonical minimal and production Mission templates,
-alongside the paired output-contract patterns. This chapter names the
-template families and design rules; Appendix C holds the reusable
-text.</p>
-<p>Here are examples of how templates can simplify recurring Software
-Development as Code (SDaC) workflows:</p>
-<h3 id="driver-pattern-decouple-intent-from-mechanism">Driver Pattern
-(decouple intent from mechanism)</h3>
-<p>Mission Objects and templates should express what to do, not which
-tool to use. “Run tests” is intent; <code>pytest</code> vs
-<code>vitest</code> vs <code>mvn test</code> is mechanism.</p>
-<p>One simple pattern is to name the intent and let a driver map it to
-the repository substrate. The Mission can say “run tests for this
-target,” and the driver resolves the actual command from deterministic
-identity (language, build system, repo conventions).</p>
-<p>Your driver selects the command based on the repo (language, package
-manager, existing CI), ideally using <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a> identity for the
-target node. That keeps Mission Objects portable across stacks and keeps
-tool details out of intent.</p>
-<h4 id="a-common-implementation-the-makefile-is-the-driver-interface">A
-common implementation: the Makefile <em>is</em> the driver
-interface</h4>
-<p>If you standardize on a canonical CLI per repo (or per
-language-root), you can implement the <a class="concept-link" href="concepts#driver-pattern" title="See concept: Driver Pattern">Driver Pattern</a> by convention
-instead of by introspection.</p>
-<p>This is the same move you saw in <a class="chapter-link" href="chapter-1-the-minimum-viable-factory-your-first-loop#chapter-1-the-minimum-viable-factory-your-first-loop" title="Go to: Chapter 1">Chapter 1</a> (“Makefiles as the repo’s
-command panel”): <code>make</code> becomes the stable control surface,
-and each repository maps that surface to its local toolchain.</p>
-<ul>
-<li>Mission Objects express intent (<code>run_tests</code>).</li>
-<li>The runner calls one mechanism everywhere (<code>make test</code> in
-the target root).</li>
-<li>The repo’s <code>Makefile</code> hides the incantation
-(<code>pytest</code> vs <code>npm test</code> vs <code>mvn test</code>)
-and bakes in paths, env vars, and flags.</li>
-</ul>
-<p>This works especially well when your boundaries are clean: one
-language/toolchain per repo, or a monorepo that is deliberately split
-into language-root folders with their own command panels. In that world,
-“select the mechanism” often reduces to “cd into the right root and
-press the same button.”</p>
-<p>Make is only one substrate. You can swap it for any task runner
-(<code>just</code>, <code>task</code>, <code>bazel</code>,
-<code>npm scripts</code>, CI-native wrappers). The Driver Pattern is the
-invariant: one canonical interface per project, with swappable
-implementations underneath.</p>
-<h4 id="driver-resolution-algorithm-identity-command-fail-fast">Driver
-resolution algorithm (identity → command, fail fast)</h4>
-<p>Keep driver resolution deterministic and explicit:</p>
-<ol type="1">
-<li>Read node identity from the Context Graph (language + build
-system).</li>
-<li>Look up a driver in a registry (built-in defaults plus repo
-overrides).</li>
-<li>If multiple drivers match, apply precedence (most specific match
-wins).</li>
-<li>If no driver matches, fail fast with an actionable error (“no test
-driver for rust+cargo”).</li>
-</ol>
-<p>The key is that the system chooses the mechanism from deterministic
-identity. The model never guesses which toolchain to run.</p>
-<h4 id="worked-polyglot-example-pytest-vs.-jest">Worked polyglot
-example: <code>pytest</code> vs. <code>jest</code></h4>
-<p>Assume a monorepo with two packages:</p>
-<ul>
-<li><code>services/api</code> is Python (tests run via
-<code>pytest</code>)</li>
-<li><code>services/web</code> is JavaScript (tests run via
-<code>jest</code>)</li>
-</ul>
-<p>The Mission Object expresses intent only: “run tests for
-<code>services/api</code>” and “run tests for
-<code>services/web</code>.”</p>
-<p>The driver uses deterministic identity (computed from manifests like
-<code>pyproject.toml</code> / <code>package.json</code>) to choose the
-mechanism. If a package has no manifest, the driver fails fast. If a
-package has no test command, the driver fails fast. The model never
-invents toolchains; the substrate tells you what exists.</p>
-<h3 id="documentation-synchronization">Documentation
-Synchronization</h3>
-<ul>
-<li><p><strong>Problem</strong>: <code>README.md</code> or API
-documentation often drifts out of sync with the actual code or OpenAPI
-specification.</p></li>
-<li><p><strong>Template</strong>: A <code>DocSyncMission</code>
-typically takes a source of truth (OpenAPI/schema) and a target doc
-surface, and constrains edits to named sections. The quality gate checks
-that required fields/paths appear and formatting stays
-canonical.</p></li>
-</ul>
-<h3 id="schema-evolution">Schema Evolution</h3>
-<ul>
-<li><p><strong>Problem</strong>: Adding a field to a database schema
-requires corresponding updates in ORM models, API DTOs, and potentially
-UI forms.</p></li>
-<li><p><strong>Template</strong>: A <code>SchemaEvolutionMission</code>
-takes a schema change (add field / rename / deprecate) and expands scope
-deterministically to the dependent surfaces (models, DTOs, migrations).
-The quality gate compiles, types, and tests the affected roots.</p></li>
-</ul>
-<h3 id="bounded-refactor">Bounded Refactor</h3>
-<ul>
-<li><p><strong>Problem</strong>: Applying a consistent rename across a
-codebase or extracting a small helper function.</p></li>
-<li><p><strong>Template</strong>: A <code>BoundedRefactorMission</code>
-takes a small, mechanizable change (rename, extraction, “make this
-function pure”) and applies strict diff budgets. The quality gate runs
-the local <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> plus static checks.</p></li>
-</ul>
-<p>Templates let teams establish pre-vetted patterns for recurring
-changes. That improves consistency, reduces novel instruction-injection
-failures, and lets engineers spend attention on the change itself rather
-than rebuilding guardrails for every run.</p>
-<p>The companion repo includes a <code>driver-demo</code> target that
-runs <code>resolve_driver.py</code> to demonstrate how a driver can be
-resolved from a simple registry based on file type.</p>
-<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
-do this week</h2>
-<ol type="1">
-<li><p><strong>Define a Simple Mission Object</strong>: Pick a
-straightforward, low-stakes task in your codebase (e.g., update a
-comment, add a line to a specific section of a non-critical file). Start
-from Appendix C’s minimal Mission template, then specialize the
-<code>goal</code>, <code>scope</code>, and any simple
-<code>constraints</code>.</p></li>
-<li><p><strong>Mock an AI Executor</strong>: Write a small script
-(Python, Bash, Node) that <em>reads</em> your Mission Object YAML. For
-now, have it simply print the <code>goal</code> and <code>scope</code>.
-Then, manually make the requested change in the target file.</p></li>
-<li><p><strong>Implement a Basic Quality Gate</strong>: Add a
-<code>quality_gate</code> to your Mission Object. Create a separate
-script (e.g., <code>validate_task.sh</code>) that takes the modified
-file as input and performs one or two simple checks (e.g.,
-<code>grep</code> for a specific string, check file size). Have this
-script output a simple JSON object indicating <code>status</code>
-(“PASSED” or “FAILED”) and a <code>reason</code>.</p></li>
-<li><p><strong>Wire up a “Judge”</strong>: Modify your executor script
-from step 2 to call your <code>quality_gate</code> script. Based on the
-JSON output, print “Mission PASSED” or “Mission FAILED” along with the
-reason. You now have the core components of an auditable SDaC
-loop.</p></li>
-</ol>
+</div>
+</div>
+<p class="aoi-book-diagram__note">The inverse path is also proposal-only: admitted implementation and runtime evidence may support a human-readable <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> update, but observation cannot install intent.</p>
+</figure>
+</section>
+<p>Part II established why candidate generation needs bounded context,
+comparable evidence, and finite stopping. The Mission Object packages
+those decisions so the same class of work can run repeatedly without
+reconstructing authority from tickets, chats, or prompts.</p>
+<h2 id="what-belongs-in-the-contract">What Belongs in the Contract</h2>
+<p>The categories in the opening table serve different purposes.</p>
+<p>The <strong>objective</strong> names the outcome without prescribing
+every implementation move. <strong>Authority</strong> identifies the
+adopted contracts, policies, or decisions allowed to define correctness
+for the governed property. Read access does not confer authority: a
+source may be relevant evidence while remaining unable to instruct the
+run.</p>
+<p><strong>Effects</strong> bound where and how work may occur. They
+include writable regions, denied paths, external systems, network
+access, credentials, and any behavior the run may not perform.
+<strong>Outputs and checks</strong> define what the workflow must
+produce and how selected properties will be evaluated. “Fast enough” is
+not an executable condition; a fixed workload, environment, measurement
+protocol, threshold, and tolerance can be.</p>
+<p>The contract also fixes when execution must stop and what may happen
+afterward. <strong>Stopping and <a class="concept-link" href="concepts#admission" title="See concept: Admission">admission</a></strong> name the budgets,
+permitted routes, required approvals, and response to missing evidence.
+A missing contract may require an external decision. Exhausted attempts
+without progress should end as an evidenced failure. A successful run
+closes a proposal; it does not merge, deploy, or adopt it.</p>
+<p>If a criterion cannot produce evidence under a declared decision
+protocol, keep it as an explicit human review item or a deferred quality
+goal. Do not hide subjective judgment behind a field that looks
+machine-readable.</p>
+<h2 id="authority-and-evidence-are-different-artifacts">Authority and
+Evidence Are Different Artifacts</h2>
+<p>One mutable document cannot safely serve as both instruction and
+history. A governed run uses two related artifacts:</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mission Object</strong></td>
+<td>Fixed authority: objective, authoritative sources, effects, outputs,
+checks, budgets, routing, and admission policy</td>
+</tr>
+<tr>
+<td><strong>Run Record</strong></td>
+<td>Append-only execution evidence: baseline, bounded input, attempts,
+findings, actual effects, decisions, outputs, budgets, and sealed
+result</td>
+</tr>
+</tbody>
+</table>
+<p>The Run Record is the evidence record for one execution. Findings may
+guide the next attempt or support a later Mission proposal, but they
+cannot rewrite the active Mission. A changed objective, writable scope,
+budget, check plan, or admission rule requires a new Mission version and
+a new activation decision.</p>
+<p>The same separation applies to outputs. A workspace output, such as
+the edited README, is part of the candidate. An evidence output, such as
+the protected Map-alignment report, is retained because the Mission or
+policy declares it necessary for reconstruction or decision. A workflow
+should not copy every generated file into its evidence store. Declared
+output checks must finish before the proposal can close, but retaining
+an artifact does not make it authoritative or admit it.</p>
+<h2 id="draft-activate-execute">Draft, Activate, Execute</h2>
+<p>A human, planner, <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a>, or model may draft a Mission Object.
+Drafting is assistive, not authoritative. Independent activation must
+fix the exact version permitted to run and record the approval
+basis.</p>
+<p>An ordinary-language request may seed that draft. A model can turn
+“document <code>/v2/users</code> without changing code” into proposed
+fields for the objective, authority, effects, checks, budgets, and
+admission path. The structured proposal makes omissions and conflicts
+easier to inspect; it does not make guessed fields authoritative.
+Activation must verify that the contract reflects adopted intent before
+execution.</p>
+<p>Before execution, protected preflight resolves the exact authority
+and check identities, pins the source baseline, and verifies that
+declared outputs fit the effect boundary. In a repository workflow, this
+may mean resolving an OpenAPI contract digest, a Git base commit, and a
+protected CI check. Preflight rejects missing or ambiguous decision
+mechanisms and never accepts executable graders supplied by the
+candidate.</p>
+<p>Once activated, the Mission remains fixed for the run. The workflow
+may choose only among its declared transitions. It cannot widen scope,
+add a grader, change a budget, reinterpret missing evidence as success,
+or authorize admission. Those are changes to authority, not refinements
+of a candidate.</p>
+<p>A later Mission version may supersede the contract for future runs.
+Existing Run Records continue to refer to the exact version that
+governed them.</p>
+<h2 id="checks-bind-to-the-candidate">Checks Bind to the Candidate</h2>
+<p><a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a> defined structured findings, and Chapter 5 defined bounded
+routing. The Mission Object binds those mechanisms to one run. It names
+the required protected checks, while each report identifies the exact
+candidate and configuration it evaluated.</p>
+<p>Only <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>, internally consistent evidence from the declared check
+set may support a transition. A finding may enter the next bounded input
+as tagged evidence. It cannot become a new instruction, expand
+authority, or substitute for a check that did not run.</p>
+<p>This is also why candidate-proposed tests are supporting evidence
+rather than the sole oracle for that candidate. They may improve
+coverage, but the active Mission and protected policy decide which
+checks count.</p>
+<h2 id="reuse-without-self-authorization">Reuse Without
+Self-Authorization</h2>
+<p>Templates can predeclare the shape of recurring work: default
+budgets, permitted check identities, routing, and output classes.
+Specialization still supplies the exact objective, authority, effects,
+and evidence requirements, then passes independent activation.</p>
+<p>A rejected candidate may contain a useful fragment. That fragment
+remains untrusted. A later run may reuse it with provenance, but it must
+re-enter as part of a new candidate inside declared scope and pass the
+ordinary checks and admission path. Salvage does not promote failed
+work.</p>
+<p>The same rule governs recursively proposed work. A maintenance scan
+may produce a draft Mission, and run history may suggest a better
+template. Neither becomes authority until a separate activation or
+adoption decision approves the exact proposal.</p>
+<p>The Mission Object is therefore not a detailed ticket and not a
+prompt wrapper. It is the stable boundary between requested work and
+executable authority. Together, the two records make the change process
+inspectable and reusable as structured data. The Mission Object states
+what may happen; the Run Record preserves what did happen. The system
+can then reuse the workflow without asking a model to infer permission
+on every run.</p>
+<p>The organizational consequence is repeatable delegation. Teams can
+approve a stable class of work once, then let each instance execute
+under the same explicit authority and evidence contract instead of
+reconstructing permission and review expectations from prose.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). That is already enough to do real work. It names the goal, the writable surface, the…" data-share-title="Chapter 7 – Intent as Code (Mission Objects) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-7-intent-as-code-mission-objects" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). A serious workflow needs more than an instruction string. It needs a versioned work…" data-share-title="Chapter 7 – Intent as Code (Mission Objects) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-7-intent-as-code-mission-objects" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -859,7 +314,7 @@ loop.</p></li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-7-intent-as-code-mission-objects" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-7-intent-as-code-mission-objects" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-7-intent-as-code-mission-objects&amp;title=Chapter%207%20%E2%80%93%20Intent%20as%20Code%20%28Mission%20Objects%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%207%20%E2%80%93%20Intent%20as%20Code%20%28Mission%20Objects%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%207%20of%20Architects%20of%20Intent%3A%20Intent%20as%20Code%20%28Mission%20Objects%29.%20That%20is%20already%20enough%20to%20do%20real%20work.%20It%20names%20the%20goal%2C%20the%20writable%20surface%2C%20the%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-7-intent-as-code-mission-objects">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%207%20%E2%80%93%20Intent%20as%20Code%20%28Mission%20Objects%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%207%20of%20Architects%20of%20Intent%3A%20Intent%20as%20Code%20%28Mission%20Objects%29.%20A%20serious%20workflow%20needs%20more%20than%20an%20instruction%20string.%20It%20needs%20a%20versioned%20work%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-7-intent-as-code-mission-objects">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -885,7 +340,7 @@ loop.</p></li>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

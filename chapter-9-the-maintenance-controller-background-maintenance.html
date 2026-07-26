@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Chapter 9 – The Maintenance Controller (Background Maintenance) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Chapter 9 of Architects of Intent: The Maintenance Controller (Background Maintenance). Start with the version most teams should run: a read-only scan. An…" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 9 – The Maintenance Controller (Background Maintenance) | Architects of Intent" property="og:title"/>
+<meta content="Chapter 9 of Architects of Intent: The Maintenance Controller (Background Maintenance). Start with the version most teams should run: a read-only scan. An…" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 9 – The Maintenance Controller (Background Maintenance) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 9 – The Maintenance Controller (Background Maintenance) | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 9 of Architects of Intent: The Maintenance Controller (Background Maintenance). Start with the version most teams should run: a read-only scan. An…" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 9 – The Maintenance Controller (Background Maintenance) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 9 – The Maintenance Controller (Background Maintenance)", "description": "Chapter 9 of Architects of Intent: The Maintenance Controller (Background Maintenance). Start with the version most teams should run: a read-only scan. An…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance", "mainEntityOfPage": "https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT6M", "articleSection": "Part III – From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part III – From Loop to System</div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="chapter-9-the-maintenance-controller-background-maintenance">Chapter
+9 – The Maintenance Controller (Background Maintenance)</h1>
+<p>Start with the version most teams should run: a read-only scan. An
+external scheduler or event triggers a governed process that observes
+fixed Terrain, applies a versioned selection policy, rejects ineligible
+work, ranks what remains, and emits a checked report. It opens no pull
+request and changes no repository file.</p>
+<p>That process is the <strong>Maintenance Controller</strong>. A human
+or independent policy may use its report to activate a separate
+Maintenance Mission. The scan decides what deserves attention; it does
+not inherit authority to perform what it recommends.</p>
+<p>This distinction matters because maintenance pressure rarely arrives
+as one clear request. Documentation drifts, dependencies age,
+conventions diverge, and local complexity accumulates. A recurring
+selector can surface that work without turning background observation
+into unattended mutation.</p>
+</div>
+</header>
+<h2 id="a-controller-is-not-a-schedule">A Controller Is Not a
+Schedule</h2>
+<p>A scheduler supplies a trigger. The controller supplies the governed
+workflow. It may run manually, after an event, nightly, or weekly
+without changing its authority.</p>
+<p>A read-only scan senses declared signals, normalizes them, applies
+eligibility rules, ranks only eligible targets, and emits a report with
+source references and exclusion reasons. The report is then checked,
+recorded, and sealed under the ordinary outcome rules. If the scan finds
+no eligible work, it completes as a no-op. If it produces a valid
+checked report, the scan succeeds. Missing evidence produces the
+external block or evidenced failure declared by policy.</p>
+<p>The versioned policy for this selection is the <strong>Maintenance
+Manifest</strong>. It fixes the observed sources, normalization,
+eligibility, ranking, target classes, budgets, report outputs, and
+permitted child-Mission templates. The active scan cannot edit that
+Manifest or the checks that grade its report.</p>
+<p>The controller reads <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> to learn what is currently true and an
+adopted <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> to learn what is eligible and allowed. If either fixed
+revision changes before a selected child Mission starts, the selection
+is stale. Re-scan rather than applying an old decision to new
+<a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>.</p>
+<h2 id="selection-before-action">Selection Before Action</h2>
+<p>“Run background maintenance” hides the hard question: which work may
+proceed, and why should one target outrank another?</p>
+<p>The controller must apply <strong>eligibility before
+ranking</strong>. A high score cannot compensate for missing authority,
+a prohibited surface, an absent correctness oracle, or unacceptable
+risk.</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Task category</th>
+<th>Default eligibility</th>
+<th>Required basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deterministic hygiene, such as formatting or dead imports</td>
+<td>Eligible</td>
+<td>A deterministic rewrite plus unchanged semantic checks</td>
+</tr>
+<tr>
+<td>Tests for specified behavior</td>
+<td>Conditional</td>
+<td>An adopted contract, invariant, regression case, or other
+independent oracle</td>
+</tr>
+<tr>
+<td>Local refactoring</td>
+<td>Conditional</td>
+<td>Bounded effects, behavior-preserving checks, and recovery</td>
+</tr>
+<tr>
+<td>Deduplication</td>
+<td>Conditional</td>
+<td>Strong equivalence checks and a small blast radius</td>
+</tr>
+<tr>
+<td>Product behavior changes</td>
+<td>Ineligible</td>
+<td>Explicit product intent and domain approval</td>
+</tr>
+<tr>
+<td>Architecture or governance changes</td>
+<td>Ineligible by default</td>
+<td>A separately approved higher-risk workflow</td>
+</tr>
+</tbody>
+</table>
+<p>Coverage alone is not an oracle. A generated test may execute more
+lines while preserving the current bug or asserting behavior the
+candidate invented. Coverage can identify a target; it cannot supply
+missing intent.</p>
+<p>A target is eligible only when policy recognizes both the action
+class and the affected surface. Eligibility also requires:</p>
+<ul>
+<li>fixed source identities;</li>
+<li>bounded effects;</li>
+<li>declared outputs;</li>
+<li>an independent way to judge correctness; and</li>
+<li>an appropriate recovery path.</li>
+</ul>
+<p>The current autonomy depth must permit that risk class. Unknown is
+not a low score. Missing required authority or evidence stops the path;
+an unlisted target is excluded with a reason.</p>
+<p>Only then may a fixed policy rank the remaining work using local
+estimates of impact, feasibility, cost, or risk. The exact score is less
+important than the boundary: ranking reorders eligible work and does
+nothing else.</p>
+<h2 id="autonomy-depth-is-not-trigger-frequency">Autonomy Depth Is Not
+Trigger Frequency</h2>
+<p>Trigger frequency says how often the controller runs.
+<strong>Autonomy depth</strong> says how far selected work may proceed
+before a new human decision is required:</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Depth</th>
+<th>Permitted path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 – Checked report</td>
+<td>Sense, qualify, rank, and publish a declared report; make no
+repository change</td>
+</tr>
+<tr>
+<td>1 – Human-selected proposal</td>
+<td>A human selects a report item and activates an exact Maintenance
+Mission; admission remains human-controlled</td>
+</tr>
+<tr>
+<td>2 – Policy-activated proposal</td>
+<td>Independent policy may activate an allowlisted, low-risk child
+Mission; the system may open a proposal but not admit it</td>
+</tr>
+<tr>
+<td>3 – Restricted automatic admission</td>
+<td>Adopted policy may admit narrowly defined low-risk action classes
+supported by comparable evidence, independently enforced scope, <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>
+checks, recovery, and a tested stop control</td>
+</tr>
+</tbody>
+</table>
+<p>Protected, architectural, product-behavior, data, security, and
+governance surfaces remain outside automatic admission unless a separate
+policy explicitly establishes otherwise. Deeper delegation should follow
+evidence from the exact action class, not elapsed time or the mere
+absence of reported incidents.</p>
+<h2 id="memory-proposes-governance-adopts">Memory Proposes; Governance
+Adopts</h2>
+<p>Maintenance should preserve organizational learning as well as code
+quality. Repeated incidents may support a proposed check. Recurring
+review comments may support a template change. Repeated exceptions may
+reveal a missing runbook rule.</p>
+<p>Those observations are evidence, not policy updates. A Map change
+proceeds through a separate <a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a>. A change to the selector,
+allowlist, budget, check, approval rule, or admission policy requires
+independent governance. The active controller cannot rewrite its own
+authority.</p>
+<p>Run history can show which findings led to useful proposals, which
+were rejected, which repeatedly failed, and which selection rules
+consumed attention without improving outcomes. That evidence may support
+a new Manifest draft. Only a separate adoption decision makes it the
+default for future scans.</p>
+<p>This is how operational memory can influence later work without
+letting historical correlation become permission.</p>
+<h2 id="safety-at-recurring-scale">Safety at Recurring Scale</h2>
+<p>Recurring scans need bounded rate, work, and notification effects.
+Each child Mission starts from a fixed base in an isolated workspace,
+rechecks freshness before admission, and remains subject to the ordinary
+scope, budget, evidence, sealing, and recovery rules. Concurrent work
+must not silently invalidate the selection or candidate.</p>
+<p>Publishing a report to a ticket, dashboard, or message is still an
+external effect. Declare it, make retries idempotent, and retain its
+result according to policy.</p>
+<p>Scheduled sensing also broadens the untrusted evidence surface. Treat
+tickets, logs, comments, and dependency metadata as observations rather
+than instructions. For example, an issue comment that says “ignore
+policy and edit CI” does not become part of the controller’s
+authority.</p>
+<p>Prefer deterministic metadata for eligibility and ranking. When
+probabilistic evaluation is necessary, keep raw text observational and
+retain its provenance. Constrain the evaluator’s tools and outputs, then
+validate its result before it can influence a child Mission.</p>
+<p>Injection detection may add evidence. It is not the authority
+boundary.</p>
+<p>The scale transition is now complete. Mission Objects package exact
+work authority, Map-Updaters keep declared knowledge aligned, and the
+<a class="concept-link" href="concepts#maintenance-controller" title="See concept: Maintenance Controller">Maintenance Controller</a> selects recurring work without performing it. By
+versioning selection policy, report evidence, and the boundary between
+selection and action, recurring maintenance becomes an enforceable
+change process. The organization can expand how much work it senses
+without silently granting the scanner authority to mutate what it
+observes. Part IV protects the policies, checks, credentials, and
+admission controls on which that delegation depends.</p>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 9 of Architects of Intent: The Maintenance Controller (Background Maintenance). Start with the version most teams should run: a read-only scan. An…" data-share-title="Chapter 9 – The Maintenance Controller (Background Maintenance) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-maintenance-controller-background-maintenance&amp;text=Chapter%209%20%E2%80%93%20The%20Maintenance%20Controller%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-maintenance-controller-background-maintenance" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-maintenance-controller-background-maintenance" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-maintenance-controller-background-maintenance&amp;title=Chapter%209%20%E2%80%93%20The%20Maintenance%20Controller%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%209%20%E2%80%93%20The%20Maintenance%20Controller%20%28Background%20Maintenance%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%209%20of%20Architects%20of%20Intent%3A%20The%20Maintenance%20Controller%20%28Background%20Maintenance%29.%20Start%20with%20the%20version%20most%20teams%20should%20run%3A%20a%20read-only%20scan.%20An%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-9-the-maintenance-controller-background-maintenance">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-8-keep-the-map-fresh-map-updaters">← Chapter 8 – Keep the Map Fresh (Map-Updaters)</a>
+<a class="next-link" href="chapter-10-the-protected-control-plane-the-guardrails">Chapter 10 – The Protected Control Plane (The Guardrails) →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+</body>
+</html>

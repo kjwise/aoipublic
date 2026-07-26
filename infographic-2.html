@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infographic 2 — The Shape of All Work: SDaC</title>
+    <title>Infographic 2 — Composable Governed Loops</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -38,12 +38,12 @@
                 <div>
                     <h4 class="text-cyber-accent font-mono text-sm tracking-widest uppercase mb-4">Software Development as Code (SDaC)</h4>
                     <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
-                        The Shape of <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent">All Work</span>
+                        A Composable <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent">Shape of Work</span>
                     </h1>
                     <p class="text-xl text-cyber-muted max-w-xl leading-relaxed">
-                        Every productive process follows the same recursive shape. The "Product" isn't the code.
-                        <strong class="text-white">The Loop is the Product.</strong>
+                        The book develops a proposition: bounded workflows can compose when their authority, effects, evidence, and failure semantics remain explicit.
+                        <strong class="text-white">The workflow system becomes part of the product.</strong>
                     </p>
                 </div>
 
@@ -85,7 +85,7 @@
     <main class="max-w-[1500px] mx-auto px-6 py-12 space-y-24">
 <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-01-fractal-nature" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
 <span data-infographic-fragment-label="1" aria-hidden="true">i2-section-01-fractal-nature</span>
-  <style>
+<style>
     [data-role="fractal-sim"] .scale-button {
       border: 1px solid rgba(148, 163, 184, 0.4);
       border-radius: 999px;
@@ -107,98 +107,92 @@
       transform: translateX(4px);
     }
   </style>
-
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-    <div class="lg:col-span-5">
-    <h2 class="text-3xl font-bold mb-4 text-white">The Same Loop at Different Scales</h2>
-    <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
-    <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-      The same pattern shows up at multiple levels. Functions change in minutes; products change in weeks; organizations change much more slowly.
-      Faster loops feed the slower ones above them.
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<div class="lg:col-span-5">
+<h2 class="text-3xl font-bold mb-4 text-white">A Pattern Across Different Scales</h2>
+<div class="h-1 w-20 bg-cyber-accent mb-6"></div>
+<p class="text-cyber-muted mb-6 text-lg leading-relaxed">
+      State, process, evidence, and decision can be modeled at multiple levels. Functions often change faster than products or organizations, but evidence does not automatically rewrite the slower layers above it.
     </p>
-    <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
-      <li>Drift at lower levels spreads upward.</li>
-      <li>Improvements at lower levels spread upward too.</li>
-      <li>Intent and validation at every scale keep the stack coherent.</li>
-    </ul>
-    <div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
-      <p class="font-mono text-sm text-cyber-neon">
+<ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
+<li>Drift at lower levels spreads upward.</li>
+<li>Improvements move upward only through explicit interfaces and adoption.</li>
+<li>Each scale needs authority and evidence appropriate to its consequences.</li>
+</ul>
+<div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
+<p class="font-mono text-sm text-cyber-neon">
         Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)<br/>
-        P<sub>k+1</sub> = improve(P<sub>k</sub>, evidence)
+        P<sub>k+1</sub> = adopt(proposal(P<sub>k</sub>, evidence))
       </p>
-    </div>
-    </div>
-
-    <div class="lg:col-span-7">
-      <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
-      <div class="flex flex-wrap items-center gap-2 mb-4">
-        <span class="text-xs font-mono text-gray-500 uppercase">Pick a scale</span>
-        <button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
-        <button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
-        <button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
-        <button class="scale-button" data-role="scale-button" data-scale="function" type="button">Function</button>
-      </div>
-
-      <div class="space-y-3">
-        <div class="fractal-layer border-l-cyber-primary is-active" data-role="scale-card" data-scale="company" data-state="Market position" data-process="Culture + leadership" data-cadence="Years" data-example="Strategic bets">
-          <div class="flex justify-between items-center mb-1">
-            <span class="font-bold text-lg text-cyber-primary">Company Scale</span>
-            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
-          </div>
-          <div class="text-xs text-gray-400">State: Market position · Process: Culture + leadership</div>
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
+<div class="flex flex-wrap items-center gap-2 mb-4">
+<span class="text-xs font-mono text-gray-500 uppercase">Pick a scale</span>
+<button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
+<button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
+<button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
+<button class="scale-button" data-role="scale-button" data-scale="function" type="button">Function</button>
+</div>
+<div class="space-y-3">
+<div class="fractal-layer border-l-cyber-primary is-active" data-cadence="Years" data-example="Strategic bets" data-process="Culture + leadership" data-role="scale-card" data-scale="company" data-state="Market position">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-lg text-cyber-primary">Company Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
+</div>
+<div class="text-xs text-gray-400">State: Market position · Process: Culture + leadership</div>
+</div>
+<div class="fractal-layer border-l-cyber-neon ml-4" data-cadence="Months" data-example="Portfolio bets" data-process="Org + strategy" data-role="scale-card" data-scale="product" data-state="System architecture">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-md text-cyber-neon">Product Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
+</div>
+<div class="text-xs text-gray-400">State: System architecture · Process: Org + strategy</div>
+</div>
+<div class="fractal-layer border-l-cyber-accent ml-8" data-cadence="Days" data-example="Release scope" data-process="Team practices" data-role="scale-card" data-scale="feature" data-state="Capabilities">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
+<span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
+</div>
+<div class="text-xs text-gray-400">State: Capabilities · Process: Team practices</div>
+</div>
+<div class="fractal-layer border-l-cyber-success ml-12" data-cadence="Minutes" data-example="Code edits" data-process="Dev tools" data-role="scale-card" data-scale="function" data-state="Implementation">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-xs text-cyber-success">Function Scale</span>
+<span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
+</div>
+<div class="text-xs text-gray-400">State: Implementation · Process: Dev tools</div>
+</div>
+</div>
+<div class="mt-4 bg-gray-900/70 p-4 rounded-lg border border-gray-700">
+<div class="text-xs font-mono text-gray-500">Selected scale</div>
+<div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+<div>
+<div class="text-xs text-gray-500">State</div>
+<div class="text-white font-semibold" data-role="fractal-state">Market position</div>
+</div>
+<div>
+<div class="text-xs text-gray-500">Process</div>
+<div class="text-white font-semibold" data-role="fractal-process">Culture + leadership</div>
+</div>
+<div>
+<div class="text-xs text-gray-500">Cadence</div>
+<div class="text-white font-semibold" data-role="fractal-cadence">Years</div>
+</div>
+<div>
+<div class="text-xs text-gray-500">Example</div>
+<div class="text-white font-semibold" data-role="fractal-example">Strategic bets</div>
+</div>
+</div>
+<div class="mt-3 text-xs text-gray-500" data-role="fractal-insight">
+          Verify each handoff. Similar shape does not grant shared authority.
         </div>
-        <div class="fractal-layer border-l-cyber-neon ml-4" data-role="scale-card" data-scale="product" data-state="System architecture" data-process="Org + strategy" data-cadence="Months" data-example="Portfolio bets">
-          <div class="flex justify-between items-center mb-1">
-            <span class="font-bold text-md text-cyber-neon">Product Scale</span>
-            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
-          </div>
-          <div class="text-xs text-gray-400">State: System architecture · Process: Org + strategy</div>
-        </div>
-        <div class="fractal-layer border-l-cyber-accent ml-8" data-role="scale-card" data-scale="feature" data-state="Capabilities" data-process="Team practices" data-cadence="Days" data-example="Release scope">
-          <div class="flex justify-between items-center mb-1">
-            <span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
-            <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
-          </div>
-          <div class="text-xs text-gray-400">State: Capabilities · Process: Team practices</div>
-        </div>
-        <div class="fractal-layer border-l-cyber-success ml-12" data-role="scale-card" data-scale="function" data-state="Implementation" data-process="Dev tools" data-cadence="Minutes" data-example="Code edits">
-          <div class="flex justify-between items-center mb-1">
-            <span class="font-bold text-xs text-cyber-success">Function Scale</span>
-            <span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
-          </div>
-          <div class="text-xs text-gray-400">State: Implementation · Process: Dev tools</div>
-        </div>
-      </div>
-
-      <div class="mt-4 bg-gray-900/70 p-4 rounded-lg border border-gray-700">
-        <div class="text-xs font-mono text-gray-500">Selected scale</div>
-        <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-          <div>
-            <div class="text-xs text-gray-500">State</div>
-            <div class="text-white font-semibold" data-role="fractal-state">Market position</div>
-          </div>
-          <div>
-            <div class="text-xs text-gray-500">Process</div>
-            <div class="text-white font-semibold" data-role="fractal-process">Culture + leadership</div>
-          </div>
-          <div>
-            <div class="text-xs text-gray-500">Cadence</div>
-            <div class="text-white font-semibold" data-role="fractal-cadence">Years</div>
-          </div>
-          <div>
-            <div class="text-xs text-gray-500">Example</div>
-            <div class="text-white font-semibold" data-role="fractal-example">Strategic bets</div>
-          </div>
-        </div>
-        <div class="mt-3 text-xs text-gray-500" data-role="fractal-insight">
-          Improve the fastest loops first; the rest of the stack inherits the gain.
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
+</div>
+</div>
+</div>
+</div>
+<script>
   (function () {
     const script = document.currentScript;
     const root = script ? script.closest('[data-infographic-section-id="i2-section-01-fractal-nature"]') : null;
@@ -249,9 +243,9 @@
 <section data-infographic-section-id="i2-section-02-clock-speed" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
 <span data-infographic-fragment-label="1" aria-hidden="true">i2-section-02-clock-speed</span>
 <div class="text-center mb-12">
-<h2 class="text-3xl font-bold text-white mb-2">AI Changes the Clock Speed</h2>
+<h2 class="text-3xl font-bold text-white mb-2">AI Changes Candidate Economics</h2>
 <p class="text-cyber-muted max-w-2xl mx-auto">
-                    The iteration that took a day now takes minutes. This is pure acceleration.
+                    Some workflows become faster; others become slower once review and correction are counted. The stable change is that producing plausible alternatives can become cheaper.
                 </p>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
@@ -259,24 +253,24 @@
 <canvas id="clockSpeedChart"></canvas>
 </div>
 <div class="bg-cyber-panel p-8 rounded-xl border border-gray-700">
-<h3 class="text-xl font-bold text-cyber-accent mb-4">From "Sprint" to "Loop"</h3>
+<h3 class="text-xl font-bold text-cyber-accent mb-4">From Proposal Speed to Delivery Evidence</h3>
 <ul class="space-y-4 text-gray-300 text-sm">
 <li class="flex items-start">
 <span class="text-cyber-neon mr-2">➜</span>
 <div>
-<strong class="text-white">Feature Dev:</strong> Reduced from weeks to days. The constraint is no longer typing speed, but verification speed.
+<strong class="text-white">Candidate production:</strong> More alternatives may arrive sooner, shifting pressure toward verification and admission.
                             </div>
 </li>
 <li class="flex items-start">
 <span class="text-cyber-neon mr-2">➜</span>
 <div>
-<strong class="text-white">Refactoring:</strong> Reduced from days to minutes. Entire codebases can be fluidly reshaped.
+<strong class="text-white">Total delivery:</strong> Measure review, retries, escapes, and ownership cost rather than assuming proposal speed is progress.
                             </div>
 </li>
 <li class="flex items-start">
 <span class="text-cyber-neon mr-2">➜</span>
 <div>
-<strong class="text-white">The Danger:</strong> A faster loop that drifts is just faster drift. Speed amplifies whatever is already there.
+<strong class="text-white">The danger:</strong> Where proposal rate rises, weak controls can convert acceleration into faster drift and more review load.
                             </div>
 </li>
 </ul>
@@ -288,14 +282,14 @@
 <span data-infographic-fragment-label="1" aria-hidden="true">i2-section-03-drift-vs-convergence</span>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 <div class="lg:col-span-4 flex flex-col justify-center">
-<h2 class="text-3xl font-bold mb-4 text-white">Drift vs. Convergence</h2>
+<h2 class="text-3xl font-bold mb-4 text-white">A Drift vs. Convergence Hypothesis</h2>
 <div class="h-1 w-20 bg-cyber-danger mb-6"></div>
 <p class="text-cyber-muted mb-6">
-                        Acceleration without structure is chaos.
+	                        This illustrative model compares two assumed cost curves; it is not measured evidence.
                         <br/><br/>
-<strong>Red Band:</strong> Vibe coding. It starts fast, but variance expands and rework dominates as the foundations crack.
+<strong>Red Band:</strong> an ungoverned case in which variance and rework rise with candidate volume.
                         <br/><br/>
-<strong>Green Band:</strong> SDaC. It starts slower while tooling is built, then compounds into higher throughput with tighter variance.
+<strong>Green Band:</strong> a governed case in which control investment lowers escape and rework costs enough to improve net throughput.
                     </p>
 <div class="p-4 bg-cyber-panel rounded border border-gray-700 space-y-4">
 <div class="flex items-center justify-between gap-4">
@@ -309,7 +303,7 @@
 </div>
 <input class="w-full accent-cyber-success" id="drift-week-slider" max="26" min="1" type="range" value="8"/>
 <p class="text-xs text-gray-500">
-                            Early: Vibe coding wins on speed. By week 8 SDaC overtakes. After that, vibe collapses under rising foundation debt.
+                            Scenario assumption: the governed curve overtakes in week 8. Real crossover points, if any, must be measured for comparable workflows.
                         </p>
 <div class="grid grid-cols-2 gap-4">
 <div class="rounded-lg bg-gray-800/50 p-3 border border-gray-700">
@@ -370,8 +364,8 @@
 <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
 <li>Explicit Intent Surfaces</li>
 <li>Bounded Effectors</li>
-<li>Deterministic Validators</li>
-<li>Loops that Converge</li>
+<li>Protected evaluation and routing</li>
+<li>Workflows that converge or stop with evidence</li>
 </ul>
 </div>
 </div>
@@ -386,20 +380,20 @@
 <section class="bg-cyber-panel rounded-2xl p-8 border border-gray-700" data-infographic-section-id="i2-section-04-moat-also-loop" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
 <span data-infographic-fragment-label="1" aria-hidden="true">i2-section-04-moat-also-loop</span>
 <div class="text-center mb-8 space-y-4">
-<h2 class="text-3xl font-bold mb-2 text-white">The Moat Is Also the Loop</h2>
+<h2 class="text-3xl font-bold mb-2 text-white">Can the Loop Become a Moat?</h2>
 <p class="text-cyber-muted w-full leading-relaxed">
-                    Iteration can improve the state and improve the process that creates it.
+                    Iteration changes state. Its evidence may support a separately adopted improvement to the process that creates it.
                 </p>
 <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-mono">
 <div class="rounded-lg border border-cyber-success/30 bg-cyber-success/10 px-4 py-2 text-cyber-success">
                         State: Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)
                     </div>
 <div class="rounded-lg border border-cyber-accent/30 bg-cyber-accent/10 px-4 py-2 text-cyber-accent">
-                        Process: P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)
+                        Process: P<sub>k+1</sub> = adopt(proposal(P<sub>k</sub>, evidence))
                     </div>
 </div>
 <p class="text-cyber-muted w-full leading-relaxed">
-                    That self-upgrading loop is the moat: it upgrades itself, sets the clock speed of your business, and becomes an immune system against ever-evolving competition.
+                    A governed improvement loop can become defensible when comparable recurring work shows sustained gains after its full ownership cost. Its Validator Suite acts, metaphorically, like an immune system by detecting recurring failure patterns before they spread.
                 </p>
 </div>
 <div class="bg-cyber-dark border border-gray-700 rounded-xl p-8">
@@ -410,7 +404,7 @@
 	                                Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)
 	                            </div>
 <div class="text-lg md:text-2xl text-cyber-accent mt-2">
-	                                P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)
+	                                P<sub>k+1</sub> = adopt(proposal(P<sub>k</sub>, evidence))
 	                            </div>
 </div>
 <div class="flex justify-between items-center text-center mb-6">
@@ -431,7 +425,7 @@
 </div>
 </div>
 <div class="font-mono text-xs text-center text-cyber-muted h-6" id="loop-log-process">
-	                            Click 'RUN P_k( )' to advance the state; evidence upgrades the process right after.
+	                            Click 'RUN P_k( )' to advance the illustrative state. Evidence may support a process proposal; adoption remains separate.
 	                        </div>
 </div>
 <div class="bg-gray-800/60 rounded-lg border border-gray-700 p-6">
@@ -453,7 +447,7 @@
 </div>
 </div>
 <div class="font-mono text-sm text-gray-300">
-                                    P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)
+                                    P<sub>k+1</sub> = adopt(proposal(P<sub>k</sub>, evidence))
                                 </div>
 <div>
 <label class="text-xs uppercase tracking-wide text-gray-500" for="evidence-slider">Evidence Strength</label>
@@ -483,7 +477,7 @@
 </div>
 <div>
 <div class="flex justify-between text-xs text-gray-400 mb-1">
-<span>Defensibility</span>
+<span>Defensibility proxy</span>
 <span id="defensibility-value">50%</span>
 </div>
 <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
@@ -492,7 +486,7 @@
 </div>
 </div>
 <div class="text-xs text-cyber-muted" id="process-note">
-                                    Better process means the next loop compounds. Same recurrence, stronger operator, stronger moat.
+                                    Better process can improve the next loop. Whether that becomes an advantage is measured, not assumed.
                                 </div>
 </div>
 </div>
@@ -508,140 +502,134 @@
 <rect class="moat-loop-runner" height="96" pathlength="100" rx="16" width="96" x="2" y="2"></rect>
 </svg>
 <div class="bg-cyber-dark rounded-xl p-10 md:p-16">
-<h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Loop is the Moat</h2>
+<h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Governed Loop Can Become a Moat</h2>
 <p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
-	                        Intent becomes operational when formalized into Maps and executed by loops:
-	                        <span class="block font-mono text-cyber-success mt-3">intent -&gt; map -&gt; loop -&gt; terrain</span>
-<span class="block font-mono text-cyber-accent mt-1">terrain -&gt; map(sync) -&gt; next loop</span>
-<span class="block mt-3 text-base md:text-lg">
-	                            If the loop is validated, a useful compact form is:
-	                        </span>
-<span class="block font-mono text-cyber-success mt-3">Z<sub>n+1</sub> = P<sub>k</sub>(Z<sub>n</sub>)</span>
-<span class="block font-mono text-cyber-accent mt-1">P<sub>k+1</sub> = improve(P<sub>k</sub>, Z<sub>n</sub>)</span>
-<span class="block mt-3 text-base md:text-lg">
-	                            Compounding only holds under ratchets:
-	                            <span class="font-mono text-cyber-vibrant">q<sub>now</sub> &gt;= q<sub>prev</sub></span>.
-	                        </span>
-<span class="block mt-4">
-	                            This is how AI execution becomes reliable: bounded loops convert intent to verified state and feed reality back into tomorrow’s maps.
-	                        </span>
+<span class="block">Intent becomes operational through an adopted Map and a bounded Mission:</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">intent + adopted map</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; bounded mission -&gt; candidate terrain</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-3">candidate -&gt; findings</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; output checks -&gt; judge</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; canonical result -&gt; ledger</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">complete proposal</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; mission gate</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; admitted terrain</span>
+<span class="block mt-4 text-base md:text-lg">Evidence can support a future Map proposal. It cannot authorize one.</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-3">evidence -&gt; governed proposal</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; independent adoption</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; future map</span>
+<span class="block mt-4 text-base md:text-lg">A Ratchet compounds only under a pinned measurement protocol, a protected non-regression floor, and independently admitted advancement.</span>
+<span class="block mt-4 text-base md:text-lg">Comparable recurring work must show that accumulated judgment improves outcomes after the full cost of controls and maintenance.</span>
 </p>
-<button class="text-cyber-accent hover:text-white underline decoration-cyber-neon decoration-2 underline-offset-4 transition-colors" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-	                        Restart the Loop
-	                    </button>
+<p class="text-cyber-accent font-semibold">History proposes. Authority adopts.</p>
 </div>
 </div>
 </section>
 
 <section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-06-executive-loop" data-infographic-selector="main &gt; section:nth-of-type(6)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
 <span data-infographic-fragment-label="1" aria-hidden="true">i2-section-06-executive-loop</span>
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-    <div class="lg:col-span-5">
-      <h2 class="text-3xl font-bold mb-4 text-white">Executive View: The Business Loop</h2>
-      <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
-      <p class="text-cyber-muted text-lg leading-relaxed">
-        Executives win on validated outcomes, not raw model calls. A faster loop with strong gates
-        delivers more outcomes per quarter, reduces rework, and compounds moat strength.
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<div class="lg:col-span-5">
+<h2 class="text-3xl font-bold mb-4 text-white">Executive View: Test the Business Case</h2>
+<div class="h-1 w-20 bg-cyber-accent mb-6"></div>
+<p class="text-cyber-muted text-lg leading-relaxed">
+        Raw model calls are not a business outcome. Compare like workflows and test whether bounded effects, evidence, and admission improve delivery after the full cost of controls and maintenance.
       </p>
-      <ul class="mt-6 text-sm text-gray-400 list-disc list-inside space-y-2">
-        <li>Cadence sets how fast you learn and ship.</li>
-        <li>Deterministic gates reduce costly drift.</li>
-        <li>Validated outcomes compound advantage.</li>
-      </ul>
-    </div>
-
-    <div class="lg:col-span-7 space-y-4">
-      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
-        <div class="text-xs font-mono text-gray-500 mb-3">Execution flywheel</div>
-        <div class="flex items-center justify-between gap-3">
-          <div class="w-20 h-20 rounded-full border border-cyber-accent/40 bg-gray-900 flex flex-col items-center justify-center">
-            <span class="text-[10px] text-gray-400 font-mono">DECIDE</span>
-            <span class="text-xs text-cyber-accent font-mono">Mission</span>
-          </div>
-          <div class="text-cyber-muted text-2xl font-mono">→</div>
-          <div class="w-20 h-20 rounded-full border border-cyber-primary/40 bg-gray-900 flex flex-col items-center justify-center">
-            <span class="text-[10px] text-gray-400 font-mono">EXECUTE</span>
-            <span class="text-xs text-cyber-primary font-mono">Run</span>
-          </div>
-          <div class="text-cyber-muted text-2xl font-mono">→</div>
-          <div class="w-20 h-20 rounded-full border border-cyber-success/40 bg-gray-900 flex flex-col items-center justify-center">
-            <span class="text-[10px] text-gray-400 font-mono">VALIDATE</span>
-            <span class="text-xs text-cyber-success font-mono">Gates</span>
-          </div>
+<ul class="mt-6 text-sm text-gray-400 list-disc list-inside space-y-2">
+<li>Candidate cadence is only one input to delivery.</li>
+<li>Protected checks can reduce selected forms of drift.</li>
+<li>Defensibility remains a measured hypothesis.</li>
+</ul>
+</div>
+<div class="lg:col-span-7 space-y-4">
+<div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
+<div class="text-xs font-mono text-gray-500 mb-3">Execution flywheel</div>
+<div class="flex items-center justify-between gap-3">
+<div class="w-20 h-20 rounded-full border border-cyber-accent/40 bg-gray-900 flex flex-col items-center justify-center">
+<span class="text-[10px] text-gray-400 font-mono">DECIDE</span>
+<span class="text-xs text-cyber-accent font-mono">Mission</span>
+</div>
+<div class="text-cyber-muted text-2xl font-mono">→</div>
+<div class="w-20 h-20 rounded-full border border-cyber-primary/40 bg-gray-900 flex flex-col items-center justify-center">
+<span class="text-[10px] text-gray-400 font-mono">EXECUTE</span>
+<span class="text-xs text-cyber-primary font-mono">Run</span>
+</div>
+<div class="text-cyber-muted text-2xl font-mono">→</div>
+<div class="w-20 h-20 rounded-full border border-cyber-success/40 bg-gray-900 flex flex-col items-center justify-center">
+<span class="text-[10px] text-gray-400 font-mono">VALIDATE</span>
+<span class="text-xs text-cyber-success font-mono">Gates</span>
+</div>
+</div>
+<div class="mt-3 text-xs text-gray-500">
+          Admitted outcomes produce evidence. That evidence may support a separately governed change to future Missions.
         </div>
-        <div class="mt-3 text-xs text-gray-500">
-          The outcome feeds the next mission. This is the business loop that compounds.
-        </div>
-      </div>
-
-      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <div class="flex items-center justify-between text-xs text-gray-400">
-              <span class="font-mono uppercase">Loop cadence</span>
-              <span class="font-mono text-cyber-accent" data-role="exec-cadence-value">2 wk</span>
-            </div>
-            <label class="sr-only" for="execCadence">Cadence slider</label>
-            <input class="mt-2 w-full accent-cyber-accent" data-role="exec-cadence" id="execCadence" max="6" min="1" step="1" type="range" value="2" />
-          </div>
-          <div>
-            <div class="flex items-center justify-between text-xs text-gray-400">
-              <span class="font-mono uppercase">Gate strength</span>
-              <span class="font-mono text-cyber-success" data-role="exec-gate-value">78%</span>
-            </div>
-            <label class="sr-only" for="execGate">Gate slider</label>
-            <input class="mt-2 w-full accent-cyber-success" data-role="exec-gate" id="execGate" max="95" min="40" step="1" type="range" value="78" />
-          </div>
-          <div class="md:col-span-2">
-            <div class="flex items-center justify-between text-xs text-gray-400">
-              <span class="font-mono uppercase">AI acceleration depth</span>
-              <span class="font-mono text-cyber-neon" data-role="exec-accel-value">52%</span>
-            </div>
-            <label class="sr-only" for="execAccel">Acceleration slider</label>
-            <input class="mt-2 w-full accent-cyber-neon" data-role="exec-accel" id="execAccel" max="100" min="0" step="1" type="range" value="52" />
-            <p class="mt-2 text-[11px] text-gray-500">More AI inside the loop creates sub-loops that compress cadence.</p>
-          </div>
-        </div>
-
-        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
-          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
-            <div class="text-xs uppercase tracking-wide text-gray-400">Outcomes / quarter</div>
-            <div class="mt-1 text-2xl font-bold text-cyber-success" data-role="exec-outcomes">6</div>
-            <div class="text-[11px] text-gray-500">Validated releases shipped</div>
-          </div>
-          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
-            <div class="text-xs uppercase tracking-wide text-gray-400">Rework risk</div>
-            <div class="mt-1 text-2xl font-bold text-cyber-danger" data-role="exec-risk">22%</div>
-            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
-              <div class="h-2 bg-cyber-danger transition-all duration-300" data-role="exec-risk-bar" style="width: 22%;"></div>
-            </div>
-          </div>
-          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
-            <div class="text-xs uppercase tracking-wide text-gray-400">Reputation risk</div>
-            <div class="mt-1 text-2xl font-bold text-cyber-neon" data-role="exec-rep-risk">18%</div>
-            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
-              <div class="h-2 bg-cyber-neon transition-all duration-300" data-role="exec-rep-risk-bar" style="width: 18%;"></div>
-            </div>
-            <div class="text-[11px] text-gray-500 mt-2">External exposure from gate escapes at scale.</div>
-          </div>
-          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
-            <div class="text-xs uppercase tracking-wide text-gray-400">Moat strength</div>
-            <div class="mt-1 text-2xl font-bold text-cyber-accent" data-role="exec-moat">78/100</div>
-            <div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
-              <div class="h-2 bg-cyber-accent transition-all duration-300" data-role="exec-moat-bar" style="width: 78%;"></div>
-            </div>
-          </div>
-          <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3 sm:col-span-2 xl:col-span-4">
-            <div class="text-xs uppercase tracking-wide text-gray-400">Loop multiplier</div>
-            <div class="mt-1 text-2xl font-bold text-cyber-neon" data-role="exec-multiplier">1.8x</div>
-            <div class="text-[11px] text-gray-500">Nested automation increases effective loop throughput.</div>
-          </div>
-        </div>
-        <div class="mt-4 text-xs text-gray-500" data-role="exec-insight"></div>
-      </div>
-    </div>
-  </div>
-  <script>
+</div>
+<div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<div class="flex items-center justify-between text-xs text-gray-400">
+<span class="font-mono uppercase">Loop cadence</span>
+<span class="font-mono text-cyber-accent" data-role="exec-cadence-value">2 wk</span>
+</div>
+<label class="sr-only" for="execCadence">Cadence slider</label>
+<input class="mt-2 w-full accent-cyber-accent" data-role="exec-cadence" id="execCadence" max="6" min="1" step="1" type="range" value="2"/>
+</div>
+<div>
+<div class="flex items-center justify-between text-xs text-gray-400">
+<span class="font-mono uppercase">Gate strength</span>
+<span class="font-mono text-cyber-success" data-role="exec-gate-value">78%</span>
+</div>
+<label class="sr-only" for="execGate">Gate slider</label>
+<input class="mt-2 w-full accent-cyber-success" data-role="exec-gate" id="execGate" max="95" min="40" step="1" type="range" value="78"/>
+</div>
+<div class="md:col-span-2">
+<div class="flex items-center justify-between text-xs text-gray-400">
+<span class="font-mono uppercase">Candidate automation depth</span>
+<span class="font-mono text-cyber-neon" data-role="exec-accel-value">52%</span>
+</div>
+<label class="sr-only" for="execAccel">Acceleration slider</label>
+<input class="mt-2 w-full accent-cyber-neon" data-role="exec-accel" id="execAccel" max="100" min="0" step="1" type="range" value="52"/>
+<p class="mt-2 text-[11px] text-gray-500">Illustrative assumption: deeper automation increases candidate rate, not necessarily admitted throughput.</p>
+</div>
+</div>
+<div class="mt-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+<div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+<div class="text-xs uppercase tracking-wide text-gray-400">Modeled outcomes / quarter</div>
+<div class="mt-1 text-2xl font-bold text-cyber-success" data-role="exec-outcomes">6</div>
+<div class="text-[11px] text-gray-500">Scenario output, not a forecast</div>
+</div>
+<div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+<div class="text-xs uppercase tracking-wide text-gray-400">Rework proxy</div>
+<div class="mt-1 text-2xl font-bold text-cyber-danger" data-role="exec-risk">22%</div>
+<div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-danger transition-all duration-300" data-role="exec-risk-bar" style="width: 22%;"></div>
+</div>
+</div>
+<div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+<div class="text-xs uppercase tracking-wide text-gray-400">Exposure proxy</div>
+<div class="mt-1 text-2xl font-bold text-cyber-neon" data-role="exec-rep-risk">18%</div>
+<div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-neon transition-all duration-300" data-role="exec-rep-risk-bar" style="width: 18%;"></div>
+</div>
+<div class="text-[11px] text-gray-500 mt-2">External exposure from gate escapes at scale.</div>
+</div>
+<div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
+<div class="text-xs uppercase tracking-wide text-gray-400">Defensibility proxy</div>
+<div class="mt-1 text-2xl font-bold text-cyber-accent" data-role="exec-moat">78/100</div>
+<div class="mt-2 h-2 bg-gray-800 rounded-full overflow-hidden">
+<div class="h-2 bg-cyber-accent transition-all duration-300" data-role="exec-moat-bar" style="width: 78%;"></div>
+</div>
+</div>
+<div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3 sm:col-span-2 xl:col-span-4">
+<div class="text-xs uppercase tracking-wide text-gray-400">Candidate-rate proxy</div>
+<div class="mt-1 text-2xl font-bold text-cyber-neon" data-role="exec-multiplier">1.8x</div>
+<div class="text-[11px] text-gray-500">Modeled candidate-rate effect under the selected assumptions.</div>
+</div>
+</div>
+<div class="mt-4 text-xs text-gray-500" data-role="exec-insight"></div>
+</div>
+</div>
+</div>
+<script>
   (function () {
     const script = document.currentScript;
     const root = script ? script.closest('[data-infographic-section-id="i2-section-06-executive-loop"]') : null;
@@ -706,7 +694,7 @@
     moatEl.textContent = `${moat}/100`;
     moatBar.style.width = `${moat}%`;
     multiplierEl.textContent = `${multiplier.toFixed(1)}x`;
-    insight.textContent = `At ${weeks} weeks/loop, ${gateStrength}% gates, and ${accelDepth}% AI depth, you deliver ~${outcomes} validated outcomes/quarter with ${rework}% rework risk and ${reputation}% reputation exposure.`;
+    insight.textContent = `Illustrative scenario: at ${weeks} weeks/loop, ${gateStrength}% gate strength, and ${accelDepth}% automation depth, the model estimates ~${outcomes} outcomes/quarter, a ${rework}% rework proxy, and a ${reputation}% exposure proxy. Validate these relationships against comparable local work.`;
   };
 
   cadence.addEventListener("input", update);
@@ -717,441 +705,59 @@
   </script>
 </section>
 
-<section class="bg-gray-900/50 rounded-2xl p-6 md:p-7 border border-gray-800" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
+<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published" aria-labelledby="enforceable-map-title" data-infographic-fragment-shell="1">
 <span data-infographic-fragment-label="1" aria-hidden="true">i2-section-07-intention-architecture</span>
-  <style>
-    [data-role="bridge-sim"] .phase-pill {
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      background: rgba(15, 23, 42, 0.62);
-      color: #94a3b8;
-      transition: all 160ms ease;
-    }
-    [data-role="bridge-sim"] .phase-pill[data-active="1"] {
-      border-color: rgba(217, 70, 239, 0.5);
-      background: rgba(217, 70, 239, 0.14);
-      color: #f8fafc;
-    }
-    [data-role="bridge-sim"] .soft-toggle[data-role="scenario"][aria-pressed="true"] {
-      border-color: rgba(99, 102, 241, 0.5);
-      background: rgba(99, 102, 241, 0.18);
-      color: #f8fafc;
-    }
-    [data-role="bridge-sim"] .status-pill {
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      background: rgba(15, 23, 42, 0.62);
-      color: #94a3b8;
-    }
-    [data-role="bridge-sim"] .status-pill.is-pass {
-      border-color: rgba(16, 185, 129, 0.45);
-      background: rgba(16, 185, 129, 0.12);
-      color: #ecfdf5;
-    }
-    [data-role="bridge-sim"] .status-pill.is-fail {
-      border-color: rgba(239, 68, 68, 0.45);
-      background: rgba(239, 68, 68, 0.12);
-      color: #fef2f2;
-    }
-    [data-role="bridge-sim"] .attempt-pill {
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 9999px;
-      border: 1px solid rgba(148, 163, 184, 0.25);
-      background: rgba(148, 163, 184, 0.2);
-    }
-    [data-role="bridge-sim"] .attempt-pill.is-pass {
-      border-color: rgba(16, 185, 129, 0.5);
-      background: rgba(16, 185, 129, 0.8);
-    }
-    [data-role="bridge-sim"] .attempt-pill.is-fail {
-      border-color: rgba(239, 68, 68, 0.5);
-      background: rgba(239, 68, 68, 0.8);
-    }
-    @media (prefers-reduced-motion: reduce) {
-      [data-role="bridge-sim"] .phase-pill,
-      [data-role="bridge-sim"] .soft-toggle {
-        transition: none;
-      }
-    }
-  </style>
+  <figure class="aoi-book-diagram">
+    <figcaption class="aoi-book-diagram__header">
+      <p class="aoi-book-diagram__eyebrow">One property, one direction, one protected check</p>
+      <h3 class="aoi-book-diagram__title" id="enforceable-map-title">From Map Claim to Enforceable Relationship</h3>
+      <p class="aoi-book-diagram__summary">A relationship becomes enforceable only after the workflow declares which side is authoritative for one property and protects the check that compares them.</p>
+    </figcaption>
 
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-    <div class="lg:col-span-5 min-w-0">
-      <h2 class="text-3xl font-bold mb-4 text-white">Micro-Bridge: One Block + One Gate</h2>
-      <div class="h-1 w-20 bg-cyber-neon mb-6"></div>
-      <p class="text-cyber-muted text-lg leading-relaxed">
-        The smallest Hofstadter Bridge is one bounded Map heading regenerated from Terrain
-        and checked by a hard gate. Start with high-blast-radius surfaces first, not total formalization.
-      </p>
-      <div class="mt-6 bg-cyber-panel border border-gray-700 rounded-xl p-4">
-        <div class="text-xs font-mono text-gray-500 mb-2">Deterministic micro-loop</div>
-        <div class="text-sm text-gray-300 leading-relaxed space-y-2">
-          <div><span class="text-cyber-neon font-mono">1) Extract</span> skeleton facts from Terrain.</div>
-          <div><span class="text-cyber-neon font-mono">2) Sync</span> one heading block (diff-first).</div>
-          <div><span class="text-cyber-neon font-mono">3) Validate</span> exact Map/Terrain match.</div>
-          <div><span class="text-cyber-neon font-mono">4) Gate</span> merge on PASS/FAIL.</div>
-        </div>
-        <div class="mt-3 text-xs text-gray-400">One bounded surface, not total formalization.</div>
+    <div class="aoi-book-diagram__grid">
+      <div class="aoi-book-diagram__artifact">
+        <span class="aoi-book-diagram__label">Descriptive direction: Terrain → Map</span>
+        <p>Route declarations define the current endpoint inventory. A bounded updater proposes a documentation patch. A protected comparison checks correspondence before separate adoption.</p>
       </div>
-      <div class="mt-4 bg-cyber-panel border border-gray-700 rounded-xl p-4 text-xs text-gray-400">
-        <strong class="text-white">Selective crossing:</strong>
-        formalize bounded, high-value surfaces first so drift becomes a deterministic CI failure where the reliability return is clear, while fast-moving narrative guidance can stay advisory.
+      <div class="aoi-book-diagram__artifact">
+        <span class="aoi-book-diagram__label">Prescriptive direction: Map → Terrain</span>
+        <p>An adopted API contract defines the intended interface. A bounded workflow proposes implementation changes. Protected behavior and compatibility checks run before separate admission.</p>
       </div>
     </div>
 
-    <div class="lg:col-span-7 min-w-0 space-y-4" data-role="bridge-sim">
-      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-4">
-        <div class="text-xs font-mono text-gray-500 mb-3">Scenario runner</div>
-        <div class="flex flex-wrap gap-2" data-role="scenario-controls">
-          <button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="scenario" data-scenario="aligned" type="button">Aligned Block</button>
-          <button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="scenario" data-scenario="missing" type="button">Missing Item</button>
-          <button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="scenario" data-scenario="extra" type="button">Extra Item</button>
-          <button aria-pressed="false" class="soft-toggle font-mono text-xs" data-role="scenario" data-scenario="both" type="button">Missing + Extra</button>
-        </div>
-        <div class="mt-2 text-xs text-gray-400" data-role="scenario-note">Map block and Terrain skeleton already match.</div>
+    <div class="aoi-book-diagram__divider" aria-hidden="true"></div>
 
-        <div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] font-mono">
-          <div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-role="phase-pill" data-phase="extract">1 Extract</div>
-          <div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-role="phase-pill" data-phase="sync">2 Sync</div>
-          <div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-role="phase-pill" data-phase="validate">3 Validate</div>
-          <div class="phase-pill rounded-lg p-2 text-center" data-active="0" data-role="phase-pill" data-phase="gate">4 Gate</div>
-        </div>
-
-        <div class="mt-3 flex flex-wrap gap-2">
-          <button class="soft-toggle font-mono text-xs" data-role="run-validator" type="button">Run Gate Check</button>
-          <button class="soft-toggle font-mono text-xs" data-role="apply-sync" type="button">Apply Sync + Check</button>
-          <button class="soft-toggle font-mono text-xs" data-role="reset" type="button">Reset</button>
-        </div>
+    <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
+      <div class="aoi-book-diagram__step" data-tone="authority">
+        <span class="aoi-book-diagram__label">Declare authority</span>
+        <p>Name the exact property and direction before execution.</p>
       </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-        <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
-          <div class="uppercase tracking-wide text-gray-500">Drift status</div>
-          <div class="mt-1 text-sm font-bold status-pill rounded-md px-2 py-1 inline-block" data-role="drift-status">READY</div>
-        </div>
-        <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
-          <div class="uppercase tracking-wide text-gray-500">Check result</div>
-          <div class="mt-1 text-sm font-bold status-pill rounded-md px-2 py-1 inline-block" data-role="validator-status">PENDING</div>
-        </div>
-        <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
-          <div class="uppercase tracking-wide text-gray-500">Merge gate</div>
-          <div class="mt-1 text-sm font-bold status-pill rounded-md px-2 py-1 inline-block" data-role="gate-status">PENDING</div>
-        </div>
-        <div class="bg-gray-900/70 border border-gray-700 rounded-lg p-3">
-          <div class="uppercase tracking-wide text-gray-500">Run</div>
-          <div class="mt-1 text-sm font-bold text-white"><span data-role="run">0</span></div>
-        </div>
+      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
+      <div class="aoi-book-diagram__step" data-tone="proposal">
+        <span class="aoi-book-diagram__label">Propose one patch</span>
+        <p>The updater or implementation step changes only the bounded surface.</p>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div class="bg-cyber-panel border border-gray-700 rounded-xl p-3 min-w-0">
-          <div class="text-xs font-mono text-gray-500 mb-2">Terrain skeleton</div>
-          <pre class="text-[11px] leading-relaxed font-mono text-gray-200 whitespace-pre-wrap break-words" data-role="terrain-block"></pre>
-        </div>
-        <div class="bg-cyber-panel border border-gray-700 rounded-xl p-3 min-w-0">
-          <div class="text-xs font-mono text-gray-500 mb-2">Map heading block</div>
-          <pre class="text-[11px] leading-relaxed font-mono text-gray-200 whitespace-pre-wrap break-words" data-role="map-block"></pre>
-        </div>
+      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
+      <div class="aoi-book-diagram__step" data-tone="evidence">
+        <span class="aoi-book-diagram__label">Protected check</span>
+        <p>The protected gate compares the candidate with the authoritative source.</p>
       </div>
-
-      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-3">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-400">
-          <div>Missing in Map: <span class="font-mono text-white" data-role="missing-count">0</span></div>
-          <div>Extra in Map: <span class="font-mono text-white" data-role="extra-count">0</span></div>
-        </div>
-        <div class="text-xs font-mono text-gray-500 mt-2 mb-2">Evidence diff</div>
-        <pre class="text-[11px] leading-relaxed font-mono text-gray-200 whitespace-pre-wrap break-words" data-role="diff-output"></pre>
-        <div class="mt-2 text-xs text-gray-400" data-role="outcome">Select a scenario and run validation.</div>
-      </div>
-
-      <div class="bg-cyber-panel border border-gray-700 rounded-xl p-3">
-        <div class="flex items-center justify-between gap-3">
-          <div class="text-xs font-mono text-gray-500">History</div>
-          <div class="text-xs text-gray-500">Green = pass, red = fail</div>
-        </div>
-        <div class="mt-2 flex flex-wrap gap-1" data-role="history"></div>
+      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
+      <div class="aoi-book-diagram__step" data-tone="authority">
+        <span class="aoi-book-diagram__label">Adopt or admit separately</span>
+        <p>A passing relationship does not authorize its own effect.</p>
       </div>
     </div>
-  </div>
 
-  <script>
-  (function () {
-    const script = document.currentScript;
-    const root = script ? script.closest('[data-infographic-section-id="i2-section-07-intention-architecture"]') : null;
-    if (!root || root.dataset.bridgeSimReady === '1') return;
-    root.dataset.bridgeSimReady = '1';
-
-    const sim = root.querySelector('[data-role="bridge-sim"]');
-    if (!sim) return;
-
-    const scenarioButtons = Array.from(sim.querySelectorAll('[data-role="scenario"]'));
-    const scenarioNoteEl = sim.querySelector('[data-role="scenario-note"]');
-    const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
-    const runValidatorBtn = sim.querySelector('[data-role="run-validator"]');
-    const applySyncBtn = sim.querySelector('[data-role="apply-sync"]');
-    const resetBtn = sim.querySelector('[data-role="reset"]');
-
-    const driftStatusEl = sim.querySelector('[data-role="drift-status"]');
-    const validatorStatusEl = sim.querySelector('[data-role="validator-status"]');
-    const gateStatusEl = sim.querySelector('[data-role="gate-status"]');
-    const runEl = sim.querySelector('[data-role="run"]');
-
-    const terrainBlockEl = sim.querySelector('[data-role="terrain-block"]');
-    const mapBlockEl = sim.querySelector('[data-role="map-block"]');
-    const missingCountEl = sim.querySelector('[data-role="missing-count"]');
-    const extraCountEl = sim.querySelector('[data-role="extra-count"]');
-    const diffOutputEl = sim.querySelector('[data-role="diff-output"]');
-    const outcomeEl = sim.querySelector('[data-role="outcome"]');
-    const historyEl = sim.querySelector('[data-role="history"]');
-
-    if (!scenarioButtons.length || !scenarioNoteEl || phasePills.length === 0 || !runValidatorBtn || !applySyncBtn || !resetBtn ||
-        !driftStatusEl || !validatorStatusEl || !gateStatusEl || !runEl || !terrainBlockEl || !mapBlockEl || !missingCountEl ||
-        !extraCountEl || !diffOutputEl || !outcomeEl || !historyEl) return;
-
-    const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const phaseDelay = reducedMotion ? 0 : 120;
-    const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
-
-    const CASES = {
-      aligned: {
-        label: 'Aligned Block',
-        note: 'Map block and Terrain skeleton already match.',
-        terrain: ['do_thing(x, y)', 'list_things(user_id)'],
-        map: ['do_thing(x, y)', 'list_things(user_id)']
-      },
-      missing: {
-        label: 'Missing Item',
-        note: 'Terrain has a public function missing from the Map block.',
-        terrain: ['do_thing(x, y)', 'list_things(user_id)', 'delete_thing(id)'],
-        map: ['do_thing(x, y)', 'list_things(user_id)']
-      },
-      extra: {
-        label: 'Extra Item',
-        note: 'Map block still lists an interface no longer present in Terrain.',
-        terrain: ['do_thing(x, y)', 'list_things(user_id)'],
-        map: ['do_thing(x, y)', 'list_things(user_id)', 'legacy_thing(z)']
-      },
-      both: {
-        label: 'Missing + Extra',
-        note: 'Map and Terrain diverged in both directions.',
-        terrain: ['do_thing(x, y)', 'list_things(user_id)', 'delete_thing(id)'],
-        map: ['do_thing(x, y)', 'legacy_thing(z)']
-      }
-    };
-
-    const state = {
-      selected: 'aligned',
-      run: 0,
-      last: null
-    };
-
-    const setStatus = (el, label, pass) => {
-      el.textContent = label;
-      el.classList.remove('is-pass', 'is-fail');
-      if (pass === null) return;
-      el.classList.add(pass ? 'is-pass' : 'is-fail');
-    };
-
-    const setScenarioButtons = () => {
-      for (const button of scenarioButtons) {
-        const active = button.dataset.scenario === state.selected;
-        button.setAttribute('aria-pressed', active ? 'true' : 'false');
-      }
-    };
-
-    const setPhase = (phase) => {
-      for (const pill of phasePills) {
-        pill.dataset.active = pill.dataset.phase === phase ? '1' : '0';
-      }
-    };
-
-    const clearPhase = () => {
-      for (const pill of phasePills) {
-        pill.dataset.active = '0';
-      }
-    };
-
-    const formatBlock = (items) => {
-      const lines = ['## Public Interfaces', ''];
-      for (const item of items) {
-        lines.push(`- \`${item}\``);
-      }
-      return lines.join('\n');
-    };
-
-    const compute = (selectedCase, applySync) => {
-      const terrain = selectedCase.terrain.slice();
-      const mapBefore = selectedCase.map.slice();
-      const mapAfter = applySync ? terrain.slice() : mapBefore.slice();
-
-      const missingBefore = terrain.filter((item) => !mapBefore.includes(item));
-      const extraBefore = mapBefore.filter((item) => !terrain.includes(item));
-      const missingAfter = terrain.filter((item) => !mapAfter.includes(item));
-      const extraAfter = mapAfter.filter((item) => !terrain.includes(item));
-
-      const driftBefore = missingBefore.length > 0 || extraBefore.length > 0;
-      const driftAfter = missingAfter.length > 0 || extraAfter.length > 0;
-      const validatorPass = !driftAfter;
-
-      return {
-        selectedCase,
-        applySync,
-        terrain,
-        mapBefore,
-        mapAfter,
-        missingBefore,
-        extraBefore,
-        missingAfter,
-        extraAfter,
-        driftBefore,
-        driftAfter,
-        validatorPass,
-        gate: validatorPass ? 'OPEN' : 'BLOCKED',
-        merge: validatorPass ? 'MERGE_ALLOWED' : 'MERGE_BLOCKED'
-      };
-    };
-
-    const buildDiffText = (result) => {
-      const lines = ['--- map.before', '+++ map.after', '@@ ## Public Interfaces @@'];
-
-      const removed = result.mapBefore.filter((item) => !result.mapAfter.includes(item));
-      const added = result.mapAfter.filter((item) => !result.mapBefore.includes(item));
-
-      for (const item of removed) {
-        lines.push(`- - \`${item}\``);
-      }
-      for (const item of added) {
-        lines.push(`+ - \`${item}\``);
-      }
-      if (removed.length === 0 && added.length === 0) {
-        lines.push('  no block rewrite needed');
-      }
-
-      if (result.validatorPass) {
-        lines.push('[validator] PASS map_terrain_sync');
-      } else {
-        lines.push('[validator] FAIL map_terrain_sync');
-        if (result.missingAfter.length > 0) {
-          lines.push(`  missing_in_map: ${result.missingAfter.join(', ')}`);
-        }
-        if (result.extraAfter.length > 0) {
-          lines.push(`  extra_in_map: ${result.extraAfter.join(', ')}`);
-        }
-      }
-
-      return lines.join('\n');
-    };
-
-    const appendHistory = (pass) => {
-      const dot = document.createElement('span');
-      dot.className = `attempt-pill ${pass ? 'is-pass' : 'is-fail'}`;
-      historyEl.appendChild(dot);
-      while (historyEl.children.length > 36) {
-        historyEl.removeChild(historyEl.firstChild);
-      }
-    };
-
-    const renderPreview = () => {
-      const selectedCase = CASES[state.selected] || CASES.aligned;
-      const preview = compute(selectedCase, false);
-
-      scenarioNoteEl.textContent = selectedCase.note;
-      runEl.textContent = String(state.run);
-
-      setStatus(driftStatusEl, preview.driftAfter ? 'DRIFT' : 'NO_DRIFT', preview.driftAfter ? false : true);
-      setStatus(validatorStatusEl, preview.driftAfter ? 'PREDICT_FAIL' : 'PREDICT_PASS', null);
-      setStatus(gateStatusEl, 'PENDING', null);
-
-      terrainBlockEl.textContent = formatBlock(preview.terrain);
-      mapBlockEl.textContent = formatBlock(preview.mapBefore);
-      missingCountEl.textContent = String(preview.missingAfter.length);
-      extraCountEl.textContent = String(preview.extraAfter.length);
-      diffOutputEl.textContent = 'Run Gate Check for current block state, or Apply Sync + Check to rewrite and re-check.';
-      outcomeEl.textContent = 'Select a scenario and run validation.';
-
-      clearPhase();
-    };
-
-    const renderResult = (result) => {
-      runEl.textContent = String(state.run);
-      scenarioNoteEl.textContent = result.selectedCase.note;
-
-      const driftLabel = !result.driftBefore
-        ? 'NO_DRIFT'
-        : (result.applySync && !result.driftAfter ? 'RESOLVED' : 'DRIFT');
-
-      setStatus(driftStatusEl, driftLabel, !result.driftAfter);
-      setStatus(validatorStatusEl, result.validatorPass ? 'PASS' : 'FAIL', result.validatorPass);
-      setStatus(gateStatusEl, result.gate, result.validatorPass);
-
-      terrainBlockEl.textContent = formatBlock(result.terrain);
-      mapBlockEl.textContent = formatBlock(result.mapAfter);
-      missingCountEl.textContent = String(result.missingAfter.length);
-      extraCountEl.textContent = String(result.extraAfter.length);
-      diffOutputEl.textContent = buildDiffText(result);
-
-      if (result.validatorPass) {
-        outcomeEl.textContent = result.applySync
-          ? 'Sync applied and validator passed. This Map slice is now enforceable.'
-          : 'Validator passed. CI gate remains open for this slice.';
-      } else {
-        outcomeEl.textContent = 'Validator failed. CI gate blocks merge until Map/Terrain drift is resolved.';
-      }
-    };
-
-    const runPipeline = async (applySync) => {
-      const phases = ['extract', 'sync', 'validate', 'gate'];
-      for (const phase of phases) {
-        setPhase(phase);
-        if (phaseDelay > 0) await wait(phaseDelay);
-      }
-
-      const selectedCase = CASES[state.selected] || CASES.aligned;
-      const result = compute(selectedCase, applySync);
-
-      state.run += 1;
-      state.last = result;
-      appendHistory(result.validatorPass);
-      renderResult(result);
-    };
-
-    for (const button of scenarioButtons) {
-      button.addEventListener('click', () => {
-        const key = button.dataset.scenario;
-        if (!key || !CASES[key]) return;
-        state.selected = key;
-        setScenarioButtons();
-        renderPreview();
-      });
-    }
-
-    runValidatorBtn.addEventListener('click', () => {
-      runPipeline(false);
-    });
-
-    applySyncBtn.addEventListener('click', () => {
-      runPipeline(true);
-    });
-
-    resetBtn.addEventListener('click', () => {
-      state.selected = 'aligned';
-      state.run = 0;
-      state.last = null;
-      historyEl.innerHTML = '';
-      setScenarioButtons();
-      renderPreview();
-    });
-
-    setScenarioButtons();
-    renderPreview();
-  })();
-  </script>
+    <p class="aoi-book-diagram__note">Enforcement remains selective. Passing this gate establishes one declared correspondence, not universal correctness or truth.</p>
+  </figure>
 </section>
 
 
     </main>
 
     <footer class="bg-cyber-panel border-t border-gray-800 py-8 text-center text-xs text-gray-600 font-mono">
-        <p>SDAC INTENT ARCHITECTURE // THE SHAPE OF ALL WORK</p>
+        <p>SDAC INTENT ARCHITECTURE // COMPOSABLE GOVERNED LOOPS</p>
     </footer>
 
 </body>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Appendix A: Failure Modes and Limits | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/appendix-a-failure-modes-and-limits" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Appendix A: Failure Modes and Limits | Architects of Intent" property="og:title"/>
+<meta content="Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…" property="og:description"/>
+<meta content="https://architectsofintent.com/appendix-a-failure-modes-and-limits" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Appendix A: Failure Modes and Limits | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Appendix A: Failure Modes and Limits | Architects of Intent" name="twitter:title"/>
+<meta content="Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Appendix A: Failure Modes and Limits | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix A: Failure Modes and Limits", "description": "Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "mainEntityOfPage": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT5M", "articleSection": "Part VI – Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part VI – Appendices</div>
+<div class="chapter-meta"><span class="read-time">5 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="appendix-a-failure-modes-and-limits">Appendix A: Failure Modes
+and Limits</h1>
+<p>A governed loop offers conditional guarantees, not universal
+correctness. Under its stated trust assumptions, it can establish that
+effects stayed within declared bounds, required checks ran, transitions
+followed policy, terminal evidence was sealed, and admission used the
+required authority. It cannot establish that the Map was wise, that the
+Validators covered every relevant property, that hidden dependencies did
+not correlate two evaluators, or that the governance cost was
+justified.</p>
+<p>The following failure modes mark that boundary. Some identify
+conditions under which the architectural guarantees fail; others
+identify limits the architecture cannot remove or cases in which the
+governed path is not worth its cost.</p>
+</div>
+</header>
+<h2 id="mis-scoped-context">Mis-scoped Context</h2>
+<p>A <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a> can be too small to contain a necessary contract or
+too large to preserve relevance. In the first case, the generator works
+without a fact needed to satisfy the Mission. In the second, unrelated
+material competes with the active constraints and enlarges the surface
+on which plausible but unauthorized structure can appear.</p>
+<p>Deterministic extraction does not make a bad slice sufficient. It
+makes the slice reproducible. The evidence must therefore distinguish
+omitted authority, irrelevant inclusion, and unauthorized effects rather
+than collapsing all three into “the model failed.”</p>
+<p>A protected effect boundary can reject an overbroad candidate. It
+cannot recover an omitted truth. If the active authority cannot support
+a sufficient Context Packet, the run must fail or stop for separately
+authorized correction; it cannot silently widen its own scope.</p>
+<h2 id="non-convergence">Non-convergence</h2>
+<p>Refinement does not guarantee convergence. Findings may repeat,
+alternate, or disappear without a meaningful improvement. Constraints
+may conflict. A requested state may be unreachable under the active
+budgets and effect envelope. A probabilistic evaluator may also vary
+enough to create the appearance of progress where none exists.</p>
+<p>The relevant evidence spans attempts: candidate identities,
+normalized findings, state signatures, evaluator protocol identities,
+and progress measures. A finite loop responds to absent progress by
+stopping. Ordinary exhaustion, oscillation, or repeated failure ends as
+<code>failed_with_evidence</code>. <code>blocked</code> is reserved for
+a named external condition such as missing authority, an unavailable
+trustworthy oracle, contradictory Mission terms, or an environment
+repair that the run cannot perform.</p>
+<p>Finite failure is part of reliability. A loop that cannot establish
+progress but closes with evidence reconstructable under the
+protected-sink and trust-root assumptions stated later in this appendix
+has behaved more reliably than one that continues until a favorable
+answer appears.</p>
+<h2 id="map-contamination">Map Contamination</h2>
+<p><a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> Contamination occurs when generated structure is mistaken for
+observed or adopted structure. A model invents a route, signature,
+schema field, dependency, or policy statement; a later step records that
+invention as if a <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> had extracted it from <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> or an authorized
+process had adopted it. Subsequent runs then optimize against a
+self-confirming fiction.</p>
+<p>The Skeleton-First rule prevents one common form of this failure:
+Sensors extract structural facts, while models may propose bounded
+content around them. The deeper invariant is authority direction. A
+Terrain-to-Map workflow may report observed structure but may not make
+that structure intended policy. A Map-to-Terrain workflow may propose
+implementation from adopted intent but may not rewrite the intent that
+judges it.</p>
+<p>Post-processing cannot erase an authority violation. If a candidate
+attempted undeclared effects, the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> attempted footprint remains
+evidence even when a deterministic cleanup could produce an apparently
+compliant diff. The candidate is rejected as attempted; a new candidate
+may be generated under corrected authority and context.</p>
+<h2 id="validator-error-and-false-confidence">Validator Error and False
+Confidence</h2>
+<p>A <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> can be wrong. It can reject an acceptable candidate,
+accept a defective one, encode a stale rule, or test a property too
+weakly. Completing every required check therefore means only that the
+declared evidence requirements were satisfied. It does not mean that
+every important property was declared or that the resulting software is
+good in every relevant sense.</p>
+<p>Probabilistic evaluation adds instability and correlation risk.
+Shared models, prompts, retrieval, fixtures, or context can make
+generator and evaluator agree on the same wrong answer. <a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>’s
+protected protocol makes that uncertainty more visible; it does not
+abolish it.</p>
+<p>For a protected high-consequence property, a probabilistic evaluator
+cannot be the sole oracle unless adopted policy explicitly accepts its
+measured error characteristics for that Mission class. Repeated
+false-positive or false-negative evidence may justify a Validator-change
+proposal. The active candidate cannot soften the rule that evaluates
+it.</p>
+<h2 id="completion-without-admission">Completion Without Admission</h2>
+<p>Chapter 10’s boundary remains decisive: <code>complete</code> closes
+a proposal; it does not make the candidate Terrain. <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a>
+revalidates the current base, policy, identity, approvals, and protected
+evidence. Any changed or missing predicate can deny the proposal without
+reopening its sealed <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>.</p>
+<p>Automatically applying every <code>complete</code> candidate would
+collapse validation into authorization. The same rule applies to Maps
+and policy: history may support a proposal, but only separate adoption
+changes authority.</p>
+<h2 id="trust-root-failure">Trust-Root Failure</h2>
+<p>The <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a> is contradiction-resistant only under a protected sink and
+trust root. Hash chains, independent storage, integrity checkpoints, and
+access control can expose missing, reordered, or conflicting evidence.
+They cannot prevent a sufficiently privileged actor from replacing both
+the evidence and the mechanism used to verify it.</p>
+<p>Likewise, a <a class="concept-link" href="concepts#scope-guard" title="See concept: Scope Guard">Scope Guard</a> is meaningful only when the runtime,
+credentials, execution isolation, and admission path are outside
+candidate control. If an ordinary Mission can rewrite its own Validator,
+conceal network effects, replace its evidence, or bypass the Mission
+Gate, the governed-loop claim no longer applies. The architecture makes
+the trust boundary explicit; it does not make that boundary
+invulnerable.</p>
+<h2 id="economic-failure">Economic Failure</h2>
+<p>A governed loop can cost more than it saves. Validator maintenance,
+false-positive handling, evidence retention, protected execution, and
+review all consume engineering capacity. For low-risk or infrequent
+work, ownership may cost more than the recurring work justifies.</p>
+<p>The architecture does not guarantee productivity or strategic
+advantage. A workflow that is reliable but uneconomic should remain
+narrow, run with less autonomy, or not exist.</p>
+<h2 id="the-claim-that-remains">The Claim That Remains</h2>
+<p>Software Development as Code does not promise perfect specifications,
+complete oracles, inevitable convergence, tamper-proof history, or
+cheaper delivery everywhere. Its narrower claim is stronger because it
+is testable: under declared authority and trust assumptions, selected
+effects, evidence requirements, transitions, and admission decisions can
+be made explicit and enforceable.</p>
+<p>That changes the shape of failure. Missing evidence stops the run.
+Scope violations remain visible. Non-convergence ends finitely.
+Completed proposals remain separate from adopted reality. History may
+inform future authority but cannot install it. The system can still be
+wrong, but it becomes harder for uncertainty to masquerade as
+permission.</p>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…" data-share-title="Appendix A: Failure Modes and Limits | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-a-failure-modes-and-limits" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-a-failure-modes-and-limits&amp;text=Appendix%20A%3A%20Failure%20Modes%20and%20Limits%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-a-failure-modes-and-limits" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fappendix-a-failure-modes-and-limits" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-a-failure-modes-and-limits&amp;title=Appendix%20A%3A%20Failure%20Modes%20and%20Limits%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20A%3A%20Failure%20Modes%20and%20Limits%20%7C%20Architects%20of%20Intent&amp;body=Appendix%20A%20of%20Architects%20of%20Intent%3A%20Appendix%20A%3A%20Failure%20Modes%20and%20Limits.%20A%20governed%20loop%20offers%20conditional%20guarantees%2C%20not%20universal%20correctness.%20Under%20its%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-a-failure-modes-and-limits">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-14-implications-for-delegated-automation">← Chapter 14 – Implications for Delegated Automation</a>
+<a class="next-link" href="appendix-b-core-vocabulary">Appendix B: Core Vocabulary →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+</body>
+</html>

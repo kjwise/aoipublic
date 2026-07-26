@@ -5,7 +5,7 @@
 <title>Chapter 11 – Automated Refactoring Under Guards | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. That is automated refactoring under guards in miniature: measure the baseline, apply…" name="description"/>
+<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
@@ -13,7 +13,7 @@
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" property="og:title"/>
-<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. That is automated refactoring under guards in miniature: measure the baseline, apply…" property="og:description"/>
+<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -21,17 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. That is automated refactoring under guards in miniature: measure the baseline, apply…" name="twitter:description"/>
+<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 11 – Automated Refactoring Under Guards", "description": "Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. That is automated refactoring under guards in miniature: measure the baseline, apply…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards", "mainEntityOfPage": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT14M", "articleSection": "Part IV Govern It Safe Evolution", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 11 – Automated Refactoring Under Guards", "description": "Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards", "mainEntityOfPage": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT6M", "articleSection": "Part IV – Governance and Safe Evolution", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
-<script defer="" src="script.js?v=180c7c0ba0a2"></script>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -47,9 +47,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
-<a href="for-leaders">For Leaders</a>
-<a href="philosophy">Philosophy</a>
-<a href="concepts">Concepts</a>
+<a href="concepts">Core Vocabulary</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
@@ -57,250 +55,96 @@
 <main class="content content--chapter" id="main">
 <header class="chapter-header">
 <div class="chapter-kicker">
-<div class="part-title">Part IV Govern It Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">14 min read</span></div>
+<div class="part-title">Part IV – Governance and Safe Evolution</div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-11-automated-refactoring-under-guards">Chapter 11 –
 Automated Refactoring Under Guards</h1>
-<p>Start with one bounded refactor:</p>
+<p>Start with one candidate whose run ended in <code>complete</code> and
+whose Run Record is sealed, but which has not yet been admitted:</p>
 </div>
 </header>
-<pre class="text"><code>$ npm run lint
-src/utils/data-parser.js
-  1:8  error  'unusedParser' is defined but never used  no-unused-vars
-
-$ eslint --fix src/utils/data-parser.js
-$ npm test
-PASS
-$ npm run lint
-0 errors, 0 warnings</code></pre>
-<p>That is automated refactoring under guards in miniature: measure the
-baseline, apply one bounded mutation, rerun the guards, and admit the
-change only if the after-state is at least as good as the
-before-state.</p>
-<p>In <a class="chapter-link" href="chapter-10-immutable-infrastructure-the-guardrails#chapter-10-immutable-infrastructure-the-guardrails" title="Go to: Chapter 10">Chapter 10</a>, we established <a class="concept-link" href="concepts#immutable-infrastructure" title="See concept: Immutable Infrastructure">Immutable Infrastructure</a>: the
-non-negotiable boundary that keeps the system from rewriting the graders
-and guardrails that govern it.</p>
-<p>Part IV is about engineering a capability:
-<strong><a class="concept-link" href="concepts#neuroplasticity-safe-self-modification-capability" title="See concept: Neuroplasticity
-(Safe Self-Modification Capability)">Neuroplasticity</a></strong> (safe self-modification capability). It
-means the system can accept self-modification without collapsing into
-regressions.</p>
-<p>Refactoring is the action. Neuroplasticity is the capability.
-Immutable Infrastructure is the constraint that makes that capability
-safe.</p>
-<p>The mechanism is <strong>Automated Refactoring Under Guards</strong>:
-a deterministic loop that proposes a bounded change, measures impact,
-and admits it only when the result passes hard gates. This is how you
-get evolution without drift.</p>
-<p>By this point the roles should feel familiar. Sensors capture
-baseline and post-mutation measurements, the <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a> applies one
-bounded refactor under an explicit Mission, Validators run the Immune
-System plus ratchets and policy gates, the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> decides
-<code>commit</code> vs <code>revert</code>, and the Ledger keeps the
-evidence. The loop is safe only when those measurements and gates stay
-deterministic.</p>
-<h2 id="the-atomic-loop-measure-mutate-measure-commitrevert">The Atomic
-Loop: Measure → Mutate → Measure → Commit/Revert</h2>
-<p>At its heart, automated refactoring under guards is a four-phase
-loop. Every candidate runs inside a tightly controlled sandbox.</p>
-<h3 id="phase-1-pre-mutation-measurement-the-baseline">Phase 1:
-Pre-Mutation Measurement (The Baseline)</h3>
-<p>Before any autonomous change, the system captures a baseline. Run the
-relevant tests, static analysis, and metrics collectors first, so the
-candidate is judged against a known starting point.</p>
-<p><strong>Typical Pre-Mutation Measurements:</strong></p>
-<ul>
-<li><p><strong><a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> Execution:</strong> All unit, integration,
-and end-to-end cases must pass.</p></li>
-<li><p><strong>Code Coverage:</strong> Current percentage of code
-covered by tests.</p></li>
-<li><p><strong>Static Analysis:</strong> Linter warnings, security
-vulnerabilities detected by SAST (Static Application Security Testing)
-tools, complexity metrics.</p></li>
-<li><p><strong>Architectural Conformance:</strong> Checks against
-defined architectural rules (e.g., dependency inversion, package
-layering).</p></li>
-<li><p><strong>Performance Benchmarks:</strong> Baseline metrics for
-critical paths.</p></li>
-</ul>
-<p>The output of this phase is the deterministic “before” state. That
-report is the reference point for everything that follows.</p>
-<h3 id="phase-2-automated-mutation-the-change-candidate">Phase 2:
-Automated Mutation (The Change Candidate)</h3>
-<p>With a baseline in hand, the agent proposes and applies one specific
-change. Generation may be <em>stochastic</em> (a large language model
-(LLM) suggestion, a dependency updater, a linter autofix), but the
-applied mutation must stay precise and bounded.</p>
-<p>Generation can be stochastic; admission is deterministic.</p>
-<p><strong>Examples of Automated Mutations:</strong></p>
-<ul>
-<li><p><strong>Dependency Updates:</strong> Automatically upgrading a
-library to a newer patch or minor version.</p></li>
-<li><p><strong>Code Formatting/Linting:</strong> Applying
-<code>prettier</code> or <code>black</code> autofixes.</p></li>
-<li><p><strong>Refactoring Suggestions:</strong> Renaming variables,
-extracting methods, or simplifying expressions based on defined patterns
-or AI suggestions.</p></li>
-<li><p><strong>Security Patches:</strong> Applying known fixes for
-vulnerabilities identified in dependencies.</p></li>
-<li><p><strong>Configuration Updates:</strong> Adjusting settings based
-on environment changes or best practices.</p></li>
-</ul>
-<p>This mutation happens in isolation: a temporary branch, a sandboxed
-container, or another disposable workspace. Never mutate
-<code>main</code> or a live system directly.</p>
-<h3 id="phase-3-post-mutation-validation-the-guards">Phase 3:
-Post-Mutation Validation (The Guards)</h3>
-<p>Immediately after the mutation, run the same measurement pass again.
-That gives you the deterministic “after” state. The core of automated
-refactoring under guards is the comparison between those two states.</p>
-<p><strong>Deterministic Gates (Validators):</strong> These are the
-non-negotiable rules that decide whether the candidate is acceptable.
-These are your guards.</p>
-<ul>
-<li><p><strong>All Tests Must Pass:</strong> No regressions in existing
-functionality. This is the first and most fundamental guard.</p></li>
-<li><p><strong>The <a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> Principle:</strong> Quality metrics, once
-established, should only ever improve or remain the same; they must
-<em>never</em> degrade. In practice: reject if <code>m_new</code> is
-worse than <code>m_old</code>. (Detailed ratchet rules are defined later
-in this chapter.)</p></li>
-<li><p><strong>Architectural Conformance:</strong> The change must not
-violate any predefined architectural rules.</p></li>
-<li><p><strong>Blast Radius Limits:</strong> The scope of the change
-(e.g., number of lines changed, number of files affected) might be
-capped. Changes exceeding a certain threshold could automatically
-trigger a revert or require human review.</p></li>
-</ul>
-<h3 id="phase-4-the-decision-gate-commit-or-revert">Phase 4: The
-Decision Gate: Commit or Revert</h3>
-<p>Based on post-mutation validation, the system makes an automated
-decision:</p>
-<ul>
-<li><p><strong>If all guards pass:</strong> The change is deemed safe
-and beneficial (or at least non-regressive). The mutation is proposed as
-a pull request with the before/after evidence attached. Merge can be
-automatic only for explicitly allowlisted change classes; otherwise this
-is where human review happens.</p></li>
-<li><p><strong>If any guard fails:</strong> The change is automatically
-discarded. The temporary branch is deleted, and the system reverts to
-its pre-mutation state. A detailed report of the failure (what guard was
-tripped, why) is generated and can be sent to a human for review. This
-prevents bad changes from ever reaching the codebase.</p></li>
-</ul>
-<h2 id="guard-sufficiency-what-counts-as-comprehensive">Guard
-Sufficiency (What counts as “comprehensive”?)</h2>
-<p>The phrase “comprehensive tests” is doing a lot of work.</p>
-<p>Guard sufficiency is not a single number. It is a relationship
-between:</p>
-<ul>
-<li><strong>Refactor scope:</strong> how wide the mutation is allowed to
-reach.</li>
-<li><strong>Guard strength:</strong> what Validators you run, and what
-they actually constrain.</li>
-<li><strong>Signal quality:</strong> whether your tests contain
-meaningful assertions, not just line execution.</li>
-</ul>
-<p>You can think of it as a simple rule: <strong>bigger refactors
-require stronger, more diverse guards.</strong></p>
-<h3 id="sufficiency-signals-useful-but-not-decisive">Sufficiency signals
-(useful, but not decisive)</h3>
-<p>Some practical signals that can inform the “safe enough”
-decision:</p>
 <table>
 <colgroup>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
 </colgroup>
 <thead>
 <tr>
-<th>Signal</th>
-<th>What it measures</th>
-<th>Why it helps</th>
-<th>Failure mode</th>
+<th>Moment</th>
+<th>Protected observation</th>
+<th>Governance status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Line and branch coverage</td>
-<td>Reachability</td>
-<td>Tells you what’s even being exercised</td>
-<td>High coverage can still have weak assertions</td>
+<td>Fixed baseline</td>
+<td>One declared lint violation, no contract failures, and 88.2%
+coverage under the protected measurement protocol and current
+non-regression baseline, revision 42</td>
+<td>Current admitted <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a></td>
 </tr>
 <tr>
-<td>Type checking strictness</td>
-<td>Static invariants</td>
-<td>Catches interface drift and many refactor mistakes early</td>
-<td>Types can be missing or too permissive</td>
+<td><a class="concept-link" href="concepts#candidate" title="See concept: Candidate">Candidate</a></td>
+<td>The lint violation is removed, protected behavior and coverage are
+unchanged, and the effect stays inside one file</td>
+<td><code>complete</code>; <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> sealed</td>
 </tr>
 <tr>
-<td>Mutation score</td>
-<td>Test strength</td>
-<td>Checks whether tests detect small semantic changes</td>
-<td>Expensive; can be noisy without stable tests</td>
-</tr>
-<tr>
-<td>Contract/integration tests</td>
-<td>Cross-module invariants</td>
-<td>Protects public interfaces and side effects</td>
-<td>Often slow; requires environment realism</td>
-</tr>
-<tr>
-<td>Benchmarks/ratchets</td>
-<td>Non-functional invariants</td>
-<td>Catches “refactor that passes tests but regresses performance”</td>
-<td>Requires stable harness and tolerance</td>
+<td><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> boundary</td>
+<td>Current-base revalidation and floor advancement have not run</td>
+<td>Admission pending; non-regression baseline revision 42 remains
+authoritative</td>
 </tr>
 </tbody>
 </table>
-<p>The pragmatic posture is to <strong>refuse broad refactors when
-guards are weak</strong>. Instead, run a “guard strengthening” mission
-first: add one missing test, add one contract check, or add one ratchet,
-then refactor.</p>
-<h3 id="mutation-testing-a-guard-for-your-guards">Mutation testing (a
-guard for your guards)</h3>
-<p>Mutation testing is a direct way to check whether your tests are
-sensitive to behavioral changes. The tool edits your code in small ways
-(flip a comparison, remove a branch) and verifies that tests fail.</p>
-<p>Example (Python):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="co"># Install once</span></span>
-<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a><span class="ex">pip</span> install mutmut</span>
-<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a></span>
-<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a><span class="co"># Run mutations on a bounded surface</span></span>
-<span id="cb2-5"><a aria-hidden="true" href="#cb2-5" tabindex="-1"></a><span class="ex">mutmut</span> run <span class="at">--paths-to-mutate</span><span class="op">=</span>src/auth/ <span class="at">--tests-dir</span><span class="op">=</span>tests/auth/</span>
-<span id="cb2-6"><a aria-hidden="true" href="#cb2-6" tabindex="-1"></a></span>
-<span id="cb2-7"><a aria-hidden="true" href="#cb2-7" tabindex="-1"></a><span class="co"># Inspect survivors (mutations that tests failed to catch)</span></span>
-<span id="cb2-8"><a aria-hidden="true" href="#cb2-8" tabindex="-1"></a><span class="ex">mutmut</span> results</span></code></pre></div>
-<p>Use mutation testing selectively. It’s too expensive as a default
-per-PR gate, but it is useful for deciding whether a module is safe for
-autonomous refactors.</p>
-<p>A practical operating pattern:</p>
-<ol type="1">
-<li>Run mutation testing before allowlisting a refactor class on a
-module.</li>
-<li>Track a simple mutation score (<code>killed / total</code>) over
-time.</li>
-<li>If score drops below your floor, pause broad autonomous refactors on
-that surface.</li>
-<li>Open a guard-strengthening mission (add assertions, contracts, or
-integration cases), then re-measure.</li>
-</ol>
-<p>Treat survivors as map updates:</p>
+<p>The candidate improved one structural property without regressing the
+protected observations. Nothing has merged, and the floor has not
+moved.</p>
+<p>Automated refactoring is governable when the workflow may propose a
+behavior-preserving structural change but cannot redefine behavior,
+weaken measurement, lower the protected floor, or admit itself.</p>
+<h2 id="fix-the-measurement-before-mutation">Fix the Measurement Before
+Mutation</h2>
+<p>Before work begins, the Mission fixes the base revision, permitted
+effects, structural objective, protected checks, budgets, routing, and
+admission policy. The control plane separately fixes:</p>
 <ul>
-<li>categorize by risk (data integrity &gt; auth &gt; formatting)</li>
-<li>link each survivor to a missing test or contract</li>
-<li>close survivors before increasing refactor blast radius</li>
+<li>the measurement implementation and protocol used for both baseline
+and candidate;</li>
+<li>the current protected minimum, or <strong><a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a>
+floor</strong>;</li>
+<li>the dependency closure whose behavior could be affected.</li>
 </ul>
-<p>For extended recipes and stack variants, see <a class="chapter-link" href="appendix-c-pattern-library#appendix-c-pattern-library" title="Go to: Appendix C">Appendix C</a>.</p>
-<h2 id="scope-boundaries-how-wide-is-the-refactor-allowed-to-reach">Scope
-Boundaries (How wide is the refactor allowed to reach?)</h2>
-<p>“Refactor the code” is not a Mission. A refactoring mission needs
-explicit boundaries.</p>
-<p>One way to frame scope:</p>
+<p>The baseline and candidate must be observed by the same protected
+implementation under the same protocol. Candidate-controlled package
+scripts, test configuration, benchmark settings, or thresholds cannot
+redefine what “unchanged” means.</p>
+<p>The record must identify what was measured and how. Preserve the
+source revision, protocol, tools, environment, raw observations,
+comparison rule, and floor revision.</p>
+<p>Preflight blocks the workflow if the protocol cannot run, the base is
+stale, the affected closure is unknown, or the baseline contradicts the
+protected floor. It does not treat that uncertainty as a pass.</p>
+<p>The normal starting point is a green base. A policy may permit a
+precisely enumerated known-failure set, but the candidate must introduce
+no new or changed failure. “The branch was already red” is not a
+waiver.</p>
+<h2 id="declare-the-equivalence-boundary">Declare the Equivalence
+Boundary</h2>
+<p>“No behavior change” means no change to the observations that adopted
+intent declares stable. Depending on the system, those observations may
+include return values, errors, persisted state, external calls, event
+order, idempotency, timing, performance, logging, or telemetry.</p>
+<p>Internal representation remains unconstrained unless another <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>
+makes it observable. A changed public schema, exception contract, event
+sequence, or data effect is a behavior migration and belongs in a
+different Mission.</p>
+<h2 id="guard-sufficiency">Guard Sufficiency</h2>
+<p>No test suite is universally comprehensive. Evidence must match the
+behavior boundary, mutation scope, and consequence:</p>
 <table>
 <colgroup>
 <col style="width: 25%"/>
@@ -310,948 +154,420 @@ explicit boundaries.</p>
 </colgroup>
 <thead>
 <tr>
-<th>Refactor type</th>
+<th>Refactor class</th>
 <th>Typical scope</th>
-<th>Minimum guards</th>
-<th>Default posture</th>
+<th>Minimum protected evidence</th>
+<th>Default admission</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Within-function cleanup</td>
-<td>One symbol</td>
-<td>Unit tests + types + lint</td>
-<td>Often safe</td>
+<td>Private lint cleanup</td>
+<td>One symbol or file</td>
+<td>Intended finding removed, relevant tests, lint, and <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>
+diff</td>
+<td>Allowlist only after comparable runs demonstrate stable results</td>
 </tr>
 <tr>
-<td>Extract method / simplify logic</td>
-<td>One module</td>
-<td>Module tests + coverage signal + types</td>
-<td>Usually safe when bounded</td>
-</tr>
-<tr>
-<td>Rename with callers</td>
+<td>Private rename</td>
 <td>One module or package</td>
-<td>Tests + type checks + contract tests (if public)</td>
-<td>Require tighter review</td>
+<td>Symbol-aware rename evidence, types, tests, and affected
+closure</td>
+<td>Review until comparable evidence supports deeper delegation</td>
 </tr>
 <tr>
-<td>Public interface change</td>
-<td>Multiple modules</td>
-<td>Integration/consumer tests + explicit deprecation plan</td>
-<td>Human review by default</td>
+<td>Extract or inline function</td>
+<td>One module</td>
+<td>Behavioral contracts, types, tests, and structural predicate</td>
+<td>Review by default</td>
 </tr>
 <tr>
-<td>Architecture change</td>
-<td>System-wide</td>
-<td>Full system checks + explicit approval</td>
-<td>Rare and expensive</td>
+<td>Move private implementation</td>
+<td>Several files in one package</td>
+<td>Dependency closure, integration contracts, and diff budget</td>
+<td>Human review</td>
+</tr>
+<tr>
+<td>Public behavior or interface change</td>
+<td>Not a refactor Mission</td>
+<td>Migration Map, compatibility plan, and consumer evidence</td>
+<td>Separate Mission and approval</td>
 </tr>
 </tbody>
 </table>
-<p>This is the same idea as blast radius limits, but moved earlier in
-the pipeline: <strong>scope is part of the mission, not an
-afterthought.</strong></p>
-<h2 id="equivalence-classes-what-does-no-behavior-change-mean">Equivalence
-Classes (What does “no behavior change” mean?)</h2>
-<p>Refactoring is “change the how, keep the what.” But “the what” has
-layers:</p>
+<p>When guards are weak, strengthen them in a separate Mission first.
+Admit and protect the new contract or check before activating the
+refactor. The same candidate cannot author the only oracle that approves
+its change.</p>
+<p>Mutation testing may help determine whether a check detects small
+semantic changes. Use a fixed mutation protocol as eligibility evidence
+for a refactor class, not as a universal per-candidate ritual. A
+surviving mutant supports a guard-strengthening proposal; it does not
+widen the current Mission.</p>
+<h2 id="produce-a-true-bounded-refactor">Produce a True Bounded
+Refactor</h2>
+<p>A refactor changes structure while preserving behavior declared by
+the Map. Suitable transformations include:</p>
 <ul>
-<li><strong>Strict equivalence:</strong> same outputs for the same
-inputs. Always required.</li>
-<li><strong>Observational equivalence:</strong> same externally
-observable behavior (responses, persisted state, emitted events), with
-different internals. Usually acceptable.</li>
-<li><strong>Semantic equivalence:</strong> same business meaning, but
-with a different representation or different trade-offs. Requires
-explicit review because it can shift edge cases.</li>
+<li>remove one unused private symbol;</li>
+<li>rename one private symbol with a language-aware tool;</li>
+<li>extract or inline one function without changing its contract;</li>
+<li>simplify one expression under an explicit equivalence check;</li>
+<li>apply one protected formatter or codemod to an allowlisted
+region.</li>
 </ul>
-<p>This is where performance, memory, logging, and side-effect timing
-enter the picture. If they matter, they need to be promoted into the
-Map: benchmarks, invariants, and ratchets that make them gateable.</p>
-<h2 id="the-ratchet-metrics-that-cant-go-backward">The Ratchet: Metrics
-That Can’t Go Backward</h2>
-<p>Here is the failure mode that kills Neuroplasticity:</p>
-<p>The system learns to pass tests by weakening the tests.</p>
-<p>If an autonomous loop can modify both the code <em>and</em> the
-validators, it can discover that the easiest way to achieve “all tests
-pass” is to delete the hard tests. This isn’t malice—it’s optimization
-finding the shortest path.</p>
-<p>The <strong>Ratchet</strong> prevents this. It’s a governance
-mechanism that treats a chosen metric value <span class="math inline"><em>m</em></span> as strictly monotonic:</p>
-<p><span class="math display"><em>m</em><sub>new</sub> ≥ <em>m</em><sub>old</sub></span></p>
-<p>If the new value is worse, the commit is rejected—regardless of
-whether tests pass.</p>
-<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-07-ratchet-gates" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<p>The Mission must also state why the change should exist: remove a
+named finding, reduce a declared complexity measure, or complete a
+specific structural transformation. Non-regression alone does not
+justify churn.</p>
+<p>Dependency upgrades, security patches, migrations, public-interface
+changes, and architectural changes are not refactors for governance
+purposes. They may use the same workflow architecture, but they need
+different authority, checks, approvals, and recovery.</p>
+<p>The candidate runs inside Chapter 10’s complete effect boundary. An
+ordinary refactor has no authority over protected checks, floor state,
+CI, credentials, deployment, databases, production configuration, or
+admission.</p>
+<h2 id="validate-the-candidate-independently">Validate the Candidate
+Independently</h2>
+<p>The protected validation plan answers five questions:</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Question</th>
+<th>Required evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Did the intended refactor occur?</td>
+<td>The named finding disappeared, the declared codemod completed, or
+the exact structural predicate holds</td>
+</tr>
+<tr>
+<td>Is declared behavior preserved?</td>
+<td>Protected contracts, tests, properties, and relevant runtime
+observations</td>
+</tr>
+<tr>
+<td>Did effects remain in scope?</td>
+<td>Runtime effect records and the independently computed complete
+diff</td>
+</tr>
+<tr>
+<td>Did governed quality regress?</td>
+<td>Candidate observations compared with the fixed floor under the same
+protocol</td>
+</tr>
+<tr>
+<td>Are required artifacts complete?</td>
+<td>Declared identities, provenance, schemas, and output checks</td>
+</tr>
+</tbody>
+</table>
+<p>Candidate-supplied tests may add evidence. They cannot replace the
+protected checks named by the Mission. A candidate that edits its floor,
+harness, required configuration, or protected check fails even when its
+own commands report success.</p>
+<p>Affected checks follow dependency closure, not only changed paths.
+Shared contracts and transitive consumers may need validation even when
+the diff is local.</p>
+<h3 id="noisy-measurements">Noisy Measurements</h3>
+<p>A noisy required metric has three outcomes: pass, fail, or
+inconclusive. Use the same fail-closed pattern introduced for
+probabilistic evaluation in <a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>: predeclare the sampling protocol,
+aggregation rule, tolerance, retry budget, and inconclusive outcome. For
+performance-like observations, policy also fixes the warmup and
+environment class before execution.</p>
+<p>An inconclusive result may permit another declared sample batch for
+the same candidate. Exhausting that budget without a decision ends in
+evidenced failure. It becomes an external block only when progress
+requires a named authority, trustworthy oracle, or environment
+repair.</p>
+<h2 id="protected-non-regression">Protected Non-Regression</h2>
+<p>A <strong>Ratchet</strong> is a protected non-regression rule
+measured by one fixed protocol. It may require zero contract violations,
+non-increasing lint or type failures, a bounded performance
+distribution, or no undeclared API expansion.</p>
+<section aria-labelledby="ratchet-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-07-ratchet-gates" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-07-ratchet-gates</span>
 <style>
-  [data-role="ratchet-sim"] .ratchet-phase {
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(11, 12, 16, 0.48);
-    color: #b5b6bf;
-    transition: all 180ms ease;
-  }
-  [data-role="ratchet-sim"] .ratchet-phase[data-active="1"] {
-    border-color: rgba(42, 195, 222, 0.45);
-    background: rgba(42, 195, 222, 0.14);
-    color: #f2f3f8;
-    box-shadow: 0 0 0 1px rgba(42, 195, 222, 0.2) inset;
-  }
-  [data-role="ratchet-sim"] .soft-toggle[data-role="scenario"][aria-pressed="true"] {
-    border-color: rgba(42, 195, 222, 0.45);
-    background: rgba(42, 195, 222, 0.16);
-    color: #f2f3f8;
-  }
-  [data-role="ratchet-sim"] .attempt-pill.is-human {
-    background: rgba(187, 154, 247, 0.24);
-    border-color: rgba(187, 154, 247, 0.34);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    [data-role="ratchet-sim"] .ratchet-phase {
-      transition: none;
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-scenarios,
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
-  }
-</style>
-<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-vibrant">
-<div class="flex flex-col lg:flex-row gap-8">
-<div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">Ratchets (Quality Floors That Only Move Up)</h2>
-<p class="text-brand-muted leading-relaxed">
-      Ratchets turn quality expectations into executable law. A candidate may fail, but the floor does not move down.
-      If a candidate passes deterministic guards, the floor moves up and future loops start from a stronger baseline.
-    </p>
-<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Admission loop</div>
-<div class="text-sm text-brand-muted leading-relaxed space-y-2">
-<span class="block"><span class="font-mono text-brand-vibrant">1) Measure</span> baseline metrics.</span>
-<span class="block"><span class="font-mono text-brand-vibrant">2) Mutate</span> one bounded candidate.</span>
-<span class="block"><span class="font-mono text-brand-vibrant">3) Validate</span> ratchets + policy gates.</span>
-<span class="block"><span class="font-mono text-brand-vibrant">4) Decide</span> raise the floor, reject, or route to human review.</span>
-</div>
-</div>
-<div class="mt-4 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Deterministic guard rules</div>
-<div class="text-sm text-brand-muted leading-relaxed">
-<span class="block font-mono text-brand-vibrant">test_count_new &gt;= test_count_old</span>
-<span class="block font-mono text-brand-vibrant mt-1">coverage_new &gt;= coverage_old</span>
-<span class="block font-mono text-brand-vibrant mt-1">lint_new &lt;= lint_old</span>
-<span class="block font-mono text-brand-vibrant mt-1">security_new &lt;= security_old</span>
-<span class="block mt-2">If all ratchets pass, policy decides: allowlisted auto-merge or explicit human approval.</span>
-</div>
-</div>
-</div>
-<div class="lg:w-7/12 space-y-4" data-role="ratchet-sim">
-<div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3">Scenario runner (deterministic)</div>
-<div class="flex flex-wrap gap-2" data-role="scenario-controls">
-<button aria-pressed="true" class="soft-toggle font-mono" data-role="scenario" data-scenario="lint_fix" type="button">Lint Autofix</button>
-<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="coverage_drop" type="button">Coverage Drop</button>
-<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="security_regression" type="button">Security Regression</button>
-<button aria-pressed="false" class="soft-toggle font-mono" data-role="scenario" data-scenario="api_expansion" type="button">API Expansion</button>
-</div>
-<div class="mt-2 text-xs text-brand-muted" data-role="scenario-note">Small bounded mutation that should raise quality and pass ratchets.</div>
-<div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
-<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="measure" data-role="phase-pill">1 Measure</div>
-<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="mutate" data-role="phase-pill">2 Mutate</div>
-<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="validate" data-role="phase-pill">3 Validate</div>
-<div class="ratchet-phase rounded-lg p-2 text-center" data-active="0" data-phase="decide" data-role="phase-pill">4 Decide</div>
-</div>
-<div class="mt-3 flex flex-wrap gap-2">
-<button class="soft-toggle font-mono" data-role="run" type="button">Run Scenario</button>
-<button class="soft-toggle font-mono" data-role="reset" type="button">Reset Floor</button>
-</div>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Test count</div>
-<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="test-old">480</span> -&gt; <span data-role="test-new">481</span></div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Coverage</div>
-<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="coverage-old">88.0</span>% -&gt; <span data-role="coverage-new">88.0</span>%</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Lint violations</div>
-<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="lint-old">6</span> -&gt; <span data-role="lint-new">4</span></div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Security findings</div>
-<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong"><span data-role="security-old">2</span> -&gt; <span data-role="security-new">2</span></div>
-</div>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Current floor</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="floor">72</span>/100</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Candidate quality</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="candidate-quality">75</span>/100</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Ratchet gate</div>
-<div class="mt-1 text-lg font-bold text-brand-strong" data-role="status">READY</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Decision</div>
-<div class="mt-1 text-sm sm:text-base font-bold text-brand-strong" data-role="decision">Run scenario</div>
-</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Gate trace</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs text-brand-muted">
-<div class="border border-brand-border rounded-lg p-2">test_count: <span data-role="check-test">READY</span></div>
-<div class="border border-brand-border rounded-lg p-2">coverage: <span data-role="check-coverage">READY</span></div>
-<div class="border border-brand-border rounded-lg p-2">lint: <span data-role="check-lint">READY</span></div>
-<div class="border border-brand-border rounded-lg p-2">security: <span data-role="check-security">READY</span></div>
-<div class="border border-brand-border rounded-lg p-2">quality floor: <span data-role="check-quality">READY</span></div>
-<div class="border border-brand-border rounded-lg p-2">policy gate: <span data-role="check-policy">READY</span></div>
-</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Floor vs candidate</div>
-<div class="space-y-2">
-<div>
-<div class="text-xs text-brand-muted mb-1">Floor</div>
-<div class="h-2 rounded-full bg-brand-dark/70 border border-brand-border overflow-hidden">
-<div class="h-full bg-brand-primary" data-role="floor-bar" style="width: 72%;"></div>
-</div>
-</div>
-<div>
-<div class="text-xs text-brand-muted mb-1">Candidate</div>
-<div class="h-2 rounded-full bg-brand-dark/70 border border-brand-border overflow-hidden">
-<div class="h-full bg-brand-accent" data-role="candidate-bar" style="width: 75%;"></div>
-</div>
-</div>
-</div>
-<div class="mt-3 text-xs text-brand-muted" data-role="outcome">Ready. Run a candidate through deterministic guards.</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between gap-3">
-<div class="text-xs font-mono text-brand-muted">Attempts</div>
-<div class="text-xs text-brand-muted">Cyan = floor raised, red = rejected, violet = human gate</div>
-</div>
-<div class="mt-3 grid grid-cols-12 gap-1" data-role="attempts"></div>
-</div>
-</div>
-</div>
-</div>
-<script>
-(function () {
-  const script = document.currentScript;
-  const root = script ? script.closest('[data-infographic-section-id="i3-section-07-ratchet-gates"]') : null;
-  if (!root || root.dataset.ratchetReady === "1") return;
-  root.dataset.ratchetReady = "1";
-
-  const sim = root.querySelector('[data-role="ratchet-sim"]');
-  if (!sim) return;
-
-  const scenarioButtons = Array.from(sim.querySelectorAll('[data-role="scenario"]'));
-  const scenarioNoteEl = sim.querySelector('[data-role="scenario-note"]');
-  const phasePills = Array.from(sim.querySelectorAll('[data-role="phase-pill"]'));
-  const runBtn = sim.querySelector('[data-role="run"]');
-  const resetBtn = sim.querySelector('[data-role="reset"]');
-
-  const testOldEl = sim.querySelector('[data-role="test-old"]');
-  const testNewEl = sim.querySelector('[data-role="test-new"]');
-  const coverageOldEl = sim.querySelector('[data-role="coverage-old"]');
-  const coverageNewEl = sim.querySelector('[data-role="coverage-new"]');
-  const lintOldEl = sim.querySelector('[data-role="lint-old"]');
-  const lintNewEl = sim.querySelector('[data-role="lint-new"]');
-  const securityOldEl = sim.querySelector('[data-role="security-old"]');
-  const securityNewEl = sim.querySelector('[data-role="security-new"]');
-
-  const floorEl = sim.querySelector('[data-role="floor"]');
-  const candidateQualityEl = sim.querySelector('[data-role="candidate-quality"]');
-  const statusEl = sim.querySelector('[data-role="status"]');
-  const decisionEl = sim.querySelector('[data-role="decision"]');
-
-  const checkTestEl = sim.querySelector('[data-role="check-test"]');
-  const checkCoverageEl = sim.querySelector('[data-role="check-coverage"]');
-  const checkLintEl = sim.querySelector('[data-role="check-lint"]');
-  const checkSecurityEl = sim.querySelector('[data-role="check-security"]');
-  const checkQualityEl = sim.querySelector('[data-role="check-quality"]');
-  const checkPolicyEl = sim.querySelector('[data-role="check-policy"]');
-
-  const floorBar = sim.querySelector('[data-role="floor-bar"]');
-  const candidateBar = sim.querySelector('[data-role="candidate-bar"]');
-  const outcomeEl = sim.querySelector('[data-role="outcome"]');
-  const attemptsEl = sim.querySelector('[data-role="attempts"]');
-
-  if (!scenarioNoteEl || !runBtn || !resetBtn || phasePills.length === 0 || scenarioButtons.length === 0 ||
-      !testOldEl || !testNewEl || !coverageOldEl || !coverageNewEl || !lintOldEl || !lintNewEl ||
-      !securityOldEl || !securityNewEl || !floorEl || !candidateQualityEl || !statusEl || !decisionEl ||
-      !checkTestEl || !checkCoverageEl || !checkLintEl || !checkSecurityEl || !checkQualityEl || !checkPolicyEl ||
-      !floorBar || !candidateBar || !outcomeEl || !attemptsEl) return;
-
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-  const round = (n) => Math.round(n);
-  const round1 = (n) => Math.round(n * 10) / 10;
-  const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
-  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const phaseDelay = reducedMotion ? 0 : 130;
-
-  const SCENARIOS = {
-    lint_fix: {
-      note: 'Small bounded mutation that should raise quality and pass ratchets.',
-      delta: { test: 1, coverage: 0.0, lint: -2, security: 0 },
-      requiresHuman: false,
-    },
-    coverage_drop: {
-      note: 'Refactor reduces measured coverage below the existing floor.',
-      delta: { test: 0, coverage: -1.8, lint: -1, security: 0 },
-      requiresHuman: false,
-    },
-    security_regression: {
-      note: 'Candidate introduces a new security finding. Deterministic reject.',
-      delta: { test: 1, coverage: 0.0, lint: 0, security: 1 },
-      requiresHuman: false,
-    },
-    api_expansion: {
-      note: 'Quality improves, but API surface expansion requires explicit human approval.',
-      delta: { test: 2, coverage: 0.2, lint: -1, security: 0 },
-      requiresHuman: true,
-    },
-  };
-
-  const INITIAL_BASELINE = { test: 480, coverage: 88.0, lint: 6, security: 2 };
-
-  const state = {
-    selected: 'lint_fix',
-    baseline: { ...INITIAL_BASELINE },
-    floor: 72,
-    running: false,
-  };
-
-  const qualityScore = (metrics) => {
-    const score = 72
-      + (metrics.coverage - 88) * 1.9
-      + (metrics.test - 480) * 0.2
-      - (metrics.lint - 6) * 1.4
-      - (metrics.security - 2) * 4.5;
-    return clamp(round(score), 0, 100);
-  };
-
-  const formatCoverage = (n) => round1(n).toFixed(1);
-
-  const deriveCandidate = (baseline, scenario) => ({
-    test: Math.max(0, baseline.test + scenario.delta.test),
-    coverage: clamp(round1(baseline.coverage + scenario.delta.coverage), 0, 100),
-    lint: Math.max(0, baseline.lint + scenario.delta.lint),
-    security: Math.max(0, baseline.security + scenario.delta.security),
-  });
-
-  const evaluate = (baseline, candidate, scenario) => {
-    const checks = {
-      test: candidate.test >= baseline.test,
-      coverage: (candidate.coverage + 0.1) >= baseline.coverage,
-      lint: candidate.lint <= baseline.lint,
-      security: candidate.security <= baseline.security,
-    };
-
-    const candidateQuality = qualityScore(candidate);
-    const qualityPass = candidateQuality >= state.floor;
-    const ratchetPass = checks.test && checks.coverage && checks.lint && checks.security && qualityPass;
-
-    const failures = [];
-    if (!checks.test) failures.push(`test_count ${candidate.test} < ${baseline.test}`);
-    if (!checks.coverage) failures.push(`coverage ${formatCoverage(candidate.coverage)} < ${formatCoverage(baseline.coverage)}`);
-    if (!checks.lint) failures.push(`lint ${candidate.lint} > ${baseline.lint}`);
-    if (!checks.security) failures.push(`security ${candidate.security} > ${baseline.security}`);
-    if (!qualityPass) failures.push(`quality ${candidateQuality} < floor ${state.floor}`);
-
-    let verdict = 'FAIL';
-    let decision = 'REVERT';
-    let pillClass = 'is-fail';
-    let policyGate = 'BLOCKED';
-
-    if (ratchetPass && scenario.requiresHuman) {
-      verdict = 'HUMAN GATE';
-      decision = 'WAIT FOR APPROVAL';
-      pillClass = 'is-human';
-      policyGate = 'HUMAN';
-    } else if (ratchetPass) {
-      verdict = 'PASS';
-      decision = 'RAISE FLOOR';
-      pillClass = 'is-pass';
-      policyGate = 'ALLOWLISTED';
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-actions {
+      margin-top: 0.75rem;
     }
-
-    return {
-      checks,
-      qualityPass,
-      candidateQuality,
-      ratchetPass,
-      failures,
-      verdict,
-      decision,
-      pillClass,
-      policyGate,
-    };
-  };
-
-  const setPhase = (phase) => {
-    for (const pill of phasePills) {
-      const active = pill.dataset.phase === phase;
-      pill.dataset.active = active ? '1' : '0';
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-scenarios button,
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-actions button {
+      min-height: 2.4rem;
+      border: 1px solid rgba(122, 162, 247, 0.32);
+      border-radius: 6px;
+      background: #121827;
+      color: #d7dcec;
+      padding: 0.45rem 0.65rem;
+      font: 700 0.75rem "JetBrains Mono", ui-monospace, monospace;
     }
-  };
-
-  const clearPhase = () => {
-    for (const pill of phasePills) {
-      pill.dataset.active = '0';
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-scenarios button[aria-pressed="true"] {
+      border-color: #2ac3de;
+      color: #f2f3f8;
+      background: #17263a;
     }
-  };
-
-  const updateCheck = (el, value, tone) => {
-    el.textContent = value;
-    if (tone === 'pass') el.style.color = '#2ac3de';
-    else if (tone === 'fail') el.style.color = '#f7768e';
-    else if (tone === 'human') el.style.color = '#bb9af7';
-    else el.style.color = '#b5b6bf';
-  };
-
-  const updateScenarioButtons = () => {
-    for (const button of scenarioButtons) {
-      const active = button.dataset.scenario === state.selected;
-      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-actions button:disabled {
+      cursor: not-allowed;
+      opacity: 0.45;
     }
-  };
-
-  const appendAttempt = (pillClass) => {
-    const pill = document.createElement('span');
-    pill.className = `attempt-pill ${pillClass}`;
-    attemptsEl.appendChild(pill);
-    while (attemptsEl.children.length > 36) {
-      attemptsEl.removeChild(attemptsEl.firstChild);
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-stages {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.45rem;
+      margin: 0.85rem 0;
     }
-  };
-
-  const render = (baseline, candidate, evaluation, mode, oldFloor) => {
-    const scenario = SCENARIOS[state.selected];
-
-    scenarioNoteEl.textContent = scenario.note;
-    testOldEl.textContent = String(baseline.test);
-    testNewEl.textContent = String(candidate.test);
-    coverageOldEl.textContent = formatCoverage(baseline.coverage);
-    coverageNewEl.textContent = formatCoverage(candidate.coverage);
-    lintOldEl.textContent = String(baseline.lint);
-    lintNewEl.textContent = String(candidate.lint);
-    securityOldEl.textContent = String(baseline.security);
-    securityNewEl.textContent = String(candidate.security);
-
-    floorEl.textContent = String(state.floor);
-    candidateQualityEl.textContent = String(evaluation.candidateQuality);
-    floorBar.style.width = `${state.floor}%`;
-    candidateBar.style.width = `${evaluation.candidateQuality}%`;
-
-    if (mode === 'preview') {
-      statusEl.textContent = 'READY';
-      statusEl.style.color = '#b5b6bf';
-      decisionEl.textContent = `Predicted: ${evaluation.decision}`;
-      decisionEl.style.color = '#b5b6bf';
-      outcomeEl.textContent = 'Ready. Run a candidate through deterministic guards.';
-    } else {
-      statusEl.textContent = evaluation.verdict;
-      statusEl.style.color = evaluation.verdict === 'PASS' ? '#2ac3de' : (evaluation.verdict === 'HUMAN GATE' ? '#bb9af7' : '#f7768e');
-      decisionEl.textContent = evaluation.decision;
-      decisionEl.style.color = statusEl.style.color;
-
-      if (evaluation.verdict === 'PASS') {
-        outcomeEl.textContent = `PASS: floor raised from ${oldFloor} to ${state.floor}.`;
-      } else if (evaluation.verdict === 'HUMAN GATE') {
-        outcomeEl.textContent = `HUMAN GATE: ratchets pass at ${evaluation.candidateQuality}, but policy requires approval.`;
-      } else {
-        outcomeEl.textContent = `FAIL: ${evaluation.failures.join('; ')}. Floor stays ${state.floor}.`;
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-stage {
+      border-bottom: 3px solid rgba(122, 162, 247, 0.28);
+      padding: 0.55rem 0.35rem;
+      color: #b8bfd0;
+      font: 700 0.72rem "JetBrains Mono", ui-monospace, monospace;
+      text-align: center;
+    }
+    [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-stage[data-state="done"] {
+      border-color: #2ac3de;
+      color: #f2f3f8;
+    }
+    @media (max-width: 720px) {
+      [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-stages {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
+  </style>
+<figure class="aoi-book-diagram">
+<figcaption class="aoi-book-diagram__header">
+<p class="aoi-book-diagram__eyebrow">Protected non-regression</p>
+<h3 class="aoi-book-diagram__title" id="ratchet-title">Validate, Admit, Then Advance the Ratchet</h3>
+<p class="aoi-book-diagram__summary">Validation may close a proposal against one protected floor revision. Only successful current-state admission may advance that floor.</p>
+</figcaption>
+<div class="aoi-book-diagram__grid">
+<div class="aoi-book-diagram__artifact">
+<span class="aoi-book-diagram__label">Protected state</span>
+<p>Protocol: <code>code-health@7</code><br/>Floor: <strong data-role="floor">revision 42</strong><br/>Worker access to floor: read-only</p>
+</div>
+<div class="aoi-book-diagram__artifact">
+<span class="aoi-book-diagram__label">Invariant</span>
+<p>Failure, uncertainty, and stale-base admission leave the accepted floor unchanged. Lowering it requires a separate <a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a>.</p>
+</div>
+</div>
+<div aria-hidden="true" class="aoi-book-diagram__divider"></div>
+<span class="aoi-book-diagram__label">Candidate scenario</span>
+<div aria-label="Candidate scenario" class="ratchet-scenarios" role="group">
+<button aria-pressed="true" data-scenario="eligible" type="button">Eligible refactor</button>
+<button aria-pressed="false" data-scenario="regression" type="button">Coverage regression</button>
+<button aria-pressed="false" data-scenario="inconclusive" type="button">Noisy signal</button>
+<button aria-pressed="false" data-scenario="behavior" type="button">Behavior change</button>
+<button aria-pressed="false" data-scenario="race" type="button">Floor race</button>
+</div>
+<p class="aoi-book-diagram__summary" data-role="scenario-note">One lint finding is removed while protected behavior and the current floor are preserved.</p>
+<div aria-label="Ratchet lifecycle" class="ratchet-stages">
+<div class="ratchet-stage" data-stage="measure">1. Measure</div>
+<div class="ratchet-stage" data-stage="judge">2. <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a></div>
+<div class="ratchet-stage" data-stage="seal">3. Seal</div>
+<div class="ratchet-stage" data-stage="admit">4. Admit</div>
+<div class="ratchet-stage" data-stage="advance">5. CAS floor</div>
+</div>
+<div aria-live="polite" class="aoi-book-diagram__outcomes">
+<div class="aoi-book-diagram__outcome">
+<span class="aoi-book-diagram__label">Protected check</span>
+<p data-role="check">not run</p>
+</div>
+<div class="aoi-book-diagram__outcome">
+<span class="aoi-book-diagram__label">Terminal result</span>
+<p data-role="result">not run</p>
+</div>
+<div class="aoi-book-diagram__outcome">
+<span class="aoi-book-diagram__label">Admission</span>
+<p data-role="admission">not eligible</p>
+</div>
+<div class="aoi-book-diagram__outcome">
+<span class="aoi-book-diagram__label">Accepted floor</span>
+<p data-role="floor-result">revision 42</p>
+</div>
+</div>
+<div class="ratchet-actions">
+<button data-action="validate" type="button">Validate candidate</button>
+<button data-action="admit" disabled="" type="button">Admit and advance</button>
+<button data-action="reset" type="button">Reset</button>
+</div>
+<p class="aoi-book-diagram__note" data-role="outcome">The candidate has not been evaluated.</p>
+</figure>
+<script>
+    (() => {
+      const script = document.currentScript;
+      const root = script && script.closest('[data-infographic-section-id="i3-section-07-ratchet-gates"]');
+      if (!root) return;
 
-    updateCheck(checkTestEl, evaluation.checks.test ? 'PASS' : 'FAIL', evaluation.checks.test ? 'pass' : 'fail');
-    updateCheck(checkCoverageEl, evaluation.checks.coverage ? 'PASS' : 'FAIL', evaluation.checks.coverage ? 'pass' : 'fail');
-    updateCheck(checkLintEl, evaluation.checks.lint ? 'PASS' : 'FAIL', evaluation.checks.lint ? 'pass' : 'fail');
-    updateCheck(checkSecurityEl, evaluation.checks.security ? 'PASS' : 'FAIL', evaluation.checks.security ? 'pass' : 'fail');
-    updateCheck(checkQualityEl, evaluation.qualityPass ? 'PASS' : 'FAIL', evaluation.qualityPass ? 'pass' : 'fail');
+      const scenarios = {
+        eligible: {
+          note: 'One lint finding is removed while protected behavior and the current floor are preserved.',
+          check: 'pass',
+          result: 'complete',
+          outcome: 'The run closes complete at floor revision 42. Admission remains separate.',
+          admissible: true
+        },
+        regression: {
+          note: 'The structural goal is met, but protected coverage falls below the accepted floor.',
+          check: 'fail',
+          result: 'failed_with_evidence',
+          outcome: 'The run seals failed_with_evidence. The floor remains unchanged.',
+          admissible: false
+        },
+        inconclusive: {
+          note: 'The required signal remains inconclusive after the declared sampling budget.',
+          check: 'inconclusive',
+          result: 'failed_with_evidence',
+          outcome: 'The exhausted protocol seals failed_with_evidence. Unknown does not pass.',
+          admissible: false
+        },
+        behavior: {
+          note: 'A protected public response changed, so this is a migration rather than a refactor.',
+          check: 'fail: equivalence',
+          result: 'failed_with_evidence',
+          outcome: 'This Mission class rejects the candidate. A separate migration proposal is required.',
+          admissible: false
+        },
+        race: {
+          note: 'Another admission advances the floor after validation but before this candidate is admitted.',
+          check: 'pass at revision 42',
+          result: 'complete',
+          outcome: 'The proposal closes complete against revision 42. Current-state admission is still required.',
+          admissible: true,
+          race: true
+        }
+      };
 
-    if (evaluation.policyGate === 'ALLOWLISTED') {
-      updateCheck(checkPolicyEl, 'ALLOWLISTED', 'pass');
-    } else if (evaluation.policyGate === 'HUMAN') {
-      updateCheck(checkPolicyEl, 'HUMAN REVIEW', 'human');
-    } else {
-      updateCheck(checkPolicyEl, 'BLOCKED', mode === 'preview' ? 'neutral' : 'fail');
-    }
-  };
+      const buttons = [...root.querySelectorAll('[data-scenario]')];
+      const stages = [...root.querySelectorAll('[data-stage]')];
+      const validateButton = root.querySelector('[data-action="validate"]');
+      const admitButton = root.querySelector('[data-action="admit"]');
+      const resetButton = root.querySelector('[data-action="reset"]');
+      const fields = {
+        note: root.querySelector('[data-role="scenario-note"]'),
+        check: root.querySelector('[data-role="check"]'),
+        result: root.querySelector('[data-role="result"]'),
+        admission: root.querySelector('[data-role="admission"]'),
+        floor: root.querySelector('[data-role="floor"]'),
+        floorResult: root.querySelector('[data-role="floor-result"]'),
+        outcome: root.querySelector('[data-role="outcome"]')
+      };
+      if (!validateButton || !admitButton || !resetButton || Object.values(fields).some((field) => !field)) return;
 
-  const renderPreview = () => {
-    const scenario = SCENARIOS[state.selected];
-    const baseline = { ...state.baseline };
-    const candidate = deriveCandidate(baseline, scenario);
-    const evaluation = evaluate(baseline, candidate, scenario);
-    render(baseline, candidate, evaluation, 'preview', state.floor);
-    clearPhase();
-  };
+      let selected = 'eligible';
+      let validated = false;
+      let floorRevision = 42;
 
-  const runScenario = async () => {
-    if (state.running) return;
-    state.running = true;
-    runBtn.disabled = true;
-    resetBtn.disabled = true;
+      const setStages = (doneThrough) => {
+        stages.forEach((stage, index) => {
+          stage.dataset.state = index <= doneThrough ? 'done' : 'pending';
+        });
+      };
 
-    const phases = ['measure', 'mutate', 'validate', 'decide'];
-    for (const phase of phases) {
-      setPhase(phase);
-      if (phaseDelay > 0) await wait(phaseDelay);
-    }
+      const resetRun = () => {
+        validated = false;
+        floorRevision = 42;
+        const scenario = scenarios[selected];
+        fields.note.textContent = scenario.note;
+        fields.check.textContent = 'not run';
+        fields.result.textContent = 'not run';
+        fields.admission.textContent = 'not eligible';
+        fields.floor.textContent = 'revision 42';
+        fields.floorResult.textContent = 'revision 42';
+        fields.outcome.textContent = 'The candidate has not been evaluated.';
+        admitButton.disabled = true;
+        setStages(-1);
+      };
 
-    const scenario = SCENARIOS[state.selected];
-    const baselineBefore = { ...state.baseline };
-    const oldFloor = state.floor;
-    const candidate = deriveCandidate(baselineBefore, scenario);
-    const evaluation = evaluate(baselineBefore, candidate, scenario);
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          selected = button.dataset.scenario || 'eligible';
+          buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+          resetRun();
+        });
+      });
 
-    if (evaluation.verdict === 'PASS') {
-      state.baseline = { ...candidate };
-      state.floor = evaluation.candidateQuality;
-    }
+      validateButton.addEventListener('click', () => {
+        const scenario = scenarios[selected];
+        validated = true;
+        fields.check.textContent = scenario.check;
+        fields.result.textContent = scenario.result;
+        fields.admission.textContent = scenario.admissible ? 'pending' : 'not eligible';
+        fields.outcome.textContent = scenario.outcome;
+        admitButton.disabled = !scenario.admissible;
+        setStages(2);
+      });
 
-    appendAttempt(evaluation.pillClass);
-    render(baselineBefore, candidate, evaluation, 'result', oldFloor);
+      admitButton.addEventListener('click', () => {
+        if (!validated) return;
+        const scenario = scenarios[selected];
+        if (scenario.race) {
+          floorRevision = 43;
+          fields.admission.textContent = 'blocked: stale floor';
+          fields.outcome.textContent = 'Compare-and-set rejects the stale proposal. Revalidate in a new run against revision 43.';
+        } else {
+          floorRevision += 1;
+          fields.admission.textContent = 'admitted';
+          fields.outcome.textContent = 'Admission succeeds. The protected service advances the floor atomically.';
+        }
+        fields.floor.textContent = `revision ${floorRevision}`;
+        fields.floorResult.textContent = `revision ${floorRevision}`;
+        admitButton.disabled = true;
+        setStages(4);
+      });
 
-    state.running = false;
-    runBtn.disabled = false;
-    resetBtn.disabled = false;
-  };
-
-  for (const button of scenarioButtons) {
-    button.addEventListener('click', () => {
-      if (state.running) return;
-      const key = button.dataset.scenario;
-      if (!key || !SCENARIOS[key]) return;
-      state.selected = key;
-      updateScenarioButtons();
-      renderPreview();
-    });
-  }
-
-  runBtn.addEventListener('click', runScenario);
-
-  resetBtn.addEventListener('click', () => {
-    if (state.running) return;
-    state.baseline = { ...INITIAL_BASELINE };
-    state.floor = qualityScore(state.baseline);
-    attemptsEl.innerHTML = '';
-    statusEl.textContent = 'READY';
-    statusEl.style.color = '#b5b6bf';
-    decisionEl.textContent = 'Run scenario';
-    decisionEl.style.color = '#b5b6bf';
-    outcomeEl.textContent = 'Reset. Floor returned to baseline.';
-    clearPhase();
-    renderPreview();
-  });
-
-  state.floor = qualityScore(state.baseline);
-  updateScenarioButtons();
-  renderPreview();
-})();
-</script>
+      resetButton.addEventListener('click', resetRun);
+      resetRun();
+    })();
+  </script>
 </section>
-<p><strong>What to ratchet:</strong></p>
-<table>
-<colgroup>
-<col style="width: 29%"/>
-<col style="width: 51%"/>
-<col style="width: 18%"/>
-</colgroup>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Ratchet Rule</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Test count</td>
-<td>Can’t decrease</td>
-<td>Prevents “pass by deletion”</td>
-</tr>
-<tr>
-<td>Coverage %</td>
-<td>Can’t decrease</td>
-<td>Prevents coverage gaming</td>
-</tr>
-<tr>
-<td>Type coverage</td>
-<td>Can’t decrease</td>
-<td>Prevents <code>any</code> creep</td>
-</tr>
-<tr>
-<td>Lint violations</td>
-<td>Can’t increase</td>
-<td>Prevents gradual decay</td>
-</tr>
-<tr>
-<td>Security findings</td>
-<td>Can’t increase</td>
-<td>Prevents vulnerability accumulation</td>
-</tr>
-<tr>
-<td>API surface</td>
-<td>Can’t expand without approval</td>
-<td>Prevents scope creep</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Implementation:</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="co"># In your governance config or CI pipeline</span></span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="fu">ratchets</span><span class="kw">:</span></span>
-<span id="cb3-3"><a aria-hidden="true" href="#cb3-3" tabindex="-1"></a><span class="at">  </span><span class="fu">test_count</span><span class="kw">:</span></span>
-<span id="cb3-4"><a aria-hidden="true" href="#cb3-4" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
-<span id="cb3-5"><a aria-hidden="true" href="#cb3-5" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/test_count.json</span></span>
-<span id="cb3-6"><a aria-hidden="true" href="#cb3-6" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
-<span id="cb3-7"><a aria-hidden="true" href="#cb3-7" tabindex="-1"></a></span>
-<span id="cb3-8"><a aria-hidden="true" href="#cb3-8" tabindex="-1"></a><span class="at">  </span><span class="fu">coverage_percent</span><span class="kw">:</span></span>
-<span id="cb3-9"><a aria-hidden="true" href="#cb3-9" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> up</span></span>
-<span id="cb3-10"><a aria-hidden="true" href="#cb3-10" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/coverage.json</span></span>
-<span id="cb3-11"><a aria-hidden="true" href="#cb3-11" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span>
-<span id="cb3-12"><a aria-hidden="true" href="#cb3-12" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.1</span><span class="co">  # Allow tiny fluctuations from test timing</span></span>
-<span id="cb3-13"><a aria-hidden="true" href="#cb3-13" tabindex="-1"></a></span>
-<span id="cb3-14"><a aria-hidden="true" href="#cb3-14" tabindex="-1"></a><span class="at">  </span><span class="fu">lint_errors</span><span class="kw">:</span></span>
-<span id="cb3-15"><a aria-hidden="true" href="#cb3-15" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> down</span></span>
-<span id="cb3-16"><a aria-hidden="true" href="#cb3-16" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/lint.json</span></span>
-<span id="cb3-17"><a aria-hidden="true" href="#cb3-17" tabindex="-1"></a><span class="at">    </span><span class="fu">on_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
-<p>The baseline files are updated only when a commit passes all
-ratchets. They become the new floor.</p>
-<h3 id="ratchet-tolerance-and-flaky-metrics-noise-management">Ratchet
-tolerance and flaky metrics (noise management)</h3>
-<p>Not all metrics are equally stable. Keep hard invariants strict, and
-handle noisy metrics explicitly.</p>
-<ul>
-<li><strong>Hard invariants (strict):</strong> test pass/fail, lint
-errors, security findings. No tolerance.</li>
-<li><strong>Noisy metrics (modeled):</strong> benchmark latency,
-throughput, memory peaks. Use statistical guards, not single-run
-comparisons.</li>
-</ul>
-<p>A practical noise policy:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="fu">ratchets</span><span class="kw">:</span></span>
-<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="at">  </span><span class="fu">benchmark_p95_ms</span><span class="kw">:</span></span>
-<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a><span class="at">    </span><span class="fu">direction</span><span class="kw">:</span><span class="at"> down</span></span>
-<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a><span class="at">    </span><span class="fu">baseline_file</span><span class="kw">:</span><span class="at"> .metrics/benchmark_p95.json</span></span>
-<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance_mode</span><span class="kw">:</span><span class="at"> relative</span></span>
-<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a><span class="at">    </span><span class="fu">tolerance</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.05</span><span class="co">              # 5%</span></span>
-<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a><span class="at">    </span><span class="fu">sample_runs</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
-<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a><span class="at">    </span><span class="fu">aggregation</span><span class="kw">:</span><span class="at"> median</span></span>
-<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a><span class="at">    </span><span class="fu">required_consecutive_failures</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a><span class="at">    </span><span class="fu">on_first_violation</span><span class="kw">:</span><span class="at"> warn</span></span>
-<span id="cb4-11"><a aria-hidden="true" href="#cb4-11" tabindex="-1"></a><span class="at">    </span><span class="fu">on_repeated_violation</span><span class="kw">:</span><span class="at"> reject</span></span></code></pre></div>
-<p>Guidance:</p>
-<ol type="1">
-<li>Pin the benchmark harness (hardware class, warmup, dataset, runtime
-flags).</li>
-<li>Compare aggregates (<code>median-of-N</code> or trimmed mean), not
-single runs.</li>
-<li>Use relative tolerances for variable metrics and absolute tolerances
-for counts.</li>
-<li>Escalate on persistent regression; avoid blocking on one noisy
-sample.</li>
-</ol>
-<p>To enforce this in CI, the ratchet is typically a short shell
-gate:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="va">OLD_COV</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> .pct .metrics/coverage.json<span class="va">)</span></span>
-<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a><span class="va">NEW_COV</span><span class="op">=</span><span class="va">$(</span><span class="ex">pytest</span> <span class="at">--cov</span> <span class="at">--cov-report</span><span class="op">=</span>json <span class="kw">|</span> <span class="ex">jq</span> .pct<span class="va">)</span></span>
-<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a><span class="cf">if</span> <span class="kw">((</span> <span class="va">$(</span><span class="bu">echo</span> <span class="st">"</span><span class="va">$NEW_COV</span><span class="st"> &lt; </span><span class="va">$OLD_COV</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">bc</span> <span class="at">-l</span><span class="va">)</span> <span class="kw">));</span> <span class="cf">then</span></span>
-<span id="cb5-4"><a aria-hidden="true" href="#cb5-4" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Ratchet failed: coverage dropped."</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span> 1</span>
-<span id="cb5-5"><a aria-hidden="true" href="#cb5-5" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
-<p>The companion repo (<code>github.com/kjwise/aoi_code</code>) includes
-<code>ratchet-check</code> and <code>ratchet-baseline</code> targets
-that demonstrate this. <code>ratchet_check.py</code> compares current
-metrics against a baseline, and <code>ratchet_update_baseline.py</code>
-updates the baseline.</p>
-<p>The deeper principle:</p>
-<p>A ratchet is a monotonic invariant: a property that can only move in
-one direction over the system’s lifetime. That is how you prevent drift
-in a self-modifying system.</p>
-<p>Without ratchets, every quality metric becomes a negotiation. “We’ll
-fix the coverage later.” “This test was flaky anyway.” “The lint rule is
-too strict.” Each exception is small. The cumulative effect is
-decay.</p>
-<p>With ratchets, the negotiation happens once—when you set the
-baseline. After that, the direction is locked.</p>
-<h3 id="releasing-a-ratchet-human-only">Releasing a ratchet
-(human-only)</h3>
-<p>Ratchets aren’t permanent. Legitimate reasons to reset a
-baseline:</p>
-<ul>
-<li>Major architectural change (intentional coverage reset)</li>
-<li>Deprecated module removal (test count drops, but that’s
-correct)</li>
-<li>Security policy update (old findings reclassified)</li>
-</ul>
-<p>The key: releasing a ratchet requires explicit human approval and
-documentation. The system can’t release its own ratchets—that’s the
-point.</p>
-<pre class="text"><code>┌─────────────────────────────────────────────────────────┐
-│  Ratchet Release Request                                │
-│                                                         │
-│  Metric: test_count                                     │
-│  Current baseline: 847                                  │
-│  Proposed baseline: 812                                 │
-│  Reason: Removed deprecated billing module (35 tests)    │
-│  Approved by: @platform-lead                            │
-│  Date: 2024-03-15                                       │
-│                                                         │
-│  [Approve] [Reject] [Request more context]              │
-└─────────────────────────────────────────────────────────┘</code></pre>
-<p>This audit trail is governance. Anyone can see when baselines changed
-and why.</p>
-<h2 id="rollback-mechanics-what-revert-means-operationally">Rollback
-Mechanics (what “revert” means operationally)</h2>
-<p>“Revert” is not one mechanism. Use the rollback pattern that matches
-the change surface:</p>
-<table>
-<colgroup>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-</colgroup>
-<thead>
-<tr>
-<th>Change surface</th>
-<th>Primary rollback</th>
-<th>Typical trigger</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Candidate code diff (pre-merge)</td>
-<td>Drop candidate branch / discard workspace</td>
-<td>Any guard failure</td>
-<td>Default and cheapest path</td>
-</tr>
-<tr>
-<td>Runtime behavior behind flag</td>
-<td>Disable feature flag</td>
-<td>Post-merge SLO breach</td>
-<td>Requires flag discipline and owner</td>
-</tr>
-<tr>
-<td>Deployment/runtime config</td>
-<td>Blue-green or canary rollback</td>
-<td>Error budget burn, health checks</td>
-<td>Prefer automated rollback thresholds</td>
-</tr>
-</tbody>
-</table>
-<p>Concrete defaults:</p>
-<ol type="1">
-<li><strong>Pre-merge refactors:</strong> never mutate
-<code>main</code>; failed guard means no merge artifact exists.</li>
-<li><strong>Post-merge exposure:</strong> gate high-risk behavior behind
-kill switches or flags.</li>
-<li><strong>Production rollout:</strong> pair ratchets with rollout
-monitors so rollback can trigger automatically.</li>
-</ol>
-<p>Rollback itself is part of the Immune System: test it, log it, and
-make it deterministic.</p>
-<h2 id="containing-the-blast-radius">Containing the Blast Radius</h2>
-<p>Even with robust guards, keep each automated change small. Blast
-radius controls ensure that if an unforeseen issue <em>does</em> slip
-through, its effects stay localized and reversible.</p>
-<ul>
-<li><p><strong>Small, Focused Changes:</strong> Automated agents should
-strive to make the smallest possible atomic changes. For instance, a
-dependency update for <em>one</em> library, not an entire
-<code>package.json</code> manifest.</p></li>
-<li><p><strong>File Path Restrictions:</strong> Define
-<code>CODEOWNERS</code>-like paths for automated agents, limiting them
-to specific directories or file types. An agent focused on
-<code>src/components</code> should not touch
-<code>src/database</code>.</p></li>
-<li><p><strong>Immutable Boundaries:</strong> Keep autonomous refactors
-out of protected governance surfaces (CI workflows, policy files,
-validator code). If a change touches those paths, require explicit human
-review before merge.</p></li>
-</ul>
-<h3 id="monorepo-and-multi-repo-ratchets">Monorepo and multi-repo
-ratchets</h3>
-<p>Repository topology changes where ratchets live, not whether you need
-them.</p>
-<p><strong>Monorepo pattern:</strong></p>
-<ul>
-<li>Keep per-surface baselines (for example
-<code>.metrics/service-a/coverage.json</code>,
-<code>.metrics/service-b/latency.json</code>).</li>
-<li>Evaluate ratchets only for affected packages, plus shared
-contracts.</li>
-<li>Keep a small set of global ratchets for shared infrastructure and
-policy surfaces.</li>
-</ul>
-<p><strong>Multi-repo pattern:</strong></p>
-<ul>
-<li>Keep local ratchets per repo, but add contract ratchets on published
-interfaces (OpenAPI/schema/event versions).</li>
-<li>Use a central governance ledger to track cross-repo exceptions and
-releases.</li>
-<li>For cross-repo refactors, use compatibility windows:
-producer-compatible change first, consumer migration second, removal
-last.</li>
-</ul>
-<p>The rule is consistent: ratchet at the boundary where failure becomes
-expensive.</p>
-<h2 id="refactoring-pattern-gallery-and-the-guards-that-make-them-safe">Refactoring
-Pattern Gallery (and the guards that make them safe)</h2>
-<p>Refactoring patterns are useful because they define a bounded change
-shape. Guards become easier to write when you can name what the Effector
-is allowed to do.</p>
-<table>
-<colgroup>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-</colgroup>
-<thead>
-<tr>
-<th>Pattern</th>
-<th>Typical scope</th>
-<th>Minimum guards</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Extract function</td>
-<td>One module</td>
-<td>Tests + types + lint</td>
-<td>Prefer one extraction per diff</td>
-</tr>
-<tr>
-<td>Inline variable</td>
-<td>One function</td>
-<td>Tests + lint</td>
-<td>Safe when assertions are strong</td>
-</tr>
-<tr>
-<td>Rename symbol (private)</td>
-<td>One module</td>
-<td>Tests + type checks</td>
-<td>Prefer automated rename tooling when available</td>
-</tr>
-<tr>
-<td>Introduce parameter object</td>
-<td>One module (sometimes cross-module)</td>
-<td>Tests + types + integration checks</td>
-<td>Easy to break call sites; keep diff small</td>
-</tr>
-<tr>
-<td>Replace conditional with dispatch</td>
-<td>One module/package</td>
-<td>Tests + contract checks</td>
-<td>Can change edge cases; watch equivalence class</td>
-</tr>
-<tr>
-<td>Move function/class</td>
-<td>Multi-file</td>
-<td>Integration tests + ratchets</td>
-<td>Treat as higher risk; enforce strict scope</td>
-</tr>
-</tbody>
-</table>
-<h3 id="multi-step-refactors-chains">Multi-step refactors (chains)</h3>
-<p>Some refactors need multiple steps (extract → rename → move). Handle
-these as a chain of atomic diffs:</p>
-<ul>
-<li>Run guards after each step. If a step fails, revert the chain, not
-just the last edit.</li>
-<li>Keep intermediate artifacts in a quarantine directory (candidate
-diff + guard output) so humans can salvage useful fragments without
-re-running the Effector.</li>
-<li>Prefer squashing “refactor noise” into one logical commit once the
-chain is proven safe. Your Ledger is the PR evidence; your Git history
-is the narrative.</li>
-</ul>
-<h2 id="worked-example-an-automated-lint-fix">Worked Example: An
-Automated Lint Fix</h2>
-<p>Here is a concrete example: an automated agent applies a lint fix
-using the Measure → Mutate → Measure → Commit/Revert loop.</p>
-<p>Imagine a <code>.js</code> file with an unused import that triggers a
-linter warning (<code>ESLint: no-unused-vars</code>).</p>
-<p><strong>1. Baseline Measurement:</strong> The CI pipeline is
-triggered (e.g., by a daily scheduled job or a change in a linting
-rule).</p>
-<ul>
-<li><p><code>npm test</code> → All tests pass.</p></li>
-<li><p><code>npm run lint</code> → Detects
-<code>1 error, 0 warnings</code> (due to
-<code>no-unused-vars</code>).</p></li>
-<li><p>Code coverage: 88%.</p></li>
-</ul>
-<p><strong>2. Automated Mutation:</strong> An autonomous agent (e.g., a
-script that runs <code>eslint --fix</code> on detected files) is
-invoked.</p>
-<ul>
-<li><p>It identifies <code>src/utils/data-parser.js</code> as having an
-unused import.</p></li>
-<li><p>It removes the unused import (a tiny, bounded edit).</p></li>
-<li><p>This change is staged on a temporary Git branch, say
-<code>feat/autofix-eslint-20231027</code>.</p></li>
-</ul>
-<p><strong>3. Post-Mutation Validation:</strong> The CI pipeline runs
-again on the <code>feat/autofix-eslint-20231027</code> branch.</p>
-<ul>
-<li><p><code>npm test</code> → All tests pass (Success).</p></li>
-<li><p><code>npm run lint</code> → Detects
-<code>0 errors, 0 warnings</code> (Success, lint error fixed).</p></li>
-<li><p>Code coverage: 88% (Success, no drop from baseline).</p></li>
-<li><p>Blast Radius: Only 1 file changed, 1 line removed (Within
-limits).</p></li>
-</ul>
-<p><strong>4. Decision Gate:</strong></p>
-<ul>
-<li><p>All guards passed.</p></li>
-<li><p>The system commits the change to the temporary branch and opens
-(or updates) a pull request with evidence.</p></li>
-<li><p>If policy explicitly allowlists this change class, it may
-auto-merge after all gates pass. Otherwise it waits at the human
-approval gate (see <a class="chapter-link" href="chapter-12-governance-at-machine-speed#chapter-12-governance-at-machine-speed" title="Go to: Chapter 12">Chapter 12</a>).</p></li>
-<li><p>An audit log entry is created, showing the agent, the change, the
-metrics before and after, and the gate outcome (auto-merged or awaiting
-human approval).</p></li>
-</ul>
-<p>Had <code>npm test</code> failed, or if code coverage dropped, the
-automation would revert its changes, delete the candidate branch, and
-log the failure for human attention. This cycle runs unattended only for
-explicitly allowlisted low-risk change classes; otherwise it stops at
-human approval.</p>
-<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
-do this week</h2>
-<ol type="1">
-<li><p><strong>Identify a Monotonic Metric:</strong> Choose one quality
-metric in your project (e.g., code coverage, number of lint errors,
-number of security vulnerabilities) that you want to prevent from
-backsliding.</p></li>
-<li><p><strong>Add a “Ratchet” Check to CI:</strong> Configure your
-CI/CD pipeline to:</p>
-<ul>
-<li><p>Capture the current value of this metric (e.g.,
-<code>coverage.json</code>, <code>eslint-report.json</code>).</p></li>
-<li><p>During a build, compare the <em>new</em> metric value against a
-<em>persisted</em> baseline (e.g., from <code>main</code>
-branch).</p></li>
-<li><p>Fail the build if the new metric is worse than the baseline
-(e.g., <code>new_coverage &lt; old_coverage</code>,
-<code>new_errors &gt; old_errors</code>).</p></li>
-</ul></li>
-<li><p><strong>Experiment with an Automated Linter Fix:</strong> Set up
-a scheduled job or a local script that runs <code>eslint --fix</code>
-(or equivalent for your language) on a small, well-tested part of your
-codebase. Manually verify the changes, but envision how this would fit
-into the Measure → Mutate → Measure loop.</p></li>
-</ol>
+<p>Coverage and test count are weak universal floors because their
+denominators and semantics change. Use them only where the protocol and
+governed property make the comparison meaningful.</p>
+<p>The floor, protocol, comparator, and advancement mechanism belong to
+the <a class="concept-link" href="concepts#protected-control-plane" title="See concept: Protected Control Plane">Protected Control Plane</a>. The active refactor may read them but
+cannot modify them. Lowering a floor or changing its protocol requires a
+separate Governance Mission.</p>
+<p>A Ratchet lets an organization automate repeated improvement without
+letting automated work erase prior gains by lowering the baseline.
+Delegation can deepen only while the independently measured floor
+continues to hold.</p>
+<h2 id="admit-then-advance-the-floor">Admit, Then Advance the Floor</h2>
+<p>Following the lifecycle established in Chapters 5 and 10, the Mission
+Gate revalidates the candidate and its sealed Run Record against the
+current base, dependency closure, protocol, and floor.</p>
+<p>The unique rule for refactoring is that the floor advances only after
+current-base admission. An independently authorized service checks that
+the expected floor revision and admitted candidate identity still match
+current state, then updates the floor atomically. If another admission
+already changed the floor, that update fails and the candidate must be
+measured again.</p>
+<p>Before admission, <code>revert</code> discards a candidate workspace
+after required evidence is preserved. After admission, rollback is a new
+governed transition with authority and evidence appropriate to the
+affected surface. The two are not interchangeable.</p>
+<p>For a multi-step extract-rename-move sequence, keep intermediate work
+inside one isolated candidate and compare the final result with the
+original base. If an intermediate state must become Terrain, make it a
+separately governed child Mission.</p>
+<p>This is the bounded form of structural self-modification. The
+workflow may propose an improvement, but its structural gain, behavior
+boundary, effects, non-regression floor, and eventual admission remain
+independently checkable.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. That is automated refactoring under guards in miniature: measure the baseline, apply…" data-share-title="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…" data-share-title="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -1259,14 +575,14 @@ into the Measure → Mutate → Measure loop.</p></li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards&amp;title=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2011%20of%20Architects%20of%20Intent%3A%20Automated%20Refactoring%20Under%20Guards.%20That%20is%20automated%20refactoring%20under%20guards%20in%20miniature%3A%20measure%20the%20baseline%2C%20apply%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2011%20of%20Architects%20of%20Intent%3A%20Automated%20Refactoring%20Under%20Guards.%20%7C%20Moment%20%7C%20Protected%20observation%20%7C%20Governance%20status%20%7C%20%7C%20---%20%7C%20---%20%7C%20---%20%7C%20%7C%20Fixed%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
-<a class="prev-link" href="chapter-10-immutable-infrastructure-the-guardrails">← Chapter 10 – Immutable Infrastructure (The Guardrails)</a>
-<a class="next-link" href="chapter-12-governance-at-machine-speed">Chapter 12 – Governance at Machine Speed →</a>
+<a class="prev-link" href="chapter-10-the-protected-control-plane-the-guardrails">← Chapter 10 – The Protected Control Plane (The Guardrails)</a>
+<a class="next-link" href="chapter-12-governance-for-high-rate-automation">Chapter 12 – Governance for High-Rate Automation →</a>
 </nav>
 <footer class="site-footer">
 <p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
@@ -1285,7 +601,7 @@ into the Measure → Mutate → Measure loop.</p></li>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

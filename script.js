@@ -62,6 +62,21 @@ function isMermaidCodeBlock(pre, code) {
   return code.classList.contains("language-mermaid") || code.classList.contains("mermaid");
 }
 
+function isCopyableCodeBlock(pre, code) {
+  const classes = [];
+  if (code && code.classList) classes.push(...code.classList);
+  if (pre && pre.classList) classes.push(...pre.classList);
+
+  return !classes.some((cls) => (
+    cls === "text"
+    || cls === "output"
+    || cls === "test-output"
+    || cls === "language-text"
+    || cls === "language-output"
+    || cls === "language-test-output"
+  ));
+}
+
 function normalizeTrailingNewline(text) {
   if (!text) return "";
   return text.endsWith("\n") ? text.slice(0, -1) : text;
@@ -123,7 +138,7 @@ function enhanceCodeBlocks() {
     container.classList.add("codeblock");
     const lang = formatLanguageLabel(detectLanguageClass(pre, code));
     if (lang) container.dataset.lang = lang;
-    addCopyButton(container, code);
+    if (isCopyableCodeBlock(pre, code)) addCopyButton(container, code);
   }
 
   // Other fenced code blocks: <pre><code class="language-...">...</code></pre>
@@ -141,7 +156,7 @@ function enhanceCodeBlocks() {
 
     pre.parentNode.insertBefore(wrapper, pre);
     wrapper.appendChild(pre);
-    addCopyButton(wrapper, code);
+    if (isCopyableCodeBlock(pre, code)) addCopyButton(wrapper, code);
   }
 }
 
@@ -539,8 +554,8 @@ async function renderMermaidIfPresent() {
     securityLevel: "strict",
     themeVariables: preset.themeVariables,
     flowchart: {
-      useMaxWidth: false,
-      htmlLabels: true,
+      useMaxWidth: true,
+      htmlLabels: false,
     },
   });
 

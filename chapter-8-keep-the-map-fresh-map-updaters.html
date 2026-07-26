@@ -5,7 +5,7 @@
 <title>Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…" name="description"/>
+<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
@@ -13,7 +13,7 @@
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" property="og:title"/>
-<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…" property="og:description"/>
+<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -21,21 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…" name="twitter:description"/>
+<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 8 – Keep the Map Fresh (Map-Updaters)", "description": "Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "mainEntityOfPage": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-04-08T13:23:45Z", "timeRequired": "PT13M", "articleSection": "Part III Scale It From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 8 – Keep the Map Fresh (Map-Updaters)", "description": "Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "mainEntityOfPage": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT6M", "articleSection": "Part III – From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=180c7c0ba0a2" rel="stylesheet"/>
-<script defer="" src="script.js?v=180c7c0ba0a2"></script>
-<link href="infographic-tailwind.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<link href="infographic-deck-runtime.css" rel="stylesheet"/>
-<link href="infographic-fragment-shell.css" rel="stylesheet"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -47,9 +43,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
-<a href="for-leaders">For Leaders</a>
-<a href="philosophy">Philosophy</a>
-<a href="concepts">Concepts</a>
+<a href="concepts">Core Vocabulary</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
@@ -57,953 +51,202 @@
 <main class="content content--chapter" id="main">
 <header class="chapter-header">
 <div class="chapter-kicker">
-<div class="part-title">Part III Scale It From Loop to System</div>
-<div class="chapter-meta"><span class="read-time">13 min read</span></div>
+<div class="part-title">Part III – From Loop to System</div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-8-keep-the-map-fresh-map-updaters">Chapter 8 – Keep the
 Map Fresh (Map-Updaters)</h1>
-<p>Drift is the default state. Docs fall behind code. Specs lag behind
-services. Inventories and indexes rot. Policies miss new surfaces.</p>
-<p>In Software Development as Code (SDaC), you do not fight drift with
-reminders. You fight it with a loop that turns “this Map surface is
-wrong” into a bounded, reviewable patch.</p>
-<p>Enter the <strong>Map-Updater</strong>. A Map-Updater is the
-specialized loop that keeps one Map surface synchronized with its
-corresponding Terrain. It observes reality, compares it to the current
-Map, and emits a concrete, reviewable patch when the two diverge.</p>
-<p>A Map-Updater matters because <strong>a Map is part of a context
-slice</strong>. You rarely want to hand an Effector the whole Terrain.
-You want a compact Map that says what matters, what is in-bounds, and
-what must hold. A well-kept Map can be more useful than a raw dump
-because it preserves intent without dragging in stale detail.</p>
+<p>Documentation, specifications, inventories, and policies drift
+because the systems they describe continue to change. A workflow can
+make selected drift visible and propose a bounded correction.</p>
+<p>A <strong>Map-Updater</strong> is specifically a Terrain-to-Map
+workflow. It observes declared facts in the current system, compares
+them with one bounded Map surface, and proposes a reviewable Map change
+when they diverge. It does not change Terrain.</p>
+<p>This direction matters. The same file can be authoritative for one
+property and observational for another. Route declarations can define
+one narrow property: the current endpoint inventory. They do not define
+intended API policy, compatibility promises, or future design. A
+Map-Updater must name the exact property for which the observed source
+is authoritative.</p>
 </div>
 </header>
-<h2 id="the-operating-map">The Operating Map</h2>
-<p>At small scales, the Map is easy to point to: a schema, an interface
-spec, an inventory, a policy file. At larger scales, it becomes the
-<a class="concept-link" href="concepts#operating-map" title="See concept: Operating Map">operating Map</a>: strategy, architecture decisions, operating rules,
-incident learnings, onboarding guidance, brand voice, tone, and
-culture.</p>
-<p>That does not mean every one of those surfaces becomes a hard CI
-gate. It means they are all memory surfaces the system should stop
-forgetting.</p>
-<p>Map-Updaters are how that memory stays coupled to reality. A changed
-API should update the contract. A repeated incident should update a
-runbook or validator. A new architectural boundary should update the
-architecture Map and policy. Without these loops, the organization
-relearns the same lessons in tickets, chat threads, and review
-comments.</p>
-<h2 id="the-map-updater-loop-sense-normalize-compare-propose">The
-Map-Updater Loop: Sense → Normalize → Compare → Propose</h2>
-<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
-<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-06-skeleton-first-rule</span>
-<style>
-  [data-role="skeleton-sim"] .trend-pill {
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 0.6rem;
-    background: rgba(11, 12, 16, 0.48);
-    padding: 0.45rem;
-    min-width: 0;
-  }
-
-  [data-role="skeleton-sim"] .trend-pill[data-state="pass"] {
-    border-color: rgba(42, 195, 222, 0.45);
-    background: rgba(42, 195, 222, 0.15);
-  }
-
-  [data-role="skeleton-sim"] .trend-pill[data-state="fail"] {
-    border-color: rgba(247, 118, 142, 0.45);
-    background: rgba(247, 118, 142, 0.16);
-  }
-
-  [data-role="skeleton-sim"] .trend-pill[data-state="empty"] {
-    opacity: 0.56;
-    border-style: dashed;
-  }
-
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="converged"],
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="improving"] {
-    color: #2ac3de;
-  }
-
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="stalled"] {
-    color: #bb9af7;
-  }
-
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="diverging"],
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="unreachable"] {
-    color: #f7768e;
-  }
-
-  [data-role="skeleton-sim"] [data-role="ledger-path"] {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-</style>
-<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
-<div class="flex flex-col lg:flex-row gap-8">
-<div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">Skeleton-First Rule (Prevent Map Contamination)</h2>
-<p class="text-brand-muted leading-relaxed">
-              Extract the skeleton from Terrain first, then let the model fill prose around it.
-              If the skeleton changes, fail the update and write a receipt.
-            </p>
-<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Interactive updater</div>
-<div class="text-sm text-brand-muted leading-relaxed">
-                Toggle extraction and run bounded attempts. You should see either a clean
-                <span class="font-mono text-brand-strong">PASS</span> or a deterministic
-                <span class="font-mono text-brand-strong">ESCALATE</span> when the budget runs out.
-              </div>
-</div>
-</div>
-<div class="lg:w-7/12 space-y-4" data-role="skeleton-sim">
-<div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3"><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> loop</div>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
-<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Sense/Normalize</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Extract skeleton</div>
-</div>
-<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Propose</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Generate prose patch</div>
-</div>
-<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Validate</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Hard skeleton gate</div>
-</div>
-<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Ledger</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">State of record</div>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
-<div class="md:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Contamination pressure</span>
-<span class="font-mono text-brand-strong"><span data-role="pressure-value">40</span>/100</span>
-</div>
-<label class="sr-only" for="skeletonPressureSlider">Contamination pressure</label>
-<input class="mt-2 w-full" data-role="pressure-slider" id="skeletonPressureSlider" max="100" min="0" type="range" value="40"/>
-</div>
-<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Retry budget</span>
-<span class="font-mono text-brand-strong"><span data-role="budget-value">5</span>x</span>
-</div>
-<label class="sr-only" for="skeletonBudgetSlider">Retry budget</label>
-<input class="mt-2 w-full" data-role="budget-slider" id="skeletonBudgetSlider" max="10" min="2" step="1" type="range" value="5"/>
-</div>
-<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Extractor</span>
-<button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="extractor-toggle" type="button">ON</button>
-</div>
-<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Step attempt</span>
-<button class="soft-toggle font-mono text-xs" data-role="run-button" type="button">Run</button>
-</div>
-<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Bounded loop</span>
-<button class="soft-toggle font-mono text-xs" data-role="run-budget" type="button">Run to exit</button>
-</div>
-<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Reset</span>
-<button class="soft-toggle font-mono text-xs" data-role="reset-button" type="button">Reset</button>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Canonical skeleton (<a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a>)</div>
-<ul class="space-y-1 text-xs text-brand-strong font-mono" data-role="canonical-list"></ul>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Proposed skeleton (Map)</div>
-<ul class="space-y-1 text-xs font-mono" data-role="proposed-list"></ul>
-</div>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Mismatch count</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="mismatch-count">0</span></div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Contamination risk</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="risk-score">0</span>/100</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Skeleton gate</div>
-<div class="mt-1 text-lg font-bold text-brand-strong" data-role="gate-badge">PASS</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Budget remaining</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="budget-remaining">5</span>x</div>
-</div>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
-<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Constraint → deterministic gate</div>
-<div class="mt-2 space-y-2 text-sm text-brand-muted">
-<div class="flex items-center justify-between gap-2">
-<span>Skeleton must match exactly</span>
-<span class="font-mono text-brand-strong" data-role="gate-skeleton">PASS</span>
-</div>
-<div class="flex items-center justify-between gap-2">
-<span>No invented structure</span>
-<span class="font-mono text-brand-strong" data-role="gate-scope">PASS</span>
-</div>
-<div class="flex items-center justify-between gap-2">
-<span>Retry budget not exceeded</span>
-<span class="font-mono text-brand-strong" data-role="gate-budget">PASS</span>
-</div>
-<div class="flex items-center justify-between gap-2">
-<span>Receipt written to Ledger</span>
-<span class="font-mono text-brand-strong" data-role="gate-ledger">PENDING</span>
-</div>
-</div>
-</div>
-<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Updater state of record</div>
-<div class="mt-2 text-sm text-brand-muted leading-relaxed">
-<div class="flex items-center justify-between gap-2">
-<span>Status</span>
-<span class="font-mono text-brand-strong" data-role="status-label">READY</span>
-</div>
-<div class="mt-2 flex items-center justify-between gap-2">
-<span>Attempt</span>
-<span class="font-mono text-brand-strong" data-role="attempt-label">0/5</span>
-</div>
-<div class="mt-2 flex items-center justify-between gap-2">
-<span>Last run</span>
-<span class="font-mono text-brand-strong" data-role="last-run">--</span>
-</div>
-</div>
-<div class="mt-3 text-xs font-mono text-brand-muted" data-role="ledger-path">ledger/map-updaters/skeleton-first/attempt-00.json</div>
-</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between gap-3">
-<div class="text-xs font-mono text-brand-muted">Mismatch trend (W=4)</div>
-<div class="text-xs text-brand-muted" data-role="trend-status" data-state="baseline">Collecting baseline.</div>
-</div>
-<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2" data-role="trend-window"></div>
-<div class="mt-2 text-xs text-brand-muted" data-role="outcome-text">Ready to run one bounded attempt.</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between gap-3">
-<div class="text-xs font-mono text-brand-muted">Loop attempts</div>
-<div class="text-xs text-brand-muted">Cyan = PASS, red = FAIL, violet = ESCALATE</div>
-</div>
-<div class="mt-3 flex flex-wrap gap-1" data-role="attempts"></div>
-</div>
-</div>
-</div>
-</div>
-<script>
-(function () {
-  const script = document.currentScript;
-  const root = script ? script.closest('[data-infographic-section-id="i3-section-06-skeleton-first-rule"]') : null;
-  if (!root || root.dataset.skeletonFirstReady === "1") {
-    return;
-  }
-  root.dataset.skeletonFirstReady = "1";
-
-  const sim = root.querySelector('[data-role="skeleton-sim"]');
-  if (!sim) return;
-
-  const pressureSlider = sim.querySelector('[data-role="pressure-slider"]');
-  const pressureValue = sim.querySelector('[data-role="pressure-value"]');
-  const budgetSlider = sim.querySelector('[data-role="budget-slider"]');
-  const budgetValue = sim.querySelector('[data-role="budget-value"]');
-  const extractorToggle = sim.querySelector('[data-role="extractor-toggle"]');
-  const runButton = sim.querySelector('[data-role="run-button"]');
-  const runBudgetButton = sim.querySelector('[data-role="run-budget"]');
-  const resetButton = sim.querySelector('[data-role="reset-button"]');
-  const canonicalList = sim.querySelector('[data-role="canonical-list"]');
-  const proposedList = sim.querySelector('[data-role="proposed-list"]');
-  const mismatchCount = sim.querySelector('[data-role="mismatch-count"]');
-  const riskScore = sim.querySelector('[data-role="risk-score"]');
-  const gateBadge = sim.querySelector('[data-role="gate-badge"]');
-  const budgetRemaining = sim.querySelector('[data-role="budget-remaining"]');
-  const gateSkeleton = sim.querySelector('[data-role="gate-skeleton"]');
-  const gateScope = sim.querySelector('[data-role="gate-scope"]');
-  const gateBudget = sim.querySelector('[data-role="gate-budget"]');
-  const gateLedger = sim.querySelector('[data-role="gate-ledger"]');
-  const statusLabel = sim.querySelector('[data-role="status-label"]');
-  const attemptLabel = sim.querySelector('[data-role="attempt-label"]');
-  const lastRun = sim.querySelector('[data-role="last-run"]');
-  const ledgerPath = sim.querySelector('[data-role="ledger-path"]');
-  const trendStatus = sim.querySelector('[data-role="trend-status"]');
-  const trendWindow = sim.querySelector('[data-role="trend-window"]');
-  const outcomeText = sim.querySelector('[data-role="outcome-text"]');
-  const attempts = sim.querySelector('[data-role="attempts"]');
-
-  if (!pressureSlider || !pressureValue || !budgetSlider || !budgetValue || !extractorToggle || !runButton || !runBudgetButton || !resetButton ||
-      !canonicalList || !proposedList || !mismatchCount || !riskScore || !gateBadge || !budgetRemaining || !gateSkeleton || !gateScope ||
-      !gateBudget || !gateLedger || !statusLabel || !attemptLabel || !lastRun || !ledgerPath || !trendStatus || !trendWindow || !outcomeText || !attempts) {
-    return;
-  }
-
-  const canonical = [
-    "routes.py",
-    "schemas/order.json",
-    "contracts/public_api.yaml",
-    "validators/policy.py",
-    "tests/immune_system_cases.py"
-  ];
-
-  const noisePool = [
-    "routes_v2_guess.py",
-    "schemas/legacy_mode.json",
-    "contracts/experimental.yaml",
-    "validators/soft_policy.py",
-    "notes/todo-skeleton.md",
-    "tests/speculative_case.py"
-  ];
-
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-
-  const state = {
-    pressure: Number.parseInt(pressureSlider.value, 10) || 40,
-    budget: Number.parseInt(budgetSlider.value, 10) || 5,
-    extractorOn: true,
-    run: 0,
-    history: []
-  };
-
-  const setGate = (el, ok, pending) => {
-    if (pending) {
-      el.textContent = "PENDING";
-      el.style.color = "#b5b6bf";
-      return;
-    }
-    el.textContent = ok ? "PASS" : "FAIL";
-    el.style.color = ok ? "#2ac3de" : "#f7768e";
-  };
-
-  const renderList = (el, items, mode) => {
-    for (const item of items) {
-      const li = document.createElement("li");
-      li.textContent = item;
-      if (mode === "extra") li.className = "text-brand-danger";
-      if (mode === "missing") li.className = "text-amber-300";
-      el.appendChild(li);
-    }
-  };
-
-  const computeProposed = () => {
-    if (state.extractorOn) return canonical.slice();
-
-    const missingCount = clamp(Math.floor((state.pressure + state.run * 8) / 35), 0, 3);
-    const proposed = canonical.slice(missingCount);
-
-    const extraCount = clamp(Math.floor((state.pressure + state.run * 6) / 22), 1, 5);
-    for (let i = 0; i < extraCount; i += 1) {
-      const candidate = noisePool[(state.run + i) % noisePool.length];
-      if (!proposed.includes(candidate)) proposed.push(candidate);
-    }
-
-    return proposed;
-  };
-
-  const computeTrend = () => {
-    if (state.history.length === 0) {
-      return { state: "baseline", text: "Collecting baseline." };
-    }
-
-    const latest = state.history[state.history.length - 1];
-    if (latest.pass) {
-      return { state: "converged", text: "Converged: hard gate PASS." };
-    }
-
-    if (state.run >= state.budget) {
-      return { state: "unreachable", text: "Budget exhausted before convergence." };
-    }
-
-    if (state.history.length < 2) {
-      return { state: "baseline", text: "Need more runs for trend." };
-    }
-
-    const window = state.history.slice(-4).map((entry) => entry.mismatch);
-    const first = window[0];
-    const last = window[window.length - 1];
-
-    let decreasing = true;
-    let increasing = true;
-    for (let i = 1; i < window.length; i += 1) {
-      if (window[i] >= window[i - 1]) decreasing = false;
-      if (window[i] <= window[i - 1]) increasing = false;
-    }
-
-    if (decreasing) {
-      return { state: "improving", text: "Mismatch trend improving." };
-    }
-    if (increasing || last > first) {
-      return { state: "diverging", text: "Drift is diverging; extraction is too weak." };
-    }
-    return { state: "stalled", text: "Oscillating or flat; refine context or scope." };
-  };
-
-  const renderTrendWindow = () => {
-    trendWindow.innerHTML = "";
-
-    const slots = state.history.slice(-4);
-    for (let i = 0; i < 4; i += 1) {
-      const entry = slots[i];
-      const pill = document.createElement("div");
-      pill.className = "trend-pill";
-
-      if (!entry) {
-        pill.dataset.state = "empty";
-        pill.innerHTML = '<div class="text-[10px] font-mono text-brand-muted">run --</div><div class="mt-1 text-xs text-brand-muted">M: --</div>';
-        trendWindow.appendChild(pill);
-        continue;
-      }
-
-      pill.dataset.state = entry.pass ? "pass" : "fail";
-      const statusWord = entry.pass ? "PASS" : "FAIL";
-      pill.innerHTML =
-        '<div class="text-[10px] font-mono text-brand-muted">run ' + entry.run + '</div>' +
-        '<div class="mt-1 text-xs font-mono text-brand-strong">M: ' + entry.mismatch + '</div>' +
-        '<div class="mt-1 text-[10px] font-mono text-brand-muted">' + statusWord + '</div>';
-      trendWindow.appendChild(pill);
-    }
-  };
-
-  const updateAttempts = (status) => {
-    const dot = document.createElement("span");
-    dot.className = "inline-block w-2.5 h-2.5 rounded-full";
-    if (status === "PASS") {
-      dot.style.backgroundColor = "rgba(42, 195, 222, 0.95)";
-    } else if (status === "ESCALATE") {
-      dot.style.backgroundColor = "rgba(187, 154, 247, 0.95)";
-    } else {
-      dot.style.backgroundColor = "rgba(247, 118, 142, 0.95)";
-    }
-
-    attempts.appendChild(dot);
-    while (attempts.children.length > 28) {
-      attempts.removeChild(attempts.firstChild);
-    }
-  };
-
-  const render = (recordAttempt) => {
-    state.pressure = clamp(Number.parseInt(pressureSlider.value, 10) || state.pressure, 0, 100);
-    state.budget = clamp(Number.parseInt(budgetSlider.value, 10) || state.budget, 2, 10);
-
-    pressureValue.textContent = String(state.pressure);
-    budgetValue.textContent = String(state.budget);
-
-    const proposed = computeProposed();
-    const missing = canonical.filter((item) => !proposed.includes(item));
-    const extras = proposed.filter((item) => !canonical.includes(item));
-    const mismatch = missing.length + extras.length;
-
-    const skeletonPass = mismatch === 0;
-    const scopePass = extras.length === 0;
-    const budgetExhausted = state.run >= state.budget && !(skeletonPass && scopePass);
-    const gatePass = skeletonPass && scopePass && !budgetExhausted;
-
-    const risk = state.extractorOn
-      ? clamp(Math.round(state.pressure * 0.1 + mismatch * 3), 0, 100)
-      : clamp(Math.round(state.pressure * 0.52 + mismatch * 10 + state.run * 2), 0, 100);
-
-    canonicalList.innerHTML = "";
-    proposedList.innerHTML = "";
-    renderList(canonicalList, canonical, "");
-    renderList(proposedList, proposed.filter((item) => canonical.includes(item)), "");
-    renderList(proposedList, extras, "extra");
-    renderList(proposedList, missing.map((item) => "MISSING: " + item), "missing");
-
-    mismatchCount.textContent = String(mismatch);
-    riskScore.textContent = String(risk);
-    gateBadge.textContent = gatePass ? "PASS" : "FAIL";
-    gateBadge.style.color = gatePass ? "#2ac3de" : "#f7768e";
-
-    const remaining = Math.max(0, state.budget - state.run);
-    budgetRemaining.textContent = String(remaining);
-
-    setGate(gateSkeleton, skeletonPass, false);
-    setGate(gateScope, scopePass, false);
-    setGate(gateBudget, !budgetExhausted, false);
-    setGate(gateLedger, state.run > 0, state.run === 0);
-
-    let status = "READY";
-    if (state.run > 0) {
-      if (budgetExhausted) {
-        status = "ESCALATE";
-      } else {
-        status = gatePass ? "PASS" : "FAIL";
-      }
-    }
-
-    statusLabel.textContent = status;
-    statusLabel.style.color = status === "PASS" ? "#2ac3de" : status === "ESCALATE" ? "#bb9af7" : status === "FAIL" ? "#f7768e" : "#e2e8f0";
-
-    attemptLabel.textContent = String(state.run) + "/" + String(state.budget);
-    lastRun.textContent = state.run === 0 ? "--" : "T+" + String(state.run);
-    ledgerPath.textContent = "ledger/map-updaters/skeleton-first/attempt-" + String(state.run).padStart(2, "0") + ".json";
-
-    if (recordAttempt) {
-      state.history.push({ run: state.run, mismatch, pass: gatePass });
-      while (state.history.length > 28) {
-        state.history.shift();
-      }
-      updateAttempts(status);
-    }
-
-    const trend = computeTrend();
-    trendStatus.textContent = trend.text;
-    trendStatus.dataset.state = trend.state;
-    renderTrendWindow();
-
-    if (state.run === 0) {
-      outcomeText.textContent = "Ready to run one bounded attempt.";
-    } else if (status === "PASS") {
-      outcomeText.textContent = state.extractorOn
-        ? "Exact skeleton match. Merge is admissible; record receipt and continue."
-        : "PASS occurred with extraction off. Keep guardrails: this is brittle.";
-    } else if (status === "ESCALATE") {
-      outcomeText.textContent = "Circuit break: retry budget exhausted without convergence. Escalate to human review.";
-    } else {
-      outcomeText.textContent = "Hard fail on skeleton mismatch. Refine extraction context before next attempt.";
-    }
-
-    return { gatePass, status };
-  };
-
-  const runOne = () => {
-    state.run += 1;
-    return render(true);
-  };
-
-  extractorToggle.addEventListener("click", () => {
-    state.extractorOn = !state.extractorOn;
-    extractorToggle.setAttribute("aria-pressed", state.extractorOn ? "true" : "false");
-    extractorToggle.textContent = state.extractorOn ? "ON" : "OFF";
-    render(false);
-  });
-
-  pressureSlider.addEventListener("input", () => {
-    render(false);
-  });
-
-  budgetSlider.addEventListener("input", () => {
-    render(false);
-  });
-
-  runButton.addEventListener("click", () => {
-    runOne();
-  });
-
-  runBudgetButton.addEventListener("click", () => {
-    let result = { gatePass: false, status: "READY" };
-    while (state.run < state.budget) {
-      result = runOne();
-      if (result.gatePass) break;
-    }
-
-    if (!result.gatePass && state.run >= state.budget) {
-      render(false);
-    }
-  });
-
-  resetButton.addEventListener("click", () => {
-    state.run = 0;
-    state.history = [];
-    attempts.innerHTML = "";
-    render(false);
-  });
-
-  render(false);
-})();
-</script>
-</section>
-<p>A Map-Updater follows a consistent four-step process:</p>
+<h2 id="sense-normalize-compare-propose">Sense, Normalize, Compare,
+Propose</h2>
+<p>The updater has four steps:</p>
 <ol type="1">
-<li><p><strong>Sense:</strong> read the Terrain directly from the source
-of truth: a running service, a repository, a cloud config, a schema
-file. The output is raw reality.</p></li>
-<li><p><strong>Normalize:</strong> turn that sensed data into a
-structured, canonical form that is easy to compare: parse it, sort it,
-standardize names, and drop irrelevant transients.</p></li>
-<li><p><strong>Compare:</strong> read the current Map, normalize it too,
-then deterministically compare normalized Map and normalized Terrain.
-The output is a precise diff.</p></li>
-<li><p><strong>Propose:</strong> generate the patch that brings Map and
-Terrain back into alignment, in the direction your authority model
-permits. The patch must be reviewable.</p></li>
+<li><strong>Sense:</strong> observe the declared <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> sources and fix
+their exact identities.</li>
+<li><strong>Normalize:</strong> parse those observations into a stable
+representation, removing irrelevant transients.</li>
+<li><strong>Compare:</strong> normalize the selected <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> surface and
+produce an exact difference.</li>
+<li><strong>Propose:</strong> when drift exists, create a candidate
+change inside the declared Map region.</li>
 </ol>
-<p>This is the same Sandwich pattern, aimed at a Map surface:
-<code>Sense/Normalize/Compare</code> is <code>Prep</code>,
-<code>Propose</code> is the stochastic step, and Validation is the hard
-gate.</p>
-<p>Keep the loop honest by emitting a reviewable diff plus <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>
-output into the Ledger.</p>
-<p>If you want the loop in one screen:</p>
-<pre class="text"><code>terrain = normalize(sense_terrain())
-map = normalize(read_map())
-diff = compare(map, terrain)
-if diff:
-    propose_patch(diff)  # reviewable output, not prose advice</code></pre>
-<p>One key reversal to name explicitly: Chapters 1–7 mostly run
-<strong>Map → Terrain</strong> (intent drives changes). Map-Updaters
-often run <strong>Terrain → Map</strong> (reality updates documentation
-and intent artifacts). Both directions are valid, but they require a
-clear authority model.</p>
-<h2 id="meta-pattern-skeleton-first-rule-maps-get-skeletons-from-sensors">Meta-Pattern:
-Skeleton-First Rule (Maps get skeletons from Sensors)</h2>
-<p>Map-Updaters are where teams get hurt by fabricated structure.
-Chapter 2 covered the <a class="concept-link" href="concepts#skeleton-first-rule" title="See concept: Skeleton-First Rule">Skeleton-First rule</a> in general; here is the
-Map-specific version.</p>
-<p><strong>Rule:</strong> build the Map on a deterministically extracted
-skeleton, then (optionally) let the model add “flesh” such as
-explanations or formatting. The model must never invent the
-skeleton.</p>
-<p>Concrete skeletons you can extract deterministically:</p>
-<ul>
-<li>public function signatures from an AST</li>
-<li>HTTP routes from your router definitions</li>
-<li>API shapes from OpenAPI/JSON Schema</li>
-<li>dependency edges from import graphs</li>
-</ul>
-<p>If the model writes the skeleton, it will eventually invent routes,
-symbols, or fields. Those invented facts then get fed back in as context
-on the next run, and the updater starts converging on a clean story
-instead of reality. This is <strong><a class="concept-link" href="concepts#map-contamination" title="See concept: Map Contamination">Map Contamination</a></strong> in SDaC:
-generated structure gets mistaken for extracted fact.</p>
-<p><strong><a class="concept-link" href="concepts#mechanism" title="See concept: Mechanism">Mechanism</a>:</strong> extract the skeleton from the Terrain,
-constrain edits to an allowed region, then re-extract the skeleton from
-the candidate Map and require an exact match. Treat mismatch as a hard
-fail in CI.</p>
-<p>If the re-extracted skeleton does not match exactly, stop
-immediately. Do not let the model “explain” or prose-polish its way past
-a skeleton mismatch.</p>
-<p>When you can, make the skeleton the whole story: generate the Map
-deterministically from Sensors, with zero AI in the critical path.</p>
-<h2 id="brownfield-adoption-the-hollow-map-flashlight">Brownfield
-Adoption: The Hollow Map (Flashlight)</h2>
-<p>In a legacy monolith, a full <a class="concept-link" href="concepts#context-graph" title="See concept: Context Graph">Context Graph</a> is often the wrong first
-project. If you try to map the whole Terrain at once, you’ll stall
-before you ship the first loop.</p>
-<p>The Hollow Map pattern is a brownfield on-ramp: you build a temporary
-Map that contains only the path you’re touching today, then you throw it
-away.</p>
-<ul>
-<li><strong>Ignore the dark:</strong> do not index the whole repo.</li>
-<li><strong>Spotlight the path:</strong> start from one anchor (an
-entrypoint, a failing test, a function), then include only the imports
-reachable from that anchor up to a small depth and a strict budget.</li>
-<li><strong>Discard:</strong> treat the resulting graph and context
-packet as build artifacts for one Mission. Once the loop finishes,
-delete them.</li>
-</ul>
-<p>If the same slice keeps showing up, promote it into a cached snapshot
-later. But do not start by trying to maintain a “perfect architecture
-doc” for a system you can’t yet reason about.</p>
-<h2 id="example-keep-agent-instructions-aligned-a-self-referential-map-updater">Example:
-Keep agent instructions aligned (a self-referential Map-Updater)</h2>
-<p>A practical Map-Updater is one that keeps its own operating
-instructions current.</p>
-<p>In this repository, we keep per-directory agent-instructions files as
-local operator manuals: what this directory is for, what invariants
-matter, and how to run the tools here. Different agent runtimes use
-different conventions, but the pattern is the same: keep a small Map
-close to the Terrain it governs.</p>
-<p>The concrete implementation is the agent-instructions
-Map-Updater:</p>
-<ul>
-<li>Tool: <code>tools/update_agents.py</code></li>
-<li>Run:
-<code>python -m tools.update_agents --path &lt;changed_file&gt;</code></li>
-<li>Output:
-<code>build/update_agents/&lt;dir_slug&gt;_agents_suggestions.md</code>
-(patch-style hunks, designed for review)</li>
-<li>Apply:
-<code>python -m tools.apply_meta_suggestions --suggestions build/update_agents</code>
-(or wire it into a Make target)</li>
-</ul>
-<p>This is intentionally an <strong>advisory</strong> updater: if AI is
-unavailable it emits an explicit no-change marker and returns success.
-That keeps the build deterministic while still making drift visible
-whenever the tool can run.</p>
-<pre class="text"><code>@@ NO CHANGE @@</code></pre>
-<p>Here is the loop in action:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> tools.update_agents <span class="at">--path</span> mk/book.mk</span>
-<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a><span class="ex">INFO:</span> AGENTS update suggestions written to build/update_agents/mk_agents_suggestions.md</span></code></pre></div>
-<p>The suggestions file is a small, reviewable patch format:</p>
-<pre class="text"><code>FILE: mk/AGENTS.md
-@@ SUGGESTED PATCH @@
-@@
--&lt;old lines…&gt;
-+&lt;new lines…&gt;</code></pre>
-<p>If you want a fully automated “maintenance sweep,” this repo includes
-an example Make target that runs the instructions updater on a few
-anchor files and then applies the suggestions in one pass:
-<code>make update-agents-epoch</code>. The key move is that it still
-leaves you with a clean <code>git diff</code> to review: the loop
-proposes; humans accept.</p>
-<h3 id="alternative-the-low-tech-start">Alternative: The Low-Tech
-Start</h3>
-<p>You can also do a “cheap Map-Updater” version without wiring the full
-deterministic pipeline yet. Keep a small instruction file close to the
-code it governs, then ask a programming AI agent to propose an update
-when the directory’s purpose, commands, or boundaries change. Review the
-diff like any other doc change.</p>
-<p>Different agent runtimes use different conventions for these files.
-For example:</p>
-<pre class="text"><code>AGENTS.md
-CLAUDE.md</code></pre>
-<p>The power move is locality. Put these files in subdirectories so the
-Map stays focused on the Terrain it’s describing:</p>
-<pre class="text"><code>repo/
-  AGENTS.md
-  tools/AGENTS.md
-  services/payments/AGENTS.md</code></pre>
-<p>This is not “complete SDaC” on day one. Your sensing and comparison
-may be less formal than <code>make help</code> parsing, but it still
-tightens intent. It reduces context pollution (“what is this directory
-for?”) and gives both humans and agents a small, versioned Map surface
-to anchor on.</p>
-<p>The important point is not the particular file name. The point is the
-direction: your terrain changed, so you update the Map that tells future
-operators how to move through that terrain.</p>
-<h2 id="example-update-meta-from-chapters-map-surfaces-for-the-manuscript">Example:
-Update meta/ from chapters (Map surfaces for the manuscript)</h2>
-<p>Not every Map surface is an operations manual. In this manuscript’s
-engine, <code>meta/</code> is a Map for the manuscript: it carries the
-concepts, outline, and the editorial constraints that make downstream
-writing tools converge instead of drift.</p>
-<p>This repo contains a Workflow-based Map-Updater that proposes changes
-to <code>meta/</code> based on a chapter’s current prose:</p>
-<ul>
-<li>Tool: <code>tools/update_meta.py</code></li>
-<li>Run:
-<code>make update-meta TARGET=&lt;chapter|part|book&gt;</code></li>
-<li>Output: patch-style suggestions under
-<code>build/update_meta/</code></li>
-<li>Apply:</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="fu">make</span> apply-meta SUGGESTIONS=build/update_meta</span></code></pre></div>
-<p>This is the same pattern as the agent-instructions updater, pointed
-at a different Map surface: observe Terrain (chapter prose), normalize
-(extract candidates), compare to the current Map, then propose a
-reviewable patch.</p>
-<h2 id="authority-models-terrain-first-vs.-map-first-surfaces">Authority
-Models: Terrain-first vs. Map-first Surfaces</h2>
-<p>The direction of the patch is determined by the <strong>authority
-model</strong>:</p>
-<ul>
-<li><p><strong>Terrain-first:</strong> Reality is the source of truth.
-If the Map differs, you update the Map. Most documentation surfaces are
-Terrain-first: code changes, docs follow. The “agent instructions
-updater” example above is Terrain-first for the same reason: the
-directory changed, so the local instructions must follow.</p></li>
-<li><p><strong>Map-first:</strong> Intent is the source of truth. If the
-Terrain differs, you update the Terrain to comply. This is common for
-policy surfaces: if the Map says “all buckets are encrypted,” you change
-the infrastructure until the scan matches.</p></li>
-</ul>
-<p>Trying to make one surface both Terrain-first and Map-first creates a
-tug-of-war over what “truth” is.</p>
-<p>Different memory surfaces also compile differently. Contracts and
-policies often become hard gates. Brand voice, tone, and onboarding
-rules usually compile into templates, directives, retrieval defaults,
-review checklists, or <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> criteria. Treating them all as if they were
-schemas is naive; treating them all as versioned memory is correct.</p>
-<h2 id="map-quality-criteria-what-fresh-means">Map Quality Criteria
-(what “fresh” means)</h2>
-<p>Keeping a Map “fresh” is not the same as making it long. A good Map
-is:</p>
+<p>All four steps may be deterministic. When structured Terrain can
+render the Map directly, that is preferable. If a model adds connective
+prose, the extracted facts remain fixed and the generated material stays
+inside a bounded candidate. The workflow then re-extracts and checks the
+factual structure before the proposal may close.</p>
+<p>Alignment is a no-op only when every required source was available
+and the comparison completed. Missing or contradictory evidence cannot
+be interpreted as agreement.</p>
+<p><a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a>’s Skeleton-First rule specializes cleanly here:
+deterministic extraction supplies the factual skeleton; probabilistic
+generation may supply only the permitted explanation or presentation. If
+generated structure is later mistaken for observed fact, the Map begins
+reinforcing its own invention. Protected re-extraction helps prevent
+that contamination by rejecting a mismatch before the proposal
+closes.</p>
+<h2 id="one-bounded-map-proposal">One Bounded Map Proposal</h2>
+<p>Consider a payments service whose local operator Map lists public
+routes, ownership, health checks, and standard commands. Route
+declarations, ownership metadata, deployment manifests, and task-runner
+definitions already contain those facts.</p>
 <table>
 <colgroup>
-<col style="width: 38%"/>
-<col style="width: 61%"/>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
 </colgroup>
 <thead>
 <tr>
-<th>Property</th>
-<th>Why it matters</th>
+<th>Contract element</th>
+<th>Declaration</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Bounded</td>
-<td>A Map that tries to cover everything becomes noise</td>
+<td>Observed sources that define this generated property</td>
+<td>Fixed route declarations, ownership metadata, deployment manifests,
+and command definitions</td>
 </tr>
 <tr>
-<td>Skeleton-anchored</td>
-<td>The non-negotiable structure comes from Sensors, not generation</td>
+<td>Permitted effect</td>
+<td>Edit only the generated inventory blocks in the operator Map</td>
 </tr>
 <tr>
-<td>Explicit about scope</td>
-<td>What the updater may edit (and must not touch) is written down</td>
+<td>Required evidence</td>
+<td>Source identities, normalized comparison, bounded candidate
+identity, and <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> check results</td>
 </tr>
 <tr>
-<td>Reviewable</td>
-<td>Output is a diff, not a paragraph</td>
+<td>Required checks</td>
+<td>Every source parses; no out-of-region edit occurs; the candidate’s
+extracted inventory exactly matches Terrain</td>
 </tr>
 <tr>
-<td>Auditable</td>
-<td>Every change has evidence (diff + validator output) in the
-Ledger</td>
-</tr>
-<tr>
-<td>Stable under iteration</td>
-<td>It doesn’t oscillate because the authority model is clear</td>
+<td><a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a></td>
+<td>A separate review or policy decision decides whether the successful
+proposal becomes the Map</td>
 </tr>
 </tbody>
 </table>
-<h2 id="ci-gate-drift-becomes-a-build-failure">CI Gate: Drift Becomes a
-Build Failure</h2>
-<p>A Map-Updater becomes powerful when drift becomes non-ignorable:</p>
-<ol type="1">
-<li>Run the Map-Updater in CI for every relevant change.</li>
-<li>If drift exists, fail the build (or block merge) with the proposed
-patch attached as evidence.</li>
-<li>Require the Map surface to be updated in the same pull request, or
-require an explicit waiver.</li>
-</ol>
-<p>This turns drift from a quiet, compounding problem into an immediate,
-bounded, reviewable change.</p>
-<p>Two practical constraints matter in CI:</p>
-<ul>
-<li><strong>Relevance:</strong> do not run expensive updaters on every
-commit; trigger on the paths that can actually cause drift.</li>
-<li><strong>Budget:</strong> an updater that “never stops retrying” is
-not a gate; it’s a denial-of-service. Give it timeouts, retry limits,
-and cost caps.</li>
-</ul>
-<p>Not every updater is a pure <a class="concept-link" href="concepts#physics" title="See concept: Physics">Physics</a> gate. Some Map-Updaters are
-advisory (they generate suggested prose patches). That’s still valuable:
-the output becomes part of the Decision Trace, and humans can review and
-accept or reject the update.</p>
-<h2 id="documentation-physics-validators-for-maps">Documentation Physics
-(validators for Maps)</h2>
-<p>If a Map-Updater can write prose, you need Physics for prose.</p>
-<p>At minimum, you want validators that catch structural drift and
-invented structure:</p>
-<ul>
-<li><strong>Structure lint:</strong> headings, single H1, no heading
-jumps, no banned markers</li>
-<li><strong>Terminology physics:</strong> concept bans and redirects
-(Map vocabulary control)</li>
-<li><strong>Skeleton match:</strong> re-extract
-signatures/routes/schemas and require exact match</li>
-<li><strong>Link checks / references:</strong> ensure internal links
-resolve; ensure quoted identifiers exist</li>
-</ul>
-<p>In this repo, the manuscript has its own Physics targets (for example
-<code>make text-health</code> plus <code>tools.lint_concepts</code>).
-The existence of these validators is the point: a Map-Updater only
-becomes trustworthy when the Map surface is gated by constraints it
-cannot argue with.</p>
-<h2 id="north-star-map-updaters-are-a-plank-of-the-hofstadter-bridge">North
-Star: Map-Updaters are a plank of the Hofstadter Bridge</h2>
-<p>At first, a Map-Updater feels like housekeeping: “keep docs
-fresh.”</p>
-<p>The higher-leverage view is that you are turning documentation from
-an output into an input. Map/Terrain sync today is the prerequisite for
-Maps that can become executable constraints tomorrow. <a class="chapter-link" href="chapter-13-the-hofstadter-bridge#chapter-13-the-hofstadter-bridge" title="Go to: Chapter 13">Chapter 13</a> takes
-that next step in full (the <a class="concept-link" href="concepts#hofstadter-bridge" title="See concept: Hofstadter Bridge">Hofstadter Bridge</a>): the Map stops being
-advisory and starts acting as an enforcer.</p>
-<p>The larger north star is a <strong><a class="concept-link" href="concepts#torus" title="See concept: Torus">Torus</a></strong>: think of a looped
-surface rather than a straight line, where the operating Map shapes
-execution, execution produces evidence, evidence updates the Map, and
-the next loop starts from a truer operating Map. Over time, that is not
-just one loop but many bounded loops running in parallel across the
-organization at different levels.</p>
-<p>If you want that future safely, you start here: deterministic
-skeletons, bounded diffs, and hard gates.</p>
-<h2 id="meta-maps-when-maps-need-maps">Meta-Maps: When Maps Need
-Maps</h2>
-<p>A slice map (a saved <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a>: what’s in, what’s out, and why)
-works for a feature. A handful of slice maps work for a release. But
-what happens when you have fifty slice maps across twelve teams?</p>
-<p>You need a map of maps—a <strong>meta-map</strong>.</p>
-<p>This is not new complexity. It is the same fractal structure showing
-up at scale. Just as a function’s docstring is a Map for its
-implementation, and a module’s API is a Map for its functions, a
-meta-map is a Map for your collection of slice maps.</p>
-<pre class="mermaid"><code>flowchart TD
-  subgraph Meta["Meta-Map&lt;br/&gt;Q2 Platform Migration"]
-    A["Slice Map A&lt;br/&gt;Auth Service&lt;br/&gt;12 slices&lt;br/&gt;Converging"] --&gt; B["Slice Map B&lt;br/&gt;Data Layer&lt;br/&gt;8 slices&lt;br/&gt;Mixed"] --&gt; C["Slice Map C&lt;br/&gt;API Gateway&lt;br/&gt;15 slices&lt;br/&gt;Early"]
-    B --- Status["Status: B blocked on A slice 9&lt;br/&gt;Next convergence check: Friday"]
-  end</code></pre>
-<p><strong>What a meta-map tracks:</strong></p>
+<p>A representative candidate remains small:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a> ## Health Checks</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="st">- Readiness: `/ready`</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="va">+ Readiness: `/readyz`</span></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a> ## Ownership</span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a><span class="st">- Primary: `payments-platform`</span></span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a><span class="va">+ Primary: `money-movement`</span></span></code></pre></div>
+<p>The updater can establish that drift existed, that the patch stayed
+inside the permitted Map blocks, and that its extracted inventory
+matches the declared Terrain sources. It cannot establish that the
+organization chose the right owners, routes, or operating policy. Those
+are different properties with different authority.</p>
+<p>The run may close as a successful proposal after its required checks
+pass. The candidate is not adopted merely because it was generated,
+retained, or sealed.</p>
+<h2 id="the-opposite-direction">The Opposite Direction</h2>
+<p>A <a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> always runs from observed Terrain toward a proposed Map
+revision. The inverse is <strong>Map-driven reconciliation</strong>: an
+authoritative Map governs a bounded proposal to change Terrain.</p>
 <table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
 <thead>
 <tr>
-<th>Field</th>
-<th>Purpose</th>
+<th>Direction</th>
+<th>Fixed authority</th>
+<th>Proposed effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Child slice maps</td>
-<td>Which maps roll up to this one</td>
+<td>Terrain → Map</td>
+<td>Declared observed facts for one Map property</td>
+<td>A bounded Map revision</td>
 </tr>
 <tr>
-<td>Cross-map dependencies</td>
-<td>Which slices in Map A gate slices in Map B</td>
-</tr>
-<tr>
-<td>Aggregate progress</td>
-<td><a class="concept-link" href="concepts#convergence" title="See concept: Convergence">Convergence</a> status across all children</td>
-</tr>
-<tr>
-<td>Escalation triggers</td>
-<td>When to surface blockers to humans</td>
-</tr>
-<tr>
-<td>Rollup schedule</td>
-<td>When child maps report status</td>
+<td>Map → Terrain</td>
+<td>An adopted requirement or desired state</td>
+<td>A bounded Terrain revision</td>
 </tr>
 </tbody>
 </table>
-<p><strong>The key insight:</strong> meta-maps do not require new
-primitives. They reuse the same structure: explicit intent, typed
-artifacts, and validation gates, applied to maps instead of code. The
-<a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> for a meta-map is “coordinate these child maps toward
-this milestone.” The <a class="concept-link" href="concepts#immune-system" title="See concept: Immune System">Immune System</a> checks cross-map invariants.</p>
-<p>This is how SDaC scales without becoming a different system at each
-level. <a class="concept-link" href="concepts#recursion" title="See concept: Recursion">Recursion</a> is the scaling mechanism.</p>
-<p><strong>When you need a meta-map:</strong></p>
-<ul>
-<li>More than ~7 active slice maps (attention dilution threshold)</li>
-<li>Cross-team dependencies that need explicit tracking</li>
-<li>Milestones that span multiple maps</li>
-<li>Autonomous agents (<a class="concept-link" href="concepts#dream-daemon" title="See concept: Dream Daemon">Dream Daemon</a> depth 2+) orchestrating multiple
-workstreams</li>
-</ul>
-<p>At depth 0-1, humans hold meta-maps in their heads or in project
-management tools. At depth 2+, meta-maps become explicit artifacts that
-agents read and update—the system managing its own coordination.</p>
-<h2 id="actionable-what-you-can-do-this-week">Actionable: What you can
-do this week</h2>
-<p>Choose one Map surface in your current project that drifts often.</p>
-<ol type="1">
-<li><strong>Identify Terrain and Map:</strong> pinpoint the source of
-truth and the Map file(s) that should track it.</li>
-<li><strong>Choose an authority model:</strong> Terrain-first or
-Map-first. Write it down.</li>
-<li><strong>Sketch the updater loop:</strong>
-<code>Sense -&gt; Normalize -&gt; Compare -&gt; Propose</code>.</li>
-<li><strong>Pick a skeleton you can extract deterministically:</strong>
-signatures, routes, schemas, inventories. Treat it as truth.</li>
-<li><strong>Add one deterministic gate:</strong> re-extract the skeleton
-after the patch, or make drift fail in CI with the proposed patch
-attached as evidence.</li>
-<li><strong>Make the output reviewable:</strong> emit a unified diff or
-a patch file, not a paragraph of advice.</li>
-<li><strong>Wire it into your loop:</strong> run it on every relevant
-change, and decide whether it should fail the build or simply attach
-evidence to review.</li>
-</ol>
+<p>Both directions may cross between natural-language and formal
+representations, but they are not inverses. Map-driven reconciliation
+elaborates adopted intent into a Terrain candidate. A Map-Updater
+describes selected facts observed in Terrain. It cannot recover why the
+system was built, infer what policy ought to be, or make its description
+authoritative.</p>
+<p>If policy requires encrypted storage and a <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> observes an
+unencrypted bucket, Map-driven reconciliation may propose the
+infrastructure change. The policy remains fixed during that run.</p>
+<p>If evidence suggests the policy itself is wrong, the reconciliation
+workflow must not edit its own authority to make Terrain pass. It stops
+for an external decision. A separately activated Map-Updater may then
+propose a policy revision under the governance rules for that Map
+surface.</p>
+<p>The two directions may exchange evidence, but neither reverses
+direction in flight. This prevents a candidate from changing the rule
+that judges it.</p>
+<h2 id="updater-success-is-not-build-policy">Updater Success Is Not
+Build Policy</h2>
+<p>The updater and the delivery pipeline answer different questions. The
+Map-Updater may succeed because it produced a checked proposal. The
+pipeline may still block because the currently adopted Map remains out
+of sync until that proposal is reviewed and adopted.</p>
+<p>That separation avoids a false failure. The updater completed its
+declared work; the enclosing policy decides whether unresolved drift may
+proceed. A waiver, where permitted, is a separate governed decision with
+exact scope, rationale, approval, and expiry.</p>
+<p>For factual Map regions, validation should re-extract the candidate’s
+structure and bind it to the declared sources. Structural lint and
+reference checks may support that comparison. Subjective prose receives
+a proportionate review gate. No tool list can prove every sentence true;
+the invariant is that each enforced property has a declared basis and an
+independent check.</p>
+<h2 id="maps-as-operating-memory">Maps as Operating Memory</h2>
+<p>At small scales, a Map may be a schema, interface inventory, or
+policy file. At larger scales, Maps include architecture decisions,
+operating rules, incident lessons, onboarding guidance, and other shared
+knowledge.</p>
+<p>Not every surface should become a hard gate. Structured contracts
+often support exact comparison. Judgment-heavy material may produce an
+advisory proposal that still requires human review. Different Map
+surfaces need checks proportionate to the claims they make.</p>
+<p>The context-quality properties from Chapter 6 still apply: a useful
+Map concentrates decision-bearing meaning, remains traceable to current
+evidence, and stays relevant to the governed property. A Map is fresh
+only for the surfaces that were actually compared. More text does not
+make it current, and synchronization does not make every claim true.</p>
+<p>Historical evidence can also support Map proposals. Repeated
+incidents may justify a runbook change; recurring review findings may
+justify a new check. Evidence does not install those lessons by itself.
+The appropriate Map-Updater produces a candidate, and independent
+adoption makes it authoritative.</p>
+<p>A synchronized Map can then support context selection, generated
+help, policy evaluation, or later workflows. <a class="chapter-link" href="chapter-13-from-documentation-to-enforceable-constraints#chapter-13-from-documentation-to-enforceable-constraints" title="Go to: Chapter 13">Chapter 13</a> examines the
+stronger boundary where a selected Map claim becomes an enforceable
+constraint. Synchronization prepares that boundary, but does not create
+it automatically.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Drift is the default state. Docs fall behind code. Specs lag behind services.…" data-share-title="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…" data-share-title="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -1011,14 +254,14 @@ evidence to review.</li>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters&amp;title=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%208%20of%20Architects%20of%20Intent%3A%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29.%20Drift%20is%20the%20default%20state.%20Docs%20fall%20behind%20code.%20Specs%20lag%20behind%20services.%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%208%20of%20Architects%20of%20Intent%3A%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29.%20Documentation%2C%20specifications%2C%20inventories%2C%20and%20policies%20drift%20because%20the%20systems%20they%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
 <a class="prev-link" href="chapter-7-intent-as-code-mission-objects">← Chapter 7 – Intent as Code (Mission Objects)</a>
-<a class="next-link" href="chapter-9-the-dream-daemon-background-maintenance">Chapter 9 – The Dream Daemon (Background Maintenance) →</a>
+<a class="next-link" href="chapter-9-the-maintenance-controller-background-maintenance">Chapter 9 – The Maintenance Controller (Background Maintenance) →</a>
 </nav>
 <footer class="site-footer">
 <p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
@@ -1037,10 +280,9 @@ evidence to review.</li>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>180c7c0ba0a2</code></span>
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>
-<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>

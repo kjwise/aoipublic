@@ -14,12 +14,160 @@
   box-shadow: 0 20px 38px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.035);
   overflow: clip;
   isolation: isolate;
+  scroll-margin-top: 6rem;
+}
+
+/* Compact diagrams embedded in the book. These favor one explanatory path over
+   the dashboard-like layouts used by the standalone infographic pages. */
+.aoi-book-diagram {
+  color: #e7e7ea;
+  background: #0d111b;
+  border: 1px solid rgba(122, 162, 247, 0.28);
+  border-radius: 8px;
+  padding: 1.15rem;
+}
+
+.aoi-book-diagram__header {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.aoi-book-diagram__eyebrow {
+  margin: 0;
+  color: #7aa2f7;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.aoi-book-diagram__title {
+  margin: 0;
+  color: #f2f3f8;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.aoi-book-diagram__summary,
+.aoi-book-diagram__note {
+  margin: 0;
+  color: #b8bfd0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.aoi-book-diagram__flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.5rem minmax(0, 1fr) 1.5rem minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.55rem;
+}
+
+.aoi-book-diagram__flow--four {
+  grid-template-columns:
+    minmax(0, 1fr) 1.25rem minmax(0, 1fr) 1.25rem
+    minmax(0, 1fr) 1.25rem minmax(0, 1fr);
+}
+
+.aoi-book-diagram__step,
+.aoi-book-diagram__artifact,
+.aoi-book-diagram__outcome {
+  min-width: 0;
+  border: 1px solid rgba(122, 162, 247, 0.24);
+  border-radius: 6px;
+  background: #121827;
+  padding: 0.8rem;
+}
+
+.aoi-book-diagram__step[data-tone="proposal"] {
+  border-color: rgba(187, 154, 247, 0.48);
+}
+
+.aoi-book-diagram__step[data-tone="evidence"] {
+  border-color: rgba(42, 195, 222, 0.48);
+}
+
+.aoi-book-diagram__step[data-tone="authority"] {
+  border-color: rgba(36, 204, 142, 0.46);
+}
+
+.aoi-book-diagram__step[data-tone="stop"] {
+  border-color: rgba(247, 118, 142, 0.46);
+}
+
+.aoi-book-diagram__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #f2f3f8;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.aoi-book-diagram__step p,
+.aoi-book-diagram__artifact p,
+.aoi-book-diagram__outcome p {
+  margin: 0;
+  color: #b8bfd0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.aoi-book-diagram__arrow {
+  align-self: center;
+  justify-self: center;
+  color: #7aa2f7;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.aoi-book-diagram__grid,
+.aoi-book-diagram__outcomes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.85rem;
+}
+
+.aoi-book-diagram__outcomes {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.aoi-book-diagram__divider {
+  height: 1px;
+  margin: 1rem 0;
+  background: rgba(122, 162, 247, 0.2);
+}
+
+.aoi-book-diagram__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #b8bfd0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.aoi-book-diagram__list li + li {
+  margin-top: 0.25rem;
+}
+
+.aoi-book-diagram__note {
+  margin-top: 0.85rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid rgba(42, 195, 222, 0.62);
 }
 
 /* Keep chapter pacing consistent when fragments are embedded in prose. */
 .content:not(.infographic-presentation) [data-infographic-fragment-shell] {
   margin-top: clamp(0.9rem, 2vw, 1.4rem);
   margin-bottom: clamp(1.4rem, 2.8vw, 2rem);
+}
+
+.content:not(.infographic-presentation)
+  [data-infographic-fragment-shell] > [data-infographic-fragment-label] {
+  display: none;
 }
 
 /* Give chapter-embedded infographic-3 sections a little more usable canvas
@@ -225,6 +373,30 @@ body.bg-cyber-dark [data-infographic-fragment-shell] {
   [data-infographic-fragment-shell] {
     border-radius: 0.85rem;
     padding: 0.32rem;
+    scroll-margin-top: 11.5rem;
+  }
+
+  .aoi-book-diagram {
+    padding: 0.85rem;
+  }
+
+  .aoi-book-diagram__title {
+    font-size: 1.15rem;
+  }
+
+  .aoi-book-diagram__flow,
+  .aoi-book-diagram__flow--four {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aoi-book-diagram__arrow {
+    min-height: 1.1rem;
+    transform: rotate(90deg);
+  }
+
+  .aoi-book-diagram__grid,
+  .aoi-book-diagram__outcomes {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   [data-infographic-fragment-shell] > [data-infographic-fragment-label] {

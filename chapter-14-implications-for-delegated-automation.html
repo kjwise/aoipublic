@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Chapter 14 – Implications for Delegated Automation | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/chapter-14-implications-for-delegated-automation" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 14 – Implications for Delegated Automation | Architects of Intent" property="og:title"/>
+<meta content="Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-14-implications-for-delegated-automation" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 14 – Implications for Delegated Automation | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 14 – Implications for Delegated Automation | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 14 – Implications for Delegated Automation | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 14 – Implications for Delegated Automation", "description": "Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "mainEntityOfPage": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT10M", "articleSection": "Part V – Implications and Limits", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part V – Implications and Limits</div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="chapter-14-implications-for-delegated-automation">Chapter 14 –
+Implications for Delegated Automation</h1>
+<p>The previous chapters treated the software change process as an
+engineering object. Adopted intent fixes authority, probabilistic steps
+operate inside declared effects, independent evidence guides refinement,
+every run stops finitely, and separate authority decides what becomes
+real. This chapter asks what follows when those governed processes
+become recurring, composable organizational capabilities.</p>
+<p>The implications fall into three questions: how far authority may be
+delegated, how quickly the organization can produce a governed response,
+and whether the resulting capability is economically or strategically
+valuable.</p>
+<p><em>Reliable autonomy</em> does not mean removing people from every
+decision. It means executing recurring work under adopted human judgment
+without requiring a new human intervention at every step. Humans and
+other independent authorities still own new intent, policy, exact
+exceptions, novel disputes, and high-consequence admission.</p>
+<p>Capability and delegated authority are separate axes:</p>
+</div>
+</header>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Operating posture</th>
+<th>System capability</th>
+<th>Authority boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assist</td>
+<td>Draft snippets, analyses, or reviews</td>
+<td>A person performs and admits the effect</td>
+</tr>
+<tr>
+<td>Propose</td>
+<td>Produce a bounded candidate and evidence</td>
+<td>An independent gate admits each candidate</td>
+</tr>
+<tr>
+<td>Execute delegated classes</td>
+<td>Run recurring Missions inside declared effects</td>
+<td>Policy may automatically admit only protected, allowlisted low-risk
+classes</td>
+</tr>
+<tr>
+<td>Operate continuously</td>
+<td>Schedule, repeat, stop, and escalate governed workflows</td>
+<td>Humans own risk classes, policy changes, and exact exceptions</td>
+</tr>
+<tr>
+<td>Handle high-consequence work</td>
+<td>Prepare and validate candidates for privileged or irreversible
+effects</td>
+<td>Independent authority approves and performs admission</td>
+</tr>
+</tbody>
+</table>
+<p>More capability can reduce routine supervision. It does not dissolve
+the authority boundary.</p>
+<h2 id="composition-across-scales">Composition Across Scales</h2>
+<p>The same distinctions recur at three scales:</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Scale</th>
+<th>Proposed transition</th>
+<th>Boundary that makes it effective</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run</td>
+<td><a class="concept-link" href="concepts#candidate" title="See concept: Candidate">Candidate</a> workspace to sealed proposal</td>
+<td>Activated Mission, required evidence, and permitted routing</td>
+</tr>
+<tr>
+<td>System</td>
+<td>Sealed proposal to admitted <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a></td>
+<td>Current-base <a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">Mission Gate</a> and admission authority</td>
+</tr>
+<tr>
+<td>Process</td>
+<td>Run-history evidence to changed <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>, policy, or default</td>
+<td><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> or <a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a> plus independent adoption</td>
+</tr>
+</tbody>
+</table>
+<p>Evidence may therefore support a proposal to change the process that
+produced it. It cannot directly rewrite that process. Composition
+preserves this rule or it merely moves self-authorization one level
+upward.</p>
+<h2 id="from-governed-steps-to-a-factory">From Governed Steps to a
+Factory</h2>
+<p>Workflows compose when their steps expose stable input and output
+contracts, bounded effects, required evidence, and explicit terminal
+outcomes and failure semantics. A workflow may contain several
+probabilistic steps arranged sequentially, conditionally, or in
+parallel. Chapter 2 defines how the enclosing workflow treats model
+calls, agents, harnesses, services, and child workflows. Whatever the
+component, the enclosing workflow consumes declared results rather than
+borrowing undeclared authority from it.</p>
+<p>A retry loop may repeat one step inside a finite run. An operational
+loop invokes the whole workflow again when changed Terrain, a schedule,
+an event, or newly adopted intent requires it. Each invocation fixes
+current authority and state, then ends with a sealed result. Continuous
+operation is assembled from finite histories rather than one
+indefinitely mutable execution.</p>
+<p>One dependable step can become a reusable capability. Compatible
+capabilities can become larger workflows. Repeated finite runs can
+become a continuous operating capacity for change. AI may supply
+generation, evaluation, or routing inside several steps; the factory
+supplies the boundaries, evidence, memory, and admission paths that make
+those capabilities dependable enough to compose.</p>
+<p>A factory can therefore compose a path from adopted intent expressed
+in natural language through progressively more formal contracts and
+candidates to implementation. In the other direction, evidence from
+admitted Terrain can support proposed human-readable Maps. This is
+circulation, not symmetry: one direction elaborates what should become
+real, while the other describes what appears to be real. Only separate
+adoption changes intent.</p>
+<p>Better models and prompts improve the candidate distribution and may
+reduce retries. They strengthen the factory rather than replace it. A
+complementary hypothesis concerns generator strength. When work can be
+decomposed into narrow steps with informative feedback, modest
+probabilistic capability may produce better admitted results than a more
+elaborate one-shot generator. Poor decomposition, weak or correlated
+checks, and excessive retry cost can reverse that result.</p>
+<p>Composed finite workflows form a <strong>Governed <a class="concept-link" href="concepts#loop" title="See concept: Loop">Loop</a>
+Network</strong>. The network detects declared divergence on selected
+observable surfaces and dispatches bounded workflows. Under adopted
+policy, it admits supported proposals and retains outcomes as evidence.
+The <em>Torus</em> is simply a destination metaphor for that circulation
+over time: the ambition of a governed adaptive organization, not an
+architectural guarantee.</p>
+<p>Routine, well-specified adaptation may proceed automatically. Changes
+to intent, authority, or policy remain separately governed. Because an
+E-Type system and its environment continue to change, the organization
+repeatedly re-establishes selected relationships between current Terrain
+and current intent rather than reaching one final state.</p>
+<h2 id="evidence-back-into-intent">Evidence Back Into Intent</h2>
+<pre class="mermaid"><code>flowchart TD
+  I[Adopted intent] --&gt; M[Activated contract]
+  M --&gt; C[Candidate]
+  C --&gt; E[Independent evidence]
+  E --&gt; S[Sealed proposal]
+  S --&gt; A[Separate admission]
+  A --&gt; T[Admitted Terrain]
+  E -.-&gt;|supports| G[Improvement proposal]
+  T -.-&gt;|reveals outcomes| G
+  G --&gt; D[Independent adoption]
+  D --&gt; N[Future adopted intent]</code></pre>
+<p>The <a class="concept-link" href="concepts#protected-control-plane" title="See concept: Protected Control Plane">Protected Control Plane</a> constrains activation, effects, evidence,
+admission, and adoption throughout this circulation.</p>
+<p>Chapter 9 described how to learn from run history. Reconstructable
+histories, workflow topology, check configuration, and exception
+inventories may reveal repeated missing authority, oscillation, scope
+violations, stale exceptions, weak checks, or action classes that
+consistently succeed.</p>
+<p>Each diagnosis can support a bounded proposal to change a Map,
+workflow, or policy. It does not install that proposal. Ordinary work
+cannot declare its own tests to be replacements for protected checks,
+lower a threshold, or alter the policy governing its current run.
+Control-plane changes follow a Governance Mission and independent
+adoption. History proposes; it does not authorize.</p>
+<p>This is the useful form of self-inspection: retained evidence informs
+later governance without becoming authority by observation alone. The
+system may propose its next Map; it cannot appoint that proposal as
+truth.</p>
+<h2 id="competitive-adaptation">Competitive Adaptation</h2>
+<p>An E-Type system operates in a changing environment shaped by users,
+regulations, technology, constraints, competitors, and adopted intent.
+It does not optimize toward one permanent endpoint. A better outcome is
+a better-supported tradeoff under current priorities.</p>
+<p>In environments where AI accelerates search, implementation, and
+evaluation across competing organizations, useful positions may decay
+faster and response cycles may compress. A locally reliable organization
+can still be outcompeted if it adapts too slowly. This is the author’s
+strategic hypothesis, not a Lehman law or universal market
+prediction.</p>
+<p>The relevant form of speed is <strong>adaptation latency</strong>:
+the time from meaningful divergence, through any required change to
+adopted intent or policy, to a validated and admitted response. The
+objective is to shorten that path subject to evidence, risk, and
+authority.</p>
+<p>For measurement, fix the event that starts the clock and the
+admission event that ends it. Report detection delay, intent-or-policy
+revision time, execution and refinement time, and validation and
+admission time separately. A response that requires no change to adopted
+intent has zero time in that component.</p>
+<p>Candidate throughput is only one component. Fast execution toward
+stale intent is not adaptation. Fast ungoverned change is not
+convergence. A well-supported answer that arrives after the environment
+has moved may no longer be relevant.</p>
+<p>The competitive hypothesis is therefore conditional: organizations
+that shorten governed adaptation without increasing escape, recovery, or
+ownership cost may produce relevant governed responses more consistently
+than organizations that are slower or less controlled. Whether that
+advantage exists must be established in the recurring work where it is
+claimed.</p>
+<h2 id="strengthen-the-delivery-substrate">Strengthen the Delivery
+Substrate</h2>
+<p>A common mistake is to point AI at code production before the
+delivery system can confidently verify, release, observe, and recover
+the code the organization already writes.</p>
+<p>Where tests are sparse or flaky, contracts are thin, builds are
+irreproducible, deployments depend on manual knowledge, rollback is
+weak, or production feedback arrives late, more implementation
+throughput increases only one side of the system. It can create a larger
+review and confidence problem rather than faster adaptation.</p>
+<p>In that setting, a higher-leverage early use of AI may be to
+strengthen tests, contracts, fixtures, reproducible builds, deployment
+checks, rollback, and observability. Candidate-proposed controls cannot
+be the sole evidence of their own adequacy, but they can enter
+separately governed improvement workflows.</p>
+<p>Governance should remain proportionate. Direct generation can be
+reasonable when work is temporary, consequences are limited, and
+acceptance is immediately observable. Stronger controls become important
+when an output persists, is reused, reaches other systems, or carries
+obligations beyond the generating session.</p>
+<p>For recurring mutating work, begin with five controls:</p>
+<ol type="1">
+<li>Activate exact authority.</li>
+<li>Enforce the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> effect boundary.</li>
+<li>Protect the checks that decide consequential properties.</li>
+<li>Retain reconstructable outcomes under explicit trust
+assumptions.</li>
+<li>Reserve automatic admission for narrowly defined low-risk classes
+supported by comparable evidence.</li>
+</ol>
+<h2 id="the-economic-hypothesis">The Economic Hypothesis</h2>
+<p>The setup cost of a check or workflow is visible. The cost of a weak
+admitted change is often distributed across review, retries, rollback,
+incidents, and later archaeology. The relevant baseline may be an
+isolated model call or a person manually coordinating prompts, retries,
+checks, artifact transfer, and approvals.</p>
+<p>Compare the complete operating path in either case. Divide total
+operating cost by the number of admitted changes. Include model and
+compute costs, review, rollback, incident response, and ownership of the
+controls in that total.</p>
+<p>The measure is incomplete if it omits failed attempts or downstream
+cost. Compare costs only across work with similar consequence and
+admitted-result quality; otherwise a cheaper path may simply accept more
+risk or worse outcomes. The formula is not a universal accounting
+method. It keeps cheap proposals from being mistaken for cheap
+delivery.</p>
+<p>Executable intent also has ownership cost. Contracts, checks,
+templates, protected infrastructure, false-positive tuning, and
+independent decisions must be maintained. Formalization is justified
+where work recurs, carries material risk, or repeatedly consumes
+judgment. The operational hypothesis fails when those costs exceed the
+value of the governed path.</p>
+<h2 id="the-defensibility-hypothesis">The Defensibility Hypothesis</h2>
+<p>Adaptive advantage asks whether an organization can produce relevant
+governed responses quickly enough. Defensibility asks whether the
+capability producing those responses remains valuable and difficult to
+reproduce.</p>
+<p>The argument has five moves:</p>
+<ol type="1">
+<li>Raw model capability and generic workflow engines are increasingly
+reproducible; neither is a durable advantage by itself.</li>
+<li>Local contracts, bounded workflows, failure-derived checks, context
+structures, and decision evidence may accumulate organization-specific
+operating knowledge.</li>
+<li>Explicit artifacts preserve only selected knowledge. They do not
+replace tacit judgment, apprenticeship, accountability, or shared
+understanding.</li>
+<li>The accumulated system is an advantage only when it improves
+admitted outcomes after model, compute, review, control maintenance,
+recovery, and incident cost.</li>
+<li>The claim fails when local assets become stale, ownership consumes
+the gain, or a generic process produces equivalent outcomes.</li>
+</ol>
+<p>“The loop is the potential moat” is therefore shorthand for a
+falsifiable claim. A governed factory may accumulate judgment tied to
+local Terrain and use it to improve recurring adaptation. It becomes
+defensible only when that accumulation produces sustained results after
+its full cost.</p>
+<h2 id="conclusions-and-operating-principles">Conclusions and Operating
+Principles</h2>
+<p>Human intelligence directs artificial intelligence through governed
+workflows. Adopted intent and authority establish direction; structured
+feedback guides adaptation; protected governance decides what may become
+real.</p>
+<p>Four operating principles follow:</p>
+<ol type="1">
+<li><strong>Prefer verifiable state to plausible output.</strong>
+Evidence cannot prevent every failure, but it can make selected claims
+checkable and decisions reconstructable.</li>
+<li><strong>Concentrate context on decision-bearing meaning.</strong>
+Maximize <a class="concept-link" href="concepts#semantic-density" title="See concept: Semantic Density">Semantic Density</a>, Correctness, and Relevance rather than
+volume.</li>
+<li><strong>Treat composed workflows as adaptive capacity.</strong>
+Their value lies in recurring work that reaches supported admission with
+bounded effects and finite failure.</li>
+<li><strong>Start with one bounded loop, then compose what earns
+trust.</strong> A capability becomes a building block only when its
+evidence supports the next delegation.</li>
+</ol>
+<p>Model, prompt, context, and workflow quality remain complementary.
+Better generation improves what the workflow can attempt. Governance
+determines which attempts may advance, when they must stop, and what
+becomes real.</p>
+<p>The strategic ambition is governed adaptation fast enough to remain
+relevant as reality changes, without allowing speed to weaken evidence
+or authority.</p>
+<p>The system can still be wrong, but it becomes harder for uncertainty
+to masquerade as permission.</p>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…" data-share-title="Chapter 14 – Implications for Delegated Automation | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-14-implications-for-delegated-automation" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-14-implications-for-delegated-automation&amp;text=Chapter%2014%20%E2%80%93%20Implications%20for%20Delegated%20Automation%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-14-implications-for-delegated-automation" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-14-implications-for-delegated-automation" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-14-implications-for-delegated-automation&amp;title=Chapter%2014%20%E2%80%93%20Implications%20for%20Delegated%20Automation%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2014%20%E2%80%93%20Implications%20for%20Delegated%20Automation%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2014%20of%20Architects%20of%20Intent%3A%20Implications%20for%20Delegated%20Automation.%20The%20previous%20chapters%20treated%20the%20software%20change%20process%20as%20an%20engineering%20object.%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-14-implications-for-delegated-automation">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-13-from-documentation-to-enforceable-constraints">← Chapter 13 – From Documentation to Enforceable Constraints</a>
+<a class="next-link" href="appendix-a-failure-modes-and-limits">Appendix A: Failure Modes and Limits →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+</body>
+</html>

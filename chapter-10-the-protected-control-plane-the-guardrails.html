@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Chapter 10 – The Protected Control Plane (The Guardrails) | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane (The Guardrails). An ordinary documentation Mission may edit its declared source and…" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 10 – The Protected Control Plane (The Guardrails) | Architects of Intent" property="og:title"/>
+<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane (The Guardrails). An ordinary documentation Mission may edit its declared source and…" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 10 – The Protected Control Plane (The Guardrails) | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 10 – The Protected Control Plane (The Guardrails) | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane (The Guardrails). An ordinary documentation Mission may edit its declared source and…" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 10 – The Protected Control Plane (The Guardrails) | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 10 – The Protected Control Plane (The Guardrails)", "description": "Chapter 10 of Architects of Intent: The Protected Control Plane (The Guardrails). An ordinary documentation Mission may edit its declared source and…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails", "mainEntityOfPage": "https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT8M", "articleSection": "Part IV – Governance and Safe Evolution", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part IV – Governance and Safe Evolution</div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="chapter-10-the-protected-control-plane-the-guardrails">Chapter
+10 – The Protected Control Plane (The Guardrails)</h1>
+<p>Start with a denied effect.</p>
+<p>An ordinary documentation Mission may edit its declared source and
+documentation surfaces, then attempt to change a release workflow. The
+runtime must deny that write before application, record the attempted
+effect, and close the run under its declared failure policy. Denial is
+not a warning. If the runtime claims it denied the write while the
+candidate diff contains the protected change, the evidence contradicts
+itself and the run fails closed.</p>
+<p>Part III scaled bounded work into recurring workflows. That scale
+turns the machinery that grants scope, grades candidates, and admits
+changes into part of the threat model.</p>
+<p>The controls ordinary work is not allowed to rewrite form the
+<strong>Protected Control Plane</strong>. An ordinary Mission may report
+that one of those controls should change. Only a separately activated
+Governance Mission may produce a bounded proposal, and it still cannot
+apply, approve, or admit that proposal.</p>
+</div>
+</header>
+<blockquote>
+<p>A run cannot widen its own authority, rewrite its required check, or
+admit its own candidate.</p>
+</blockquote>
+<p>The organization that adopts policy and admits effects remains
+accountable. Automatic admission does not transfer responsibility to a
+model; it executes delegation the organization approved in advance.</p>
+<h2 id="authority-is-declared-per-property">Authority Is Declared Per
+Property</h2>
+<p>Code, prose, and tests do not occupy one universal hierarchy.
+Authority depends on the property being decided.</p>
+<table>
+<colgroup>
+<col style="width: 20%"/>
+<col style="width: 20%"/>
+<col style="width: 20%"/>
+<col style="width: 20%"/>
+<col style="width: 20%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Governed property</th>
+<th>Adopted authority</th>
+<th>Observed <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a></th>
+<th>Independent check</th>
+<th><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> authority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public API compatibility</td>
+<td>Versioned API contract</td>
+<td>Extracted signatures and behavior</td>
+<td>Contract and compatibility checks</td>
+<td>Release policy</td>
+</tr>
+<tr>
+<td>Generated reference material</td>
+<td>Generation policy naming source interfaces</td>
+<td>Fixed source interfaces and rendered output</td>
+<td><a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>-alignment check</td>
+<td>Documentation policy</td>
+</tr>
+<tr>
+<td>Application behavior</td>
+<td>Product contract and acceptance criteria</td>
+<td><a class="concept-link" href="concepts#candidate" title="See concept: Candidate">Candidate</a> code and runtime results</td>
+<td>Protected acceptance suite</td>
+<td>Change policy</td>
+</tr>
+<tr>
+<td><a class="concept-link" href="concepts#workflow" title="See concept: Workflow">Workflow</a> security</td>
+<td>Governance policy</td>
+<td>Candidate workflow and platform settings</td>
+<td>Protected policy checks and settings audit</td>
+<td>Governance policy and named approvers</td>
+</tr>
+</tbody>
+</table>
+<p>An artifact may play different roles for different properties. A
+schema can define an API shape and be observed Terrain for a schema
+inventory. A candidate-supplied test may support a behavior claim
+without being the sole protected check authorized to decide it. CI
+enforces adopted decisions; it does not create the intent it
+enforces.</p>
+<p>The control plane is therefore not a higher source of truth. It
+preserves the authority declared for each property while a candidate is
+produced and considered for admission.</p>
+<h2 id="close-the-trust-root">Close the Trust Root</h2>
+<p>The <strong>trust root</strong> is the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> set of mechanisms
+that ordinary work must not be able to weaken. The practical test is
+simple: what must stay outside ordinary write authority? Common answers
+include:</p>
+<ul>
+<li>activated Missions, effect policy, routing, and approval rules;</li>
+<li>the runtime components that mediate effects, resolve protected
+checks, route decisions, and seal results;</li>
+<li>protected contracts, acceptance tests, policy checks, and output
+schemas;</li>
+<li>CI and admission configuration, ownership rules, and bypass
+lists;</li>
+<li>scheduler state, credentials, deployment permissions, and kill
+state;</li>
+<li>the protected audit sink and its retention policy.</li>
+</ul>
+<p>Some controls live in the repository. Others live in source control,
+identity, CI, scheduling, or deployment systems. Repository protection
+cannot secure an off-repository bypass list. Observe those settings as
+Terrain and compare them with the governance Map.</p>
+<p>Candidate code and documentation may change inside declared scope.
+Candidate-supplied tests remain supporting evidence. Protected
+contracts, checks, admission rules, credentials, and audit controls
+remain outside ordinary write authority.</p>
+<h2 id="two-paths-two-authorities">Two Paths, Two Authorities</h2>
+<p>The control plane must evolve without giving ordinary work a
+privileged mode.</p>
+<p>An <strong>ordinary Mission</strong> receives a fixed work contract
+and bounded effects. Attempts to touch protected controls are denied
+during execution and rejected again at admission.</p>
+<p>A <strong><a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a></strong> is activated separately for one
+exact protected surface and one fixed base. It produces a checked
+proposal in an isolated workspace under stronger approval and validation
+rules. A different authorized identity applies the exact proposal.
+Independent owners and the governance admission policy decide whether it
+takes effect.</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Path</th>
+<th>Proposal</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ordinary Mission</td>
+<td>Bounded candidate</td>
+<td>Ordinary admission policy</td>
+</tr>
+<tr>
+<td>Governance Mission</td>
+<td>Checked proposal against one exact protected surface and base</td>
+<td>Independent application and governance admission</td>
+</tr>
+</tbody>
+</table>
+<p>Completion is not adoption. A Governance Mission may successfully
+produce its declared proposal while the protected control remains
+unchanged.</p>
+<h2 id="enforce-the-complete-effect-boundary">Enforce the Complete
+Effect Boundary</h2>
+<p>Filesystem paths are only one effect surface. The implementation
+varies; the portable requirement is that ordinary work cannot perform or
+conceal an undeclared effect:</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Effect surface</th>
+<th>Ordinary-run authority</th>
+<th>Concrete enforcement boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Protected control sources</td>
+<td>Read only when required</td>
+<td>Separate runtime identity and read-only mount, without remount or
+permission-changing capability</td>
+</tr>
+<tr>
+<td>Candidate workspace</td>
+<td>Bounded read and write</td>
+<td>Isolated workspace or worktree with independently observed
+changes</td>
+</tr>
+<tr>
+<td>Process execution</td>
+<td>Allowlisted mechanisms</td>
+<td>Brokered executable resolution, dropped privileges and capabilities,
+and risk-appropriate system-call restrictions</td>
+</tr>
+<tr>
+<td>Network</td>
+<td>Denied or destination-limited</td>
+<td>Separate network namespace, firewall, or authenticated egress
+proxy</td>
+</tr>
+<tr>
+<td>Secrets and credentials</td>
+<td>None unless explicitly delegated</td>
+<td>Short-lived, capability-scoped delivery through a broker outside
+workspace control</td>
+</tr>
+<tr>
+<td>Platform APIs, data, and deployment</td>
+<td>No ambient access</td>
+<td>Mediated calls constrained to the declared operation and target</td>
+</tr>
+</tbody>
+</table>
+<p>A read-only file permission is not a complete boundary if the worker
+owns the files, can remount them, can invoke a privileged helper, or can
+reach a host control socket. Enforce the boundary outside the worker’s
+authority. Depending on risk, that may require separate identities and
+namespaces, read-only mounts, dropped capabilities, system-call
+filtering, isolated networking, a virtual machine, or a microVM.</p>
+<p>The runtime’s enforcement of this declared <strong>effect
+envelope</strong> is the <a class="concept-link" href="concepts#scope-guard" title="See concept: Scope Guard">Scope Guard</a>. It checks attempted effects before
+application and records attempted and applied effects separately. If an
+effect cannot be mediated, the Mission does not possess it.</p>
+<h2 id="recompute-the-candidate-independently">Recompute the Candidate
+Independently</h2>
+<p>Admission must not trust a model-supplied path list or summary. A
+protected <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> computes the actual candidate changeset from the fixed
+base and candidate using the version-control system’s structured
+diff.</p>
+<p>The comparison must account for both endpoints of renames, file-mode
+and type changes, symlinks, and untracked outputs. It must normalize
+paths, enforce repository containment, and identify the protected policy
+used for the decision. Missing, ambiguous, or stale revisions block
+admission. A disagreement between runtime effect records and the
+independently computed diff is an evidenced failure.</p>
+<p>Use one small trusted admission-dispatch step for every candidate. It
+computes the complete effect set, applies baseline control-plane policy,
+and invokes deeper checks required by the observed change. Platform path
+filters and ownership features may optimize routing, but they are not
+the trust boundary.<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<h2 id="the-mission-gate">The Mission Gate</h2>
+<p>The independent admission check is the <strong><a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">Mission Gate</a></strong>.
+It runs without the model and verifies:</p>
+<ul>
+<li>the exact activated Mission, base, candidate, policy, and protected
+check versions;</li>
+<li>the complete observed effects and diff against declared
+authority;</li>
+<li>every required check and declared output contract;</li>
+<li>required approvals and routing predicates;</li>
+<li>the absence of missing or contradictory evidence.</li>
+</ul>
+<p>Completion and admission remain separate. Base drift after proposal
+closure produces this sequence:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run</td>
+<td>The candidate reaches <code>complete</code>; the <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> is
+sealed</td>
+</tr>
+<tr>
+<td>Mission Gate</td>
+<td>Re-read the base and protected policy</td>
+</tr>
+<tr>
+<td>Revalidation</td>
+<td>Base drift is detected</td>
+</tr>
+<tr>
+<td>Admission</td>
+<td>Denied</td>
+</tr>
+<tr>
+<td><a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a></td>
+<td>Append the linked admission decision</td>
+</tr>
+</tbody>
+</table>
+<p>The sealed run remains unchanged. Its successful result says that the
+workflow produced a supported proposal under the evidence then
+available. The later gate denies admission because the current base no
+longer matches that evidence.</p>
+<p>Humans need not approve every low-risk instance. Adopted policy may
+automatically admit a narrowly defined low-risk class supported by
+comparable evidence. The gate still applies organizational authority
+rather than model authority.</p>
+<p>The practical consequence is that higher proposal throughput does not
+require a direct path from generation to production. Admission can scale
+by risk class while the rules that authorize production effects remain
+independently controlled.</p>
+<h2 id="emergency-and-stop-controls">Emergency and Stop Controls</h2>
+<p>Break glass is an emergency Governance Mission, not an unbounded
+bypass. It must:</p>
+<ul>
+<li>bind the exact incident, target, effects, base, reason, and
+restoration plan;</li>
+<li>require independent approval and expiring least privilege;</li>
+<li>write to an audit sink the responder cannot alter;</li>
+<li>restore ordinary controls automatically; and</li>
+<li>run the full protected checks afterward.</li>
+</ul>
+<p>A complete kill mechanism has two independent jobs:</p>
+<ul>
+<li><strong>Stop execution:</strong> prevent new work, cancel active
+work, and revoke credentials at systems that enforce the effects.</li>
+<li><strong>Stop admission:</strong> make an always-required external
+gate reject merge or deployment while authoritative kill state is
+active, missing, stale, or unreadable.</li>
+</ul>
+<p>The worker cannot own the kill state or its reset authority. A
+cooperative environment variable may be a signal, but it cannot revoke
+credentials, stop direct external calls, or cover bypass roles by
+itself.</p>
+<h2 id="enforcement-evidence">Enforcement Evidence</h2>
+<p>A denied ordinary effect and a later Governance Mission are separate
+histories. The first retains the attempted protected write, the absence
+of an applied effect, the finding, and the evidenced failure. The second
+may retain a supported proposal whose adoption is still pending.</p>
+<p>Any protected diff after a claimed denial, successful summary over a
+required failure, or adopted change without independent admission is a
+contradiction. Under the protected sink and trust-root assumptions
+developed in <a class="chapter-link" href="chapter-12-governance-for-high-rate-automation#chapter-12-governance-for-high-rate-automation" title="Go to: Chapter 12">Chapter 12</a>, the evidence path must reject that account.</p>
+<p>The <a class="concept-link" href="concepts#protected-control-plane" title="See concept: Protected Control Plane">Protected Control Plane</a> keeps autonomy delegated rather than
+sovereign. It turns the versioned change-process contract into an
+independently enforced boundary: undeclared effects are denied, the
+candidate is recomputed independently, and changes to governing rules
+move onto a separate path. <a class="chapter-link" href="chapter-11-automated-refactoring-under-guards#chapter-11-automated-refactoring-under-guards" title="Go to: Chapter 11">Chapter 11</a> uses that boundary to govern
+structural self-modification.</p>
+<section class="footnotes footnotes-end-of-document" id="footnotes" role="doc-endnotes">
+<hr/>
+<ol>
+<li id="fn1"><p>Platform controls require careful composition. GitHub
+documents that skipped required workflows may remain pending, path
+filtering considers a limited changed-file set, one listed code owner
+can satisfy a pattern, and administrator or ruleset bypasses require
+explicit treatment. The portable rule is to run a trusted
+admission-dispatch step, enforce compound approvals directly, and
+observe platform configuration as Terrain. <a href="https://docs.github.com/en/actions/how-tos/troubleshoot-workflows">Actions
+documentation</a>, <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners">CODEOWNERS
+documentation</a>, <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches">protected
+branch documentation</a>.<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 10 of Architects of Intent: The Protected Control Plane (The Guardrails). An ordinary documentation Mission may edit its declared source and…" data-share-title="Chapter 10 – The Protected Control Plane (The Guardrails) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails&amp;text=Chapter%2010%20%E2%80%93%20The%20Protected%20Control%20Plane%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails&amp;title=Chapter%2010%20%E2%80%93%20The%20Protected%20Control%20Plane%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2010%20%E2%80%93%20The%20Protected%20Control%20Plane%20%28The%20Guardrails%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2010%20of%20Architects%20of%20Intent%3A%20The%20Protected%20Control%20Plane%20%28The%20Guardrails%29.%20An%20ordinary%20documentation%20Mission%20may%20edit%20its%20declared%20source%20and%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-9-the-maintenance-controller-background-maintenance">← Chapter 9 – The Maintenance Controller (Background Maintenance)</a>
+<a class="next-link" href="chapter-11-automated-refactoring-under-guards">Chapter 11 – Automated Refactoring Under Guards →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+</body>
+</html>

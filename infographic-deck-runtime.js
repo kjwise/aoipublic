@@ -100,7 +100,7 @@
                     color: theme.accent,
                     box: { left: 24, top: 42, width: 52, height: 14 },
                     description:
-                        'One bounded stochastic step. Output is untrusted until it passes Validation. The goal is not “trust the model,” but “trust the loop.”',
+                        'One bounded stochastic step. Its output remains a candidate; Validation supplies evidence about declared properties. The goal is not “trust the model,” but “trust the loop.”',
                     detail:
                         'The middle layer explores candidate patches or decisions inside the mission boundary; it does not commit.',
                     point1:
@@ -759,8 +759,8 @@
                 return 2;
             };
 
-            const makeConvergingSampler = (target) => {
-                const spread = target <= 2 ? 0.8 : (target >= 8 ? 1.35 : 2.1);
+            const makeConvergingSampler = (target, phase) => {
+                const offsets = [0, 1, 0, -1, 0, 0];
                 let total = 0;
                 let samples = 0;
 
@@ -768,8 +768,8 @@
                     next: () => {
                         const runningAvg = samples > 0 ? total / samples : target;
                         const drift = target - runningAvg;
-                        const noise = (Math.random() - Math.random()) * spread;
-                        const value = clamp(Math.round(target + noise + drift * 0.85), 1, 9);
+                        const offset = offsets[(samples + phase) % offsets.length];
+                        const value = clamp(Math.round(target + offset + drift * 0.85), 1, 12);
                         total += value;
                         samples += 1;
                         return value;
@@ -780,7 +780,7 @@
             };
 
             const buildTreeModel = function(rawValue) {
-                const target = clamp(rawValue, 1, 9);
+                const target = clamp(rawValue, 1, 12);
                 const depth = depthForTarget(target);
                 const lines = ['workspace/'];
                 const visibleCounts = { dirs: 1, files: 0 };
@@ -796,8 +796,8 @@
                     lines.push(`${prefix}${isLast ? '└──' : '├──'} ${label}`);
                 };
 
-                const dirSampler = makeConvergingSampler(target);
-                const fileSampler = makeConvergingSampler(target);
+                const dirSampler = makeConvergingSampler(target, 0);
+                const fileSampler = makeConvergingSampler(target, 3);
 
                 const rootDirCap = target >= 8 ? 8 : (target >= 6 ? 5 : (target >= 4 ? 3 : 1));
                 const nestedDirCap = target >= 8 ? 2 : 1;
@@ -910,8 +910,8 @@
                 }
 
                 let mode = {
-                    title: 'Balanced zone',
-                    body: 'This is the workable middle band. Breadth and depth are both high enough to stay navigable.',
+                    title: 'Heuristic band',
+                    body: 'Five to nine siblings is an inspection band, not proof that the grouping is right. Run outcomes still decide.',
                 };
 
                 if (target <= 2) {
@@ -921,18 +921,18 @@
                     };
                 } else if (target <= 4) {
                     mode = {
-                        title: 'Depth-heavy tree',
-                        body: 'Still narrow. Better than 1–2, but structure remains chain-like and retrieval costs stay higher.',
+                        title: 'Low fan-out: inspect',
+                        body: 'The structure may be chain-like. Check whether traversal hides peer context or consumes packet budget.',
                     };
-                } else if (target >= 8) {
+                } else if (target >= 12) {
                     mode = {
                         title: 'Junk-drawer edge',
-                        body: 'Very wide layers flatten the map. Discovery is fast, but curation pressure and naming collisions spike.',
+                        body: 'Very wide layers can hide relevant edges. Check misses, irrelevant inclusions, and scope violations before regrouping.',
                     };
-                } else if (target >= 7) {
+                } else if (target >= 10) {
                     mode = {
-                        title: 'Wide-but-usable',
-                        body: 'Fast top-level discovery, but you need strict naming and governance to avoid category sprawl.',
+                        title: 'High fan-out: inspect',
+                        body: 'This layer sits above the mnemonic band. Treat that as a warning to measure outcomes, not a reason to restructure by itself.',
                     };
                 }
 
@@ -949,12 +949,12 @@
             };
 
             const render = function(rawValue) {
-                const next = buildTreeModel(toInt(rawValue, 5));
+                const next = buildTreeModel(toInt(rawValue, 7));
                 valueEl.textContent = String(next.target);
                 modeTitle.textContent = next.mode.title;
                 modeBody.textContent = next.mode.body;
                 stats.textContent =
-                    `target=${next.target} • avg sibling dirs≈${next.avgDirs.toFixed(2)} • avg files/dir≈${next.avgFiles.toFixed(2)} • depth≈${next.depth} • sampled branches=${formatInt(next.sampleCount)} • visible sample=${next.visibleCounts.dirs} dirs / ${next.visibleCounts.files} files`;
+                    `observed siblings=${next.target} • illustrative avg dirs≈${next.avgDirs.toFixed(2)} • avg files/dir≈${next.avgFiles.toFixed(2)} • depth≈${next.depth} • sampled branches=${formatInt(next.sampleCount)} • visible sample=${next.visibleCounts.dirs} dirs / ${next.visibleCounts.files} files`;
                 tree.textContent = next.lines.join('\n');
             };
 
@@ -2158,52 +2158,48 @@
 
             const data = {
                 map: {
-                    fileLabel: 'map/mission.yaml',
-                    file: `id: mission_bugfix_auth\nowner: platform\nobjective: Fix auth redirect loop\nconstraints:\n  - do not change public API\n  - keep p95 login < 250ms\nacceptance:\n  - unit tests pass\n  - integration: login flow green\nbudgets:\n  max_calls: 120\n  max_latency_s: 45`,
+                    fileLabel: 'docs/architecture.md',
+                    file: `## Public Interfaces\n- calculate_tax(amount, country, rate)\n- normalize_country(country)`,
                     tree: [
                         { text: 'workspace/', kind: null },
-                        { text: '├── map/', kind: null },
-                        { text: '│   ├── mission.yaml', kind: 'read' },
-                        { text: '│   ├── contracts/', kind: null },
-                        { text: '│   │   └── login-flow.json', kind: 'read' },
-                        { text: '│   └── budgets.yaml', kind: 'read' },
-                        { text: '├── terrain/', kind: null },
+                        { text: '├── docs/', kind: null },
+                        { text: '│   └── architecture.md', kind: 'write' },
+                        { text: '├── src/', kind: null },
+                        { text: '│   └── tax.py', kind: 'read' },
+                        { text: '├── checks/', kind: null },
+                        { text: '│   └── map_terrain_sync', kind: 'exec' },
                         { text: '└── ledger/', kind: null },
                     ],
                 },
                 terrain: {
-                    fileLabel: 'terrain/policies/auth.policy',
-                    file: `package auth\n\ndef allow_redirect(uri):\n  not startswith(uri, \"http\")\n  not contains(uri, \"//\")\n\n# deterministic policy gate\n`,
+                    fileLabel: 'src/tax.py',
+                    file: `def calculate_tax(amount, country, rate):\n    return amount * rate\n\ndef normalize_country(country):\n    return country.upper()`,
                     tree: [
                         { text: 'workspace/', kind: null },
-                        { text: '├── map/', kind: null },
-                        { text: '├── terrain/', kind: null },
-                        { text: '│   ├── src/', kind: 'exec' },
-                        { text: '│   │   └── auth/', kind: 'exec' },
-                        { text: '│   │       └── redirect.ts', kind: 'exec' },
-                        { text: '│   ├── schemas/', kind: 'read' },
-                        { text: '│   │   └── login.json', kind: 'read' },
-                        { text: '│   ├── tests/', kind: 'exec' },
-                        { text: '│   │   ├── test_login.ts', kind: 'exec' },
-                        { text: '│   │   └── test_redirect.ts', kind: 'exec' },
-                        { text: '│   └── policies/', kind: null },
-                        { text: '│       └── auth.policy', kind: 'read' },
+                        { text: '├── docs/', kind: null },
+                        { text: '│   └── architecture.md', kind: 'write' },
+                        { text: '├── src/', kind: null },
+                        { text: '│   └── tax.py', kind: 'read' },
+                        { text: '├── checks/', kind: null },
+                        { text: '│   └── map_terrain_sync', kind: 'exec' },
                         { text: '└── ledger/', kind: null },
                     ],
                 },
                 ledger: {
                     fileLabel: 'ledger/runs/run_1042.json',
-                    file: `{\n  \"run_id\": \"run_1042\",\n  \"mission_id\": \"mission_bugfix_auth\",\n  \"inputs\": { \"git_ref\": \"a1b2c3d\" },\n  \"validators\": {\n    \"tests\": \"pass\",\n    \"policy\": \"pass\",\n    \"security\": \"pass\"\n  },\n  \"diff\": { \"hash\": \"sha256:...\", \"files\": 3 },\n  \"decision\": \"merge\",\n  \"timestamp\": \"2026-02-13T21:18:00Z\"\n}`,
+                    file: `{\n  \"run_id\": \"run_1042\",\n  \"intent\": \"sync_public_interfaces\",\n  \"allowed_scope\": \"docs/architecture.md#Public Interfaces\",\n  \"inputs\": {\n    \"terrain\": \"sha256:7bc...\",\n    \"map\": \"sha256:291...\"\n  },\n  \"diff\": { \"hash\": \"sha256:a14...\", \"files\": 1 },\n  \"result\": {\n    \"check\": \"map_terrain_sync@1\",\n    \"status\": \"pass\",\n    \"changed\": true\n  },\n  \"transition\": {\n    \"from\": \"validating\",\n    \"signal\": \"pass\",\n    \"to\": \"complete\"\n  }\n}`,
                     tree: [
                         { text: 'workspace/', kind: null },
-                        { text: '├── map/', kind: null },
-                        { text: '├── terrain/', kind: null },
+                        { text: '├── docs/', kind: null },
+                        { text: '├── src/', kind: null },
+                        { text: '├── checks/', kind: null },
                         { text: '└── ledger/', kind: null },
                         { text: '    ├── runs/', kind: null },
                         { text: '    │   └── run_1042.json', kind: 'write' },
                         { text: '    ├── evidence/', kind: null },
-                        { text: '    │   └── validators_1042.txt', kind: 'write' },
-                        { text: '    └── decisions.log', kind: 'write' },
+                        { text: '    │   └── map_terrain_sync_1042.json', kind: 'write' },
+                        { text: '    └── diffs/', kind: null },
+                        { text: '        └── run_1042.patch', kind: 'write' },
                     ],
                 },
             };
@@ -2242,988 +2238,273 @@
             render();
         };
 
-        // Section 2: Mission object builder
-        const setupMissionObjectBuilder = () => {
-            const presetButtons = Array.from(document.querySelectorAll('[data-mission-preset]'));
-            const slider = document.getElementById('missionTightnessSlider');
-            const tightValue = document.getElementById('missionTightnessValue');
-            const missionYaml = document.getElementById('missionYaml');
-            const missionIdLabel = document.getElementById('missionIdLabel');
-            const gateMapEl = document.getElementById('missionGateMap');
-            const retriesEl = document.getElementById('missionRetries');
-            const convEl = document.getElementById('missionConvergence');
-            const driftEl = document.getElementById('missionDrift');
-            const callsEl = document.getElementById('missionMaxCalls');
-            const latencyEl = document.getElementById('missionMaxLatency');
-            const lifecycleEl = document.getElementById('missionLifecycleStatus');
-            const attemptEl = document.getElementById('missionAttemptLabel');
-            const runEl = document.getElementById('missionLastRun');
-            const evidenceEl = document.getElementById('missionEvidencePath');
-            const flexEl = document.getElementById('missionFlex');
-            const flexBar = document.getElementById('missionFlexBar');
-            const tightEl = document.getElementById('missionTight');
-            const tightBar = document.getElementById('missionTightBar');
-            const schemaStatusEl = document.getElementById('missionSchemaStatus');
-            const scopeStatusEl = document.getElementById('missionScopeStatus');
-            const qualityStatusEl = document.getElementById('missionQualityGateStatus');
-            const schemaNoteEl = document.getElementById('missionSchemaNote');
-
-            if (
-                !presetButtons.length ||
-                !slider ||
-                !tightValue ||
-                !missionYaml ||
-                !missionIdLabel ||
-                !gateMapEl ||
-                !retriesEl ||
-                !convEl ||
-                !driftEl ||
-                !callsEl ||
-                !latencyEl ||
-                !lifecycleEl ||
-                !attemptEl ||
-                !runEl ||
-                !evidenceEl ||
-                !flexEl ||
-                !flexBar ||
-                !tightEl ||
-                !tightBar ||
-                !schemaStatusEl ||
-                !scopeStatusEl ||
-                !qualityStatusEl ||
-                !schemaNoteEl
-            ) return;
-
-            const presets = {
-                bugfix: {
-                    id: 'mission_bugfix_auth',
-                    version: 1,
-                    objective: 'Fix auth redirect loop',
-                    scope: {
-                        modify: ['services/auth/redirect_handler.ts'],
-                        readOnly: ['contracts/auth_flow.schema.json'],
-                        doNotTouch: ['.github/**', 'policies/**'],
-                        editRegions: {
-                            'services/auth/redirect_handler.ts': ['function handleRedirect'],
-                        },
-                    },
-                    budgets: { calls: 120, latency: '45s' },
-                    accepts: ['unit tests', 'integration: login flow'],
-                    constraints: ['do not change public API', 'keep p95 login < 250ms'],
-                    qualityGate: './scripts/validate_auth_flow.sh',
-                    rollbackOn: ['quality_gate_fail', 'scope_violation'],
-                    fallbacks: { maxIterations: 3, onFail: 'revert' },
-                },
-                feature: {
-                    id: 'mission_feature_billing',
-                    version: 1,
-                    objective: 'Add usage-based billing endpoint',
-                    scope: {
-                        modify: ['services/billing/routes/v2_usage.ts', 'docs/api/reference.md'],
-                        readOnly: ['contracts/billing.openapi.json'],
-                        doNotTouch: ['infra/**', 'policies/**'],
-                        editRegions: {
-                            'services/billing/routes/v2_usage.ts': ['router.post("/v2/usage")'],
-                        },
-                    },
-                    budgets: { calls: 180, latency: '70s' },
-                    accepts: ['contract tests', 'docs updated'],
-                    constraints: ['idempotent endpoint', 'no PII in logs'],
-                    qualityGate: './scripts/validate_billing_contracts.sh',
-                    rollbackOn: ['quality_gate_fail', 'schema_mismatch'],
-                    fallbacks: { maxIterations: 4, onFail: 'revert' },
-                },
-                refactor: {
-                    id: 'mission_refactor_queue',
-                    version: 1,
-                    objective: 'Refactor queue worker for determinism',
-                    scope: {
-                        modify: ['services/queue/worker.ts'],
-                        readOnly: ['contracts/queue_jobs.schema.json'],
-                        doNotTouch: ['services/public_api/**', '.github/**'],
-                        editRegions: {
-                            'services/queue/worker.ts': ['class QueueWorker'],
-                        },
-                    },
-                    budgets: { calls: 150, latency: '55s' },
-                    accepts: ['load test passes', 'no behavior regression'],
-                    constraints: ['keep schema stable', 'preserve retry semantics'],
-                    qualityGate: './scripts/validate_queue_worker.sh',
-                    rollbackOn: ['quality_gate_fail', 'performance_regression'],
-                    fallbacks: { maxIterations: 3, onFail: 'revert' },
-                },
-                compliance: {
-                    id: 'mission_compliance_policy',
-                    version: 1,
-                    objective: 'Enforce retention policy in storage layer',
-                    scope: {
-                        modify: ['services/storage/retention_policy.ts', 'ledger/audit_rules.md'],
-                        readOnly: ['policy/retention_v4.yaml'],
-                        doNotTouch: ['runtime/secrets/**', '.github/**'],
-                        editRegions: {
-                            'services/storage/retention_policy.ts': ['applyRetentionPolicy'],
-                        },
-                    },
-                    budgets: { calls: 200, latency: '90s' },
-                    accepts: ['policy gate green', 'audit log entries'],
-                    constraints: ['append-only ledger', 'no bypass path'],
-                    qualityGate: './scripts/validate_retention_policy.sh',
-                    rollbackOn: ['policy_gate_fail', 'scope_violation'],
-                    fallbacks: { maxIterations: 2, onFail: 'escalate' },
-                },
-            };
-
-            const state = { preset: 'bugfix', tight: clamp(toInt(slider.value, 55), 0, 100) };
-            const statusPalette = {
-                pass: { fg: 'rgba(198, 246, 232, 0.98)', border: 'rgba(16, 185, 129, 0.55)', bg: 'rgba(16, 185, 129, 0.16)' },
-                warn: { fg: 'rgba(255, 236, 179, 0.98)', border: 'rgba(245, 158, 11, 0.55)', bg: 'rgba(245, 158, 11, 0.16)' },
-                fail: { fg: 'rgba(255, 221, 225, 0.98)', border: 'rgba(247, 118, 142, 0.60)', bg: 'rgba(247, 118, 142, 0.18)' },
-                info: { fg: 'rgba(223, 235, 255, 0.98)', border: 'rgba(122, 162, 247, 0.55)', bg: 'rgba(122, 162, 247, 0.16)' },
-            };
-            const badgeStyle = (tone) => {
-                const t = statusPalette[tone] || statusPalette.info;
-                return [
-                    'display:inline-flex',
-                    'align-items:center',
-                    'justify-content:center',
-                    'padding:0.12rem 0.4rem',
-                    'border-radius:999px',
-                    `border:1px solid ${t.border}`,
-                    `background:${t.bg}`,
-                    `color:${t.fg}`,
-                    'font-family:JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, monospace',
-                    'font-size:0.68rem',
-                    'line-height:1.15',
-                    'font-weight:700',
-                    'letter-spacing:0.01em',
-                    'white-space:nowrap',
-                ].join(';');
-            };
-            const badgeHtml = (label, tone) => `<span style="${badgeStyle(tone)}">${escapeHtml(label)}</span>`;
-            const setBadge = (el, label, tone) => {
-                if (!el) return;
-                el.textContent = label;
-                el.setAttribute('style', badgeStyle(tone));
-            };
-
-            const render = () => {
-                presetButtons.forEach((b) => setPressed(b, b.dataset.missionPreset === state.preset));
-                tightValue.textContent = `${state.tight}%`;
-                slider.value = String(state.tight);
-
-                const p = presets[state.preset] || presets.bugfix;
-                missionIdLabel.textContent = p.id;
-
-                const retries = clamp(1 + Math.round((100 - state.tight) / 18), 1, 7);
-                const convergence = clamp(Math.round(25 + 75 * Math.pow(state.tight / 100, 0.65)), 0, 100);
-                const drift = clamp(Math.round(85 - state.tight * 0.7), 5, 95);
-                const flex = clamp(100 - state.tight, 0, 100);
-                const schemaPass = true;
-                const scopePass = state.tight >= 42;
-                const qualityPass = state.tight >= 50;
-
-                let lifecycle = 'DRAFT';
-                if (!scopePass && drift >= 65) lifecycle = 'REVERTED';
-                else if (scopePass && qualityPass && convergence >= 82) lifecycle = 'COMPLETED';
-                else if (scopePass) lifecycle = 'ACTIVE';
-
-                const lifecycleTone = lifecycle === 'COMPLETED'
-                    ? 'pass'
-                    : lifecycle === 'ACTIVE'
-                        ? 'info'
-                        : lifecycle === 'REVERTED'
-                            ? 'fail'
-                            : 'warn';
-                const attempt = lifecycle === 'COMPLETED'
-                    ? 1
-                    : clamp(Math.max(1, Math.round((100 - convergence) / 18) + 1), 1, p.fallbacks.maxIterations);
-                const runId = `run_${String(1000 + state.tight + p.budgets.calls + attempt).padStart(4, '0')}`;
-                const versionTag = `${p.id}@v${p.version}`;
-
-                retriesEl.textContent = String(retries);
-                convEl.textContent = String(convergence);
-                driftEl.textContent = String(drift);
-                callsEl.textContent = String(p.budgets.calls);
-                latencyEl.textContent = p.budgets.latency;
-                setBadge(lifecycleEl, lifecycle, lifecycleTone);
-                attemptEl.textContent = `${attempt}/${p.fallbacks.maxIterations}`;
-                runEl.textContent = runId;
-                evidenceEl.textContent = `ledger/runs/${versionTag}/${runId}.json`;
-
-                flexEl.textContent = String(flex);
-                flexBar.style.width = `${flex}%`;
-                tightEl.textContent = String(state.tight);
-                tightBar.style.width = `${state.tight}%`;
-
-                setBadge(schemaStatusEl, schemaPass ? 'PASS' : 'FAIL', schemaPass ? 'pass' : 'fail');
-                setBadge(scopeStatusEl, scopePass ? 'PASS' : 'WARN', scopePass ? 'pass' : 'warn');
-                setBadge(qualityStatusEl, qualityPass ? 'PASS' : 'WARN', qualityPass ? 'pass' : 'warn');
-                if (!scopePass) {
-                    schemaNoteEl.textContent = 'Scope boundary is too loose for safe activation. Tighten constraints before opening the write window.';
-                } else if (!qualityPass) {
-                    schemaNoteEl.textContent = `Schema is valid, but ${escapeHtml(p.qualityGate)} is under-constrained. Add stricter acceptance criteria before scale-up.`;
-                } else {
-                    schemaNoteEl.textContent = `Schema + scope + quality gate compiled. Mission can run deterministically under ${escapeHtml(p.qualityGate)}.`;
-                }
-
-                const gateRows = [
-                    {
-                        key: 'scope.do_not_touch',
-                        gate: 'protected path validator',
-                        detail: p.scope.doNotTouch[0],
-                        tone: scopePass ? 'pass' : 'warn',
-                        label: scopePass ? 'PASS' : 'WARN',
-                    },
-                    {
-                        key: 'scope.edit_regions',
-                        gate: 'edit region validator',
-                        detail: Object.values(p.scope.editRegions)[0][0],
-                        tone: state.tight >= 48 ? 'pass' : 'warn',
-                        label: state.tight >= 48 ? 'PASS' : 'WARN',
-                    },
-                    {
-                        key: 'constraints.forbidden',
-                        gate: 'policy assertion check',
-                        detail: p.constraints[0],
-                        tone: state.tight >= 45 ? 'pass' : 'warn',
-                        label: state.tight >= 45 ? 'PASS' : 'WARN',
-                    },
-                    {
-                        key: 'acceptance_criteria',
-                        gate: 'deterministic content/test checks',
-                        detail: p.accepts[0],
-                        tone: qualityPass ? 'pass' : 'warn',
-                        label: qualityPass ? 'PASS' : 'WARN',
-                    },
-                    {
-                        key: 'quality_gate.cmd',
-                        gate: p.qualityGate,
-                        detail: p.fallbacks.onFail === 'escalate' ? 'on_fail: escalate' : 'on_fail: revert',
-                        tone: qualityPass ? 'pass' : 'warn',
-                        label: qualityPass ? 'PASS' : 'WARN',
-                    },
-                ];
-                gateMapEl.innerHTML = gateRows.map((row) => (
-                    `<div class="flex items-start justify-between gap-2">
-                        <div class="min-w-0">
-                            <div class="text-brand-strong">${escapeHtml(row.key)} → ${escapeHtml(row.gate)}</div>
-                            <div class="text-brand-muted">${escapeHtml(row.detail)}</div>
-                        </div>
-                        ${badgeHtml(row.label, row.tone)}
-                    </div>`
-                )).join('');
-
-                const [editFile, editSections] = Object.entries(p.scope.editRegions)[0];
-                const yaml = [
-                    `mission_id: ${p.id}`,
-                    `mission_version: ${p.version}`,
-                    `goal: "${p.objective}"`,
-                    `scope:`,
-                    `  modify:`,
-                    ...p.scope.modify.map((f) => `    - ${f}`),
-                    `  read_only:`,
-                    ...p.scope.readOnly.map((f) => `    - ${f}`),
-                    `  do_not_touch:`,
-                    ...p.scope.doNotTouch.map((f) => `    - ${f}`),
-                    `  edit_regions:`,
-                    `    ${editFile}:`,
-                    ...editSections.map((r) => `      - "${r}"`),
-                    `constraints:`,
-                    `  forbidden:`,
-                    ...p.constraints.map((c) => `    - "${c}"`),
-                    `acceptance_criteria:`,
-                    `  must_pass:`,
-                    ...p.accepts.map((a) => `    - "${a}"`),
-                    `budgets:`,
-                    `  max_calls: ${p.budgets.calls}`,
-                    `  max_latency: ${p.budgets.latency}`,
-                    `  constraint_tightness: ${state.tight}%`,
-                    `quality_gate:`,
-                    `  cmd: ${p.qualityGate}`,
-                    `rollback_on:`,
-                    ...p.rollbackOn.map((r) => `  - "${r}"`),
-                    `fallbacks:`,
-                    `  max_iterations: ${p.fallbacks.maxIterations}`,
-                    `  on_fail: ${p.fallbacks.onFail}`,
-                    `telemetry:`,
-                    `  status: ${lifecycle.toLowerCase()}`,
-                    `  attempt: ${attempt}`,
-                    `  last_run_id: ${runId}`,
-                    `derived:`,
-                    `  expected_retries: ${retries}x`,
-                    `  convergence_rate: ${convergence}/100`,
-                    `  drift_risk: ${drift}/100`,
-                ].join('\n');
-
-                missionYaml.textContent = yaml;
-            };
-
-            slider.addEventListener('input', () => {
-                state.tight = clamp(toInt(slider.value, state.tight), 0, 100);
-                render();
-            });
-
-            presetButtons.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    state.preset = btn.dataset.missionPreset || 'bugfix';
-                    render();
-                });
-            });
-
-            render();
-        };
-
-        // Section 3: Sandwich simulator
-        const setupSandwichSimulator = () => {
-            const entropySlider = document.getElementById('sandwichEntropySlider');
-            const gateSlider = document.getElementById('sandwichGateSlider');
-            const entropyValue = document.getElementById('sandwichEntropyValue');
-            const gateValue = document.getElementById('sandwichGateValue');
-            const runBtn = document.getElementById('sandwichRunBtn');
-            const attempts = document.getElementById('sandwichAttempts');
-            const retriesEl = document.getElementById('sandwichRetries');
-            const qualityEl = document.getElementById('sandwichQuality');
-            const costEl = document.getElementById('sandwichExpectedCost');
-            const exitEl = document.getElementById('sandwichExit');
-            if (!entropySlider || !gateSlider || !entropyValue || !gateValue || !runBtn || !attempts || !retriesEl || !qualityEl || !costEl || !exitEl) return;
-
-            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            const state = {
-                entropy: clamp(toInt(entropySlider.value, 60), 0, 100),
-                gate: clamp(toInt(gateSlider.value, 70), 0, 100),
-                running: false,
-                timer: null,
-            };
-
-            const ensurePills = () => {
-                if (attempts.childElementCount >= 12) return;
-                attempts.innerHTML = '';
-                for (let i = 0; i < 12; i++) {
-                    const el = document.createElement('div');
-                    el.className = 'attempt-pill';
-                    attempts.appendChild(el);
-                }
-            };
-
-            const metrics = () => {
-                const entropy = state.entropy;
-                const gate = state.gate;
-                const retries = clamp(1 + Math.round(entropy / 18 + gate / 34), 1, 12);
-                const quality = clamp(Math.round(40 + gate * 0.55 - entropy * 0.18), 10, 95);
-                const expectedCost = clamp(Math.round(55 + retries * 8 + entropy * 0.12 + gate * 0.08), 40, 220);
-                const exit = gate >= 30 ? 'PASS' : 'PASS';
-                return { retries, quality, expectedCost, exit };
-            };
-
-            const render = () => {
-                entropySlider.value = String(state.entropy);
-                gateSlider.value = String(state.gate);
-                entropyValue.textContent = String(state.entropy);
-                gateValue.textContent = String(state.gate);
-
-                const m = metrics();
-                retriesEl.textContent = String(m.retries);
-                qualityEl.textContent = String(m.quality);
-                costEl.textContent = String(m.expectedCost);
-                exitEl.textContent = m.exit;
-            };
-
-            const clearRun = () => {
-                if (state.timer) window.clearInterval(state.timer);
-                state.timer = null;
-                state.running = false;
-                runBtn.textContent = 'Run';
-            };
-
-            const run = () => {
-                ensurePills();
-                clearRun();
-                state.running = true;
-                runBtn.textContent = 'Running…';
-
-                const pills = Array.from(attempts.children);
-                pills.forEach((p) => p.classList.remove('is-fail', 'is-pass'));
-
-                const m = metrics();
-                let idx = 0;
-                const total = m.retries;
-
-                const tick = () => {
-                    if (idx >= total) {
-                        clearRun();
-                        render();
-                        return;
-                    }
-                    const isLast = idx === total - 1;
-                    const el = pills[idx];
-                    if (el) {
-                        el.classList.add(isLast ? 'is-pass' : 'is-fail');
-                        if (!prefersReducedMotion) el.style.transform = 'translateY(-1px)';
-                        window.setTimeout(() => { if (el) el.style.transform = ''; }, 90);
-                    }
-                    idx += 1;
-                };
-
-                if (prefersReducedMotion) {
-                    // no animation, just final state
-                    for (let i = 0; i < total; i++) {
-                        const el = pills[i];
-                        if (el) el.classList.add(i === total - 1 ? 'is-pass' : 'is-fail');
-                    }
-                    clearRun();
-                    render();
-                    return;
-                }
-
-                tick();
-                state.timer = window.setInterval(tick, 140);
-            };
-
-            entropySlider.addEventListener('input', () => {
-                state.entropy = clamp(toInt(entropySlider.value, state.entropy), 0, 100);
-                render();
-            });
-            gateSlider.addEventListener('input', () => {
-                state.gate = clamp(toInt(gateSlider.value, state.gate), 0, 100);
-                render();
-            });
-            runBtn.addEventListener('click', () => {
-                if (state.running) clearRun();
-                else run();
-            });
-
-            window.addEventListener('beforeunload', clearRun, { once: true });
-            ensurePills();
-            render();
-        };
-
-        // Section 4: Validator bundle
-        const setupValidatorBundle = () => {
-            const diffEl = document.getElementById('validatorDiff');
-            const ledgerEl = document.getElementById('validatorLedger');
-            const resultsEl = document.getElementById('validatorResults');
-            const runIdEl = document.getElementById('validatorRunId');
-            const budgetSlider = document.getElementById('validatorBudgetSlider');
-            const budgetValue = document.getElementById('validatorBudgetValue');
-            const runBtn = document.getElementById('validatorRunBtn');
-            const toggleButtons = Array.from(document.querySelectorAll('[data-validator]'));
-            if (!diffEl || !ledgerEl || !resultsEl || !runIdEl || !budgetSlider || !budgetValue || !runBtn || !toggleButtons.length) return;
-
-            const issues = [
-                { key: 'schema', label: 'Schema mismatch: login.redirectUri missing', caughtBy: 'schema' },
-                { key: 'tests', label: 'Unit regression: redirect loop not covered', caughtBy: 'tests' },
-                { key: 'security', label: 'Security: open redirect possible', caughtBy: 'security' },
-                { key: 'policy', label: 'Policy: external URL disallowed', caughtBy: 'policy' },
-                { key: 'style', label: 'Style: lint + formatting', caughtBy: 'style' },
-                { key: 'integration', label: 'Integration: login flow end-to-end', caughtBy: 'integration' },
-            ];
-
-            const sampleDiff = [
-                'diff --git a/src/auth/redirect.ts b/src/auth/redirect.ts',
-                'index 11aa22..33bb44 100644',
-                '--- a/src/auth/redirect.ts',
-                '+++ b/src/auth/redirect.ts',
-                '@@',
-                '-export function redirect(uri: string) {',
-                '-  return uri;',
-                '-}',
-                '+export function redirect(uri: string) {',
-                '+  // TODO: validate uri',
-                '+  return decodeURIComponent(uri);',
-                '+}',
-                '',
-                'diff --git a/schemas/login.json b/schemas/login.json',
-                '@@',
-                '-  \"redirectUri\": { \"type\": \"string\" }',
-                '+  \"redirect\": { \"type\": \"string\" }',
-            ].join('\n');
-
-            diffEl.textContent = sampleDiff;
-
-            const state = {
-                active: new Set(toggleButtons.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.validator)),
-                budget: clamp(toInt(budgetSlider.value, 4), 1, 10),
-                runId: 0,
-            };
-
-            const render = () => {
-                budgetValue.textContent = String(state.budget);
-                budgetSlider.value = String(state.budget);
-
-                const activeValidators = Array.from(state.active).sort();
-                const caught = issues.filter((i) => state.active.has(i.caughtBy));
-                const neededAttempts = 1 + caught.length;
-                const attemptsUsed = Math.min(state.budget, neededAttempts);
-                const boundedFail = state.budget < neededAttempts;
-                const outcome = boundedFail ? 'bounded-fail' : (caught.length === 0 ? 'pass' : 'pass');
-
-                resultsEl.innerHTML = '';
-                issues.forEach((issue) => {
-                    const isEnabled = state.active.has(issue.caughtBy);
-                    const isCaught = isEnabled;
-                    const status = isEnabled ? (isCaught ? 'FAIL' : 'PASS') : 'SKIP';
-                    const color = status === 'FAIL' ? 'text-brand-danger' : (status === 'PASS' ? 'text-brand-vibrant' : 'text-brand-muted');
-                    const line = document.createElement('div');
-                    line.className = 'flex items-start justify-between gap-3';
-                    line.innerHTML = `<span class="text-brand-muted">${escapeHtml(issue.label)}</span><span class="font-mono ${color}">${status}</span>`;
-                    resultsEl.appendChild(line);
-                });
-
-                runIdEl.textContent = `run_${String(state.runId).padStart(3, '0')}`;
-                const ledger = {
-                    run_id: runIdEl.textContent,
-                    mission_id: 'mission_bugfix_auth',
-                    budget: { max_attempts: state.budget },
-                    validators: activeValidators,
-                    attempts_used: attemptsUsed,
-                    outcome,
-                    notes: boundedFail
-                        ? 'Budget exhausted: deterministic exit with partial evidence.'
-                        : 'Bundle executed: evidence recorded; deterministic decision available.',
-                };
-                ledgerEl.textContent = JSON.stringify(ledger, null, 2);
-            };
-
-            const bumpRun = () => {
-                state.runId += 1;
-                render();
-            };
-
-            budgetSlider.addEventListener('input', () => {
-                state.budget = clamp(toInt(budgetSlider.value, state.budget), 1, 10);
-                render();
-            });
-
-            runBtn.addEventListener('click', () => bumpRun());
-
-            toggleButtons.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    const key = btn.dataset.validator || '';
-                    if (!key) return;
-                    if (state.active.has(key)) state.active.delete(key);
-                    else state.active.add(key);
-                    btn.setAttribute('aria-pressed', state.active.has(key) ? 'true' : 'false');
-                    render();
-                });
-            });
-
-            render();
-        };
-
-        // Section 5: Always-on loops chart
+        // Always-on maintenance controller
         const setupAlwaysOnLoops = () => {
             const root = document.querySelector('[data-infographic-section-id="i3-section-05-always-on-loops"]');
             if (!root) return;
 
-            const weekSlider = root.querySelector('#maintWeekSlider');
-            const weekValue = root.querySelector('#maintWeekValue');
-            const budgetSlider = root.querySelector('#maintCycleBudgetSlider');
-            const budgetValue = root.querySelector('#maintCycleBudgetValue');
-            const stepBtn = root.querySelector('#maintRunCycleButton');
-            const runToGateBtn = root.querySelector('#maintRunToGateButton');
-            const resetBtn = root.querySelector('#maintResetButton');
-            const debtEl = root.querySelector('#maintDebt');
-            const incidentsEl = root.querySelector('#maintIncidents');
-            const p95El = root.querySelector('#maintP95');
-            const budgetRemainingEl = root.querySelector('#maintBudgetRemaining');
-            const targetEl = root.querySelector('#maintTarget');
-            const expectedGainEl = root.querySelector('#maintExpectedGain');
-            const gateSignalEl = root.querySelector('#maintGateSignal');
-            const gateGuardrailsEl = root.querySelector('#maintGateGuardrails');
-            const gateBudgetEl = root.querySelector('#maintGateBudget');
-            const gateLedgerEl = root.querySelector('#maintGateLedger');
-            const statusEl = root.querySelector('#maintStatus');
-            const cycleEl = root.querySelector('#maintCycle');
-            const lastRunEl = root.querySelector('#maintLastRun');
-            const receiptEl = root.querySelector('#maintReceipt');
-            const trendStatusEl = root.querySelector('#maintTrendStatus');
-            const trendWindowEl = root.querySelector('#maintTrendWindow');
-            const outcomeEl = root.querySelector('#maintOutcome');
-            const attemptsEl = root.querySelector('#maintAttempts');
-            const chartEl = root.querySelector('#maintenanceChart');
-            const loopButtons = Array.from(root.querySelectorAll('[data-maint-loop]'));
+            const findingsSlider = root.querySelector('#maintenanceFindingsSlider');
+            const findingsValue = root.querySelector('#maintenanceFindingsValue');
+            const sensorToggle = root.querySelector('#maintenanceSensorToggle');
+            const eligibilityToggle = root.querySelector('#maintenanceEligibilityToggle');
+            const approvalToggle = root.querySelector('#maintenanceApprovalToggle');
+            const validatorToggle = root.querySelector('#maintenanceValidatorToggle');
+            const runScanButton = root.querySelector('#maintenanceRunScanButton');
+            const runMissionButton = root.querySelector('#maintenanceRunMissionButton');
+            const resetButton = root.querySelector('#maintenanceResetButton');
+            const scanSeal = root.querySelector('#maintenanceScanSeal');
+            const scanStatus = root.querySelector('#maintenanceScanStatus');
+            const evaluated = root.querySelector('#maintenanceEvaluated');
+            const selectedTarget = root.querySelector('#maintenanceSelectedTarget');
+            const scanOutputsChecked = root.querySelector('#maintenanceScanOutputsChecked');
+            const scanLedger = root.querySelector('#maintenanceScanLedger');
+            const missionSeal = root.querySelector('#maintenanceMissionSeal');
+            const missionStatus = root.querySelector('#maintenanceMissionStatus');
+            const candidate = root.querySelector('#maintenanceCandidate');
+            const missionOutputsChecked = root.querySelector('#maintenanceMissionOutputsChecked');
+            const adoption = root.querySelector('#maintenanceAdoption');
+            const missionLedger = root.querySelector('#maintenanceMissionLedger');
+            const gatePinned = root.querySelector('#maintenanceGatePinned');
+            const gateEligibility = root.querySelector('#maintenanceGateEligibility');
+            const gateReport = root.querySelector('#maintenanceGateReport');
+            const gateApproval = root.querySelector('#maintenanceGateApproval');
+            const gateValidators = root.querySelector('#maintenanceGateValidators');
+            const gateProposal = root.querySelector('#maintenanceGateProposal');
+            const outcome = root.querySelector('#maintenanceOutcome');
+            const stages = Array.from(root.querySelectorAll('[data-maintenance-stage]'));
 
-            if (!weekSlider || !weekValue || !budgetSlider || !budgetValue || !stepBtn || !runToGateBtn || !resetBtn ||
-                !debtEl || !incidentsEl || !p95El || !budgetRemainingEl || !targetEl || !expectedGainEl ||
-                !gateSignalEl || !gateGuardrailsEl || !gateBudgetEl || !gateLedgerEl || !statusEl || !cycleEl ||
-                !lastRunEl || !receiptEl || !trendStatusEl || !trendWindowEl || !outcomeEl || !attemptsEl ||
-                !chartEl || !loopButtons.length) {
-                return;
-            }
+            const required = [
+                findingsSlider, findingsValue, sensorToggle, eligibilityToggle, approvalToggle,
+                validatorToggle, runScanButton, runMissionButton, resetButton, scanSeal,
+                scanStatus, evaluated, selectedTarget, scanOutputsChecked, scanLedger,
+                missionSeal, missionStatus, candidate, missionOutputsChecked, adoption,
+                missionLedger, gatePinned, gateEligibility, gateReport, gateApproval,
+                gateValidators, gateProposal, outcome,
+            ];
+            if (required.some((el) => !el) || stages.length !== 5) return;
 
-            const MAX_WEEK = 26;
             const state = {
-                week: clamp(toInt(weekSlider.value, 8), 0, MAX_WEEK),
-                loops: new Set(loopButtons.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.maintLoop)),
-                cycleBudget: clamp(toInt(budgetSlider.value, 6), 2, 12),
-                cycle: 0,
-                history: [],
+                findings: 3,
+                sensorAvailable: true,
+                targetEligible: true,
+                approvalGranted: false,
+                validatorsPass: true,
+                scanAttempt: 0,
+                scanStatus: 'ready',
+                scanSealed: false,
+                scanOutputsChecked: false,
+                selectedTarget: null,
+                missionAttempt: 0,
+                missionTerminal: null,
+                missionOutputsChecked: false,
             };
 
-            const simulate = (loops) => {
-                const weeks = [];
-                const debt = [];
-                const p95 = [];
-                const incidents = [];
-
-                for (let w = 0; w <= MAX_WEEK; w++) {
-                    const autonomy = clamp(20 + w * 3.2, 0, 100);
-                    let d = 38 + w * 2.7;
-                    if (loops.has('map')) d -= w * 0.9;
-                    if (loops.has('dream')) d -= Math.max(0, w - 4) * 1.0;
-                    if (loops.has('refactor')) d -= Math.max(0, w - 2) * 1.25;
-                    if (loops.has('governance')) d -= w * 0.55;
-                    d = clamp(d, 0, 100);
-
-                    let expected = 62 + autonomy * 0.55 + d * 0.38;
-                    expected += loops.has('map') ? 2.0 : 0;
-                    expected += loops.has('dream') ? 2.5 : 0;
-                    expected += loops.has('refactor') ? 2.5 : 0;
-                    expected += loops.has('governance') ? 2.0 : 0;
-
-                    let pricing = 25 + Math.pow(autonomy / 100, 1.25) * 75;
-                    let frontier = 18 + Math.pow(autonomy / 100, 1.55) * 65;
-                    if (loops.has('governance')) frontier = clamp(frontier * 0.92, 0, 100);
-
-                    if (loops.has('hedged')) {
-                        expected += 6;
-                        pricing = Math.min(pricing * 0.35, 18);
-                    }
-
-                    const tailFactor = 1 + pricing * 0.008 + frontier * 0.004;
-                    const p95Cost = clamp(expected * tailFactor, expected, 260);
-
-                    const incBase = Math.pow(d / 100, 2) * 8;
-                    const inc = clamp(Math.round(incBase * (loops.has('governance') ? 0.55 : 1.0)), 0, 10);
-
-                    weeks.push(`W${w}`);
-                    debt.push(d);
-                    p95.push(p95Cost);
-                    incidents.push(inc);
-                }
-
-                return { weeks, debt, p95, incidents };
+            const setGate = (el, value) => {
+                el.textContent = value;
+                if (value === 'PASS') el.style.color = '#2ac3de';
+                else if (value === 'FAIL') el.style.color = '#f7768e';
+                else el.style.color = '#b5b6bf';
             };
 
-            const markerPlugin = {
-                id: 'weekMarker',
-                afterDraw(chart) {
-                    const xScale = chart.scales.x;
-                    const area = chart.chartArea;
-                    if (!xScale || !area) return;
-                    const x = xScale.getPixelForValue(state.week);
-                    const ctx = chart.ctx;
-                    ctx.save();
-                    ctx.strokeStyle = 'rgba(242, 243, 248, 0.22)';
-                    ctx.setLineDash([4, 4]);
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(x, area.top);
-                    ctx.lineTo(x, area.bottom);
-                    ctx.stroke();
-                    ctx.restore();
-                }
+            const setToggle = (button, pressed, onLabel, offLabel) => {
+                button.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+                button.textContent = pressed ? onLabel : offLabel;
             };
 
-            const ctx = chartEl.getContext('2d');
-            const chartState = { chart: null };
+            const setStage = (name, stageState) => {
+                const stage = stages.find((el) => el.dataset.maintenanceStage === name);
+                if (!stage) return;
+                if (stageState) stage.dataset.state = stageState;
+                else delete stage.dataset.state;
+            };
 
-            const setGate = (el, ok, pending) => {
-                if (pending) {
-                    el.textContent = 'PENDING';
-                    el.style.color = '#b5b6bf';
+            const getMissionStatus = () => {
+                if (state.missionTerminal) return state.missionTerminal;
+                if (!state.scanSealed || !state.selectedTarget) return 'not_activated';
+                if (!state.approvalGranted) return 'awaiting_approval';
+                return 'ready';
+            };
+
+            const renderStages = (displayMissionStatus) => {
+                stages.forEach((stage) => delete stage.dataset.state);
+
+                if (state.scanStatus === 'blocked') {
+                    setStage('sense', 'blocked');
                     return;
                 }
-                el.textContent = ok ? 'PASS' : 'FAIL';
-                el.style.color = ok ? '#2ac3de' : '#f7768e';
-            };
 
-            const statusColor = (status) => {
-                if (status === 'PASS') return '#2ac3de';
-                if (status === 'ESCALATE') return '#bb9af7';
-                if (status === 'DEFER') return '#ff9e64';
-                return '#e2e8f0';
-            };
-
-            const targetLabel = (debt, incidents) => {
-                if (debt >= 65) return 'Map drift hotspots';
-                if (incidents >= 4) return 'Incident-prone modules';
-                if (!state.loops.has('refactor')) return 'Refactor queue (guarded)';
-                if (!state.loops.has('dream')) return 'Backlog triage candidates';
-                return 'Validation debt sweep';
-            };
-
-            const expectedDelta = (cycleIndex = state.cycle + 1) => {
-                const pattern = [0.28, -0.12, 0.18, -0.08, 0.12, -0.04][cycleIndex % 6];
-                let base = 0;
-                if (state.loops.has('map')) base += 0.65;
-                if (state.loops.has('dream')) base += 0.95;
-                if (state.loops.has('refactor')) base += 0.8;
-                if (state.loops.has('governance')) base += 0.45;
-                const pressurePenalty = clamp((state.week - 8) * 0.05, 0, 0.9);
-                const hedgeTax = state.loops.has('hedged') ? 0.08 : 0;
-                return clamp(base - pressurePenalty + pattern - hedgeTax, -0.7, 1.8);
-            };
-
-            const metricFromHistory = (baseDebt, baseP95) => {
-                const gains = state.history.reduce((sum, entry) => sum + Math.max(entry.delta, 0), 0);
-                const regressions = state.history.reduce((sum, entry) => sum + Math.max(-entry.delta, 0), 0);
-                const debt = clamp(baseDebt - gains * 2.4 + regressions * 1.5, 0, 100);
-                const p95 = clamp(baseP95 - gains * 4.2 + regressions * 3.4 - (state.loops.has('hedged') ? 4 : 0), 40, 260);
-                const inc = clamp(Math.round(Math.pow(debt / 100, 2) * 8 * (state.loops.has('governance') ? 0.55 : 1.0)), 0, 10);
-                return { debt, p95, inc };
-            };
-
-            const computeTrend = (signalPass) => {
-                if (state.history.length === 0) {
-                    return { state: 'baseline', text: 'Collecting baseline.' };
-                }
-                if (state.cycle >= state.cycleBudget && !signalPass) {
-                    return { state: 'unreachable', text: 'Budget exhausted without sufficient signal gain.' };
+                if (state.scanSealed) {
+                    setStage('sense', 'sealed');
+                    setStage('qualify', 'sealed');
+                    setStage('report', 'sealed');
+                } else if (state.scanAttempt > 0) {
+                    setStage('sense', 'active');
                 }
 
-                const window = state.history.slice(-4).map((entry) => entry.delta);
-                const avg = window.reduce((sum, value) => sum + value, 0) / window.length;
-                const improving = window.length > 1 && window[window.length - 1] > window[0];
-
-                if (signalPass && improving) {
-                    return { state: 'converged', text: 'Converging: minimum progress gate satisfied.' };
+                if (state.selectedTarget && !state.approvalGranted) {
+                    setStage('activate', 'active');
+                } else if (state.selectedTarget && state.approvalGranted) {
+                    setStage('activate', 'sealed');
                 }
-                if (signalPass) {
-                    return { state: 'improving', text: 'Signal is acceptable; continue bounded cycles.' };
-                }
-                if (avg <= 0.05) {
-                    return { state: 'flat', text: 'Signal flat; defer writes and keep sensing.' };
-                }
-                return { state: 'defer', text: 'Partial gain only; stay in bounded defer mode.' };
-            };
 
-            const renderTrendWindow = () => {
-                trendWindowEl.innerHTML = '';
-                const slots = state.history.slice(-4);
-
-                for (let i = 0; i < 4; i += 1) {
-                    const entry = slots[i];
-                    const pill = document.createElement('div');
-                    pill.className = 'maint-trend-pill';
-
-                    if (!entry) {
-                        pill.dataset.state = 'empty';
-                        pill.innerHTML = '<div class="text-[10px] font-mono text-brand-muted">cycle --</div><div class="mt-1 text-xs text-brand-muted">Δ --</div>';
-                        trendWindowEl.appendChild(pill);
-                        continue;
-                    }
-
-                    const delta = entry.delta;
-                    const deltaLabel = `${delta >= 0 ? '+' : ''}${delta.toFixed(2)}`;
-                    const pillState = delta >= 0.45 ? 'pass' : (delta >= 0 ? 'defer' : 'fail');
-                    pill.dataset.state = pillState;
-                    pill.innerHTML =
-                        `<div class="text-[10px] font-mono text-brand-muted">cycle ${entry.cycle}</div>` +
-                        `<div class="mt-1 text-xs font-mono text-brand-strong">Δ ${deltaLabel}</div>`;
-                    trendWindowEl.appendChild(pill);
-                }
-            };
-
-            const pushAttemptDot = (status) => {
-                const dot = document.createElement('span');
-                dot.className = 'inline-block w-2.5 h-2.5 rounded-full';
-                if (status === 'PASS') dot.style.backgroundColor = 'rgba(42, 195, 222, 0.95)';
-                else if (status === 'ESCALATE') dot.style.backgroundColor = 'rgba(187, 154, 247, 0.95)';
-                else dot.style.backgroundColor = 'rgba(255, 158, 100, 0.95)';
-                attemptsEl.appendChild(dot);
-                while (attemptsEl.children.length > 28) {
-                    attemptsEl.removeChild(attemptsEl.firstChild);
-                }
-            };
-
-            const resetLoopState = () => {
-                state.cycle = 0;
-                state.history = [];
-                attemptsEl.innerHTML = '';
+                if (displayMissionStatus === 'ready') setStage('mission', 'active');
+                else if (state.missionTerminal) setStage('mission', 'sealed');
             };
 
             const render = () => {
-                weekValue.textContent = String(state.week);
-                weekSlider.value = String(state.week);
-                budgetValue.textContent = String(state.cycleBudget);
-                budgetSlider.value = String(state.cycleBudget);
+                findingsSlider.value = String(state.findings);
+                findingsValue.textContent = String(state.findings);
+                setToggle(sensorToggle, state.sensorAvailable, 'ON', 'OFF');
+                setToggle(eligibilityToggle, state.targetEligible, 'ELIGIBLE', 'INELIGIBLE');
+                setToggle(approvalToggle, state.approvalGranted, 'APPROVED', 'PENDING');
+                setToggle(validatorToggle, state.validatorsPass, 'PASS', 'FAIL');
 
-                const series = simulate(state.loops);
-                const baseDebt = series.debt[state.week] ?? series.debt[0];
-                const baseP95 = series.p95[state.week] ?? series.p95[0];
-                const metrics = metricFromHistory(baseDebt, baseP95);
+                const displayMissionStatus = getMissionStatus();
+                scanStatus.textContent = state.scanStatus;
+                scanStatus.dataset.state = state.scanStatus;
+                scanSeal.textContent = state.scanSealed ? 'SEALED' : 'OPEN';
+                evaluated.textContent = state.sensorAvailable && state.scanAttempt > 0
+                    ? `${state.findings}/${state.findings}`
+                    : `0/${state.findings}`;
+                selectedTarget.textContent = state.selectedTarget || 'none';
+                scanOutputsChecked.textContent = state.scanOutputsChecked ? 'true' : 'false';
+                scanOutputsChecked.style.color = state.scanOutputsChecked ? '#2ac3de' : '#e2e8f0';
+                scanLedger.textContent = state.scanAttempt > 0
+                    ? `ledger/maintenance/scans/scan-01/attempt-${String(state.scanAttempt).padStart(2, '0')}.json`
+                    : 'ledger/maintenance/scans/scan-00.json';
 
-                debtEl.textContent = String(Math.round(metrics.debt));
-                incidentsEl.textContent = String(metrics.inc);
-                p95El.textContent = String(Math.round(metrics.p95));
-                budgetRemainingEl.textContent = String(Math.max(0, state.cycleBudget - state.cycle));
-                targetEl.textContent = targetLabel(metrics.debt, metrics.inc);
-                const nextGain = expectedDelta();
-                expectedGainEl.textContent = `${nextGain >= 0 ? '+' : ''}${nextGain.toFixed(2)} debt/cycle`;
+                missionStatus.textContent = displayMissionStatus;
+                missionStatus.dataset.state = displayMissionStatus;
+                missionSeal.textContent = state.missionTerminal
+                    ? 'SEALED'
+                    : displayMissionStatus === 'ready' ? 'OPEN' : 'NOT ACTIVATED';
+                candidate.textContent = state.missionAttempt > 0 ? 'diff@sha256:85e1...' : 'none';
+                missionOutputsChecked.textContent = state.missionOutputsChecked ? 'true' : 'false';
+                missionOutputsChecked.style.color = state.missionOutputsChecked ? '#2ac3de' : '#e2e8f0';
+                adoption.textContent = state.missionTerminal === 'complete'
+                    ? 'pending_review'
+                    : state.missionTerminal === 'failed_with_evidence' ? 'rejected' : 'not_applicable';
+                missionLedger.textContent = state.missionAttempt > 0
+                    ? 'ledger/maintenance/missions/run-01/attempt-01.json'
+                    : 'ledger/maintenance/missions/not-activated';
 
-                const window = state.history.slice(-4).map((entry) => entry.delta);
-                const avgDelta = window.length ? (window.reduce((sum, value) => sum + value, 0) / window.length) : 0;
-                const signalPass = state.history.length > 0 && (window.length >= 3 ? avgDelta >= 0.45 : window[window.length - 1] >= 0.75);
-                const guardrailsPass = state.loops.has('map') && state.loops.has('governance');
-                const budgetExhausted = state.cycle >= state.cycleBudget && !signalPass;
+                setGate(gatePinned, state.scanAttempt === 0 ? 'PENDING' : state.sensorAvailable ? 'PASS' : 'FAIL');
+                setGate(gateEligibility, state.scanSealed ? 'PASS' : 'PENDING');
+                setGate(gateReport, state.scanOutputsChecked ? 'PASS' : 'PENDING');
+                setGate(gateApproval, state.selectedTarget && state.approvalGranted ? 'PASS' : 'PENDING');
+                setGate(gateValidators, state.missionTerminal
+                    ? state.missionTerminal === 'complete' ? 'PASS' : 'FAIL'
+                    : 'PENDING');
+                setGate(gateProposal, state.missionOutputsChecked ? 'PASS' : 'PENDING');
 
-                setGate(gateSignalEl, signalPass, state.cycle === 0);
-                setGate(gateGuardrailsEl, guardrailsPass, false);
-                setGate(gateBudgetEl, !budgetExhausted, false);
-                setGate(gateLedgerEl, state.cycle > 0, state.cycle === 0);
+                findingsSlider.disabled = state.scanSealed;
+                sensorToggle.disabled = state.scanSealed;
+                eligibilityToggle.disabled = state.scanSealed;
+                runScanButton.disabled = state.scanSealed;
+                approvalToggle.disabled = !state.selectedTarget || Boolean(state.missionTerminal);
+                validatorToggle.disabled = !state.selectedTarget || Boolean(state.missionTerminal);
+                runMissionButton.disabled = !state.selectedTarget || !state.approvalGranted || Boolean(state.missionTerminal);
 
-                let status = 'READY';
-                if (state.cycle > 0) {
-                    if (budgetExhausted) status = 'ESCALATE';
-                    else if (signalPass && guardrailsPass) status = 'PASS';
-                    else status = 'DEFER';
-                }
+                renderStages(displayMissionStatus);
 
-                statusEl.textContent = status;
-                statusEl.style.color = statusColor(status);
-                cycleEl.textContent = `${state.cycle}/${state.cycleBudget}`;
-                lastRunEl.textContent = state.cycle === 0 ? '--' : `T+${state.cycle}`;
-                receiptEl.textContent = `ledger/dream-daemon/week-${String(state.week).padStart(2, '0')}/cycle-${String(state.cycle).padStart(2, '0')}.json`;
-
-                const trend = computeTrend(signalPass);
-                trendStatusEl.textContent = trend.text;
-                trendStatusEl.dataset.state = trend.state;
-                renderTrendWindow();
-
-                if (state.cycle === 0) {
-                    outcomeEl.textContent = 'Ready to run one bounded cycle.';
-                } else if (status === 'PASS') {
-                    outcomeEl.textContent = 'Signal gain and guardrails pass. Admit one bounded maintenance diff.';
-                } else if (status === 'DEFER' && !guardrailsPass) {
-                    outcomeEl.textContent = 'Defer: guardrails incomplete. Keep sensing and route to human triage.';
-                } else if (status === 'DEFER') {
-                    outcomeEl.textContent = 'Defer: progress is below threshold. Keep bounded sensing cycles.';
+                if (state.missionTerminal === 'complete') {
+                    outcome.textContent = 'Mission complete and sealed. The checked proposal is still pending review.';
+                } else if (state.missionTerminal === 'failed_with_evidence') {
+                    outcome.textContent = 'Mission failed_with_evidence and sealed. The candidate is rejected; no adoption occurred.';
+                } else if (displayMissionStatus === 'ready') {
+                    outcome.textContent = 'The scan is sealed and an exact child Mission is activated. No candidate exists yet.';
+                } else if (displayMissionStatus === 'awaiting_approval') {
+                    outcome.textContent = 'The scan is sealed. The selected target cannot run until an exact child Mission is approved.';
+                } else if (state.scanStatus === 'blocked') {
+                    outcome.textContent = 'Scan blocked: a required Sensor is unavailable. No child Mission exists.';
+                } else if (state.scanStatus === 'complete_noop') {
+                    outcome.textContent = 'Scan complete_noop and sealed. The checked report contains no eligible work.';
+                } else if (state.scanStatus === 'complete') {
+                    outcome.textContent = 'Scan complete and sealed. Findings are recorded, but no child Mission was activated.';
                 } else {
-                    outcomeEl.textContent = 'Circuit break: budget exhausted without convergence. Escalate.';
+                    outcome.textContent = 'No run activated. Scan authority and child-mission authority remain separate.';
                 }
-
-                if (!chartState.chart) {
-                    chartState.chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: series.weeks,
-                            datasets: [
-                                {
-                                    label: 'Entropy debt',
-                                    data: series.debt,
-                                    borderColor: theme.danger,
-                                    backgroundColor: 'rgba(247, 118, 142, 0.12)',
-                                    borderWidth: 2,
-                                    tension: 0.28,
-                                    pointRadius: 0,
-                                    yAxisID: 'yDebt',
-                                },
-                                {
-                                    label: 'P95 cost/outcome',
-                                    data: series.p95,
-                                    borderColor: theme.accent,
-                                    backgroundColor: 'rgba(187, 154, 247, 0.10)',
-                                    borderWidth: 2,
-                                    tension: 0.28,
-                                    pointRadius: 0,
-                                    yAxisID: 'yCost',
-                                },
-                            ],
-                        },
-                        options: {
-                            ...commonChartOptions,
-                            interaction: { mode: 'index', intersect: false },
-                            scales: {
-                                x: { ticks: { color: theme.muted }, grid: { color: theme.grid } },
-                                yDebt: {
-                                    position: 'left',
-                                    min: 0,
-                                    max: 100,
-                                    title: { display: true, text: 'Debt', color: theme.muted },
-                                    ticks: { color: theme.muted },
-                                    grid: { color: theme.grid },
-                                },
-                                yCost: {
-                                    position: 'right',
-                                    min: 40,
-                                    max: 260,
-                                    title: { display: true, text: 'P95 cost', color: theme.muted },
-                                    ticks: { color: theme.muted },
-                                    grid: { display: false },
-                                },
-                            },
-                        },
-                        plugins: [markerPlugin],
-                    });
-                } else {
-                    chartState.chart.data.labels = series.weeks;
-                    chartState.chart.data.datasets[0].data = series.debt;
-                    chartState.chart.data.datasets[1].data = series.p95;
-                    chartState.chart.update('none');
-                }
-
-                return { status };
             };
 
-            const runOne = () => {
-                state.cycle += 1;
-                state.history.push({
-                    cycle: state.cycle,
-                    delta: expectedDelta(state.cycle),
-                });
-                while (state.history.length > 28) {
-                    state.history.shift();
+            const runScan = () => {
+                if (state.scanSealed) return;
+                state.scanAttempt += 1;
+
+                if (!state.sensorAvailable) {
+                    state.scanStatus = 'blocked';
+                    state.scanOutputsChecked = false;
+                    state.selectedTarget = null;
+                    render();
+                    return;
                 }
-                const current = render();
-                pushAttemptDot(current.status);
-                return current;
+
+                state.scanOutputsChecked = true;
+                if (state.findings > 0 && state.targetEligible) {
+                    state.scanStatus = 'complete';
+                    state.selectedTarget = 'target-01 · allowlisted hygiene';
+                } else {
+                    state.scanStatus = 'complete_noop';
+                    state.selectedTarget = null;
+                }
+                state.scanSealed = true;
+                render();
             };
 
-            weekSlider.addEventListener('input', () => {
-                state.week = clamp(toInt(weekSlider.value, state.week), 0, MAX_WEEK);
-                resetLoopState();
+            const runMission = () => {
+                if (!state.selectedTarget || !state.approvalGranted || state.missionTerminal) return;
+                state.missionAttempt = 1;
+                state.missionOutputsChecked = true;
+                state.missionTerminal = state.validatorsPass ? 'complete' : 'failed_with_evidence';
+                render();
+            };
+
+            findingsSlider.addEventListener('input', () => {
+                if (state.scanSealed) return;
+                state.findings = clamp(toInt(findingsSlider.value, state.findings), 0, 6);
                 render();
             });
 
-            budgetSlider.addEventListener('input', () => {
-                state.cycleBudget = clamp(toInt(budgetSlider.value, state.cycleBudget), 2, 12);
-                if (state.cycle > state.cycleBudget) {
-                    state.cycle = state.cycleBudget;
-                }
+            sensorToggle.addEventListener('click', () => {
+                if (state.scanSealed) return;
+                state.sensorAvailable = !state.sensorAvailable;
                 render();
             });
 
-            loopButtons.forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    const key = btn.dataset.maintLoop || '';
-                    if (!key) return;
-                    if (state.loops.has(key)) state.loops.delete(key);
-                    else state.loops.add(key);
-                    btn.setAttribute('aria-pressed', state.loops.has(key) ? 'true' : 'false');
-                    resetLoopState();
-                    render();
-                });
+            eligibilityToggle.addEventListener('click', () => {
+                if (state.scanSealed) return;
+                state.targetEligible = !state.targetEligible;
+                render();
             });
 
-            stepBtn.addEventListener('click', () => {
-                runOne();
+            approvalToggle.addEventListener('click', () => {
+                if (!state.selectedTarget || state.missionTerminal) return;
+                state.approvalGranted = !state.approvalGranted;
+                render();
             });
 
-            runToGateBtn.addEventListener('click', () => {
-                let current = { status: 'READY' };
-                while (state.cycle < state.cycleBudget) {
-                    current = runOne();
-                    if (current.status === 'PASS' || current.status === 'ESCALATE') break;
-                }
-                if (current.status !== 'PASS' && state.cycle >= state.cycleBudget) {
-                    render();
-                }
+            validatorToggle.addEventListener('click', () => {
+                if (!state.selectedTarget || state.missionTerminal) return;
+                state.validatorsPass = !state.validatorsPass;
+                render();
             });
 
-            resetBtn.addEventListener('click', () => {
-                resetLoopState();
+            runScanButton.addEventListener('click', runScan);
+            runMissionButton.addEventListener('click', runMission);
+
+            resetButton.addEventListener('click', () => {
+                state.findings = 3;
+                state.sensorAvailable = true;
+                state.targetEligible = true;
+                state.approvalGranted = false;
+                state.validatorsPass = true;
+                state.scanAttempt = 0;
+                state.scanStatus = 'ready';
+                state.scanSealed = false;
+                state.scanOutputsChecked = false;
+                state.selectedTarget = null;
+                state.missionAttempt = 0;
+                state.missionTerminal = null;
+                state.missionOutputsChecked = false;
                 render();
             });
 
@@ -3239,6 +2520,7 @@
 
             const setHidden = (el, isHidden) => {
                 if (!el) return;
+                el.classList.toggle('hidden', isHidden);
                 if (isHidden) el.setAttribute('hidden', '');
                 else el.removeAttribute('hidden');
             };
@@ -3355,7 +2637,10 @@
 
                 const renderSim = () => {
                     if (attemptEl) attemptEl.textContent = String(state.attempt);
-                    if (loopsEl) loopsEl.textContent = String(Math.max(0, state.attempt - 1));
+                    if (loopsEl) {
+                        const completed = state.step >= 4 ? state.attempt : Math.max(0, state.attempt - 1);
+                        loopsEl.textContent = String(completed);
+                    }
 
                     showEl(missionStatusEl, state.step === 1);
                     showEl(generatorStatusEl, state.step === 2);
@@ -3365,13 +2650,13 @@
                         showEl(validatorStatusEl, state.step >= 3);
                         validatorStatusEl.classList.remove('text-brand-muted', 'text-[rgba(96,165,250,0.95)]', 'text-[rgba(255,158,100,0.95)]', 'text-[rgba(16,185,129,0.95)]');
                         if (state.step === 3) {
-                            validatorStatusEl.textContent = 'Running physics check…';
+                            validatorStatusEl.textContent = 'Running Validator…';
                             validatorStatusEl.classList.add('text-[rgba(96,165,250,0.95)]');
                         } else if (state.step === 4) {
-                            validatorStatusEl.textContent = 'Failed! Try again.';
+                            validatorStatusEl.textContent = 'FAIL: structured finding emitted.';
                             validatorStatusEl.classList.add('text-[rgba(255,158,100,0.95)]');
                         } else if (state.step === 5) {
-                            validatorStatusEl.textContent = 'Passed & trusted!';
+                            validatorStatusEl.textContent = 'PASS: candidate admissible.';
                             validatorStatusEl.classList.add('text-[rgba(16,185,129,0.95)]');
                         } else {
                             validatorStatusEl.textContent = '';
@@ -3497,9 +2782,6 @@
 
         // Boot
         setupSubstrateExplorer();
-        setupMissionObjectBuilder();
-        setupSandwichSimulator();
-        setupValidatorBundle();
         setupAlwaysOnLoops();
         setupIllusionVsResults();
     })();

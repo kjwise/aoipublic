@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Chapter 13 – From Documentation to Enforceable Constraints | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Chapter 13 of Architects of Intent: From Documentation to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: bounded Map…" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Chapter 13 – From Documentation to Enforceable Constraints | Architects of Intent" property="og:title"/>
+<meta content="Chapter 13 of Architects of Intent: From Documentation to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: bounded Map…" property="og:description"/>
+<meta content="https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Chapter 13 – From Documentation to Enforceable Constraints | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 13 – From Documentation to Enforceable Constraints | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 13 of Architects of Intent: From Documentation to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: bounded Map…" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Chapter 13 – From Documentation to Enforceable Constraints | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 13 – From Documentation to Enforceable Constraints", "description": "Chapter 13 of Architects of Intent: From Documentation to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: bounded Map…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints", "mainEntityOfPage": "https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT5M", "articleSection": "Part V – Implications and Limits", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
+<script defer="" src="script.js?v=337bafbc4d6b"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Core Vocabulary</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part V – Implications and Limits</div>
+<div class="chapter-meta"><span class="read-time">5 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="chapter-13-from-documentation-to-enforceable-constraints">Chapter 13
+– From Documentation to Enforceable Constraints</h1>
+</div>
+</header>
+<blockquote>
+<p><strong>Destination:</strong> Selected <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> claims become enforceable
+rather than merely advisory.</p>
+</blockquote>
+<p>Chapters 8, 10, and 12 established the pieces of this boundary:
+bounded Map proposals, a <a class="concept-link" href="concepts#protected-control-plane" title="See concept: Protected Control Plane">protected control plane</a>, and mandatory policy
+and admission paths. This chapter draws those mechanisms together around
+one question: when does a selected Map claim stop being merely
+advisory?</p>
+<p>Documentation drifts when nothing checks whether a declared fact or
+rule still holds. One selected claim becomes enforceable when a
+protected mechanism checks its relationship with observed <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> and
+routes a mismatch as a finding.</p>
+<p>The whole Map does not cross that boundary at once. One property
+does.</p>
+<p>Together, the preceding mechanisms create checked links between
+representations rather than a direct compiler from natural-language
+intent to reality. A contract may be observed Terrain for a
+documentation updater and an authoritative Map for an implementation
+workflow. Its role depends on the property being governed and the
+declared direction of authority.</p>
+<p>AI may propose the movement between those representations. The
+protected check establishes only the selected correspondence at that
+boundary; it does not prove that the source captured the right intent or
+that the translation preserved every unstated concern.</p>
+<h2 id="one-claim-one-direction-one-check">One Claim, One Direction, One
+Check</h2>
+<section aria-labelledby="enforceable-map-title" class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-fragment-shell="1" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i2-section-07-intention-architecture</span>
+<figure class="aoi-book-diagram">
+<figcaption class="aoi-book-diagram__header">
+<p class="aoi-book-diagram__eyebrow">One property, one direction, one protected check</p>
+<h3 class="aoi-book-diagram__title" id="enforceable-map-title">From Map Claim to Enforceable Relationship</h3>
+<p class="aoi-book-diagram__summary">A relationship becomes enforceable only after the workflow declares which side is authoritative for one property and protects the check that compares them.</p>
+</figcaption>
+<div class="aoi-book-diagram__grid">
+<div class="aoi-book-diagram__artifact">
+<span class="aoi-book-diagram__label">Descriptive direction: Terrain → Map</span>
+<p>Route declarations define the current endpoint inventory. A bounded updater proposes a documentation patch. A protected comparison checks correspondence before separate adoption.</p>
+</div>
+<div class="aoi-book-diagram__artifact">
+<span class="aoi-book-diagram__label">Prescriptive direction: Map → Terrain</span>
+<p>An adopted API contract defines the intended interface. A bounded workflow proposes implementation changes. Protected behavior and compatibility checks run before separate admission.</p>
+</div>
+</div>
+<div aria-hidden="true" class="aoi-book-diagram__divider"></div>
+<div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
+<div class="aoi-book-diagram__step" data-tone="authority">
+<span class="aoi-book-diagram__label">Declare authority</span>
+<p>Name the exact property and direction before execution.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="proposal">
+<span class="aoi-book-diagram__label">Propose one patch</span>
+<p>The updater or implementation step changes only the bounded surface.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="evidence">
+<span class="aoi-book-diagram__label">Protected check</span>
+<p>The protected gate compares the candidate with the authoritative source.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="authority">
+<span class="aoi-book-diagram__label">Adopt or admit separately</span>
+<p>A passing relationship does not authorize its own effect.</p>
+</div>
+</div>
+<p class="aoi-book-diagram__note">Enforcement remains selective. Passing this gate establishes one declared correspondence, not universal correctness or truth.</p>
+</figure>
+</section>
+<p>Before enforcing a relationship, declare its authority direction:</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Map surface</th>
+<th>Authority for the checked property</th>
+<th>Permitted response to mismatch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generated inventory, such as public interfaces</td>
+<td>Observed Terrain</td>
+<td>Propose a bounded Terrain-to-Map revision</td>
+</tr>
+<tr>
+<td>Prescriptive rule, such as allowed dependencies</td>
+<td>Adopted Map</td>
+<td>Block or propose a bounded Map-to-Terrain correction</td>
+</tr>
+</tbody>
+</table>
+<p>This prevents a dangerous shortcut: observe current behavior, rewrite
+the policy to match it, then declare compliance. If the authority itself
+appears wrong, the current workflow stops. A separately authorized
+<a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a>, reconciliation Mission, or <a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a> may propose a
+change under its own authority.</p>
+<p>Consider a generated <code>Public Interfaces</code> block. The fixed
+source revision exposes one additional parameter:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a> ## Public Interfaces</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="st">- charge(amount, currency)</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="va">+ charge(amount, currency, idempotency_key)</span></span></code></pre></div>
+<p>A deterministic extractor reads the actual public signatures. A
+bounded workflow compares them with the selected Map block and, when
+they differ, produces a candidate patch in an isolated workspace. A
+protected check re-extracts the candidate block and requires an exact
+match with the fixed source. Chapter 10’s separation between proposal
+and adoption still applies: the candidate remains a Map proposal until
+separate authority adopts it.</p>
+<p>If the two surfaces already agree, the outcome is a no-op. If a
+required source is missing, the workflow cannot claim alignment.</p>
+<p>For an adopted dependency rule, the same mechanism runs in the
+opposite direction. The workflow observes dependency edges and may
+propose a bounded Terrain correction. It cannot edit the allowlist that
+grades it.</p>
+<p>The <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> mechanism is therefore small: one declared property, one
+authority direction, one observation, one protected check, and one
+separate adoption path.</p>
+<h2 id="different-artifacts-same-boundary">Different Artifacts, Same
+Boundary</h2>
+<p>A schema, policy, or infrastructure declaration becomes enforceable
+only for a named property. A protected mechanism must evaluate that
+property, and a required execution or admission path must act on the
+result.</p>
+<table>
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Map artifact</th>
+<th>Selected enforceable relationship</th>
+<th>Boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API specification</td>
+<td>Requests, responses, or compatibility conform to the fixed
+contract</td>
+<td>Protected contract checks and release admission</td>
+</tr>
+<tr>
+<td>Infrastructure as code</td>
+<td>Observed or proposed infrastructure corresponds to adopted
+configuration</td>
+<td>Plan, drift, destination, and admission controls</td>
+</tr>
+<tr>
+<td>Policy as code</td>
+<td>A decision input satisfies the exact adopted rule bundle</td>
+<td>Protected evaluator plus mandatory execution or admission gate</td>
+</tr>
+</tbody>
+</table>
+<p>The same principle applies less mechanically to higher-level Maps. A
+tone guide may become a template plus human review rather than a hard
+schema. A runbook claim may become a <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> that detects a known unsafe
+state. The point is not to make every sentence executable. It is to
+select claims whose authority, observation, and consequence justify
+maintaining an enforcement boundary.</p>
+<h2 id="what-selective-enforcement-buys">What Selective Enforcement
+Buys</h2>
+<p>Selective enforcement prevents specific failures:</p>
+<ul>
+<li>a mismatch on the checked surface cannot remain invisible once the
+required Sensor runs;</li>
+<li>a protected gate can prevent the known forbidden state on the path
+it controls;</li>
+<li>findings, proposal closure, and admission remain distinct;</li>
+<li>under protected-sink and trust-root assumptions, retained evidence
+can explain the decision.</li>
+</ul>
+<p>The limit is equally important. A passing gate establishes only the
+named property under the named inputs, extractor, check, and policy. It
+does not prove that the source specification is wise, that the rest of
+the Map is current, or that unobserved behavior is correct. A
+synchronized source can still be verbose, irrelevant, or wrong outside
+the checked surface.</p>
+<p>Enforcement should therefore be selective. Use it where a
+consequential claim can be observed and the cost of undetected drift
+exceeds the cost of maintaining the check. Leave volatile narrative
+guidance advisory when a hard gate would create more false authority
+than assurance.</p>
+<p>Software Development as Code does not require every useful outcome to
+be fully specified. Exploratory work may therefore have only containment
+checks for effects, budgets, protected controls, and evidence. Those
+checks can establish that the attempt remained inside its boundaries;
+they cannot establish that the artifact is correct. A declared oracle or
+authorized human must still support the proposal before separate
+admission or adoption.</p>
+<p>The enforcement boundary is consequently modest but important. It
+turns one selected relationship from advice into a check while
+preserving the distinction between correspondence and truth.</p>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 13 of Architects of Intent: From Documentation to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: bounded Map…" data-share-title="Chapter 13 – From Documentation to Enforceable Constraints | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-from-documentation-to-enforceable-constraints&amp;text=Chapter%2013%20%E2%80%93%20From%20Documentation%20to%20Enforceable%20Constraints%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-from-documentation-to-enforceable-constraints" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-from-documentation-to-enforceable-constraints" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-13-from-documentation-to-enforceable-constraints&amp;title=Chapter%2013%20%E2%80%93%20From%20Documentation%20to%20Enforceable%20Constraints%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2013%20%E2%80%93%20From%20Documentation%20to%20Enforceable%20Constraints%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2013%20of%20Architects%20of%20Intent%3A%20From%20Documentation%20to%20Enforceable%20Constraints.%20Chapters%208%2C%2010%2C%20and%2012%20established%20the%20pieces%20of%20this%20boundary%3A%20bounded%20Map%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-13-from-documentation-to-enforceable-constraints">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="chapter-12-governance-for-high-rate-automation">← Chapter 12 – Governance for High-Rate Automation</a>
+<a class="next-link" href="chapter-14-implications-for-delegated-automation">Chapter 14 – Implications for Delegated Automation →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+<script defer="" src="infographic-deck-runtime.js"></script>
+</body>
+</html>
