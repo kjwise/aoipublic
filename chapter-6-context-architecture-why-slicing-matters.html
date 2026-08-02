@@ -24,14 +24,18 @@
 <meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 6 – Context Architecture (Why Slicing Matters)", "description": "Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "mainEntityOfPage": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT8M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 6 – Context Architecture (Why Slicing Matters)", "description": "Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "mainEntityOfPage": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-02T22:03:54Z", "timeRequired": "PT10M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
-<script defer="" src="script.js?v=337bafbc4d6b"></script>
+<link href="style.css?v=cbc3c8fc494c" rel="stylesheet"/>
+<script defer="" src="script.js?v=cbc3c8fc494c"></script>
+<link href="infographic-tailwind.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="infographic-deck-runtime.css" rel="stylesheet"/>
+<link href="infographic-fragment-shell.css" rel="stylesheet"/>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -52,7 +56,7 @@
 <header class="chapter-header">
 <div class="chapter-kicker">
 <div class="part-title">Part II – Reliability Foundations</div>
-<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
@@ -305,10 +309,18 @@ discarding required context.</td>
 boundary reproducible so a failure can be attributed more accurately to
 the candidate, the context, or the governing contract.</p>
 <h2 id="skeleton-first">Skeleton-First</h2>
-<p>Chapter 2 demonstrated one practical rule: deterministic checks
-extract the skeleton; probabilistic generation supplies only the
-permitted variable material. Context Architecture generalizes that
-rule.</p>
+<p>Chapter 2 demonstrated one use of Skeleton-First: deterministic
+extraction records structure already present in <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>, and
+probabilistic generation supplies only permitted variable material
+around it. The broader rule is to fix the structural basis before
+variable work begins. Authority direction determines where that basis
+comes from and what it may do.</p>
+<p>In <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>-to-Terrain work that produces implementation, an adopted
+design, specification, or schema supplies a prescriptive minimum
+scaffold: it fixes invariants and declares where implementation may
+expand. In Terrain-to-<a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> work, deterministic extraction supplies
+descriptive structure for exact comparison, aggregation, and bounded <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>
+proposals.</p>
 <p>Typical skeleton surfaces include:</p>
 <ul>
 <li>signatures and interface contracts;</li>
@@ -316,21 +328,237 @@ rule.</p>
 <li>test names and assertion surfaces;</li>
 <li>file paths, imports, and allowed edit regions.</li>
 </ul>
-<p>Before generation, deterministic extraction records these surfaces
-from the fixed source revision. After generation, the workflow extracts
-them again from the candidate and compares them with the declared
-baseline. An unintended structural change fails before broader
-behavioral checks run.</p>
-<p>The rule does not make the extracted structure correct or current. It
-protects a declared boundary while the workflow evaluates the candidate
-against independent evidence. Missing context never authorizes broader
-scope by itself.</p>
-<p>Context Architecture therefore establishes a reproducible input
-boundary, not a successful outcome. In the tax example, it can establish
-which rule, failing case, implementation surface, and direct dependency
-the generator received, and which surfaces remained outside its
-authority. The checks must still decide whether the candidate satisfies
-the rule.</p>
+<p>In Map-to-Terrain work, a skeleton can be deliberately incomplete: it
+fixes the top level and declares which content nodes may expand.
+Elaboration materializes permitted children downward. Once the leaves
+contain checked content, their results can be folded upward into derived
+parent views. The two operations may repeat at any depth allowed by the
+active specification.<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a> A changed descendant makes each
+dependent parent view stale.</p>
+<p>The expansion contract may begin as an outline or schema. If
+recurring cases reveal a stable grammar, a separate Map change may adopt
+a domain-specific language (DSL) that expresses nodes, expansion rules,
+and checks more precisely. The active <a class="concept-link" href="concepts#workflow" title="See concept: Workflow">Workflow</a> cannot promote its own
+successful convention into governing syntax.</p>
+<p>The content hierarchy, Context Graph, and Workflow remain separate.
+The hierarchy relates content nodes. The Context Graph identifies
+sources from which policy selects bounded authority and evidence. The
+governed Workflow controls which operations may run, with what effects
+and checks. Their topologies need not match.</p>
+<p>Preparation and validation enforce the direction. A prescriptive
+skeleton accepts only declared expansions. A descriptive skeleton traces
+exact aggregates to <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> observations, while judgment-heavy summaries
+remain candidates. Traversal grants authority in neither case.</p>
+<section aria-labelledby="skeleton-first-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<span aria-hidden="true" data-infographic-fragment-label="1">i3-section-06-skeleton-first-rule</span>
+<style>
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-direction-card {
+    background: rgba(19, 21, 28, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.9rem;
+    min-width: 0;
+    padding: 1.1rem;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-direction-grid {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 32rem), 1fr));
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-direction-label {
+    align-items: center;
+    border: 1px solid rgba(42, 195, 222, 0.45);
+    border-radius: 999px;
+    color: #2ac3de;
+    display: inline-flex;
+    font-size: 0.68rem;
+    gap: 0.35rem;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.55rem;
+    text-transform: uppercase;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-node {
+    align-items: center;
+    background: rgba(11, 12, 16, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.5rem;
+    color: #e2e8f0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    min-height: 1.9rem;
+    overflow-wrap: anywhere;
+    padding: 0.3rem 0.55rem;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-node::before {
+    color: #2ac3de;
+    content: "•";
+    font-size: 0.75rem;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-node-root {
+    border-color: rgba(42, 195, 222, 0.55);
+    font-weight: 700;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-expansion {
+    border: 1px dashed rgba(42, 195, 222, 0.7);
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-tier-label {
+    color: #8b91a1;
+    font-size: 0.58rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-observation {
+    background: rgba(11, 12, 16, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.55rem;
+    min-width: 0;
+    padding: 0.55rem 0.65rem;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-provenance {
+    color: #8b91a1;
+    overflow-wrap: anywhere;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-map-inventory {
+    background: rgba(42, 195, 222, 0.1);
+    border: 1px solid rgba(42, 195, 222, 0.45);
+    border-radius: 0.65rem;
+    color: #e2e8f0;
+    padding: 0.65rem 0.75rem;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-footer-item {
+    border-left: 2px solid rgba(42, 195, 222, 0.38);
+    min-width: 0;
+    padding-left: 0.65rem;
+  }
+
+  @media print {
+    [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-direction-card,
+    [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-node,
+    [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-observation,
+    [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-map-inventory {
+      background: transparent !important;
+      color: #111 !important;
+    }
+  }
+</style>
+<div class="bg-brand-surface rounded-xl shadow-lg p-5 md:p-6 border border-brand-border border-l-8 border-l-brand-primary">
+<div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 mb-5">
+<div class="max-w-3xl">
+<h2 class="text-2xl md:text-3xl font-bold text-brand-strong" id="skeleton-first-title">Skeleton-First: Scaffold or Extract</h2>
+<p class="mt-2 text-sm text-brand-muted leading-relaxed">
+        A skeleton can prescribe the minimum structure implementation must preserve, or describe exact structure observed in Terrain. Authority direction determines which one it is.
+      </p>
+</div>
+<div class="text-xs font-mono text-brand-muted">one technique · opposite authority direction</div>
+</div>
+<div class="sf-direction-grid">
+<article aria-labelledby="scaffold-direction-title" class="sf-direction-card">
+<div class="sf-direction-label font-mono">1 · Map <span class="sr-only">to</span><span aria-hidden="true">→</span> Terrain</div>
+<h3 class="mt-3 text-lg font-bold text-brand-strong" id="scaffold-direction-title">Prescriptive minimum viable scaffold</h3>
+<p class="mt-1 text-xs text-brand-muted leading-relaxed">
+        Adopted structure comes first. Implementation may fill content and expand only the points the Map declares.
+      </p>
+<div aria-label="Prescriptive Architecture guide scaffold" class="mt-3 text-xs">
+<div class="sf-tier-label font-mono">Fixed root</div>
+<div><span class="sf-node sf-node-root">Architecture guide</span></div>
+<div class="sf-tier-label font-mono mt-2">Top level · dashed = declared expansion</div>
+<div class="grid grid-cols-3 gap-1">
+<span class="sf-node">Problem</span>
+<span class="sf-node sf-expansion">Mechanism<span class="sr-only"> — declared expansion point</span></span>
+<span class="sf-node">Limits</span>
+</div>
+<div class="sf-tier-label font-mono mt-2">Mechanism expands to</div>
+<div class="grid grid-cols-3 gap-1">
+<span class="sf-node">Inputs</span>
+<span class="sf-node sf-expansion">Transformation<span class="sr-only"> — declared expansion point</span></span>
+<span class="sf-node">Outputs</span>
+</div>
+<div class="sf-tier-label font-mono mt-2">Transformation expands to</div>
+<div class="grid grid-cols-3 gap-1">
+<span class="sf-node">Preconditions</span>
+<span class="sf-node">State changes</span>
+<span class="sf-node">Postconditions</span>
+</div>
+</div>
+<div class="mt-3 bg-brand-light border border-brand-border rounded-lg p-2 text-xs text-brand-muted leading-relaxed">
+<span class="font-mono text-brand-strong">Possible formalization:</span>
+        when a stable grammar recurs, outline <span aria-hidden="true">→</span><span class="sr-only">to</span> schema <span aria-hidden="true">→</span><span class="sr-only">to</span> domain-specific language. Each transition requires separate adoption.
+</div>
+<div class="mt-3 bg-brand-light border border-brand-border rounded-lg p-2 text-xs text-brand-muted leading-relaxed">
+<span class="font-mono text-brand-strong">Content topology:</span>
+        declared expansion points below <span aria-hidden="true">↓</span><span class="sr-only">downward</span> · derivable parent views above <span aria-hidden="true">↑</span><span class="sr-only">upward</span>
+</div>
+</article>
+<article aria-labelledby="extract-direction-title" class="sf-direction-card">
+<div class="sf-direction-label font-mono">2 · Terrain <span class="sr-only">to</span><span aria-hidden="true">→</span> Map</div>
+<h3 class="mt-3 text-lg font-bold text-brand-strong" id="extract-direction-title">Descriptive extracted skeleton</h3>
+<p class="mt-1 text-xs text-brand-muted leading-relaxed">
+        Terrain-to-Map work records exact observed structure first. It preserves provenance and leaves judgment-heavy prose as a proposal.
+      </p>
+<div aria-label="Observed Terrain leaves" class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
+<div class="sf-observation">
+<div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Routes</div>
+<div class="mt-1 text-xs font-mono text-brand-strong">GET /orders<br/>POST /orders</div>
+<div class="sf-provenance mt-1 text-[10px] font-mono">routes.py@8ac4e1</div>
+</div>
+<div class="sf-observation">
+<div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Commands</div>
+<div class="mt-1 text-xs font-mono text-brand-strong">CreateOrder<br/>CancelOrder</div>
+<div class="sf-provenance mt-1 text-[10px] font-mono">commands.py@8ac4e1</div>
+</div>
+<div class="sf-observation">
+<div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Ownership</div>
+<div class="mt-1 text-xs font-mono text-brand-strong">orders/**<br/><span class="sr-only">owned by</span><span aria-hidden="true">→</span> commerce-team</div>
+<div class="sf-provenance mt-1 text-[10px] font-mono">CODEOWNERS@8ac4e1</div>
+</div>
+</div>
+<div class="my-2 text-center text-[10px] uppercase tracking-wide font-mono text-brand-muted">
+        Terrain <span class="sr-only">to</span><span aria-hidden="true">→</span> exact upward inventory + aggregation <span class="sr-only">to</span><span aria-hidden="true">→</span> Map
+      </div>
+<div class="sf-map-inventory">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+<div class="text-xs font-semibold">Normalized Terrain inventory</div>
+<div class="text-xs font-mono text-brand-strong">2 routes · 2 commands · 1 ownership rule</div>
+</div>
+<div class="mt-1 text-[10px] font-mono text-brand-muted">exact observation · source revision 8ac4e1 · no inferred rationale</div>
+</div>
+<div class="mt-2 border border-dashed border-brand-border rounded-lg p-3">
+<div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Compare, then propose</div>
+<p class="mt-1 text-xs text-brand-muted leading-relaxed">
+          The updater compares this observation with the selected Map surface. Any bounded Map change, rationale, or judgment-heavy prose remains a proposal until separately reviewed and adopted.
+        </p>
+</div>
+</article>
+</div>
+<footer class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 bg-brand-light border border-brand-border rounded-lg p-3 text-xs text-brand-muted leading-relaxed">
+<div class="sf-footer-item"><span class="font-semibold text-brand-strong">Content structure</span> says what is nested.</div>
+<div class="sf-footer-item"><span class="font-semibold text-brand-strong">Context Graph</span> makes source identities and typed relationships addressable; policy selects the slice.</div>
+<div class="sf-footer-item"><span class="font-semibold text-brand-strong">Governed Workflow</span> controls allowed transformations, checks, and effects. The three topologies need not match.</div>
+</footer>
+</div>
+</section>
+<p>Skeleton-First protects structure, not correctness. Context
+Architecture makes the authority and evidence slice used to construct or
+check that structure reproducible. In the tax example, it establishes
+exactly which rule, failing case, implementation surface, and direct
+dependency the generator received. The governed Workflow and its checks
+still decide whether the candidate satisfies the rule.</p>
 <p>With drift, refinement, and bounded context established, Part III can
 package work as explicit authority and compose these loops across
 recurring tasks.</p>
@@ -340,6 +568,12 @@ recurring tasks.</p>
 <li id="fn1"><p>Nelson F. Liu et al., “Lost in the Middle: How Language
 Models Use Long Contexts,” <em>Transactions of the Association for
 Computational Linguistics</em> 12 (2024): 157–173. <a href="https://aclanthology.org/2024.tacl-1.9/">Paper</a>.<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In functional programming, an unfold followed by a fold
+is called a hylomorphism. The analogy here describes content traversal,
+not authority, Workflow transitions, or admission. See Erik Meijer,
+Maarten Fokkinga, and Ross Paterson, “Functional Programming with
+Bananas, Lenses, Envelopes and Barbed Wire,” in <em>Functional
+Programming Languages and Computer Architecture</em> (1991). <a href="https://research.utwente.nl/files/6142049/meijer91functional.pdf">Paper</a>.<a class="footnote-back" href="#fnref2" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </main>
@@ -377,9 +611,10 @@ Computational Linguistics</em> 12 (2024): 157–173. <a href="https://aclantholo
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<span class="site-footer__item">Version: <code>cbc3c8fc494c</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>
+<script defer="" src="infographic-deck-runtime.js"></script>
 </body>
 </html>

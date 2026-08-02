@@ -4,19 +4,19 @@
     <title>Architects of Intent</title>
     <link>https://architectsofintent.com/</link>
     <description>Chapter updates for Architects of Intent.</description>
-    <lastBuildDate>Sun, 26 Jul 2026 06:41:07 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2026 22:04:12 +0000</lastBuildDate>
     <item>
       <title>Introduction</title>
       <link>https://architectsofintent.com/introduction</link>
       <guid>https://architectsofintent.com/introduction</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:11 +0000</pubDate>
       <description>Friday, 4:03 PM.</description>
     </item>
     <item>
       <title>Architects of Intent Infographic Deck</title>
       <link>https://architectsofintent.com/infographic-deck</link>
       <guid>https://architectsofintent.com/infographic-deck</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:11 +0000</pubDate>
       <description>Use this page as a talk-ready sequence. Arrow keys (←/→), page keys, and dots jump between slides.
       The deck marker below now auto-loads all published fragments from the library index.</description>
     </item>
@@ -24,7 +24,7 @@
       <title>Architects of Intent 10-Slide Deck</title>
       <link>https://architectsofintent.com/infographic-deck-10</link>
       <guid>https://architectsofintent.com/infographic-deck-10</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:11 +0000</pubDate>
       <description>Curated sequence for a shorter presentation. This flow starts with loop fundamentals,
       moves through candidate economics, drift, and control mechanisms, and closes on the defensibility hypothesis.</description>
     </item>
@@ -32,14 +32,14 @@
       <title>The LoopMay Be the Moat</title>
       <link>https://architectsofintent.com/infographic-4</link>
       <guid>https://architectsofintent.com/infographic-4</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:11 +0000</pubDate>
       <description>Architects of Intent — Essence</description>
     </item>
     <item>
       <title>Architects of Intent</title>
       <link>https://architectsofintent.com/infographic-3</link>
       <guid>https://architectsofintent.com/infographic-3</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:06 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:11 +0000</pubDate>
       <description>Architectural mechanisms for bounded work, inspectable evidence, finite outcomes, and separate admission.</description>
     </item>
     <item>
@@ -47,7 +47,7 @@
 9 – The Maintenance Controller (Background Maintenance)</title>
       <link>https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance</link>
       <guid>https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:11 +0000</pubDate>
       <description>Start with the version most teams should run: a read-only scan. An
 external scheduler or event triggers a governed process that observes
 fixed Terrain, applies a versioned selection policy, rejects ineligible
@@ -59,7 +59,7 @@ request and changes no repository file.</description>
 Map Fresh (Map-Updaters)</title>
       <link>https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters</link>
       <guid>https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:11 +0000</pubDate>
       <description>Documentation, specifications, inventories, and policies drift
 because the systems they describe continue to change. A workflow can
 make selected drift visible and propose a bounded correction.</description>
@@ -69,7 +69,7 @@ make selected drift visible and propose a bounded correction.</description>
 Code (Mission Objects)</title>
       <link>https://architectsofintent.com/chapter-7-intent-as-code-mission-objects</link>
       <guid>https://architectsofintent.com/chapter-7-intent-as-code-mission-objects</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:11 +0000</pubDate>
       <description>A serious workflow needs more than an instruction string. It needs a
 versioned work contract that states what the work is, what may define
 correctness, what may change, what evidence is required, when execution
@@ -80,7 +80,7 @@ must stop, and who may admit the result.</description>
 Context Architecture (Why Slicing Matters)</title>
       <link>https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters</link>
       <guid>https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>Start with a failing tax case:</description>
     </item>
     <item>
@@ -89,7 +89,7 @@ Context Architecture (Why Slicing Matters)</title>
 Stopping</title>
       <link>https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping</link>
       <guid>https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>Start with one bounded trace:</description>
     </item>
     <item>
@@ -97,7 +97,7 @@ Stopping</title>
 4 – The Stochastic Generator (Why You Need Physics)</title>
       <link>https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics</link>
       <guid>https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>Consider two representative outputs from the same fixed request:</description>
     </item>
     <item>
@@ -105,7 +105,7 @@ Stopping</title>
 “Good” (Your First Validators)</title>
       <link>https://architectsofintent.com/chapter-3-define-good-your-first-validators</link>
       <guid>https://architectsofintent.com/chapter-3-define-good-your-first-validators</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>The Deterministic Sandwich from Chapter 2 relies on an independent
 check outside the probabilistic change step. Start with one concrete
 result:</description>
@@ -115,7 +115,7 @@ result:</description>
 2 – The Deterministic Sandwich (Your First Pattern)</title>
       <link>https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern</link>
       <guid>https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>Chapter 1 traced a minimal loop that stayed in bounds because every
 step was deterministic. This chapter shows what changes when one of
 those steps uses a foundation model.</description>
@@ -125,7 +125,7 @@ those steps uses a foundation model.</description>
 Implications for Delegated Automation</title>
       <link>https://architectsofintent.com/chapter-14-implications-for-delegated-automation</link>
       <guid>https://architectsofintent.com/chapter-14-implications-for-delegated-automation</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>The previous chapters treated the software change process as an
 engineering object. Adopted intent fixes authority, probabilistic steps
 operate inside declared effects, independent evidence guides refinement,
@@ -138,7 +138,7 @@ become recurring, composable organizational capabilities.</description>
 – From Documentation to Enforceable Constraints</title>
       <link>https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints</link>
       <guid>https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>Destination: Selected Map claims become enforceable
 rather than merely advisory.</description>
     </item>
@@ -147,7 +147,7 @@ rather than merely advisory.</description>
 Governance for High-Rate Automation</title>
       <link>https://architectsofintent.com/chapter-12-governance-for-high-rate-automation</link>
       <guid>https://architectsofintent.com/chapter-12-governance-for-high-rate-automation</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>A maintenance Mission is authorized to edit one service. Its
 candidate diff stays inside that directory, but the process also
 attempts an undeclared network call. A path-only check would pass.</description>
@@ -157,7 +157,7 @@ attempts an undeclared network call. A path-only check would pass.</description>
 Automated Refactoring Under Guards</title>
       <link>https://architectsofintent.com/chapter-11-automated-refactoring-under-guards</link>
       <guid>https://architectsofintent.com/chapter-11-automated-refactoring-under-guards</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>Start with one candidate whose run ended in complete and
 whose Run Record is sealed, but which has not yet been admitted:</description>
     </item>
@@ -166,7 +166,7 @@ whose Run Record is sealed, but which has not yet been admitted:</description>
 10 – The Protected Control Plane (The Guardrails)</title>
       <link>https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails</link>
       <guid>https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>Start with a denied effect.</description>
     </item>
     <item>
@@ -174,14 +174,14 @@ whose Run Record is sealed, but which has not yet been admitted:</description>
 Governed Loop</title>
       <link>https://architectsofintent.com/chapter-1-a-minimal-governed-loop</link>
       <guid>https://architectsofintent.com/chapter-1-a-minimal-governed-loop</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>Build one small loop: code changes, docs sync, checks decide.</description>
     </item>
     <item>
       <title>Appendix B: Core Vocabulary</title>
       <link>https://architectsofintent.com/appendix-b-core-vocabulary</link>
       <guid>https://architectsofintent.com/appendix-b-core-vocabulary</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>These terms carry the architectural argument. They are collected here
 for reference; each is introduced and developed where its mechanism
 first matters.</description>
@@ -191,7 +191,7 @@ first matters.</description>
 and Limits</title>
       <link>https://architectsofintent.com/appendix-a-failure-modes-and-limits</link>
       <guid>https://architectsofintent.com/appendix-a-failure-modes-and-limits</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:05 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:10 +0000</pubDate>
       <description>A governed loop offers conditional guarantees, not universal
 correctness. Under its stated trust assumptions, it can establish that
 effects stayed within declared bounds, required checks ran, transitions
@@ -205,7 +205,7 @@ justified.</description>
       <title>Search</title>
       <link>https://architectsofintent.com/search</link>
       <guid>https://architectsofintent.com/search</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:04 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:09 +0000</pubDate>
       <description>Search works entirely in your browser. Results update as you type.</description>
     </item>
     <item>
@@ -213,7 +213,7 @@ justified.</description>
 About the Author</title>
       <link>https://architectsofintent.com/acknowledgements-and-about-the-author</link>
       <guid>https://architectsofintent.com/acknowledgements-and-about-the-author</guid>
-      <pubDate>Sun, 26 Jul 2026 06:41:04 +0000</pubDate>
+      <pubDate>Sun, 02 Aug 2026 22:04:09 +0000</pubDate>
       <description>Thanks to the CTO at Abler for implementing ideas from an earlier
 draft and testing them against production-grade work.</description>
     </item>

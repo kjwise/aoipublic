@@ -24,14 +24,14 @@
 <meta content="Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Appendix A: Failure Modes and Limits | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix A: Failure Modes and Limits", "description": "Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "mainEntityOfPage": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT5M", "articleSection": "Part VI – Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix A: Failure Modes and Limits", "description": "Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "mainEntityOfPage": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-02T22:03:54Z", "timeRequired": "PT6M", "articleSection": "Part VI – Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
-<script defer="" src="script.js?v=337bafbc4d6b"></script>
+<link href="style.css?v=cbc3c8fc494c" rel="stylesheet"/>
+<script defer="" src="script.js?v=cbc3c8fc494c"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -52,7 +52,7 @@
 <header class="chapter-header">
 <div class="chapter-kicker">
 <div class="part-title">Part VI – Appendices</div>
-<div class="chapter-meta"><span class="read-time">5 min read</span></div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="appendix-a-failure-modes-and-limits">Appendix A: Failure Modes
@@ -111,13 +111,19 @@ schema field, dependency, or policy statement; a later step records that
 invention as if a <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> had extracted it from <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> or an authorized
 process had adopted it. Subsequent runs then optimize against a
 self-confirming fiction.</p>
-<p>The Skeleton-First rule prevents one common form of this failure:
-Sensors extract structural facts, while models may propose bounded
-content around them. The deeper invariant is authority direction. A
-Terrain-to-Map workflow may report observed structure but may not make
-that structure intended policy. A Map-to-Terrain workflow may propose
-implementation from adopted intent but may not rewrite the intent that
-judges it.</p>
+<p>The Skeleton-First rule prevents one common form of this failure in
+two directions. In Map-to-Terrain work, an adopted design supplies a
+prescriptive minimum scaffold and permitted expansion rules. In
+Terrain-to-Map work, deterministic extraction records descriptive
+observed structure. Exact derived views remain traceable observations;
+judgment-heavy summaries remain candidates. An exact view carries only
+the bounded descriptive authority of its declared Terrain sources. A
+judgment-heavy summary cannot overwrite prescriptive Map content or
+become Map authority without separate adoption.</p>
+<p>The deeper invariant is authority direction. A Terrain-to-Map
+workflow may report observed structure but may not make that structure
+intended policy. A Map-to-Terrain workflow may propose implementation
+from adopted intent but may not rewrite the intent that judges it.</p>
 <p>Post-processing cannot erase an authority violation. If a candidate
 attempted undeclared effects, the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> attempted footprint remains
 evidence even when a deterministic cleanup could produce an apparently
@@ -221,7 +227,7 @@ permission.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<span class="site-footer__item">Version: <code>cbc3c8fc494c</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

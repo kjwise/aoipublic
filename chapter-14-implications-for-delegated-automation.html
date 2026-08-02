@@ -24,14 +24,14 @@
 <meta content="Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 14 – Implications for Delegated Automation | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 14 – Implications for Delegated Automation", "description": "Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "mainEntityOfPage": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT10M", "articleSection": "Part V – Implications and Limits", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 14 – Implications for Delegated Automation", "description": "Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "mainEntityOfPage": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-02T22:03:54Z", "timeRequired": "PT10M", "articleSection": "Part V – Implications and Limits", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
-<script defer="" src="script.js?v=337bafbc4d6b"></script>
+<link href="style.css?v=cbc3c8fc494c" rel="stylesheet"/>
+<script defer="" src="script.js?v=cbc3c8fc494c"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -163,25 +163,31 @@ Factory</h2>
 contracts, bounded effects, required evidence, and explicit terminal
 outcomes and failure semantics. A workflow may contain several
 probabilistic steps arranged sequentially, conditionally, or in
-parallel. Chapter 2 defines how the enclosing workflow treats model
-calls, agents, harnesses, services, and child workflows. Whatever the
-component, the enclosing workflow consumes declared results rather than
-borrowing undeclared authority from it.</p>
+parallel. A step may invoke an agent harness through a CLI or API, and
+that harness may invoke smaller harnesses. The enclosing workflow
+consumes only declared outputs and evidence from the step boundary.
+Nesting does not propagate undeclared authority.</p>
 <p>A retry loop may repeat one step inside a finite run. An operational
 loop invokes the whole workflow again when changed Terrain, a schedule,
 an event, or newly adopted intent requires it. Each invocation fixes
 current authority and state, then ends with a sealed result. Continuous
 operation is assembled from finite histories rather than one
 indefinitely mutable execution.</p>
+<p>At factory scale, the whole arrangement acts as a harness around
+delivery. A workflow organizes the path; loops repeat a declared step,
+subsequence, or whole workflow; a <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a> grounds each run; and
+agent harnesses execute bounded work within selected steps. Under an
+activated Mission, these parts carry adopted intent through
+progressively more formal contracts and candidates to a sealed result.
+Separate admission decides whether the proposal becomes Terrain.</p>
 <p>One dependable step can become a reusable capability. Compatible
 capabilities can become larger workflows. Repeated finite runs can
 become a continuous operating capacity for change. AI may supply
 generation, evaluation, or routing inside several steps; the factory
 supplies the boundaries, evidence, memory, and admission paths that make
 those capabilities dependable enough to compose.</p>
-<p>A factory can therefore compose a path from adopted intent expressed
-in natural language through progressively more formal contracts and
-candidates to implementation. In the other direction, evidence from
+<p>Dependencies among those representations need not mirror the <a class="concept-link" href="concepts#workflow" title="See concept: Workflow">Workflow</a>
+execution graph that acts on them. In the other direction, evidence from
 admitted Terrain can support proposed human-readable Maps. This is
 circulation, not symmetry: one direction elaborates what should become
 real, while the other describes what appears to be real. Only separate
@@ -408,7 +414,7 @@ to masquerade as permission.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<span class="site-footer__item">Version: <code>cbc3c8fc494c</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

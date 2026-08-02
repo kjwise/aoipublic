@@ -24,14 +24,14 @@
 <meta content="Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 2 – The Deterministic Sandwich (Your First Pattern)", "description": "Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "mainEntityOfPage": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-07-26T06:40:51Z", "timeRequired": "PT7M", "articleSection": "Part I – Building a Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 2 – The Deterministic Sandwich (Your First Pattern)", "description": "Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "mainEntityOfPage": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-02T22:03:54Z", "timeRequired": "PT8M", "articleSection": "Part I – Building a Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=337bafbc4d6b" rel="stylesheet"/>
-<script defer="" src="script.js?v=337bafbc4d6b"></script>
+<link href="style.css?v=cbc3c8fc494c" rel="stylesheet"/>
+<script defer="" src="script.js?v=cbc3c8fc494c"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -56,7 +56,7 @@
 <header class="chapter-header">
 <div class="chapter-kicker">
 <div class="part-title">Part I – Building a Governed Loop</div>
-<div class="chapter-meta"><span class="read-time">7 min read</span></div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter
@@ -203,12 +203,27 @@ declared repetition of a step, a subsequence, or the complete workflow.
 Continuous operation is therefore a sequence of finite runs with fixed
 authority, terminal outcomes, and sealed evidence, not one immortal run
 whose state and rules drift indefinitely.</p>
-<p>A step may invoke a model, agent, harness, command-line interface
-(CLI), remote service, or child workflow. The interface does not
-determine how much the parent workflow may trust it. For example,
-<code>make lint</code> may expose a deterministic check, while an agent
-CLI may choose tools and edit files. Classify the step by its declared
-behavior, effects, and evidence contract.</p>
+<p>A step may invoke a model or tool directly, or it may invoke an agent
+harness through a command-line interface (CLI) or application
+programming interface (API). The CLI or API is the invocation and
+control surface, not a separate kind of worker. An agent harness
+surrounds model-and-tool work. Within its declared inputs and read
+authority, it manages working context, tool use, bounded internal
+iteration, and result production. Thus <code>make lint</code> can expose
+a deterministic check through a CLI, while a Codex CLI invocation can
+expose a coding-agent harness rather than a single deterministic
+command.</p>
+<p>A harness names a role at a boundary, not a fixed architectural
+layer. From the enclosing workflow’s viewpoint, it is one bounded
+component. The activated Mission fixes the step’s authority, permitted
+effects, budget, and required evidence; the workflow governs its
+transitions and the results it may consume; the protected runtime
+enforces those boundaries. An agent harness may invoke smaller
+harnesses, but authority does not implicitly propagate: each nested
+component remains inside the authority granted at its enclosing
+boundary, and its result cannot confer new authority. Classify the step
+by its declared behavior, effects, and evidence contract rather than its
+invocation surface.</p>
 <p>A component with its own finite governed lifecycle and sealed result
 can act as a child workflow. Otherwise, its outputs and attempted
 effects remain untrusted at the parent boundary.</p>
@@ -301,7 +316,7 @@ determine what evidence is required and what may advance.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>337bafbc4d6b</code></span>
+<span class="site-footer__item">Version: <code>cbc3c8fc494c</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

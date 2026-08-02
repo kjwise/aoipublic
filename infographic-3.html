@@ -191,558 +191,209 @@
 <p class="aoi-book-diagram__note">A <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> result is evidence for routing. It is not admission, and a retry policy belongs to the enclosing workflow.</p>
 </figure>
 </section>
-<section class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
+<section aria-labelledby="skeleton-first-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-06-skeleton-first-rule</span>
 <style>
-  [data-role="skeleton-sim"] .trend-pill {
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 0.6rem;
-    background: rgba(11, 12, 16, 0.48);
-    padding: 0.45rem;
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-direction-card {
+    background: rgba(19, 21, 28, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.9rem;
     min-width: 0;
+    padding: 1.1rem;
   }
 
-  [data-role="skeleton-sim"] .trend-pill[data-state="pass"] {
-    border-color: rgba(42, 195, 222, 0.45);
-    background: rgba(42, 195, 222, 0.15);
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-direction-grid {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 32rem), 1fr));
   }
 
-  [data-role="skeleton-sim"] .trend-pill[data-state="fail"] {
-    border-color: rgba(247, 118, 142, 0.45);
-    background: rgba(247, 118, 142, 0.16);
-  }
-
-  [data-role="skeleton-sim"] .trend-pill[data-state="empty"] {
-    opacity: 0.56;
-    border-style: dashed;
-  }
-
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="converged"],
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="improving"] {
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-direction-label {
+    align-items: center;
+    border: 1px solid rgba(42, 195, 222, 0.45);
+    border-radius: 999px;
     color: #2ac3de;
+    display: inline-flex;
+    font-size: 0.68rem;
+    gap: 0.35rem;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.55rem;
+    text-transform: uppercase;
   }
 
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="stalled"] {
-    color: #bb9af7;
-  }
-
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="diverging"],
-  [data-role="skeleton-sim"] [data-role="trend-status"][data-state="unreachable"] {
-    color: #f7768e;
-  }
-
-  [data-role="skeleton-sim"] [data-role="ledger-path"] {
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-node {
+    align-items: center;
+    background: rgba(11, 12, 16, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.5rem;
+    color: #e2e8f0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    min-height: 1.9rem;
     overflow-wrap: anywhere;
-    word-break: break-word;
+    padding: 0.3rem 0.55rem;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-node::before {
+    color: #2ac3de;
+    content: "•";
+    font-size: 0.75rem;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-node-root {
+    border-color: rgba(42, 195, 222, 0.55);
+    font-weight: 700;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-expansion {
+    border: 1px dashed rgba(42, 195, 222, 0.7);
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-tier-label {
+    color: #8b91a1;
+    font-size: 0.58rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-observation {
+    background: rgba(11, 12, 16, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.55rem;
+    min-width: 0;
+    padding: 0.55rem 0.65rem;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-provenance {
+    color: #8b91a1;
+    overflow-wrap: anywhere;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-map-inventory {
+    background: rgba(42, 195, 222, 0.1);
+    border: 1px solid rgba(42, 195, 222, 0.45);
+    border-radius: 0.65rem;
+    color: #e2e8f0;
+    padding: 0.65rem 0.75rem;
+  }
+
+  [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-footer-item {
+    border-left: 2px solid rgba(42, 195, 222, 0.38);
+    min-width: 0;
+    padding-left: 0.65rem;
+  }
+
+  @media print {
+    [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-direction-card,
+    [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-node,
+    [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-observation,
+    [data-infographic-section-id="i3-section-06-skeleton-first-rule"] .sf-map-inventory {
+      background: transparent !important;
+      color: #111 !important;
+    }
   }
 </style>
-<div class="bg-brand-surface rounded-xl shadow-lg p-8 border border-brand-border border-l-8 border-l-brand-primary">
-<div class="flex flex-col lg:flex-row gap-8">
-<div class="lg:w-5/12">
-<h2 class="text-3xl font-bold text-brand-strong mb-3">Skeleton-First Rule (Prevent Map Contamination)</h2>
-<p class="text-brand-muted leading-relaxed">
-              Extract authoritative facts from Terrain, then render a bounded Map candidate.
-              Skeleton checks emit evidence; the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> records the governed run result.
-            </p>
-<div class="mt-5 bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-2">Interactive updater</div>
-<div class="text-sm text-brand-muted leading-relaxed">
-                Toggle extraction and run bounded attempts. The skeleton gate emits
-                <span class="font-mono text-brand-strong">PASS/FAIL</span> evidence; the run ends
-                <span class="font-mono text-brand-strong"><a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a></span> or
-                <span class="font-mono text-brand-strong"><a class="concept-link" href="concepts#failed_with_evidence" title="See concept: failed_with_evidence">failed_with_evidence</a></span>.
-              </div>
+<div class="bg-brand-surface rounded-xl shadow-lg p-5 md:p-6 border border-brand-border border-l-8 border-l-brand-primary">
+<div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 mb-5">
+<div class="max-w-3xl">
+<h2 class="text-2xl md:text-3xl font-bold text-brand-strong" id="skeleton-first-title">Skeleton-First: Scaffold or Extract</h2>
+<p class="mt-2 text-sm text-brand-muted leading-relaxed">
+        A skeleton can prescribe the minimum structure implementation must preserve, or describe exact structure observed in Terrain. Authority direction determines which one it is.
+      </p>
+</div>
+<div class="text-xs font-mono text-brand-muted">one technique · opposite authority direction</div>
+</div>
+<div class="sf-direction-grid">
+<article aria-labelledby="scaffold-direction-title" class="sf-direction-card">
+<div class="sf-direction-label font-mono">1 · Map <span class="sr-only">to</span><span aria-hidden="true">→</span> Terrain</div>
+<h3 class="mt-3 text-lg font-bold text-brand-strong" id="scaffold-direction-title">Prescriptive minimum viable scaffold</h3>
+<p class="mt-1 text-xs text-brand-muted leading-relaxed">
+        Adopted structure comes first. Implementation may fill content and expand only the points the Map declares.
+      </p>
+<div aria-label="Prescriptive Architecture guide scaffold" class="mt-3 text-xs">
+<div class="sf-tier-label font-mono">Fixed root</div>
+<div><span class="sf-node sf-node-root">Architecture guide</span></div>
+<div class="sf-tier-label font-mono mt-2">Top level · dashed = declared expansion</div>
+<div class="grid grid-cols-3 gap-1">
+<span class="sf-node">Problem</span>
+<span class="sf-node sf-expansion">Mechanism<span class="sr-only"> — declared expansion point</span></span>
+<span class="sf-node">Limits</span>
+</div>
+<div class="sf-tier-label font-mono mt-2">Mechanism expands to</div>
+<div class="grid grid-cols-3 gap-1">
+<span class="sf-node">Inputs</span>
+<span class="sf-node sf-expansion">Transformation<span class="sr-only"> — declared expansion point</span></span>
+<span class="sf-node">Outputs</span>
+</div>
+<div class="sf-tier-label font-mono mt-2">Transformation expands to</div>
+<div class="grid grid-cols-3 gap-1">
+<span class="sf-node">Preconditions</span>
+<span class="sf-node">State changes</span>
+<span class="sf-node">Postconditions</span>
 </div>
 </div>
-<div class="lg:w-7/12 space-y-4" data-role="skeleton-sim">
-<div class="bg-brand-light border border-brand-border rounded-xl p-4">
-<div class="text-xs font-mono text-brand-muted mb-3"><a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a> loop</div>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-center">
-<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Sense/Normalize</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Extract skeleton</div>
+<div class="mt-3 bg-brand-light border border-brand-border rounded-lg p-2 text-xs text-brand-muted leading-relaxed">
+<span class="font-mono text-brand-strong">Possible formalization:</span>
+        when a stable grammar recurs, outline <span aria-hidden="true">→</span><span class="sr-only">to</span> schema <span aria-hidden="true">→</span><span class="sr-only">to</span> domain-specific language. Each transition requires separate adoption.
 </div>
-<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Propose</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Render Map candidate</div>
+<div class="mt-3 bg-brand-light border border-brand-border rounded-lg p-2 text-xs text-brand-muted leading-relaxed">
+<span class="font-mono text-brand-strong">Content topology:</span>
+        declared expansion points below <span aria-hidden="true">↓</span><span class="sr-only">downward</span> · derivable parent views above <span aria-hidden="true">↑</span><span class="sr-only">upward</span>
 </div>
-<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Validate</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Hard skeleton gate</div>
+</article>
+<article aria-labelledby="extract-direction-title" class="sf-direction-card">
+<div class="sf-direction-label font-mono">2 · Terrain <span class="sr-only">to</span><span aria-hidden="true">→</span> Map</div>
+<h3 class="mt-3 text-lg font-bold text-brand-strong" id="extract-direction-title">Descriptive extracted skeleton</h3>
+<p class="mt-1 text-xs text-brand-muted leading-relaxed">
+        Terrain-to-Map work records exact observed structure first. It preserves provenance and leaves judgment-heavy prose as a proposal.
+      </p>
+<div aria-label="Observed Terrain leaves" class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
+<div class="sf-observation">
+<div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Routes</div>
+<div class="mt-1 text-xs font-mono text-brand-strong">GET /orders<br/>POST /orders</div>
+<div class="sf-provenance mt-1 text-[10px] font-mono">routes.py@8ac4e1</div>
 </div>
-<div class="border border-brand-border rounded-lg p-3 bg-brand-surface">
-<div class="text-xs font-mono text-brand-muted">Ledger</div>
-<div class="mt-1 text-sm font-semibold text-brand-strong">Evidence + result</div>
+<div class="sf-observation">
+<div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Commands</div>
+<div class="mt-1 text-xs font-mono text-brand-strong">CreateOrder<br/>CancelOrder</div>
+<div class="sf-provenance mt-1 text-[10px] font-mono">commands.py@8ac4e1</div>
 </div>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
-<div class="md:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Contamination pressure</span>
-<span class="font-mono text-brand-strong"><span data-role="pressure-value">40</span>/100</span>
-</div>
-<label class="sr-only" for="skeletonPressureSlider">Contamination pressure</label>
-<input class="mt-2 w-full" data-role="pressure-slider" id="skeletonPressureSlider" max="100" min="0" type="range" value="40"/>
-</div>
-<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between text-xs text-brand-muted">
-<span class="font-mono">Retry budget</span>
-<span class="font-mono text-brand-strong"><span data-role="budget-value">5</span>x</span>
-</div>
-<label class="sr-only" for="skeletonBudgetSlider">Retry budget</label>
-<input class="mt-2 w-full" data-role="budget-slider" id="skeletonBudgetSlider" max="10" min="2" step="1" type="range" value="5"/>
-</div>
-<div class="md:col-span-3 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Extractor</span>
-<button aria-pressed="true" class="soft-toggle font-mono text-xs" data-role="extractor-toggle" type="button">ON</button>
-</div>
-<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Step attempt</span>
-<button class="soft-toggle font-mono text-xs" data-role="run-button" type="button">Run</button>
-</div>
-<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Bounded loop</span>
-<button class="soft-toggle font-mono text-xs" data-role="run-budget" type="button">Run to exit</button>
-</div>
-<div class="md:col-span-4 bg-brand-light border border-brand-border rounded-xl p-3 flex items-center justify-between gap-2">
-<span class="text-xs font-mono text-brand-muted">Reset</span>
-<button class="soft-toggle font-mono text-xs" data-role="reset-button" type="button">Reset</button>
+<div class="sf-observation">
+<div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Ownership</div>
+<div class="mt-1 text-xs font-mono text-brand-strong">orders/**<br/><span class="sr-only">owned by</span><span aria-hidden="true">→</span> commerce-team</div>
+<div class="sf-provenance mt-1 text-[10px] font-mono">CODEOWNERS@8ac4e1</div>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Canonical skeleton (<a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a>)</div>
-<ul class="space-y-1 text-xs text-brand-strong font-mono" data-role="canonical-list"></ul>
+<div class="my-2 text-center text-[10px] uppercase tracking-wide font-mono text-brand-muted">
+        Terrain <span class="sr-only">to</span><span aria-hidden="true">→</span> exact upward inventory + aggregation <span class="sr-only">to</span><span aria-hidden="true">→</span> Map
+      </div>
+<div class="sf-map-inventory">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+<div class="text-xs font-semibold">Normalized Terrain inventory</div>
+<div class="text-xs font-mono text-brand-strong">2 routes · 2 commands · 1 ownership rule</div>
 </div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted mb-2">Proposed skeleton (Map)</div>
-<ul class="space-y-1 text-xs font-mono" data-role="proposed-list"></ul>
+<div class="mt-1 text-[10px] font-mono text-brand-muted">exact observation · source revision 8ac4e1 · no inferred rationale</div>
 </div>
+<div class="mt-2 border border-dashed border-brand-border rounded-lg p-3">
+<div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Compare, then propose</div>
+<p class="mt-1 text-xs text-brand-muted leading-relaxed">
+          The updater compares this observation with the selected Map surface. Any bounded Map change, rationale, or judgment-heavy prose remains a proposal until separately reviewed and adopted.
+        </p>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Mismatch count</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="mismatch-count">0</span></div>
+</article>
 </div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Contamination risk</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="risk-score">0</span>/100</div>
+<footer class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 bg-brand-light border border-brand-border rounded-lg p-3 text-xs text-brand-muted leading-relaxed">
+<div class="sf-footer-item"><span class="font-semibold text-brand-strong">Content structure</span> says what is nested.</div>
+<div class="sf-footer-item"><span class="font-semibold text-brand-strong">Context Graph</span> makes source identities and typed relationships addressable; policy selects the slice.</div>
+<div class="sf-footer-item"><span class="font-semibold text-brand-strong">Governed Workflow</span> controls allowed transformations, checks, and effects. The three topologies need not match.</div>
+</footer>
 </div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Skeleton gate</div>
-<div class="mt-1 text-lg font-bold text-brand-strong" data-role="gate-badge">PASS</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Budget remaining</div>
-<div class="mt-1 text-lg font-bold text-brand-strong"><span data-role="budget-remaining">5</span>x</div>
-</div>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
-<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Constraint → deterministic gate</div>
-<div class="mt-2 space-y-2 text-sm text-brand-muted">
-<div class="flex items-center justify-between gap-2">
-<span>Skeleton must match exactly</span>
-<span class="font-mono text-brand-strong" data-role="gate-skeleton">PASS</span>
-</div>
-<div class="flex items-center justify-between gap-2">
-<span>No invented structure</span>
-<span class="font-mono text-brand-strong" data-role="gate-scope">PASS</span>
-</div>
-<div class="flex items-center justify-between gap-2">
-<span>Retry budget not exceeded</span>
-<span class="font-mono text-brand-strong" data-role="gate-budget">PASS</span>
-</div>
-<div class="flex items-center justify-between gap-2">
-<span>Declared evidence complete</span>
-<span class="font-mono text-brand-strong" data-role="gate-ledger">PENDING</span>
-</div>
-</div>
-</div>
-<div class="lg:col-span-6 bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="text-xs font-mono text-brand-muted">Updater state of record</div>
-<div class="mt-2 text-sm text-brand-muted leading-relaxed">
-<div class="flex items-center justify-between gap-2">
-<span>Status</span>
-<span class="font-mono text-brand-strong break-all text-right" data-role="status-label">ready</span>
-</div>
-<div class="mt-2 flex items-center justify-between gap-2">
-<span>Attempt</span>
-<span class="font-mono text-brand-strong" data-role="attempt-label">0/5</span>
-</div>
-<div class="mt-2 flex items-center justify-between gap-2">
-<span>Last run</span>
-<span class="font-mono text-brand-strong" data-role="last-run">--</span>
-</div>
-<div class="mt-2 flex items-center justify-between gap-2">
-<span>outputs.checked</span>
-<span class="font-mono text-brand-strong" data-role="outputs-checked">false</span>
-</div>
-</div>
-<div class="mt-3 text-xs font-mono text-brand-muted" data-role="ledger-path">ledger/map-updaters/skeleton-first/attempt-00.json</div>
-</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between gap-3">
-<div class="text-xs font-mono text-brand-muted">Mismatch trend (W=4)</div>
-<div class="text-xs text-brand-muted" data-role="trend-status" data-state="baseline">Collecting baseline.</div>
-</div>
-<div class="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2" data-role="trend-window"></div>
-<div class="mt-2 text-xs text-brand-muted" data-role="outcome-text">Ready to run one bounded attempt.</div>
-</div>
-<div class="bg-brand-light border border-brand-border rounded-xl p-3">
-<div class="flex items-center justify-between gap-3">
-<div class="text-xs font-mono text-brand-muted"><a class="concept-link" href="concepts#loop" title="See concept: Loop">Loop</a> attempts</div>
-<div class="text-xs text-brand-muted">Cyan = complete, red = in progress, violet = failed with evidence</div>
-</div>
-<div class="mt-3 flex flex-wrap gap-1" data-role="attempts"></div>
-</div>
-</div>
-</div>
-</div>
-<script>
-(function () {
-  const script = document.currentScript;
-  const root = script ? script.closest('[data-infographic-section-id="i3-section-06-skeleton-first-rule"]') : null;
-  if (!root || root.dataset.skeletonFirstReady === "1") {
-    return;
-  }
-  root.dataset.skeletonFirstReady = "1";
-
-  const sim = root.querySelector('[data-role="skeleton-sim"]');
-  if (!sim) return;
-
-  const pressureSlider = sim.querySelector('[data-role="pressure-slider"]');
-  const pressureValue = sim.querySelector('[data-role="pressure-value"]');
-  const budgetSlider = sim.querySelector('[data-role="budget-slider"]');
-  const budgetValue = sim.querySelector('[data-role="budget-value"]');
-  const extractorToggle = sim.querySelector('[data-role="extractor-toggle"]');
-  const runButton = sim.querySelector('[data-role="run-button"]');
-  const runBudgetButton = sim.querySelector('[data-role="run-budget"]');
-  const resetButton = sim.querySelector('[data-role="reset-button"]');
-  const canonicalList = sim.querySelector('[data-role="canonical-list"]');
-  const proposedList = sim.querySelector('[data-role="proposed-list"]');
-  const mismatchCount = sim.querySelector('[data-role="mismatch-count"]');
-  const riskScore = sim.querySelector('[data-role="risk-score"]');
-  const gateBadge = sim.querySelector('[data-role="gate-badge"]');
-  const budgetRemaining = sim.querySelector('[data-role="budget-remaining"]');
-  const gateSkeleton = sim.querySelector('[data-role="gate-skeleton"]');
-  const gateScope = sim.querySelector('[data-role="gate-scope"]');
-  const gateBudget = sim.querySelector('[data-role="gate-budget"]');
-  const gateLedger = sim.querySelector('[data-role="gate-ledger"]');
-  const statusLabel = sim.querySelector('[data-role="status-label"]');
-  const attemptLabel = sim.querySelector('[data-role="attempt-label"]');
-  const lastRun = sim.querySelector('[data-role="last-run"]');
-  const outputsChecked = sim.querySelector('[data-role="outputs-checked"]');
-  const ledgerPath = sim.querySelector('[data-role="ledger-path"]');
-  const trendStatus = sim.querySelector('[data-role="trend-status"]');
-  const trendWindow = sim.querySelector('[data-role="trend-window"]');
-  const outcomeText = sim.querySelector('[data-role="outcome-text"]');
-  const attempts = sim.querySelector('[data-role="attempts"]');
-
-  if (!pressureSlider || !pressureValue || !budgetSlider || !budgetValue || !extractorToggle || !runButton || !runBudgetButton || !resetButton ||
-      !canonicalList || !proposedList || !mismatchCount || !riskScore || !gateBadge || !budgetRemaining || !gateSkeleton || !gateScope ||
-      !gateBudget || !gateLedger || !statusLabel || !attemptLabel || !lastRun || !outputsChecked || !ledgerPath || !trendStatus || !trendWindow || !outcomeText || !attempts) {
-    return;
-  }
-
-  const canonical = [
-    "routes.py",
-    "schemas/order.json",
-    "contracts/public_api.yaml",
-    "validators/policy.py",
-    "tests/validator_cases.py"
-  ];
-
-  const noisePool = [
-    "routes_v2_guess.py",
-    "schemas/legacy_mode.json",
-    "contracts/experimental.yaml",
-    "validators/soft_policy.py",
-    "notes/todo-skeleton.md",
-    "tests/speculative_case.py"
-  ];
-
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-
-  const state = {
-    pressure: Number.parseInt(pressureSlider.value, 10) || 40,
-    budget: Number.parseInt(budgetSlider.value, 10) || 5,
-    extractorOn: true,
-    run: 0,
-    history: [],
-    terminal: null
-  };
-
-  const setGate = (el, ok, pending) => {
-    if (pending) {
-      el.textContent = "PENDING";
-      el.style.color = "#b5b6bf";
-      return;
-    }
-    el.textContent = ok ? "PASS" : "FAIL";
-    el.style.color = ok ? "#2ac3de" : "#f7768e";
-  };
-
-  const renderList = (el, items, mode) => {
-    for (const item of items) {
-      const li = document.createElement("li");
-      li.textContent = item;
-      if (mode === "extra") li.className = "text-brand-danger";
-      if (mode === "missing") li.className = "text-amber-300";
-      el.appendChild(li);
-    }
-  };
-
-  const computeProposed = () => {
-    if (state.extractorOn) return canonical.slice();
-
-    const missingCount = clamp(Math.floor((state.pressure + state.run * 8) / 35), 0, 3);
-    const proposed = canonical.slice(missingCount);
-
-    const extraCount = clamp(Math.floor((state.pressure + state.run * 6) / 22), 1, 5);
-    for (let i = 0; i < extraCount; i += 1) {
-      const candidate = noisePool[(state.run + i) % noisePool.length];
-      if (!proposed.includes(candidate)) proposed.push(candidate);
-    }
-
-    return proposed;
-  };
-
-  const computeTrend = () => {
-    if (state.history.length === 0) {
-      return { state: "baseline", text: "Collecting baseline." };
-    }
-
-    const latest = state.history[state.history.length - 1];
-    if (latest.pass) {
-      return { state: "converged", text: "Complete: required skeleton checks pass." };
-    }
-
-    if (state.run >= state.budget) {
-      return { state: "unreachable", text: "failed_with_evidence: budget exhausted." };
-    }
-
-    if (state.history.length < 2) {
-      return { state: "baseline", text: "Need more runs for trend." };
-    }
-
-    const window = state.history.slice(-4).map((entry) => entry.mismatch);
-    const first = window[0];
-    const last = window[window.length - 1];
-
-    let decreasing = true;
-    let increasing = true;
-    for (let i = 1; i < window.length; i += 1) {
-      if (window[i] >= window[i - 1]) decreasing = false;
-      if (window[i] <= window[i - 1]) increasing = false;
-    }
-
-    if (decreasing) {
-      return { state: "improving", text: "Mismatch trend improving." };
-    }
-    if (increasing || last > first) {
-      return { state: "diverging", text: "Drift is diverging; extraction is too weak." };
-    }
-    return { state: "stalled", text: "Oscillating or flat; refine context or scope." };
-  };
-
-  const renderTrendWindow = () => {
-    trendWindow.innerHTML = "";
-
-    const slots = state.history.slice(-4);
-    for (let i = 0; i < 4; i += 1) {
-      const entry = slots[i];
-      const pill = document.createElement("div");
-      pill.className = "trend-pill";
-
-      if (!entry) {
-        pill.dataset.state = "empty";
-        pill.innerHTML = '<div class="text-[10px] font-mono text-brand-muted">run --</div><div class="mt-1 text-xs text-brand-muted">M: --</div>';
-        trendWindow.appendChild(pill);
-        continue;
-      }
-
-      pill.dataset.state = entry.pass ? "pass" : "fail";
-      const statusWord = entry.pass ? "PASS" : "FAIL";
-      pill.innerHTML =
-        '<div class="text-[10px] font-mono text-brand-muted">run ' + entry.run + '</div>' +
-        '<div class="mt-1 text-xs font-mono text-brand-strong">M: ' + entry.mismatch + '</div>' +
-        '<div class="mt-1 text-[10px] font-mono text-brand-muted">' + statusWord + '</div>';
-      trendWindow.appendChild(pill);
-    }
-  };
-
-  const updateAttempts = (status) => {
-    const dot = document.createElement("span");
-    dot.className = "inline-block w-2.5 h-2.5 rounded-full";
-    if (status === "complete") {
-      dot.style.backgroundColor = "rgba(42, 195, 222, 0.95)";
-    } else if (status === "failed_with_evidence") {
-      dot.style.backgroundColor = "rgba(187, 154, 247, 0.95)";
-    } else {
-      dot.style.backgroundColor = "rgba(247, 118, 142, 0.95)";
-    }
-
-    attempts.appendChild(dot);
-    while (attempts.children.length > 28) {
-      attempts.removeChild(attempts.firstChild);
-    }
-  };
-
-  const render = (recordAttempt) => {
-    state.pressure = clamp(Number.parseInt(pressureSlider.value, 10) || state.pressure, 0, 100);
-    state.budget = clamp(Number.parseInt(budgetSlider.value, 10) || state.budget, 2, 10);
-
-    pressureValue.textContent = String(state.pressure);
-    budgetValue.textContent = String(state.budget);
-
-    const proposed = computeProposed();
-    const missing = canonical.filter((item) => !proposed.includes(item));
-    const extras = proposed.filter((item) => !canonical.includes(item));
-    const mismatch = missing.length + extras.length;
-
-    const skeletonPass = mismatch === 0;
-    const scopePass = extras.length === 0;
-    const budgetExhausted = state.run >= state.budget && !(skeletonPass && scopePass);
-    const gatePass = skeletonPass && scopePass && !budgetExhausted;
-
-    const risk = state.extractorOn
-      ? clamp(Math.round(state.pressure * 0.1 + mismatch * 3), 0, 100)
-      : clamp(Math.round(state.pressure * 0.52 + mismatch * 10 + state.run * 2), 0, 100);
-
-    canonicalList.innerHTML = "";
-    proposedList.innerHTML = "";
-    renderList(canonicalList, canonical, "");
-    renderList(proposedList, proposed.filter((item) => canonical.includes(item)), "");
-    renderList(proposedList, extras, "extra");
-    renderList(proposedList, missing.map((item) => "MISSING: " + item), "missing");
-
-    mismatchCount.textContent = String(mismatch);
-    riskScore.textContent = String(risk);
-    gateBadge.textContent = gatePass ? "PASS" : "FAIL";
-    gateBadge.style.color = gatePass ? "#2ac3de" : "#f7768e";
-
-    const remaining = Math.max(0, state.budget - state.run);
-    budgetRemaining.textContent = String(remaining);
-
-    setGate(gateSkeleton, skeletonPass, false);
-    setGate(gateScope, scopePass, false);
-    setGate(gateBudget, !budgetExhausted, false);
-    setGate(gateLedger, state.run > 0, state.run === 0);
-    outputsChecked.textContent = state.run > 0 ? "true" : "false";
-    outputsChecked.style.color = state.run > 0 ? "#2ac3de" : "#b5b6bf";
-
-    let status = state.terminal || "ready";
-    if (!state.terminal && state.run > 0) {
-      if (budgetExhausted) {
-        status = "failed_with_evidence";
-      } else {
-        status = gatePass ? "complete" : "in_progress";
-      }
-      if (status === "complete" || status === "failed_with_evidence") {
-        state.terminal = status;
-      }
-    }
-
-    const sealed = Boolean(state.terminal);
-    pressureSlider.disabled = sealed;
-    budgetSlider.disabled = sealed;
-    extractorToggle.disabled = sealed;
-    runButton.disabled = sealed;
-    runBudgetButton.disabled = sealed;
-
-    statusLabel.textContent = status;
-    statusLabel.style.color = status === "complete" ? "#2ac3de" : status === "failed_with_evidence" ? "#bb9af7" : status === "in_progress" ? "#f7768e" : "#e2e8f0";
-
-    attemptLabel.textContent = String(state.run) + "/" + String(state.budget);
-    lastRun.textContent = state.run === 0 ? "--" : "T+" + String(state.run);
-    ledgerPath.textContent = "ledger/map-updaters/skeleton-first/attempt-" + String(state.run).padStart(2, "0") + ".json";
-
-    if (recordAttempt) {
-      state.history.push({ run: state.run, mismatch, pass: gatePass });
-      while (state.history.length > 28) {
-        state.history.shift();
-      }
-      updateAttempts(status);
-    }
-
-    const trend = computeTrend();
-    trendStatus.textContent = trend.text;
-    trendStatus.dataset.state = trend.state;
-    renderTrendWindow();
-
-    if (state.run === 0) {
-      outcomeText.textContent = "Ready to run one bounded attempt.";
-    } else if (status === "complete") {
-      outcomeText.textContent = "Seal complete. All declared checks passed; the checked Map candidate may enter review.";
-    } else if (status === "failed_with_evidence") {
-      outcomeText.textContent = "Retry budget exhausted. Seal failed_with_evidence with the complete Validator record.";
-    } else {
-      outcomeText.textContent = "Skeleton Validator FAIL. Retain the finding and retry only inside the fixed authority and scope.";
-    }
-
-    return { gatePass, status };
-  };
-
-  const runOne = () => {
-    if (state.terminal) {
-      return { gatePass: state.terminal === "complete", status: state.terminal };
-    }
-    state.run += 1;
-    return render(true);
-  };
-
-  extractorToggle.addEventListener("click", () => {
-    state.extractorOn = !state.extractorOn;
-    extractorToggle.setAttribute("aria-pressed", state.extractorOn ? "true" : "false");
-    extractorToggle.textContent = state.extractorOn ? "ON" : "OFF";
-    render(false);
-  });
-
-  pressureSlider.addEventListener("input", () => {
-    render(false);
-  });
-
-  budgetSlider.addEventListener("input", () => {
-    render(false);
-  });
-
-  runButton.addEventListener("click", () => {
-    runOne();
-  });
-
-  runBudgetButton.addEventListener("click", () => {
-    let result = { gatePass: false, status: "ready" };
-    while (state.run < state.budget) {
-      result = runOne();
-      if (result.gatePass) break;
-    }
-
-    if (!result.gatePass && state.run >= state.budget) {
-      render(false);
-    }
-  });
-
-  resetButton.addEventListener("click", () => {
-    pressureSlider.value = "40";
-    budgetSlider.value = "5";
-    state.pressure = 40;
-    state.budget = 5;
-    state.extractorOn = true;
-    extractorToggle.setAttribute("aria-pressed", "true");
-    extractorToggle.textContent = "ON";
-    state.run = 0;
-    state.history = [];
-    state.terminal = null;
-    attempts.innerHTML = "";
-    render(false);
-  });
-
-  render(false);
-})();
-</script>
 </section>
 <section aria-labelledby="validator-suite-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-04-validator-bundles</span>
@@ -784,7 +435,7 @@
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
 <span class="aoi-book-diagram__label">Declared routing</span>
-<p>The Judge consumes findings; it cannot invent them or reinterpret failure as success.</p>
+<p>The <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> consumes findings; it cannot invent them or reinterpret failure as success.</p>
 </div>
 </div>
 <p class="aoi-book-diagram__note">For a consequential property, a model-based evaluator is not the sole oracle unless adopted policy accepts the measured error of that exact protocol.</p>
@@ -821,7 +472,7 @@
 </div>
 <div class="aoi-book-diagram__outcomes">
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label">complete</span>
+<span class="aoi-book-diagram__label"><a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a></span>
 <p>A changed candidate met the declared completion conditions. <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> remains separate.</p>
 </div>
 <div class="aoi-book-diagram__outcome">
@@ -1158,7 +809,7 @@
 </div>
 <div class="grid grid-cols-1 gap-2">
 <div class="flex items-center justify-between gap-3 border border-brand-border rounded-lg p-3">
-<span class="text-xs font-mono text-brand-muted">Required Sensor</span>
+<span class="text-xs font-mono text-brand-muted">Required <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a></span>
 <button aria-pressed="true" class="soft-toggle font-mono" id="maintenanceSensorToggle" type="button">ON</button>
 </div>
 <div class="flex items-center justify-between gap-3 border border-brand-border rounded-lg p-3">

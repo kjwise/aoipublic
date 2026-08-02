@@ -8,7 +8,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-1-a-minimal-governed-loop.html",
@@ -18,7 +18,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-2-the-deterministic-sandwich-your-first-pattern.html",
@@ -28,7 +28,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-3-define-good-your-first-validators.html",
@@ -38,7 +38,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-4-the-stochastic-generator-why-you-need-physics.html",
@@ -48,7 +48,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping.html",
@@ -58,7 +58,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-6-context-architecture-why-slicing-matters.html",
@@ -68,7 +68,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-7-intent-as-code-mission-objects.html",
@@ -78,7 +78,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-8-keep-the-map-fresh-map-updaters.html",
@@ -88,7 +88,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-9-the-maintenance-controller-background-maintenance.html",
@@ -98,7 +98,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-10-the-protected-control-plane-the-guardrails.html",
@@ -108,7 +108,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-11-automated-refactoring-under-guards.html",
@@ -118,7 +118,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-12-governance-for-high-rate-automation.html",
@@ -128,7 +128,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-13-from-documentation-to-enforceable-constraints.html",
@@ -138,7 +138,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "chapter-14-implications-for-delegated-automation.html",
@@ -148,7 +148,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "appendix-a-failure-modes-and-limits.html",
@@ -158,7 +158,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "appendix-b-core-vocabulary.html",
@@ -168,7 +168,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "acknowledgements-and-about-the-author.html",
@@ -178,7 +178,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "concepts.html",
@@ -188,7 +188,7 @@
       "kind": "concepts",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "search.html",
@@ -198,7 +198,7 @@
       "kind": "search",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "toc.html",
@@ -208,7 +208,7 @@
       "kind": "toc",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "index.html",
@@ -218,7 +218,7 @@
       "kind": "landing",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "infographic-deck-10.html",
@@ -228,7 +228,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "infographic.html",
@@ -238,7 +238,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "infographic-deck.html",
@@ -248,7 +248,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "infographic-4.html",
@@ -258,7 +258,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "infographic-2.html",
@@ -268,7 +268,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     },
     {
       "output_filename": "infographic-3.html",
@@ -278,7 +278,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-07-26T06:40:51Z"
+      "lastmod": "2026-08-02T22:03:54Z"
     }
   ]
 }
