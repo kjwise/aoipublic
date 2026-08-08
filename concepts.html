@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Core Vocabulary | Architects of Intent</title>
+  <title>Concepts | Architects of Intent</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Core architectural vocabulary for Architects of Intent.">
-  <meta name="keywords" content="Architects of Intent, core vocabulary">
+  <meta name="description" content="A practical guide to the architecture, mechanisms, boundaries, and core vocabulary of Architects of Intent.">
+  <meta name="keywords" content="Architects of Intent, concepts, core vocabulary, governed workflows">
   <meta name="author" content="Jóhann Haukur Gunnarsson">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://architectsofintent.com/concepts">
   <link rel="alternate" type="application/rss+xml" href="https://architectsofintent.com/rss-book.xml" title="Architects of Intent RSS">
 
   <meta property="og:site_name" content="Architects of Intent">
-  <meta property="og:title" content="Core Vocabulary | Architects of Intent">
-  <meta property="og:description" content="Core architectural vocabulary for Architects of Intent.">
+  <meta property="og:title" content="Concepts | Architects of Intent">
+  <meta property="og:description" content="A practical guide to the architecture, mechanisms, boundaries, and core vocabulary of Architects of Intent.">
   <meta property="og:url" content="https://architectsofintent.com/concepts">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta property="og:image:alt" content="Core Vocabulary | Architects of Intent">
+  <meta property="og:image:alt" content="Concepts | Architects of Intent">
   <meta property="og:image:type" content="image/jpeg">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Core Vocabulary | Architects of Intent">
-  <meta name="twitter:description" content="Core architectural vocabulary for Architects of Intent.">
+  <meta name="twitter:title" content="Concepts | Architects of Intent">
+  <meta name="twitter:description" content="A practical guide to the architecture, mechanisms, boundaries, and core vocabulary of Architects of Intent.">
   <meta name="twitter:image" content="https://architectsofintent.com/og-image.jpg">
-  <meta name="twitter:image:alt" content="Core Vocabulary | Architects of Intent">
+  <meta name="twitter:image:alt" content="Concepts | Architects of Intent">
 
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Core Vocabulary | Architects of Intent", "description": "Core architectural vocabulary for Architects of Intent.", "url": "https://architectsofintent.com/concepts", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Concepts | Architects of Intent", "description": "A practical guide to the architecture, mechanisms, boundaries, and core vocabulary of Architects of Intent.", "url": "https://architectsofintent.com/concepts", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="style.css?v=cbc3c8fc494c">
-  <script src="script.js?v=cbc3c8fc494c" defer></script>
+  <link rel="stylesheet" href="style.css?v=43278bf4523f">
+  <script src="script.js?v=43278bf4523f" defer></script>
   
 </head>
 <body>
@@ -46,163 +46,963 @@
       </a>
       <a class="site-nav__toc" href="toc">Table of Contents</a>
       <div class="site-nav__links">
-        <a href="concepts">Core Vocabulary</a>
+        <a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
       </div>
     </nav>
   </header>
 
-  <main id="main" class="content ">
-    <h1 id="appendix-b-core-vocabulary">Appendix B: Core Vocabulary</h1>
-<p>These terms carry the architectural argument. They are collected here
-for reference; each is introduced and developed where its mechanism
-first matters.</p>
-<h2 id="direction-and-state">Direction and State</h2>
-<h2 id="map">Map</h2>
-<p>A structured, versioned representation of intent or observed system
-structure. A Map is authoritative only for the declared property and
-scope granted by its adopted source or policy.</p>
-<h2 id="terrain">Terrain</h2>
-<p>The system state a loop can observe or affect, including source,
-configuration, infrastructure, runtime behavior, and external
-operational facts.</p>
-<h2 id="candidate">Candidate</h2>
-<p>A proposed state, not admitted Terrain.</p>
-<h2 id="work-and-evidence">Work and Evidence</h2>
-<h2 id="workflow">Workflow</h2>
-<p>A finite, governed execution graph of sequential, conditional, or
-parallel steps with declared authority, effects, transitions, stopping
-conditions, evidence requirements, and admission path.</p>
-<h2 id="loop">Loop</h2>
-<p>Repetition of a step, subsequence, or complete workflow at a declared
-scale. Each workflow run remains finite and ends with a sealed
-result.</p>
-<h2 id="mission-object">Mission Object</h2>
-<p>A versioned work-contract artifact. Before activation it is a
-proposal; activation fixes the exact objective, authority, effects,
-outputs, checks, budgets, routing, and approval policy that govern one
-run.</p>
-<h2 id="run-record">Run Record</h2>
-<p>The logically append-only execution record and retained evidence for
-one activated Mission. Every terminal result is sealed; later
-intervention creates a linked record.</p>
-<h2 id="context-graph">Context Graph</h2>
-<p>The versioned structure from which a bounded input is selected. Its
-nodes identify sources; its typed edges record why those sources
-relate.</p>
-<h2 id="context-packet">Context Packet</h2>
-<p>The bounded, ordered, provenance-bearing input assembled for one
-Mission from fixed authority and evidence.</p>
-<h2 id="ledger">Ledger</h2>
-<p>Logically append-only, reconstructable evidence for authority,
-attempts, effects, findings, decisions, terminal results, and admission.
-Its guarantees depend on a protected sink and trust root.</p>
-<h2 id="oracle">Oracle</h2>
-<p>The source or decision procedure allowed to settle a declared
-property.</p>
-<h2 id="software-development-as-code-sdac-engine">Software Development
-as Code (SDaC) Engine</h2>
-<p>The complete runtime that executes governed workflows while keeping
-probabilistic steps inside fixed authority, evidence, stopping, and
-admission boundaries.</p>
-<h2 id="governed-loop-network">Governed Loop Network</h2>
-<p>A composed system of finite governed workflows whose declared
-contracts, effects, evidence, terminal outcomes, and failure semantics
-let them operate as reusable capabilities without inheriting undeclared
-authority.</p>
-<h2 id="semantic-density">Semantic Density</h2>
-<p>The concentration of distinct, decision-bearing meaning in context.
-Useful context combines Semantic Density, Correctness, and Relevance
-rather than maximizing volume.</p>
-<h2 id="roles-and-controls">Roles and Controls</h2>
-<h2 id="sensor">Sensor</h2>
-<p>A read-only measurement of Terrain or retained evidence that emits
-structured observations with provenance.</p>
-<h2 id="effector">Effector</h2>
-<p>A bounded transformation that proposes a declared change to Terrain
-or a Map surface. It does not admit its own output.</p>
-<h2 id="stochastic-generator">Stochastic Generator</h2>
-<p>A probabilistic model invocation that proposes a bounded candidate
-from declared inputs. It is one component of the system, not the system
-itself.</p>
-<h2 id="validator">Validator</h2>
-<p>A declared check of one property that emits a structured report. A
-Validator supplies evidence; it does not independently widen authority
-or admit a candidate.</p>
-<h2 id="judge">Judge</h2>
-<p>A policy-bound decision role used when evidence can support more than
-one allowed transition. Its implementation may vary; runtime enforcement
-still limits transitions and keeps admission separate.</p>
-<h2 id="map-updater">Map-Updater</h2>
-<p>A governed Terrain-to-Map workflow that proposes a bounded change to
-selected Map surfaces without changing Terrain.</p>
-<h2 id="maintenance-controller">Maintenance Controller</h2>
-<p>A recurring selector that senses, qualifies, and ranks eligible
-maintenance work without inheriting authority to perform it.</p>
-<h2 id="governance-mission">Governance Mission</h2>
-<p>A separately activated workflow for proposing a bounded change to
-protected policy or control surfaces. It cannot adopt its own
-proposal.</p>
-<h2 id="scope-guard">Scope Guard</h2>
-<p>Runtime enforcement of the declared effect boundary, including
-attempted filesystem, process, network, credential, platform, data, and
-deployment effects.</p>
-<h2 id="mission-gate">Mission Gate</h2>
-<p>The independent admission check that revalidates a sealed proposal
-against current base, policy, effects, evidence, and approvals.</p>
-<h2 id="ratchet">Ratchet</h2>
-<p>A protected non-regression rule measured by one fixed protocol. Its
-floor advances only after admission.</p>
-<h2 id="physics">Physics</h2>
-<p>The protected constraints that shape execution: schemas, Validators,
-effect boundaries, budgets, gates, and stopping conditions. The name is
-a control-model metaphor, not a claim that the checks are complete
-truth.</p>
-<h2 id="protected-control-plane">Protected Control Plane</h2>
-<p>The authority boundary around policy, trusted Validators,
-credentials, execution limits, evidence sinks, and admission mechanisms
-that ordinary work cannot rewrite.</p>
-<h2 id="deterministic-sandwich">Deterministic Sandwich</h2>
-<p>Deterministic preparation and validation around one bounded
-probabilistic invocation and its candidate output.</p>
-<h2 id="bounded-refinement-loop">Bounded Refinement Loop</h2>
-<p>The governed
+  <main id="main" class="content content--concepts">
+    <h1 id="concepts-how-governed-change-works">Concepts: How Governed
+Change Works</h1>
+<p>These concepts describe an architecture for turning uncertain
+proposals into bounded, inspectable change. They are most useful as a
+system, not as isolated definitions.</p>
+<p>The central path is simple: adopted intent becomes an activated work
+contract; the contract bounds one candidate-producing run; independent
+evidence determines how that run closes; and a separate decision
+determines whether the proposal changes reality.</p>
+<p>Use this page to understand the mechanism, see where each term stops,
+and follow links into the chapters. For the compact canonical list, see
+<a href="/appendix-b-core-vocabulary">Appendix B: Core
+Vocabulary</a>.</p>
+<h2 id="the-system-in-one-trace">The system in one trace</h2>
+<p>Suppose a team asks an AI-enabled workflow to add cursor pagination
+to <code>GET /api/users</code> without breaking existing clients.</p>
+<pre class="mermaid"><code>flowchart TB
+    I[&quot;Adopted intent&quot;] --&gt; M[&quot;Activated Mission&quot;]
+    M --&gt; C[&quot;Bounded context&quot;]
+    C --&gt; P[&quot;Candidate proposal&quot;]
+    P --&gt; E[&quot;Independent evidence&quot;]
+    E --&gt; R[&quot;Sealed run result&quot;]
+    R --&gt; G[&quot;Mission Gate&quot;]
+    G --&gt; A[&quot;Admission or adoption&quot;]</code></pre>
+<ol type="1">
+<li><strong>Fix intent and authority.</strong> The released
+compatibility contract is an adopted <a href="#map">Map</a> for the
+response-shape property. Current source and behavior are <a
+href="#terrain">Terrain</a>. An activated <a
+href="#mission-object">Mission Object</a> fixes the objective, base
+revision, permitted effects, required checks, budgets, stopping policy,
+and admission path.</li>
+<li><strong>Build a bounded input.</strong> A <a
+href="#context-graph">Context Graph</a> records the relevant
+relationships among the endpoint, released contract, generated client,
+tests, and compatibility checks. Policy selects a <a
+href="#context-packet">Context Packet</a> containing only the authority
+and evidence needed for this run.</li>
+<li><strong>Produce one proposal.</strong> A <a
+href="#stochastic-generator">Stochastic Generator</a> runs inside a
+bounded <a href="#effector">Effector</a>. Its first <a
+href="#candidate">Candidate</a> changes the response from an array to an
+object and updates candidate-controlled tests to agree with that
+interpretation.</li>
+<li><strong>Measure independently.</strong> A protected <a
+href="#sensor">Sensor</a> computes the actual changeset. The <a
+href="#scope-guard">Scope Guard</a> denies undeclared effects. A
+compatibility <a href="#validator">Validator</a> compares the candidate
+with the released baseline; candidate-controlled tests cannot replace
+that check.</li>
+<li><strong>Refine without moving the target.</strong> The Validator
+reports that released clients still expect an array. The finding can
+guide another attempt inside the <a
+href="#bounded-refinement-loop">Bounded Refinement Loop</a>. It cannot
+widen scope or redefine compatibility. A <a href="#judge">Judge</a> is
+needed only if complete evidence can support more than one permitted
+route.</li>
+<li><strong>Close the finite run.</strong> A corrected candidate
+preserves compatibility and passes every required check. The run ends <a
+href="#complete"><code>complete</code></a>: it produced a supported
+proposal, not a deployed change. The <a href="#run-record">Run
+Record</a> is sealed, and the <a href="#ledger">Ledger</a> retains the
+evidence.</li>
+<li><strong>Revalidate before changing reality.</strong> The <a
+href="#mission-gate">Mission Gate</a> checks the current base, policy,
+effects, evidence, approvals, and candidate identity. If they still
+match, separate <a href="#admission">Admission</a> makes the candidate
+effective in Terrain. Base drift can still deny admission without
+rewriting the sealed run.</li>
+<li><strong>Keep learning separate from authority.</strong> Evidence
+from several runs may support a later Map, workflow, Validator, or
+policy proposal. A <a href="#map-updater">Map-Updater</a> or <a
+href="#governance-mission">Governance Mission</a> may prepare that
+proposal. Only separate <a href="#adoption">Adoption</a> makes a new Map
+or policy authoritative.</li>
+</ol>
+<p>The workflow can still be wrong. Its narrower guarantee is that
+selected authority, effects, checks, transitions, and admission
+decisions remain explicit and enforceable under the stated trust
+assumptions.</p>
+<nav class="concept-index" aria-labelledby="concept-index-title">
+<h2 id="concept-index-title">
+Find a concept
+</h2>
+<p>
+Browse by the question the concept helps answer.
+</p>
+<div class="concept-index__grid">
+<section aria-labelledby="concept-index-direction">
+<h3 id="concept-index-direction">
+What is real, proposed, or authoritative?
+</h3>
+<ul>
+<li>
+<a href="#map">Map</a>
+</li>
+<li>
+<a href="#terrain">Terrain</a>
+</li>
+<li>
+<a href="#candidate">Candidate</a>
+</li>
+<li>
+<a href="#complete"><code>complete</code></a>
+</li>
+<li>
+<a href="#complete_noop"><code>complete_noop</code></a>
+</li>
+<li>
+<a href="#blocked"><code>blocked</code></a>
+</li>
+<li>
+<a href="#failed_with_evidence"><code>failed_with_evidence</code></a>
+</li>
+<li>
+<a href="#admission">Admission</a>
+</li>
+<li>
+<a href="#adoption">Adoption</a>
+</li>
+</ul>
+</section>
+<section aria-labelledby="concept-index-contract">
+<h3 id="concept-index-contract">
+What governs and records one run?
+</h3>
+<ul>
+<li>
+<a href="#workflow">Workflow</a>
+</li>
+<li>
+<a href="#loop">Loop</a>
+</li>
+<li>
+<a href="#mission-object">Mission Object</a>
+</li>
+<li>
+<a href="#run-record">Run Record</a>
+</li>
+<li>
+<a href="#ledger">Ledger</a>
+</li>
+</ul>
+</section>
+<section aria-labelledby="concept-index-context">
+<h3 id="concept-index-context">
+What should the run receive?
+</h3>
+<ul>
+<li>
+<a href="#context-graph">Context Graph</a>
+</li>
+<li>
+<a href="#context-packet">Context Packet</a>
+</li>
+<li>
+<a href="#semantic-density">Semantic Density</a>
+</li>
+</ul>
+</section>
+<section aria-labelledby="concept-index-execution">
+<h3 id="concept-index-execution">
+Who proposes, checks, and routes?
+</h3>
+<ul>
+<li>
+<a href="#sensor">Sensor</a>
+</li>
+<li>
+<a href="#effector">Effector</a>
+</li>
+<li>
+<a href="#stochastic-generator">Stochastic Generator</a>
+</li>
+<li>
+<a href="#validator">Validator</a>
+</li>
+<li>
+<a href="#oracle">Oracle</a>
+</li>
+<li>
+<a href="#judge">Judge</a>
+</li>
+<li>
+<a href="#software-development-as-code-sdac-engine">SDaC Engine</a>
+</li>
+<li>
+<a href="#deterministic-sandwich">Deterministic Sandwich</a>
+</li>
+<li>
+<a href="#bounded-refinement-loop">Bounded Refinement Loop</a>
+</li>
+</ul>
+</section>
+<section aria-labelledby="concept-index-governance">
+<h3 id="concept-index-governance">
+What keeps recurring work bounded?
+</h3>
+<ul>
+<li>
+<a href="#map-updater">Map-Updater</a>
+</li>
+<li>
+<a href="#maintenance-controller">Maintenance Controller</a>
+</li>
+<li>
+<a href="#governance-mission">Governance Mission</a>
+</li>
+<li>
+<a href="#scope-guard">Scope Guard</a>
+</li>
+<li>
+<a href="#mission-gate">Mission Gate</a>
+</li>
+<li>
+<a href="#ratchet">Ratchet</a>
+</li>
+<li>
+<a href="#physics">Physics</a>
+</li>
+<li>
+<a href="#protected-control-plane">Protected Control Plane</a>
+</li>
+<li>
+<a href="#governed-loop-network">Governed Loop Network</a>
+</li>
+</ul>
+</section>
+</div>
+</nav>
+<h2 id="direction-state-and-outcomes">1. Direction, state, and
+outcomes</h2>
+<p>Every governed change needs a declared direction: what currently
+exists, what may define the desired property, what is merely proposed,
+and which later event can make the proposal real.</p>
+<p>Authority belongs to a property, not automatically to a file type.
+Source code can define the current exported-signature inventory while
+remaining unable to define intended compatibility policy. An API
+contract can be observed evidence in one workflow and the authoritative
+Map in another.</p>
+<h3 class="concept-term" id="map">Map</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A structured, versioned
+representation of intent or observed system structure. A Map is
+authoritative only for the declared property and scope granted by its
+adopted source or policy.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> A Map tells a workflow which
+representation may settle a particular intent or description claim.
+<strong>Example.</strong> An adopted OpenAPI contract may govern public
+compatibility, while a generated route inventory describes what the
+current service exposes. <strong>Boundary.</strong> No document, schema,
+or codebase is universally authoritative; its authority must name the
+property and scope.</p>
+<p><strong>Related.</strong> <a href="#terrain">Terrain</a>, <a
+href="#candidate">Candidate</a>, <a href="#adoption">Adoption</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-1-a-minimal-governed-loop#the-smallest-useful-loop">Chapter
+1: The Smallest Useful Loop</a>.</p>
+<h3 class="concept-term" id="terrain">Terrain</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The system state a loop can
+observe or affect, including source, configuration, infrastructure,
+runtime behavior, and external operational facts.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Terrain gives Sensors and Effectors
+an explicit system boundary to observe or affect.
+<strong>Example.</strong> A pinned source revision, current deployment
+configuration, and measured runtime behavior may all be Terrain for one
+Mission. <strong>Boundary.</strong> Terrain shows what appears to be
+true now; it does not recover why the system was built or what policy
+ought to be.</p>
+<p><strong>Related.</strong> <a href="#map">Map</a>, <a
+href="#sensor">Sensor</a>, <a href="#admission">Admission</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-8-keep-the-map-fresh-map-updaters#the-opposite-direction">Chapter
+8: The Opposite Direction</a>.</p>
+<h3 class="concept-term" id="candidate">Candidate</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A proposed state, not admitted
+Terrain.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Calling an output a Candidate
+prevents plausible work from being confused with admitted reality.
+<strong>Example.</strong> A model-generated patch, proposed policy
+revision, or regenerated documentation block remains a Candidate while
+checks and review are pending. <strong>Boundary.</strong> Retaining,
+sealing, or repeatedly reproducing a Candidate does not make it Terrain
+or an adopted Map.</p>
+<p><strong>Related.</strong> <a
+href="#complete"><code>complete</code></a>, <a
+href="#admission">Admission</a>, <a href="#adoption">Adoption</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping#state-results-and-sealing">Chapter
+5: State, Results, and Sealing</a>.</p>
+<h3 class="concept-term" id="complete"><code>complete</code></h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A sealed terminal result
+indicating that a changed candidate satisfied the run’s declared
+completion conditions.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> This result distinguishes successful
+proposal closure from the later decision to apply it.
+<strong>Example.</strong> A compatible API patch passes every required
+check and the Run Record seals <code>complete</code>; a Mission Gate may
+still reject it after the base changes. <strong>Boundary.</strong>
+<code>complete</code> does not mean merged, deployed, approved,
+admitted, or adopted.</p>
+<p><strong>Related.</strong> <a href="#candidate">Candidate</a>, <a
+href="#mission-gate">Mission Gate</a>, <a
+href="#admission">Admission</a>. <strong>Deep dive.</strong> <a
+href="/appendix-a-failure-modes-and-limits#completion-without-admission">Appendix
+A: Completion Without Admission</a>.</p>
+<h3 class="concept-term"
+id="complete_noop"><code>complete_noop</code></h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A sealed terminal result
+indicating that the required property already held and no candidate
+effect exists.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> A verified no-op records useful work
+without inventing a change. <strong>Example.</strong> A Map-Updater
+reads every required source, completes the comparison, and finds that
+the selected Map surface already agrees with Terrain.
+<strong>Boundary.</strong> Missing, stale, or contradictory evidence is
+not agreement and must not be reported as
+<code>complete_noop</code>.</p>
+<p><strong>Related.</strong> <a href="#map-updater">Map-Updater</a>, <a
+href="#validator">Validator</a>, <a
+href="#blocked"><code>blocked</code></a>. <strong>Deep dive.</strong> <a
+href="/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping#state-results-and-sealing">Chapter
+5: State, Results, and Sealing</a>.</p>
+<h3 class="concept-term" id="blocked"><code>blocked</code></h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A sealed terminal result
+naming an external authority, oracle, contradiction, or environment
+repair required before a new linked run can proceed.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> <code>blocked</code> names a
+condition that more internal retries cannot resolve.
+<strong>Example.</strong> The Mission lacks an authority decision, the
+only accepted Oracle is unavailable, or the environment cannot produce
+trustworthy evidence. <strong>Boundary.</strong> Resolving the
+dependency creates a new linked run; it never reopens or edits the
+sealed blocked record.</p>
+<p><strong>Related.</strong> <a href="#oracle">Oracle</a>, <a
+href="#run-record">Run Record</a>, <a
+href="#failed_with_evidence"><code>failed_with_evidence</code></a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping#oscillation-and-failure-routing">Chapter
+5: Oscillation and Failure Routing</a>.</p>
+<h3 class="concept-term"
+id="failed_with_evidence"><code>failed_with_evidence</code></h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A sealed terminal result for
+exhausted, non-convergent, or otherwise unsuccessful execution that does
+not depend on an external unblock.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Finite, inspectable failure is safer
+than an agent that keeps trying or summarizes exhaustion as success.
+<strong>Example.</strong> A loop consumes its attempt budget without
+comparable progress and seals the candidates, findings, and stop reason.
+<strong>Boundary.</strong> Use <code>blocked</code> instead when a named
+external decision or repair could unblock a new run.</p>
+<p><strong>Related.</strong> <a
+href="#blocked"><code>blocked</code></a>, <a
+href="#bounded-refinement-loop">Bounded Refinement Loop</a>, <a
+href="#ledger">Ledger</a>. <strong>Deep dive.</strong> <a
+href="/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping#finite-stopping">Chapter
+5: Finite Stopping</a>.</p>
+<h3 class="concept-term" id="admission">Admission</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The separately authorized
+event that makes a candidate effective in Terrain.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Admission keeps candidate production
+separate from changes to operational reality. <strong>Example.</strong>
+A protected gate revalidates a sealed code patch against the current
+base and policy before merging or deploying it.
+<strong>Boundary.</strong> A Validator pass, Judge decision, or
+<code>complete</code> result cannot admit its own Candidate.</p>
+<p><strong>Related.</strong> <a href="#mission-gate">Mission Gate</a>,
+<a href="#candidate">Candidate</a>, <a href="#adoption">Adoption</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-10-the-protected-control-plane-the-guardrails#the-mission-gate">Chapter
+10: The Mission Gate</a>.</p>
+<h3 class="concept-term" id="adoption">Adoption</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The separately authorized
+event that makes a proposed Map or policy authoritative.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Adoption marks the separate decision
+that changes what will govern later work. <strong>Example.</strong> A
+reviewed Map-Updater proposal becomes the new authoritative inventory,
+or a Governance Mission proposal becomes active policy.
+<strong>Boundary.</strong> Adoption changes a Map or policy; Admission
+changes Terrain. Neither event follows automatically from proposal
+closure.</p>
+<p><strong>Related.</strong> <a href="#map">Map</a>, <a
+href="#governance-mission">Governance Mission</a>, <a
+href="#admission">Admission</a>. <strong>Deep dive.</strong> <a
+href="/chapter-10-the-protected-control-plane-the-guardrails#two-paths-two-authorities">Chapter
+10: Two Paths, Two Authorities</a>.</p>
+<p><a href="#concept-index-title">Back to the concept index</a></p>
+<h2 id="work-contracts-and-evidence">2. Work contracts and evidence</h2>
+<p>A prompt asks for work. A governed workflow states what may happen,
+records what did happen, and ends finitely. Authority and execution
+history remain separate so the run cannot rewrite its own contract after
+seeing inconvenient evidence.</p>
+<h3 class="concept-term" id="workflow">Workflow</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A finite, governed execution
+graph of sequential, conditional, or parallel steps with declared
+authority, effects, transitions, stopping conditions, evidence
+requirements, and admission path.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The Workflow makes multi-step
+behavior inspectable as a finite graph rather than an open-ended
+conversation. <strong>Example.</strong> Prepare input, generate a patch,
+run checks, route findings, seal a result, and present an admission
+proposal. <strong>Boundary.</strong> A Workflow may contain loops,
+branches, parallel steps, and child workflows, but every run still needs
+declared terminal conditions.</p>
+<p><strong>Related.</strong> <a href="#loop">Loop</a>, <a
+href="#mission-object">Mission Object</a>, <a
+href="#governed-loop-network">Governed Loop Network</a>. <strong>Deep
+dive.</strong> <a
+href="/chapter-2-the-deterministic-sandwich-your-first-pattern#beyond-one-model-call">Chapter
+2: Beyond One Model Call</a>.</p>
+<h3 class="concept-term" id="loop">Loop</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> Repetition of a step,
+subsequence, or complete workflow at a declared scale. Each workflow run
+remains finite and ends with a sealed result.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Naming the repeated unit prevents
+continuous operation from becoming one immortal process whose state and
+authority drift. <strong>Example.</strong> A check-and-refine
+subsequence may repeat three times inside one run, while the complete
+maintenance Workflow runs again each night. <strong>Boundary.</strong>
+Repetition does not remove budgets, terminal outcomes, or the
+requirement to seal each run.</p>
+<p><strong>Related.</strong> <a href="#workflow">Workflow</a>, <a
+href="#bounded-refinement-loop">Bounded Refinement Loop</a>, <a
+href="#run-record">Run Record</a>. <strong>Deep dive.</strong> <a
+href="/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping#finite-stopping">Chapter
+5: Finite Stopping</a>.</p>
+<h3 class="concept-term" id="mission-object">Mission Object</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A versioned work-contract
+artifact. Before activation it is a proposal; activation fixes the exact
+objective, authority, effects, outputs, checks, budgets, routing, and
+approval policy that govern one run.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The Mission Object moves executable
+authority out of chat and fixes it before candidate production begins.
+<strong>Example.</strong> A documentation Mission names the exact
+contract, editable README block, checks, three-attempt budget, and
+docs-owner adoption path. <strong>Boundary.</strong> Parsing a Mission
+proves only that fields exist; a model may draft it, but independent
+activation must authorize its exact identity.</p>
+<p><strong>Related.</strong> <a href="#context-packet">Context
+Packet</a>, <a href="#run-record">Run Record</a>, <a
+href="#scope-guard">Scope Guard</a>. <strong>Deep dive.</strong> <a
+href="/chapter-7-intent-as-code-mission-objects#what-belongs-in-the-contract">Chapter
+7: What Belongs in the Contract</a>.</p>
+<h3 class="concept-term" id="run-record">Run Record</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The logically append-only
+execution record and retained evidence for one activated Mission. Every
+terminal result is sealed; later intervention creates a linked
+record.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The Run Record preserves what
+happened without allowing evidence to rewrite what was authorized.
+<strong>Example.</strong> It binds the baseline, Context Packet,
+attempts, findings, actual effects, decisions, outputs, budgets, and
+terminal result to one activated Mission. <strong>Boundary.</strong>
+Every terminal record is sealed; later intervention creates a linked
+record rather than editing history.</p>
+<p><strong>Related.</strong> <a href="#mission-object">Mission
+Object</a>, <a href="#ledger">Ledger</a>, <a
+href="#blocked"><code>blocked</code></a>. <strong>Deep dive.</strong> <a
+href="/chapter-7-intent-as-code-mission-objects#authority-and-evidence-are-different-artifacts">Chapter
+7: Authority and Evidence Are Different Artifacts</a>.</p>
+<h3 class="concept-term" id="ledger">Ledger</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> Logically append-only,
+reconstructable evidence for authority, attempts, effects, findings,
+decisions, terminal results, and admission. Its guarantees depend on a
+protected sink and trust root.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> A Ledger lets a later reader
+reconstruct why a transition or admission was allowed and reject
+contradictions in that account. <strong>Example.</strong> It preserves
+an ordered link from activated authority through attempted effects,
+Validator reports, the sealed outcome, and the later admission decision.
+<strong>Boundary.</strong> JSONL, a Git history, or a database table is
+not trustworthy by format alone; guarantees depend on a protected sink
+and trust root.</p>
+<p><strong>Related.</strong> <a href="#run-record">Run Record</a>, <a
+href="#protected-control-plane">Protected Control Plane</a>, <a
+href="#admission">Admission</a>. <strong>Deep dive.</strong> <a
+href="/chapter-12-governance-for-high-rate-automation#a-ledger-is-more-than-a-log-file">Chapter
+12: A Ledger Is More Than a Log File</a>.</p>
+<p><a href="#concept-index-title">Back to the concept index</a></p>
+<h2 id="context-architecture">3. Context architecture</h2>
+<p>Useful context is not the largest prompt available. It is the
+smallest reproducible input that contains the authority and evidence
+needed for one bounded decision.</p>
+<p>Context selection anchors on a concrete target, expands only across
+relationships needed to understand and check it, and prunes by read
+authority, write scope, relevance, denied surfaces, and finite
+budgets.</p>
+<h3 class="concept-term" id="context-graph">Context Graph</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The versioned structure from
+which a bounded input is selected. Its nodes identify sources; its typed
+edges record why those sources relate.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The graph makes the relationships
+used for context selection explicit and reproducible.
+<strong>Example.</strong> Nodes identify an endpoint, its released
+contract, implementation, generated client, owner, and checks; typed
+edges record <code>implements</code>, <code>generates</code>, or
+<code>is checked by</code>. <strong>Boundary.</strong> It can begin as a
+repository-local index and does not need to become an organization-wide
+knowledge graph.</p>
+<p><strong>Related.</strong> <a href="#context-packet">Context
+Packet</a>, <a href="#sensor">Sensor</a>, <a
+href="#semantic-density">Semantic Density</a>. <strong>Deep
+dive.</strong> <a
+href="/chapter-6-context-architecture-why-slicing-matters#build-a-context-graph">Chapter
+6: Build a Context Graph</a>.</p>
+<h3 class="concept-term" id="context-packet">Context Packet</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The bounded, ordered,
+provenance-bearing input assembled for one Mission from fixed authority
+and evidence.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The packet records the exact bounded
+input a run actually received. <strong>Example.</strong> A failing tax
+case anchors a packet containing the approved rule, function, direct
+helpers, and checks, while excluding unrelated endpoints and writable
+surfaces. <strong>Boundary.</strong> Retrieval may suggest sources, but
+policy selects them; changing authority, writable scope, budgets, or
+required checks requires a new Mission.</p>
+<p><strong>Related.</strong> <a href="#context-graph">Context Graph</a>,
+<a href="#mission-object">Mission Object</a>, <a
+href="#deterministic-sandwich">Deterministic Sandwich</a>. <strong>Deep
+dive.</strong> <a
+href="/chapter-6-context-architecture-why-slicing-matters#assemble-a-context-packet">Chapter
+6: Assemble a Context Packet</a>.</p>
+<h3 class="concept-term" id="semantic-density">Semantic Density</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The concentration of distinct,
+decision-bearing meaning in context. Useful context combines Semantic
+Density, Correctness, and Relevance rather than maximizing volume.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Dense context can reduce noise only
+when the retained meaning can change the current decision.
+<strong>Example.</strong> A short packet with the governing contract,
+failing case, direct dependency, and relevant check is denser than a
+repository dump. <strong>Boundary.</strong> Density alone is unsafe:
+concise falsehood is dangerous, correct but irrelevant material is
+noise, and tacit organizational judgment cannot be assumed to survive
+encoding.</p>
+<p><strong>Related.</strong> <a href="#context-packet">Context
+Packet</a>, <a href="#oracle">Oracle</a>, <a
+href="#validator">Validator</a>. <strong>Deep dive.</strong> <a
+href="/chapter-6-context-architecture-why-slicing-matters#semantic-density-correctness-and-relevance">Chapter
+6: Semantic Density, Correctness, and Relevance</a>.</p>
+<p><a href="#concept-index-title">Back to the concept index</a></p>
+<h2 id="producing-checking-and-refining-work">4. Producing, checking,
+and refining work</h2>
+<p>Probabilistic generation becomes governable when fixed boundaries
+control its inputs, measure its outputs, restrict its transitions, and
+stop refinement when another attempt is no longer justified.</p>
+<h3 class="concept-term" id="sensor">Sensor</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A read-only measurement of
+Terrain or retained evidence that emits structured observations with
+provenance.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Sensors turn Terrain and retained
+evidence into observations the workflow can identify and check.
+<strong>Example.</strong> A protected Sensor extracts exported
+signatures or computes the complete diff from a pinned base.
+<strong>Boundary.</strong> Read-only measurement does not make the
+Sensor’s output universally authoritative; policy still declares which
+property the observation may settle.</p>
+<p><strong>Related.</strong> <a href="#terrain">Terrain</a>, <a
+href="#oracle">Oracle</a>, <a href="#map-updater">Map-Updater</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-8-keep-the-map-fresh-map-updaters#sense-normalize-compare-propose">Chapter
+8: Sense, Normalize, Compare, Propose</a>.</p>
+<h3 class="concept-term" id="effector">Effector</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A bounded transformation that
+proposes a declared change to Terrain or a Map surface. It does not
+admit its own output.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> An Effector gives candidate
+production an explicit effect envelope and output contract.
+<strong>Example.</strong> It may propose a diff in an isolated workspace
+or rewrite one generated documentation block. <strong>Boundary.</strong>
+An Effector proposes; it cannot grade broadly, expand its own write
+authority, or admit the result it produced.</p>
+<p><strong>Related.</strong> <a href="#candidate">Candidate</a>, <a
+href="#scope-guard">Scope Guard</a>, <a
+href="#stochastic-generator">Stochastic Generator</a>. <strong>Deep
+dive.</strong> <a
+href="/chapter-2-the-deterministic-sandwich-your-first-pattern#model-the-probabilistic-step-in-the-minimal-sandwich">Chapter
+2: The Model Step</a>.</p>
+<h3 class="concept-term" id="stochastic-generator">Stochastic
+Generator</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A probabilistic model
+invocation that proposes a bounded candidate from declared inputs. It is
+one component of the system, not the system itself.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> This term isolates the variable
+proposal mechanism from the governed system around it.
+<strong>Example.</strong> One model invocation produces a strict JSON or
+unified-diff Candidate from a fixed Context Packet.
+<strong>Boundary.</strong> Better model capability can improve
+proposals, but it does not confer authority over scope, checks, routing,
+or admission.</p>
+<p><strong>Related.</strong> <a href="#effector">Effector</a>, <a
+href="#deterministic-sandwich">Deterministic Sandwich</a>, <a
+href="#software-development-as-code-sdac-engine">Software Development as
+Code (SDaC) Engine</a>. <strong>Deep dive.</strong> <a
+href="/chapter-4-the-stochastic-generator-why-you-need-physics#llms-are-probability-generators">Chapter
+4: LLMs Are Probability Generators</a>.</p>
+<h3 class="concept-term" id="validator">Validator</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A declared check of one
+property that emits a structured report. A Validator supplies evidence;
+it does not independently widen authority or admit a candidate.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Validators replace a reassuring
+summary with property-specific, structured evidence.
+<strong>Example.</strong> A compatibility Validator compares a Candidate
+API response with a released contract and reports the exact mismatch.
+<strong>Boundary.</strong> A deterministic Validator can consistently
+check the wrong rule, and a passing check establishes only the property
+and cases it actually evaluated.</p>
+<p><strong>Related.</strong> <a href="#oracle">Oracle</a>, <a
+href="#judge">Judge</a>, <a href="#physics">Physics</a>. <strong>Deep
+dive.</strong> <a
+href="/chapter-3-define-good-your-first-validators#what-a-check-relies-on">Chapter
+3: What a Check Relies On</a>.</p>
+<h3 class="concept-term" id="oracle">Oracle</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The source or decision
+procedure allowed to settle a declared property.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Naming the Oracle makes explicit
+what may settle one contested property. <strong>Example.</strong> A
+parser can settle schema validity, a released contract can settle
+compatibility, and an authorized human may settle a judgment that cannot
+be encoded safely. <strong>Boundary.</strong> Relevance, retrieval rank,
+model confidence, or read access does not grant oracle authority.</p>
+<p><strong>Related.</strong> <a href="#validator">Validator</a>, <a
+href="#map">Map</a>, <a href="#blocked"><code>blocked</code></a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-3-define-good-your-first-validators#checks-as-workflow-evidence">Chapter
+3: Checks as Workflow Evidence</a>.</p>
+<h3 class="concept-term" id="judge">Judge</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A policy-bound decision role
+used when evidence can support more than one allowed transition. Its
+implementation may vary; runtime enforcement still limits transitions
+and keeps admission separate.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> A Judge makes ambiguous routing a
+declared policy decision instead of hidden agent discretion.
+<strong>Example.</strong> Complete findings might support retrying
+within budget, sealing failure, or escalating a named authority
+conflict. <strong>Boundary.</strong> A narrow loop whose results each
+have one fixed destination needs no Judge; a Judge cannot invent
+findings, widen scope, alter budgets, or authorize admission.</p>
+<p><strong>Related.</strong> <a href="#validator">Validator</a>, <a
+href="#bounded-refinement-loop">Bounded Refinement Loop</a>, <a
+href="#mission-object">Mission Object</a>. <strong>Deep dive.</strong>
+<a
+href="/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping#the-judge-is-a-role">Chapter
+5: The Judge Is a Role</a>.</p>
+<h3 class="concept-term"
+id="software-development-as-code-sdac-engine">Software Development as
+Code (SDaC) Engine</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The complete runtime that
+executes governed workflows while keeping probabilistic steps inside
+fixed authority, evidence, stopping, and admission boundaries.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The engine is the complete runtime
+boundary, not a synonym for its model or agent harness.
+<strong>Example.</strong> It activates Missions, prepares context,
+invokes bounded steps, enforces effects and transitions, runs checks,
+seals evidence, and presents admission proposals.
+<strong>Boundary.</strong> A capable agent can be one component inside
+the engine; it does not own the policies and gates that contain it.</p>
+<p><strong>Related.</strong> <a href="#workflow">Workflow</a>, <a
+href="#protected-control-plane">Protected Control Plane</a>, <a
+href="#governed-loop-network">Governed Loop Network</a>. <strong>Deep
+dive.</strong> <a
+href="/introduction#the-architecture-in-brief">Introduction: The
+Architecture in Brief</a>.</p>
+<h3 class="concept-term" id="deterministic-sandwich">Deterministic
+Sandwich</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> Deterministic preparation and
+validation around one bounded probabilistic invocation and its candidate
+output.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The pattern bounds one probabilistic
+invocation with reproducible input preparation and strict output
+validation. <strong>Example.</strong> Prep extracts exact signatures and
+the only editable block; a model proposes prose; Validation rejects
+invented signatures and out-of-region edits. <strong>Boundary.</strong>
+The pattern does not require every larger Workflow to contain only one
+probabilistic step, and deterministic checks are not complete truth.</p>
+<p><strong>Related.</strong> <a href="#context-packet">Context
+Packet</a>, <a href="#stochastic-generator">Stochastic Generator</a>, <a
+href="#validator">Validator</a>. <strong>Deep dive.</strong> <a
+href="/chapter-2-the-deterministic-sandwich-your-first-pattern#the-deterministic-sandwich-prep-model-validation">Chapter
+2: Prep, Model, Validation</a>.</p>
+<h3 class="concept-term" id="bounded-refinement-loop">Bounded Refinement
+Loop</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The governed
 <code>Propose -&gt; Check -&gt; Decide -&gt; Refine</code> cycle. An
 Effector proposes, Validators produce findings, and a Judge is used when
 evidence can support more than one permitted transition. Authority,
 scope, budgets, and stopping rules remain fixed.</p>
-<h2 id="outcomes">Outcomes</h2>
-<h2 id="complete"><code>complete</code></h2>
-<p>A sealed terminal result indicating that a changed candidate
-satisfied the run’s declared completion conditions.</p>
-<h2 id="complete_noop"><code>complete_noop</code></h2>
-<p>A sealed terminal result indicating that the required property
-already held and no candidate effect exists.</p>
-<h2 id="blocked"><code>blocked</code></h2>
-<p>A sealed terminal result naming an external authority, oracle,
-contradiction, or environment repair required before a new linked run
-can proceed.</p>
-<h2 id="failed_with_evidence"><code>failed_with_evidence</code></h2>
-<p>A sealed terminal result for exhausted, non-convergent, or otherwise
-unsuccessful execution that does not depend on an external unblock.</p>
-<h2 id="admission">Admission</h2>
-<p>The separately authorized event that makes a candidate effective in
-Terrain.</p>
-<h2 id="adoption">Adoption</h2>
-<p>The separately authorized event that makes a proposed Map or policy
-authoritative.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Structured findings can improve the
+next proposal without changing the target or allowing unbounded retries.
+<strong>Example.</strong> An exact signature mismatch informs a second
+Candidate while the Mission, scope, checks, and budgets stay fixed.
+<strong>Boundary.</strong> Finite execution is not convergence;
+oscillation, unreachable acceptance conditions, or exhausted progress
+limits should close with evidence.</p>
+<p><strong>Related.</strong> <a href="#judge">Judge</a>, <a
+href="#failed_with_evidence"><code>failed_with_evidence</code></a>, <a
+href="#run-record">Run Record</a>. <strong>Deep dive.</strong> <a
+href="/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping#from-one-attempt-to-refinement">Chapter
+5: From One Attempt to Refinement</a>.</p>
+<p><a href="#concept-index-title">Back to the concept index</a></p>
+<h2 id="governance-and-composition">5. Governance and composition</h2>
+<p>Recurring automation remains delegated only when the system separates
+observation, proposal, policy change, and admission—and enforces those
+separations outside the worker’s control.</p>
+<h3 class="concept-term" id="map-updater">Map-Updater</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A governed Terrain-to-Map
+workflow that proposes a bounded change to selected Map surfaces without
+changing Terrain.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> A Map-Updater makes selected drift
+visible and proposes a bounded correction without silently changing the
+system it observes. <strong>Example.</strong> It extracts current
+service routes, compares them with one generated inventory block, and
+proposes the exact Map patch. <strong>Boundary.</strong> It cannot
+recover intent from implementation, change Terrain, or adopt its own
+description.</p>
+<p><strong>Related.</strong> <a href="#map">Map</a>, <a
+href="#terrain">Terrain</a>, <a href="#adoption">Adoption</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-8-keep-the-map-fresh-map-updaters#sense-normalize-compare-propose">Chapter
+8: Sense, Normalize, Compare, Propose</a>.</p>
+<h3 class="concept-term" id="maintenance-controller">Maintenance
+Controller</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A recurring selector that
+senses, qualifies, and ranks eligible maintenance work without
+inheriting authority to perform it.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The controller can surface recurring
+maintenance pressure without acquiring authority to perform every task
+it finds. <strong>Example.</strong> A read-only scan applies eligibility
+rules, ranks a dead-import cleanup, and emits a checked report from
+which policy may activate a separate Mission. <strong>Boundary.</strong>
+Trigger frequency is not autonomy depth: a nightly schedule does not
+grant permission to edit, merge, deploy, or adopt.</p>
+<p><strong>Related.</strong> <a href="#sensor">Sensor</a>, <a
+href="#mission-object">Mission Object</a>, <a
+href="#governed-loop-network">Governed Loop Network</a>. <strong>Deep
+dive.</strong> <a
+href="/chapter-9-the-maintenance-controller-background-maintenance#selection-before-action">Chapter
+9: Selection Before Action</a>.</p>
+<h3 class="concept-term" id="governance-mission">Governance Mission</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A separately activated
+workflow for proposing a bounded change to protected policy or control
+surfaces. It cannot adopt its own proposal.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Protected rules need a change path
+that does not give ordinary work a privileged mode.
+<strong>Example.</strong> A separately activated Mission proposes a
+content-addressed change to one policy bundle under stronger checks and
+approvals. <strong>Boundary.</strong> Successful proposal closure still
+cannot apply, approve, or adopt the control-plane change.</p>
+<p><strong>Related.</strong> <a
+href="#protected-control-plane">Protected Control Plane</a>, <a
+href="#adoption">Adoption</a>, <a href="#mission-gate">Mission Gate</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-10-the-protected-control-plane-the-guardrails#two-paths-two-authorities">Chapter
+10: Two Paths, Two Authorities</a>.</p>
+<h3 class="concept-term" id="scope-guard">Scope Guard</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> Runtime enforcement of the
+declared effect boundary, including attempted filesystem, process,
+network, credential, platform, data, and deployment effects.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Runtime mediation catches undeclared
+effects that a final diff cannot reveal. <strong>Example.</strong> A
+Candidate stays inside one service directory but attempts an
+unauthorized network call; the guard denies and records the call.
+<strong>Boundary.</strong> Path checks alone are incomplete because
+effects also include processes, credentials, APIs, databases,
+deployments, and concealed external changes.</p>
+<p><strong>Related.</strong> <a href="#mission-object">Mission
+Object</a>, <a href="#protected-control-plane">Protected Control
+Plane</a>, <a href="#mission-gate">Mission Gate</a>. <strong>Deep
+dive.</strong> <a
+href="/chapter-10-the-protected-control-plane-the-guardrails#enforce-the-complete-effect-boundary">Chapter
+10: Enforce the Complete Effect Boundary</a>.</p>
+<h3 class="concept-term" id="mission-gate">Mission Gate</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The independent admission
+check that revalidates a sealed proposal against current base, policy,
+effects, evidence, and approvals.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The gate prevents a once-valid
+proposal from bypassing changed state or incomplete evidence at
+admission time. <strong>Example.</strong> It recomputes the diff,
+rechecks the current base and policy, and denies an otherwise
+<code>complete</code> Candidate after base drift.
+<strong>Boundary.</strong> It runs independently of the model and cannot
+repair a stale proposal by rewriting the sealed run.</p>
+<p><strong>Related.</strong> <a href="#admission">Admission</a>, <a
+href="#complete"><code>complete</code></a>, <a href="#scope-guard">Scope
+Guard</a>. <strong>Deep dive.</strong> <a
+href="/chapter-10-the-protected-control-plane-the-guardrails#the-mission-gate">Chapter
+10: The Mission Gate</a>.</p>
+<h3 class="concept-term" id="ratchet">Ratchet</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A protected non-regression
+rule measured by one fixed protocol. Its floor advances only after
+admission.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> A Ratchet preserves a selected
+measured floor across admitted changes. <strong>Example.</strong> A
+protected protocol records the baseline duplication metric, rejects a
+regression, and advances the floor only after a supported refactor is
+admitted. <strong>Boundary.</strong> It protects only the declared
+property under the fixed protocol; coverage, test count, or one score is
+not universal quality.</p>
+<p><strong>Related.</strong> <a href="#validator">Validator</a>, <a
+href="#admission">Admission</a>, <a href="#physics">Physics</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-11-automated-refactoring-under-guards#protected-non-regression">Chapter
+11: Protected Non-Regression</a>.</p>
+<h3 class="concept-term" id="physics">Physics</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The protected constraints that
+shape execution: schemas, Validators, effect boundaries, budgets, gates,
+and stopping conditions. The name is a control-model metaphor, not a
+claim that the checks are complete truth.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Physics names the fixed control
+surface that shapes probabilistic work without pretending the generator
+will behave deterministically. <strong>Example.</strong> Schemas
+constrain output, Validators check selected properties, effect
+boundaries restrict writes, and circuit breakers stop execution.
+<strong>Boundary.</strong> The metaphor does not imply that the checks
+encode complete truth, good judgment, or every property that
+matters.</p>
+<p><strong>Related.</strong> <a href="#validator">Validator</a>, <a
+href="#scope-guard">Scope Guard</a>, <a
+href="#protected-control-plane">Protected Control Plane</a>.
+<strong>Deep dive.</strong> <a
+href="/chapter-4-the-stochastic-generator-why-you-need-physics#operating-a-stochastic-generator">Chapter
+4: Operating a Stochastic Generator</a>.</p>
+<h3 class="concept-term" id="protected-control-plane">Protected Control
+Plane</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> The authority boundary around
+policy, trusted Validators, credentials, execution limits, evidence
+sinks, and admission mechanisms that ordinary work cannot rewrite.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> The control plane keeps autonomy
+delegated by placing authority, checks, credentials, limits, evidence
+sinks, and admission outside ordinary write authority.
+<strong>Example.</strong> Ordinary work may report a defective policy,
+but only a separate Governance Mission can propose a bounded
+replacement. <strong>Boundary.</strong> It is not a universal source of
+truth, and its guarantees fail if privileged actors can rewrite the
+enforcement path or protected history.</p>
+<p><strong>Related.</strong> <a href="#governance-mission">Governance
+Mission</a>, <a href="#ledger">Ledger</a>, <a href="#scope-guard">Scope
+Guard</a>. <strong>Deep dive.</strong> <a
+href="/chapter-10-the-protected-control-plane-the-guardrails#close-the-trust-root">Chapter
+10: Close the Trust Root</a>.</p>
+<h3 class="concept-term" id="governed-loop-network">Governed Loop
+Network</h3>
+<blockquote>
+<p><strong>Canonical definition.</strong> A composed system of finite
+governed workflows whose declared contracts, effects, evidence, terminal
+outcomes, and failure semantics let them operate as reusable
+capabilities without inheriting undeclared authority.</p>
+</blockquote>
+<p><strong>Why it matters.</strong> Stable contracts let finite governed
+capabilities compose into larger operating systems without erasing their
+failure semantics. <strong>Example.</strong> A maintenance scan
+activates a cleanup Mission whose sealed result enters an admission
+workflow, while evidence later supports a separate policy proposal.
+<strong>Boundary.</strong> Nesting does not propagate authority, and
+composition does not guarantee correctness, convergence, lower cost, or
+good policy.</p>
+<p><strong>Related.</strong> <a href="#workflow">Workflow</a>, <a
+href="#maintenance-controller">Maintenance Controller</a>, <a
+href="#software-development-as-code-sdac-engine">Software Development as
+Code (SDaC) Engine</a>. <strong>Deep dive.</strong> <a
+href="/chapter-14-implications-for-delegated-automation#from-governed-steps-to-a-factory">Chapter
+14: From Governed Steps to a Factory</a>.</p>
+<p><a href="#concept-index-title">Back to the concept index</a></p>
+<h2 id="a-practical-starting-point">A practical starting point</h2>
+<p>Do not begin by implementing every concept. Choose one recurring,
+bounded change with a meaningful acceptance signal.</p>
+<p>Declare the property that must hold. Fix the authority that defines
+it. Bound the allowed effects. Install one independent check. Preserve
+the result and its evidence. Keep proposal closure separate from
+admission or adoption.</p>
+<p>Once that small Workflow produces comparable evidence and finite
+failure, it can earn a place inside something larger.</p>
 
   </main>
 
-  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Core Vocabulary | Architects of Intent" data-share-url="https://architectsofintent.com/concepts" data-share-text="Core architectural vocabulary for Architects of Intent.">
+  <section class="share-panel" role="region" aria-label="Share this page" data-share-title="Concepts | Architects of Intent" data-share-url="https://architectsofintent.com/concepts" data-share-text="A practical guide to the architecture, mechanisms, boundaries, and core vocabulary of Architects of Intent.">
   <div class="share-panel__label">Share</div>
   <div class="share-panel__actions">
     <button type="button" class="share-button" data-share="native" aria-label="Share this page">Share</button>
-    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fconcepts&amp;text=Core%20Vocabulary%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
+    <a class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fconcepts&amp;text=Concepts%20%7C%20Architects%20of%20Intent" aria-label="Share on X" target="_blank" rel="noopener noreferrer">X</a>
     <a class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fconcepts" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
     <a class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fconcepts" aria-label="Share on Facebook" target="_blank" rel="noopener noreferrer">f</a>
-    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fconcepts&amp;title=Core%20Vocabulary%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
-    <a class="share-button" data-share="email" href="mailto:?subject=Core%20Vocabulary%20%7C%20Architects%20of%20Intent&amp;body=Core%20architectural%20vocabulary%20for%20Architects%20of%20Intent.%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fconcepts" aria-label="Share by email">email</a>
+    <a class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fconcepts&amp;title=Concepts%20%7C%20Architects%20of%20Intent" aria-label="Share on Reddit" target="_blank" rel="noopener noreferrer">r</a>
+    <a class="share-button" data-share="email" href="mailto:?subject=Concepts%20%7C%20Architects%20of%20Intent&amp;body=A%20practical%20guide%20to%20the%20architecture%2C%20mechanisms%2C%20boundaries%2C%20and%20core%20vocabulary%20of%20Architects%20of%20Intent.%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fconcepts" aria-label="Share by email">email</a>
     <button type="button" class="share-button" data-share="copy" aria-label="Copy link">copy</button>
   </div>
   <span class="share-status" aria-live="polite"></span>
@@ -230,7 +1030,7 @@ authoritative.</p>
       </a>
     </div>
     <div class="site-footer__links site-footer__links--secondary">
-      <span class="site-footer__item">Version: <code>cbc3c8fc494c</code></span>
+      <span class="site-footer__item">Version: <code>43278bf4523f</code></span>
       <a class="site-footer__item" href="infographic">Infographic</a>
     </div>
   </footer>

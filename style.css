@@ -454,6 +454,133 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
 .content > h3 { font-size: clamp(1.26rem, 2vw, 1.5rem); }
 .content > h4 { font-size: 1.12rem; }
 
+/* Concepts guide: a web-only explanatory layer over the canonical glossary. */
+.content.content--concepts {
+  --measure: 72ch;
+}
+
+.content.content--concepts > h1 + p {
+  max-width: 66ch;
+}
+
+.content.content--concepts > h2 {
+  margin-top: 3.6rem;
+}
+
+.content.content--concepts > h3.concept-term {
+  margin-top: 2.8rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  scroll-margin-top: 6rem;
+}
+
+.content.content--concepts > h3.concept-term:target {
+  padding: 1rem 0.9rem 0.85rem;
+  border: 1px solid rgba(132, 184, 255, 0.5);
+  border-radius: 14px;
+  background: rgba(122, 162, 247, 0.1);
+  box-shadow: 0 0 0 4px rgba(122, 162, 247, 0.06);
+}
+
+.content.content--concepts > h3.concept-term + blockquote {
+  max-width: var(--measure);
+  margin-top: -0.12rem;
+  margin-bottom: 1.1rem;
+  padding: 0.75rem 0.95rem;
+  border-left-color: rgba(36, 204, 142, 0.82);
+  background: rgba(36, 204, 142, 0.07);
+  color: rgba(231, 237, 244, 0.95);
+}
+
+.content.content--concepts > h3.concept-term + blockquote p {
+  margin: 0;
+}
+
+.content.content--concepts .concept-index {
+  max-width: none;
+  margin: 3rem auto 1.25rem;
+  padding: clamp(1rem, 2.2vw, 1.45rem);
+  border: 1px solid rgba(132, 184, 255, 0.2);
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(122, 162, 247, 0.08), rgba(36, 204, 142, 0.035)),
+    rgba(255, 255, 255, 0.025);
+}
+
+.content.content--concepts .concept-index > h2 {
+  margin: 0;
+  font-family: var(--ui-font);
+  font-size: clamp(1.55rem, 2.5vw, 2rem);
+  color: var(--text-strong);
+}
+
+.content.content--concepts .concept-index > p {
+  margin: 0.45rem 0 1.1rem;
+  color: var(--muted);
+}
+
+.content.content--concepts .concept-index__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.content.content--concepts .concept-index section {
+  min-width: 0;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  background: rgba(5, 8, 14, 0.24);
+}
+
+.content.content--concepts .concept-index h3 {
+  margin: 0 0 0.55rem;
+  font-family: var(--ui-font);
+  font-size: 0.96rem;
+  line-height: 1.4;
+  color: var(--text-strong);
+}
+
+.content.content--concepts .concept-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.content.content--concepts .concept-index li {
+  margin: 0;
+}
+
+.content.content--concepts .concept-index a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.26rem 0.56rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  font-family: var(--ui-font);
+  font-size: 0.82rem;
+  line-height: 1.25;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.content.content--concepts .concept-index a:hover {
+  border-color: rgba(132, 184, 255, 0.42);
+  background: rgba(122, 162, 247, 0.11);
+  color: var(--text-strong);
+}
+
+.content.content--concepts a[href="#concept-index-title"] {
+  font-family: var(--ui-font);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
 .content .landing-logo-stack {
   display: inline-flex;
   align-items: center;
@@ -1663,6 +1790,23 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
     gap: 0.38rem;
     justify-content: stretch;
     justify-self: stretch;
+  }
+
+  .content.content--concepts .concept-index {
+    padding: 0.9rem;
+  }
+
+  .content.content--concepts .concept-index__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content.content--concepts h2,
+  .content.content--concepts h3 {
+    scroll-margin-top: 11rem;
+  }
+
+  .content.content--concepts > h3.concept-term {
+    scroll-margin-top: 12rem;
   }
 
   .site-nav__links a {

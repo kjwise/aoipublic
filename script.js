@@ -848,6 +848,7 @@ function setupSearchPage() {
   const scoreDoc = (doc, tokens) => {
     const title = (doc.title || "").toLowerCase();
     const text = (doc.text || "").toLowerCase();
+    const normalizedQuery = tokens.join(" ");
 
     let score = 0;
     for (const token of tokens) {
@@ -857,6 +858,7 @@ function setupSearchPage() {
       score += inTitle * 25 + inText * 4;
     }
 
+    if (title === normalizedQuery) score += 500;
     if (doc.kind === "chapter") score += 2;
     if (doc.kind === "concepts") score += 1;
     return score;

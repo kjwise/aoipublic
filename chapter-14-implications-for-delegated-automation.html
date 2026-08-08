@@ -24,14 +24,14 @@
 <meta content="Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 14 – Implications for Delegated Automation | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 14 – Implications for Delegated Automation", "description": "Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "mainEntityOfPage": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-02T22:03:54Z", "timeRequired": "PT10M", "articleSection": "Part V – Implications and Limits", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 14 – Implications for Delegated Automation", "description": "Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "mainEntityOfPage": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT10M", "articleSection": "Part V – Implications and Limits", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=cbc3c8fc494c" rel="stylesheet"/>
-<script defer="" src="script.js?v=cbc3c8fc494c"></script>
+<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
+<script defer="" src="script.js?v=43278bf4523f"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
 </a>
 <a class="site-nav__toc" href="toc">Table of Contents</a>
 <div class="site-nav__links">
-<a href="concepts">Core Vocabulary</a>
+<a href="concepts">Concepts</a>
 <a class="nav-search" href="search">🔎 Search</a>
 </div>
 </nav>
@@ -199,8 +199,9 @@ decomposed into narrow steps with informative feedback, modest
 probabilistic capability may produce better admitted results than a more
 elaborate one-shot generator. Poor decomposition, weak or correlated
 checks, and excessive retry cost can reverse that result.</p>
-<p>Composed finite workflows form a <strong>Governed <a class="concept-link" href="concepts#loop" title="See concept: Loop">Loop</a>
-Network</strong>. The network detects declared divergence on selected
+<p>Composed finite workflows form a <strong><a class="concept-link" href="concepts#governed-loop-network" title="See concept: Governed Loop
+Network">Governed Loop
+Network</a></strong>. The network detects declared divergence on selected
 observable surfaces and dispatches bounded workflows. Under adopted
 policy, it admits supported proposals and retains outcomes as evidence.
 The <em>Torus</em> is simply a destination metaphor for that circulation
@@ -223,7 +224,7 @@ and current intent rather than reaching one final state.</p>
   T -.-&gt;|reveals outcomes| G
   G --&gt; D[Independent adoption]
   D --&gt; N[Future adopted intent]</code></pre>
-<p>The <a class="concept-link" href="concepts#protected-control-plane" title="See concept: Protected Control Plane">Protected Control Plane</a> constrains activation, effects, evidence,
+<p>The Protected Control Plane constrains activation, effects, evidence,
 admission, and adoption throughout this circulation.</p>
 <p>Chapter 9 described how to learn from run history. Reconstructable
 histories, workflow topology, check configuration, and exception
@@ -366,7 +367,7 @@ volume.</li>
 <li><strong>Treat composed workflows as adaptive capacity.</strong>
 Their value lies in recurring work that reaches supported admission with
 bounded effects and finite failure.</li>
-<li><strong>Start with one bounded loop, then compose what earns
+<li><strong>Start with one bounded <a class="concept-link" href="concepts#loop" title="See concept: Loop">loop</a>, then compose what earns
 trust.</strong> A capability becomes a building block only when its
 evidence supports the next delegation.</li>
 </ol>
@@ -414,7 +415,7 @@ to masquerade as permission.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>cbc3c8fc494c</code></span>
+<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>
