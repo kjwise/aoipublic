@@ -5,7 +5,7 @@
 <title>Chapter 11 – Automated Refactoring Under Guards | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…" name="description"/>
+<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Observation | Governance status | | --- | --- | --- | | Baseline | One…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
@@ -13,7 +13,7 @@
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" property="og:title"/>
-<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…" property="og:description"/>
+<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Observation | Governance status | | --- | --- | --- | | Baseline | One…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -21,17 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…" name="twitter:description"/>
+<meta content="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Observation | Governance status | | --- | --- | --- | | Baseline | One…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 11 – Automated Refactoring Under Guards", "description": "Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards", "mainEntityOfPage": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT6M", "articleSection": "Part IV – Governance and Safe Evolution", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 11 – Automated Refactoring Under Guards", "description": "Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Observation | Governance status | | --- | --- | --- | | Baseline | One…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards", "mainEntityOfPage": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT7M", "articleSection": "Part IV – Governance and Safe Evolution", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -56,13 +56,15 @@
 <header class="chapter-header">
 <div class="chapter-kicker">
 <div class="part-title">Part IV – Governance and Safe Evolution</div>
-<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+<div class="chapter-meta"><span class="read-time">7 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-11-automated-refactoring-under-guards">Chapter 11 –
 Automated Refactoring Under Guards</h1>
-<p>Start with one candidate whose run ended in <code>complete</code> and
-whose Run Record is sealed, but which has not yet been admitted:</p>
+<p>Now give the payments service a separate refactor Mission. It targets
+one lint violation in a private payment-normalization helper. The run
+ends <code>complete</code> with a supported proposal and sealed Run
+Record, but Admission has not yet occurred:</p>
 </div>
 </header>
 <table>
@@ -74,23 +76,23 @@ whose Run Record is sealed, but which has not yet been admitted:</p>
 <thead>
 <tr>
 <th>Moment</th>
-<th>Protected observation</th>
+<th>Observation</th>
 <th>Governance status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Fixed baseline</td>
+<td>Baseline</td>
 <td>One declared lint violation, no contract failures, and 88.2%
-coverage under the protected measurement protocol and current
-non-regression baseline, revision 42</td>
+coverage under the measurement protocol and current non-regression
+baseline, revision 42</td>
 <td>Current admitted <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a></td>
 </tr>
 <tr>
 <td><a class="concept-link" href="concepts#candidate" title="See concept: Candidate">Candidate</a></td>
-<td>The lint violation is removed, protected behavior and coverage are
-unchanged, and the effect stays inside one file</td>
-<td><code>complete</code>; <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> sealed</td>
+<td>The lint violation is removed, declared behavior and measured
+coverage are unchanged, and the effect stays inside one file</td>
+<td><code>complete</code>; supported proposal; <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> sealed</td>
 </tr>
 <tr>
 <td><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> boundary</td>
@@ -101,16 +103,16 @@ authoritative</td>
 </tbody>
 </table>
 <p>The candidate improved one structural property without regressing the
-protected observations. Nothing has merged, and the floor has not
-moved.</p>
+required behavior or metric floor. Nothing has merged, and the floor has
+not moved.</p>
 <p>Automated refactoring is governable when the workflow may propose a
 behavior-preserving structural change but cannot redefine behavior,
 weaken measurement, lower the protected floor, or admit itself.</p>
 <h2 id="fix-the-measurement-before-mutation">Fix the Measurement Before
 Mutation</h2>
-<p>Before work begins, the Mission fixes the base revision, permitted
-effects, structural objective, protected checks, budgets, routing, and
-admission policy. The control plane separately fixes:</p>
+<p>The activated refactor Mission pins the base revision and the
+material controls needed to compare baseline and candidate. Its bindings
+identify:</p>
 <ul>
 <li>the measurement implementation and protocol used for both baseline
 and candidate;</li>
@@ -118,16 +120,22 @@ and candidate;</li>
 floor</strong>;</li>
 <li>the dependency closure whose behavior could be affected.</li>
 </ul>
-<p>The baseline and candidate must be observed by the same protected
-implementation under the same protocol. Candidate-controlled package
-scripts, test configuration, benchmark settings, or thresholds cannot
-redefine what “unchanged” means.</p>
+<p>The same implementation and protocol, both outside candidate
+authority, must observe the baseline and candidate. Candidate-controlled
+package scripts, test configuration, benchmark settings, or thresholds
+cannot redefine what “unchanged” means.</p>
 <p>The record must identify what was measured and how. Preserve the
 source revision, protocol, tools, environment, raw observations,
 comparison rule, and floor revision.</p>
-<p>Preflight blocks the workflow if the protocol cannot run, the base is
-stale, the affected closure is unknown, or the baseline contradicts the
-protected floor. It does not treat that uncertainty as a pass.</p>
+<p>Preflight verifies only that the already-authorized Mission identity
+and its bound protocol, base, affected closure, baseline, and floor
+revision remain present, intact, and executable. It may not repeat
+policy review, remeasure the baseline, or select, replace, change, or
+rebind a dependency. A missing, altered, or unusable dependency ends the
+run as <code>blocked</code> only when the result names the external
+repair or decision needed for a new linked run; otherwise it ends
+<code>failed</code>. In either case, the Run Record is sealed. The
+workflow never treats uncertainty as a pass.</p>
 <p>The normal starting point is a green base. A policy may permit a
 precisely enumerated known-failure set, but the candidate must introduce
 no new or changed failure. “The branch was already red” is not a
@@ -143,7 +151,7 @@ makes it observable. A changed public schema, exception contract, event
 sequence, or data effect is a behavior migration and belongs in a
 different Mission.</p>
 <h2 id="guard-sufficiency">Guard Sufficiency</h2>
-<p>No test suite is universally comprehensive. Evidence must match the
+<p>No test suite is universally comprehensive. <a class="concept-link" href="concepts#evidence" title="See concept: Evidence">Evidence</a> must match the
 behavior boundary, mutation scope, and consequence:</p>
 <table>
 <colgroup>
@@ -156,15 +164,15 @@ behavior boundary, mutation scope, and consequence:</p>
 <tr>
 <th>Refactor class</th>
 <th>Typical scope</th>
-<th>Minimum protected evidence</th>
-<th>Default admission</th>
+<th>Minimum required evidence</th>
+<th>Default Admission</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Private lint cleanup</td>
 <td>One symbol or file</td>
-<td>Intended finding removed, relevant tests, lint, and <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>
+<td>Intended finding removed, relevant tests, lint, and complete
 diff</td>
 <td>Allowlist only after comparable runs demonstrate stable results</td>
 </tr>
@@ -196,7 +204,7 @@ closure</td>
 </tbody>
 </table>
 <p>When guards are weak, strengthen them in a separate Mission first.
-Admit and protect the new contract or check before activating the
+Adopt and protect the new contract or check before activating the
 refactor. The same candidate cannot author the only oracle that approves
 its change.</p>
 <p>Mutation testing may help determine whether a check detects small
@@ -204,8 +212,8 @@ semantic changes. Use a fixed mutation protocol as eligibility evidence
 for a refactor class, not as a universal per-candidate ritual. A
 surviving mutant supports a guard-strengthening proposal; it does not
 widen the current Mission.</p>
-<h2 id="produce-a-true-bounded-refactor">Produce a True Bounded
-Refactor</h2>
+<h2 id="produce-a-refactor-within-the-boundary">Produce a Refactor
+Within the Boundary</h2>
 <p>A refactor changes structure while preserving behavior declared by
 the Map. Suitable transformations include:</p>
 <ul>
@@ -213,7 +221,7 @@ the Map. Suitable transformations include:</p>
 <li>rename one private symbol with a language-aware tool;</li>
 <li>extract or inline one function without changing its contract;</li>
 <li>simplify one expression under an explicit equivalence check;</li>
-<li>apply one protected formatter or codemod to an allowlisted
+<li>apply one approved formatter or codemod to an allowlisted
 region.</li>
 </ul>
 <p>The Mission must also state why the change should exist: remove a
@@ -228,9 +236,13 @@ different authority, checks, approvals, and recovery.</p>
 ordinary refactor has no authority over protected checks, floor state,
 CI, credentials, deployment, databases, production configuration, or
 admission.</p>
-<h2 id="validate-the-candidate-independently">Validate the Candidate
-Independently</h2>
-<p>The protected validation plan answers five questions:</p>
+<h2 id="validate-outside-candidate-authority">Validate Under Protected
+Acceptance Rules</h2>
+<p>The protected boundary applies to acceptance authority, not to where
+every check is authored or invoked. The workflow may create, run, and
+record checks under a declared protocol, but the candidate cannot
+rewrite their decisive meaning. The Mission’s bound validation plan
+answers five questions:</p>
 <table>
 <colgroup>
 <col style="width: 50%"/>
@@ -250,18 +262,18 @@ the exact structural predicate holds</td>
 </tr>
 <tr>
 <td>Is declared behavior preserved?</td>
-<td>Protected contracts, tests, properties, and relevant runtime
-observations</td>
+<td>Contracts, tests, properties, and runtime observations named by the
+bound validation plan</td>
 </tr>
 <tr>
 <td>Did effects remain in scope?</td>
-<td>Runtime effect records and the independently computed complete
-diff</td>
+<td>Runtime effect records and the complete diff computed outside
+candidate authority</td>
 </tr>
 <tr>
-<td>Did governed quality regress?</td>
-<td>Candidate observations compared with the fixed floor under the same
-protocol</td>
+<td>Did measured quality regress?</td>
+<td>Candidate observations compared with the current floor under the
+same protocol</td>
 </tr>
 <tr>
 <td>Are required artifacts complete?</td>
@@ -269,25 +281,26 @@ protocol</td>
 </tr>
 </tbody>
 </table>
-<p>Candidate-supplied tests may add evidence. They cannot replace the
-protected checks named by the Mission. A candidate that edits its floor,
-protected test harness, required configuration, or protected check fails
-even when its own commands report success.</p>
+<p>When recorded with provenance, candidate-supplied tests and results
+are evidence. By themselves, they neither independently corroborate the
+candidate nor replace the protected acceptance basis. A declared
+protocol may validate new tests as <a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a> describes. A candidate that
+edits its floor, required test harness, required configuration, or any
+required check outside authorized effects fails validation even when its
+own commands report success.</p>
 <p>Affected checks follow dependency closure, not only changed paths.
 Shared contracts and transitive consumers may need validation even when
 the diff is local.</p>
 <h3 id="noisy-measurements">Noisy Measurements</h3>
-<p>A noisy required metric has three outcomes: pass, fail, or
-inconclusive. Use the same fail-closed pattern introduced for
-probabilistic evaluation in <a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>: predeclare the sampling protocol,
-aggregation rule, tolerance, retry budget, and inconclusive outcome. For
-performance-like observations, policy also fixes the warmup and
-environment class before execution.</p>
+<p>A noisy required metric has three check results: pass, fail, or
+inconclusive. Its bound validation plan fixes the sampling protocol,
+aggregation rule, tolerance, retry budget, and inconclusive result. For
+performance-like observations, that protocol also fixes the warmup and
+environment class.</p>
 <p>An inconclusive result may permit another declared sample batch for
-the same candidate. Exhausting that budget without a decision ends in
-evidenced failure. It becomes an external block only when progress
-requires a named authority, trustworthy oracle, or environment
-repair.</p>
+the same candidate. Exhausting that budget without a decision ends as
+<code>failed</code>. It ends as <code>blocked</code> only when progress
+requires a named external repair or decision.</p>
 <h2 id="protected-non-regression">Protected Non-Regression</h2>
 <p>A <strong>Ratchet</strong> is a protected non-regression rule
 measured by one fixed protocol. It may require zero contract violations,
@@ -326,7 +339,7 @@ distribution, or no undeclared API expansion.</p>
     }
     [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-stages {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0.45rem;
       margin: 0.85rem 0;
     }
@@ -350,8 +363,8 @@ distribution, or no undeclared API expansion.</p>
 <figure class="aoi-book-diagram">
 <figcaption class="aoi-book-diagram__header">
 <p class="aoi-book-diagram__eyebrow">Protected non-regression</p>
-<h3 class="aoi-book-diagram__title" id="ratchet-title">Validate, Admit, Then Advance the Ratchet</h3>
-<p class="aoi-book-diagram__summary">Validation may close a proposal against one protected floor revision. Only successful current-state admission may advance that floor.</p>
+<h3 class="aoi-book-diagram__title" id="ratchet-title">Validate, Then Commit Admission and Floor Together</h3>
+<p class="aoi-book-diagram__summary">Validation may support proposal closure against one protected floor revision. Current-state Admission commits the candidate and next floor as one transaction.</p>
 </figcaption>
 <div class="aoi-book-diagram__grid">
 <div class="aoi-book-diagram__artifact">
@@ -360,7 +373,7 @@ distribution, or no undeclared API expansion.</p>
 </div>
 <div class="aoi-book-diagram__artifact">
 <span class="aoi-book-diagram__label">Invariant</span>
-<p>Failure, uncertainty, and stale-base admission leave the accepted floor unchanged. Lowering it requires a separate <a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a>.</p>
+<p>For this candidate, failure, uncertainty, stale state, or a transaction write failure commits neither Admission nor floor advancement. Lowering the floor requires a separate <a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a> and separate <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a>.</p>
 </div>
 </div>
 <div aria-hidden="true" class="aoi-book-diagram__divider"></div>
@@ -372,13 +385,12 @@ distribution, or no undeclared API expansion.</p>
 <button aria-pressed="false" data-scenario="behavior" type="button">Behavior change</button>
 <button aria-pressed="false" data-scenario="race" type="button">Floor race</button>
 </div>
-<p class="aoi-book-diagram__summary" data-role="scenario-note">One lint finding is removed while protected behavior and the current floor are preserved.</p>
+<p class="aoi-book-diagram__summary" data-role="scenario-note">One lint finding is removed while required behavior remains unchanged and the current floor is preserved.</p>
 <div aria-label="Ratchet lifecycle" class="ratchet-stages">
 <div class="ratchet-stage" data-stage="measure">1. Measure</div>
 <div class="ratchet-stage" data-stage="judge">2. <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a></div>
 <div class="ratchet-stage" data-stage="seal">3. Seal</div>
-<div class="ratchet-stage" data-stage="admit">4. Admit</div>
-<div class="ratchet-stage" data-stage="advance">5. CAS floor</div>
+<div class="ratchet-stage" data-stage="admit">4. Admit + CAS floor</div>
 </div>
 <div aria-live="polite" class="aoi-book-diagram__outcomes">
 <div class="aoi-book-diagram__outcome">
@@ -390,7 +402,7 @@ distribution, or no undeclared API expansion.</p>
 <p data-role="result">not run</p>
 </div>
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label">Admission</span>
+<span class="aoi-book-diagram__label">Admission + floor</span>
 <p data-role="admission">not eligible</p>
 </div>
 <div class="aoi-book-diagram__outcome">
@@ -400,7 +412,7 @@ distribution, or no undeclared API expansion.</p>
 </div>
 <div class="ratchet-actions">
 <button data-action="validate" type="button">Validate candidate</button>
-<button data-action="admit" disabled="" type="button">Admit and advance</button>
+<button data-action="admit" disabled="" type="button">Commit Admission + floor</button>
 <button data-action="reset" type="button">Reset</button>
 </div>
 <p class="aoi-book-diagram__note" data-role="outcome">The candidate has not been evaluated.</p>
@@ -413,30 +425,30 @@ distribution, or no undeclared API expansion.</p>
 
       const scenarios = {
         eligible: {
-          note: 'One lint finding is removed while protected behavior and the current floor are preserved.',
+          note: 'One lint finding is removed while required behavior remains unchanged and the current floor is preserved.',
           check: 'pass',
           result: 'complete',
-          outcome: 'The run closes complete at floor revision 42. Admission remains separate.',
+          outcome: 'The run ends complete with a supported proposal at floor revision 42. Its Run Record is sealed; Admission remains separate.',
           admissible: true
         },
         regression: {
-          note: 'The structural goal is met, but protected coverage falls below the accepted floor.',
+          note: 'The structural goal is met, but measured coverage falls below the protected floor.',
           check: 'fail',
-          result: 'failed_with_evidence',
-          outcome: 'The run seals failed_with_evidence. The floor remains unchanged.',
+          result: 'failed',
+          outcome: 'The run ends failed. Its Run Record is sealed, and the floor remains unchanged.',
           admissible: false
         },
         inconclusive: {
           note: 'The required signal remains inconclusive after the declared sampling budget.',
           check: 'inconclusive',
-          result: 'failed_with_evidence',
-          outcome: 'The exhausted protocol seals failed_with_evidence. Unknown does not pass.',
+          result: 'failed',
+          outcome: 'The exhausted protocol ends failed. The Run Record is sealed; unknown does not pass.',
           admissible: false
         },
         behavior: {
-          note: 'A protected public response changed, so this is a migration rather than a refactor.',
+          note: 'A public response covered by the protected equivalence check changed, so this is a migration rather than a refactor.',
           check: 'fail: equivalence',
-          result: 'failed_with_evidence',
+          result: 'failed',
           outcome: 'This Mission class rejects the candidate. A separate migration proposal is required.',
           admissible: false
         },
@@ -444,7 +456,7 @@ distribution, or no undeclared API expansion.</p>
           note: 'Another admission advances the floor after validation but before this candidate is admitted.',
           check: 'pass at revision 42',
           result: 'complete',
-          outcome: 'The proposal closes complete against revision 42. Current-state admission is still required.',
+          outcome: 'The run ends complete with a supported proposal against revision 42. Its Run Record is sealed; current-state Admission is still required.',
           admissible: true,
           race: true
         }
@@ -515,17 +527,17 @@ distribution, or no undeclared API expansion.</p>
         const scenario = scenarios[selected];
         if (scenario.race) {
           floorRevision = 43;
-          fields.admission.textContent = 'blocked: stale floor';
-          fields.outcome.textContent = 'Compare-and-set rejects the stale proposal. Revalidate in a new run against revision 43.';
+          fields.admission.textContent = 'aborted: stale floor';
+          fields.outcome.textContent = 'Another transaction advanced the floor. This candidate remains unadmitted and must be revalidated against revision 43.';
         } else {
           floorRevision += 1;
-          fields.admission.textContent = 'admitted';
-          fields.outcome.textContent = 'Admission succeeds. The protected service advances the floor atomically.';
+          fields.admission.textContent = 'committed together';
+          fields.outcome.textContent = 'The transaction commits the candidate and floor revision 43 together.';
         }
         fields.floor.textContent = `revision ${floorRevision}`;
         fields.floorResult.textContent = `revision ${floorRevision}`;
         admitButton.disabled = true;
-        setStages(4);
+        setStages(scenario.race ? 2 : 3);
       });
 
       resetButton.addEventListener('click', resetRun);
@@ -539,35 +551,43 @@ governed property make the comparison meaningful.</p>
 <p>The floor, protocol, comparator, and advancement mechanism belong to
 the Protected Control Plane. The active refactor may read them but
 cannot modify them. Lowering a floor or changing its protocol requires a
-separate Governance Mission.</p>
+separate Governance Mission and separate Adoption before the change
+becomes authoritative.</p>
 <p>A Ratchet lets an organization automate repeated improvement without
 letting automated work erase prior gains by lowering the baseline.
-Delegation can deepen only while the independently measured floor
-continues to hold.</p>
-<h2 id="admit-then-advance-the-floor">Admit, Then Advance the Floor</h2>
+Delegation can deepen only while a floor measured outside candidate
+authority continues to hold.</p>
+<h2 id="admit-and-advance-the-floor-together">Admit and Advance the
+Floor Together</h2>
 <p>Following the lifecycle established in Chapters 5 and 10, the Mission
 Gate revalidates the candidate and its sealed Run Record against the
 current base, dependency closure, protocol, and floor.</p>
-<p>The unique rule for refactoring is that the floor advances only after
-current-base admission. An independently authorized service checks that
-the expected floor revision and admitted candidate identity still match
-current state, then updates the floor atomically. If another admission
-already changed the floor, that update fails and the candidate must be
-measured again.</p>
-<p>Before admission, <code>revert</code> discards a candidate workspace
-after required evidence is preserved. After admission, rollback is a new
-governed transition with authority and evidence appropriate to the
-affected surface. The two are not interchangeable.</p>
+<p>For a ratcheted candidate, current-base Admission and floor
+advancement form one transactional transition. An Admission service
+whose authority is separate from the candidate producer revalidates the
+expected base, floor revision, candidate identity, and measured result,
+then commits the admitted state and new floor together. If either write
+fails, neither commits: the candidate remains unadmitted, the prior
+floor remains authoritative, and a retry requires current-state
+revalidation. If another Admission has already changed the base or
+floor, the transaction aborts and the candidate must be measured again.
+A conforming Ratchet therefore cannot expose a state in which Admission
+succeeded but its required floor advancement failed.</p>
+<p>Before Admission, <code>revert</code> discards a candidate workspace
+after required evidence is preserved. After Admission, rollback is a new
+transition with authority and evidence appropriate to the affected
+surface. The two are not interchangeable.</p>
 <p>For a multi-step extract-rename-move sequence, keep intermediate work
 inside one isolated candidate and compare the final result with the
-original base. If an intermediate state must become Terrain, make it a
-separately governed child Mission.</p>
+original base. If an intermediate state must become Terrain, produce it
+through a separately activated child Mission and submit its supported
+proposal to separate Admission.</p>
 <p>This is the bounded form of structural self-modification. The
 workflow may propose an improvement, but its structural gain, behavior
-boundary, effects, non-regression floor, and eventual admission remain
-independently checkable.</p>
+boundary, effects, non-regression floor, and eventual Admission remain
+checkable outside candidate authority.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…" data-share-title="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Observation | Governance status | | --- | --- | --- | | Baseline | One…" data-share-title="Chapter 11 – Automated Refactoring Under Guards | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-11-automated-refactoring-under-guards" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -575,13 +595,13 @@ independently checkable.</p>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards&amp;title=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2011%20of%20Architects%20of%20Intent%3A%20Automated%20Refactoring%20Under%20Guards.%20%7C%20Moment%20%7C%20Protected%20observation%20%7C%20Governance%20status%20%7C%20%7C%20---%20%7C%20---%20%7C%20---%20%7C%20%7C%20Fixed%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2011%20%E2%80%93%20Automated%20Refactoring%20Under%20Guards%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2011%20of%20Architects%20of%20Intent%3A%20Automated%20Refactoring%20Under%20Guards.%20%7C%20Moment%20%7C%20Observation%20%7C%20Governance%20status%20%7C%20%7C%20---%20%7C%20---%20%7C%20---%20%7C%20%7C%20Baseline%20%7C%20One%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-11-automated-refactoring-under-guards">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
-<a class="prev-link" href="chapter-10-the-protected-control-plane-the-guardrails">← Chapter 10 – The Protected Control Plane (The Guardrails)</a>
+<a class="prev-link" href="chapter-10-the-protected-control-plane-the-guardrails">← Chapter 10 – The Protected Control Plane</a>
 <a class="next-link" href="chapter-12-governance-for-high-rate-automation">Chapter 12 – Governance for High-Rate Automation →</a>
 </nav>
 <footer class="site-footer">
@@ -601,7 +621,7 @@ independently checkable.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

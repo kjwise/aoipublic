@@ -2,36 +2,36 @@
 
 <html lang="en">
 <head>
-<title>Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent</title>
+<title>Chapter 8 – Map-Updaters: From Terrain to Map | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…" name="description"/>
+<meta content="Chapter 8 of Architects of Intent: Map-Updaters: From Terrain to Map. Documentation, specifications, inventories, and policies drift because the systems they…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" rel="canonical"/>
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
-<meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" property="og:title"/>
-<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…" property="og:description"/>
+<meta content="Chapter 8 – Map-Updaters: From Terrain to Map | Architects of Intent" property="og:title"/>
+<meta content="Chapter 8 of Architects of Intent: Map-Updaters: From Terrain to Map. Documentation, specifications, inventories, and policies drift because the systems they…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
-<meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" property="og:image:alt"/>
+<meta content="Chapter 8 – Map-Updaters: From Terrain to Map | Architects of Intent" property="og:image:alt"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
-<meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…" name="twitter:description"/>
+<meta content="Chapter 8 – Map-Updaters: From Terrain to Map | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 8 of Architects of Intent: Map-Updaters: From Terrain to Map. Documentation, specifications, inventories, and policies drift because the systems they…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
-<meta content="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 8 – Keep the Map Fresh (Map-Updaters)", "description": "Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "mainEntityOfPage": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT7M", "articleSection": "Part III – From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<meta content="Chapter 8 – Map-Updaters: From Terrain to Map | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 8 – Map-Updaters: From Terrain to Map", "description": "Chapter 8 of Architects of Intent: Map-Updaters: From Terrain to Map. Documentation, specifications, inventories, and policies drift because the systems they…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "mainEntityOfPage": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT7M", "articleSection": "Part III – From Loop to System", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -55,75 +55,61 @@
 <div class="chapter-meta"><span class="read-time">7 min read</span></div>
 </div>
 <div class="chapter-header__body">
-<h1 id="chapter-8-keep-the-map-fresh-map-updaters">Chapter 8 – Keep the
-Map Fresh (Map-Updaters)</h1>
+<h1 id="chapter-8-keep-the-map-fresh-map-updaters">Chapter 8 –
+Map-Updaters: From Terrain to Map</h1>
 <p>Documentation, specifications, inventories, and policies drift
 because the systems they describe continue to change. A workflow can
-make selected drift visible and propose a bounded correction.</p>
+make selected drift visible and propose a correction limited to one Map
+surface permitted by its Mission and adopted policy.</p>
 <p>A <strong>Map-Updater</strong> is specifically a Terrain-to-Map
 workflow. It observes declared facts in the current system, compares
-them with one bounded Map surface, and proposes a reviewable Map change
-when they diverge. It does not change Terrain.</p>
+them with one Map surface within its Mission’s authority, and proposes a
+reviewable Map change when they diverge. Adopted policy must permit that
+surface. The workflow does not change Terrain.</p>
 <p>This direction matters. The same file can be authoritative for one
 property and observational for another. Route declarations can define
 one narrow property: the current endpoint inventory. They do not define
 intended API policy, compatibility promises, or future design. A
-Map-Updater must name the exact property for which the observed source
-is authoritative.</p>
+Map-Updater must name the property for which the observed source is
+authoritative.</p>
 </div>
 </header>
 <h2 id="sense-normalize-compare-propose">Sense, Normalize, Compare,
 Propose</h2>
 <p>The updater has four steps:</p>
 <ol type="1">
-<li><strong>Sense:</strong> observe the declared <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> sources and fix
-their exact identities.</li>
+<li><strong>Sense:</strong> observe the declared <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> sources at the
+immutable identities already bound into the activated Mission and record
+the observations with provenance.</li>
 <li><strong>Normalize:</strong> parse those observations into a stable
 representation, removing irrelevant transients.</li>
 <li><strong>Compare:</strong> normalize the selected <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> surface and
-produce an exact difference.</li>
+compute the difference.</li>
 <li><strong>Propose:</strong> when drift exists, create a candidate
 change inside the declared Map region.</li>
 </ol>
 <p>All four steps may be deterministic. When structured Terrain can
 render the Map directly, that is preferable. If a model adds connective
-prose, the extracted facts remain fixed and the generated material stays
-inside a bounded candidate. The workflow then re-extracts and checks the
-factual structure before the proposal may close.</p>
-<p>Alignment is a no-op only when every required source was available
-and the comparison completed. Missing or contradictory evidence cannot
-be interpreted as agreement.</p>
+prose, the extracted facts do not change during generation, and the
+candidate stays inside the selected Map region. The workflow then
+re-extracts and checks the factual structure before proposal
+closure.</p>
+<p>The run reaches <code>no_change</code> only when every required
+source was available, the comparison completed, and no candidate effect
+exists. The <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> is then sealed. Missing or contradictory evidence
+cannot be interpreted as agreement.</p>
 <p><a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a>’s Skeleton-First rule has a descriptive form here:
 deterministic extraction records the observed structural facts in
 Terrain. Probabilistic generation may supply only the permitted
 explanation or presentation. If generated structure is later mistaken
 for observed fact, the Map begins reinforcing its own invention.
-Protected re-extraction helps prevent that contamination by rejecting a
-mismatch before the proposal closes.</p>
-<h2 id="when-the-map-surface-is-hierarchical">When the Map Surface Is
-Hierarchical</h2>
-<p>A bounded Map surface may organize facts in a hierarchy. An operator
-guide, for example, may group routes and commands under service,
-subsystem, and platform sections. During Normalize, the updater parses
-leaf facts and aggregates exact parent inventories or counts before
-comparison. These derived views remain traceable observations of
-declared Terrain; bottom-up aggregation does not make them Map
-proposals.</p>
-<p>Each derived parent view must retain links to the leaf observations
-that support it. If the proposed Map change needs a judgment-heavy
-parent summary or connective prose, a model writes it only during
-Propose. That material remains a candidate with its sources attached and
-receives a proportionate review.</p>
-<p>When one leaf changes, the updater invalidates each derived ancestor
-whose declared inputs include that leaf.</p>
-<p>Bottom-up traversal does not make a workflow a <a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a>. The
-Terrain-to-Map authority direction does: declared Terrain facts support
-a proposed change to one bounded Map surface.</p>
-<h2 id="one-bounded-map-proposal">One Bounded Map Proposal</h2>
-<p>Consider a payments service whose local operator Map lists public
-routes, ownership, health checks, and standard commands. Route
-declarations, ownership metadata, deployment manifests, and task-runner
-definitions already contain those facts.</p>
+Re-extraction outside candidate authority helps prevent that
+contamination by rejecting a mismatch before proposal closure.</p>
+<h2 id="one-map-proposal">One Map Proposal</h2>
+<p>Continue with the payments service from <a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a>. Its local operator
+Map lists public routes, ownership, health checks, and standard
+commands. Route declarations, ownership metadata, deployment manifests,
+and task-runner definitions already contain those facts.</p>
 <table>
 <colgroup>
 <col style="width: 50%"/>
@@ -138,8 +124,8 @@ definitions already contain those facts.</p>
 <tbody>
 <tr>
 <td>Observed sources that define this generated property</td>
-<td>Fixed route declarations, ownership metadata, deployment manifests,
-and command definitions</td>
+<td>Route declarations, ownership metadata, deployment manifests, and
+command definitions at pinned revisions</td>
 </tr>
 <tr>
 <td>Permitted effect</td>
@@ -147,8 +133,8 @@ and command definitions</td>
 </tr>
 <tr>
 <td>Required evidence</td>
-<td>Source identities, normalized comparison, bounded candidate
-identity, and <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> check results</td>
+<td>Source identities, normalized comparison, candidate identity, and
+complete check results</td>
 </tr>
 <tr>
 <td>Required checks</td>
@@ -157,8 +143,8 @@ extracted inventory exactly matches Terrain</td>
 </tr>
 <tr>
 <td><a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a></td>
-<td>A separate review or policy decision decides whether the successful
-proposal becomes the Map</td>
+<td>A separate authority makes the exact supported proposal
+authoritative; any earlier staging remains non-authoritative</td>
 </tr>
 </tbody>
 </table>
@@ -174,14 +160,34 @@ inside the permitted Map blocks, and that its extracted inventory
 matches the declared Terrain sources. It cannot establish that the
 organization chose the right owners, routes, or operating policy. Those
 are different properties with different authority.</p>
-<p>The run may close as a successful proposal after its required checks
-pass. The candidate is not adopted merely because it was generated,
-retained, or sealed.</p>
-<h2 id="the-opposite-direction">The Opposite Direction</h2>
+<p>After every required check passes, <code>complete</code> records
+proposal closure. The final artifact is a supported proposal, and the
+Run Record is sealed.</p>
+<h2 id="when-the-map-surface-is-hierarchical">When the Map Surface Is
+Hierarchical</h2>
+<p>The payments Map is shallow; other surfaces organize facts in deeper
+hierarchies. An operator guide, for example, may group routes and
+commands under service, subsystem, and platform sections. During
+Normalize, the updater parses leaf facts and deterministically
+aggregates parent inventories or counts before comparison. These derived
+views remain traceable to the named Terrain sources; bottom-up
+aggregation does not make them Map proposals.</p>
+<p>Each derived parent view must retain links to the leaf observations
+that support it. If the proposed Map change needs a judgment-heavy
+parent summary or connective prose, a model writes it only during
+Propose. That material remains a candidate with its sources attached and
+receives a proportionate review.</p>
+<p>When one leaf changes, the updater invalidates each derived ancestor
+whose declared inputs include that leaf.</p>
+<p>The Terrain-to-Map authority direction, not bottom-up traversal,
+makes this a <a class="concept-link" href="concepts#map-updater" title="See concept: Map-Updater">Map-Updater</a>: declared Terrain facts support a proposed
+change to one Map surface within Mission authority.</p>
+<h2 id="the-opposite-direction">Map-Driven Reconciliation: Map to
+Terrain</h2>
 <p>A Map-Updater always runs from observed Terrain toward a proposed Map
 revision. The opposite authority direction is <strong>Map-driven
-reconciliation</strong>: an authoritative Map governs a bounded proposal
-to change Terrain.</p>
+reconciliation</strong>: an authoritative Map governs a proposal to
+change Terrain within the declared effect envelope.</p>
 <table>
 <colgroup>
 <col style="width: 33%"/>
@@ -191,7 +197,7 @@ to change Terrain.</p>
 <thead>
 <tr>
 <th>Direction</th>
-<th>Fixed authority</th>
+<th>Authority held for the run</th>
 <th>Proposed effect</th>
 </tr>
 </thead>
@@ -199,48 +205,47 @@ to change Terrain.</p>
 <tr>
 <td>Terrain → Map</td>
 <td>Declared observed facts for one Map property</td>
-<td>A bounded Map revision</td>
+<td>A Map revision limited to a surface permitted by the Mission and
+adopted policy</td>
 </tr>
 <tr>
 <td>Map → Terrain</td>
 <td>An adopted requirement or desired state</td>
-<td>A bounded Terrain revision</td>
+<td>A Terrain candidate within the effect envelope</td>
 </tr>
 </tbody>
 </table>
-<p>Both directions may cross between natural-language and formal
-representations, but they are not inverses. Map-driven reconciliation
-elaborates adopted intent into a Terrain candidate. A Map-Updater
-describes selected facts observed in Terrain. It cannot recover why the
-system was built, infer what policy ought to be, or make its description
+<p>The directions are not inverses. Map-driven reconciliation elaborates
+adopted intent into a Terrain candidate. A Map-Updater describes
+selected facts observed in Terrain. It cannot recover why the system was
+built, infer what policy ought to be, or make its description
 authoritative.</p>
 <p>If policy requires encrypted storage and a <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> observes an
 unencrypted bucket, Map-driven reconciliation may propose the
 infrastructure change. The policy remains fixed during that run.</p>
-<p>If evidence suggests the policy itself is wrong, the reconciliation
-workflow must not edit its own authority to make Terrain pass. It stops
-for an external decision. A separately activated Map-Updater may then
-propose a policy revision under the governance rules for that Map
-surface.</p>
-<p>The two directions may exchange evidence, but neither reverses
-direction in flight. This prevents a candidate from changing the rule
-that judges it.</p>
-<h2 id="updater-success-is-not-build-policy">Updater Success Is Not
-Build Policy</h2>
+<p>If evidence suggests the protected policy itself is wrong, the
+reconciliation workflow must not edit its own authority to make Terrain
+pass. It ends <code>blocked</code> and names the required external
+decision. A separate <a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a> may then propose a change to the
+named protected Map, policy, authority, workflow, or control surface;
+separate Adoption makes the exact proposal authoritative.</p>
+<h2 id="updater-success-is-not-build-policy">Completion Does Not Make a
+Map Authoritative</h2>
 <p>The updater and the delivery pipeline answer different questions. The
-Map-Updater may succeed because it produced a checked proposal. The
-pipeline may still block because the currently adopted Map remains out
-of sync until that proposal is reviewed and adopted.</p>
+Map-Updater may reach <code>complete</code> because proposal closure
+produced a supported proposal and the runtime sealed its Run Record. The
+pipeline may still stop because the currently adopted Map remains out of
+sync until separate Adoption makes the exact proposal authoritative.</p>
 <p>That separation avoids a false failure. The updater completed its
 declared work; the enclosing policy decides whether unresolved drift may
-proceed. A waiver, where permitted, is a separate governed decision with
-exact scope, rationale, approval, and expiry.</p>
+proceed. A waiver, where permitted, is a separate decision with a named
+scope, rationale, approver, and expiry.</p>
 <p>For factual Map regions, validation should re-extract the candidate’s
-structure and bind it to the declared sources. Structural lint and
+structure and trace it to the declared sources. Structural lint and
 reference checks may support that comparison. Subjective prose receives
 a proportionate review gate. No tool list can prove every sentence true;
-the invariant is that each enforced property has a declared basis and an
-independent check.</p>
+each enforced property needs a declared basis and a check outside
+updater and candidate authority.</p>
 <h2 id="maps-as-operating-memory">Maps as Operating Memory</h2>
 <p>At small scales, a Map may be a schema, interface inventory, or
 policy file. At larger scales, Maps include architecture decisions,
@@ -255,33 +260,35 @@ Map concentrates decision-bearing meaning, remains traceable to current
 evidence, and stays relevant to the governed property. A Map is fresh
 only for the surfaces that were actually compared. More text does not
 make it current, and synchronization does not make every claim true.</p>
-<p>Historical evidence can also support Map proposals. Repeated
-incidents may justify a runbook change; recurring review findings may
-justify a new check. Evidence does not install those lessons by itself.
-The appropriate Map-Updater produces a candidate, and independent
-adoption makes it authoritative.</p>
-<p>A synchronized Map can then support context selection, generated
-help, policy evaluation, or later workflows. <a class="chapter-link" href="chapter-13-from-documentation-to-enforceable-constraints#chapter-13-from-documentation-to-enforceable-constraints" title="Go to: Chapter 13">Chapter 13</a> examines the
-stronger boundary where a selected Map claim becomes an enforceable
-constraint. Synchronization prepares that boundary, but does not create
-it automatically.</p>
+<p>Historical evidence can also support proposals: repeated incidents
+may justify a runbook change, and recurring review findings may justify
+a new check. A Map-Updater may propose a change to a Map surface
+permitted by its Mission and adopted policy. A protected check or policy
+change requires a Governance Mission. Separate Adoption makes either
+proposal authoritative.</p>
+<p>The synchronized payments Map can then support context selection,
+generated help, policy evaluation, or later workflows. Chapter 9 uses
+that operating memory while selecting recurring maintenance; <a class="chapter-link" href="chapter-13-from-documentation-to-enforceable-constraints#chapter-13-from-documentation-to-enforceable-constraints" title="Go to: Chapter 13">Chapter 13</a>
+later examines the stronger boundary where a selected Map claim becomes
+an enforceable constraint. Synchronization prepares that boundary, but
+does not create it automatically.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…" data-share-title="Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 8 of Architects of Intent: Map-Updaters: From Terrain to Map. Documentation, specifications, inventories, and policies drift because the systems they…" data-share-title="Chapter 8 – Map-Updaters: From Terrain to Map | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
-<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters&amp;text=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters&amp;text=Chapter%208%20%E2%80%93%20Map-Updaters%3A%20From%20Terrain%20to%20Map%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters" rel="noopener noreferrer" target="_blank">f</a>
-<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters&amp;title=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%208%20%E2%80%93%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%208%20of%20Architects%20of%20Intent%3A%20Keep%20the%20Map%20Fresh%20%28Map-Updaters%29.%20Documentation%2C%20specifications%2C%20inventories%2C%20and%20policies%20drift%20because%20the%20systems%20they%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters">email</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters&amp;title=Chapter%208%20%E2%80%93%20Map-Updaters%3A%20From%20Terrain%20to%20Map%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%208%20%E2%80%93%20Map-Updaters%3A%20From%20Terrain%20to%20Map%20%7C%20Architects%20of%20Intent&amp;body=Chapter%208%20of%20Architects%20of%20Intent%3A%20Map-Updaters%3A%20From%20Terrain%20to%20Map.%20Documentation%2C%20specifications%2C%20inventories%2C%20and%20policies%20drift%20because%20the%20systems%20they%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-8-keep-the-map-fresh-map-updaters">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
-<a class="prev-link" href="chapter-7-intent-as-code-mission-objects">← Chapter 7 – Intent as Code (Mission Objects)</a>
-<a class="next-link" href="chapter-9-the-maintenance-controller-background-maintenance">Chapter 9 – The Maintenance Controller (Background Maintenance) →</a>
+<a class="prev-link" href="chapter-7-intent-as-code-mission-objects">← Chapter 7 – Mission Objects: From Intent to Activation</a>
+<a class="next-link" href="chapter-9-the-maintenance-controller-background-maintenance">Chapter 9 – The Maintenance Controller: Selection Before Action →</a>
 </nav>
 <footer class="site-footer">
 <p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
@@ -300,7 +307,7 @@ it automatically.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

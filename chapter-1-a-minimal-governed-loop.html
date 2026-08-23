@@ -24,14 +24,14 @@
 <meta content="Chapter 1 of Architects of Intent: A Minimal Governed Loop. Build one small loop: code changes, docs sync, checks decide." name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 1 – A Minimal Governed Loop | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 1 – A Minimal Governed Loop", "description": "Chapter 1 of Architects of Intent: A Minimal Governed Loop. Build one small loop: code changes, docs sync, checks decide.", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-1-a-minimal-governed-loop", "mainEntityOfPage": "https://architectsofintent.com/chapter-1-a-minimal-governed-loop", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT5M", "articleSection": "Part I – Building a Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 1 – A Minimal Governed Loop", "description": "Chapter 1 of Architects of Intent: A Minimal Governed Loop. Build one small loop: code changes, docs sync, checks decide.", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-1-a-minimal-governed-loop", "mainEntityOfPage": "https://architectsofintent.com/chapter-1-a-minimal-governed-loop", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT6M", "articleSection": "Part I – The Minimal Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -51,8 +51,8 @@
 <main class="content content--chapter" id="main">
 <header class="chapter-header">
 <div class="chapter-kicker">
-<div class="part-title">Part I – Building a Governed Loop</div>
-<div class="chapter-meta"><span class="read-time">5 min read</span></div>
+<div class="part-title">Part I – The Minimal Governed Loop</div>
+<div class="chapter-meta"><span class="read-time">6 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-1-a-minimal-governed-loop">Chapter 1 – A Minimal
@@ -67,11 +67,11 @@ we’ll name the parts so we can reuse them precisely.</p>
 </header>
 <h2 id="keep-code-and-docs-in-sync">Keep Code and Docs in Sync</h2>
 <p>The loop aligns one code surface with one doc or spec block through a
-bounded change step, an independent check, and retained evidence. The
-change step emits a patch or works in an isolated candidate workspace;
-it does not adopt its own result. <a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a> later turns the goal into a
-typed <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> and separates that authority from the <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>
-for one execution.</p>
+bounded change step, a check outside that step’s authority, and retained
+evidence. The change step emits a patch or works in an isolated
+candidate workspace; it does not adopt its own result. <a class="chapter-link" href="chapter-7-intent-as-code-mission-objects#chapter-7-intent-as-code-mission-objects" title="Go to: Chapter 7">Chapter 7</a> later
+turns the goal into a typed <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a> and separates that authority
+from the <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> for one execution.</p>
 <p>This first version stays deterministic so the mechanism is visible
 without model output, API failure, or non-convergence. Chapter 2 adds
 stochastic work; Chapter 5 adds bounded recovery.</p>
@@ -80,10 +80,10 @@ stochastic work; Chapter 5 adds bounded recovery.</p>
 that should mirror it.</p>
 <p>A concrete first loop can be a public-interface sync. The code is the
 observed source. The generated inventory is the description that should
-mirror it. A bounded writer proposes the update, an independent
-comparison checks it, and a small evidence record preserves what
-happened. The book calls these roles <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>, <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>, <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>, <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>,
-and <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a>.</p>
+mirror it. A bounded writer proposes the update, a comparison against
+the pinned source outside writer authority checks it, and a small
+evidence record preserves what happened. The book calls these roles
+<a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>, <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>, <a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a>, <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>, and <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a>.</p>
 <p>A file is not authoritative in every context. Authority belongs to
 the specific property being decided. Here, source code defines the
 exported-signature inventory, but it does not define intended API policy
@@ -135,7 +135,7 @@ mismatch would fail instead of rewriting the contract. Chapter 10
 generalizes this as property-specific authority.</p>
 <p>The loop enters with one intent: update only the generated
 <code>Public Interfaces</code> inventory so it exactly matches the
-exported Terrain signatures. One compact trace shows the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>
+exported Terrain signatures. One compact trace shows the complete
 claim:</p>
 <table>
 <colgroup>
@@ -160,17 +160,19 @@ and <code>normalize_country(country)</code></td>
 else changes</td>
 </tr>
 <tr>
-<td>Independent check</td>
+<td>Check outside writer authority</td>
 <td>Correspondence and scope both hold</td>
 </tr>
 <tr>
 <td>Run outcome</td>
-<td>The proposal and its evidence are recorded and sealed</td>
+<td>The run ends <code>complete</code> with a supported proposal; the
+Run Record is sealed</td>
 </tr>
 <tr>
-<td>Separate adoption</td>
-<td>The gate rechecks the current Map state before applying the
-candidate</td>
+<td>Separate <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a></td>
+<td>The gate rechecks the current Map state, then Adoption makes the
+exact candidate authoritative; any earlier staging remains
+non-authoritative</td>
 </tr>
 <tr>
 <td>Next run</td>
@@ -178,11 +180,11 @@ candidate</td>
 </tr>
 </tbody>
 </table>
-<p>The Validator result is structured evidence, not a reassuring
-sentence. This loop has no separate <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> because there is no policy
-choice to make. Its scope-matched Validator covers the narrow
-correspondence claim, and each evidence class has one semantic
-outcome:</p>
+<p>The recorded, provenance-bearing Validator result is evidence tied to
+the correspondence and scope claims, not a reassuring sentence. This
+loop has no separate <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> because there is no policy choice to make.
+Its scope-matched Validator covers the narrow correspondence claim, and
+each evidence class has one semantic outcome:</p>
 <table>
 <colgroup>
 <col style="width: 50%"/>
@@ -190,35 +192,37 @@ outcome:</p>
 </colgroup>
 <thead>
 <tr>
-<th>Evidence</th>
+<th><a class="concept-link" href="concepts#evidence" title="See concept: Evidence">Evidence</a></th>
 <th>Outcome</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Correspondence holds and the candidate changes the Map</td>
-<td>Successful proposal, sealed for separate adoption</td>
+<td><code>complete</code>: supported proposal; Run Record sealed</td>
 </tr>
 <tr>
 <td>Correspondence already holds and nothing changed</td>
-<td>No-op, recorded and sealed</td>
+<td><code>no_change</code>: no candidate effect; Run Record sealed</td>
 </tr>
 <tr>
 <td>Correspondence or scope fails</td>
-<td>Evidenced failure; the candidate does not advance</td>
+<td><code>failed</code>: evidence retained; candidate does not advance;
+Run Record sealed</td>
 </tr>
 </tbody>
 </table>
 <p>If correspondence or scope failed but the recorded outcome says
 success, the record contradicts its own evidence. Reject that account
 rather than preserving it as valid run history. The Validator does not
-apply the patch, and a successful proposal does not make itself
+apply the patch, and a supported proposal does not make itself
 authoritative. A Terrain-changing candidate would likewise require
-separate admission.</p>
-<p>The implementation needs four things: a bounded writer, an
-independent check, a fixed mapping from each result to an outcome, and
-one stable interface through which the loop runs. For one mechanically
-decidable property, a separate decision layer adds nothing.</p>
+separate <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a>.</p>
+<p>The implementation needs four things: a bounded writer, a check
+outside writer authority, a one-to-one mapping from each result to an
+outcome, and one stable interface through which the loop runs. For one
+mechanically decidable property, a separate decision layer adds
+nothing.</p>
 <p>The check must still be strong enough for the claim made at that
 scope. A unit test or the corresponding verification step in the V-model
 supports only the property it checks. Here, exact signature comparison
@@ -229,32 +233,38 @@ requires interpretation.</p>
 <h3 id="stable-interface">Stable Interface</h3>
 <p>Put the Effector and Validator behind a stable interface that humans,
 continuous integration, and agents can all call. They should invoke the
-same operation and receive the same structured result while
-implementations remain swappable. After alignment, the same interface
-returns a no-op without changing the contract.</p>
+same operation and receive the same structured result; future Mission
+versions may swap implementations behind that interface. After
+alignment, the same interface returns <code>no_change</code> without
+changing the contract.</p>
 <p>Git can preserve the patch, but a patch alone is not a Ledger. Even
 this minimal record ties the intent and input state to the diff,
 Validator result, terminal transition, and seal. Later chapters add
 Mission identity, Validator versions, approvals, and richer output
 evidence.</p>
-<p>The negative case is part of the contract: a deliberate Map/Terrain
-mismatch must produce machine-readable evidence and must not advance.
-After a corrected proposal is separately adopted, the next run should
-produce a no-op.</p>
+<p>The negative case is part of the contract: the workflow must record
+machine-readable evidence for a deliberate Map/Terrain mismatch, and
+that candidate must not advance. After a supported proposal is
+separately adopted, the next run should return
+<code>no_change</code>.</p>
 <h2 id="from-one-loop-to-a-factory">From One Loop to a Factory</h2>
 <p>One bounded loop is the unit of trust, not the destination. When its
 inputs, effects, checks, outputs, result, and evidence are stable, it
 can become a dependable step inside a larger workflow. The enclosing
-workflow may consume its declared outputs and sealed result. It may not
-turn a failed step into success, inherit undeclared effects, or treat
-the step’s evidence as new authority.</p>
+workflow may consume its declared outputs and sealed Run Record as
+provisional inputs to a larger candidate; it need not admit each child
+result globally. It may not turn a failed step into success, inherit
+undeclared effects, or treat the step’s evidence as new authority.</p>
 <p>Scale comes from accumulating these workflows around recurring
 changes. Evidence from a reliable recurring class of low-risk work can
-support a policy proposal for deeper delegation. If independently
-adopted, that policy may trigger or admit later instances without a new
-human decision. Human attention then moves toward exceptions, novel
-intent, protected rule changes, and high-consequence admission. The aim
-is fewer routine interruptions per admitted change, not autonomy for its
+support a candidate policy change for deeper delegation. If its
+governance run ends <code>complete</code> with a supported proposal and
+separate authority adopts it, the policy may authorize <a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a> of
+later Missions after they have been fully bound and reviewed. It may
+also admit candidates backed by supported proposals without a new human
+decision. Human attention then moves toward exceptions, novel intent,
+changes to protected rules, and high-consequence Admission. The aim is
+fewer routine interruptions per admitted change, not autonomy for its
 own sake.</p>
 <p>This is why the first loop stays small. A step must be narrow enough
 to reason about before it can be trusted as part of something larger. We
@@ -281,7 +291,7 @@ that unit.</p>
 </section>
 <nav class="page-nav">
 <a class="prev-link" href="introduction">← Introduction</a>
-<a class="next-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter 2 – The Deterministic Sandwich (Your First Pattern) →</a>
+<a class="next-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter 2 – The Deterministic Sandwich →</a>
 </nav>
 <footer class="site-footer">
 <p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
@@ -300,7 +310,7 @@ that unit.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

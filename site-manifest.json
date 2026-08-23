@@ -8,7 +8,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-1-a-minimal-governed-loop.html",
@@ -18,137 +18,137 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-2-the-deterministic-sandwich-your-first-pattern.html",
       "canonical_url": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern",
-      "title": "Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent",
-      "description": "Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…",
+      "title": "Chapter 2 – The Deterministic Sandwich | Architects of Intent",
+      "description": "Chapter 2 of Architects of Intent: The Deterministic Sandwich. Chapter 1 used a deterministic renderer because the transformation was fully specified:…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-3-define-good-your-first-validators.html",
       "canonical_url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators",
-      "title": "Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent",
-      "description": "Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). The model produced plausible-looking output. A cheap deterministic check caught a…",
+      "title": "Chapter 3 – Validators: What Checks Can Establish | Architects of Intent",
+      "description": "Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-4-the-stochastic-generator-why-you-need-physics.html",
       "canonical_url": "https://architectsofintent.com/chapter-4-the-stochastic-generator-why-you-need-physics",
-      "title": "Chapter 4 – The Stochastic Generator (Why You Need Physics) | Architects of Intent",
-      "description": "Chapter 4 of Architects of Intent: The Stochastic Generator (Why You Need Physics). Both are reasonable enough to pass a weak Validator set. If the only…",
+      "title": "Chapter 4 – The Stochastic Generator: Variance, Validation, and Feedback | Architects of Intent",
+      "description": "Chapter 4 of Architects of Intent: The Stochastic Generator: Variance, Validation, and Feedback. Both are plausible enough to pass weak checks for valid…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping.html",
       "canonical_url": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping",
       "title": "Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping | Architects of Intent",
-      "description": "Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. | Stage | Evidence | | --- | --- | | Attempt 1 |…",
+      "description": "Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-6-context-architecture-why-slicing-matters.html",
       "canonical_url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters",
-      "title": "Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent",
-      "description": "Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…",
+      "title": "Chapter 6 – Context Architecture | Architects of Intent",
+      "description": "Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-7-intent-as-code-mission-objects.html",
       "canonical_url": "https://architectsofintent.com/chapter-7-intent-as-code-mission-objects",
-      "title": "Chapter 7 – Intent as Code (Mission Objects) | Architects of Intent",
-      "description": "Chapter 7 of Architects of Intent: Intent as Code (Mission Objects). A serious workflow needs more than an instruction string. It needs a versioned work…",
+      "title": "Chapter 7 – Mission Objects: From Intent to Activation | Architects of Intent",
+      "description": "Chapter 7 of Architects of Intent: Mission Objects: From Intent to Activation. Part II followed a tax-rule change through one governed loop. Part III now…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-8-keep-the-map-fresh-map-updaters.html",
       "canonical_url": "https://architectsofintent.com/chapter-8-keep-the-map-fresh-map-updaters",
-      "title": "Chapter 8 – Keep the Map Fresh (Map-Updaters) | Architects of Intent",
-      "description": "Chapter 8 of Architects of Intent: Keep the Map Fresh (Map-Updaters). Documentation, specifications, inventories, and policies drift because the systems they…",
+      "title": "Chapter 8 – Map-Updaters: From Terrain to Map | Architects of Intent",
+      "description": "Chapter 8 of Architects of Intent: Map-Updaters: From Terrain to Map. Documentation, specifications, inventories, and policies drift because the systems they…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-9-the-maintenance-controller-background-maintenance.html",
       "canonical_url": "https://architectsofintent.com/chapter-9-the-maintenance-controller-background-maintenance",
-      "title": "Chapter 9 – The Maintenance Controller (Background Maintenance) | Architects of Intent",
-      "description": "Chapter 9 of Architects of Intent: The Maintenance Controller (Background Maintenance). Start with the version most teams should run: a read-only scan. An…",
+      "title": "Chapter 9 – The Maintenance Controller: Selection Before Action | Architects of Intent",
+      "description": "Chapter 9 of Architects of Intent: The Maintenance Controller: Selection Before Action. For the same payments service, begin with the version most teams…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-10-the-protected-control-plane-the-guardrails.html",
       "canonical_url": "https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails",
-      "title": "Chapter 10 – The Protected Control Plane (The Guardrails) | Architects of Intent",
-      "description": "Chapter 10 of Architects of Intent: The Protected Control Plane (The Guardrails). An ordinary documentation Mission may edit its declared source and…",
+      "title": "Chapter 10 – The Protected Control Plane | Architects of Intent",
+      "description": "Chapter 10 of Architects of Intent: The Protected Control Plane. Return to the payments service from Part III. An ordinary documentation Mission may propose…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-11-automated-refactoring-under-guards.html",
       "canonical_url": "https://architectsofintent.com/chapter-11-automated-refactoring-under-guards",
       "title": "Chapter 11 – Automated Refactoring Under Guards | Architects of Intent",
-      "description": "Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Protected observation | Governance status | | --- | --- | --- | | Fixed…",
+      "description": "Chapter 11 of Architects of Intent: Automated Refactoring Under Guards. | Moment | Observation | Governance status | | --- | --- | --- | | Baseline | One…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-12-governance-for-high-rate-automation.html",
       "canonical_url": "https://architectsofintent.com/chapter-12-governance-for-high-rate-automation",
       "title": "Chapter 12 – Governance for High-Rate Automation | Architects of Intent",
-      "description": "Chapter 12 of Architects of Intent: Governance for High-Rate Automation. A maintenance Mission is authorized to edit one service. Its candidate diff stays…",
+      "description": "Chapter 12 of Architects of Intent: Governance for High-Rate Automation. High-rate automation creates pressures that one guarded run does not: candidates…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-13-from-documentation-to-enforceable-constraints.html",
       "canonical_url": "https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints",
-      "title": "Chapter 13 – From Documentation to Enforceable Constraints | Architects of Intent",
-      "description": "Chapter 13 of Architects of Intent: From Documentation to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: bounded Map…",
+      "title": "Chapter 13 – From Maps to Enforceable Constraints | Architects of Intent",
+      "description": "Chapter 13 of Architects of Intent: From Maps to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: Map proposals…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "chapter-14-implications-for-delegated-automation.html",
       "canonical_url": "https://architectsofintent.com/chapter-14-implications-for-delegated-automation",
-      "title": "Chapter 14 – Implications for Delegated Automation | Architects of Intent",
-      "description": "Chapter 14 of Architects of Intent: Implications for Delegated Automation. The previous chapters treated the software change process as an engineering object.…",
+      "title": "Chapter 14 – The Torus: Governed Adaptation at Organizational Scale | Architects of Intent",
+      "description": "Chapter 14 of Architects of Intent: The Torus: Governed Adaptation at Organizational Scale. The previous chapters treated software change as an engineering…",
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "appendix-a-failure-modes-and-limits.html",
@@ -158,7 +158,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "appendix-b-core-vocabulary.html",
@@ -168,7 +168,17 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
+    },
+    {
+      "output_filename": "appendix-c-protocol-and-object-model.html",
+      "canonical_url": "https://architectsofintent.com/appendix-c-protocol-and-object-model",
+      "title": "Appendix C: Protocol and Object Model | Architects of Intent",
+      "description": "Appendix C of Architects of Intent: Appendix C: Protocol and Object Model. This appendix specifies references, closure, and authority boundaries among…",
+      "kind": "chapter",
+      "robots_directives": "index,follow,max-image-preview:large",
+      "include_in_sitemap": true,
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "acknowledgements-and-about-the-author.html",
@@ -178,7 +188,7 @@
       "kind": "chapter",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "concepts.html",
@@ -188,7 +198,7 @@
       "kind": "concepts",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "search.html",
@@ -198,7 +208,7 @@
       "kind": "search",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "toc.html",
@@ -208,7 +218,7 @@
       "kind": "toc",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "index.html",
@@ -218,47 +228,7 @@
       "kind": "landing",
       "robots_directives": "index,follow,max-image-preview:large",
       "include_in_sitemap": true,
-      "lastmod": "2026-08-08T20:46:38Z"
-    },
-    {
-      "output_filename": "infographic-deck-10.html",
-      "canonical_url": "https://architectsofintent.com/infographic-deck-10",
-      "title": "Architects of Intent | 10-Slide Deck",
-      "description": "Curated 10-slide presentation deck built from reusable infographic sections.",
-      "kind": "infographic",
-      "robots_directives": "noindex,follow",
-      "include_in_sitemap": false,
-      "lastmod": "2026-08-08T20:46:38Z"
-    },
-    {
-      "output_filename": "infographic.html",
-      "canonical_url": "https://architectsofintent.com/infographic",
-      "title": "Architects of Intent: Governed Workflow Systems",
-      "description": "Interactive infographic companion page for Architects of Intent.",
-      "kind": "infographic",
-      "robots_directives": "noindex,follow",
-      "include_in_sitemap": false,
-      "lastmod": "2026-08-08T20:46:38Z"
-    },
-    {
-      "output_filename": "infographic-deck.html",
-      "canonical_url": "https://architectsofintent.com/infographic-deck",
-      "title": "Architects of Intent | Infographic Deck",
-      "description": "Presentation-style deck built from reusable infographic sections.",
-      "kind": "infographic",
-      "robots_directives": "noindex,follow",
-      "include_in_sitemap": false,
-      "lastmod": "2026-08-08T20:46:38Z"
-    },
-    {
-      "output_filename": "infographic-4.html",
-      "canonical_url": "https://architectsofintent.com/infographic-4",
-      "title": "Infographic 4 — Testing the Loop as a Moat",
-      "description": "A visual test of whether verified loops produce a sustained advantage after their full cost.",
-      "kind": "infographic",
-      "robots_directives": "noindex,follow",
-      "include_in_sitemap": false,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "infographic-2.html",
@@ -268,7 +238,7 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
     },
     {
       "output_filename": "infographic-3.html",
@@ -278,7 +248,47 @@
       "kind": "infographic",
       "robots_directives": "noindex,follow",
       "include_in_sitemap": false,
-      "lastmod": "2026-08-08T20:46:38Z"
+      "lastmod": "2026-08-23T13:25:41Z"
+    },
+    {
+      "output_filename": "infographic-4.html",
+      "canonical_url": "https://architectsofintent.com/infographic-4",
+      "title": "Infographic 4 — Testing the Loop as a Moat",
+      "description": "A visual test of whether verified loops produce a sustained advantage after their full cost.",
+      "kind": "infographic",
+      "robots_directives": "noindex,follow",
+      "include_in_sitemap": false,
+      "lastmod": "2026-08-23T13:25:41Z"
+    },
+    {
+      "output_filename": "infographic-deck.html",
+      "canonical_url": "https://architectsofintent.com/infographic-deck",
+      "title": "Architects of Intent | Infographic Deck",
+      "description": "Presentation-style deck built from reusable infographic sections.",
+      "kind": "infographic",
+      "robots_directives": "noindex,follow",
+      "include_in_sitemap": false,
+      "lastmod": "2026-08-23T13:25:41Z"
+    },
+    {
+      "output_filename": "infographic.html",
+      "canonical_url": "https://architectsofintent.com/infographic",
+      "title": "Architects of Intent: Governed Workflow Systems",
+      "description": "Interactive infographic companion page for Architects of Intent.",
+      "kind": "infographic",
+      "robots_directives": "noindex,follow",
+      "include_in_sitemap": false,
+      "lastmod": "2026-08-23T13:25:41Z"
+    },
+    {
+      "output_filename": "infographic-deck-10.html",
+      "canonical_url": "https://architectsofintent.com/infographic-deck-10",
+      "title": "Architects of Intent | 10-Slide Deck",
+      "description": "Curated 10-slide presentation deck built from reusable infographic sections.",
+      "kind": "infographic",
+      "robots_directives": "noindex,follow",
+      "include_in_sitemap": false,
+      "lastmod": "2026-08-23T13:25:41Z"
     }
   ]
 }

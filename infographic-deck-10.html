@@ -68,7 +68,7 @@
 <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
 <div class="aoi-book-diagram__step">
 <span class="aoi-book-diagram__label">Observed state: Z<sub>n</sub></span>
-<p>The fixed base, current <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>, and adopted intent used for this run.</p>
+<p>The pinned base, current <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>, and adopted intent used for this run.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
@@ -77,8 +77,8 @@
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
-<span class="aoi-book-diagram__label">Sealed result</span>
-<p>A supported candidate, a no-op, an external block, or an evidenced failure.</p>
+<span class="aoi-book-diagram__label">Terminal result</span>
+<p>A supported proposal, <code>no_change</code>, <code>blocked</code>, or <code>failed</code>. The <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> is sealed.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
@@ -86,7 +86,7 @@
 <p><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> may apply a candidate. <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a> may change future intent or policy.</p>
 </div>
 </div>
-<p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit its own result.</p>
+<p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit or adopt its own result.</p>
 </figure>
 </section>
 </section><section aria-label="State → Run P( ) → New State" class="infographic-slide" data-infographic-section-id="i2-section-00-state-run-new-state" data-slide-index="1" role="group">
@@ -104,7 +104,7 @@
 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent">Shape of Work</span>
 </h1>
 <p class="text-xl text-cyber-muted max-w-xl leading-relaxed">
-                        The book develops a proposition: bounded workflows can compose when their authority, effects, evidence, and failure semantics remain explicit.
+                        The book develops a proposition: workflows can compose when their authority, effect limits, evidence, and failure semantics remain explicit.
                         <strong class="text-white">The <a class="concept-link" href="concepts#workflow" title="See concept: Workflow">workflow</a> system becomes part of the product.</strong>
 </p>
 </div>
@@ -484,7 +484,7 @@
 <figcaption class="aoi-book-diagram__header">
 <p class="aoi-book-diagram__eyebrow">Intent becomes proposed authority before it becomes active</p>
 <h3 class="aoi-book-diagram__title" id="mission-object-title">From Request to Activated Mission</h3>
-<p class="aoi-book-diagram__summary">AI may help translate an ordinary-language request into a formal work contract. That translation remains a draft until independent activation fixes its exact identity.</p>
+<p class="aoi-book-diagram__summary">AI may help draft the work contract. A protected binding step resolves its material references, final review evaluates that exact proposal, and separate authority activates its content-addressed identity.</p>
 </figcaption>
 <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
 <div class="aoi-book-diagram__step">
@@ -494,17 +494,17 @@
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
 <span class="aoi-book-diagram__label">2. Draft <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a></span>
-<p>A proposed objective, authority, effects, outputs, checks, budgets, routes, and admission policy.</p>
+<p>A proposed objective, authority, effects, outputs, checks, budgets, routes, and output-appropriate handoff.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="proposal">
+<span class="aoi-book-diagram__label">3. Bind and review</span>
+<p>Resolve material references to immutable identities, then evaluate the fully bound proposal against intent and policy.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
-<span class="aoi-book-diagram__label">3. Independent activation</span>
-<p>An authorized identity or adopted policy approves the exact contract and fixed base.</p>
-</div>
-<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
-<div class="aoi-book-diagram__step" data-tone="evidence">
-<span class="aoi-book-diagram__label">4. Governed run</span>
-<p>The workflow executes under the activated contract and records what actually happened.</p>
+<span class="aoi-book-diagram__label">4. Separate <a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a></span>
+<p>An authorized identity or adopted policy authorizes that exact content-addressed Mission identity.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__grid">
@@ -512,14 +512,14 @@
 <span class="aoi-book-diagram__label">Mission Object: instruction</span>
 <ul class="aoi-book-diagram__list">
 <li>Fixed during the run</li>
+<li>Fully bound before Activation</li>
 <li>States what may happen</li>
-<li>Cannot activate itself</li>
 </ul>
 </div>
 <div class="aoi-book-diagram__artifact">
-<span class="aoi-book-diagram__label"><a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>: history</span>
+<span class="aoi-book-diagram__label">Run Record: history</span>
 <ul class="aoi-book-diagram__list">
-<li>Records attempts and effects</li>
+<li>Records attempts, observations, and effects</li>
 <li>Retains findings and transitions</li>
 <li>Seals at every terminal result</li>
 </ul>
@@ -539,12 +539,12 @@
 <figcaption class="aoi-book-diagram__header">
 <p class="aoi-book-diagram__eyebrow">One probabilistic invocation</p>
 <h3 class="aoi-book-diagram__title" id="sandwich-title">The Deterministic Sandwich</h3>
-<p class="aoi-book-diagram__summary">Deterministic preparation fixes the request. One bounded probabilistic step proposes a candidate. Independent validation parses and checks the result.</p>
+<p class="aoi-book-diagram__summary">Deterministic preparation constructs the request. One probabilistic step proposes a candidate within named limits. Validation outside candidate authority parses and checks the result.</p>
 </figcaption>
 <div class="aoi-book-diagram__flow">
 <div class="aoi-book-diagram__step" data-tone="authority">
 <span class="aoi-book-diagram__label">1. Prepare</span>
-<p>Read the activated work contract, select bounded context, and construct one fixed input shape.</p>
+<p>Read the activated work contract, select a bounded <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a>, and construct the required input shape.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
@@ -554,7 +554,7 @@
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">3. Validate</span>
-<p>Parse strictly, check declared properties and effects, and emit structured findings.</p>
+<p>Parse strictly, check the Mission's properties and effects, and emit structured findings.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__grid">
@@ -567,12 +567,12 @@
 <p>The candidate produced by the probabilistic step and the findings returned about it.</p>
 </div>
 </div>
-<p class="aoi-book-diagram__note">A <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> result is evidence for routing. It is not admission, and a retry policy belongs to the enclosing workflow.</p>
+<p class="aoi-book-diagram__note">A <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> result is evidence for routing. It is not Admission or Adoption, and a retry policy belongs to the enclosing workflow.</p>
 </figure>
 </section>
 </section><section aria-label="A Validator Suite Produces Partial Evidence" class="infographic-slide" data-infographic-section-id="i3-section-04-validator-bundles" data-slide-index="8" role="group">
 <div class="infographic-slide__header">
-<span class="infographic-slide__title">A Validator Suite Produces Partial Evidence</span>
+<span class="infographic-slide__title">A Validator Suite Produces Partial <a class="concept-link" href="concepts#evidence" title="See concept: Evidence">Evidence</a></span>
 <span class="infographic-slide__meta">i3-section-04-validator-bundles</span>
 </div>
 <section aria-labelledby="validator-suite-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-04-validator-bundles" data-infographic-selector="main &gt; section:nth-of-type(5)" data-infographic-source="infographic-3.html" data-infographic-status="published">
@@ -610,7 +610,7 @@
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">Structured findings</span>
-<p>Pass, fail, inconclusive, or a declared reason the check could not run.</p>
+<p>Pass, fail, inconclusive, or a recorded reason the check could not run.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
@@ -636,20 +636,20 @@
 <div class="bg-cyber-dark rounded-xl p-10 md:p-16">
 <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Governed Loop Can Become a Moat</h2>
 <p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
-<span class="block">Intent becomes operational through an adopted Map and a bounded Mission:</span>
+<span class="block">Intent becomes operational through an adopted Map and an activated Mission:</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">intent + adopted map</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; bounded mission -&gt; candidate terrain</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; activated mission -&gt; candidate workspace</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-accent mt-3">candidate -&gt; findings</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; output checks -&gt; judge</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; canonical result -&gt; ledger</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-success mt-3"><a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> proposal</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; terminal result -&gt; ledger</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">supported proposal + sealed Run Record</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; <a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">mission gate</a></span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; admitted terrain</span>
 <span class="block mt-4 text-base md:text-lg">Evidence can support a future Map proposal. It cannot authorize one.</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-3">evidence -&gt; governed proposal</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; independent adoption</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-3">evidence -&gt; policy proposal</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; separate adoption</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; future map</span>
-<span class="block mt-4 text-base md:text-lg">A <a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> compounds only under a pinned measurement protocol, a protected non-regression floor, and independently admitted advancement.</span>
+<span class="block mt-4 text-base md:text-lg">A <a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> compounds only when each supported proposal is measured by the pinned protocol and transactional Admission commits the candidate and protected floor together.</span>
 <span class="block mt-4 text-base md:text-lg">Comparable recurring work must show that accumulated judgment improves outcomes after the full cost of controls and maintenance.</span>
 </p>
 <p class="text-cyber-accent font-semibold">History proposes. Authority adopts.</p>

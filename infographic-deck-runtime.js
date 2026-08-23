@@ -87,7 +87,7 @@
                     color: theme.primary,
                     box: { left: 16, top: 18, width: 68, height: 16 },
                     description:
-                        'Deterministically compile authority (Mission) and assemble a bounded context slice. Treat untrusted Terrain text as evidence with provenance.',
+                        'Compile the Mission authority reproducibly and assemble a bounded Context Packet. Treat untrusted Terrain text as evidence with provenance.',
                     detail:
                         'Prep converts intent into a typed mission packet the model can safely consume without improvising scope.',
                     point1:
@@ -100,7 +100,7 @@
                     color: theme.accent,
                     box: { left: 24, top: 42, width: 52, height: 14 },
                     description:
-                        'One bounded stochastic step. Its output remains a candidate; Validation supplies evidence about declared properties. The goal is not “trust the model,” but “trust the loop.”',
+                        'One probabilistic step works within a named scope. Its output remains a candidate; Validation supplies evidence about properties selected by the Mission.',
                     detail:
                         'The middle layer explores candidate patches or decisions inside the mission boundary; it does not commit.',
                     point1:
@@ -119,7 +119,7 @@
                     point1:
                         'Rejected outputs are discarded with receipts; no partial apply and no side-channel execution.',
                     point2:
-                        'Accepted outputs produce ledger evidence for replay, audit, rollback, and continuous process improvement.',
+                        'When the run ends complete, it records a supported proposal. The sealed Run Record supplies evidence for replay and audit.',
                 },
             };
 
@@ -1403,7 +1403,7 @@
                 const messages = [
                     'Compiling intent...',
                     'Running deterministic validators...',
-                    'Bounded effector active...',
+                    'Effect limits active...',
                     'Integration successful.'
                 ];
                 log.innerText = `Iteration #${iterationCount}: ${messages[iterationCount % messages.length]}`;
@@ -2262,7 +2262,7 @@
             const missionStatus = root.querySelector('#maintenanceMissionStatus');
             const candidate = root.querySelector('#maintenanceCandidate');
             const missionOutputsChecked = root.querySelector('#maintenanceMissionOutputsChecked');
-            const adoption = root.querySelector('#maintenanceAdoption');
+            const admission = root.querySelector('#maintenanceAdmission');
             const missionLedger = root.querySelector('#maintenanceMissionLedger');
             const gatePinned = root.querySelector('#maintenanceGatePinned');
             const gateEligibility = root.querySelector('#maintenanceGateEligibility');
@@ -2277,7 +2277,7 @@
                 findingsSlider, findingsValue, sensorToggle, eligibilityToggle, approvalToggle,
                 validatorToggle, runScanButton, runMissionButton, resetButton, scanSeal,
                 scanStatus, evaluated, selectedTarget, scanOutputsChecked, scanLedger,
-                missionSeal, missionStatus, candidate, missionOutputsChecked, adoption,
+                missionSeal, missionStatus, candidate, missionOutputsChecked, admission,
                 missionLedger, gatePinned, gateEligibility, gateReport, gateApproval,
                 gateValidators, gateProposal, outcome,
             ];
@@ -2381,9 +2381,9 @@
                 candidate.textContent = state.missionAttempt > 0 ? 'diff@sha256:85e1...' : 'none';
                 missionOutputsChecked.textContent = state.missionOutputsChecked ? 'true' : 'false';
                 missionOutputsChecked.style.color = state.missionOutputsChecked ? '#2ac3de' : '#e2e8f0';
-                adoption.textContent = state.missionTerminal === 'complete'
+                admission.textContent = state.missionTerminal === 'complete'
                     ? 'pending_review'
-                    : state.missionTerminal === 'failed_with_evidence' ? 'rejected' : 'not_applicable';
+                    : state.missionTerminal === 'failed' ? 'rejected' : 'not_applicable';
                 missionLedger.textContent = state.missionAttempt > 0
                     ? 'ledger/maintenance/missions/run-01/attempt-01.json'
                     : 'ledger/maintenance/missions/not-activated';
@@ -2408,21 +2408,21 @@
                 renderStages(displayMissionStatus);
 
                 if (state.missionTerminal === 'complete') {
-                    outcome.textContent = 'Mission complete and sealed. The checked proposal is still pending review.';
-                } else if (state.missionTerminal === 'failed_with_evidence') {
-                    outcome.textContent = 'Mission failed_with_evidence and sealed. The candidate is rejected; no adoption occurred.';
+                    outcome.textContent = 'The Mission ended complete with a supported proposal. Its Run Record is sealed; review remains pending.';
+                } else if (state.missionTerminal === 'failed') {
+                    outcome.textContent = 'The Mission ended failed. Its Run Record is sealed; the candidate is rejected and no Admission occurred.';
                 } else if (displayMissionStatus === 'ready') {
-                    outcome.textContent = 'The scan is sealed and an exact child Mission is activated. No candidate exists yet.';
+                    outcome.textContent = 'The scan Run Record is sealed and a content-addressed child Mission is activated. No candidate exists yet.';
                 } else if (displayMissionStatus === 'awaiting_approval') {
-                    outcome.textContent = 'The scan is sealed. The selected target cannot run until an exact child Mission is approved.';
+                    outcome.textContent = 'The scan Run Record is sealed. The selected target cannot run until a content-addressed child Mission is approved.';
                 } else if (state.scanStatus === 'blocked') {
-                    outcome.textContent = 'Scan blocked: a required Sensor is unavailable. No child Mission exists.';
-                } else if (state.scanStatus === 'complete_noop') {
-                    outcome.textContent = 'Scan complete_noop and sealed. The checked report contains no eligible work.';
+                    outcome.textContent = 'The scan ended blocked. Its Run Record is sealed; restore the required Sensor, then start a new linked scan.';
+                } else if (state.scanStatus === 'no_change') {
+                    outcome.textContent = 'The scan ended no_change. Its Run Record is sealed; the checked report contains no eligible work.';
                 } else if (state.scanStatus === 'complete') {
-                    outcome.textContent = 'Scan complete and sealed. Findings are recorded, but no child Mission was activated.';
+                    outcome.textContent = 'The scan ended complete. Its Run Record is sealed; findings are recorded, but no child Mission was activated.';
                 } else {
-                    outcome.textContent = 'No run activated. Scan authority and child-mission authority remain separate.';
+                    outcome.textContent = 'No child Mission is activated. Scan authority and child-Mission authority remain separate.';
                 }
             };
 
@@ -2434,6 +2434,7 @@
                     state.scanStatus = 'blocked';
                     state.scanOutputsChecked = false;
                     state.selectedTarget = null;
+                    state.scanSealed = true;
                     render();
                     return;
                 }
@@ -2443,7 +2444,7 @@
                     state.scanStatus = 'complete';
                     state.selectedTarget = 'target-01 · allowlisted hygiene';
                 } else {
-                    state.scanStatus = 'complete_noop';
+                    state.scanStatus = 'no_change';
                     state.selectedTarget = null;
                 }
                 state.scanSealed = true;
@@ -2454,7 +2455,7 @@
                 if (!state.selectedTarget || !state.approvalGranted || state.missionTerminal) return;
                 state.missionAttempt = 1;
                 state.missionOutputsChecked = true;
-                state.missionTerminal = state.validatorsPass ? 'complete' : 'failed_with_evidence';
+                state.missionTerminal = state.validatorsPass ? 'complete' : 'failed';
                 render();
             };
 

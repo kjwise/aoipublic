@@ -2,36 +2,36 @@
 
 <html lang="en">
 <head>
-<title>Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent</title>
+<title>Chapter 6 – Context Architecture | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" name="description"/>
+<meta content="Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" rel="canonical"/>
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
-<meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" property="og:title"/>
-<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" property="og:description"/>
+<meta content="Chapter 6 – Context Architecture | Architects of Intent" property="og:title"/>
+<meta content="Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
-<meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" property="og:image:alt"/>
+<meta content="Chapter 6 – Context Architecture | Architects of Intent" property="og:image:alt"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
-<meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" name="twitter:description"/>
+<meta content="Chapter 6 – Context Architecture | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
-<meta content="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 6 – Context Architecture (Why Slicing Matters)", "description": "Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "mainEntityOfPage": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT10M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<meta content="Chapter 6 – Context Architecture | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 6 – Context Architecture", "description": "Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "mainEntityOfPage": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT10M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -60,7 +60,7 @@
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
-Context Architecture (Why Slicing Matters)</h1>
+Context Architecture</h1>
 <p>Start with a failing tax case:</p>
 </div>
 </header>
@@ -81,10 +81,12 @@ history, and writable surfaces.</li>
     A[Anchor&lt;br/&gt;Failing case or target] --&gt; E[Expand&lt;br/&gt;Authority + evidence]
     E --&gt; P[Prune&lt;br/&gt;Scope + relevance + budgets]
     P --&gt; S[Bounded input]</code></pre>
-<p>Part I established a bounded loop. This chapter asks what that loop
-should receive. The answer is not the largest available prompt. It is
-the smallest reproducible input that contains the authority and evidence
-required for one bounded change.</p>
+<p>Part I established a bounded loop. Chapter 5 showed that useful
+refinement depends on feedback specific enough to guide a correction.
+This chapter asks what the loop should receive so it can act on that
+feedback without guessing. The answer is not the largest available
+prompt. It is the smallest reproducible input that contains the
+authority and evidence required for that change.</p>
 <p>Long context can still be useful, but capacity does not imply uniform
 use. In controlled multi-document question-answering and key-value
 retrieval experiments, performance often declined when relevant
@@ -128,7 +130,7 @@ explicit. They can retain contracts, decisions, incident findings, and
 provenance. They do not automatically preserve tacit judgment,
 apprenticeship, or the reasons people recognize a bad solution before a
 check does. Context Architecture should expose decision-bearing
-relationships without pretending that encoded context is <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>
+relationships without pretending that encoded context is complete
 institutional knowledge.</p>
 <h2 id="build-a-context-graph">Build a Context Graph</h2>
 <p>The larger structure behind one slice is a versioned relationship
@@ -143,25 +145,17 @@ steps, or incident records. Typed edges record why one source relates to
 another—for example, calls, depends on, implements, is documented by, or
 is checked by.</p>
 <p>Whatever its size, the graph needs stable identity, provenance,
-deterministic ordering, and explicit failure. Given the same declared
-source identities and extractor version, protected extraction should
-produce the same graph snapshot or fail loudly.</p>
-<p>Project identity and tooling should come from protected repository
-metadata rather than model inference. Manifests, ownership records,
-registered schemas, and policy identify whether a target belongs to
-code, documentation, infrastructure, or data, and which extraction and
-checking rules apply. File extensions alone are weak evidence: the same
-Markdown format may contain approved policy, generated reference
-material, or untrusted background text.</p>
-<blockquote>
-<p><strong>Fan-out heuristic:</strong> As a starting point, inspect
-conceptual layers whose immediate fan-out falls far outside roughly
-seven siblings, plus or minus two. High fan-out can hide the relevant
-relationship; repeated one-child layers can waste context on traversal.
-This is a mnemonic, not a cognitive law, repository invariant, or gate.
-Use evidence from actual packets before reorganizing source or enforcing
-a threshold.</p>
-</blockquote>
+deterministic ordering, and explicit failure. Given the same source
+identities and extractor version named by the Mission, extraction
+outside candidate authority should produce the same graph snapshot or
+fail loudly.</p>
+<p>Project identity and tooling should come from repository metadata
+outside candidate authority rather than model inference. Manifests,
+ownership records, registered schemas, and policy identify whether a
+target belongs to code, documentation, infrastructure, or data, and
+which extraction and checking rules apply. File extensions alone are
+weak evidence: the same Markdown format may contain approved policy,
+generated reference material, or untrusted background text.</p>
 <h2 id="assemble-a-context-packet">Assemble a Context Packet</h2>
 <p>Slicing then applies the same three moves used in the tax
 example:</p>
@@ -190,8 +184,9 @@ claims are not.</p>
 <tbody>
 <tr>
 <td>Identity</td>
-<td>The exact Mission, source revision, graph snapshot, extractor,
-slicer, and request-template identities</td>
+<td>The Mission; its bound source revision, graph snapshot, extractor,
+slicer, and request-template identities; and this packet instance’s
+content digest</td>
 </tr>
 <tr>
 <td>Anchor</td>
@@ -204,7 +199,7 @@ which selection began</td>
 grants that role</td>
 </tr>
 <tr>
-<td>Evidence</td>
+<td><a class="concept-link" href="concepts#evidence" title="See concept: Evidence">Evidence</a></td>
 <td>Which sources are observations only, with provenance, trust
 classification, and integrity identity</td>
 </tr>
@@ -230,23 +225,26 @@ candidate</td>
 </tr>
 </tbody>
 </table>
-<p>Given the same fixed inputs, the extractor and slicer must produce
-the same ordered packet or fail. Once used, the packet is immutable.
-Later findings may justify a new packet revision inside existing read
-authority. Changing authority, writable scope, budgets, or required
-checks requires a newly authorized Mission revision.</p>
+<p>Before final review and <a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a>, the Mission binds the source
+revision, graph snapshot, extractor, slicer, request template, selection
+rules, and read authority. Given those bindings, the extractor and
+slicer must produce the same ordered packet or fail. Once used, a packet
+instance is immutable. Later findings may justify a new packet instance
+only under the same bindings and existing read authority; record its new
+identity. Changing a binding, writable scope, budget, or required check
+requires a new Mission revision and <a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a>.</p>
 <p>Give each Context Packet and referenced source a stable, verified
 identity, such as a Git commit for repository content or a content
-digest for a packet. Once used by a run, those exact versions remain
+digest for a packet. Once used by a run, those versions remain
 immutable. Reuse their references across attempts instead of copying the
 same material into each attempt, and retain them long enough to
-reconstruct the exact input later. If required context cannot be
-resolved within read authority, preparation stops rather than silently
-widening the packet.</p>
+reconstruct the run input later. If a bound context reference cannot be
+loaded and verified within read authority, preparation stops rather than
+silently widening the packet.</p>
 <p>Before generation, preparation must establish that:</p>
 <ul>
-<li>the anchor resolves to the fixed source or evidence identity
-declared by the Mission;</li>
+<li>the anchor and its source or evidence identity match the bindings
+named by the Mission;</li>
 <li>authority and evidence remain distinct;</li>
 <li>read, write, and deny boundaries are explicit;</li>
 <li>required checking surfaces are present;</li>
@@ -266,11 +264,12 @@ contracts.</p>
 <h2 id="when-required-context-does-not-fit">When Required Context Does
 Not Fit</h2>
 <p>If all required context cannot fit, split the work along a real
-semantic boundary instead of dropping a required contract. Each smaller
-proposal must use the same fixed baseline. The workflow must also
-declare the proposal order, reject or govern overlapping edits, and
-validate the combined result. Local success does not establish that the
-combined candidate satisfies the required checks.</p>
+semantic boundary instead of dropping a required contract. If the
+activated Mission already declares that decomposition, each smaller
+candidate uses the same baseline, ordering, and overlap policy, and the
+workflow validates the combined result. Otherwise, stop and propose
+split Missions. Local success does not establish that the combined
+candidate satisfies the required checks.</p>
 <h2 id="when-the-slice-is-wrong">When the Slice Is Wrong</h2>
 <p>The opening tax case already shows why a concrete anchor matters. Two
 broader failure classes complete the picture:</p>
@@ -292,16 +291,16 @@ broader failure classes complete the picture:</p>
 <td>Too small</td>
 <td>The packet omits required authority, a failing case, a direct
 dependency, or a checking surface; the generator must guess.</td>
-<td>Reject the packet and add the missing material within existing read
-authority. If that requires new authority, revise the Mission or
-stop.</td>
+<td>Produce a new packet instance under the existing bindings and read
+authority. If the missing material is outside either, stop and propose a
+new Mission.</td>
 </tr>
 <tr>
 <td>Too large</td>
 <td>Irrelevant material dilutes the governing property and exposes
 unrelated surfaces, encouraging broad or unauthorized changes.</td>
-<td>Tighten relationships and budgets, or split the Mission without
-discarding required context.</td>
+<td>Produce a smaller packet under the existing selection rules and
+budget. If either must change, stop and propose a new Mission.</td>
 </tr>
 </tbody>
 </table>
@@ -320,7 +319,7 @@ design, specification, or schema supplies a prescriptive minimum
 scaffold: it fixes invariants and declares where implementation may
 expand. In Terrain-to-<a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> work, deterministic extraction supplies
 descriptive structure for exact comparison, aggregation, and bounded <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>
-proposals.</p>
+candidates.</p>
 <p>Typical skeleton surfaces include:</p>
 <ul>
 <li>signatures and interface contracts;</li>
@@ -328,13 +327,16 @@ proposals.</p>
 <li>test names and assertion surfaces;</li>
 <li>file paths, imports, and allowed edit regions.</li>
 </ul>
-<p>In Map-to-Terrain work, a skeleton can be deliberately incomplete: it
-fixes the top level and declares which content nodes may expand.
-Elaboration materializes permitted children downward. Once the leaves
-contain checked content, their results can be folded upward into derived
-parent views. The two operations may repeat at any depth allowed by the
-active specification.<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a> A changed descendant makes each
-dependent parent view stale.</p>
+<p>Return to the tax example. Suppose the adopted tax policy supplies a
+requirement hierarchy: the policy at the root, jurisdictions beneath it,
+and bracket and rate rules at the leaves. Those requirement nodes remain
+fixed authority for the run. The skeleton declares where permitted
+implementation and test children may be elaborated beneath them. Once
+each child is checked against its parent rule, the workflow can fold
+those results upward into derived jurisdiction summaries and then a
+policy-wide view. A changed rule or child result makes every dependent
+parent view stale. The same downward elaboration and upward aggregation
+may repeat at any depth allowed by the active specification.</p>
 <p>The expansion contract may begin as an outline or schema. If
 recurring cases reveal a stable grammar, a separate Map change may adopt
 a domain-specific language (DSL) that expresses nodes, expansion rules,
@@ -347,8 +349,8 @@ governed Workflow controls which operations may run, with what effects
 and checks. Their topologies need not match.</p>
 <p>Preparation and validation enforce the direction. A prescriptive
 skeleton accepts only declared expansions. A descriptive skeleton traces
-exact aggregates to <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> observations, while judgment-heavy summaries
-remain candidates. Traversal grants authority in neither case.</p>
+aggregates to <a class="concept-link" href="concepts#sensor" title="See concept: Sensor">Sensor</a> observations, while judgment-heavy summaries remain
+candidates. Traversal grants authority in neither case.</p>
 <section aria-labelledby="skeleton-first-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-infographic-selector="main &gt; section:nth-of-type(4)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-06-skeleton-first-rule</span>
 <style>
@@ -536,12 +538,12 @@ remain candidates. Traversal grants authority in neither case.</p>
 <div class="text-xs font-semibold">Normalized Terrain inventory</div>
 <div class="text-xs font-mono text-brand-strong">2 routes · 2 commands · 1 ownership rule</div>
 </div>
-<div class="mt-1 text-[10px] font-mono text-brand-muted">exact observation · source revision 8ac4e1 · no inferred rationale</div>
+<div class="mt-1 text-[10px] font-mono text-brand-muted">content-addressed observation · source revision 8ac4e1 · no inferred rationale</div>
 </div>
 <div class="mt-2 border border-dashed border-brand-border rounded-lg p-3">
 <div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Compare, then propose</div>
 <p class="mt-1 text-xs text-brand-muted leading-relaxed">
-          The updater compares this observation with the selected Map surface. Any bounded Map change, rationale, or judgment-heavy prose remains a proposal until separately reviewed and adopted.
+          The updater compares this observation with the selected Map surface. Any change to that surface, rationale, or judgment-heavy prose remains a proposal until separately reviewed and adopted.
         </p>
 </div>
 </article>
@@ -556,9 +558,9 @@ remain candidates. Traversal grants authority in neither case.</p>
 <p>Skeleton-First protects structure, not correctness. Context
 Architecture makes the authority and evidence slice used to construct or
 check that structure reproducible. In the tax example, it establishes
-exactly which rule, failing case, implementation surface, and direct
-dependency the generator received. The governed Workflow and its checks
-still decide whether the candidate satisfies the rule.</p>
+which rule, failing case, implementation surface, and direct dependency
+the generator received. The governed Workflow and its checks still
+decide whether the candidate satisfies the rule.</p>
 <p>With drift, refinement, and bounded context established, Part III can
 package work as explicit authority and compose these loops across
 recurring tasks.</p>
@@ -568,31 +570,25 @@ recurring tasks.</p>
 <li id="fn1"><p>Nelson F. Liu et al., “Lost in the Middle: How Language
 Models Use Long Contexts,” <em>Transactions of the Association for
 Computational Linguistics</em> 12 (2024): 157–173. <a href="https://aclanthology.org/2024.tacl-1.9/">Paper</a>.<a class="footnote-back" href="#fnref1" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>In functional programming, an unfold followed by a fold
-is called a hylomorphism. The analogy here describes content traversal,
-not authority, Workflow transitions, or admission. See Erik Meijer,
-Maarten Fokkinga, and Ross Paterson, “Functional Programming with
-Bananas, Lenses, Envelopes and Barbed Wire,” in <em>Functional
-Programming Languages and Computer Architecture</em> (1991). <a href="https://research.utwente.nl/files/6142049/meijer91functional.pdf">Paper</a>.<a class="footnote-back" href="#fnref2" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 6 of Architects of Intent: Context Architecture (Why Slicing Matters). Part I established a bounded loop. This chapter asks what that loop should…" data-share-title="Chapter 6 – Context Architecture (Why Slicing Matters) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…" data-share-title="Chapter 6 – Context Architecture | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
-<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;text=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;text=Chapter%206%20%E2%80%93%20Context%20Architecture%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters" rel="noopener noreferrer" target="_blank">f</a>
-<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;title=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%206%20%E2%80%93%20Context%20Architecture%20%28Why%20Slicing%20Matters%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%206%20of%20Architects%20of%20Intent%3A%20Context%20Architecture%20%28Why%20Slicing%20Matters%29.%20Part%20I%20established%20a%20bounded%20loop.%20This%20chapter%20asks%20what%20that%20loop%20should%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters">email</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters&amp;title=Chapter%206%20%E2%80%93%20Context%20Architecture%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%206%20%E2%80%93%20Context%20Architecture%20%7C%20Architects%20of%20Intent&amp;body=Chapter%206%20of%20Architects%20of%20Intent%3A%20Context%20Architecture.%20Part%20I%20established%20a%20bounded%20loop.%20Chapter%205%20showed%20that%20useful%20refinement%20depends%20on%20feedback%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-6-context-architecture-why-slicing-matters">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
 <a class="prev-link" href="chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping">← Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping</a>
-<a class="next-link" href="chapter-7-intent-as-code-mission-objects">Chapter 7 – Intent as Code (Mission Objects) →</a>
+<a class="next-link" href="chapter-7-intent-as-code-mission-objects">Chapter 7 – Mission Objects: From Intent to Activation →</a>
 </nav>
 <footer class="site-footer">
 <p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
@@ -611,7 +607,7 @@ Programming Languages and Computer Architecture</em> (1991). <a href="https://re
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

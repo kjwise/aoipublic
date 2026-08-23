@@ -123,7 +123,7 @@
 </div>
 <div class="rounded-xl border border-fm-border bg-fm-popover p-4">
 <div class="font-mono text-xs text-fm-mutedFg uppercase tracking-widest">Validate</div>
-<p class="mt-2 text-fm-mutedFg">Protected checks: schema, lint, types, tests.</p>
+<p class="mt-2 text-fm-mutedFg">Checks outside candidate authority: schema, lint, types, tests.</p>
 </div>
 <div class="rounded-xl border border-fm-border bg-fm-popover p-4">
 <div class="font-mono text-xs text-fm-mutedFg uppercase tracking-widest">Learn</div>
@@ -261,7 +261,7 @@
 <div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Rule of thumb</div>
 <p class="mt-2 text-sm text-fm-mutedFg">
 <span class="text-fm-fg font-semibold">Acceleration without structure</span> is just faster variance.
-                            Convergence requires protected evaluation, fixed routing, and finite stopping conditions.
+                            Convergence requires checks outside candidate authority, routes chosen before execution, and finite stopping conditions.
                         </p>
 </div>
 </div>
@@ -334,13 +334,13 @@
 <div aria-hidden="true" class="hidden md:flex items-center justify-center text-fm-mutedFg font-mono text-2xl px-2 opacity-80">→</div>
 <div class="rounded-xl border border-fm-border bg-fm-card p-5 md:p-6 min-h-[96px] flex flex-col justify-center">
 <div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Admitted <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a></div>
-<div class="mt-2 text-base font-semibold text-fm-fg">Evidence may support future intent</div>
+<div class="mt-2 text-base font-semibold text-fm-fg"><a class="concept-link" href="concepts#evidence" title="See concept: Evidence">Evidence</a> may support future intent</div>
 </div>
 </div>
 <div class="mt-6 rounded-xl border border-fm-border bg-fm-card p-4">
 <p class="text-sm text-fm-mutedFg">
-                            The goal isn’t a “smarter model.” It’s a system whose bounded changes,
-                            protected boundaries, independent evidence, and governed admission produce measurable value under declared conditions.
+                            The goal isn’t a “smarter model.” It’s a system that limits each change,
+                            checks it outside candidate authority, and uses a separate gate to decide what takes effect.
                         </p>
 </div>
 </div>
@@ -356,7 +356,7 @@
 <h2 class="mt-4 font-display text-3xl font-semibold tracking-tight">Autonomy needs an envelope</h2>
 <p class="mt-3 text-fm-mutedFg leading-relaxed">
                         When candidate output gets cheap, <span class="text-fm-fg font-semibold">the limiter can become verification</span>.
-                        Autonomy is delegated when retained evidence supports fixed policy, bounded effects, and independent admission.
+                        Autonomy is delegated when adopted policy limits effects, the <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> retains evidence, and a separate gate decides Admission.
                     </p>
 <div class="mt-6 rounded-xl border border-fm-border bg-fm-muted p-4">
 <div class="font-mono text-xs uppercase tracking-widest text-fm-mutedFg">Where you are</div>
@@ -878,7 +878,7 @@
                     }
                     if (envelopeLevel === 'low' && actions.length < 3) {
                         actions.push('Raise autonomy before you raise speed.');
-                        actions.push('Keep changes bounded (small diffs, clear evidence).');
+                        actions.push('Limit each change (small diffs, clear evidence).');
                     }
 
                     els.envelopeActions.replaceChildren(...actions.slice(0, 3).map((text) => {

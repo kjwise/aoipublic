@@ -2,36 +2,36 @@
 
 <html lang="en">
 <head>
-<title>Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent</title>
+<title>Chapter 2 – The Deterministic Sandwich | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…" name="description"/>
+<meta content="Chapter 2 of Architects of Intent: The Deterministic Sandwich. Chapter 1 used a deterministic renderer because the transformation was fully specified:…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern" rel="canonical"/>
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
-<meta content="Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent" property="og:title"/>
-<meta content="Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…" property="og:description"/>
+<meta content="Chapter 2 – The Deterministic Sandwich | Architects of Intent" property="og:title"/>
+<meta content="Chapter 2 of Architects of Intent: The Deterministic Sandwich. Chapter 1 used a deterministic renderer because the transformation was fully specified:…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
-<meta content="Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent" property="og:image:alt"/>
+<meta content="Chapter 2 – The Deterministic Sandwich | Architects of Intent" property="og:image:alt"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
-<meta content="Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…" name="twitter:description"/>
+<meta content="Chapter 2 – The Deterministic Sandwich | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 2 of Architects of Intent: The Deterministic Sandwich. Chapter 1 used a deterministic renderer because the transformation was fully specified:…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
-<meta content="Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 2 – The Deterministic Sandwich (Your First Pattern)", "description": "Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "mainEntityOfPage": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT8M", "articleSection": "Part I – Building a Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<meta content="Chapter 2 – The Deterministic Sandwich | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 2 – The Deterministic Sandwich", "description": "Chapter 2 of Architects of Intent: The Deterministic Sandwich. Chapter 1 used a deterministic renderer because the transformation was fully specified:…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "mainEntityOfPage": "https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT9M", "articleSection": "Part I – The Minimal Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -55,60 +55,94 @@
 <main class="content content--chapter" id="main">
 <header class="chapter-header">
 <div class="chapter-kicker">
-<div class="part-title">Part I – Building a Governed Loop</div>
-<div class="chapter-meta"><span class="read-time">8 min read</span></div>
+<div class="part-title">Part I – The Minimal Governed Loop</div>
+<div class="chapter-meta"><span class="read-time">9 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-2-the-deterministic-sandwich-your-first-pattern">Chapter
-2 – The Deterministic Sandwich (Your First Pattern)</h1>
-<p>Chapter 1 traced a minimal loop that stayed in bounds because every
-step was deterministic. This chapter shows what changes when one of
-those steps uses a foundation model.</p>
-<p>Start with one failed attempt and one correction. Deterministic Prep
-extracts the exact Terrain signatures and the only Map block the run may
-change. The first model attempt adds annotations that are absent from
-Terrain, so deterministic Validation rejects the candidate and returns
-that exact mismatch.</p>
-<p>On the second attempt, the model uses the extracted signatures
-without invention. Validation confirms correspondence and scope, then
-seals the proposal. A separate adoption step rechecks the current Map
-state before applying it.</p>
-<p>This is the Chapter 1 loop with a different worker. Intent, scope,
-evidence requirements, routing, sealing, and separate adoption stay
-fixed; candidate generation becomes probabilistic. The Validator is
-still decisive for this one-property loop because each evidence class
-has one declared destination. That is the whole pattern in miniature:
-one probabilistic step pinned between deterministic layers.</p>
-<p>That loop can propose a diff and stop on <code>PASS/FAIL</code>. To
-include a model safely, it needs the same deterministic boundaries.
-Large language models (LLMs) drift. Ask for the same task twice and you
-can get a different diff. In production, that variance is where
-regressions hide.</p>
-<p>Longer instructions alone are not the fix. The architectural fix is
-structure: <code>Prep</code> -&gt; <code>Model</code> -&gt;
-<code>Validation</code>. That structure is the <strong>Deterministic
-Sandwich</strong>.</p>
+2 – The Deterministic Sandwich</h1>
+<p>Chapter 1 used a deterministic renderer because the transformation
+was fully specified: reproduce an extracted inventory exactly. Replacing
+that renderer with a model would add variance without adding judgment—an
+expensive renderer with a creative streak.</p>
+<p>This chapter keeps the renderer and adds one bounded editorial
+choice. The Map gains a short <code>Usage</code> block. Deterministic
+Prep supplies the exact signatures, several pinned behavioral cases, the
+explanatory objective, and the permitted edit region. The model may
+select and arrange one example that shows the two functions interacting;
+it may not rewrite the inventory or invent behavior.</p>
+<p>Suppose the pinned tests establish four observations, forming two
+eligible example pairs:</p>
 </div>
 </header>
+<pre class="text"><code>normalize_country(" is ") == "IS"
+calculate_tax(100, "IS", 0.24) == 24
+normalize_country(" us ") == "US"
+calculate_tax(64, "US", 0.25) == 16</code></pre>
+<p>The first model attempt selects the Iceland case but writes
+<code>24</code> where the supplied rate is <code>0.24</code>. The
+example is syntactically plausible and stays inside the permitted block.
+Execution against the pinned source produces <code>2400</code>, not
+<code>24</code>, so deterministic Validation rejects it with an
+<code>EXAMPLE_ASSERTION_FAILED</code> finding.</p>
+<p>The second attempt composes the first pair of pinned
+observations:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a>country <span class="op">=</span> normalize_country(<span class="st">" is "</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" href="#cb2-2" tabindex="-1"></a>tax <span class="op">=</span> calculate_tax(<span class="dv">100</span>, country, <span class="fl">0.24</span>)</span>
+<span id="cb2-3"><a aria-hidden="true" href="#cb2-3" tabindex="-1"></a><span class="cf">assert</span> country <span class="op">==</span> <span class="st">"IS"</span></span>
+<span id="cb2-4"><a aria-hidden="true" href="#cb2-4" tabindex="-1"></a><span class="cf">assert</span> tax <span class="op">==</span> <span class="dv">24</span></span></code></pre></div>
+<p>Validation confirms that the example uses the extracted signatures,
+executes against the pinned source, derives its claims from the selected
+tests, and changes only the permitted block. Proposal closure ends the
+run <code>complete</code> with a supported proposal, and the runtime
+seals the <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>. A separate <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a> event rechecks the current <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>
+state and makes the exact candidate authoritative. Any earlier staging
+remains non-authoritative.</p>
+<p>This extends the <a class="chapter-link" href="chapter-1-a-minimal-governed-loop#chapter-1-a-minimal-governed-loop" title="Go to: Chapter 1">Chapter 1</a> loop without surrendering its
+deterministic work. The exact inventory remains mechanically rendered;
+only the judgment-bearing example becomes probabilistic. Once the
+extended Mission is activated, its intent, scope, evidence requirements,
+routing, Run Record sealing, and separate Adoption remain fixed across
+both attempts. The <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> is still decisive because each evidence
+class has one declared destination.</p>
+<p>The checks establish grounding, execution, and scope. They do not
+establish that the example is the clearest possible explanation.
+Choosing among several supported cases and arranging one compact
+explanation remains judgment-bearing work. If policy fully specifies
+that choice as well, a deterministic renderer is again the better tool.
+The result is the pattern in miniature: one probabilistic choice pinned
+between deterministic stages.</p>
+<p>The loop can propose a diff and stop on <code>PASS/FAIL</code>. Its
+authority and effect limits remain unchanged when it gains a
+probabilistic step. Deterministic Prep and Validation make input
+construction and output evaluation repeatable; they reject outputs that
+violate the declared contract. Large language models (LLMs) vary: the
+same task can produce a different diff on another attempt. In
+production, regressions hide in that variance.</p>
+<p>Longer instructions alone are not the fix. The architectural fix is
+structure: <code>Prep</code> -&gt; <code>Model</code> -&gt;
+<code>Validation</code>. That structure is the <strong><a class="concept-link" href="concepts#deterministic-sandwich" title="See concept: Deterministic
+Sandwich">Deterministic
+Sandwich</a></strong>.</p>
 <h2 id="the-deterministic-sandwich-prep-model-validation">The
 Deterministic Sandwich: Prep, Model, Validation</h2>
-<p>The Deterministic Sandwich is the simplest reusable pattern for
-bounding one probabilistic invocation in a production loop. The pattern
-has three parts. In this teaching case, the invocation is one model call
-inside the <strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a></strong>, pinned between two deterministic
-layers:</p>
+<p>The Deterministic Sandwich places one probabilistic invocation
+between reproducible input preparation and deterministic output
+validation. The larger workflow supplies the authority and effect
+boundary. In this teaching case, one model call inside the
+<strong><a class="concept-link" href="concepts#effector" title="See concept: Effector">Effector</a></strong> sits between the two deterministic layers:</p>
 <section aria-labelledby="sandwich-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-03-deterministic-sandwich" data-infographic-selector="main &gt; section:nth-of-type(3)" data-infographic-source="infographic-3.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-03-deterministic-sandwich</span>
 <figure class="aoi-book-diagram">
 <figcaption class="aoi-book-diagram__header">
 <p class="aoi-book-diagram__eyebrow">One probabilistic invocation</p>
 <h3 class="aoi-book-diagram__title" id="sandwich-title">The Deterministic Sandwich</h3>
-<p class="aoi-book-diagram__summary">Deterministic preparation fixes the request. One bounded probabilistic step proposes a candidate. Independent validation parses and checks the result.</p>
+<p class="aoi-book-diagram__summary">Deterministic preparation constructs the request. One probabilistic step proposes a candidate within named limits. Validation outside candidate authority parses and checks the result.</p>
 </figcaption>
 <div class="aoi-book-diagram__flow">
 <div class="aoi-book-diagram__step" data-tone="authority">
 <span class="aoi-book-diagram__label">1. Prepare</span>
-<p>Read the activated work contract, select bounded context, and construct one fixed input shape.</p>
+<p>Read the activated work contract, select a bounded <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a>, and construct the required input shape.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
@@ -118,7 +152,7 @@ layers:</p>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">3. Validate</span>
-<p>Parse strictly, check declared properties and effects, and emit structured findings.</p>
+<p>Parse strictly, check the Mission's properties and effects, and emit structured findings.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__grid">
@@ -131,7 +165,7 @@ layers:</p>
 <p>The candidate produced by the probabilistic step and the findings returned about it.</p>
 </div>
 </div>
-<p class="aoi-book-diagram__note">A <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> result is evidence for routing. It is not admission, and a retry policy belongs to the enclosing workflow.</p>
+<p class="aoi-book-diagram__note">A Validator result is evidence for routing. It is not <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> or Adoption, and a retry policy belongs to the enclosing workflow.</p>
 </figure>
 </section>
 <ol type="1">
@@ -140,20 +174,21 @@ the request, builds a bounded context slice, and keeps untrusted
 evidence separate from actual instructions. It takes structured data and
 produces a structured model request.</p></li>
 <li><p><strong>Model</strong>: The single bounded model call. In this
-minimal sandwich, it is the only unpredictable step, so you keep its
-surface area small.</p></li>
+minimal sandwich, it is the only unpredictable step, so its surface area
+remains small.</p></li>
 <li><p><strong>Validation</strong>: A deterministic gate. It strictly
 parses the model output and runs Validators. It accepts the output
-<em>only if</em> it matches the rules you defined.</p></li>
+<em>only if</em> it matches the declared rules.</p></li>
 </ol>
-<p>Think of it like building a reliable wrapper around a flaky external
-service. You control what goes in, you control how you read what comes
-out, and you reject anything that breaks the contract.</p>
+<p>The pattern resembles a reliable wrapper around a flaky external
+service. Prep controls what enters the service, Validation controls how
+its output is interpreted, and anything that breaks the contract is
+rejected.</p>
 <p><code>Prep</code> and <code>Validation</code> are both deterministic,
 but they guard different boundaries. <code>Prep</code> controls inputs;
 <code>Validation</code> controls outputs. The model remains one bounded
 Effector between them.</p>
-<p>Deterministic execution does not imply a <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> specification. A
+<p>Deterministic execution does not imply a complete specification. A
 Validator can return the same answer every time and still check the
 wrong rule or miss an important case. <a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a> owns that problem; here
 the requirement is simply that the model cannot bypass the checks that
@@ -166,21 +201,26 @@ the same inputs. It tags repository content, tickets, logs, chat, and
 prior findings as provenance-bearing evidence rather than instructions.
 Mixing those channels lets hostile or accidental prose compete with the
 actual rules.</p>
-<p>For the <a class="chapter-link" href="chapter-1-a-minimal-governed-loop#chapter-1-a-minimal-governed-loop" title="Go to: Chapter 1">Chapter 1</a> doc sync, <code>Prep</code> needs only the
-extracted signatures, the permitted <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> block, and any normalized
-Validator finding. Start from that anchor, add direct dependencies, and
-prune everything else. Extract structural facts such as signatures and
-routes deterministically; let the model generate only bounded content
-around that skeleton.</p>
+<p>For this extension of the Chapter 1 doc sync, <code>Prep</code> needs
+only the extracted signatures, selected behavioral cases, bounded
+explanatory objective, permitted <code>Usage</code> block, and any
+normalized Validator finding. The deterministic renderer handles the
+signature inventory before the model runs. Structural facts remain
+mechanical; the model receives only the evidence needed to choose and
+arrange an example.</p>
 <p>The failure mode is <strong>Map Contamination</strong>: invented
-structure enters a Map, then later runs consume the invention as fact.
-Prevent it by comparing the candidate skeleton with a fresh
-deterministic extraction and failing on mismatch.</p>
+structure or behavior enters a Map, then later runs consume the
+invention as fact. Validation therefore compares referenced signatures
+with a fresh extraction, executes the example against the pinned source,
+compares its claims with the selected cases, and fails on any
+mismatch.</p>
 <h3 id="model-the-probabilistic-step-in-the-minimal-sandwich">2. Model:
 The probabilistic step in the minimal sandwich</h3>
-<p>Within this minimal sandwich, candidate generation is the only
-probabilistic step. Ask for a declared shape, such as a unified diff or
-strict JSON, and treat the result as an untrusted candidate.</p>
+<p>Within this minimal sandwich, selecting and arranging the usage
+example is the only probabilistic step. The request requires a declared
+shape, such as a unified diff or strict JSON, and the result remains an
+untrusted candidate. Fully specified transformations stay outside the
+model call.</p>
 <p>That is a property of this teaching pattern, not a rule that larger
 workflows contain only one probabilistic step. A larger workflow may
 arrange several such steps sequentially, conditionally, or in
@@ -193,7 +233,7 @@ property, the affected surface or location when available, a
 machine-readable reason, and the evidence supporting it. Chapter 3 owns
 that finding contract; Chapter 5 owns retry and stopping policy.</p>
 <p>The failed first attempt in this trace shows why the finding must
-name the exact mismatch without changing target or scope. A later
+name the assertion failure without changing target or scope. A later
 attempt may receive that finding as evidence, but Chapter 5 owns the
 retry and stopping policy.</p>
 <h2 id="beyond-one-model-call">Beyond One Model Call</h2>
@@ -201,41 +241,31 @@ retry and stopping policy.</p>
 a loop. A workflow is the finite governed graph of steps. A loop is the
 declared repetition of a step, a subsequence, or the complete workflow.
 Continuous operation is therefore a sequence of finite runs with fixed
-authority, terminal outcomes, and sealed evidence, not one immortal run
-whose state and rules drift indefinitely.</p>
-<p>A step may invoke a model or tool directly, or it may invoke an agent
-harness through a command-line interface (CLI) or application
-programming interface (API). The CLI or API is the invocation and
-control surface, not a separate kind of worker. An agent harness
-surrounds model-and-tool work. Within its declared inputs and read
-authority, it manages working context, tool use, bounded internal
-iteration, and result production. Thus <code>make lint</code> can expose
-a deterministic check through a CLI, while a Codex CLI invocation can
-expose a coding-agent harness rather than a single deterministic
-command.</p>
-<p>A harness names a role at a boundary, not a fixed architectural
-layer. From the enclosing workflow’s viewpoint, it is one bounded
-component. The activated Mission fixes the step’s authority, permitted
-effects, budget, and required evidence; the workflow governs its
-transitions and the results it may consume; the protected runtime
-enforces those boundaries. An agent harness may invoke smaller
-harnesses, but authority does not implicitly propagate: each nested
-component remains inside the authority granted at its enclosing
-boundary, and its result cannot confer new authority. Classify the step
-by its declared behavior, effects, and evidence contract rather than its
-invocation surface.</p>
-<p>A component with its own finite governed lifecycle and sealed result
-can act as a child workflow. Otherwise, its outputs and attempted
-effects remain untrusted at the parent boundary.</p>
-<p>Several such steps can form a chain across representations: intent
-into a work contract, a contract and <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a> into a code
-candidate, or formal artifacts into proposed documentation. Each step
-proposes only its declared transformation. Its output contract and
-independent checks determine which correspondence claims the enclosing
-workflow may rely on.</p>
-<p>Larger workflows may also use model-based Validators or Judges.
-Deterministic runtime boundaries still enforce evidence, scope, budgets,
-allowed transitions, and separate admission.</p>
+authority, terminal outcomes, and sealed Run Records, not one immortal
+run whose state and rules drift indefinitely.</p>
+<p>The same pattern can wrap a larger worker exposed through a
+command-line interface (CLI) or application programming interface (API).
+From the enclosing workflow’s viewpoint, that worker remains one bounded
+component with declared inputs, effects, budget, output, and evidence.
+This book calls a worker that manages model-and-tool use inside that
+boundary an agent harness; a component with its own finite governed
+lifecycle is a child workflow. Part III develops the contracts that make
+such components reusable; <a class="chapter-link" href="chapter-14-implications-for-delegated-automation#chapter-14-implications-for-delegated-automation" title="Go to: Chapter 14">Chapter 14</a> develops nesting and local
+acceptance.</p>
+<p>The <strong><a class="concept-link" href="concepts#admission-horizon" title="See concept: Admission Horizon">Admission Horizon</a></strong> is the property-specific
+boundary at which an exact candidate becomes effective in <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>.
+Recursive composition can push that boundary outward for a selected
+<a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> property by keeping supported child outputs provisional as
+parent inputs. This can concentrate human attention on a later,
+higher-consequence Admission. Admission remains an authority event and
+need not be manual: adopted policy may authorize lower-risk Admissions
+without a new human decision.</p>
+<p>That deferral applies only while the intermediate output remains
+provisional for the relevant Terrain property. A staging deployment,
+publication, shared-state mutation, resource use, data access, network
+call, notification, or other external action is already an effect. It
+must be authorized and enforced at its declared effect boundary. A later
+Admission cannot relabel an earlier effect as provisional.</p>
 <h2 id="when-slicing-goes-wrong">When Slicing Goes Wrong</h2>
 <p>The previous example assumed good context. Here’s what it looks like
 when the slice is bad.</p>
@@ -246,10 +276,11 @@ candidate touched both the permitted interface block and an undeclared
 notes section.</p>
 <p>The diagnosis is not “bad model behavior.” The slice included
 adjacent material that looked like instructions or editable scope even
-though the task did not authorize changes there. Change the slice:
-include only the extracted skeleton and allowed edit region. <a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a>
-names the broader context-quality objective and develops the full
-method.</p>
+though the task did not authorize changes there. Produce a new Context
+Packet under the Mission’s fixed bindings, containing only the extracted
+skeleton and allowed edit region. If those bindings cannot produce the
+required packet, stop and propose a new Mission. <a class="chapter-link" href="chapter-6-context-architecture-why-slicing-matters#chapter-6-context-architecture-why-slicing-matters" title="Go to: Chapter 6">Chapter 6</a> names the
+broader context-quality objective and develops the full method.</p>
 <h2 id="when-the-pattern-is-worth-it">When the Pattern Is Worth It</h2>
 <p>The Sandwich is worthwhile when work repeats, persists, has material
 blast radius, crosses team boundaries, or can be judged by an actionable
@@ -275,29 +306,29 @@ boundary does not.</p>
 <p>The Sandwich is therefore more than a safe model wrapper. Its stable
 contracts let it become a dependable step in a larger workflow. A
 malformed output or out-of-scope effect must fail before application;
-only the candidate may vary while the surrounding authority, checks, and
-evidence contract remain fixed.</p>
-<p>The organizational consequence is that proposal volume can increase
-without giving every proposal a direct path to production. The
+only the candidate may vary while the surrounding authority, acceptance
+protocol, and evidence contract remain fixed.</p>
+<p>The organizational consequence is that candidate volume can increase
+without giving every candidate a direct path to production. The
 surrounding process, rather than the probabilistic step, continues to
 determine what evidence is required and what may advance.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 2 of Architects of Intent: The Deterministic Sandwich (Your First Pattern). Chapter 1 traced a minimal loop that stayed in bounds because every step…" data-share-title="Chapter 2 – The Deterministic Sandwich (Your First Pattern) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 2 of Architects of Intent: The Deterministic Sandwich. Chapter 1 used a deterministic renderer because the transformation was fully specified:…" data-share-title="Chapter 2 – The Deterministic Sandwich | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-2-the-deterministic-sandwich-your-first-pattern" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
-<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-2-the-deterministic-sandwich-your-first-pattern&amp;text=Chapter%202%20%E2%80%93%20The%20Deterministic%20Sandwich%20%28Your%20First%20Pattern%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-2-the-deterministic-sandwich-your-first-pattern&amp;text=Chapter%202%20%E2%80%93%20The%20Deterministic%20Sandwich%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-2-the-deterministic-sandwich-your-first-pattern" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-2-the-deterministic-sandwich-your-first-pattern" rel="noopener noreferrer" target="_blank">f</a>
-<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-2-the-deterministic-sandwich-your-first-pattern&amp;title=Chapter%202%20%E2%80%93%20The%20Deterministic%20Sandwich%20%28Your%20First%20Pattern%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%202%20%E2%80%93%20The%20Deterministic%20Sandwich%20%28Your%20First%20Pattern%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%202%20of%20Architects%20of%20Intent%3A%20The%20Deterministic%20Sandwich%20%28Your%20First%20Pattern%29.%20Chapter%201%20traced%20a%20minimal%20loop%20that%20stayed%20in%20bounds%20because%20every%20step%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-2-the-deterministic-sandwich-your-first-pattern">email</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-2-the-deterministic-sandwich-your-first-pattern&amp;title=Chapter%202%20%E2%80%93%20The%20Deterministic%20Sandwich%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%202%20%E2%80%93%20The%20Deterministic%20Sandwich%20%7C%20Architects%20of%20Intent&amp;body=Chapter%202%20of%20Architects%20of%20Intent%3A%20The%20Deterministic%20Sandwich.%20Chapter%201%20used%20a%20deterministic%20renderer%20because%20the%20transformation%20was%20fully%20specified%3A%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-2-the-deterministic-sandwich-your-first-pattern">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
 <a class="prev-link" href="chapter-1-a-minimal-governed-loop">← Chapter 1 – A Minimal Governed Loop</a>
-<a class="next-link" href="chapter-3-define-good-your-first-validators">Chapter 3 – Define “Good” (Your First Validators) →</a>
+<a class="next-link" href="chapter-3-define-good-your-first-validators">Chapter 3 – Validators: What Checks Can Establish →</a>
 </nav>
 <footer class="site-footer">
 <p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
@@ -316,7 +347,7 @@ determine what evidence is required and what may advance.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

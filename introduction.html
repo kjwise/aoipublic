@@ -24,14 +24,14 @@
 <meta content="Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Introduction | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Introduction", "description": "Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/introduction", "mainEntityOfPage": "https://architectsofintent.com/introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT15M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Introduction", "description": "Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/introduction", "mainEntityOfPage": "https://architectsofintent.com/introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT15M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -76,8 +76,8 @@ candidate that appears to corroborate itself.</p>
 <p>Saturday morning, client requests begin failing.</p>
 <p>Previously released clients still expect an array. The candidate
 changed the implementation and the evidence inside its own scope, but
-nothing compared the proposed response with the last released
-interface—the independently admitted compatibility baseline.</p>
+nothing compared the proposed response with the independently adopted
+compatibility contract for the last released interface.</p>
 </div>
 </header>
 <div class="sourceCode" id="cb1"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="kw">--- a/openapi.yaml</span></span>
@@ -103,22 +103,59 @@ candidate-controlled checks. A human can make the same mistake. AI
 changes the economics of that mistake: one assumption can spread across
 many plausible artifacts in seconds and return as a convincing green
 result.</p>
-<p>Now place the same change inside a governed workflow. Activated
-intent requires compatibility with the released response contract. The
-pinned contract baseline and compatibility <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> remain outside
-candidate authority, while generated tests count as supporting evidence.
-The first candidate fails because released clients cannot consume the
+<p>Now place the same change inside a governed workflow. Before edits
+begin, the team fixes the intended result, the released compatibility
+baseline, the evidence required, and the limits on what may change. A
+separate approval authorizes that exact work. The baseline and required
+check remain outside candidate authority, while generated tests may
+still supply supporting evidence.</p>
+<p>The first candidate fails because released clients cannot consume the
 new envelope. That finding returns while intent and scope stay fixed. A
-corrected candidate preserves compatibility, passes the protected check,
-and becomes a sealed proposal. A separate current-base admission
-decision determines whether it is merged.</p>
+corrected candidate preserves compatibility and passes the required
+check. The book calls the protected check a <strong><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a></strong>.
+It calls the record of the authorized run and its evidence a <strong>Run
+Record</strong>; the runtime seals that record when the run reaches a
+terminal result. The run ends <code>complete</code> with a supported
+proposal. A separate decision against the current base determines
+whether the exact change is merged. The book calls that decision
+<strong><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a></strong>.</p>
+<p>An architect of intent designs the system by which human intent
+becomes bounded authority for execution, together with the mechanisms
+and workflows that interpret, constrain, test, authorize, and enact
+it.</p>
+<p>This is higher-level programming: natural language joined to
+engineering discipline several layers above the compiler. AI enables the
+mapping between intent, context, candidate action, and evidence, but
+remains one component within the governed system.</p>
+<p>As implementation becomes increasingly generative, the engineering
+problem moves upward. Intent must increasingly be made explicit,
+executable, testable, governable, and connected to consequence. Work
+once coordinated primarily through organizational handoffs can
+increasingly be expressed within a shared architecture of intent.</p>
 <h2 id="the-architecture-in-brief">The Architecture in Brief</h2>
 <p>Treat the change process itself as a versioned engineering artifact.
-Its work contract states the intended result, who or what has authority,
-what may change, and which evidence is required. The runtime enforces
-permitted effects, transitions, and stopping rules. A separate gate
-decides whether the candidate becomes effective, and each run leaves
-enough evidence to reconstruct that decision.</p>
+A <strong><a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a></strong> records the intended result, delegated
+authority, permitted effects, required evidence, budgets, and stopping
+rules. <strong><a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a></strong> authorizes one exact Mission
+identity. Execution can then produce candidates and evidence, but not
+make its own result effective. A supported proposal remains provisional
+until separate authority admits it into the system being changed—the
+<strong><a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a></strong>—or adopts it as an authoritative
+<strong><a class="concept-link" href="concepts#map" title="See concept: Map">Map</a></strong> or policy.</p>
+<h3 id="the-engineering-trust-spine">The Engineering Trust Spine</h3>
+<p>The book calls this causal frame the <strong><a class="concept-link" href="concepts#engineering-trust-spine" title="See concept: Engineering Trust
+Spine">Engineering Trust
+Spine</a></strong>:</p>
+<p><strong>intent → compilation → binding → review → Activation →
+preflight → bounded execution → validation → recorded findings/<a class="concept-link" href="concepts#evidence" title="See concept: Evidence">evidence</a>
+→ policy-bound decision → terminal result/proposal closure → Admission
+or <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a></strong></p>
+<p>Named principals remain accountable for adopted intent, policy, and
+delegated authority throughout. A protected, logically append-only
+record makes authorization, execution, findings, decisions, and later
+authority events reconstructable. The book calls that record the
+<strong><a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a></strong>. It does not create, transfer, or erase
+accountability.</p>
 <p>This book develops that architecture through software change, where
 the problem is acute and the mechanisms can be made precise. The same
 distinctions may inform other high-rate domains, but each domain must
@@ -127,62 +164,57 @@ supply its own authority, evidence, effects, and admission rules.</p>
 makes selected product checks repeatable. Software Development as Code
 (SDaC) makes selected properties of the change process explicit and
 enforceable.</p>
-<p>Follow the arrows: express intent, produce one bounded candidate,
-gather independent evidence, and seal a successful proposal. Applying
-that proposal is a separate authorized decision. A finding can support
-another bounded attempt or an evidenced stop; it cannot widen
-authority.</p>
 <pre class="mermaid"><code>flowchart TD
-  I["Declared intent"] --&gt; C["Bounded candidate"]
-  C --&gt; E["Independent evidence"]
-  E --&gt;|"sufficient"| S["Sealed proposal"]
-  S --&gt; A["Separate admission"]
-  E --&gt;|"finding"| R["Refine next candidate&lt;br/&gt;or seal evidenced stop"]</code></pre>
-<p>Caption: The generator may sit inside candidate production, but the
-architecture begins with declared intent and ends with independent
-admission. Evidence can justify refinement or closure; it cannot
-authorize its own effect.</p>
+  I["Intent"] --&gt; C["Compilation"]
+  C --&gt; B["Binding"]
+  B --&gt; R["Review"]
+  R --&gt; A["Activation"]
+  A --&gt; P["Preflight"]
+  P --&gt; X["Bounded execution"]
+  X --&gt; V["Validation"]
+  V --&gt; E["Recorded findings&lt;br/&gt;and evidence"]
+  E --&gt; D{"Policy-bound decision"}
+  D --&gt;|"refine within Mission"| X
+  D --&gt;|"close"| T["Terminal result&lt;br/&gt;proposal closure if applicable&lt;br/&gt;Run Record sealed"]
+  T --&gt;|"supported output, if applicable"| H{"Separate handoff"}
+  H --&gt; M["Admission"]
+  H --&gt; O["Adoption"]</code></pre>
+<p>Caption: <a class="concept-link" href="concepts#intent-compilation" title="See concept: Intent Compilation">Intent Compilation</a> proposes structure; binding resolves
+material references; review evaluates the fully bound proposal; and
+Activation authorizes one exact Mission identity. Preflight verifies
+only that the already-authorized identity and its bound dependencies
+remain present, intact, and executable. Bounded execution produces a
+candidate for validation. The resulting findings and evidence enter a
+policy-bound decision, which may route refinement or close the run with
+a terminal result and, where applicable, proposal closure. Admission or
+Adoption remains a separate authority event.</p>
+<p><a class="chapter-link" href="appendix-c-protocol-and-object-model#appendix-c-protocol-and-object-model" title="Go to: Appendix C">Appendix C</a> collects the relationships, references, ownership, and
+invariants behind this sequence into one protocol and object-model
+view.</p>
 <p>The primary claim is architectural, not a productivity result.</p>
 <p><strong>Design thesis.</strong> Human intelligence directs artificial
-intelligence through governed workflows. Human judgment enters the
-system through decisions people have already made or encoded in adopted
-policy. Those decisions fix the intent of the work, who has authority,
-and what constraints apply. They also fix the required evidence, the
-budgets that limit the run, and the separate rule for admitting a
-result. AI may propose, evaluate, or route work inside those decisions;
-it may not rewrite them during the run. Feedback from declared evidence
-is the primary mechanism by which the workflow adapts. It guides
-refinement, stopping, and escalation without requiring a new human
-decision at every step.</p>
+intelligence through workflows with enforced contracts. People or
+adopted policy make the authority-bearing decisions; stochastic steps
+work inside them. Feedback from required checks may guide refinement,
+stopping, and escalation without letting a run rewrite its own governing
+rules.</p>
 <p>A workflow may contain one or many probabilistic steps arranged
 sequentially, conditionally, or in parallel. Some steps may repeat
-inside one finite run; the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> workflow may run again when <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>
+inside one finite run; the complete workflow may run again when Terrain
 or adopted intent changes. Chapter 2 makes those two scales precise and
 shows how a probabilistic step may wrap anything from a model call to a
 larger agentic system.</p>
-<p><strong>Architectural mechanism.</strong> Each probabilistic step
-operates under a declared contract. The contract fixes its allowed
-inputs, authority, effects, and budgets. It also defines the outputs the
-step must produce, the evidence and provenance it must retain, and the
-terminal outcomes it may reach. The enclosing workflow fixes transition
-rules, stopping conditions, and admission outside those steps.
-Intermediate outputs remain candidates or evidence until declared checks
-and routing rules allow them to advance.</p>
-<p><strong>Composition proposition.</strong> A governed step can become
-a reusable capability inside a larger workflow. That requires stable
-input and output contracts and declared authority. Its effects must be
-bounded, its evidence requirements explicit, and its terminal outcomes
-and failure semantics visible to the enclosing workflow. The enclosing
-workflow cannot reinterpret a step’s failure as success, inherit
-undeclared effects, or grant authority the step never possessed.
-Composing such capabilities creates a workflow factory that can retain
-organization-specific contracts, checks, context, evidence, and adopted
-operating knowledge.</p>
+<p><strong>Composition proposition.</strong> A governed step with stable
+contracts and explicit failure semantics can become a reusable
+capability inside a larger workflow. Composition preserves rather than
+expands each step’s authority and effect limits. Reuse lets a workflow
+factory retain organization-specific checks, context, evidence, and
+adopted operating knowledge.</p>
 <p><strong>Operational hypothesis.</strong> For recurring work that can
-be decomposed into bounded steps, composed governed workflows using
-structured feedback may produce greater operational value than isolated
-one-shot queries or manually orchestrated use of the same probabilistic
-capabilities.</p>
+be decomposed into steps with explicit effect limits, composed workflows
+using structured feedback may produce greater operational value than
+isolated one-shot queries or manually orchestrated use of the same
+probabilistic capabilities.</p>
 <p>Speed is central to this hypothesis in rapidly changing, AI-exposed
 environments. In environments where competitors also accelerate search
 and implementation, the relevant measure is not candidate-generation
@@ -238,8 +270,8 @@ direction, it can elaborate adopted intent expressed in natural language
 into proposed contracts, tests, configuration, or implementation. In the
 other, it can turn formal artifacts and observed behavior into proposed
 human-readable Maps.</p>
-<p>Those directions are related but not symmetric. <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>-driven work
-proposes what should become real under adopted intent. Terrain-to-<a class="concept-link" href="concepts#map" title="See concept: Map">Map</a>
+<p>Those directions are related but not symmetric. Map-driven work
+proposes what should become real under adopted intent. Terrain-to-Map
 work proposes a description of what currently appears to be real. An
 implementation cannot recover the intent that originally produced it,
 and a generated description cannot make itself authoritative.</p>
@@ -257,11 +289,12 @@ are plausible. The tests may pass. Underneath, nuance has been replaced
 by statistically likely structure.</p>
 <p>The answer is not to abandon language or formalization. It is to stop
 asking either representation, or one end-to-end model call, to carry the
-whole burden. Divide the translation into narrow, governed steps. At
-each boundary, adopted intent and authority fix the direction, AI may
-propose across the semantic gap, deterministic tools check what they
-can, and feedback identifies mismatch. The process must stop when
-evidence is missing rather than filling the gap with confidence.</p>
+whole burden. Divide the translation into narrow steps with enforced
+contracts. At each boundary, adopted intent and authority set the
+direction, AI may propose across the semantic gap, deterministic tools
+check what they can, and feedback identifies mismatch. The process must
+stop when evidence is missing rather than filling the gap with
+confidence.</p>
 <p>That process is the loop. It is not merely a retry wrapper. It tests
 each partial representation against evidence from Terrain, exposes what
 the proposed translation missed, and supports a better next
@@ -271,12 +304,12 @@ transforms a state into a candidate next state. The engineering question
 is the shape of the process around it.</p>
 <p>None of this makes model or prompt quality irrelevant. Better models,
 prompts, and Context Packets shift the candidate distribution: they can
-produce more relevant proposals, reduce refinement cycles, and make
+produce more relevant candidates, reduce refinement cycles, and make
 harder Missions feasible. The loop is not a substitute for capability.
-It is the machinery that turns available capability into bounded
-proposals, evidence, and governed outcomes. A better generator can
-improve every compatible workflow without acquiring authority over the
-rules that judge it.</p>
+It is the machinery that turns available capability into candidates
+within effect limits, evidence, and terminal outcomes. A better
+generator can improve every compatible workflow without acquiring
+authority over the rules that judge it.</p>
 <h2 id="a-model-of-bounded-change">A Model of Bounded Change</h2>
 <section aria-labelledby="bounded-change-title" class="col-span-1 md:col-span-12 mt-2 mb-12" data-infographic-fragment-shell="1" data-infographic-section-id="i1-section-01-shape-of-all-work" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic.html" data-infographic-status="published">
 <span aria-hidden="true" data-infographic-fragment-label="1">i1-section-01-shape-of-all-work</span>
@@ -289,7 +322,7 @@ rules that judge it.</p>
 <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
 <div class="aoi-book-diagram__step">
 <span class="aoi-book-diagram__label">Observed state: Z<sub>n</sub></span>
-<p>The fixed base, current Terrain, and adopted intent used for this run.</p>
+<p>The pinned base, current Terrain, and adopted intent used for this run.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
@@ -298,16 +331,16 @@ rules that judge it.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
-<span class="aoi-book-diagram__label">Sealed result</span>
-<p>A supported candidate, a no-op, an external block, or an evidenced failure.</p>
+<span class="aoi-book-diagram__label">Terminal result</span>
+<p>A supported proposal, <code>no_change</code>, <code>blocked</code>, or <code>failed</code>. The <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> is sealed.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
 <span class="aoi-book-diagram__label">Separate authority</span>
-<p><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> may apply a candidate. <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a> may change future intent or policy.</p>
+<p>Admission may apply a candidate. Adoption may change future intent or policy.</p>
 </div>
 </div>
-<p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit its own result.</p>
+<p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit or adopt its own result.</p>
 </figure>
 </section>
 <p>This book treats each bounded unit of engineering work as a proposed
@@ -328,47 +361,28 @@ composable. Those claims depend on declared intent and evidence:</p>
 <p>SDaC writes those answers into artifacts and gates instead of leaving
 them as shared intuition.</p>
 <p>The practical starting point is one recurring, bounded change:
-declare the property that must remain true, install an independent
-check, retain the evidence, and prevent the change process from
-weakening the rule that judges it. That loop is the unit of trust, not
-the destination.</p>
-<p>The composition proposition is that bounded loops can become
-dependable steps inside larger workflows when their inputs, effects,
-outputs, checks, and terminal results remain explicit. Each step either
-reaches its declared acceptance region or stops with inspectable
-evidence. Composition does not let an enclosing workflow reinterpret
-failure as success, inherit undeclared effects, or borrow authority that
-the smaller workflow never had.</p>
-<p>Evidence from recurring low-risk workflows can support a separately
-governed policy proposal. If adopted, that policy can allow instances in
-the demonstrated class to execute and be admitted without routine human
-interruption. Human attention moves toward new intent, exceptions,
-protected rule changes, and high-consequence decisions. The aim is not
-to remove people from development. It is to build a factory that needs
-less human attention for each admitted change without weakening the
-properties that earned that delegation.</p>
-<p>Finite, inspectable failure is the safety floor. Convergence is the
-ambition: most recurring Missions should reach admissible outcomes
-within their declared budgets and move Terrain toward stated intent.
-Evidence from exceptions and admitted changes may then support
-separately governed proposals to improve the Maps, Validators, and
-workflows that shape the next run.</p>
+declare the property that must remain true, protect its acceptance rule
+from candidate rewrite, run the check, and retain the recorded result.
+That loop is the unit of trust, not the destination. Later chapters show
+how such loops compose and how their evidence can justify deeper
+delegation. Finite, inspectable failure is the safety floor; convergence
+within declared budgets is the ambition.</p>
 <h2 id="the-velocity-trap">The Velocity Trap</h2>
-<p>AI can reduce proposal time dramatically in some workflows and
-increase total task time in others. Controlled studies have reported
-both substantial speedups and slowdowns across different tasks, users,
-and tools.<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a> The premise needed here is narrower:
-AI changes candidate economics. It can make it cheaper to propose more
+<p>AI can reduce candidate-generation time dramatically in some
+workflows and increase total task time in others. Controlled studies
+have reported both substantial speedups and slowdowns across different
+tasks, users, and tools.<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a> The premise needed here is narrower:
+AI changes candidate economics. It can make it cheaper to produce more
 alternatives, many plausible enough to demand evaluation. Whether that
 improves delivery is a local empirical question.</p>
 <p>That change is useful only if the loop stays sane. AI can change the
-clock speed; the trap is treating proposal speed as delivery
+clock speed; the trap is treating candidate-generation speed as delivery
 progress.</p>
-<p>A faster proposal loop that drifts is faster drift. A faster proposal
-loop that breaks is faster breakage. Where AI increases attempted-change
-rate, it amplifies the practices already present: strong controls absorb
-more candidates, while weak controls can move cost into review, rework,
-and incidents.</p>
+<p>A faster candidate loop that drifts is faster drift. A faster
+candidate loop that breaks is faster breakage. Where AI increases
+attempted-change rate, it amplifies the practices already present:
+strong controls absorb more candidates, while weak controls can move
+cost into review, rework, and incidents.</p>
 <p>Where an organization’s delivery system was not trustworthy before
 AI—because tests are sparse or flaky, integration environments drift,
 releases depend on manual knowledge, or production feedback is
@@ -376,12 +390,15 @@ weak—increasing implementation throughput accelerates only the
 implementation side of the V-model. Specification, verification,
 validation, release, rollback, and observation remain constrained.</p>
 <p>In such settings, a higher-leverage early use of AI may be to
-strengthen the factory rather than increase code output. It can propose
-tests, contracts, fixtures, Validators, continuous integration and
-delivery improvements, deployment checks, rollback mechanisms, and
-observability. Those proposals still require independent validation;
-increasing assurance capacity may be more valuable than increasing
-implementation throughput.</p>
+strengthen the factory rather than increase code output. It can produce
+candidates for tests, contracts, fixtures, Validators, continuous
+integration and delivery improvements, deployment checks, rollback
+mechanisms, and observability. The <a class="concept-link" href="concepts#workflow" title="See concept: Workflow">Workflow</a> may run those
+candidate-produced checks and record the results as evidence. They
+cannot by themselves establish their own adequacy; a protected
+acceptance rule or check-validation protocol must do that. Increasing
+assurance capacity may be more valuable than increasing implementation
+throughput.</p>
 <p>Not every task needs that machinery. A temporary, low-consequence
 artifact that can be inspected directly may justify little more than
 generation and inspection. The need for stronger workflow governance
@@ -392,15 +409,15 @@ systems, carries hidden obligations, or is costly to reverse.</p>
 harness accelerated iteration without accelerating into a wall?</em></p>
 </blockquote>
 <p>SDaC answers by making the loop itself an engineering object:
-explicit intent, bounded writes, protected Validators, evidence, and
-stopping rules. A broken loop only makes model capability more
-dangerous.</p>
+explicit intent, enforced write limits, retained evidence, acceptance
+rules the candidate cannot rewrite, and stopping rules. A broken loop
+only makes model capability more dangerous.</p>
 <h2 id="who-this-book-is-for">Who This Book Is For</h2>
 <p>This book is for people responsible for making AI-accelerated
 software change safe and sustainable. Its primary readers are engineers,
 architects, and platform, developer experience, reliability, and
 security practitioners who design or govern the systems that turn
-proposals into admitted reality.</p>
+supported proposals into admitted changes.</p>
 <p>Engineering managers and directors, along with quality and risk
 owners in regulated environments, can use the architectural argument
 without implementing every Validator themselves. The detailed mechanisms
@@ -415,20 +432,14 @@ selected checks repeatable. Supply-chain systems add adjacent controls:
 in-toto records authorized steps and artifact evidence, SLSA defines
 verifiable provenance, and the <a href="https://www.openpolicyagent.org/docs">Open Policy Agent</a> (OPA)
 separates policy decisions from their enforcement.<a class="footnote-ref" href="#fn3" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
-<p>The contribution developed here is their composition around
-stochastic proposals. For each run, an independently activated work
-contract fixes authority; a bounded change step produces a candidate;
-independent checks produce structured evidence; and declared routing
-determines whether work refines, closes, or stops. The resulting run
-record is sealed, while admission remains separate. Retained evidence
-may support a future Map or policy proposal, but it cannot install that
-proposal.</p>
-<p>A probabilistic implementation step therefore sits inside an
-executable chain from goal to bounded context and output contract.
-Assurance remains layered: parsers, schemas, tests, contract and scope
-checks, transition enforcement, and <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a> evidence. Traceability
-explains which requirement produced a change; the governed loop also
-explains how failed candidates refine or stop.</p>
+<p>The contribution developed here is to place stochastic candidate
+production inside an enforceable chain while keeping authorization,
+evidence, and consequential effect distinct. Supply-chain provenance can
+show which declared steps produced an artifact; SDaC extends that
+concern to the change process itself, including bounded refinement and
+explicit terminal outcomes. Assurance remains layered: parsers, schemas,
+tests, contract and scope checks, transition enforcement, and Ledger
+evidence.</p>
 <p>These mechanisms support the architectural claim stated above. They
 do not prove that an admitted change is good or that governed generation
 is cheaper. Those outcome claims remain hypotheses to test across
@@ -447,13 +458,15 @@ roles and contracts, not on a particular language or runner.</p>
 <p>The examples assume ordinary software-engineering fluency: reading
 diffs, running checks, and editing text configuration. They do not
 require model training or control theory.</p>
-<p>Part I follows one bounded change from intent through work,
-validation, result, transition, and evidence. Part II explains why the
-mechanism works, Part III scales it into repeatable workflows, Part IV
-protects its governing surfaces, and Part V examines the destination and
-limits. <a class="chapter-link" href="chapter-1-a-minimal-governed-loop#chapter-1-a-minimal-governed-loop" title="Go to: Chapter 1">Chapter 1</a> begins with the smallest instance: one bounded writer,
-one scope-matched independent check, one fixed route, and one sealed
-result before separate adoption.</p>
+<p>Part I follows one change with explicit effect limits from intent
+through work, validation, result, transition, and evidence. Part II
+explains why the mechanism works, Part III scales it into repeatable
+workflows, Part IV protects its governing surfaces, and Part V turns
+selected Map claims into enforceable constraints and develops governed
+adaptation at organizational scale. <a class="chapter-link" href="chapter-1-a-minimal-governed-loop#chapter-1-a-minimal-governed-loop" title="Go to: Chapter 1">Chapter 1</a> begins with the smallest
+instance: one writer with named effects, one scope-matched check outside
+writer authority, one route chosen before work, and a sealed Run Record
+before separate Adoption.</p>
 <section class="footnotes footnotes-end-of-document" id="footnotes" role="doc-endnotes">
 <hr/>
 <ol>
@@ -507,7 +520,7 @@ an artifact was produced (<a href="https://slsa.dev/spec/v1.2/provenance">specif
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

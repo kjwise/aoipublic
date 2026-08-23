@@ -39,7 +39,7 @@
             <h4 class="text-brand-vibrant font-semibold tracking-wider uppercase mb-2">Presentation Notes: Governed Workflow Systems</h4>
             <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Architects of Intent</h1>
             <p class="text-xl md:text-2xl text-brand-muted max-w-3xl mx-auto">
-                From one bounded change to a composable factory of verified workflows.
+                From one limited change to a composable factory of verified workflows.
             </p>
         </div>
     </header>
@@ -47,39 +47,37 @@
     <!-- Main Content Grid -->
     <main class="max-w-[1500px] mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-12 gap-8">
 
-<section class="col-span-1 md:col-span-12 mt-2 mb-12" data-infographic-section-id="i1-section-01-shape-of-all-work" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic.html" data-infographic-status="published" aria-labelledby="bounded-change-title" data-infographic-fragment-shell="1">
+<section aria-labelledby="bounded-change-title" class="col-span-1 md:col-span-12 mt-2 mb-12" data-infographic-section-id="i1-section-01-shape-of-all-work" data-infographic-selector="main &gt; section:nth-of-type(1)" data-infographic-source="infographic.html" data-infographic-status="published" data-infographic-fragment-shell="1">
 <span data-infographic-fragment-label="1" aria-hidden="true">i1-section-01-shape-of-all-work</span>
-  <figure class="aoi-book-diagram">
-    <figcaption class="aoi-book-diagram__header">
-      <p class="aoi-book-diagram__eyebrow">Notation, not proof</p>
-      <h3 class="aoi-book-diagram__title" id="bounded-change-title">A Model of Bounded Change</h3>
-      <p class="aoi-book-diagram__summary">The notation names a proposed transition. The workflow around that transition determines what was allowed, what evidence counts, and whether any effect becomes real.</p>
-    </figcaption>
-
-    <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
-      <div class="aoi-book-diagram__step">
-        <span class="aoi-book-diagram__label">Observed state: Z<sub>n</sub></span>
-        <p>The fixed base, current Terrain, and adopted intent used for this run.</p>
-      </div>
-      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
-      <div class="aoi-book-diagram__step" data-tone="proposal">
-        <span class="aoi-book-diagram__label">Bounded process: P</span>
-        <p>One finite workflow proposes, checks, refines, or stops under fixed authority.</p>
-      </div>
-      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
-      <div class="aoi-book-diagram__step" data-tone="evidence">
-        <span class="aoi-book-diagram__label">Sealed result</span>
-        <p>A supported candidate, a no-op, an external block, or an evidenced failure.</p>
-      </div>
-      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
-      <div class="aoi-book-diagram__step" data-tone="authority">
-        <span class="aoi-book-diagram__label">Separate authority</span>
-        <p>Admission may apply a candidate. Adoption may change future intent or policy.</p>
-      </div>
-    </div>
-
-    <p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit its own result.</p>
-  </figure>
+<figure class="aoi-book-diagram">
+<figcaption class="aoi-book-diagram__header">
+<p class="aoi-book-diagram__eyebrow">Notation, not proof</p>
+<h3 class="aoi-book-diagram__title" id="bounded-change-title">A Model of Bounded Change</h3>
+<p class="aoi-book-diagram__summary">The notation names a proposed transition. The workflow around that transition determines what was allowed, what evidence counts, and whether any effect becomes real.</p>
+</figcaption>
+<div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
+<div class="aoi-book-diagram__step">
+<span class="aoi-book-diagram__label">Observed state: Z<sub>n</sub></span>
+<p>The pinned base, current Terrain, and adopted intent used for this run.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="proposal">
+<span class="aoi-book-diagram__label">Bounded process: P</span>
+<p>One finite workflow proposes, checks, refines, or stops under fixed authority.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="evidence">
+<span class="aoi-book-diagram__label">Terminal result</span>
+<p>A supported proposal, <code>no_change</code>, <code>blocked</code>, or <code>failed</code>. The Run Record is sealed.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="authority">
+<span class="aoi-book-diagram__label">Separate authority</span>
+<p>Admission may apply a candidate. Adoption may change future intent or policy.</p>
+</div>
+</div>
+<p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit or adopt its own result.</p>
+</figure>
 </section>
 
 <section class="col-span-1 md:col-span-12" data-infographic-section-id="i1-section-02-mission-object-loop" data-infographic-selector="main &gt; section:nth-of-type(2)" data-infographic-source="infographic.html" data-infographic-status="published" data-infographic-fragment-shell="1">
@@ -90,10 +88,10 @@
 <h3 class="text-xl font-bold text-brand-strong mb-3">Mission Object &amp; The Loop</h3>
 <div class="bg-brand-light border border-brand-border rounded-xl p-5">
 <figure class="rounded-xl overflow-hidden border border-brand-border bg-brand-surface">
-<img alt="A bounded refinement loop: generation produces candidates, validation produces findings, and a successful proposal remains separate from admission." class="w-full h-auto block select-none" src="diagrams/2026-02-12-deterministic-sandwich-dark.png"/>
+<img alt="A bounded refinement loop: generation produces candidates, validation produces findings, and a supported proposal remains separate from Admission." class="w-full h-auto block select-none" src="diagrams/2026-08-10-bounded-refinement-supported-proposal-dark.png"/>
 </figure>
 <p class="mt-3 text-sm text-brand-muted leading-relaxed">
-                            This panel shows bounded refinement: probabilistic generation proposes, validation emits findings, and fixed routing either permits another attempt or closes a proposal. Admission remains separate.
+                            This panel shows the Bounded Refinement Loop: probabilistic generation proposes, validation emits findings, and routing either permits another attempt or reaches a terminal result. A supported proposal remains separate from Admission.
                         </p>
 </div>
 </div>
@@ -126,21 +124,21 @@
 <div class="border border-brand-border rounded-xl bg-brand-surface p-4">
 <div class="text-sm font-bold text-brand-strong" id="sandwichTitle">Model / GenAI</div>
 <p class="mt-2 text-sm text-brand-muted leading-relaxed" id="sandwichBody">
-                                        One bounded stochastic step. Its output remains a candidate; Validation supplies evidence about declared properties.
+                                        One probabilistic step works within named limits. Its output remains a candidate; Validation supplies evidence about the Mission's properties.
                                     </p>
 <div class="mt-3 pt-3 border-t border-brand-border">
 <div class="text-[11px] font-mono text-brand-muted uppercase tracking-wide">Operational Notes</div>
 <p class="mt-2 text-xs text-brand-muted leading-relaxed" id="sandwichDetail">
-                                            The model explores candidates inside a bounded mission packet; no side effects happen at this layer.
+                                            The model explores candidates from a bounded Context Packet; no side effects happen at this layer.
                                         </p>
 <ul class="mt-2 space-y-1 text-xs text-brand-muted list-disc list-inside">
 <li id="sandwichPoint1">Draft outputs are proposals, not accepted state.</li>
-<li id="sandwichPoint2">Checks can close a proposal; independent authority still controls admission.</li>
+<li id="sandwichPoint2">Passing checks can support proposal closure; separate authority still controls Admission or Adoption.</li>
 </ul>
 </div>
 </div>
 <div class="mt-3 text-sm text-brand-muted">
-                                    In this minimal Sandwich, only the middle is stochastic. Larger workflows may use probabilistic evaluation inside fixed enforcement and authority boundaries.
+                                    In this minimal Sandwich, only the middle is stochastic. Larger workflows may use probabilistic evaluation inside enforcement and authority boundaries the run cannot change.
                                 </div>
 </div>
 </div>
@@ -148,7 +146,7 @@
 </div>
 <!-- Substrate Surfaces -->
 <div>
-<h3 class="text-xl font-bold text-brand-strong mb-3">Substrate - Governed work starts when intent, observed reality, and retained evidence are explicit.</h3>
+<h3 class="text-xl font-bold text-brand-strong mb-3">Substrate - Work becomes enforceable when intent, observed reality, and retained evidence are explicit.</h3>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <div class="bg-brand-light border border-brand-border border-l-4 border-l-brand-primary rounded-xl p-5">
 <div class="flex items-baseline justify-between gap-3 mb-2">
@@ -183,7 +181,7 @@
 <div>
 <h3 class="text-xl font-bold text-brand-strong mb-3">Semantic Density, Correctness, and Relevance</h3>
 <p class="text-sm text-brand-muted leading-relaxed">
-                            Three independent properties of mission-ready context. Optimize all three; none can compensate for a missing one.
+                            Three distinct properties of mission-ready context. Optimize all three; none can compensate for a missing one.
                         </p>
 <div class="mt-4 border-y border-brand-border grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-brand-border">
 <div class="py-4 md:pr-5">
@@ -464,7 +462,7 @@
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="fsTree"></pre>
 </div>
 <div class="xl:col-span-5 border border-brand-border rounded-xl p-4 bg-brand-light flex flex-col">
-<div class="text-xs font-mono text-brand-muted mb-2">Side view: the system grows across bounded changes</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Side view: the system grows across authorized changes</div>
 <div class="flex-1 flex items-center justify-center">
 <svg aria-hidden="true" class="w-full max-w-[260px] h-64" id="fsGrowthSvg" viewbox="0 0 220 240">
 <defs>
@@ -539,14 +537,14 @@
 <div class="bg-brand-surface rounded-xl shadow-lg p-6 h-full flex flex-col border border-brand-border">
 <h2 class="text-2xl font-bold text-brand-strong mb-3">Anatomy of Delegated Autonomy</h2>
 <p class="text-brand-muted mb-6">
-		                    Routine work can proceed with less interruption when adopted authority, effects, checks, and stopping conditions remain fixed.
+		                    Routine work can proceed with less interruption when the activated Mission keeps authority, effects, checks, and stopping conditions unchanged.
 	                </p>
 <!-- CSS Flow Chart -->
 <div class="flex flex-col items-center justify-center space-y-4 w-full flex-grow py-4 bg-brand-light rounded-lg border border-brand-border">
 <!-- Step 1: Human Intent -->
 <div class="flow-node w-3/4 p-4 bg-brand-dark text-white rounded-lg shadow-md text-center border-l-4 border-brand-vibrant relative">
-<div class="font-bold text-lg">1. Governed Intent</div>
-<div class="text-xs text-brand-muted mt-1">Declares authority, effects, checks, and budgets</div>
+<div class="font-bold text-lg">1. Adopted Intent</div>
+<div class="text-xs text-brand-muted mt-1">Names authority, effects, checks, and budgets</div>
 <!-- Arrow Down -->
 <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-brand-dark"></div>
 </div>
@@ -554,7 +552,7 @@
 <div class="h-4"></div>
 <!-- Step 2: The SDaC Engine -->
 <div class="flow-node w-3/4 p-4 bg-brand-surface border-2 border-brand-primary text-brand-strong rounded-lg shadow-sm text-center relative">
-<div class="font-bold text-lg">2. Bounded Workflows</div>
+<div class="font-bold text-lg">2. Finite Workflows</div>
 <div class="text-xs text-brand-muted mt-1">Converge toward acceptance or stop with evidence</div>
 <!-- Loop Indicators -->
 <div class="absolute top-1/2 -right-3 w-6 h-6 border-t-2 border-r-2 border-brand-primary rounded-full animate-spin"></div>
@@ -565,8 +563,8 @@
 <div class="h-4"></div>
 <!-- Step 3: The Steward -->
 <div class="flow-node w-3/4 p-4 bg-brand-accent text-white rounded-lg shadow-md text-center relative">
-<div class="font-bold text-lg">3. Independent Governance</div>
-<div class="text-xs text-white/90 mt-1">Admits effects and adopts any rule changes separately</div>
+<div class="font-bold text-lg">3. Separate Authority</div>
+<div class="text-xs text-white/90 mt-1">Admits candidates and adopts any rule changes separately</div>
 <!-- Arrow Up (Loop back) -->
 <div class="absolute top-1/2 -left-8 text-brand-muted text-xs font-mono transform -rotate-90">Govern change</div>
 <div class="absolute top-0 bottom-0 -left-4 w-4 border-l-2 border-dashed border-brand-border rounded-l-xl"></div>
@@ -627,18 +625,18 @@
 </div>
 <div class="p-5 bg-brand-accent text-white">
 <div class="text-xs font-mono uppercase opacity-75 mb-2">4 / Decide</div>
-<div class="text-lg font-bold mb-2">Route, Seal, Admit</div>
-<div class="text-sm opacity-90">Close the proposal under fixed routing; separate authority decides admission.</div>
+<div class="text-lg font-bold mb-2">Route and Seal</div>
+<div class="text-sm opacity-90">Reach a terminal result under the Mission's routing; any supported proposal still needs separate authority.</div>
 </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 mt-5 border border-brand-border">
 <div class="p-4 md:p-5 border-b md:border-b-0 md:border-r border-brand-border">
 <div class="text-sm font-bold text-brand-strong">Ordinary Mission</div>
-<div class="mt-1 text-sm text-brand-muted">May change bounded Terrain. A protected effect is denied, recorded, and ends with sealed evidence.</div>
+<div class="mt-1 text-sm text-brand-muted">May change only the named Terrain surface. An attempted change to a protected control is denied and recorded before the Run Record is sealed.</div>
 </div>
 <div class="p-4 md:p-5">
 <div class="text-sm font-bold text-brand-strong">Governance Mission</div>
-<div class="mt-1 text-sm text-brand-muted">May emit a checked proposal. A different authority applies, approves, and admits it.</div>
+<div class="mt-1 text-sm text-brand-muted">May emit a supported proposal. Separate authority adopts it; Adoption either atomically applies and selects it or selects an exact copy that was staged non-authoritatively.</div>
 </div>
 </div>
 <div class="mt-5 px-4 py-3 border-l-4 border-brand-vibrant bg-[rgba(255,255,255,0.06)]">
@@ -656,7 +654,7 @@
     <!-- Footer -->
     <footer class="bg-brand-light py-8 text-center border-t border-brand-border">
         <p class="text-brand-muted text-sm">Generated for <strong>Architects of Intent</strong> Presentation</p>
-        <p class="text-brand-muted text-xs mt-1">Bounded autonomy under explicit governance</p>
+        <p class="text-brand-muted text-xs mt-1">Delegated autonomy under explicit governance</p>
     </footer>
 
 </body>

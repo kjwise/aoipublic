@@ -24,14 +24,14 @@
 <meta content="Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Appendix A: Failure Modes and Limits | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix A: Failure Modes and Limits", "description": "Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "mainEntityOfPage": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT6M", "articleSection": "Part VI – Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix A: Failure Modes and Limits", "description": "Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "mainEntityOfPage": "https://architectsofintent.com/appendix-a-failure-modes-and-limits", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT7M", "articleSection": "Part VI – Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -52,23 +52,23 @@
 <header class="chapter-header">
 <div class="chapter-kicker">
 <div class="part-title">Part VI – Appendices</div>
-<div class="chapter-meta"><span class="read-time">6 min read</span></div>
+<div class="chapter-meta"><span class="read-time">7 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="appendix-a-failure-modes-and-limits">Appendix A: Failure Modes
 and Limits</h1>
 <p>A governed loop offers conditional guarantees, not universal
 correctness. Under its stated trust assumptions, it can establish that
-effects stayed within declared bounds, required checks ran, transitions
-followed policy, terminal evidence was sealed, and admission used the
-required authority. It cannot establish that the Map was wise, that the
-Validators covered every relevant property, that hidden dependencies did
-not correlate two evaluators, or that the governance cost was
-justified.</p>
+effects stayed within named limits, required checks ran, and transitions
+followed policy. It can also establish that the Run Record was sealed
+with retained evidence and the declared handoff followed its rules. It
+cannot establish that the Map was wise, that the Validators covered
+every relevant property, that hidden dependencies did not correlate two
+evaluators, or that the governance cost was justified.</p>
 <p>The following failure modes mark that boundary. Some identify
 conditions under which the architectural guarantees fail; others
 identify limits the architecture cannot remove or cases in which the
-governed path is not worth its cost.</p>
+controlled path is not worth its cost.</p>
 </div>
 </header>
 <h2 id="mis-scoped-context">Mis-scoped Context</h2>
@@ -81,10 +81,12 @@ on which plausible but unauthorized structure can appear.</p>
 makes the slice reproducible. The evidence must therefore distinguish
 omitted authority, irrelevant inclusion, and unauthorized effects rather
 than collapsing all three into “the model failed.”</p>
-<p>A protected effect boundary can reject an overbroad candidate. It
-cannot recover an omitted truth. If the active authority cannot support
-a sufficient Context Packet, the run must fail or stop for separately
-authorized correction; it cannot silently widen its own scope.</p>
+<p>An effect boundary outside candidate authority can reject an
+overbroad candidate. It cannot recover an omitted truth. If the active
+authority cannot support a sufficient Context Packet, the run ends
+<code>blocked</code> only when it names an external repair or decision;
+otherwise it ends <code>failed</code>. Either outcome seals the Run
+Record. The workflow cannot silently widen its own scope.</p>
 <h2 id="non-convergence">Non-convergence</h2>
 <p>Refinement does not guarantee convergence. Findings may repeat,
 alternate, or disappear without a meaningful improvement. Constraints
@@ -95,15 +97,15 @@ enough to create the appearance of progress where none exists.</p>
 normalized findings, state signatures, evaluator protocol identities,
 and progress measures. A finite loop responds to absent progress by
 stopping. Ordinary exhaustion, oscillation, or repeated failure ends as
-<code>failed_with_evidence</code>. <code>blocked</code> is reserved for
-a named external condition such as missing authority, an unavailable
-trustworthy oracle, contradictory Mission terms, or an environment
-repair that the run cannot perform.</p>
-<p>Finite failure is part of reliability. A loop that cannot establish
-progress but closes with evidence reconstructable under the
-protected-sink and trust-root assumptions stated later in this appendix
-has behaved more reliably than one that continues until a favorable
-answer appears.</p>
+<code>failed</code>. <code>blocked</code> is reserved for a named
+external repair or decision, such as granting missing authority,
+restoring a trustworthy oracle, resolving contradictory Mission terms,
+or repairing an environment the run cannot change. Without such a named
+action, the run ends as <code>failed</code>.</p>
+<p>Finite failure is part of reliability. A loop may fail to establish
+progress and still behave reliably by reaching a terminal result and
+sealing reconstructable evidence. Continuing until a favorable answer
+appears is the less reliable behavior.</p>
 <h2 id="map-contamination">Map Contamination</h2>
 <p><a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> Contamination occurs when generated structure is mistaken for
 observed or adopted structure. A model invents a route, signature,
@@ -115,17 +117,18 @@ self-confirming fiction.</p>
 two directions. In Map-to-Terrain work, an adopted design supplies a
 prescriptive minimum scaffold and permitted expansion rules. In
 Terrain-to-Map work, deterministic extraction records descriptive
-observed structure. Exact derived views remain traceable observations;
-judgment-heavy summaries remain candidates. An exact view carries only
-the bounded descriptive authority of its declared Terrain sources. A
-judgment-heavy summary cannot overwrite prescriptive Map content or
-become Map authority without separate adoption.</p>
+observed structure. Derived views remain traceable to their
+observations; judgment-heavy summaries remain candidates. A derived view
+is authoritative only for the selected descriptive property and source
+revisions named by the Mission. A judgment-heavy summary cannot
+overwrite prescriptive Map content or become Map authority without
+separate <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a>.</p>
 <p>The deeper invariant is authority direction. A Terrain-to-Map
 workflow may report observed structure but may not make that structure
 intended policy. A Map-to-Terrain workflow may propose implementation
 from adopted intent but may not rewrite the intent that judges it.</p>
 <p>Post-processing cannot erase an authority violation. If a candidate
-attempted undeclared effects, the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> attempted footprint remains
+attempted undeclared effects, the complete attempted footprint remains
 evidence even when a deterministic cleanup could produce an apparently
 compliant diff. The candidate is rejected as attempted; a new candidate
 may be generated under corrected authority and context.</p>
@@ -142,28 +145,54 @@ Shared models, prompts, retrieval, fixtures, or context can make
 generator and evaluator agree on the same wrong answer. <a class="chapter-link" href="chapter-3-define-good-your-first-validators#chapter-3-define-good-your-first-validators" title="Go to: Chapter 3">Chapter 3</a>’s
 protected protocol makes that uncertainty more visible; it does not
 abolish it.</p>
-<p>For a protected high-consequence property, a probabilistic evaluator
-cannot be the sole oracle unless adopted policy explicitly accepts its
-measured error characteristics for that Mission class. Repeated
-false-positive or false-negative evidence may justify a Validator-change
-proposal. The active candidate cannot soften the rule that evaluates
-it.</p>
+<p>For a high-consequence property, a probabilistic evaluator cannot be
+the sole oracle unless adopted policy explicitly accepts its measured
+error characteristics for that Mission class and keeps the evaluation
+protocol outside candidate authority. Repeated false-positive or
+false-negative evidence may justify a Validator-change proposal. The
+active candidate cannot soften the rule that evaluates it.</p>
+<h2 id="local-success-without-joint-coherence">Local Success Without
+Joint Coherence</h2>
+<p>The proposed model ordinarily assumes that concurrent workflows
+affect surfaces of shared Terrain that are independent for the property
+in question. Declared interfaces define cross-surface semantics; later
+reads, events, and Sensors carry versioned observations of admitted
+changes. Under declared delivery, freshness, and read-availability
+assumptions, dependent workflows gain eventual visibility of relevant
+changes. This is a limited analogy to eventual consistency, not a claim
+of one global snapshot or replicated-state convergence.</p>
+<p>That assumption fails when concurrent work depends on observations
+another <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> can invalidate, non-commuting effects, changing
+interface semantics, spanning invariants, or limited capacity. Each
+workflow may satisfy its own Mission while their combination creates a
+collision or aggregate harm that neither Mission measures. Individual
+eligibility is not evidence of joint eligibility.</p>
+<p><a class="chapter-link" href="chapter-12-governance-for-high-rate-automation#chapter-12-governance-for-high-rate-automation" title="Go to: Chapter 12">Chapter 12</a> owns the coordination rule for this failure. When
+independence ends, current policy must govern the shared property
+against current state at the protected Admission or effect boundary.
+Without that path, the combined result remains unsupported even if each
+local run is <code>complete</code>. Eventual visibility permits delay
+across independent surfaces; it cannot replace atomic or joint judgment
+where the invariant requires it.</p>
 <h2 id="completion-without-admission">Completion Without Admission</h2>
-<p>Chapter 10’s boundary remains decisive: <code>complete</code> closes
-a proposal; it does not make the candidate Terrain. <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a>
-revalidates the current base, policy, identity, approvals, and protected
+<p>Chapter 10’s boundary remains decisive. For a proposal-producing run,
+<code>complete</code> records proposal closure: the final artifact is a
+supported proposal, and the <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> is sealed. It does not make the
+candidate Terrain. Admission revalidates the current base, policy,
+identity, approvals, and the integrity and provenance of required
 evidence. Any changed or missing predicate can deny the proposal without
-reopening its sealed <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>.</p>
-<p>Automatically applying every <code>complete</code> candidate would
-collapse validation into authorization. The same rule applies to Maps
-and policy: history may support a proposal, but only separate adoption
-changes authority.</p>
+reopening the sealed <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>.</p>
+<p>Automatically applying every supported proposal from a
+<code>complete</code> run would collapse validation into authorization.
+The same rule applies to Maps and policy: history may support a
+proposal, but only separate Adoption changes authority.</p>
 <h2 id="trust-root-failure">Trust-Root Failure</h2>
 <p>The <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a> is contradiction-resistant only under a protected sink and
-trust root. Hash chains, independent storage, integrity checkpoints, and
-access control can expose missing, reordered, or conflicting evidence.
-They cannot prevent a sufficiently privileged actor from replacing both
-the evidence and the mechanism used to verify it.</p>
+trust root. Hash chains, storage administered outside runner authority,
+integrity checkpoints, and access control can expose missing, reordered,
+or conflicting evidence. They cannot prevent a sufficiently privileged
+actor from replacing both the evidence and the mechanism used to verify
+it.</p>
 <p>Likewise, a <a class="concept-link" href="concepts#scope-guard" title="See concept: Scope Guard">Scope Guard</a> is meaningful only when the runtime,
 credentials, execution isolation, and admission path are outside
 candidate control. If an ordinary Mission can rewrite its own Validator,
@@ -184,14 +213,13 @@ narrow, run with less autonomy, or not exist.</p>
 complete oracles, inevitable convergence, tamper-proof history, or
 cheaper delivery everywhere. Its narrower claim is stronger because it
 is testable: under declared authority and trust assumptions, selected
-effects, evidence requirements, transitions, and admission decisions can
-be made explicit and enforceable.</p>
+effects, evidence requirements, transitions, and Admission or Adoption
+decisions can be made explicit and enforceable.</p>
 <p>That changes the shape of failure. Missing evidence stops the run.
 Scope violations remain visible. Non-convergence ends finitely.
-Completed proposals remain separate from adopted reality. History may
-inform future authority but cannot install it. The system can still be
-wrong, but it becomes harder for uncertainty to masquerade as
-permission.</p>
+Supported proposals remain separate from admitted Terrain and adopted
+Maps or policies. History may inform future authority but cannot install
+it.</p>
 </main>
 <section aria-label="Share this page" class="share-panel" data-share-text="Appendix A of Architects of Intent: Appendix A: Failure Modes and Limits. A governed loop offers conditional guarantees, not universal correctness. Under its…" data-share-title="Appendix A: Failure Modes and Limits | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-a-failure-modes-and-limits" role="region">
 <div class="share-panel__label">Share</div>
@@ -207,7 +235,7 @@ permission.</p>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
-<a class="prev-link" href="chapter-14-implications-for-delegated-automation">← Chapter 14 – Implications for Delegated Automation</a>
+<a class="prev-link" href="chapter-14-implications-for-delegated-automation">← Chapter 14 – The Torus: Governed Adaptation at Organizational Scale</a>
 <a class="next-link" href="appendix-b-core-vocabulary">Appendix B: Core Vocabulary →</a>
 </nav>
 <footer class="site-footer">
@@ -227,7 +255,7 @@ permission.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

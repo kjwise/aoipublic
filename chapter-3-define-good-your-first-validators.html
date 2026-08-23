@@ -2,36 +2,36 @@
 
 <html lang="en">
 <head>
-<title>Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent</title>
+<title>Chapter 3 – Validators: What Checks Can Establish | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). The model produced plausible-looking output. A cheap deterministic check caught a…" name="description"/>
+<meta content="Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
 <link href="https://architectsofintent.com/chapter-3-define-good-your-first-validators" rel="canonical"/>
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
-<meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" property="og:title"/>
-<meta content="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). The model produced plausible-looking output. A cheap deterministic check caught a…" property="og:description"/>
+<meta content="Chapter 3 – Validators: What Checks Can Establish | Architects of Intent" property="og:title"/>
+<meta content="Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-3-define-good-your-first-validators" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
-<meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" property="og:image:alt"/>
+<meta content="Chapter 3 – Validators: What Checks Can Establish | Architects of Intent" property="og:image:alt"/>
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
-<meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). The model produced plausible-looking output. A cheap deterministic check caught a…" name="twitter:description"/>
+<meta content="Chapter 3 – Validators: What Checks Can Establish | Architects of Intent" name="twitter:title"/>
+<meta content="Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
-<meta content="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Define “Good” (Your First Validators)", "description": "Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). The model produced plausible-looking output. A cheap deterministic check caught a…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT7M", "articleSection": "Part I – Building a Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<meta content="Chapter 3 – Validators: What Checks Can Establish | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Validators: What Checks Can Establish", "description": "Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT8M", "articleSection": "Part I – The Minimal Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -55,15 +55,17 @@
 <main class="content content--chapter" id="main">
 <header class="chapter-header">
 <div class="chapter-kicker">
-<div class="part-title">Part I – Building a Governed Loop</div>
-<div class="chapter-meta"><span class="read-time">7 min read</span></div>
+<div class="part-title">Part I – The Minimal Governed Loop</div>
+<div class="chapter-meta"><span class="read-time">8 min read</span></div>
 </div>
 <div class="chapter-header__body">
-<h1 id="chapter-3-define-good-your-first-validators">Chapter 3 – Define
-“Good” (Your First Validators)</h1>
-<p>The Deterministic Sandwich from Chapter 2 relies on an independent
-check outside the probabilistic change step. Start with one concrete
-result:</p>
+<h1 id="chapter-3-define-good-your-first-validators">Chapter 3 –
+Validators: What Checks Can Establish</h1>
+<p>The Deterministic Sandwich from Chapter 2 relies on a check outside
+the probabilistic change step’s authority. To isolate what that check
+can and cannot establish, this chapter deliberately switches from the
+public-interface sync to a small <code>reviewer_suggestions</code>
+payload:</p>
 </div>
 </header>
 <div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">{</span></span>
@@ -131,7 +133,7 @@ place in the workflow:</p>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">Structured findings</span>
-<p>Pass, fail, inconclusive, or a declared reason the check could not run.</p>
+<p>Pass, fail, inconclusive, or a recorded reason the check could not run.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
@@ -146,11 +148,27 @@ place in the workflow:</p>
 agent harness, or a child workflow. The enclosing workflow still governs
 how the candidate was produced: tool use, attempted effects, declared
 outputs, budgets, and provenance.</p>
+<p>The separation is not between candidate production and the <a class="concept-link" href="concepts#workflow" title="See concept: Workflow">Workflow</a>’s
+checks. One <a class="concept-link" href="concepts#workflow" title="See concept: Workflow">Workflow</a> may propose code, add or modify tests, run existing
+unit and integration suites, and retain every result. Once recorded with
+provenance, those test artifacts and results are evidence. Their origin
+changes what they can establish.</p>
+<p>An unchanged required test can corroborate a behavior claim when the
+candidate could not alter its acceptance meaning, including its harness
+and required configuration. A new or modified candidate test is evidence
+about the joint code-and-test proposal. It may reproduce a defect, state
+an example, or improve regression coverage, but it cannot by itself
+redefine success. A Mission may authorize a protected protocol for
+judging such tests. For a bug fix, that protocol might require the new
+test to fail against the pinned baseline, pass against the candidate,
+and survive a declared mutation check. If the proposed test should
+become a protected Validator for future Missions, it follows the
+separate <a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a> and <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a> path.</p>
 <p>Run cheap checks first. Parsers, schemas, formatting, and types can
 reject malformed candidates before slower behavioral or semantic
 evaluation. Failing early is useful only if every required check is
 still represented in the final evidence; a fast pass is not a substitute
-for the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> set of checks required for advancement.</p>
+for the complete set of checks required for advancement.</p>
 <h2 id="what-a-check-relies-on">What a Check Relies On</h2>
 <p>Classify a Validator by what grounds its rule, not merely by whether
 it returns the same result twice.</p>
@@ -224,9 +242,10 @@ not claim that the checks are complete truth.</p>
 Partial</h2>
 <p>Because checks define advancement, ordinary candidate work must not
 be able to weaken the required rules that judge it. Core invariants stay
-outside candidate authority. AI may help propose a test, schema, or
-policy, but that proposal must pass existing checks and follow the
-separate governance path for changing protected rules.</p>
+outside candidate authority. AI may produce a candidate test, schema, or
+policy and the Workflow may run and record it under the declared
+protocol. It becomes a protected rule for future runs only through the
+separate governance path.</p>
 <p>Validators themselves need cases on both sides of their boundary. A
 check that has never demonstrated a meaningful pass and failure is an
 assertion of confidence, not evidence of discrimination.</p>
@@ -234,15 +253,15 @@ assertion of confidence, not evidence of discrimination.</p>
 <ul>
 <li><strong>Verification</strong> checks that an artifact is formed or
 aligned as declared.</li>
-<li><strong>Validation</strong> asks whether the bounded proposal
-satisfies the adopted intent and acceptance criteria.</li>
+<li><strong>Validation</strong> asks whether the candidate satisfies the
+adopted intent and acceptance criteria.</li>
 <li><strong>Evaluation</strong> supplies heuristic or model-based
 evidence when a property cannot be reduced to a deterministic rule.</li>
 <li><strong>Runtime assurance</strong> observes whether the admitted
 system continues to operate within selected bounds.</li>
 </ul>
 <p>All four produce partial evidence. None allows a candidate or
-evaluator to widen authority or admit its own result.</p>
+evaluator to widen authority or admit or adopt its own result.</p>
 <h2 id="false-positives-and-false-negatives">False Positives and False
 Negatives</h2>
 <p>Authored checks fail in two directions:</p>
@@ -270,7 +289,8 @@ docs-only summary</td>
 <td>False negative: accept an unacceptable artifact</td>
 <td><code>reviewer_suggestions</code> is an array, but contains an
 unknown user</td>
-<td>add the independent directory or ownership check</td>
+<td>add a directory or ownership check backed by data outside candidate
+authority</td>
 </tr>
 </tbody>
 </table>
@@ -287,35 +307,37 @@ and evaluator share a model family, provider, rubric, <a class="concept-link" hr
 retrieval source, or omitted fact, they can agree for the same wrong
 reason.</p>
 <p>When probabilistic evaluation participates in a Validator or Judge,
-adopted policy fixes a small evaluation contract before candidate
-execution:</p>
+the Mission proposal must bind a small evaluation contract under adopted
+policy before final review and <a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a>:</p>
 <ul>
-<li><strong>Protected protocol:</strong> before the candidate runs, keep
-the evaluation protocol outside candidate authority. Pin the evaluator,
-rubric, tools, relevant data, and decoding controls. Predeclare retry
-limits and retain the provenance needed to reconstruct each result.</li>
-<li><strong>Known shared dependencies:</strong> record shared models,
-providers, context, retrieval sources, fixtures, and derived inputs that
-may cause the evaluator and generator to repeat the same error.</li>
-<li><strong>Calibration:</strong> exercise protected pass, fail,
-boundary, and adversarial fixtures appropriate to the property, and
-revalidate after material protocol changes.</li>
+<li><strong>Protected protocol:</strong> bind the evaluator, rubric,
+tools, relevant data, decoding controls, and retry limits. Keep the
+bound protocol outside candidate authority, and retain the provenance
+needed to reconstruct each result.</li>
+<li><strong>Known shared dependencies:</strong> bind selectable shared
+models, providers, context sources, retrieval sources, fixtures, and
+derived-input rules; record their actual identities so shared failure
+modes remain visible.</li>
+<li><strong>Calibration:</strong> exercise pass, fail, boundary, and
+adversarial fixtures kept outside candidate authority and appropriate to
+the property; revalidate any materially changed protocol before
+activating a Mission that uses it.</li>
 <li><strong>Declared decision rule:</strong> choose sampling or an
 ensemble in proportion to consequence, then aggregate through a fixed
-rule. Do not keep sampling until the desired answer appears or call
-repeated correlated judgments independent evidence.</li>
+rule. Do not keep sampling until the desired answer appears or describe
+repeated correlated judgments as independent corroboration.</li>
 <li><strong>Inconclusive outcome:</strong> stale calibration, malformed
 output, missing inputs, out-of-policy configuration, or disagreement
 beyond the declared threshold must not advance a required property.</li>
 </ul>
 <p>The source or decision procedure allowed to settle a property is
-called an <strong><a class="concept-link" href="concepts#oracle" title="See concept: Oracle">oracle</a></strong>. For a protected high-consequence
-property, a probabilistic evaluator must not be the only oracle unless
-adopted policy has explicitly accepted the measured error of that exact
-evaluation protocol for that class of work. Otherwise it needs
-corroborating protected evidence from deterministic checks, behavioral
-tests, runtime observations, independent review, or another declared
-oracle.</p>
+called an <strong><a class="concept-link" href="concepts#oracle" title="See concept: Oracle">oracle</a></strong>. For a high-consequence property
+checked under a protected protocol, a probabilistic evaluator must not
+be the only oracle unless adopted policy has explicitly accepted the
+measured error of that evaluation protocol for that class of work.
+Otherwise it needs corroborating evidence from deterministic checks,
+behavioral tests, runtime observations, review independent of candidate
+production, or another declared oracle.</p>
 <p>The runtime still enforces evidence requirements, scope, budgets,
 transition eligibility, stopping, and admission outside the model.
 Calibration makes a bounded protocol measurable; it does not turn a
@@ -335,27 +357,28 @@ findings affect advancement, the organization makes another part of the
 change process explicit and enforceable. More candidates need not mean
 proportionally more unvalidated claims reaching review or
 production.</p>
-<p>That closes Part I: one bounded workflow, one probabilistic change
-step inside deterministic boundaries, and partial but independent checks
-that can stop an unsupported candidate. Part II explains why those
-mechanics are necessary and how retries and context remain bounded.</p>
+<p>That closes Part I: one workflow with declared effects, one
+probabilistic change step between deterministic Prep and Validation, and
+partial evidence evaluated under acceptance rules the candidate cannot
+rewrite. Part II explains why those mechanics are necessary and how
+retries and context remain bounded.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 3 of Architects of Intent: Define “Good” (Your First Validators). The model produced plausible-looking output. A cheap deterministic check caught a…" data-share-title="Chapter 3 – Define “Good” (Your First Validators) | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-3-define-good-your-first-validators" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…" data-share-title="Chapter 3 – Validators: What Checks Can Establish | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-3-define-good-your-first-validators" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
-<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;text=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;text=Chapter%203%20%E2%80%93%20Validators%3A%20What%20Checks%20Can%20Establish%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators" rel="noopener noreferrer" target="_blank">f</a>
-<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;title=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%203%20%E2%80%93%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29%20%7C%20Architects%20of%20Intent&amp;body=Chapter%203%20of%20Architects%20of%20Intent%3A%20Define%20%E2%80%9CGood%E2%80%9D%20%28Your%20First%20Validators%29.%20The%20model%20produced%20plausible-looking%20output.%20A%20cheap%20deterministic%20check%20caught%20a%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators">email</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators&amp;title=Chapter%203%20%E2%80%93%20Validators%3A%20What%20Checks%20Can%20Establish%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%203%20%E2%80%93%20Validators%3A%20What%20Checks%20Can%20Establish%20%7C%20Architects%20of%20Intent&amp;body=Chapter%203%20of%20Architects%20of%20Intent%3A%20Validators%3A%20What%20Checks%20Can%20Establish.%20The%20model%20produced%20plausible-looking%20output.%20A%20cheap%20deterministic%20check%20caught%20a%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-3-define-good-your-first-validators">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
-<a class="prev-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">← Chapter 2 – The Deterministic Sandwich (Your First Pattern)</a>
-<a class="next-link" href="chapter-4-the-stochastic-generator-why-you-need-physics">Chapter 4 – The Stochastic Generator (Why You Need Physics) →</a>
+<a class="prev-link" href="chapter-2-the-deterministic-sandwich-your-first-pattern">← Chapter 2 – The Deterministic Sandwich</a>
+<a class="next-link" href="chapter-4-the-stochastic-generator-why-you-need-physics">Chapter 4 – The Stochastic Generator: Variance, Validation, and Feedback →</a>
 </nav>
 <footer class="site-footer">
 <p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
@@ -374,7 +397,7 @@ mechanics are necessary and how retries and context remain bounded.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

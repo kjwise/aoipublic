@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Appendix C: Protocol and Object Model | Architects of Intent</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Appendix C of Architects of Intent: Appendix C: Protocol and Object Model. This appendix specifies references, closure, and authority boundaries among…" name="description"/>
+<meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
+<meta content="Jóhann Haukur Gunnarsson" name="author"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<link href="https://architectsofintent.com/appendix-c-protocol-and-object-model" rel="canonical"/>
+<link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
+<meta content="Architects of Intent" property="og:site_name"/>
+<meta content="Appendix C: Protocol and Object Model | Architects of Intent" property="og:title"/>
+<meta content="Appendix C of Architects of Intent: Appendix C: Protocol and Object Model. This appendix specifies references, closure, and authority boundaries among…" property="og:description"/>
+<meta content="https://architectsofintent.com/appendix-c-protocol-and-object-model" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
+<meta content="Appendix C: Protocol and Object Model | Architects of Intent" property="og:image:alt"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Appendix C: Protocol and Object Model | Architects of Intent" name="twitter:title"/>
+<meta content="Appendix C of Architects of Intent: Appendix C: Protocol and Object Model. This appendix specifies references, closure, and authority boundaries among…" name="twitter:description"/>
+<meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
+<meta content="Appendix C: Protocol and Object Model | Architects of Intent" name="twitter:image:alt"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Appendix C: Protocol and Object Model", "description": "Appendix C of Architects of Intent: Appendix C: Protocol and Object Model. This appendix specifies references, closure, and authority boundaries among…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/appendix-c-protocol-and-object-model", "mainEntityOfPage": "https://architectsofintent.com/appendix-c-protocol-and-object-model", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT5M", "articleSection": "Part VI – Appendices", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<nav aria-label="Primary" class="site-nav">
+<a class="brand" href="./">
+<img alt="" class="brand-mark" height="22" src="favicon.svg" width="22"/>
+<span>Architects of Intent</span>
+</a>
+<a class="site-nav__toc" href="toc">Table of Contents</a>
+<div class="site-nav__links">
+<a href="concepts">Concepts</a>
+<a class="nav-search" href="search">🔎 Search</a>
+</div>
+</nav>
+</header>
+<main class="content content--chapter" id="main">
+<header class="chapter-header">
+<div class="chapter-kicker">
+<div class="part-title">Part VI – Appendices</div>
+<div class="chapter-meta"><span class="read-time">5 min read</span></div>
+</div>
+<div class="chapter-header__body">
+<h1 id="appendix-c-protocol-and-object-model">Appendix C: Protocol and
+Object Model</h1>
+<p>This appendix specifies references, closure, and authority boundaries
+among artifacts and authority events—not serialization, transport,
+storage, service boundaries, or classes. Implementations may distribute
+responsibilities while preserving these invariants.</p>
+<p>Appendix B remains the vocabulary reference. This view shows artifact
+history, transition control, and the boundary between evidence and
+authority.</p>
+</div>
+</header>
+<h2 id="the-protocol-relationship-at-a-glance">The Relationship at a
+Glance</h2>
+<pre class="mermaid"><code>flowchart TD
+  P["Mission proposal"] --&gt; B["Binding"]
+  B --&gt; M["Bound Mission Object&lt;br/&gt;exact Mission identity"]
+  M --&gt; R["Semantic + policy review"]
+  R --&gt; A["Activation decision&lt;br/&gt;references exact Mission identity"]
+  A --&gt; RR["Run Record opened&lt;br/&gt;references Activation, Mission, baseline"]
+  RR --&gt; F["Preflight&lt;br/&gt;verification recorded"]
+  F --&gt;|"ready"| X["Bounded execution&lt;br/&gt;attempts or steps, effects,&lt;br/&gt;findings, pre-closure decisions recorded"]
+  F --&gt;|"cannot proceed"| T["Terminal result&lt;br/&gt;Run Record sealed"]
+  X --&gt; T
+  T --&gt;|"complete, when applicable"| O{"Supported output&lt;br/&gt;declared type + handoff"}
+  O --&gt;|"Terrain proposal"| AR["Admission request"]
+  AR --&gt; AD["Admission decision"]
+  O --&gt;|"Map or policy proposal"| OR["Adoption request"]
+  OR --&gt; OD["Adoption decision"]
+  O --&gt;|"checked report"| D["Report delivery"]
+  O --&gt;|"supported child output"| C["Local acceptance&lt;br/&gt;under parent Mission"]
+  A -.-&gt; L["Ledger relationships"]
+  RR -.-&gt; L
+  AD -.-&gt; L
+  OD -.-&gt; L</code></pre>
+<p>Binding produces the exact identity reviewed for <a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a>.
+<a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a> authorizes it, not a mutable lookalike. The <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> opens
+before Preflight, whose result is retained whether execution proceeds or
+stops. Preflight verifies that the identity and dependencies remain
+present, intact, and executable. Attempts and steps accumulate in the
+record; they are not independent authority-bearing objects.</p>
+<p>A terminal result seals the record. A <code>complete</code> run
+identifies any declared terminal output and handoff. <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> proposals
+proceed only to <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a>; <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> or policy proposals only to <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a>.
+Reports and child outputs follow report delivery or local acceptance.
+Support grants no external authority.</p>
+<h2 id="protocol-artifacts-references-and-authority">Artifacts,
+References, and Authority</h2>
+<table>
+<colgroup>
+<col style="width: 20%"/>
+<col style="width: 20%"/>
+<col style="width: 20%"/>
+<col style="width: 20%"/>
+<col style="width: 20%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Artifact or event</th>
+<th>Produced or controlled by</th>
+<th>Exact references</th>
+<th>Mutation or closure rule</th>
+<th>Authority consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mission proposal</td>
+<td>Human or assistive drafter</td>
+<td>Adopted sources and proposed workflow, policy, checks, effects,
+budgets, and handoff; references may be symbolic</td>
+<td>Mutable until Binding; a later edit requires a new identity and
+review</td>
+<td>None; it proposes a work contract</td>
+</tr>
+<tr>
+<td>Bound <a class="concept-link" href="concepts#mission-object" title="See concept: Mission Object">Mission Object</a></td>
+<td>Binding mechanism outside drafter and runner control</td>
+<td>Immutable identities for authority sources, baseline, checks or
+check-validation protocols, policy bundle, workflow or template, and
+runtime</td>
+<td>Content-addressed and fixed for one run; a change creates a new
+identity</td>
+<td>Defines the authority that Activation may authorize</td>
+</tr>
+<tr>
+<td>Activation decision</td>
+<td>Authorized identity or adopted policy</td>
+<td>Exact bound Mission identity and approval basis</td>
+<td>Recorded as a separate event; it does not edit the Mission</td>
+<td>Authorizes that Mission identity to run once</td>
+</tr>
+<tr>
+<td>Run Record</td>
+<td>Protected runtime under the activated Mission</td>
+<td>Mission identity, Activation decision, baseline, Preflight result,
+<a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a>, candidates, budgets, and retained evidence</td>
+<td>Opened before Preflight, logically append-only, and sealed with one
+terminal result</td>
+<td>Records the run but grants no authority</td>
+</tr>
+<tr>
+<td>Preflight verification</td>
+<td>Mechanism outside candidate authority</td>
+<td>Authorized Mission identity and its bound dependencies</td>
+<td>Recorded in the open Run Record; verifies presence, integrity, and
+executability; it cannot select, replace, change, or rebind</td>
+<td>None; failure prevents execution from proceeding and seals the
+record <code>blocked</code> or <code>failed</code></td>
+</tr>
+<tr>
+<td>Attempt or step entries</td>
+<td><a class="concept-link" href="concepts#workflow" title="See concept: Workflow">Workflow</a> runtime</td>
+<td>Parent Run Record, order, inputs, outputs, candidate identity,
+effects, and budget use</td>
+<td>Appended as Run Record contents; never separate authority</td>
+<td>None; they reconstruct execution</td>
+</tr>
+<tr>
+<td><a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> findings or reports</td>
+<td>Declared Validators</td>
+<td><a class="concept-link" href="concepts#candidate" title="See concept: Candidate">Candidate</a> and configuration identities, checked property, check or
+protocol identity, and observations used</td>
+<td>Retained with the Run Record; later correction adds evidence rather
+than rewriting history</td>
+<td>Supply evidence only</td>
+</tr>
+<tr>
+<td>Policy-bound decision</td>
+<td><a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> or adopted decision rule</td>
+<td>Applicable findings and evidence, policy identity, budgets,
+permitted transition, and any exact exception authorization used</td>
+<td>Recorded before closure as part of the Run Record</td>
+<td>Routes refinement, stopping, or proposal closure within existing
+authority</td>
+</tr>
+<tr>
+<td>Supported candidate or output</td>
+<td>Candidate producer creates the output; policy-bound decision and
+terminal closure establish support</td>
+<td>Exact output identity, declared output type and handoff, and
+supporting sealed <code>complete</code> Run Record</td>
+<td>A changed output is new and unsupported</td>
+<td>Eligible only for its declared handoff; support alone grants no
+external authority</td>
+</tr>
+<tr>
+<td>Admission decision</td>
+<td><a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">Mission Gate</a> and authorized Admission path</td>
+<td>Exact Terrain candidate, sealed Run Record, current base and policy,
+effects, evidence, required approvals, and any exact exception
+authorization used</td>
+<td>Appended after closure; denial or approval does not reopen the Run
+Record</td>
+<td>Approval makes that candidate effective in Terrain; denial leaves
+Terrain unchanged</td>
+</tr>
+<tr>
+<td>Adoption decision</td>
+<td>Authorized adopting identity or policy</td>
+<td>Exact Map or policy proposal, sealed Run Record, current authority,
+and required approvals</td>
+<td>Appended after closure; it cannot revise the Mission or its
+history</td>
+<td>Approval makes that exact proposal authoritative; denial preserves
+current authority</td>
+</tr>
+<tr>
+<td><a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a> relationship</td>
+<td>Protected append interface and evidence sink</td>
+<td>Stable identities for Activation, Run Records, attempts, effects,
+findings, decisions, terminal results, Admission, and Adoption, with
+sequence and predecessor references</td>
+<td>Append-only under the sink and trust-root assumptions; linked
+records extend history</td>
+<td>Establishes reconstructable continuity, not authority</td>
+</tr>
+</tbody>
+</table>
+<h2 id="closure-before-consequence">Closure Before Consequence</h2>
+<p>Pre-closure findings and policy-bound decisions govern the active
+run. They may require refinement, stop execution, or support proposal
+closure; a discrepancy may make the run <code>failed</code>.</p>
+<p>Admission and Adoption re-evaluate whether a supported output may
+change Terrain or authority under current state. A stale base, changed
+policy, missing approval, or contradictory record may deny the request
+while the run remains sealed <code>complete</code>. The Ledger appends
+the later decision; it does not revise history.</p>
+<p>Proposal closure records what the run established. Admission or
+Adoption records what later authority allowed to become
+consequential.</p>
+<h2 id="protocol-and-object-model-invariants">Invariants</h2>
+<ul>
+<li>Mission authority cannot change during execution.</li>
+<li>A Run Record cannot authorize execution.</li>
+<li>Validator evidence cannot admit or adopt anything.</li>
+<li><code>complete</code> cannot imply Admission.</li>
+<li>Admission cannot change Map or policy authority.</li>
+<li>Adoption cannot retroactively modify a Mission.</li>
+<li>Preflight cannot rebind.</li>
+<li>A later authority event references sealed history rather than
+reopening it.</li>
+</ul>
+</main>
+<section aria-label="Share this page" class="share-panel" data-share-text="Appendix C of Architects of Intent: Appendix C: Protocol and Object Model. This appendix specifies references, closure, and authority boundaries among…" data-share-title="Appendix C: Protocol and Object Model | Architects of Intent" data-share-url="https://architectsofintent.com/appendix-c-protocol-and-object-model" role="region">
+<div class="share-panel__label">Share</div>
+<div class="share-panel__actions">
+<button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
+<a aria-label="Share on X" class="share-button" data-share="x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-c-protocol-and-object-model&amp;text=Appendix%20C%3A%20Protocol%20and%20Object%20Model%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">X</a>
+<a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-c-protocol-and-object-model" rel="noopener noreferrer" target="_blank">in</a>
+<a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fappendix-c-protocol-and-object-model" rel="noopener noreferrer" target="_blank">f</a>
+<a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fappendix-c-protocol-and-object-model&amp;title=Appendix%20C%3A%20Protocol%20and%20Object%20Model%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Appendix%20C%3A%20Protocol%20and%20Object%20Model%20%7C%20Architects%20of%20Intent&amp;body=Appendix%20C%20of%20Architects%20of%20Intent%3A%20Appendix%20C%3A%20Protocol%20and%20Object%20Model.%20This%20appendix%20specifies%20references%2C%20closure%2C%20and%20authority%20boundaries%20among%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fappendix-c-protocol-and-object-model">email</a>
+<button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
+</div>
+<span aria-live="polite" class="share-status"></span>
+</section>
+<nav class="page-nav">
+<a class="prev-link" href="appendix-b-core-vocabulary">← Appendix B: Core Vocabulary</a>
+<a class="next-link" href="acknowledgements-and-about-the-author">Acknowledgements and About the Author →</a>
+</nav>
+<footer class="site-footer">
+<p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
+<div class="site-footer__links site-footer__links--primary">
+<a class="site-footer__item site-footer__item--partner" href="https://www.linkedin.com/in/jhaukur/" rel="me noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-linkedin.ico" width="16"/>
+<span>LinkedIn</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://aigreenbytes.com/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-aigreenbytes.png" width="16"/>
+<span>AI Green Bytes</span>
+</a>
+<a class="site-footer__item site-footer__item--partner" href="https://lumiloop.ai/" rel="noopener noreferrer" target="_blank">
+<img alt="" class="site-footer__icon" height="16" src="partner-lumiloop.png" width="16"/>
+<span>LumiLoop</span>
+</a>
+</div>
+<div class="site-footer__links site-footer__links--secondary">
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
+<a class="site-footer__item" href="infographic">Infographic</a>
+</div>
+</footer>
+</body>
+</html>

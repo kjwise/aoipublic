@@ -72,7 +72,7 @@
 <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
 <div class="aoi-book-diagram__step">
 <span class="aoi-book-diagram__label">Observed state: Z<sub>n</sub></span>
-<p>The fixed base, current <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>, and adopted intent used for this run.</p>
+<p>The pinned base, current <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>, and adopted intent used for this run.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
@@ -81,8 +81,8 @@
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
-<span class="aoi-book-diagram__label">Sealed result</span>
-<p>A supported candidate, a no-op, an external block, or an evidenced failure.</p>
+<span class="aoi-book-diagram__label">Terminal result</span>
+<p>A supported proposal, <code>no_change</code>, <code>blocked</code>, or <code>failed</code>. The <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> is sealed.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
@@ -90,7 +90,7 @@
 <p><a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> may apply a candidate. <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a> may change future intent or policy.</p>
 </div>
 </div>
-<p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit its own result.</p>
+<p class="aoi-book-diagram__note"><strong>Feedback adapts the next proposal.</strong> It does not widen the active authority, lower the evidence requirement, or admit or adopt its own result.</p>
 </figure>
 </section>
 </section><section aria-label="Mission Object &amp; The Loop" class="infographic-slide" data-infographic-section-id="i1-section-02-mission-object-loop" data-slide-index="1" role="group">
@@ -106,10 +106,10 @@
 <h3 class="text-xl font-bold text-brand-strong mb-3">Mission Object &amp; The Loop</h3>
 <div class="bg-brand-light border border-brand-border rounded-xl p-5">
 <figure class="rounded-xl overflow-hidden border border-brand-border bg-brand-surface">
-<img alt="A bounded refinement loop: generation produces candidates, validation produces findings, and a successful proposal remains separate from admission." class="w-full h-auto block select-none" src="diagrams/2026-02-12-deterministic-sandwich-dark.png"/>
+<img alt="A bounded refinement loop: generation produces candidates, validation produces findings, and a supported proposal remains separate from Admission." class="w-full h-auto block select-none" src="diagrams/2026-08-10-bounded-refinement-supported-proposal-dark.png"/>
 </figure>
 <p class="mt-3 text-sm text-brand-muted leading-relaxed">
-                            This panel shows bounded refinement: probabilistic generation proposes, validation emits findings, and fixed routing either permits another attempt or closes a proposal. Admission remains separate.
+                            This panel shows the Bounded Refinement Loop: probabilistic generation proposes, validation emits findings, and routing either permits another attempt or reaches a terminal result. A supported proposal remains separate from Admission.
                         </p>
 </div>
 </div>
@@ -142,21 +142,21 @@
 <div class="border border-brand-border rounded-xl bg-brand-surface p-4">
 <div class="text-sm font-bold text-brand-strong" id="sandwichTitle">Model / GenAI</div>
 <p class="mt-2 text-sm text-brand-muted leading-relaxed" id="sandwichBody">
-                                        One bounded stochastic step. Its output remains a candidate; Validation supplies evidence about declared properties.
+                                        One probabilistic step works within named limits. Its output remains a candidate; Validation supplies evidence about the Mission's properties.
                                     </p>
 <div class="mt-3 pt-3 border-t border-brand-border">
 <div class="text-[11px] font-mono text-brand-muted uppercase tracking-wide">Operational Notes</div>
 <p class="mt-2 text-xs text-brand-muted leading-relaxed" id="sandwichDetail">
-                                            The model explores candidates inside a bounded mission packet; no side effects happen at this layer.
+                                            The model explores candidates from a bounded <a class="concept-link" href="concepts#context-packet" title="See concept: Context Packet">Context Packet</a>; no side effects happen at this layer.
                                         </p>
 <ul class="mt-2 space-y-1 text-xs text-brand-muted list-disc list-inside">
 <li id="sandwichPoint1">Draft outputs are proposals, not accepted state.</li>
-<li id="sandwichPoint2">Checks can close a proposal; independent authority still controls admission.</li>
+<li id="sandwichPoint2">Passing checks can support proposal closure; separate authority still controls Admission or Adoption.</li>
 </ul>
 </div>
 </div>
 <div class="mt-3 text-sm text-brand-muted">
-                                    In this minimal Sandwich, only the middle is stochastic. Larger workflows may use probabilistic evaluation inside fixed enforcement and authority boundaries.
+                                    In this minimal Sandwich, only the middle is stochastic. Larger workflows may use probabilistic evaluation inside enforcement and authority boundaries the run cannot change.
                                 </div>
 </div>
 </div>
@@ -164,7 +164,7 @@
 </div>
 <!-- Substrate Surfaces -->
 <div>
-<h3 class="text-xl font-bold text-brand-strong mb-3">Substrate - Governed work starts when intent, observed reality, and retained evidence are explicit.</h3>
+<h3 class="text-xl font-bold text-brand-strong mb-3">Substrate - Work becomes enforceable when intent, observed reality, and retained evidence are explicit.</h3>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <div class="bg-brand-light border border-brand-border border-l-4 border-l-brand-primary rounded-xl p-5">
 <div class="flex items-baseline justify-between gap-3 mb-2">
@@ -199,7 +199,7 @@
 <div>
 <h3 class="text-xl font-bold text-brand-strong mb-3">Semantic Density, Correctness, and Relevance</h3>
 <p class="text-sm text-brand-muted leading-relaxed">
-                            Three independent properties of mission-ready context. Optimize all three; none can compensate for a missing one.
+                            Three distinct properties of mission-ready context. Optimize all three; none can compensate for a missing one.
                         </p>
 <div class="mt-4 border-y border-brand-border grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-brand-border">
 <div class="py-4 md:pr-5">
@@ -208,7 +208,7 @@
 </div>
 <div class="py-4 md:px-5">
 <div class="text-xs font-mono text-brand-muted mb-2">Correctness</div>
-<p class="text-sm text-brand-strong leading-relaxed">Evidence-bound claims, current enough for the decision, with contradictions exposed.</p>
+<p class="text-sm text-brand-strong leading-relaxed"><a class="concept-link" href="concepts#evidence" title="See concept: Evidence">Evidence</a>-bound claims, current enough for the decision, with contradictions exposed.</p>
 </div>
 <div class="py-4 md:pl-5">
 <div class="text-xs font-mono text-brand-muted mb-2">Relevance</div>
@@ -492,7 +492,7 @@
 <pre class="text-[11px] md:text-xs leading-5 text-brand-strong whitespace-pre overflow-auto max-h-80 font-mono" id="fsTree"></pre>
 </div>
 <div class="xl:col-span-5 border border-brand-border rounded-xl p-4 bg-brand-light flex flex-col">
-<div class="text-xs font-mono text-brand-muted mb-2">Side view: the system grows across bounded changes</div>
+<div class="text-xs font-mono text-brand-muted mb-2">Side view: the system grows across authorized changes</div>
 <div class="flex-1 flex items-center justify-center">
 <svg aria-hidden="true" class="w-full max-w-[260px] h-64" id="fsGrowthSvg" viewbox="0 0 220 240">
 <defs>
@@ -575,14 +575,14 @@
 <div class="bg-brand-surface rounded-xl shadow-lg p-6 h-full flex flex-col border border-brand-border">
 <h2 class="text-2xl font-bold text-brand-strong mb-3">Anatomy of Delegated Autonomy</h2>
 <p class="text-brand-muted mb-6">
-		                    Routine work can proceed with less interruption when adopted authority, effects, checks, and stopping conditions remain fixed.
+		                    Routine work can proceed with less interruption when the activated Mission keeps authority, effects, checks, and stopping conditions unchanged.
 	                </p>
 <!-- CSS Flow Chart -->
 <div class="flex flex-col items-center justify-center space-y-4 w-full flex-grow py-4 bg-brand-light rounded-lg border border-brand-border">
 <!-- Step 1: Human Intent -->
 <div class="flow-node w-3/4 p-4 bg-brand-dark text-white rounded-lg shadow-md text-center border-l-4 border-brand-vibrant relative">
-<div class="font-bold text-lg">1. Governed Intent</div>
-<div class="text-xs text-brand-muted mt-1">Declares authority, effects, checks, and budgets</div>
+<div class="font-bold text-lg">1. Adopted Intent</div>
+<div class="text-xs text-brand-muted mt-1">Names authority, effects, checks, and budgets</div>
 <!-- Arrow Down -->
 <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-brand-dark"></div>
 </div>
@@ -590,7 +590,7 @@
 <div class="h-4"></div>
 <!-- Step 2: The SDaC Engine -->
 <div class="flow-node w-3/4 p-4 bg-brand-surface border-2 border-brand-primary text-brand-strong rounded-lg shadow-sm text-center relative">
-<div class="font-bold text-lg">2. Bounded Workflows</div>
+<div class="font-bold text-lg">2. Finite Workflows</div>
 <div class="text-xs text-brand-muted mt-1">Converge toward acceptance or stop with evidence</div>
 <!-- Loop Indicators -->
 <div class="absolute top-1/2 -right-3 w-6 h-6 border-t-2 border-r-2 border-brand-primary rounded-full animate-spin"></div>
@@ -601,8 +601,8 @@
 <div class="h-4"></div>
 <!-- Step 3: The Steward -->
 <div class="flow-node w-3/4 p-4 bg-brand-accent text-white rounded-lg shadow-md text-center relative">
-<div class="font-bold text-lg">3. Independent Governance</div>
-<div class="text-xs text-white/90 mt-1">Admits effects and adopts any rule changes separately</div>
+<div class="font-bold text-lg">3. Separate Authority</div>
+<div class="text-xs text-white/90 mt-1">Admits candidates and adopts any rule changes separately</div>
 <!-- Arrow Up (Loop back) -->
 <div class="absolute top-1/2 -left-8 text-brand-muted text-xs font-mono transform -rotate-90">Govern change</div>
 <div class="absolute top-0 bottom-0 -left-4 w-4 border-l-2 border-dashed border-brand-border rounded-l-xl"></div>
@@ -622,7 +622,7 @@
 <p class="text-brand-muted mb-6 max-w-3xl text-lg">
 	                    This is the geometry view of slicing. You are not dumping the whole repository into the window. You <strong>reshape the terrain</strong> so valid paths are easier and drift is harder.
 	                    <br/><br/>
-<span class="text-brand-vibrant">Intent defines a target region.</span> Slices, contracts, and Validators bias candidate production toward relevant states and expose selected forms of drift. They do not guarantee the shortest path, a global optimum, or a <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a> specification.
+<span class="text-brand-vibrant">Intent defines a target region.</span> Slices, contracts, and Validators bias candidate production toward relevant states and expose selected forms of drift. They do not guarantee the shortest path, a global optimum, or a complete specification.
                 </p>
 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
 <div class="text-sm text-brand-muted">
@@ -671,18 +671,18 @@
 </div>
 <div class="p-5 bg-brand-accent text-white">
 <div class="text-xs font-mono uppercase opacity-75 mb-2">4 / Decide</div>
-<div class="text-lg font-bold mb-2">Route, Seal, Admit</div>
-<div class="text-sm opacity-90">Close the proposal under fixed routing; separate authority decides admission.</div>
+<div class="text-lg font-bold mb-2">Route and Seal</div>
+<div class="text-sm opacity-90">Reach a terminal result under the Mission's routing; any supported proposal still needs separate authority.</div>
 </div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 mt-5 border border-brand-border">
 <div class="p-4 md:p-5 border-b md:border-b-0 md:border-r border-brand-border">
 <div class="text-sm font-bold text-brand-strong">Ordinary Mission</div>
-<div class="mt-1 text-sm text-brand-muted">May change bounded Terrain. A protected effect is denied, recorded, and ends with sealed evidence.</div>
+<div class="mt-1 text-sm text-brand-muted">May change only the named Terrain surface. An attempted change to a protected control is denied and recorded before the Run Record is sealed.</div>
 </div>
 <div class="p-4 md:p-5">
 <div class="text-sm font-bold text-brand-strong"><a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a></div>
-<div class="mt-1 text-sm text-brand-muted">May emit a checked proposal. A different authority applies, approves, and admits it.</div>
+<div class="mt-1 text-sm text-brand-muted">May emit a supported proposal. Separate authority adopts it; Adoption either atomically applies and selects it or selects an exact copy that was staged non-authoritatively.</div>
 </div>
 </div>
 <div class="mt-5 px-4 py-3 border-l-4 border-brand-vibrant bg-[rgba(255,255,255,0.06)]">
@@ -707,7 +707,7 @@
 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent">Shape of Work</span>
 </h1>
 <p class="text-xl text-cyber-muted max-w-xl leading-relaxed">
-                        The book develops a proposition: bounded workflows can compose when their authority, effects, evidence, and failure semantics remain explicit.
+                        The book develops a proposition: workflows can compose when their authority, effect limits, evidence, and failure semantics remain explicit.
                         <strong class="text-white">The <a class="concept-link" href="concepts#workflow" title="See concept: Workflow">workflow</a> system becomes part of the product.</strong>
 </p>
 </div>
@@ -773,12 +773,12 @@
 <h2 class="text-3xl font-bold mb-4 text-white">A Pattern Across Different Scales</h2>
 <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
 <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-      State, process, evidence, and decision can be modeled at multiple levels. Functions often change faster than products or organizations, but evidence does not automatically rewrite the slower layers above it.
+      State, process, evidence, and decision recur at multiple scales. Checked outputs can remain provisional while enclosing workflows compose larger candidates, moving a composite Admission—and often direct human attention—toward the outer consequential boundary. This hierarchy shows recursive composition, not the <a class="concept-link" href="concepts#torus" title="See concept: Torus">Torus</a> itself; the <a class="concept-link" href="concepts#torus" title="See concept: Torus">Torus</a> adds concurrent circuits across surfaces that are independent for the property at issue. Faster feedback still does not rewrite the slower layers above it.
     </p>
 <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
-<li>Drift at lower levels spreads upward.</li>
-<li>Improvements move upward only through explicit interfaces and adoption.</li>
-<li>Each scale needs authority and evidence appropriate to its consequences.</li>
+<li>Small workflows can support larger candidate assemblies.</li>
+<li>A feature, product, or replacement-system candidate can remain provisional until outer validation.</li>
+<li>Other consequential actions remain governed at their declared effect boundaries.</li>
 </ul>
 <div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
 <p class="font-mono text-sm text-cyber-neon">
@@ -790,35 +790,36 @@
 <div class="lg:col-span-7">
 <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
 <div class="flex flex-wrap items-center gap-2 mb-4">
-<span class="text-xs font-mono text-gray-500 uppercase">Pick a scale</span>
+<span class="text-xs font-mono text-gray-500 uppercase">Inspect one concurrent scale</span>
 <button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
 <button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
 <button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
 <button class="scale-button" data-role="scale-button" data-scale="function" type="button">Function</button>
 </div>
+<p class="mb-4 text-xs text-gray-500">All scales continue concurrently; selection changes only this readout.</p>
 <div class="space-y-3">
-<div class="fractal-layer border-l-cyber-primary is-active" data-cadence="Years" data-example="Strategic bets" data-process="Culture + leadership" data-role="scale-card" data-scale="company" data-state="Market position">
+<div class="fractal-layer border-l-cyber-primary is-active" data-cadence="years" data-example="Strategic bets" data-process="Culture + leadership" data-role="scale-card" data-scale="company" data-state="Market position">
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-lg text-cyber-primary">Company Scale</span>
 <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
 </div>
 <div class="text-xs text-gray-400">State: Market position · Process: Culture + leadership</div>
 </div>
-<div class="fractal-layer border-l-cyber-neon ml-4" data-cadence="Months" data-example="Portfolio bets" data-process="Org + strategy" data-role="scale-card" data-scale="product" data-state="System architecture">
+<div class="fractal-layer border-l-cyber-neon ml-4" data-cadence="months" data-example="Portfolio bets" data-process="Org + strategy" data-role="scale-card" data-scale="product" data-state="System architecture">
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-md text-cyber-neon">Product Scale</span>
 <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
 </div>
 <div class="text-xs text-gray-400">State: System architecture · Process: Org + strategy</div>
 </div>
-<div class="fractal-layer border-l-cyber-accent ml-8" data-cadence="Days" data-example="Release scope" data-process="Team practices" data-role="scale-card" data-scale="feature" data-state="Capabilities">
+<div class="fractal-layer border-l-cyber-accent ml-8" data-cadence="days" data-example="Release scope" data-process="Team practices" data-role="scale-card" data-scale="feature" data-state="Capabilities">
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
 <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
 </div>
 <div class="text-xs text-gray-400">State: Capabilities · Process: Team practices</div>
 </div>
-<div class="fractal-layer border-l-cyber-success ml-12" data-cadence="Minutes" data-example="Code edits" data-process="Dev tools" data-role="scale-card" data-scale="function" data-state="Implementation">
+<div class="fractal-layer border-l-cyber-success ml-12" data-cadence="minutes" data-example="Code edits" data-process="Dev tools" data-role="scale-card" data-scale="function" data-state="Implementation">
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-xs text-cyber-success">Function Scale</span>
 <span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
@@ -838,8 +839,8 @@
 <div class="text-white font-semibold" data-role="fractal-process">Culture + leadership</div>
 </div>
 <div>
-<div class="text-xs text-gray-500">Cadence</div>
-<div class="text-white font-semibold" data-role="fractal-cadence">Years</div>
+<div class="text-xs text-gray-500">Example cadence</div>
+<div class="text-white font-semibold" data-role="fractal-cadence">years</div>
 </div>
 <div>
 <div class="text-xs text-gray-500">Example</div>
@@ -886,7 +887,7 @@
       processEl.textContent = selected.dataset.process || '—';
       cadenceEl.textContent = selected.dataset.cadence || '—';
       exampleEl.textContent = selected.dataset.example || '—';
-      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the state is "${selected.dataset.state || 'state'}" and the process shaping it is "${selected.dataset.process || 'process'}".`;
+      insightEl.textContent = `For this scale, an example cadence is ${selected.dataset.cadence || 'unspecified'}. The state is "${selected.dataset.state || 'state'}" and the process shaping it is "${selected.dataset.process || 'process'}". Other circuits continue at their own policy-appropriate cadences.`;
     };
 
     buttons.forEach((btn) => {
@@ -1181,20 +1182,20 @@
 <div class="bg-cyber-dark rounded-xl p-10 md:p-16">
 <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Governed Loop Can Become a Moat</h2>
 <p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
-<span class="block">Intent becomes operational through an adopted Map and a bounded Mission:</span>
+<span class="block">Intent becomes operational through an adopted Map and an activated Mission:</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">intent + adopted map</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; bounded mission -&gt; candidate terrain</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; activated mission -&gt; candidate workspace</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-accent mt-3">candidate -&gt; findings</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; output checks -&gt; judge</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; canonical result -&gt; ledger</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">complete proposal</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; terminal result -&gt; ledger</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">supported proposal + sealed Run Record</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; <a class="concept-link" href="concepts#mission-gate" title="See concept: Mission Gate">mission gate</a></span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; admitted terrain</span>
 <span class="block mt-4 text-base md:text-lg">Evidence can support a future Map proposal. It cannot authorize one.</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-3">evidence -&gt; governed proposal</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; independent adoption</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-3">evidence -&gt; policy proposal</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; separate adoption</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; future map</span>
-<span class="block mt-4 text-base md:text-lg">A <a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> compounds only under a pinned measurement protocol, a protected non-regression floor, and independently admitted advancement.</span>
+<span class="block mt-4 text-base md:text-lg">A <a class="concept-link" href="concepts#ratchet" title="See concept: Ratchet">Ratchet</a> compounds only when each supported proposal is measured by the pinned protocol and transactional Admission commits the candidate and protected floor together.</span>
 <span class="block mt-4 text-base md:text-lg">Comparable recurring work must show that accumulated judgment improves outcomes after the full cost of controls and maintenance.</span>
 </p>
 <p class="text-cyber-accent font-semibold">History proposes. Authority adopts.</p>
@@ -1213,11 +1214,11 @@
 <h2 class="text-3xl font-bold mb-4 text-white">Executive View: Test the Business Case</h2>
 <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
 <p class="text-cyber-muted text-lg leading-relaxed">
-        Raw model calls are not a business outcome. Compare like workflows and test whether bounded effects, evidence, and admission improve delivery after the full cost of controls and maintenance.
+        Raw model calls are not a business outcome. Compare like workflows and test whether effect limits, retained evidence, and separate Admission improve delivery after the full cost of controls and maintenance.
       </p>
 <ul class="mt-6 text-sm text-gray-400 list-disc list-inside space-y-2">
 <li>Candidate cadence is only one input to delivery.</li>
-<li>Protected checks can reduce selected forms of drift.</li>
+<li>Checks outside candidate authority can reduce selected forms of drift.</li>
 <li>Defensibility remains a measured hypothesis.</li>
 </ul>
 </div>
@@ -1241,7 +1242,7 @@
 </div>
 </div>
 <div class="mt-3 text-xs text-gray-500">
-          Admitted outcomes produce evidence. That evidence may support a separately governed change to future Missions.
+          Admitted outcomes produce evidence. That evidence may support a separate policy change for future Missions.
         </div>
 </div>
 <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
@@ -1401,28 +1402,28 @@
 <div class="aoi-book-diagram__grid">
 <div class="aoi-book-diagram__artifact">
 <span class="aoi-book-diagram__label">Descriptive direction: Terrain → Map</span>
-<p>Route declarations define the current endpoint inventory. A bounded updater proposes a documentation patch. A protected comparison checks correspondence before separate adoption.</p>
+<p>Route declarations define the current endpoint inventory. An updater proposes a documentation patch limited to the selected Map surface. A check outside candidate authority compares it before separate Adoption.</p>
 </div>
 <div class="aoi-book-diagram__artifact">
 <span class="aoi-book-diagram__label">Prescriptive direction: Map → Terrain</span>
-<p>An adopted API contract defines the intended interface. A bounded workflow proposes implementation changes. Protected behavior and compatibility checks run before separate admission.</p>
+<p>An adopted API contract defines the intended interface. A workflow proposes implementation changes within named effects. Protected compatibility checks run before separate Admission.</p>
 </div>
 </div>
 <div aria-hidden="true" class="aoi-book-diagram__divider"></div>
 <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
 <div class="aoi-book-diagram__step" data-tone="authority">
 <span class="aoi-book-diagram__label">Declare authority</span>
-<p>Name the exact property and direction before execution.</p>
+<p>Name the property and direction before execution.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
 <span class="aoi-book-diagram__label">Propose one patch</span>
-<p>The updater or implementation step changes only the bounded surface.</p>
+<p>The updater or implementation step changes only the named surface.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">Protected check</span>
-<p>The protected gate compares the candidate with the authoritative source.</p>
+<p>The gate compares the candidate with the authoritative source.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
@@ -1430,7 +1431,7 @@
 <p>A passing relationship does not authorize its own effect.</p>
 </div>
 </div>
-<p class="aoi-book-diagram__note">Enforcement remains selective. Passing this gate establishes one declared correspondence, not universal correctness or truth.</p>
+<p class="aoi-book-diagram__note">Enforcement remains selective. Passing this gate establishes the named correspondence, not universal correctness or truth.</p>
 </figure>
 </section>
 </section><section aria-label="The Substrate (Map · Terrain · Ledger)" class="infographic-slide" data-infographic-section-id="i3-section-01-substrate" data-slide-index="17" role="group">
@@ -1513,7 +1514,7 @@
 <figcaption class="aoi-book-diagram__header">
 <p class="aoi-book-diagram__eyebrow">Intent becomes proposed authority before it becomes active</p>
 <h3 class="aoi-book-diagram__title" id="mission-object-title">From Request to Activated Mission</h3>
-<p class="aoi-book-diagram__summary">AI may help translate an ordinary-language request into a formal work contract. That translation remains a draft until independent activation fixes its exact identity.</p>
+<p class="aoi-book-diagram__summary">AI may help draft the work contract. A protected binding step resolves its material references, final review evaluates that exact proposal, and separate authority activates its content-addressed identity.</p>
 </figcaption>
 <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
 <div class="aoi-book-diagram__step">
@@ -1523,17 +1524,17 @@
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
 <span class="aoi-book-diagram__label">2. Draft Mission Object</span>
-<p>A proposed objective, authority, effects, outputs, checks, budgets, routes, and admission policy.</p>
+<p>A proposed objective, authority, effects, outputs, checks, budgets, routes, and output-appropriate handoff.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="proposal">
+<span class="aoi-book-diagram__label">3. Bind and review</span>
+<p>Resolve material references to immutable identities, then evaluate the fully bound proposal against intent and policy.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
-<span class="aoi-book-diagram__label">3. Independent activation</span>
-<p>An authorized identity or adopted policy approves the exact contract and fixed base.</p>
-</div>
-<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
-<div class="aoi-book-diagram__step" data-tone="evidence">
-<span class="aoi-book-diagram__label">4. Governed run</span>
-<p>The workflow executes under the activated contract and records what actually happened.</p>
+<span class="aoi-book-diagram__label">4. Separate <a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a></span>
+<p>An authorized identity or adopted policy authorizes that exact content-addressed Mission identity.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__grid">
@@ -1541,14 +1542,14 @@
 <span class="aoi-book-diagram__label">Mission Object: instruction</span>
 <ul class="aoi-book-diagram__list">
 <li>Fixed during the run</li>
+<li>Fully bound before Activation</li>
 <li>States what may happen</li>
-<li>Cannot activate itself</li>
 </ul>
 </div>
 <div class="aoi-book-diagram__artifact">
-<span class="aoi-book-diagram__label"><a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a>: history</span>
+<span class="aoi-book-diagram__label">Run Record: history</span>
 <ul class="aoi-book-diagram__list">
-<li>Records attempts and effects</li>
+<li>Records attempts, observations, and effects</li>
 <li>Retains findings and transitions</li>
 <li>Seals at every terminal result</li>
 </ul>
@@ -1568,12 +1569,12 @@
 <figcaption class="aoi-book-diagram__header">
 <p class="aoi-book-diagram__eyebrow">One probabilistic invocation</p>
 <h3 class="aoi-book-diagram__title" id="sandwich-title">The Deterministic Sandwich</h3>
-<p class="aoi-book-diagram__summary">Deterministic preparation fixes the request. One bounded probabilistic step proposes a candidate. Independent validation parses and checks the result.</p>
+<p class="aoi-book-diagram__summary">Deterministic preparation constructs the request. One probabilistic step proposes a candidate within named limits. Validation outside candidate authority parses and checks the result.</p>
 </figcaption>
 <div class="aoi-book-diagram__flow">
 <div class="aoi-book-diagram__step" data-tone="authority">
 <span class="aoi-book-diagram__label">1. Prepare</span>
-<p>Read the activated work contract, select bounded context, and construct one fixed input shape.</p>
+<p>Read the activated work contract, select a bounded Context Packet, and construct the required input shape.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="proposal">
@@ -1583,7 +1584,7 @@
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">3. Validate</span>
-<p>Parse strictly, check declared properties and effects, and emit structured findings.</p>
+<p>Parse strictly, check the Mission's properties and effects, and emit structured findings.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__grid">
@@ -1596,7 +1597,7 @@
 <p>The candidate produced by the probabilistic step and the findings returned about it.</p>
 </div>
 </div>
-<p class="aoi-book-diagram__note">A Validator result is evidence for routing. It is not admission, and a retry policy belongs to the enclosing workflow.</p>
+<p class="aoi-book-diagram__note">A Validator result is evidence for routing. It is not Admission or Adoption, and a retry policy belongs to the enclosing workflow.</p>
 </figure>
 </section>
 </section><section aria-label="Skeleton-First: Scaffold or Extract" class="infographic-slide" data-infographic-section-id="i3-section-06-skeleton-first-rule" data-slide-index="20" role="group">
@@ -1791,12 +1792,12 @@
 <div class="text-xs font-semibold">Normalized Terrain inventory</div>
 <div class="text-xs font-mono text-brand-strong">2 routes · 2 commands · 1 ownership rule</div>
 </div>
-<div class="mt-1 text-[10px] font-mono text-brand-muted">exact observation · source revision 8ac4e1 · no inferred rationale</div>
+<div class="mt-1 text-[10px] font-mono text-brand-muted">content-addressed observation · source revision 8ac4e1 · no inferred rationale</div>
 </div>
 <div class="mt-2 border border-dashed border-brand-border rounded-lg p-3">
 <div class="text-[10px] uppercase tracking-wide font-mono text-brand-muted">Compare, then propose</div>
 <p class="mt-1 text-xs text-brand-muted leading-relaxed">
-          The updater compares this observation with the selected Map surface. Any bounded Map change, rationale, or judgment-heavy prose remains a proposal until separately reviewed and adopted.
+          The updater compares this observation with the selected Map surface. Any change to that surface, rationale, or judgment-heavy prose remains a proposal until separately reviewed and adopted.
         </p>
 </div>
 </article>
@@ -1848,7 +1849,7 @@
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">Structured findings</span>
-<p>Pass, fail, inconclusive, or a declared reason the check could not run.</p>
+<p>Pass, fail, inconclusive, or a recorded reason the check could not run.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
@@ -1868,47 +1869,47 @@
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-08-bounded-refinement-loop</span>
 <figure class="aoi-book-diagram">
 <figcaption class="aoi-book-diagram__header">
-<p class="aoi-book-diagram__eyebrow">Finite adaptation under fixed authority</p>
+<p class="aoi-book-diagram__eyebrow">Finite adaptation without changing authority</p>
 <h3 class="aoi-book-diagram__title" id="refinement-loop-title">The Bounded Refinement Loop</h3>
 <p class="aoi-book-diagram__summary">Findings may guide another proposal. They do not change the Mission, grant new effects, or remove the stopping rules.</p>
 </figcaption>
 <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
 <div class="aoi-book-diagram__step" data-tone="proposal">
 <span class="aoi-book-diagram__label">1. Propose</span>
-<p>Produce one candidate from the fixed work contract and current working state.</p>
+<p>Produce one candidate from the activated work contract and current working state.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">2. Check</span>
-<p>Run the required checks and retain exact findings, omissions, and attempted effects.</p>
+<p>Run the required checks and retain normalized findings, omissions, and attempted effects.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
 <span class="aoi-book-diagram__label">3. Decide</span>
-<p>Select one declared transition from the findings and remaining budgets.</p>
+<p>Select one transition permitted by the Mission from the findings and remaining budgets.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step">
 <span class="aoi-book-diagram__label">4. Refine or seal</span>
-<p>Use specific findings for another bounded attempt, or seal one terminal result.</p>
+<p>Use specific findings for another attempt within budget, or reach one terminal result and seal the Run Record.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__outcomes">
 <div class="aoi-book-diagram__outcome">
 <span class="aoi-book-diagram__label">complete</span>
-<p>A changed candidate met the declared completion conditions. Admission remains separate.</p>
+<p>The run met its completion conditions. A change candidate is now a supported proposal; Admission or Adoption remains separate.</p>
 </div>
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label"><a class="concept-link" href="concepts#complete_noop" title="See concept: complete_noop">complete_noop</a></span>
+<span class="aoi-book-diagram__label">no_change</span>
 <p>The required property already held and no candidate effect exists.</p>
 </div>
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label"><a class="concept-link" href="concepts#blocked" title="See concept: blocked">blocked</a></span>
-<p>Progress requires external authority, a trustworthy oracle, or environment repair.</p>
+<span class="aoi-book-diagram__label">blocked</span>
+<p>The Run Record names the external authority decision, trustworthy-oracle restoration, or environment repair needed for a new linked run.</p>
 </div>
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label">failed_with_<wbr/>evidence</span>
-<p>A breaker or declared failure condition ended execution with reconstructable evidence.</p>
+<span class="aoi-book-diagram__label">failed</span>
+<p>A breaker or failure condition ended execution, and no named external action can resolve it.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__grid">
@@ -1918,14 +1919,14 @@
 </div>
 <div class="aoi-book-diagram__artifact">
 <span class="aoi-book-diagram__label">Reconstruction evidence</span>
-<p>The protected, logically append-only account of each attempt, effect, finding, and transition.</p>
+<p>The logically append-only account of each attempt, effect, finding, and transition, retained outside candidate authority.</p>
 </div>
 </div>
 </figure>
 </section>
-</section><section aria-label="Ratchet: Validate, Admit, Then Advance" class="infographic-slide" data-infographic-section-id="i3-section-07-ratchet-gates" data-slide-index="23" role="group">
+</section><section aria-label="Ratchet: Validate, Then Commit Admission and Floor Together" class="infographic-slide" data-infographic-section-id="i3-section-07-ratchet-gates" data-slide-index="23" role="group">
 <div class="infographic-slide__header">
-<span class="infographic-slide__title">Ratchet: Validate, Admit, Then Advance</span>
+<span class="infographic-slide__title">Ratchet: Validate, Then Commit Admission and Floor Together</span>
 <span class="infographic-slide__meta">i3-section-07-ratchet-gates</span>
 </div>
 <section aria-labelledby="ratchet-title" class="col-span-1 md:col-span-12" data-infographic-fragment-shell="1" data-infographic-section-id="i3-section-07-ratchet-gates" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-3.html" data-infographic-status="published">
@@ -1961,7 +1962,7 @@
     }
     [data-infographic-section-id="i3-section-07-ratchet-gates"] .ratchet-stages {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0.45rem;
       margin: 0.85rem 0;
     }
@@ -1985,8 +1986,8 @@
 <figure class="aoi-book-diagram">
 <figcaption class="aoi-book-diagram__header">
 <p class="aoi-book-diagram__eyebrow">Protected non-regression</p>
-<h3 class="aoi-book-diagram__title" id="ratchet-title">Validate, Admit, Then Advance the Ratchet</h3>
-<p class="aoi-book-diagram__summary">Validation may close a proposal against one protected floor revision. Only successful current-state admission may advance that floor.</p>
+<h3 class="aoi-book-diagram__title" id="ratchet-title">Validate, Then Commit Admission and Floor Together</h3>
+<p class="aoi-book-diagram__summary">Validation may support proposal closure against one protected floor revision. Current-state Admission commits the candidate and next floor as one transaction.</p>
 </figcaption>
 <div class="aoi-book-diagram__grid">
 <div class="aoi-book-diagram__artifact">
@@ -1995,7 +1996,7 @@
 </div>
 <div class="aoi-book-diagram__artifact">
 <span class="aoi-book-diagram__label">Invariant</span>
-<p>Failure, uncertainty, and stale-base admission leave the accepted floor unchanged. Lowering it requires a separate Governance Mission.</p>
+<p>For this candidate, failure, uncertainty, stale state, or a transaction write failure commits neither Admission nor floor advancement. Lowering the floor requires a separate Governance Mission and separate Adoption.</p>
 </div>
 </div>
 <div aria-hidden="true" class="aoi-book-diagram__divider"></div>
@@ -2007,13 +2008,12 @@
 <button aria-pressed="false" data-scenario="behavior" type="button">Behavior change</button>
 <button aria-pressed="false" data-scenario="race" type="button">Floor race</button>
 </div>
-<p class="aoi-book-diagram__summary" data-role="scenario-note">One lint finding is removed while protected behavior and the current floor are preserved.</p>
+<p class="aoi-book-diagram__summary" data-role="scenario-note">One lint finding is removed while required behavior remains unchanged and the current floor is preserved.</p>
 <div aria-label="Ratchet lifecycle" class="ratchet-stages">
 <div class="ratchet-stage" data-stage="measure">1. Measure</div>
 <div class="ratchet-stage" data-stage="judge">2. Judge</div>
 <div class="ratchet-stage" data-stage="seal">3. Seal</div>
-<div class="ratchet-stage" data-stage="admit">4. Admit</div>
-<div class="ratchet-stage" data-stage="advance">5. CAS floor</div>
+<div class="ratchet-stage" data-stage="admit">4. Admit + CAS floor</div>
 </div>
 <div aria-live="polite" class="aoi-book-diagram__outcomes">
 <div class="aoi-book-diagram__outcome">
@@ -2025,7 +2025,7 @@
 <p data-role="result">not run</p>
 </div>
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label">Admission</span>
+<span class="aoi-book-diagram__label">Admission + floor</span>
 <p data-role="admission">not eligible</p>
 </div>
 <div class="aoi-book-diagram__outcome">
@@ -2035,7 +2035,7 @@
 </div>
 <div class="ratchet-actions">
 <button data-action="validate" type="button">Validate candidate</button>
-<button data-action="admit" disabled="" type="button">Admit and advance</button>
+<button data-action="admit" disabled="" type="button">Commit Admission + floor</button>
 <button data-action="reset" type="button">Reset</button>
 </div>
 <p class="aoi-book-diagram__note" data-role="outcome">The candidate has not been evaluated.</p>
@@ -2048,30 +2048,30 @@
 
       const scenarios = {
         eligible: {
-          note: 'One lint finding is removed while protected behavior and the current floor are preserved.',
+          note: 'One lint finding is removed while required behavior remains unchanged and the current floor is preserved.',
           check: 'pass',
           result: 'complete',
-          outcome: 'The run closes complete at floor revision 42. Admission remains separate.',
+          outcome: 'The run ends complete with a supported proposal at floor revision 42. Its Run Record is sealed; Admission remains separate.',
           admissible: true
         },
         regression: {
-          note: 'The structural goal is met, but protected coverage falls below the accepted floor.',
+          note: 'The structural goal is met, but measured coverage falls below the protected floor.',
           check: 'fail',
-          result: 'failed_with_evidence',
-          outcome: 'The run seals failed_with_evidence. The floor remains unchanged.',
+          result: 'failed',
+          outcome: 'The run ends failed. Its Run Record is sealed, and the floor remains unchanged.',
           admissible: false
         },
         inconclusive: {
           note: 'The required signal remains inconclusive after the declared sampling budget.',
           check: 'inconclusive',
-          result: 'failed_with_evidence',
-          outcome: 'The exhausted protocol seals failed_with_evidence. Unknown does not pass.',
+          result: 'failed',
+          outcome: 'The exhausted protocol ends failed. The Run Record is sealed; unknown does not pass.',
           admissible: false
         },
         behavior: {
-          note: 'A protected public response changed, so this is a migration rather than a refactor.',
+          note: 'A public response covered by the protected equivalence check changed, so this is a migration rather than a refactor.',
           check: 'fail: equivalence',
-          result: 'failed_with_evidence',
+          result: 'failed',
           outcome: 'This Mission class rejects the candidate. A separate migration proposal is required.',
           admissible: false
         },
@@ -2079,7 +2079,7 @@
           note: 'Another admission advances the floor after validation but before this candidate is admitted.',
           check: 'pass at revision 42',
           result: 'complete',
-          outcome: 'The proposal closes complete against revision 42. Current-state admission is still required.',
+          outcome: 'The run ends complete with a supported proposal against revision 42. Its Run Record is sealed; current-state Admission is still required.',
           admissible: true,
           race: true
         }
@@ -2150,17 +2150,17 @@
         const scenario = scenarios[selected];
         if (scenario.race) {
           floorRevision = 43;
-          fields.admission.textContent = 'blocked: stale floor';
-          fields.outcome.textContent = 'Compare-and-set rejects the stale proposal. Revalidate in a new run against revision 43.';
+          fields.admission.textContent = 'aborted: stale floor';
+          fields.outcome.textContent = 'Another transaction advanced the floor. This candidate remains unadmitted and must be revalidated against revision 43.';
         } else {
           floorRevision += 1;
-          fields.admission.textContent = 'admitted';
-          fields.outcome.textContent = 'Admission succeeds. The protected service advances the floor atomically.';
+          fields.admission.textContent = 'committed together';
+          fields.outcome.textContent = 'The transaction commits the candidate and floor revision 43 together.';
         }
         fields.floor.textContent = `revision ${floorRevision}`;
         fields.floorResult.textContent = `revision ${floorRevision}`;
         admitButton.disabled = true;
-        setStages(4);
+        setStages(scenario.race ? 2 : 3);
       });
 
       resetButton.addEventListener('click', resetRun);
@@ -2184,7 +2184,7 @@
   }
 
   [data-infographic-section-id="i3-section-05-always-on-loops"] .maintenance-status[data-state="complete"],
-  [data-infographic-section-id="i3-section-05-always-on-loops"] .maintenance-status[data-state="complete_noop"] {
+  [data-infographic-section-id="i3-section-05-always-on-loops"] .maintenance-status[data-state="no_change"] {
     color: #2ac3de;
   }
 
@@ -2192,7 +2192,7 @@
     color: #ff9e64;
   }
 
-  [data-infographic-section-id="i3-section-05-always-on-loops"] .maintenance-status[data-state="failed_with_evidence"] {
+  [data-infographic-section-id="i3-section-05-always-on-loops"] .maintenance-status[data-state="failed"] {
     color: #bb9af7;
   }
 
@@ -2229,8 +2229,8 @@
 <div class="lg:col-span-5">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Maintenance Controller: Scan, Select, Dispatch</h2>
 <p class="text-brand-muted leading-relaxed">
-              A maintenance scan seals a checked report. Only an independently activated
-              Mission may produce a bounded candidate, and proposal completion never implies adoption.
+              A maintenance scan produces a checked report and seals its Run Record. Only a separately activated
+              Mission may produce a supported proposal; proposal closure never implies Admission.
             </p>
 <div class="mt-5 border-t border-brand-border pt-5 space-y-4">
 <div>
@@ -2318,8 +2318,8 @@
 <span class="maintenance-target font-mono text-right text-brand-strong" id="maintenanceCandidate">none</span>
 <span class="text-brand-muted">outputs.checked</span>
 <span class="font-mono text-right text-brand-strong" id="maintenanceMissionOutputsChecked">false</span>
-<span class="text-brand-muted">Adoption</span>
-<span class="font-mono text-right text-brand-strong" id="maintenanceAdoption">not_applicable</span>
+<span class="text-brand-muted">Admission</span>
+<span class="font-mono text-right text-brand-strong" id="maintenanceAdmission">not_applicable</span>
 </div>
 <div class="maintenance-ledger-ref mt-3 text-xs font-mono text-brand-muted" id="maintenanceMissionLedger">ledger/maintenance/missions/not-activated</div>
 </div>
@@ -2336,7 +2336,7 @@
 </div>
 </div>
 <div aria-live="polite" class="border-t border-brand-border pt-3 text-sm text-brand-muted" id="maintenanceOutcome">
-              No run activated. Scan authority and child-mission authority remain separate.
+              No child Mission is activated. Scan authority and child-Mission authority remain separate.
             </div>
 </div>
 </div>
@@ -2380,7 +2380,7 @@
     background: rgba(122, 162, 247, 0.24);
     border-color: rgba(122, 162, 247, 0.34);
   }
-  [data-role="sensor-uml"] .sensor-event.is-blocked {
+  [data-role="sensor-uml"] .sensor-event.is-denied {
     background: rgba(247, 118, 142, 0.22);
     border-color: rgba(247, 118, 142, 0.34);
   }
@@ -2496,7 +2496,7 @@
 <div class="bg-brand-light border border-brand-border rounded-xl p-3">
 <div class="flex items-center justify-between gap-3">
 <div class="text-xs font-mono text-brand-muted">Event stream</div>
-<div class="text-xs text-brand-muted">Blue = emit, red = blocked write</div>
+<div class="text-xs text-brand-muted">Blue = emit, red = denied write</div>
 </div>
 <div class="mt-3 grid grid-cols-12 gap-1" data-role="events"></div>
 </div>
@@ -2590,7 +2590,7 @@
 
   const appendEvent = (kind) => {
     const pill = document.createElement("span");
-    pill.className = `attempt-pill sensor-event ${kind === "emit" ? "is-emit" : "is-blocked"}`;
+    pill.className = `attempt-pill sensor-event ${kind === "emit" ? "is-emit" : "is-denied"}`;
     eventsEl.appendChild(pill);
     while (eventsEl.children.length > 36) {
       eventsEl.removeChild(eventsEl.firstChild);
@@ -2670,12 +2670,12 @@
       base_class: "Sensor",
       mode: "READ_ONLY",
       action: "write_attempt",
-      result: "blocked",
+      result: "denied",
       reason: "sensor boundary violation",
       next_action: "route mutation to effector"
     };
-    appendEvent("blocked");
-    outcomeEl.textContent = "WRITE BLOCKED: only Effectors mutate Terrain.";
+    appendEvent("denied");
+    outcomeEl.textContent = "WRITE DENIED: only Effectors mutate Terrain.";
     render();
   };
 
@@ -2815,8 +2815,8 @@
 <header class="max-w-4xl">
 <h2 class="text-3xl font-bold text-brand-strong mb-3">Governance: Findings, Judgment, Admission</h2>
 <p class="text-brand-muted leading-relaxed">
-      Protected Validators emit complete findings. The Judge closes the proposal. The Mission Gate
-      independently revalidates the current candidate before admission.
+      Validators outside candidate authority emit complete findings. The Judge selects an allowed transition, and the runtime
+      seals the Run Record. The Mission Gate separately revalidates a supported proposal before Admission.
     </p>
 </header>
 <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6" data-role="governance-model">
@@ -2832,11 +2832,11 @@
 <div class="mt-1 text-xs leading-relaxed text-brand-muted">Required Validators return pass, fail, or inconclusive. Every result remains visible.</div>
 </li>
 <li>
-<div class="text-sm font-bold text-brand-strong">3. Close the proposal</div>
-<div class="mt-1 text-xs leading-relaxed text-brand-muted">Declared output checks complete the evidence frontier before the Judge chooses an allowed transition and the runtime seals the result.</div>
+<div class="text-sm font-bold text-brand-strong">3. Seal the Run Record</div>
+<div class="mt-1 text-xs leading-relaxed text-brand-muted">Required output checks complete the evidence frontier before the Judge chooses an allowed transition and the runtime seals the Run Record.</div>
 </li>
 <li>
-<div class="text-sm font-bold text-brand-strong">4. Admit independently</div>
+<div class="text-sm font-bold text-brand-strong">4. Revalidate for Admission</div>
 <div class="mt-1 text-xs leading-relaxed text-brand-muted">The Mission Gate revalidates current bindings, approvals, exception scope, and kill state.</div>
 </li>
 </ol>
@@ -2850,7 +2850,7 @@
 </div>
 </div>
 <div class="lg:col-span-8 min-w-0">
-<div class="text-xs font-mono uppercase text-brand-muted">Choose a fixed case</div>
+<div class="text-xs font-mono uppercase text-brand-muted">Choose a case</div>
 <div class="mt-3 flex flex-wrap gap-2" data-role="scenario-controls">
 <button aria-pressed="true" class="gov-choice" data-role="scenario" data-scenario="allowlisted" type="button">Allowlisted</button>
 <button aria-pressed="false" class="gov-choice" data-role="scenario" data-scenario="undeclared_effect" type="button">Undeclared Effect</button>
@@ -2972,7 +2972,7 @@
         ['outputs.contract@3', 'inconclusive']
       ],
       transition: 'revert',
-      result: 'failed_with_evidence',
+      result: 'failed',
       outputsChecked: false,
       gateStatus: 'block',
       gateReason: 'proposal_not_complete',
@@ -2980,7 +2980,7 @@
     },
     missing_evidence: {
       label: 'Missing Evidence',
-      note: 'The protected security data bundle is unreadable, so the required predicate is inconclusive.',
+      note: 'The protected security data bundle is unreadable; a platform operator must restore it before a new linked run.',
       mission: 'sha256:mission-7f3',
       base: '8b21c4',
       candidate: 'sha256:candidate-c22',
@@ -2992,7 +2992,7 @@
         ['architecture.boundary@2', 'pass'],
         ['outputs.contract@3', 'pass']
       ],
-      transition: 'update_environment',
+      transition: 'restore_security_data_bundle',
       result: 'blocked',
       outputsChecked: true,
       gateStatus: 'block',
@@ -3014,7 +3014,7 @@
         ['outputs.contract@3', 'pass']
       ],
       transition: 'revert',
-      result: 'failed_with_evidence',
+      result: 'failed',
       outputsChecked: true,
       gateStatus: 'block',
       gateReason: 'proposal_not_complete',
@@ -3050,7 +3050,7 @@
     },
     base_race: {
       label: 'Base Race',
-      note: 'The proposal closes cleanly, but the admission base changes before the Mission Gate runs.',
+      note: 'The run ends complete with a supported proposal, but the Admission base changes before the Mission Gate runs.',
       mission: 'sha256:mission-7f3',
       base: '8b21c4',
       candidate: 'sha256:candidate-f88',
@@ -3139,7 +3139,7 @@
       setStage(judgeStageEl, '');
       setStage(admissionStageEl, '');
       admitBtn.disabled = true;
-      outcomeEl.textContent = 'Evaluate the proposal, then run the independent admission gate.';
+      outcomeEl.textContent = 'Evaluate the proposal, then run the separate Admission gate.';
       return;
     }
 
@@ -3205,7 +3205,7 @@
       exception: selectedCase.exception,
       judge: { transition: selectedCase.transition, result: selectedCase.result },
       outputs: { checked: selectedCase.outputsChecked },
-      seal: `sha256:proposal-${state.run}`,
+      run_record_seal: `sha256:run-record-${state.run}`,
       integrity: { complete: true, contradictions: [] }
     }];
     state.previousHash = eventHash;

@@ -2009,6 +2009,11 @@ a:hover { color: var(--link-hover); text-decoration: underline; }
     -webkit-overflow-scrolling: touch;
   }
 
+  .content th,
+  .content td {
+    min-width: 8rem;
+  }
+
   .content a {
     overflow-wrap: anywhere;
     word-break: break-word;

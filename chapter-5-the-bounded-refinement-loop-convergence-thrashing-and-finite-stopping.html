@@ -5,7 +5,7 @@
 <title>Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. | Stage | Evidence | | --- | --- | | Attempt 1 |…" name="description"/>
+<meta content="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
@@ -13,7 +13,7 @@
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping | Architects of Intent" property="og:title"/>
-<meta content="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. | Stage | Evidence | | --- | --- | | Attempt 1 |…" property="og:description"/>
+<meta content="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -21,17 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. | Stage | Evidence | | --- | --- | | Attempt 1 |…" name="twitter:description"/>
+<meta content="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping", "description": "Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. | Stage | Evidence | | --- | --- | | Attempt 1 |…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping", "mainEntityOfPage": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-08T20:46:38Z", "timeRequired": "PT9M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping", "description": "Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping", "mainEntityOfPage": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT10M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=43278bf4523f" rel="stylesheet"/>
-<script defer="" src="script.js?v=43278bf4523f"></script>
+<link href="style.css?v=75dc07434699" rel="stylesheet"/>
+<script defer="" src="script.js?v=75dc07434699"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -56,12 +56,16 @@
 <header class="chapter-header">
 <div class="chapter-kicker">
 <div class="part-title">Part II – Reliability Foundations</div>
-<div class="chapter-meta"><span class="read-time">9 min read</span></div>
+<div class="chapter-meta"><span class="read-time">10 min read</span></div>
 </div>
 <div class="chapter-header__body">
 <h1 id="chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping">Chapter
 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite
 Stopping</h1>
+<p>This chapter switches from Part I’s documentation examples to a tax
+calculation because schema and rounding failures provide distinct,
+comparable findings across attempts. Chapter 6 continues the same case
+to show how bounded context supports correction.</p>
 <p>Start with one bounded trace:</p>
 </div>
 </header>
@@ -73,7 +77,7 @@ Stopping</h1>
 <thead>
 <tr>
 <th>Stage</th>
-<th>Evidence</th>
+<th><a class="concept-link" href="concepts#evidence" title="See concept: Evidence">Evidence</a></th>
 </tr>
 </thead>
 <tbody>
@@ -92,20 +96,20 @@ file</td>
 <td>All fast checks pass; one smaller change remains</td>
 </tr>
 <tr>
-<td>Promotion</td>
+<td>Final checks</td>
 <td>All required checks and declared output checks pass</td>
 </tr>
 <tr>
 <td>Result</td>
-<td>The run ends <code>complete</code>; the candidate remains a proposal
-and the <a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> is sealed</td>
+<td>The run ends <code>complete</code> with a supported proposal; the
+<a class="concept-link" href="concepts#run-record" title="See concept: Run Record">Run Record</a> is sealed</td>
 </tr>
 </tbody>
 </table>
 <p>The same fast checks and versions ran on the first three attempts, so
 their findings are comparable. A prior failure disappears, the actual
-footprint contracts, and the proposal advances only after the <a class="concept-link" href="concepts#complete" title="See concept: complete">complete</a>
-required evidence is available.</p>
+footprint contracts, and proposal closure occurs only after all required
+evidence is available.</p>
 <p>This does not prove that every retry loop converges. It shows what
 evidence justifies calling this trace convergent. A circuit breaker can
 guarantee finite execution. Convergence requires more: reachable
@@ -118,47 +122,47 @@ explicit:</p>
 <span aria-hidden="true" data-infographic-fragment-label="1">i3-section-08-bounded-refinement-loop</span>
 <figure class="aoi-book-diagram">
 <figcaption class="aoi-book-diagram__header">
-<p class="aoi-book-diagram__eyebrow">Finite adaptation under fixed authority</p>
+<p class="aoi-book-diagram__eyebrow">Finite adaptation without changing authority</p>
 <h2 class="aoi-book-diagram__title" id="refinement-loop-title">The Bounded Refinement Loop</h2>
 <p class="aoi-book-diagram__summary">Findings may guide another proposal. They do not change the Mission, grant new effects, or remove the stopping rules.</p>
 </figcaption>
 <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
 <div class="aoi-book-diagram__step" data-tone="proposal">
 <span class="aoi-book-diagram__label">1. Propose</span>
-<p>Produce one candidate from the fixed work contract and current working state.</p>
+<p>Produce one candidate from the activated work contract and current working state.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="evidence">
 <span class="aoi-book-diagram__label">2. Check</span>
-<p>Run the required checks and retain exact findings, omissions, and attempted effects.</p>
+<p>Run the required checks and retain normalized findings, omissions, and attempted effects.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step" data-tone="authority">
 <span class="aoi-book-diagram__label">3. Decide</span>
-<p>Select one declared transition from the findings and remaining budgets.</p>
+<p>Select one transition permitted by the Mission from the findings and remaining budgets.</p>
 </div>
 <span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
 <div class="aoi-book-diagram__step">
 <span class="aoi-book-diagram__label">4. Refine or seal</span>
-<p>Use specific findings for another bounded attempt, or seal one terminal result.</p>
+<p>Use specific findings for another attempt within budget, or reach one terminal result and seal the Run Record.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__outcomes">
 <div class="aoi-book-diagram__outcome">
 <span class="aoi-book-diagram__label">complete</span>
-<p>A changed candidate met the declared completion conditions. <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> remains separate.</p>
+<p>The run met its completion conditions. A change candidate is now a supported proposal; <a class="concept-link" href="concepts#admission" title="See concept: Admission">Admission</a> or <a class="concept-link" href="concepts#adoption" title="See concept: Adoption">Adoption</a> remains separate.</p>
 </div>
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label"><a class="concept-link" href="concepts#complete_noop" title="See concept: complete_noop">complete_noop</a></span>
+<span class="aoi-book-diagram__label">no_change</span>
 <p>The required property already held and no candidate effect exists.</p>
 </div>
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label"><a class="concept-link" href="concepts#blocked" title="See concept: blocked">blocked</a></span>
-<p>Progress requires external authority, a trustworthy oracle, or environment repair.</p>
+<span class="aoi-book-diagram__label">blocked</span>
+<p>The Run Record names the external authority decision, trustworthy-oracle restoration, or environment repair needed for a new linked run.</p>
 </div>
 <div class="aoi-book-diagram__outcome">
-<span class="aoi-book-diagram__label">failed_with_<wbr/>evidence</span>
-<p>A breaker or declared failure condition ended execution with reconstructable evidence.</p>
+<span class="aoi-book-diagram__label">failed</span>
+<p>A breaker or failure condition ended execution, and no named external action can resolve it.</p>
 </div>
 </div>
 <div class="aoi-book-diagram__grid">
@@ -168,22 +172,22 @@ explicit:</p>
 </div>
 <div class="aoi-book-diagram__artifact">
 <span class="aoi-book-diagram__label">Reconstruction evidence</span>
-<p>The protected, logically append-only account of each attempt, effect, finding, and transition.</p>
+<p>The logically append-only account of each attempt, effect, finding, and transition, retained outside candidate authority.</p>
 </div>
 </div>
 </figure>
 </section>
-<p>Each attempt may use the previous candidate and exact <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>
+<p>Each attempt may use the previous candidate and normalized <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a>
 findings. The Mission’s authority, permitted effects, budgets, and
 acceptance criteria remain fixed. <a class="concept-link" href="concepts#validator" title="See concept: Validator">Validator</a> pass and failure results are
 evidence, not lifecycle outcomes.</p>
 <p>Every run ends in one of four ways: the candidate satisfies the
 completion conditions; the required property already holds and no change
-is needed; the work stops pending an external decision or repair; or
-execution stops unsuccessfully and preserves its evidence.</p>
+is needed; the work stops pending a named external decision or repair;
+or execution stops unsuccessfully and preserves its evidence.</p>
 <p>The state machine names those outcomes <code>complete</code>,
-<code>complete_noop</code>, <code>blocked</code>, and
-<code>failed_with_evidence</code>.</p>
+<code>no_change</code>, <code>blocked</code>, and
+<code>failed</code>.</p>
 <h2 id="from-one-attempt-to-refinement">From One Attempt to
 Refinement</h2>
 <p>Chapter 2 bounded one attempt as Prep, Model, and Validation.
@@ -197,8 +201,8 @@ structured findings. Declared output checks run here as required
 evidence.</li>
 <li><strong>Decide:</strong> when evidence is complete enough for the
 current stage, the <a class="concept-link" href="concepts#judge" title="See concept: Judge">Judge</a> selects one allowed transition.</li>
-<li><strong>Refine:</strong> if another attempt remains justified, exact
-normalized findings inform the next proposal without changing authority
+<li><strong>Refine:</strong> if another attempt remains justified,
+normalized findings inform the next candidate without changing authority
 or scope.</li>
 </ol>
 <p>An empty finding set is not enough for acceptance. Every required
@@ -221,12 +225,13 @@ checks, the candidate stayed in scope, the Mission and budgets remain
 unchanged, and the transition is allowed. It rejects any decision that
 invents findings, widens scope, changes the Mission or budget, selects
 an undeclared transition, or attempts admission.</p>
-<p>Human escalation should not become a routine retry stage. Use it for
-missing authority, a novel policy conflict, an exact exception, an
-explicitly high-consequence choice, or the absence of a trustworthy
-oracle. The current run closes and seals as <code>blocked</code>; a
-resolution may authorize a new linked run but never reopen the old
-one.</p>
+<p>Human escalation should not become a routine retry stage. Use it only
+when the run can name the external decision or repair required: missing
+authority, a novel policy conflict, an exception bound to this Mission
+and state, a high-consequence choice reserved for human authority, or
+the absence of a trustworthy oracle. The current run ends
+<code>blocked</code> and its Run Record is sealed; a resolution may
+authorize a new linked run but never reopen the old one.</p>
 <h2 id="state-results-and-sealing">State, Results, and Sealing</h2>
 <p>The state machine is small:</p>
 <pre class="mermaid"><code>flowchart TD
@@ -234,15 +239,17 @@ one.</p>
   V --&gt; D{Decide}
   D --&gt;|retry| R[Refine from findings]
   R --&gt; P
-  D --&gt;|terminal| T[Seal one declared result]</code></pre>
-<p>The terminal node seals exactly one of <code>complete</code>,
-<code>complete_noop</code>, <code>blocked</code>, or
-<code>failed_with_evidence</code>.</p>
-<p>A failed early stage does not need results from checks that could not
-yet run. It does need a complete account of why they did not run. A
+  D --&gt;|terminal| T[Seal Run Record]</code></pre>
+<p>The terminal node seals a Run Record with exactly one result:
+<code>complete</code>, <code>no_change</code>, <code>blocked</code>, or
+<code>failed</code>.</p>
+<p>An early-stage failure does not need results from checks that could
+not yet run. It does need a complete account of why they did not run. A
 parse failure may therefore prevent later checks from running when each
-omission has a deterministic reason. Final acceptance is different:
-every check required for promotion must complete successfully.</p>
+omission has a deterministic reason. For proposal closure, however,
+every required result must be complete and the applicable policy-bound
+decision rule, including any exact-exception condition, must be
+satisfied.</p>
 <p>The workflow keeps two kinds of memory:</p>
 <ul>
 <li><strong>Reconstruction evidence:</strong> the protected, logically
@@ -260,52 +267,63 @@ developed in <a class="chapter-link" href="chapter-12-governance-for-high-rate-a
 questions:</p>
 <ul>
 <li><code>complete</code>: a changed candidate satisfied the run’s
-declared completion conditions and is a sealed proposal for separate
-admission;</li>
-<li><code>complete_noop</code>: the required property already held and
-no candidate effect exists;</li>
-<li><code>blocked</code>: an external authority, oracle, contradiction,
-or environment repair is required;</li>
-<li><code>failed_with_evidence</code>: execution exhausted a breaker,
-failed to converge, reverted, or met another declared failure
-condition.</li>
+declared completion conditions and becomes a supported proposal for
+separate Admission or Adoption;</li>
+<li><code>no_change</code>: the required property already held and no
+candidate effect exists;</li>
+<li><code>blocked</code>: the Run Record names the external repair or
+decision required before a new linked run can proceed;</li>
+<li><code>failed</code>: execution exhausted a breaker, failed to
+converge, reverted, or met another declared failure condition.</li>
 </ul>
 <p>Seal every terminal Run Record. Later intervention creates a linked
 run. A <code>revert</code> is a workspace transition back to the
-baseline; <code>failed_with_evidence</code> is the terminal record of
-the unsuccessful run.</p>
+baseline; <code>failed</code> is the terminal result of the unsuccessful
+run, with evidence retained in the Run Record.</p>
 <p>The Judge may choose the accept transition only after every required
-output check passes and the promotion evidence is complete and
-internally consistent. That transition closes the proposal. It does not
-merge, deploy, or otherwise admit the candidate into <a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a>.</p>
+result is complete, the applicable policy-bound decision rule—including
+any exact-exception condition—is satisfied, and the evidence required
+for proposal closure is complete and internally consistent. That
+transition closes the proposal. It does not admit the candidate into
+<a class="concept-link" href="concepts#terrain" title="See concept: Terrain">Terrain</a> or adopt it as a <a class="concept-link" href="concepts#map" title="See concept: Map">Map</a> or policy.</p>
 <h3 id="feedback-drives-adaptation-it-does-not-change-authority">Feedback
 Drives Adaptation; It Does Not Change Authority</h3>
 <p>Inside one run, the model’s weights do not change. The workflow
-adapts because exact findings inform the next proposal while authority,
-scope, budgets, and acceptance criteria remain fixed. Feedback guides
-the search; it does not redefine the target or grant permission.</p>
+adapts because normalized findings inform the next candidate while
+authority, scope, budgets, and acceptance criteria remain fixed.
+Feedback guides the search; it does not redefine the target or grant
+permission.</p>
 <p>The feedback contract should identify the previous candidate, name
-exact findings, and require one output shape. Unbounded logs followed by
-“try again” make measurements harder to compare and invite scope
+specific findings, and require one output shape. Unbounded logs followed
+by “try again” make measurements harder to compare and invite scope
 leak.</p>
 <h2 id="convergence-and-thrashing">Convergence and Thrashing</h2>
 <p>Convergence is a property of a trace: the refinement policy reaches
 the declared acceptance conditions before a breaker fires. Thrashing is
 also a property of a trace: attempts accumulate while comparable
 evidence shows no net progress.</p>
+<p>Convergence is always relative to one fixed activated Mission. The
+run may use only its declared routes and correction strategies; it
+cannot change the target, authority, scope, budgets, or required checks
+to manufacture progress. If adopted intent or the relevant Terrain
+changes materially, later alignment requires a new linked Mission. If
+run evidence suggests that the workflow or policy itself should change,
+that evidence may support a separately governed proposal and Adoption.
+Neither change belongs inside the current refinement loop.</p>
 <p>A finite run is not necessarily convergent. Stopping an impossible or
-unproductive loop as <code>failed_with_evidence</code> is correct
-termination. A no-op is different again: the starting state already
+unproductive loop as <code>failed</code> is correct termination.
+<code>no_change</code> is different again: the starting state already
 satisfied the request.</p>
 <p>Useful progress signals include:</p>
 <ul>
-<li>the same complete check set reports fewer failing reason codes;</li>
+<li>the same completed check set reports fewer failing reason
+codes;</li>
 <li>an earlier finding disappears without a harder boundary
 regressing;</li>
 <li>the actual footprint contracts while authorized scope stays
 fixed;</li>
-<li>a previously blocked validation stage completes and exposes the next
-required stage.</li>
+<li>a previously unavailable validation stage completes and exposes the
+next required stage.</li>
 </ul>
 <p>Do not compare failure counts from different sets of completed checks
 as though they were the same measurement. Fixing a parse failure may
@@ -314,10 +332,10 @@ Progress need not occur on every attempt, but it must appear inside a
 declared window.</p>
 <h3 id="reachability-and-feedback-quality">Reachability and Feedback
 Quality</h3>
-<p>Acceptance conditions state what a supported proposal must satisfy:
-parsing and scope, declared intent, the complete required checks, output
-evidence, approvals, and internally consistent records. They do not
-prove that a candidate can reach those conditions.</p>
+<p>Acceptance conditions state what a candidate must satisfy to become a
+supported proposal: parsing and scope, declared intent, all required
+checks, output evidence, approvals, and internally consistent records.
+They do not prove that a candidate can reach those conditions.</p>
 <p>Three diagnoses matter:</p>
 <ul>
 <li><strong>The conditions are too broad:</strong> many materially
@@ -357,31 +375,41 @@ returned to the same state.</p>
 <tbody>
 <tr>
 <td>malformed output or ordinary correctable finding</td>
-<td>retry with the exact finding while progress and attempt budgets
+<td>retry with the specific finding while progress and attempt budgets
 remain</td>
-<td><code>failed_with_evidence</code></td>
+<td><code>failed</code></td>
 </tr>
 <tr>
 <td>ordinary out-of-scope effect</td>
 <td>reject the full candidate; retry only if policy permits correction
 without widening scope</td>
-<td><code>failed_with_evidence</code> on repetition</td>
+<td><code>failed</code> on repetition</td>
 </tr>
 <tr>
-<td>protected effect, missing approval, or contradictory Mission</td>
-<td>stop candidate generation and request the named external
-decision</td>
-<td><code>blocked</code></td>
+<td>effect on a protected surface</td>
+<td>deny and record the attempted effect; use a separately authorized
+workflow if the change is intended</td>
+<td><code>failed</code></td>
+</tr>
+<tr>
+<td>missing approval or contradictory Mission</td>
+<td>stop candidate generation and identify the authority decision or
+Mission repair that could resolve it</td>
+<td><code>blocked</code> only if that named decision or repair can
+resolve the condition; otherwise <code>failed</code></td>
 </tr>
 <tr>
 <td>transient check infrastructure failure</td>
 <td>retry the check without regenerating the candidate</td>
-<td><code>blocked</code> if trustworthy evidence cannot be produced</td>
+<td><code>blocked</code> only if a named environment repair can restore
+trustworthy evidence; otherwise <code>failed</code></td>
 </tr>
 <tr>
 <td>missing or contradictory evidence</td>
-<td>fail closed and preserve the integrity finding</td>
-<td><code>blocked</code></td>
+<td>fail closed and preserve the integrity finding; name the external
+repair or decision if one can resolve it</td>
+<td><code>blocked</code> only if that named action can resolve the
+condition; otherwise <code>failed</code></td>
 </tr>
 </tbody>
 </table>
@@ -389,11 +417,12 @@ decision</td>
 every failure has the same next transition.</p>
 <h2 id="staged-checks">Staged Checks</h2>
 <p>Expensive checks need not run on every attempt. Use a stable fast set
-for comparable refinement, then run every required promotion check
+for comparable refinement, then run every remaining required check
 before acceptance. A candidate that clears parsing, scope, lint, types,
 and narrow tests may advance to integration, environment, performance,
-or security checks. Failure at promotion follows the same routing rules;
-it does not erase the earlier evidence or justify a second Judge.</p>
+or security checks. Failure during final checks follows the same routing
+rules; it does not erase the earlier evidence or justify a second
+Judge.</p>
 <h2 id="finite-stopping">Finite Stopping</h2>
 <p>Circuit breakers make stopping deterministic even when candidate
 generation is stochastic:</p>
@@ -414,7 +443,7 @@ generation is stochastic:</p>
 <tr>
 <td>attempts, time, or spend</td>
 <td>declared budget consumed</td>
-<td><code>failed_with_evidence</code></td>
+<td><code>failed</code></td>
 </tr>
 <tr>
 <td>footprint</td>
@@ -424,29 +453,31 @@ generation is stochastic:</p>
 <tr>
 <td>minimum progress</td>
 <td>no comparable progress inside the declared window</td>
-<td><code>failed_with_evidence</code></td>
+<td><code>failed</code></td>
 </tr>
 <tr>
 <td>oscillation</td>
 <td>the same normalized candidate and check results recur</td>
-<td><code>failed_with_evidence</code></td>
+<td><code>failed</code></td>
 </tr>
 <tr>
 <td>infrastructure retries</td>
 <td>the check cannot produce trustworthy evidence within budget</td>
-<td><code>blocked</code></td>
+<td><code>blocked</code> if a named environment repair can restore
+trustworthy evidence; otherwise <code>failed</code></td>
 </tr>
 <tr>
 <td>evidence integrity</td>
 <td>required records are missing or contradictory</td>
-<td><code>blocked</code></td>
+<td><code>blocked</code> if a named external repair or decision can
+resolve the condition; otherwise <code>failed</code></td>
 </tr>
 </tbody>
 </table>
 <p>There are no universal limits. Set them from consequence, task
-surface, review capacity, and prior evidence before candidate
-generation. Changing them during the run requires an authorized
-transition or a new Mission.</p>
+surface, review capacity, and prior evidence before final review and
+<a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a>. They remain fixed for the run; a different limit requires a
+new Mission and linked run.</p>
 <p>That is enough to distinguish convergence from luck, newly exposed
 failure from regression, and finite failure from uncontrolled retry. The
 generator may remain probabilistic; the workflow keeps authority fixed,
@@ -457,7 +488,7 @@ an agent being told to keep trying. An organization can delegate more
 correction work while retaining fixed limits on what may change, what
 counts as progress, and when continued effort must stop.</p>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. | Stage | Evidence | | --- | --- | | Attempt 1 |…" data-share-title="Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…" data-share-title="Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -465,14 +496,14 @@ counts as progress, and when continued effort must stop.</p>
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping&amp;title=Chapter%205%20%E2%80%93%20The%20Bounded%20Refinement%20Loop%3A%20Convergence%2C%20Thrashing%2C%20and%20Finite%20Stopping%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%205%20%E2%80%93%20The%20Bounded%20Refinement%20Loop%3A%20Convergence%2C%20Thrashing%2C%20and%20Finite%20Stopping%20%7C%20Architects%20of%20Intent&amp;body=Chapter%205%20of%20Architects%20of%20Intent%3A%20The%20Bounded%20Refinement%20Loop%3A%20Convergence%2C%20Thrashing%2C%20and%20Finite%20Stopping.%20%7C%20Stage%20%7C%20Evidence%20%7C%20%7C%20---%20%7C%20---%20%7C%20%7C%20Attempt%201%20%7C%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%205%20%E2%80%93%20The%20Bounded%20Refinement%20Loop%3A%20Convergence%2C%20Thrashing%2C%20and%20Finite%20Stopping%20%7C%20Architects%20of%20Intent&amp;body=Chapter%205%20of%20Architects%20of%20Intent%3A%20The%20Bounded%20Refinement%20Loop%3A%20Convergence%2C%20Thrashing%2C%20and%20Finite%20Stopping.%20This%20chapter%20switches%20from%20Part%20I%27s%20documentation%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
 </section>
 <nav class="page-nav">
-<a class="prev-link" href="chapter-4-the-stochastic-generator-why-you-need-physics">← Chapter 4 – The Stochastic Generator (Why You Need Physics)</a>
-<a class="next-link" href="chapter-6-context-architecture-why-slicing-matters">Chapter 6 – Context Architecture (Why Slicing Matters) →</a>
+<a class="prev-link" href="chapter-4-the-stochastic-generator-why-you-need-physics">← Chapter 4 – The Stochastic Generator: Variance, Validation, and Feedback</a>
+<a class="next-link" href="chapter-6-context-architecture-why-slicing-matters">Chapter 6 – Context Architecture →</a>
 </nav>
 <footer class="site-footer">
 <p class="site-footer__meta">© 2025, 2026 Jóhann Haukur Gunnarsson</p>
@@ -491,7 +522,7 @@ counts as progress, and when continued effort must stop.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>43278bf4523f</code></span>
+<span class="site-footer__item">Version: <code>75dc07434699</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

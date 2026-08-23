@@ -42,7 +42,7 @@
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-primary via-cyber-neon to-cyber-accent">Shape of Work</span>
                     </h1>
                     <p class="text-xl text-cyber-muted max-w-xl leading-relaxed">
-                        The book develops a proposition: bounded workflows can compose when their authority, effects, evidence, and failure semantics remain explicit.
+                        The book develops a proposition: workflows can compose when their authority, effect limits, evidence, and failure semantics remain explicit.
                         <strong class="text-white">The workflow system becomes part of the product.</strong>
                     </p>
                 </div>
@@ -112,12 +112,12 @@
 <h2 class="text-3xl font-bold mb-4 text-white">A Pattern Across Different Scales</h2>
 <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
 <p class="text-cyber-muted mb-6 text-lg leading-relaxed">
-      State, process, evidence, and decision can be modeled at multiple levels. Functions often change faster than products or organizations, but evidence does not automatically rewrite the slower layers above it.
+      State, process, evidence, and decision recur at multiple scales. Checked outputs can remain provisional while enclosing workflows compose larger candidates, moving a composite Admission—and often direct human attention—toward the outer consequential boundary. This hierarchy shows recursive composition, not the Torus itself; the Torus adds concurrent circuits across surfaces that are independent for the property at issue. Faster feedback still does not rewrite the slower layers above it.
     </p>
 <ul class="text-sm text-gray-400 list-disc list-inside space-y-2">
-<li>Drift at lower levels spreads upward.</li>
-<li>Improvements move upward only through explicit interfaces and adoption.</li>
-<li>Each scale needs authority and evidence appropriate to its consequences.</li>
+<li>Small workflows can support larger candidate assemblies.</li>
+<li>A feature, product, or replacement-system candidate can remain provisional until outer validation.</li>
+<li>Other consequential actions remain governed at their declared effect boundaries.</li>
 </ul>
 <div class="mt-6 bg-gray-800/50 p-4 rounded-lg border-l-4 border-cyber-neon">
 <p class="font-mono text-sm text-cyber-neon">
@@ -129,35 +129,36 @@
 <div class="lg:col-span-7">
 <div class="bg-cyber-panel p-6 rounded-xl border border-gray-700 shadow-xl" data-role="fractal-sim">
 <div class="flex flex-wrap items-center gap-2 mb-4">
-<span class="text-xs font-mono text-gray-500 uppercase">Pick a scale</span>
+<span class="text-xs font-mono text-gray-500 uppercase">Inspect one concurrent scale</span>
 <button class="scale-button is-active" data-role="scale-button" data-scale="company" type="button">Company</button>
 <button class="scale-button" data-role="scale-button" data-scale="product" type="button">Product</button>
 <button class="scale-button" data-role="scale-button" data-scale="feature" type="button">Feature</button>
 <button class="scale-button" data-role="scale-button" data-scale="function" type="button">Function</button>
 </div>
+<p class="mb-4 text-xs text-gray-500">All scales continue concurrently; selection changes only this readout.</p>
 <div class="space-y-3">
-<div class="fractal-layer border-l-cyber-primary is-active" data-cadence="Years" data-example="Strategic bets" data-process="Culture + leadership" data-role="scale-card" data-scale="company" data-state="Market position">
+<div class="fractal-layer border-l-cyber-primary is-active" data-cadence="years" data-example="Strategic bets" data-process="Culture + leadership" data-role="scale-card" data-scale="company" data-state="Market position">
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-lg text-cyber-primary">Company Scale</span>
 <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Years</span>
 </div>
 <div class="text-xs text-gray-400">State: Market position · Process: Culture + leadership</div>
 </div>
-<div class="fractal-layer border-l-cyber-neon ml-4" data-cadence="Months" data-example="Portfolio bets" data-process="Org + strategy" data-role="scale-card" data-scale="product" data-state="System architecture">
+<div class="fractal-layer border-l-cyber-neon ml-4" data-cadence="months" data-example="Portfolio bets" data-process="Org + strategy" data-role="scale-card" data-scale="product" data-state="System architecture">
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-md text-cyber-neon">Product Scale</span>
 <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Months</span>
 </div>
 <div class="text-xs text-gray-400">State: System architecture · Process: Org + strategy</div>
 </div>
-<div class="fractal-layer border-l-cyber-accent ml-8" data-cadence="Days" data-example="Release scope" data-process="Team practices" data-role="scale-card" data-scale="feature" data-state="Capabilities">
+<div class="fractal-layer border-l-cyber-accent ml-8" data-cadence="days" data-example="Release scope" data-process="Team practices" data-role="scale-card" data-scale="feature" data-state="Capabilities">
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-sm text-cyber-accent">Feature Scale</span>
 <span class="font-mono text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">~Days</span>
 </div>
 <div class="text-xs text-gray-400">State: Capabilities · Process: Team practices</div>
 </div>
-<div class="fractal-layer border-l-cyber-success ml-12" data-cadence="Minutes" data-example="Code edits" data-process="Dev tools" data-role="scale-card" data-scale="function" data-state="Implementation">
+<div class="fractal-layer border-l-cyber-success ml-12" data-cadence="minutes" data-example="Code edits" data-process="Dev tools" data-role="scale-card" data-scale="function" data-state="Implementation">
 <div class="flex justify-between items-center mb-1">
 <span class="font-bold text-xs text-cyber-success">Function Scale</span>
 <span class="font-mono text-[10px] bg-gray-800 px-2 py-1 rounded text-gray-300">~Minutes</span>
@@ -177,8 +178,8 @@
 <div class="text-white font-semibold" data-role="fractal-process">Culture + leadership</div>
 </div>
 <div>
-<div class="text-xs text-gray-500">Cadence</div>
-<div class="text-white font-semibold" data-role="fractal-cadence">Years</div>
+<div class="text-xs text-gray-500">Example cadence</div>
+<div class="text-white font-semibold" data-role="fractal-cadence">years</div>
 </div>
 <div>
 <div class="text-xs text-gray-500">Example</div>
@@ -225,7 +226,7 @@
       processEl.textContent = selected.dataset.process || '—';
       cadenceEl.textContent = selected.dataset.cadence || '—';
       exampleEl.textContent = selected.dataset.example || '—';
-      insightEl.textContent = `At ${selected.dataset.cadence || 'this cadence'}, the state is "${selected.dataset.state || 'state'}" and the process shaping it is "${selected.dataset.process || 'process'}".`;
+      insightEl.textContent = `For this scale, an example cadence is ${selected.dataset.cadence || 'unspecified'}. The state is "${selected.dataset.state || 'state'}" and the process shaping it is "${selected.dataset.process || 'process'}". Other circuits continue at their own policy-appropriate cadences.`;
     };
 
     buttons.forEach((btn) => {
@@ -504,20 +505,20 @@
 <div class="bg-cyber-dark rounded-xl p-10 md:p-16">
 <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">The Governed Loop Can Become a Moat</h2>
 <p class="text-xl text-cyber-muted max-w-3xl mx-auto mb-8">
-<span class="block">Intent becomes operational through an adopted Map and a bounded Mission:</span>
+<span class="block">Intent becomes operational through an adopted Map and an activated Mission:</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">intent + adopted map</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; bounded mission -&gt; candidate terrain</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; activated mission -&gt; candidate workspace</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-accent mt-3">candidate -&gt; findings</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; output checks -&gt; judge</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; canonical result -&gt; ledger</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">complete proposal</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-accent mt-1">-&gt; terminal result -&gt; ledger</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-success mt-3">supported proposal + sealed Run Record</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; mission gate</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-success mt-1">-&gt; admitted terrain</span>
 <span class="block mt-4 text-base md:text-lg">Evidence can support a future Map proposal. It cannot authorize one.</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-3">evidence -&gt; governed proposal</span>
-<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; independent adoption</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-3">evidence -&gt; policy proposal</span>
+<span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; separate adoption</span>
 <span class="block font-mono text-sm md:text-lg text-cyber-vibrant mt-1">-&gt; future map</span>
-<span class="block mt-4 text-base md:text-lg">A Ratchet compounds only under a pinned measurement protocol, a protected non-regression floor, and independently admitted advancement.</span>
+<span class="block mt-4 text-base md:text-lg">A Ratchet compounds only when each supported proposal is measured by the pinned protocol and transactional Admission commits the candidate and protected floor together.</span>
 <span class="block mt-4 text-base md:text-lg">Comparable recurring work must show that accumulated judgment improves outcomes after the full cost of controls and maintenance.</span>
 </p>
 <p class="text-cyber-accent font-semibold">History proposes. Authority adopts.</p>
@@ -532,11 +533,11 @@
 <h2 class="text-3xl font-bold mb-4 text-white">Executive View: Test the Business Case</h2>
 <div class="h-1 w-20 bg-cyber-accent mb-6"></div>
 <p class="text-cyber-muted text-lg leading-relaxed">
-        Raw model calls are not a business outcome. Compare like workflows and test whether bounded effects, evidence, and admission improve delivery after the full cost of controls and maintenance.
+        Raw model calls are not a business outcome. Compare like workflows and test whether effect limits, retained evidence, and separate Admission improve delivery after the full cost of controls and maintenance.
       </p>
 <ul class="mt-6 text-sm text-gray-400 list-disc list-inside space-y-2">
 <li>Candidate cadence is only one input to delivery.</li>
-<li>Protected checks can reduce selected forms of drift.</li>
+<li>Checks outside candidate authority can reduce selected forms of drift.</li>
 <li>Defensibility remains a measured hypothesis.</li>
 </ul>
 </div>
@@ -560,7 +561,7 @@
 </div>
 </div>
 <div class="mt-3 text-xs text-gray-500">
-          Admitted outcomes produce evidence. That evidence may support a separately governed change to future Missions.
+          Admitted outcomes produce evidence. That evidence may support a separate policy change for future Missions.
         </div>
 </div>
 <div class="bg-cyber-panel border border-gray-700 rounded-xl p-5">
@@ -705,52 +706,48 @@
   </script>
 </section>
 
-<section class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published" aria-labelledby="enforceable-map-title" data-infographic-fragment-shell="1">
+<section aria-labelledby="enforceable-map-title" class="bg-gray-900/50 rounded-2xl p-8 border border-gray-800" data-infographic-section-id="i2-section-07-intention-architecture" data-infographic-selector="main &gt; section:nth-of-type(7)" data-infographic-source="infographic-2.html" data-infographic-status="published" data-infographic-fragment-shell="1">
 <span data-infographic-fragment-label="1" aria-hidden="true">i2-section-07-intention-architecture</span>
-  <figure class="aoi-book-diagram">
-    <figcaption class="aoi-book-diagram__header">
-      <p class="aoi-book-diagram__eyebrow">One property, one direction, one protected check</p>
-      <h3 class="aoi-book-diagram__title" id="enforceable-map-title">From Map Claim to Enforceable Relationship</h3>
-      <p class="aoi-book-diagram__summary">A relationship becomes enforceable only after the workflow declares which side is authoritative for one property and protects the check that compares them.</p>
-    </figcaption>
-
-    <div class="aoi-book-diagram__grid">
-      <div class="aoi-book-diagram__artifact">
-        <span class="aoi-book-diagram__label">Descriptive direction: Terrain → Map</span>
-        <p>Route declarations define the current endpoint inventory. A bounded updater proposes a documentation patch. A protected comparison checks correspondence before separate adoption.</p>
-      </div>
-      <div class="aoi-book-diagram__artifact">
-        <span class="aoi-book-diagram__label">Prescriptive direction: Map → Terrain</span>
-        <p>An adopted API contract defines the intended interface. A bounded workflow proposes implementation changes. Protected behavior and compatibility checks run before separate admission.</p>
-      </div>
-    </div>
-
-    <div class="aoi-book-diagram__divider" aria-hidden="true"></div>
-
-    <div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
-      <div class="aoi-book-diagram__step" data-tone="authority">
-        <span class="aoi-book-diagram__label">Declare authority</span>
-        <p>Name the exact property and direction before execution.</p>
-      </div>
-      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
-      <div class="aoi-book-diagram__step" data-tone="proposal">
-        <span class="aoi-book-diagram__label">Propose one patch</span>
-        <p>The updater or implementation step changes only the bounded surface.</p>
-      </div>
-      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
-      <div class="aoi-book-diagram__step" data-tone="evidence">
-        <span class="aoi-book-diagram__label">Protected check</span>
-        <p>The protected gate compares the candidate with the authoritative source.</p>
-      </div>
-      <span class="aoi-book-diagram__arrow" aria-hidden="true">→</span>
-      <div class="aoi-book-diagram__step" data-tone="authority">
-        <span class="aoi-book-diagram__label">Adopt or admit separately</span>
-        <p>A passing relationship does not authorize its own effect.</p>
-      </div>
-    </div>
-
-    <p class="aoi-book-diagram__note">Enforcement remains selective. Passing this gate establishes one declared correspondence, not universal correctness or truth.</p>
-  </figure>
+<figure class="aoi-book-diagram">
+<figcaption class="aoi-book-diagram__header">
+<p class="aoi-book-diagram__eyebrow">One property, one direction, one protected check</p>
+<h3 class="aoi-book-diagram__title" id="enforceable-map-title">From Map Claim to Enforceable Relationship</h3>
+<p class="aoi-book-diagram__summary">A relationship becomes enforceable only after the workflow declares which side is authoritative for one property and protects the check that compares them.</p>
+</figcaption>
+<div class="aoi-book-diagram__grid">
+<div class="aoi-book-diagram__artifact">
+<span class="aoi-book-diagram__label">Descriptive direction: Terrain → Map</span>
+<p>Route declarations define the current endpoint inventory. An updater proposes a documentation patch limited to the selected Map surface. A check outside candidate authority compares it before separate Adoption.</p>
+</div>
+<div class="aoi-book-diagram__artifact">
+<span class="aoi-book-diagram__label">Prescriptive direction: Map → Terrain</span>
+<p>An adopted API contract defines the intended interface. A workflow proposes implementation changes within named effects. Protected compatibility checks run before separate Admission.</p>
+</div>
+</div>
+<div aria-hidden="true" class="aoi-book-diagram__divider"></div>
+<div class="aoi-book-diagram__flow aoi-book-diagram__flow--four">
+<div class="aoi-book-diagram__step" data-tone="authority">
+<span class="aoi-book-diagram__label">Declare authority</span>
+<p>Name the property and direction before execution.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="proposal">
+<span class="aoi-book-diagram__label">Propose one patch</span>
+<p>The updater or implementation step changes only the named surface.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="evidence">
+<span class="aoi-book-diagram__label">Protected check</span>
+<p>The gate compares the candidate with the authoritative source.</p>
+</div>
+<span aria-hidden="true" class="aoi-book-diagram__arrow">→</span>
+<div class="aoi-book-diagram__step" data-tone="authority">
+<span class="aoi-book-diagram__label">Adopt or admit separately</span>
+<p>A passing relationship does not authorize its own effect.</p>
+</div>
+</div>
+<p class="aoi-book-diagram__note">Enforcement remains selective. Passing this gate establishes the named correspondence, not universal correctness or truth.</p>
+</figure>
 </section>
 
 
