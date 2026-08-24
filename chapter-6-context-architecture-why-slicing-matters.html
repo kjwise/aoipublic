@@ -24,14 +24,14 @@
 <meta content="Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 6 – Context Architecture | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 6 – Context Architecture", "description": "Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "mainEntityOfPage": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT10M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 6 – Context Architecture", "description": "Chapter 6 of Architects of Intent: Context Architecture. Part I established a bounded loop. Chapter 5 showed that useful refinement depends on feedback…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "mainEntityOfPage": "https://architectsofintent.com/chapter-6-context-architecture-why-slicing-matters", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-24T12:12:31Z", "timeRequired": "PT10M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=75dc07434699" rel="stylesheet"/>
-<script defer="" src="script.js?v=75dc07434699"></script>
+<link href="style.css?v=5321f88cf264" rel="stylesheet"/>
+<script defer="" src="script.js?v=5321f88cf264"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -61,14 +61,14 @@
 <div class="chapter-header__body">
 <h1 id="chapter-6-context-architecture-why-slicing-matters">Chapter 6 –
 Context Architecture</h1>
-<p>Start with a failing tax case:</p>
+<p>A failing tax case provides a concrete anchor:</p>
 </div>
 </header>
 <pre class="test-output"><code>FAIL test_calculate_income_tax_high_earner_scenario
 expected: 42_750
 actual:   43_500</code></pre>
-<p>Do not hand the model the whole repository. Build one bounded
-slice:</p>
+<p>The model receives one bounded slice rather than the whole
+repository:</p>
 <ul>
 <li><strong>Anchor:</strong> start from the failing test.</li>
 <li><strong>Expand:</strong> include the approved tax rule, the function
@@ -291,16 +291,17 @@ broader failure classes complete the picture:</p>
 <td>Too small</td>
 <td>The packet omits required authority, a failing case, a direct
 dependency, or a checking surface; the generator must guess.</td>
-<td>Produce a new packet instance under the existing bindings and read
-authority. If the missing material is outside either, stop and propose a
-new Mission.</td>
+<td>The slicer produces a new packet instance under the existing
+bindings and read authority. If the missing material is outside either,
+the current run stops; resolution requires a new Mission.</td>
 </tr>
 <tr>
 <td>Too large</td>
 <td>Irrelevant material dilutes the governing property and exposes
 unrelated surfaces, encouraging broad or unauthorized changes.</td>
-<td>Produce a smaller packet under the existing selection rules and
-budget. If either must change, stop and propose a new Mission.</td>
+<td>The slicer produces a smaller packet under the existing selection
+rules and budget. If either must change, the current run stops;
+resolution requires a new Mission.</td>
 </tr>
 </tbody>
 </table>
@@ -327,16 +328,17 @@ candidates.</p>
 <li>test names and assertion surfaces;</li>
 <li>file paths, imports, and allowed edit regions.</li>
 </ul>
-<p>Return to the tax example. Suppose the adopted tax policy supplies a
-requirement hierarchy: the policy at the root, jurisdictions beneath it,
-and bracket and rate rules at the leaves. Those requirement nodes remain
-fixed authority for the run. The skeleton declares where permitted
-implementation and test children may be elaborated beneath them. Once
-each child is checked against its parent rule, the workflow can fold
-those results upward into derived jurisdiction summaries and then a
-policy-wide view. A changed rule or child result makes every dependent
-parent view stale. The same downward elaboration and upward aggregation
-may repeat at any depth allowed by the active specification.</p>
+<p>In one extension of the tax example, the adopted tax policy supplies
+a requirement hierarchy: the policy at the root, jurisdictions beneath
+it, and bracket and rate rules at the leaves. Those requirement nodes
+remain fixed authority for the run. The skeleton declares where
+permitted implementation and test children may be elaborated beneath
+them. Once each child is checked against its parent rule, the workflow
+can fold those results upward into derived jurisdiction summaries and
+then a policy-wide view. A changed rule or child result makes every
+dependent parent view stale. The same downward elaboration and upward
+aggregation may repeat at any depth allowed by the active
+specification.</p>
 <p>The expansion contract may begin as an outline or schema. If
 recurring cases reveal a stable grammar, a separate Map change may adopt
 a domain-specific language (DSL) that expresses nodes, expansion rules,
@@ -607,7 +609,7 @@ Computational Linguistics</em> 12 (2024): 157–173. <a href="https://aclantholo
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>75dc07434699</code></span>
+<span class="site-footer__item">Version: <code>5321f88cf264</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

@@ -5,7 +5,7 @@
 <title>Chapter 10 – The Protected Control Plane | Architects of Intent</title>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane. Return to the payments service from Part III. An ordinary documentation Mission may propose…" name="description"/>
+<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane. An ordinary documentation Mission for the payments service from Part III may propose an…" name="description"/>
 <meta content="Architects of Intent, Jóhann Haukur Gunnarsson" name="keywords"/>
 <meta content="Jóhann Haukur Gunnarsson" name="author"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
@@ -13,7 +13,7 @@
 <link href="https://architectsofintent.com/rss-book.xml" rel="alternate" title="Architects of Intent RSS" type="application/rss+xml"/>
 <meta content="Architects of Intent" property="og:site_name"/>
 <meta content="Chapter 10 – The Protected Control Plane | Architects of Intent" property="og:title"/>
-<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane. Return to the payments service from Part III. An ordinary documentation Mission may propose…" property="og:description"/>
+<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane. An ordinary documentation Mission for the payments service from Part III may propose an…" property="og:description"/>
 <meta content="https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="https://architectsofintent.com/og-image.jpg" property="og:image"/>
@@ -21,17 +21,17 @@
 <meta content="image/jpeg" property="og:image:type"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 10 – The Protected Control Plane | Architects of Intent" name="twitter:title"/>
-<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane. Return to the payments service from Part III. An ordinary documentation Mission may propose…" name="twitter:description"/>
+<meta content="Chapter 10 of Architects of Intent: The Protected Control Plane. An ordinary documentation Mission for the payments service from Part III may propose an…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 10 – The Protected Control Plane | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 10 – The Protected Control Plane", "description": "Chapter 10 of Architects of Intent: The Protected Control Plane. Return to the payments service from Part III. An ordinary documentation Mission may propose…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails", "mainEntityOfPage": "https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT9M", "articleSection": "Part IV – Governance and Safe Evolution", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 10 – The Protected Control Plane", "description": "Chapter 10 of Architects of Intent: The Protected Control Plane. An ordinary documentation Mission for the payments service from Part III may propose an…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails", "mainEntityOfPage": "https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-24T12:12:31Z", "timeRequired": "PT9M", "articleSection": "Part IV – Governance and Safe Evolution", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=75dc07434699" rel="stylesheet"/>
-<script defer="" src="script.js?v=75dc07434699"></script>
+<link href="style.css?v=5321f88cf264" rel="stylesheet"/>
+<script defer="" src="script.js?v=5321f88cf264"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -57,16 +57,15 @@
 <div class="chapter-header__body">
 <h1 id="chapter-10-the-protected-control-plane-the-guardrails">Chapter
 10 – The Protected Control Plane</h1>
-<p>Start with a denied effect.</p>
-<p>Return to the payments service from Part III. An ordinary
-documentation Mission may propose an update within its permitted
-operator-Map surface, then also attempt to change the service’s
-protected release workflow. The runtime must deny that second write
-before application, record the attempted effect, and end the run as
-<code>failed</code>. Denial is not a warning. If the runtime claims it
-denied the write while the candidate diff contains a change to the
-protected control, the evidence contradicts itself and the run fails
-closed.</p>
+<p>A denied effect makes the boundary concrete.</p>
+<p>An ordinary documentation Mission for the payments service from Part
+III may propose an update within its permitted operator-Map surface,
+then also attempt to change the service’s protected release workflow.
+The runtime must deny that second write before application, record the
+attempted effect, and end the run as <code>failed</code>. Denial is not
+a warning. If the runtime claims it denied the write while the candidate
+diff contains a change to the protected control, the evidence
+contradicts itself and the run fails closed.</p>
 <p>Part III scaled controlled work into recurring workflows. That scale
 turns the machinery that grants scope, grades candidates, and admits
 changes into part of the threat model.</p>
@@ -325,8 +324,8 @@ Gate recomputes the changeset from the sealed candidate and current
 base. A missing, ambiguous, or stale revision—or a mismatch with the
 sealed candidate evidence—denies Admission. The Ledger appends the
 linked Admission decision without rewriting the sealed Run Record.</p>
-<p>Use one small trusted admission-dispatch step for every candidate. It
-computes the complete effect set, applies the already-bound
+<p>One small, trusted admission-dispatch step handles every candidate.
+It computes the complete effect set, applies the already-bound
 control-plane policy, and invokes, from the Mission’s bound check set,
 the deeper checks that the bound policy requires for the observed
 change. Platform path filters and ownership features may optimize
@@ -453,7 +452,7 @@ branch documentation</a>.<a class="footnote-back" href="#fnref1" role="doc-backl
 </ol>
 </section>
 </main>
-<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 10 of Architects of Intent: The Protected Control Plane. Return to the payments service from Part III. An ordinary documentation Mission may propose…" data-share-title="Chapter 10 – The Protected Control Plane | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails" role="region">
+<section aria-label="Share this page" class="share-panel" data-share-text="Chapter 10 of Architects of Intent: The Protected Control Plane. An ordinary documentation Mission for the payments service from Part III may propose an…" data-share-title="Chapter 10 – The Protected Control Plane | Architects of Intent" data-share-url="https://architectsofintent.com/chapter-10-the-protected-control-plane-the-guardrails" role="region">
 <div class="share-panel__label">Share</div>
 <div class="share-panel__actions">
 <button aria-label="Share this page" class="share-button" data-share="native" type="button">Share</button>
@@ -461,7 +460,7 @@ branch documentation</a>.<a class="footnote-back" href="#fnref1" role="doc-backl
 <a aria-label="Share on LinkedIn" class="share-button" data-share="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails" rel="noopener noreferrer" target="_blank">in</a>
 <a aria-label="Share on Facebook" class="share-button" data-share="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails" rel="noopener noreferrer" target="_blank">f</a>
 <a aria-label="Share on Reddit" class="share-button" data-share="reddit" href="https://www.reddit.com/submit?url=https%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails&amp;title=Chapter%2010%20%E2%80%93%20The%20Protected%20Control%20Plane%20%7C%20Architects%20of%20Intent" rel="noopener noreferrer" target="_blank">r</a>
-<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2010%20%E2%80%93%20The%20Protected%20Control%20Plane%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2010%20of%20Architects%20of%20Intent%3A%20The%20Protected%20Control%20Plane.%20Return%20to%20the%20payments%20service%20from%20Part%20III.%20An%20ordinary%20documentation%20Mission%20may%20propose%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails">email</a>
+<a aria-label="Share by email" class="share-button" data-share="email" href="mailto:?subject=Chapter%2010%20%E2%80%93%20The%20Protected%20Control%20Plane%20%7C%20Architects%20of%20Intent&amp;body=Chapter%2010%20of%20Architects%20of%20Intent%3A%20The%20Protected%20Control%20Plane.%20An%20ordinary%20documentation%20Mission%20for%20the%20payments%20service%20from%20Part%20III%20may%20propose%20an%E2%80%A6%0A%0Ahttps%3A%2F%2Farchitectsofintent.com%2Fchapter-10-the-protected-control-plane-the-guardrails">email</a>
 <button aria-label="Copy link" class="share-button" data-share="copy" type="button">copy</button>
 </div>
 <span aria-live="polite" class="share-status"></span>
@@ -487,7 +486,7 @@ branch documentation</a>.<a class="footnote-back" href="#fnref1" role="doc-backl
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>75dc07434699</code></span>
+<span class="site-footer__item">Version: <code>5321f88cf264</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

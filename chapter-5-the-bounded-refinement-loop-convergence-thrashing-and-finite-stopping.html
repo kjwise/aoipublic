@@ -24,14 +24,14 @@
 <meta content="Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping", "description": "Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping", "mainEntityOfPage": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT10M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 5 – The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping", "description": "Chapter 5 of Architects of Intent: The Bounded Refinement Loop: Convergence, Thrashing, and Finite Stopping. This chapter switches from Part I's documentation…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping", "mainEntityOfPage": "https://architectsofintent.com/chapter-5-the-bounded-refinement-loop-convergence-thrashing-and-finite-stopping", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-24T12:12:31Z", "timeRequired": "PT10M", "articleSection": "Part II – Reliability Foundations", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=75dc07434699" rel="stylesheet"/>
-<script defer="" src="script.js?v=75dc07434699"></script>
+<link href="style.css?v=5321f88cf264" rel="stylesheet"/>
+<script defer="" src="script.js?v=5321f88cf264"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -66,7 +66,7 @@ Stopping</h1>
 calculation because schema and rounding failures provide distinct,
 comparable findings across attempts. Chapter 6 continues the same case
 to show how bounded context supports correction.</p>
-<p>Start with one bounded trace:</p>
+<p>One bounded trace shows the pattern:</p>
 </div>
 </header>
 <table>
@@ -225,11 +225,11 @@ checks, the candidate stayed in scope, the Mission and budgets remain
 unchanged, and the transition is allowed. It rejects any decision that
 invents findings, widens scope, changes the Mission or budget, selects
 an undeclared transition, or attempts admission.</p>
-<p>Human escalation should not become a routine retry stage. Use it only
-when the run can name the external decision or repair required: missing
-authority, a novel policy conflict, an exception bound to this Mission
-and state, a high-consequence choice reserved for human authority, or
-the absence of a trustworthy oracle. The current run ends
+<p>Human escalation should not become a routine retry stage. It is
+justified only when the run can name the external decision or repair
+required: missing authority, a novel policy conflict, an exception bound
+to this Mission and state, a high-consequence choice reserved for human
+authority, or the absence of a trustworthy oracle. The current run ends
 <code>blocked</code> and its Run Record is sealed; a resolution may
 authorize a new linked run but never reopen the old one.</p>
 <h2 id="state-results-and-sealing">State, Results, and Sealing</h2>
@@ -258,8 +258,8 @@ append-only record needed to explain and verify each transition.</li>
 budgets, latest candidate, comparable findings, completed checks, and
 recent state signatures needed for the next attempt.</li>
 </ul>
-<p>Do not paste the entire run history into the next model request.
-Working state should remain bounded; detailed evidence may remain
+<p>The next model request should contain bounded working state rather
+than the entire run history. Detailed evidence may remain
 reference-backed as long as retention preserves reconstruction. The
 <a class="concept-link" href="concepts#ledger" title="See concept: Ledger">Ledger</a> guarantee is conditional on the protected sink and trust root
 developed in <a class="chapter-link" href="chapter-12-governance-for-high-rate-automation#chapter-12-governance-for-high-rate-automation" title="Go to: Chapter 12">Chapter 12</a>.</p>
@@ -325,11 +325,10 @@ fixed;</li>
 <li>a previously unavailable validation stage completes and exposes the
 next required stage.</li>
 </ul>
-<p>Do not compare failure counts from different sets of completed checks
-as though they were the same measurement. Fixing a parse failure may
-reveal ten semantic failures and still advance the evidence frontier.
-Progress need not occur on every attempt, but it must appear inside a
-declared window.</p>
+<p>Failure counts are comparable only when the completed-check sets
+match. Fixing a parse failure may reveal ten semantic failures and still
+advance the evidence frontier. Progress need not occur on every attempt,
+but it must appear inside a declared window.</p>
 <h3 id="reachability-and-feedback-quality">Reachability and Feedback
 Quality</h3>
 <p>Acceptance conditions state what a candidate must satisfy to become a
@@ -354,10 +353,10 @@ declared scope, generation is not the problem.</p>
 Routing</h3>
 <p>Thrashing often appears as A-to-B-to-A behavior: fix one property,
 regress another, then repeat an earlier candidate and finding set.
-Detect it by retaining the normalized candidate state, check plan,
-completed check set, and failing reason codes. If that same combination
-recurs inside the declared progress window, stop. The workflow has
-returned to the same state.</p>
+Retaining the normalized candidate state, check plan, completed check
+set, and failing reason codes makes that recurrence detectable. If the
+same combination recurs inside the declared progress window, the run
+must stop; the workflow has returned to the same state.</p>
 <p>Not every failure justifies another candidate:</p>
 <table>
 <colgroup>
@@ -416,13 +415,13 @@ condition; otherwise <code>failed</code></td>
 <p>Fail fast means stop the current validation path. It does not mean
 every failure has the same next transition.</p>
 <h2 id="staged-checks">Staged Checks</h2>
-<p>Expensive checks need not run on every attempt. Use a stable fast set
-for comparable refinement, then run every remaining required check
-before acceptance. A candidate that clears parsing, scope, lint, types,
-and narrow tests may advance to integration, environment, performance,
-or security checks. Failure during final checks follows the same routing
-rules; it does not erase the earlier evidence or justify a second
-Judge.</p>
+<p>Expensive checks need not run on every attempt. A stable fast set
+supports comparable refinement; every remaining required check must
+still run before acceptance. A candidate that clears parsing, scope,
+lint, types, and narrow tests may advance to integration, environment,
+performance, or security checks. Failure during final checks follows the
+same routing rules; it does not erase the earlier evidence or justify a
+second Judge.</p>
 <h2 id="finite-stopping">Finite Stopping</h2>
 <p>Circuit breakers make stopping deterministic even when candidate
 generation is stochastic:</p>
@@ -522,7 +521,7 @@ counts as progress, and when continued effort must stop.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>75dc07434699</code></span>
+<span class="site-footer__item">Version: <code>5321f88cf264</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

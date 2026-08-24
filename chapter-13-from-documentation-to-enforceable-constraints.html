@@ -24,14 +24,14 @@
 <meta content="Chapter 13 of Architects of Intent: From Maps to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: Map proposals…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 13 – From Maps to Enforceable Constraints | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 13 – From Maps to Enforceable Constraints", "description": "Chapter 13 of Architects of Intent: From Maps to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: Map proposals…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints", "mainEntityOfPage": "https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT6M", "articleSection": "Part V – Enforceable Intent and Adaptive Capacity", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 13 – From Maps to Enforceable Constraints", "description": "Chapter 13 of Architects of Intent: From Maps to Enforceable Constraints. Chapters 8, 10, and 12 established the pieces of this boundary: Map proposals…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints", "mainEntityOfPage": "https://architectsofintent.com/chapter-13-from-documentation-to-enforceable-constraints", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-24T12:12:31Z", "timeRequired": "PT6M", "articleSection": "Part V – Enforceable Intent and Adaptive Capacity", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=75dc07434699" rel="stylesheet"/>
-<script defer="" src="script.js?v=75dc07434699"></script>
+<link href="style.css?v=5321f88cf264" rel="stylesheet"/>
+<script defer="" src="script.js?v=5321f88cf264"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -167,8 +167,9 @@ correction under the adopted Map. A change to a protected Map, policy,
 authority, workflow, or control surface requires a <a class="concept-link" href="concepts#governance-mission" title="See concept: Governance Mission">Governance Mission</a>.
 Each proposal remains subject to separate Adoption or Admission,
 according to its target.</p>
-<p>Consider a generated <code>Public Interfaces</code> block. The pinned
-source revision exposes one additional parameter:</p>
+<p>A generated <code>Public Interfaces</code> block illustrates the
+boundary. The pinned source revision exposes one additional
+parameter:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a> ## Public Interfaces</span>
 <span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a><span class="st">- charge(amount, currency)</span></span>
 <span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a><span class="va">+ charge(amount, currency, idempotency_key)</span></span></code></pre></div>
@@ -258,11 +259,11 @@ does not prove that the source specification is wise, that the rest of
 the Map is current, or that unobserved behavior is correct. A
 synchronized source can still be verbose, irrelevant, or wrong outside
 the checked surface.</p>
-<p>Enforcement should therefore be selective. Use it where a
+<p>Enforcement should therefore be selective. It is warranted where a
 consequential claim can be observed and the cost of undetected drift
-exceeds the cost of maintaining the check. Leave volatile narrative
-guidance advisory when a hard gate would create more false authority
-than assurance.</p>
+exceeds the cost of maintaining the check. Volatile narrative guidance
+should remain advisory when a hard gate would create more false
+authority than assurance.</p>
 <p>Software Development as Code does not require every useful outcome to
 be fully specified. Exploratory work may therefore have only containment
 checks for effects, budgets, protected controls, and evidence. Those
@@ -308,7 +309,7 @@ preserving the distinction between correspondence and truth.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>75dc07434699</code></span>
+<span class="site-footer__item">Version: <code>5321f88cf264</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>

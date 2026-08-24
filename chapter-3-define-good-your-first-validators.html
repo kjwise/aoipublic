@@ -24,14 +24,14 @@
 <meta content="Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Chapter 3 – Validators: What Checks Can Establish | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Validators: What Checks Can Establish", "description": "Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-23T13:25:41Z", "timeRequired": "PT8M", "articleSection": "Part I – The Minimal Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Chapter 3 – Validators: What Checks Can Establish", "description": "Chapter 3 of Architects of Intent: Validators: What Checks Can Establish. The model produced plausible-looking output. A cheap deterministic check caught a…", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "mainEntityOfPage": "https://architectsofintent.com/chapter-3-define-good-your-first-validators", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-24T12:12:31Z", "timeRequired": "PT8M", "articleSection": "Part I – The Minimal Governed Loop", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=75dc07434699" rel="stylesheet"/>
-<script defer="" src="script.js?v=75dc07434699"></script>
+<link href="style.css?v=5321f88cf264" rel="stylesheet"/>
+<script defer="" src="script.js?v=5321f88cf264"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -310,22 +310,23 @@ reason.</p>
 the Mission proposal must bind a small evaluation contract under adopted
 policy before final review and <a class="concept-link" href="concepts#activation" title="See concept: Activation">Activation</a>:</p>
 <ul>
-<li><strong>Protected protocol:</strong> bind the evaluator, rubric,
-tools, relevant data, decoding controls, and retry limits. Keep the
-bound protocol outside candidate authority, and retain the provenance
-needed to reconstruct each result.</li>
-<li><strong>Known shared dependencies:</strong> bind selectable shared
-models, providers, context sources, retrieval sources, fixtures, and
-derived-input rules; record their actual identities so shared failure
-modes remain visible.</li>
-<li><strong>Calibration:</strong> exercise pass, fail, boundary, and
-adversarial fixtures kept outside candidate authority and appropriate to
-the property; revalidate any materially changed protocol before
-activating a Mission that uses it.</li>
-<li><strong>Declared decision rule:</strong> choose sampling or an
-ensemble in proportion to consequence, then aggregate through a fixed
-rule. Do not keep sampling until the desired answer appears or describe
-repeated correlated judgments as independent corroboration.</li>
+<li><strong>Protected protocol:</strong> the contract binds the
+evaluator, rubric, tools, relevant data, decoding controls, and retry
+limits. The bound protocol remains outside candidate authority, with
+enough retained provenance to reconstruct each result.</li>
+<li><strong>Known shared dependencies:</strong> the contract binds
+selectable shared models, providers, context sources, retrieval sources,
+fixtures, and derived-input rules. It records their actual identities so
+shared failure modes remain visible.</li>
+<li><strong>Calibration:</strong> the contract includes pass, fail,
+boundary, and adversarial fixtures kept outside candidate authority and
+appropriate to the property. Any materially changed protocol requires
+revalidation before it can support Activation.</li>
+<li><strong>Declared decision rule:</strong> the contract selects
+sampling or an ensemble in proportion to consequence and aggregates
+through a fixed rule. Sampling until the desired answer appears is not a
+valid decision rule, and repeated correlated judgments do not provide
+independent corroboration.</li>
 <li><strong>Inconclusive outcome:</strong> stale calibration, malformed
 output, missing inputs, out-of-policy configuration, or disagreement
 beyond the declared threshold must not advance a required property.</li>
@@ -347,11 +348,11 @@ model into ground truth.</p>
 checks available for a surface. For one Mission, the work contract names
 which checks are required. The completed evidence records which required
 checks actually ran and their results.</p>
-<p>Build coverage incrementally. Begin with cheap structural checks and
-the highest-consequence known failure. Add checks when incidents reveal
-missing properties. Increase strictness only when the rule is stable
-enough to own, and keep expensive behavioral or probabilistic checks for
-the work that justifies them.</p>
+<p>A practical coverage strategy begins with cheap structural checks and
+the highest-consequence known failure, then adds checks as incidents
+reveal missing properties. Greater strictness is worth adding only when
+the rule is stable enough to own; expensive behavioral or probabilistic
+checks remain for the work that justifies them.</p>
 <p>By declaring which checks count, what they establish, and how their
 findings affect advancement, the organization makes another part of the
 change process explicit and enforceable. More candidates need not mean
@@ -397,7 +398,7 @@ retries and context remain bounded.</p>
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>75dc07434699</code></span>
+<span class="site-footer__item">Version: <code>5321f88cf264</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>
