@@ -24,14 +24,15 @@
 <meta content="Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”" name="twitter:description"/>
 <meta content="https://architectsofintent.com/og-image.jpg" name="twitter:image"/>
 <meta content="Introduction | Architects of Intent" name="twitter:image:alt"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Introduction", "description": "Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/introduction", "mainEntityOfPage": "https://architectsofintent.com/introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-08-24T12:12:31Z", "timeRequired": "PT15M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Introduction", "description": "Introduction to Architects of Intent. “Add cursor pagination to GET /api/users without breaking existing clients.”", "author": {"@type": "Person", "name": "Jóhann Haukur Gunnarsson", "sameAs": "https://www.linkedin.com/in/jhaukur/"}, "url": "https://architectsofintent.com/introduction", "mainEntityOfPage": "https://architectsofintent.com/introduction", "image": "https://architectsofintent.com/og-image.jpg", "dateModified": "2026-09-04T16:08:12Z", "timeRequired": "PT15M", "articleSection": "Introduction", "isPartOf": {"@type": "Book", "name": "Architects of Intent", "url": "https://architectsofintent.com/"}}</script>
 <link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css?v=5321f88cf264" rel="stylesheet"/>
-<script defer="" src="script.js?v=5321f88cf264"></script>
+<link href="style.css?v=4e5588e171f6" rel="stylesheet"/>
+<script defer="" src="analytics.js?v=4e5588e171f6"></script>
+<script defer="" src="script.js?v=4e5588e171f6"></script>
 <link href="infographic-tailwind.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Inter:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <link href="infographic-deck-runtime.css" rel="stylesheet"/>
@@ -345,12 +346,17 @@ authority over the rules that judge it.</p>
 </section>
 <p>This book treats each bounded unit of engineering work as a proposed
 state change:</p>
-<p><span class="math display"><em>P</em>(<em>Z</em><sub><em>n</em></sub>) = <em>Z</em><sub><em>n</em> + 1</sub></span></p>
-<p>Here <span class="math inline"><em>P</em></span> is the process,
-<span class="math inline"><em>Z</em><sub><em>n</em></sub></span> is the
-observed starting state, and <span class="math inline"><em>Z</em><sub><em>n</em> + 1</sub></span> is the
-proposed next state. The expression is bookkeeping, not formal evidence
-that the transition is correct, improved, convergent, or safely
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo form="prefix" stretchy="false">(</mo><msub><mi>Z</mi><mi>n</mi></msub><mo form="postfix" stretchy="false">)</mo><mo>=</mo><msub><mi>Z</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">
+P(Z_n) = Z_{n+1}
+</annotation></semantics></math></p>
+<p>Here
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+is the process,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Z</mi><mi>n</mi></msub><annotation encoding="application/x-tex">Z_n</annotation></semantics></math>
+is the observed starting state, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Z</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">Z_{n+1}</annotation></semantics></math>
+is the proposed next state. The expression is bookkeeping, not formal
+evidence that the transition is correct, improved, convergent, or safely
 composable. Those claims depend on declared intent and evidence:</p>
 <ul>
 <li>What are we optimizing for?</li>
@@ -520,7 +526,7 @@ an artifact was produced (<a href="https://slsa.dev/spec/v1.2/provenance">specif
 </a>
 </div>
 <div class="site-footer__links site-footer__links--secondary">
-<span class="site-footer__item">Version: <code>5321f88cf264</code></span>
+<span class="site-footer__item">Version: <code>4e5588e171f6</code></span>
 <a class="site-footer__item" href="infographic">Infographic</a>
 </div>
 </footer>
